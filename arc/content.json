@@ -1,0 +1,210 @@
+{
+  "_note": "Edited via admin.php - the website loads this file and overrides its text.",
+  "global": {
+    "heroEyebrow": "Everything you need under one roof",
+    "heroTitle1": "One Trusted Group.",
+    "heroTitle2": "Multiple Specialists.",
+    "heroSub": "A family of premium home service brands helping busy families create cleaner, healthier and better run homes.",
+    "phone": "1800 ARCGROUP",
+    "phoneTel": "1800272476",
+    "email": "quotes@thearcgroup.com.au"
+  },
+  "pages": {
+    "home": {
+      "storyEyebrow": "Our story",
+      "storyTitle": "Everything You Need Under One Roof",
+      "storySub": "ARC Home Services Group brings Australia's most trusted home service brands together under one relationship.",
+      "visionEyebrow": "Our vision",
+      "visionTitle": "To be Australia's most trusted home services group.",
+      "tEyebrow": "In their words",
+      "tTitle": "Loved by households across Sydney."
+    },
+    "services": {
+      "eyebrow": "Our services",
+      "title": "One group. A specialist for every job.",
+      "intro": "Each ARC brand has its own page and quote form. Pick the service you need and tell us about your home - one relationship looks after the rest."
+    },
+    "about": {
+      "eyebrow": "Our story",
+      "title": "Care for the whole home, under one roof.",
+      "intro": "ARC brings a family of specialist home-service brands together under one trusted relationship - built on the Sydney heritage of 1800 CLEANER, and extended across the whole home.",
+      "missionTitle": "One relationship. Many solutions. Everywhere you need us.",
+      "missionP1": "Our mission is to take the running of the home off our clients' hands - bringing order, care and reliability to every corner of it, delivered by people they trust.",
+      "missionP2": "Our vision is to be Australia's most trusted home services group: local teams delivering national standards, across Sydney and beyond."
+    },
+    "contact": {
+      "eyebrow": "Get a Quote",
+      "title": "Tell us about your home.",
+      "intro": "Not sure which brand you need? Send a general enquiry and the ARC team will point you to the right specialist."
+    },
+    "careers": {
+      "title": "Join a team that cares for homes.",
+      "intro": "We're building Australia's most trusted home services group. Open roles will be listed here soon - check back or contact the ARC team in the meantime."
+    },
+    "news": {
+      "title": "Updates from ARC Home Services Group.",
+      "intro": "Stories, announcements and ideas for a calmer, better-run home."
+    },
+    "blog": {
+      "eyebrow": "The ARC Journal",
+      "title": "Ideas for a calmer, better-run home."
+    }
+  },
+  "brandOrder": [
+    "1800cleaner",
+    "halo",
+    "greengate",
+    "invisible",
+    "purepools",
+    "revive",
+    "restore",
+    "unclebob",
+    "ecolove"
+  ],
+  "brands": {
+    "1800cleaner": {
+      "name": "1800 CLEANER",
+      "eyebrow": "Specialist Dust Removal",
+      "tagline": "Breathe easier at home.",
+      "short": "Sydney's dust specialists - deep cleaning that actually lasts.",
+      "blurb": "For forty years, 1800 CLEANER has focused on what most cleaners skip: the dust you can't see.",
+      "intro": "Part of ARC Home Management Services, with the same vetted-team standards - but led by dust science, not a quick wipe-over. Regular and deep cleans scoped to your home, your family and how you live.",
+      "formIntro": "Tell us about your home and we'll recommend a 1800 CLEANER plan - no obligation.",
+      "messagePlaceholder": "e.g. 4-bed home in Rose Bay, dust on surfaces within days of cleaning, interested in regular fortnightly visits…",
+      "bullets": [
+        "Specialist dust removal for healthier indoor air",
+        "Regular and deep home cleaning",
+        "The same trained team, visit after visit",
+        "Plans tailored to your rooms and schedule"
+      ]
+    },
+    "halo": {
+      "name": "HALO HOUSEKEEPING",
+      "eyebrow": "Housekeeping",
+      "tagline": "A home that always feels ready.",
+      "short": "Thoughtful housekeeping that brings calm, comfort and care to your home.",
+      "blurb": "HALO HOUSEKEEPING is for households that want the reset handled before they walk in the door.",
+      "intro": "Dishes done, beds turned, laundry moving, surfaces clear - one regular rhythm with the same team, so your home always feels ready and you carry less mental load.",
+      "formIntro": "Share how your household runs and we'll suggest a HALO HOUSEKEEPING schedule that fits.",
+      "messagePlaceholder": "e.g. family of four, need morning resets twice a week, laundry is the main pain point…",
+      "bullets": [
+        "Kitchen reset - benches, dishes and appliances cleared",
+        "Laundry washed, dried, folded and put away",
+        "Beds made and linen rotated on your schedule",
+        "Daily tidy, light organising and room-to-room reset"
+      ]
+    },
+    "greengate": {
+      "name": "ELF GARDENING",
+      "eyebrow": "Gardening",
+      "tagline": "Love your garden. Enjoy your weekend.",
+      "short": "Regular lawn and garden care across Sydney's leafy suburbs.",
+      "blurb": "ELF GARDENING keeps lawns edged, hedges shaped and garden beds tidy on a reliable schedule.",
+      "intro": "Your garden stays presentable through the seasons - and Saturday stays yours, not another backyard chore list.",
+      "formIntro": "Describe your garden and how often you'd like us - we'll quote from there.",
+      "messagePlaceholder": "e.g. corner block in Vaucluse, lawn plus front hedges, fortnightly mow preferred, side access through gate…",
+      "bullets": [
+        "Lawn mowing and crisp edging",
+        "Hedge, shrub and small-tree trimming",
+        "Weeding, blow-down and garden tidy-ups",
+        "Seasonal clean-ups - leaves, cut-back and clearance"
+      ]
+    },
+    "invisible": {
+      "name": "INVISIBLE",
+      "eyebrow": "Window Cleaning",
+      "tagline": "Making windows disappear since 1983.",
+      "short": "Interior and exterior glass - streak-free, detail-first.",
+      "blurb": "INVISIBLE does the work you notice only when it's done: clear glass, clean tracks and sills, and more light in every room.",
+      "intro": "Forty years of streak-free finishes across Sydney - from single-storey terraces to multi-level homes with challenging access.",
+      "formIntro": "Let us know your windows and access - we'll confirm scope and timing.",
+      "messagePlaceholder": "e.g. two-storey home in Mosman, interior and exterior, ~18 panes, some high windows from balcony access…",
+      "bullets": [
+        "Interior and exterior window glass",
+        "Frames, tracks, sills and flyscreens wiped down",
+        "Streak-free finish on glass doors and pool fencing",
+        "One-off sparkle or a regular visit schedule"
+      ]
+    },
+    "purepools": {
+      "name": "PURE POOLS",
+      "eyebrow": "Pool Maintenance",
+      "tagline": "Dive into crystal-clear water.",
+      "short": "Scheduled pool care - balanced water, ready when you are.",
+      "blurb": "PURE POOLS handles testing, skimming and equipment checks on a timetable you set.",
+      "intro": "Safe, balanced, swim-ready water - without spending Sunday at the filter box or guessing chemical levels.",
+      "formIntro": "Tell us about your pool and how often you'd like it serviced.",
+      "messagePlaceholder": "e.g. saltwater pool in Double Bay, weekly service, often leaves after nor'easters, pump recently replaced…",
+      "bullets": [
+        "Water testing, balancing and chemical adjustments",
+        "Skimming, vacuuming and basket clearance",
+        "Filter, pump and equipment visual checks",
+        "Weekly, fortnightly or seasonal visit plans"
+      ]
+    },
+    "revive": {
+      "name": "REVIVE",
+      "eyebrow": "Pressure Cleaning",
+      "tagline": "Bring it back to life.",
+      "short": "Driveways, decks and facades refreshed with care.",
+      "blurb": "REVIVE lifts years of grime from the surfaces that frame your home.",
+      "intro": "Driveways, paths, patios and exterior walls - using the right pressure for each material, not a one-setting blast that damages stone, timber or render.",
+      "formIntro": "Send the surfaces you want refreshed - photos help, but a short description is fine.",
+      "messagePlaceholder": "e.g. sandstone driveway in Bellevue Hill, green algae in shaded section, plus rear timber deck…",
+      "bullets": [
+        "Driveways, paths and stepping-stone areas",
+        "Patios, decking and outdoor entertaining zones",
+        "House facades, boundary walls and rendered surfaces",
+        "Mould, algae and ground-in dirt on outdoor stone and tile"
+      ]
+    },
+    "restore": {
+      "name": "FRESH",
+      "eyebrow": "Carpet Shampooing",
+      "tagline": "Breathe easier from the ground up.",
+      "short": "Carpet and upholstery shampooing that lifts deep-down dirt, stains and odours.",
+      "blurb": "FRESH reaches into fibres most vacuums leave behind.",
+      "intro": "Embedded dirt, odours and allergens lifted from carpets, rugs and soft furnishings - so rooms feel genuinely fresh underfoot, not just vacuumed on the surface.",
+      "formIntro": "Describe the rooms, fabrics and any stains or odours you'd like us to look at.",
+      "messagePlaceholder": "e.g. wool rugs in living room, light sofa with pet odour, 3 bedrooms wall-to-wall carpet, kids' traffic areas…",
+      "bullets": [
+        "Carpet steam cleaning for high-traffic and living areas",
+        "Rug and runner cleaning, including delicate fibres",
+        "Lounge, dining and bedroom upholstery",
+        "Targeted stain, pet and odour treatment"
+      ]
+    },
+    "unclebob": {
+      "name": "UNCLE MIKE",
+      "eyebrow": "The Handyman",
+      "tagline": "The handyman you wish was family.",
+      "short": "The small repairs and fixes that sit on your list for months.",
+      "blurb": "UNCLE MIKE is the person you trust inside your home for the niggling jobs.",
+      "intro": "A door that sticks, shelves that need mounting, silicone that's gone mouldy, or a batch of odd jobs before guests arrive - handled discreetly, respectfully and properly.",
+      "formIntro": "List the jobs you've been putting off - we'll let you know what we can tackle in one visit.",
+      "messagePlaceholder": "e.g. re-hang bathroom door, mount three shelves in study, replace kitchen silicone, fix loose deck railing…",
+      "bullets": [
+        "General repairs, adjustments and maintenance",
+        "TV, art, shelving and fixture mounting",
+        "Touch-up painting, silicone and sealant refresh",
+        "Pre-season checks - gutters, fittings and odd jobs batch"
+      ]
+    },
+    "ecolove": {
+      "name": "ecoLove low-tox products",
+      "eyebrow": "Cleaning Products",
+      "tagline": "Clean with care. Live with love.",
+      "short": "Low-tox, in-house cleaning products - safe around kids and pets.",
+      "blurb": "ecoLove uses in-house, low-tox products that cut through everyday grime without harsh fumes.",
+      "intro": "A better fit for families, allergy-sensitive homes and anyone who wants a clean home without the chemical hangover - products made and used by our own team.",
+      "formIntro": "Tell us who lives in your home and what you'd like cleaned - we'll match the right ecoLove approach.",
+      "messagePlaceholder": "e.g. toddler and a dog, chemical scents are a trigger, need fortnightly clean of kitchen and bathrooms…",
+      "bullets": [
+        "Low-tox formulas developed and used in-house",
+        "Effective on kitchens, bathrooms and living areas",
+        "Safer choice for children, pets and sensitive skin",
+        "Gentle on surfaces, finishes and indoor air"
+      ]
+    }
+  }
+}
