@@ -187,3 +187,6 @@ code{background:var(--soft-2);padding:.1em .4em;border-radius:4px;font-size:.86e
   .hero-cta,.cta-band .cta-btns{gap:10px}
   .hero-cta .btn-call,.hero-cta .btn-ghost,.cta-band .btn-call{flex:1 1 100%;width:100%;justify-content:center}
 }
+
+/* people photos: crop from the top so faces stay in frame */
+.photo img[src*="loc-working"],.photo img[src*="loc-portrait"],.photo img[src*="man-car"]{object-position:center top}
