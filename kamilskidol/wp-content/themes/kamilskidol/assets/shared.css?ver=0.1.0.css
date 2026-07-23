@@ -1,0 +1,310 @@
+/* Камилски дол — shared design tokens */
+
+:root {
+  --ink: #15130f;
+  --ink-2: #1c1a16;
+  --ink-3: #25221d;
+  --line: rgba(212, 200, 176, 0.14);
+  --line-strong: rgba(212, 200, 176, 0.28);
+  --paper: #e9dfc8;
+  --paper-dim: #c9bfa8;
+  --paper-muted: #8a7d6a;
+  --paper-faint: #5a5347;
+  --bronze: #b8a878;
+  --rust: #a64d2e;
+  --serif: "Cormorant Garamond", "Times New Roman", serif;
+  --sans: "Inter", system-ui, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, monospace;
+  --maxw: 1280px;
+}
+
+html, body {
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--sans);
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  font-feature-settings: "ss01", "cv11";
+}
+
+* { box-sizing: border-box; }
+
+a { color: inherit; text-decoration: none; }
+
+.serif { font-family: var(--serif); font-weight: 400; }
+.mono { font-family: var(--mono); }
+.smallcaps {
+  font-family: var(--sans);
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--paper-muted);
+}
+.cat { font-family: var(--mono); font-size: 11px; color: var(--paper-muted); letter-spacing: 0.04em; }
+
+.hairline { border: 0; border-top: 1px solid var(--line-strong); margin: 0; }
+.hairline-soft { border: 0; border-top: 1px solid var(--line); margin: 0; }
+
+/* Site header */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(21,19,15,0.86);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--line);
+}
+.site-header-inner {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 18px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+}
+.brand {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+}
+.brand .crest {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 22px;
+  color: var(--paper);
+  letter-spacing: 0.01em;
+}
+.brand .est {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--paper-muted);
+  letter-spacing: 0.12em;
+}
+.nav {
+  display: flex;
+  gap: 28px;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+.nav a {
+  color: var(--paper-dim);
+  padding: 4px 0;
+  border-bottom: 1px solid transparent;
+  transition: border-color .2s, color .2s;
+}
+.nav a:hover, .nav a.active {
+  color: var(--paper);
+  border-bottom-color: var(--bronze);
+}
+.lang-pill {
+  font-family: var(--mono);
+  font-size: 10px;
+  border: 1px solid var(--line-strong);
+  padding: 4px 8px;
+  color: var(--paper-muted);
+  letter-spacing: 0.1em;
+}
+
+/* Footer */
+.site-footer {
+  border-top: 1px solid var(--line);
+  margin-top: 120px;
+  padding: 56px 32px 40px;
+  color: var(--paper-muted);
+  font-size: 12px;
+}
+.site-footer-inner {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 40px;
+}
+.site-footer h4 {
+  font-family: var(--sans);
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 10px;
+  color: var(--paper-dim);
+  margin: 0 0 14px;
+  font-weight: 600;
+}
+.site-footer ul { list-style: none; padding: 0; margin: 0; line-height: 1.9; }
+.site-footer .colophon {
+  max-width: var(--maxw);
+  margin: 48px auto 0;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* Section header pattern */
+.section-head {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 80px 32px 32px;
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 48px;
+  align-items: end;
+  border-bottom: 1px solid var(--line);
+}
+.section-head .num { font-family: var(--mono); font-size: 11px; color: var(--bronze); letter-spacing: 0.16em; }
+.section-head .kicker { display: block; margin-top: 6px; }
+.section-head h1 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(48px, 6vw, 88px);
+  line-height: 0.95;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+.section-head h1 em { font-style: italic; color: var(--bronze); }
+.section-head .sub {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-style: italic;
+  color: var(--paper-dim);
+  margin: 18px 0 0;
+  max-width: 60ch;
+  line-height: 1.4;
+}
+
+/* Placeholder image */
+.ph {
+  position: relative;
+  background:
+    repeating-linear-gradient(135deg,
+      #2a2620 0 8px,
+      #221f1a 8px 16px);
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  overflow: hidden;
+  border: 1px solid var(--line);
+}
+.ph::before {
+  content: attr(data-label);
+  position: absolute;
+  top: 12px;
+  left: 14px;
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--paper-muted);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.ph::after {
+  content: attr(data-cat);
+  position: absolute;
+  bottom: 12px;
+  right: 14px;
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--paper-faint);
+}
+
+/* When a real image URL is supplied via --img CSS variable, render it as a
+   cover background with a subtle archival treatment. The label/cat captions
+   stay readable via a top + bottom gradient scrim. */
+.ph[style*="--img"] {
+  background-image:
+    linear-gradient(to bottom,
+      rgba(15, 18, 14, 0.45) 0%,
+      rgba(15, 18, 14, 0) 22%,
+      rgba(15, 18, 14, 0) 70%,
+      rgba(15, 18, 14, 0.55) 100%),
+    var(--img);
+  background-size: cover, cover;
+  background-position: center, center;
+  background-repeat: no-repeat, no-repeat;
+  background-color: #1a1c18;
+  /* B&W + slight desaturation for the archival feel */
+  filter: grayscale(0.18) contrast(1.02);
+}
+.ph[style*="--img"]::before { color: rgba(245, 240, 230, 0.92); text-shadow: 0 1px 2px rgba(0,0,0,0.6); }
+.ph[style*="--img"]::after { color: rgba(245, 240, 230, 0.85); text-shadow: 0 1px 2px rgba(0,0,0,0.6); }
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 22px;
+  border: 1px solid var(--line-strong);
+  background: transparent;
+  color: var(--paper);
+  font-family: var(--sans);
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all .2s;
+}
+.btn:hover { border-color: var(--bronze); color: var(--bronze); }
+.btn-primary { background: var(--paper); color: var(--ink); border-color: var(--paper); }
+.btn-primary:hover { background: var(--bronze); border-color: var(--bronze); color: var(--ink); }
+
+/* Selection */
+::selection { background: var(--bronze); color: var(--ink); }
+
+/* Scrollbars */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--ink-2); }
+::-webkit-scrollbar-thumb { background: var(--ink-3); border: 2px solid var(--ink-2); }
+::-webkit-scrollbar-thumb:hover { background: var(--paper-faint); }
+
+/* Density modes */
+body[data-density="sparse"] .section-head { padding-top: 140px; padding-bottom: 56px; }
+body[data-density="dense"] .section-head { padding-top: 48px; padding-bottom: 20px; }
+
+/* Light mode toggle (palette tweak: warm-light) */
+body[data-palette="warm-light"] {
+  --ink: #f4efe6;
+  --ink-2: #ece6da;
+  --ink-3: #e0d8c5;
+  --paper: #2a2520;
+  --paper-dim: #4a4238;
+  --paper-muted: #6b6155;
+  --paper-faint: #8a7d6a;
+  --line: rgba(42,37,32,0.12);
+  --line-strong: rgba(42,37,32,0.24);
+  --bronze: #7a4a2e;
+  --rust: #a64d2e;
+}
+body[data-palette="warm-light"] .ph {
+  background: repeating-linear-gradient(135deg, #d4c8b0 0 8px, #c9bca0 8px 16px);
+}
+body[data-palette="warm-light"] .ph::before { color: var(--paper-faint); }
+body[data-palette="warm-light"] .site-header { background: rgba(244,239,230,0.86); }
+
+/* Forest palette */
+body[data-palette="forest"] {
+  --ink: #1a201c;
+  --ink-2: #232a25;
+  --ink-3: #2c342e;
+  --paper: #e8ece2;
+  --bronze: #a8b098;
+  --line: rgba(232,236,226,0.12);
+  --line-strong: rgba(232,236,226,0.26);
+}
+
+/* Type swap */
+body[data-type="serif-pair-2"] {
+  --serif: "EB Garamond", "Times New Roman", serif;
+  --sans: "Work Sans", system-ui, sans-serif;
+}
+body[data-type="editorial"] {
+  --serif: "Playfair Display", "Times New Roman", serif;
+  --sans: "Space Grotesk", system-ui, sans-serif;
+}
