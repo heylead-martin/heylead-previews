@@ -1,0 +1,59 @@
+.pe-feature { padding: 80px 32px; border-bottom: 1px solid var(--line); }
+.pe-feature-inner {
+  max-width: var(--maxw); margin: 0 auto;
+  display: grid; grid-template-columns: 4fr 7fr; gap: 64px; align-items: start;
+}
+.pe-feature-portrait { aspect-ratio: 4/5; width: 100%; }
+.pe-feature-body h2 {
+  font-family: var(--serif); font-weight: 400;
+  font-size: clamp(44px, 5vw, 72px); line-height: 1; letter-spacing: -0.01em;
+  margin: 8px 0 8px;
+}
+.pe-years { font-size: 12px; color: var(--paper-muted); letter-spacing: 0.1em; margin-bottom: 32px; }
+.pe-quote {
+  font-size: 28px; line-height: 1.4; font-style: italic; color: var(--paper);
+  margin: 0 0 32px; padding: 0; border-left: 2px solid var(--bronze); padding-left: 24px;
+  max-width: 32ch;
+}
+.pe-body { font-size: 17px; line-height: 1.65; color: var(--paper-dim); max-width: 60ch; margin: 0 0 40px; }
+.pe-player {
+  display: flex; align-items: center; gap: 20px;
+  padding: 18px 22px; border: 1px solid var(--line-strong);
+  max-width: 640px;
+}
+.pe-play {
+  width: 40px; height: 40px; border-radius: 50%;
+  border: 1px solid var(--paper); background: transparent; color: var(--paper);
+  cursor: pointer; flex-shrink: 0;
+}
+.pe-wave { display: flex; align-items: end; gap: 2px; height: 32px; flex: 1; }
+.pe-wave span { flex: 1; background: var(--paper-muted); opacity: 0.6; min-height: 2px; }
+
+.pe-grid-section { padding: 80px 32px; border-top: 1px solid var(--line); }
+.pe-grid-inner { max-width: var(--maxw); margin: 0 auto; }
+.pe-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px 32px; }
+.pe-card {
+  background: transparent; border: 0; padding: 0; text-align: left;
+  cursor: pointer; transition: transform .25s;
+}
+.pe-card:hover { transform: translateY(-3px); }
+.pe-card.active { outline: 1px solid var(--bronze); outline-offset: 12px; }
+.pe-card-portrait { aspect-ratio: 4/5; }
+.pe-card h3 { font-family: var(--serif); font-weight: 400; font-size: 24px; margin: 4px 0 4px; letter-spacing: -0.01em; }
+.pe-card-role { font-size: 13px; color: var(--paper-dim); }
+.pe-card-years { font-size: 11px; color: var(--paper-muted); margin-top: 4px; }
+
+/* Tree */
+.pe-tree-section { padding: 80px 32px; border-top: 1px solid var(--line); }
+.pe-tree-inner { max-width: 900px; margin: 0 auto; }
+.pe-tree { display: flex; flex-direction: column; align-items: center; gap: 0; }
+.pe-tree-row { display: flex; gap: 80px; justify-content: center; width: 100%; padding: 16px 0; }
+.pe-tree-line { width: 1px; height: 40px; background: var(--line-strong); }
+.pe-tree-node {
+  border: 1px solid var(--line-strong);
+  padding: 18px 22px; min-width: 220px;
+  text-align: center;
+  background: var(--ink-2);
+}
+.pe-tree-node.primary { border-color: var(--bronze); }
+.pe-tree-node .serif { font-size: 22px; margin-top: 4px; }

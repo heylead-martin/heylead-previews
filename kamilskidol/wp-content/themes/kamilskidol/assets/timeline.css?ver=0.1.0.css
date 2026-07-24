@@ -1,0 +1,188 @@
+/* Timeline page styles */
+
+.tl-controls {
+  border-bottom: 1px solid var(--line);
+}
+.tl-controls-inner {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 24px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 32px;
+}
+.tl-eras { display: flex; gap: 4px; flex-wrap: wrap; }
+.tl-era {
+  background: transparent;
+  border: 1px solid var(--line);
+  color: var(--paper-dim);
+  padding: 8px 14px;
+  font-family: var(--sans);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all .2s;
+}
+.tl-era:hover { border-color: var(--bronze); color: var(--paper); }
+.tl-era.active { background: var(--paper); color: var(--ink); border-color: var(--paper); }
+
+.tl-scrubber {
+  background: var(--ink-2);
+  border-bottom: 1px solid var(--line);
+}
+.tl-scrubber-inner {
+  position: relative;
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 80px 64px 60px;
+  height: 200px;
+}
+.tl-track {
+  position: absolute;
+  left: 64px; right: 64px;
+  top: 50%;
+  height: 1px;
+  background: var(--line-strong);
+}
+.tl-pin {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
+}
+.tl-pin-dot {
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  background: var(--paper-muted);
+  border: 1px solid var(--ink);
+  transition: all .2s;
+}
+.tl-pin.primary .tl-pin-dot {
+  width: 12px; height: 12px;
+  background: var(--bronze);
+}
+.tl-pin.active .tl-pin-dot {
+  background: var(--paper);
+  box-shadow: 0 0 0 6px rgba(184,168,120,0.18);
+}
+.tl-pin-year {
+  position: absolute;
+  top: 18px;
+  font-size: 10px;
+  color: var(--paper-muted);
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+  transform: rotate(-45deg);
+  transform-origin: left top;
+  opacity: 0.6;
+}
+.tl-pin.active .tl-pin-year { color: var(--paper); opacity: 1; }
+.tl-pin.primary .tl-pin-year { color: var(--bronze); opacity: 1; }
+
+/* Feature card */
+.tl-feature {
+  border-bottom: 1px solid var(--line);
+  padding: 80px 32px;
+}
+.tl-feature-inner {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 200px 1fr 5fr;
+  gap: 56px;
+  align-items: start;
+}
+.tl-feature-year {
+  font-size: 88px;
+  letter-spacing: -0.02em;
+  line-height: 0.9;
+  color: var(--bronze);
+  margin-top: 24px;
+}
+.tl-feature-body h2 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(36px, 4vw, 56px);
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  margin: 12px 0 24px;
+}
+.tl-feature-body p {
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--paper-dim);
+  max-width: 60ch;
+  margin: 0 0 32px;
+}
+.tl-feature-nav {
+  display: flex;
+  gap: 24px;
+}
+.tl-feature-nav button {
+  background: transparent;
+  border: 0;
+  color: var(--paper);
+  font-family: var(--sans);
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  cursor: pointer;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--line-strong);
+}
+.tl-feature-nav button:hover:not(:disabled) { color: var(--bronze); border-bottom-color: var(--bronze); }
+.tl-feature-nav button:disabled { color: var(--paper-faint); cursor: default; }
+.tl-feature-img {
+  aspect-ratio: 4/5;
+  width: 100%;
+}
+
+/* List */
+.tl-list { padding: 80px 32px; }
+.tl-list-inner { max-width: var(--maxw); margin: 0 auto; }
+.tl-row {
+  display: grid;
+  grid-template-columns: 200px 1fr 40px;
+  gap: 56px;
+  padding: 28px 0;
+  border-top: 1px solid var(--line);
+  cursor: pointer;
+  transition: background .2s, padding .2s;
+}
+.tl-row:hover { background: var(--ink-2); padding-left: 16px; padding-right: 16px; }
+.tl-row.active { background: var(--ink-2); padding-left: 16px; padding-right: 16px; }
+.tl-row:last-child { border-bottom: 1px solid var(--line); }
+.tl-row-year {
+  font-size: 28px;
+  color: var(--paper);
+  letter-spacing: -0.01em;
+}
+.tl-row.active .tl-row-year { color: var(--bronze); }
+.tl-row-body h3 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 24px;
+  margin: 6px 0 8px;
+  letter-spacing: -0.01em;
+}
+.tl-row-body p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--paper-dim);
+  margin: 0;
+  max-width: 64ch;
+}
+.tl-row-mark {
+  font-family: var(--mono);
+  color: var(--bronze);
+  font-size: 18px;
+  text-align: right;
+}

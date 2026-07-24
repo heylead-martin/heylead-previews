@@ -122,7 +122,7 @@ function Featured() {
           <div className="cat">— Изложба на седмицата</div>
           <h2 className="serif">Камбаната от Одрин, <em>1895</em></h2>
         </div>
-        <a href="/artifacts/" className="btn">Към сбирката →</a>
+        <a href="/kamilskidol/artifacts/" className="btn">Към сбирката →</a>
       </div>
       <div className="kd-featured-body">
         <div className="ph kd-featured-img" data-label="Photograph · черно‑бял отпечатък" data-cat="ОБ‑017 · ок. 1962" style={kdImg("ОБ‑017", {aspectRatio: "4/5"})}></div>
@@ -141,7 +141,7 @@ function Featured() {
             <div><dt>Местонахождение</dt><dd>Църква „Св. Атанас“, Камилски дол</dd></div>
             <div><dt>Състояние</dt><dd>Експонирано · действащо</dd></div>
           </dl>
-          <a href="/artifacts/" className="kd-featured-link">Прочетете цялата история →</a>
+          <a href="/kamilskidol/artifacts/" className="kd-featured-link">Прочетете цялата история →</a>
         </div>
       </div>
     </section>
@@ -191,7 +191,7 @@ function VoicesTeaser() {
           <div className="cat">— Устни истории</div>
           <h2 className="serif">Гласове, които сме записали</h2>
         </div>
-        <a href="/people/" className="btn">Слушайте всички →</a>
+        <a href="/kamilskidol/people/" className="btn">Слушайте всички →</a>
       </div>
       <div className="kd-voices-grid">
         {voices.map((v, i) => (
@@ -225,7 +225,7 @@ function ContributeStrip() {
           Изпратете ни сканирана снимка, разкажете спомен на близък, дайте име на лице,
           което не разпознаваме.
         </p>
-        <a href="/contribute/" className="btn btn-primary">Дарете на архива →</a>
+        <a href="/kamilskidol/contribute/" className="btn btn-primary">Дарете на архива →</a>
       </div>
     </section>
   );

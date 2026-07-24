@@ -3,13 +3,13 @@
    and mounts <TweaksRoot/> at the end. */
 
 const NAV = [
-  { id: "home", label: "Начало", href: "/" },
-  { id: "timeline", label: "Хронология", href: "/timeline/" },
-  { id: "archive", label: "Архив", href: "/archive/" },
-  { id: "artifacts", label: "Предмети", href: "/artifacts/" },
-  { id: "people", label: "Хора", href: "/people/" },
-  { id: "map", label: "Карта", href: "/map/" },
-  { id: "contribute", label: "Дарение", href: "/contribute/" },
+  { id: "home", label: "Начало", href: "/kamilskidol/" },
+  { id: "timeline", label: "Хронология", href: "/kamilskidol/timeline/" },
+  { id: "archive", label: "Архив", href: "/kamilskidol/archive/" },
+  { id: "artifacts", label: "Предмети", href: "/kamilskidol/artifacts/" },
+  { id: "people", label: "Хора", href: "/kamilskidol/people/" },
+  { id: "map", label: "Карта", href: "/kamilskidol/map/" },
+  { id: "contribute", label: "Дарение", href: "/kamilskidol/contribute/" },
 ];
 
 function SiteHeader({ active }) {
@@ -22,7 +22,7 @@ function SiteHeader({ active }) {
   return (
     <header className="site-header">
       <div className="site-header-inner">
-        <a href="/" className="brand">
+        <a href="/kamilskidol/" className="brand">
           <span className="crest">Камилски дол</span>
           <span className="est">EST. ANTE 1572 · ДЕВЕДЕРЕ</span>
         </a>
@@ -54,16 +54,16 @@ function SiteFooter() {
         <div>
           <h4>Раздели</h4>
           <ul>
-            <li><a href="/timeline/">Хронология</a></li>
-            <li><a href="/archive/">Фото архив</a></li>
-            <li><a href="/artifacts/">Предмети</a></li>
-            <li><a href="/people/">Хора и спомени</a></li>
+            <li><a href="/kamilskidol/timeline/">Хронология</a></li>
+            <li><a href="/kamilskidol/archive/">Фото архив</a></li>
+            <li><a href="/kamilskidol/artifacts/">Предмети</a></li>
+            <li><a href="/kamilskidol/people/">Хора и спомени</a></li>
           </ul>
         </div>
         <div>
           <h4>Изследване</h4>
           <ul>
-            <li><a href="/map/">Историческа карта</a></li>
+            <li><a href="/kamilskidol/map/">Историческа карта</a></li>
             <li><a href="#">Език и диалект</a></li>
             <li><a href="#">Природа</a></li>
             <li><a href="#">Посещение</a></li>
@@ -72,7 +72,7 @@ function SiteFooter() {
         <div>
           <h4>Контакт</h4>
           <ul>
-            <li><a href="/contribute/">Споделете история</a></li>
+            <li><a href="/kamilskidol/contribute/">Споделете история</a></li>
             <li>arhiv@kamilskidol.bg</li>
             <li>41.5999° С · 26.0560° И</li>
           </ul>
