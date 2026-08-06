@@ -136,18 +136,25 @@
   .live .dim{color:var(--muted); font-style:italic}
   .turnbtns{display:flex; justify-content:center; gap:12px; margin-top:18px; flex-wrap:wrap}
 
-  /* ---- Call screen ---- */
-  .callgrid{display:grid; grid-template-columns:1fr auto 1fr; gap:14px; align-items:center; margin-top:6px}
-  @media(max-width:640px){.callgrid{grid-template-columns:1fr; gap:6px}}
-  .cstage{position:relative; width:min(60vw,250px); aspect-ratio:1; margin:0 auto}
+  /* ---- Call race screen ---- */
+  .race{display:flex; flex-direction:column; align-items:center; gap:4px; margin-top:2px}
+  .rstage{display:flex; flex-direction:column; align-items:center; gap:6px; transition:opacity .25s, filter .25s}
+  .rstage.dim{opacity:.42; filter:saturate(.4)}
+  .rname{font-size:.85rem; font-weight:700; padding:4px 16px; border-radius:999px;
+    background:rgba(255,255,255,.05); border:1px solid var(--line)}
+  .cstage{position:relative; width:min(46vw,200px); aspect-ratio:1}
   .cstage canvas{width:100%; height:100%; display:block}
-  .cname{
-    position:absolute; left:50%; bottom:6px; transform:translateX(-50%);
-    font-size:.82rem; font-weight:700; padding:5px 14px; border-radius:999px; white-space:nowrap;
-    background:rgba(7,11,20,.75); border:1px solid var(--line);
+  .ctime{position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+    font-size:1.45rem; font-weight:800; font-variant-numeric:tabular-nums; pointer-events:none}
+  .switchbtn{
+    margin:2px 0; border-radius:999px; padding:13px 30px; font-weight:800; font-size:1.02rem;
+    cursor:pointer; border:0; color:#061018; background:linear-gradient(90deg,var(--accent),var(--accent2));
+    box-shadow:0 8px 26px rgba(56,225,255,.3); transition:transform .12s, filter .15s;
   }
-  .callmid{text-align:center; padding:4px 10px}
-  .cstatus{color:var(--muted); font-size:.8rem; margin-top:8px; min-height:1.2em}
+  .switchbtn:hover{transform:translateY(-1px)}
+  .switchbtn:disabled{opacity:.45; cursor:not-allowed; transform:none}
+  .switchbtn.take{background:rgba(255,255,255,.06); color:var(--ink); border:1px solid var(--line); box-shadow:none}
+  .cstatus{color:var(--muted); font-size:.8rem; margin-top:8px; min-height:1.2em; text-align:center}
 
   /* countdown overlay */
   #ov-cdown{
@@ -300,7 +307,7 @@
         <p id="hoststatus"><span class="pulse"></span>Waiting for your rival to join…</p>
         <div id="hostready" hidden>
           <p style="color:var(--ink)"><b id="guestname"></b> joined — you're connected! 🎉</p>
-          <label class="fld">Talking time</label>
+          <label class="fld">Speaking budget each</label>
           <div class="chips" id="chips2" style="justify-content:center">
             <button class="chip" data-sec="30">30 sec</button>
             <button class="chip sel" data-sec="60">1 min</button>
@@ -315,8 +322,9 @@
         <div class="who">Connected to <span id="hostname2"></span></div>
         <p><span class="pulse"></span>You can already talk to each other. Waiting for the host to start the round…</p>
       </div>
-      <p class="note" id="lobbynote">Best with headphones. When the round starts, you both talk at the
-        same time — each phone listens to its own speaker.</p>
+      <p class="note" id="lobbynote">Best with headphones. The mic passes back and forth — the middle
+        button switches whose turn it is, each player has their own time budget, and either of you can
+        end the race whenever you decide.</p>
       <div class="lobbybtns" style="margin-top:14px">
         <button class="btn ghost" id="leave">Leave</button>
       </div>
@@ -350,27 +358,24 @@
     </div>
   </section>
 
-  <!-- CALL (call mode) -->
+  <!-- CALL (mic-pass race) -->
   <section id="s-call">
-    <div class="callgrid">
-      <div class="cstage">
-        <canvas id="vizR"></canvas>
-        <div class="cname" id="cnameR">rival</div>
+    <div class="race">
+      <div class="rstage" id="stR">
+        <div class="rname" id="cnameR">rival</div>
+        <div class="cstage"><canvas id="vizR"></canvas><div class="ctime" id="timeR">1:00</div></div>
       </div>
-      <div class="callmid">
-        <div class="clock" id="cclock">1:00</div>
-        <div class="clocklbl">remaining</div>
-        <div class="cstatus" id="cstatus"><span class="pulse"></span>live</div>
-      </div>
-      <div class="cstage">
-        <canvas id="vizL"></canvas>
-        <div class="cname" id="cnameL">you</div>
+      <button class="switchbtn" id="switch">🎤 Pass the mic ➜</button>
+      <div class="rstage" id="stL">
+        <div class="rname" id="cnameL">you</div>
+        <div class="cstage"><canvas id="vizL"></canvas><div class="ctime" id="timeL">1:00</div></div>
       </div>
     </div>
     <div class="live" id="clive"><span class="dim">listening…</span></div>
+    <div class="cstatus" id="cstatus"></div>
     <div class="turnbtns">
       <button class="btn ghost" id="mute">Mute 🔇</button>
-      <button class="btn ghost" id="endcall">End round</button>
+      <button class="btn" id="endrace">🏁 End race</button>
     </div>
   </section>
 
@@ -702,6 +707,10 @@ function onMsg(msg) {
       state.duration = +msg.duration || 60;
       startCallRound();
       break;
+    case 'turn':
+      if (roundRunning && state.mode === 'call') applyTurn(msg);
+      break;
+    case 'end':
     case 'early':
       if (roundRunning && state.mode === 'call') finishCallRound();
       break;
@@ -771,11 +780,15 @@ async function startCallRound() {
   state.players = [me];
   state.current = 0;
   setAccent(me.color);
+  race.on = true; race.budget = state.duration;
+  race.hostLeft = state.duration; race.guestLeft = state.duration;
+  race.active = 'host';
   $('#cnameL').textContent = me.name + ' (you)';
   $('#cnameR').textContent = net.remoteName || 'Rival';
-  $('#cclock').textContent = fmt(state.duration);
   $('#clive').innerHTML = '<span class="dim">listening…</span>';
-  $('#cstatus').innerHTML = '<span class="pulse"></span>live — talk over each other, it’s allowed';
+  $('#cstatus').innerHTML = '<span class="pulse"></span>' + (net.role === 'host'
+    ? 'you speak first — the middle button passes the mic'
+    : esc(net.remoteName || 'Rival') + ' speaks first — grab the mic with the middle button');
   $('#mute').textContent = 'Mute 🔇';
   show('s-call');
   sizeViz(vizL); sizeViz(vizR);
@@ -786,7 +799,66 @@ async function startCallRound() {
   startRecognition(me, '#clive');
   roundRunning = true;
   roundStart = performance.now();
+  race.lastTick = performance.now();
+  updateRaceUI();
 }
+
+/* --- mic-pass race: chess-clock turn state, synced over the data channel --- */
+const race = { on: false, active: 'host', hostLeft: 60, guestLeft: 60, budget: 60, lastTick: 0 };
+function myTurn() { return race.active === net.role; }
+function flushMyInterim() {
+  const me = state.players[0];
+  if (me && me.interim && me.interim.trim()) { me.finalText += me.interim + ' '; me.interim = ''; }
+}
+function passTurn(broadcast) {
+  if (myTurn()) flushMyInterim();
+  race.active = race.active === 'host' ? 'guest' : 'host';
+  race.lastTick = performance.now();
+  if (broadcast && net.conn && net.conn.open) {
+    try { net.conn.send({ t: 'turn', active: race.active, hostLeft: race.hostLeft, guestLeft: race.guestLeft }); } catch (_) {}
+  }
+  updateRaceUI();
+}
+function applyTurn(msg) {
+  if (myTurn() && msg.active !== net.role) flushMyInterim();
+  race.active = msg.active === 'guest' ? 'guest' : 'host';
+  if (typeof msg.hostLeft === 'number') race.hostLeft = Math.max(0, Math.min(race.budget, msg.hostLeft));
+  if (typeof msg.guestLeft === 'number') race.guestLeft = Math.max(0, Math.min(race.budget, msg.guestLeft));
+  race.lastTick = performance.now();
+  updateRaceUI();
+}
+function tickRace() {
+  const now = performance.now();
+  race[race.active + 'Left'] = Math.max(0, race[race.active + 'Left'] - (now - race.lastTick) / 1000);
+  race.lastTick = now;
+  if (race[race.active + 'Left'] <= 0) {
+    const other = race.active === 'host' ? 'guest' : 'host';
+    if (race[other + 'Left'] > 0) {
+      // out of time: the expired player's own phone announces the hand-over
+      if (myTurn()) passTurn(true);
+      else { race.active = other; race.lastTick = now; updateRaceUI(); }
+    } else endRace();
+  }
+}
+function updateRaceUI() {
+  const mine = race[net.role + 'Left'], theirs = race[(net.role === 'host' ? 'guest' : 'host') + 'Left'];
+  $('#timeL').textContent = fmt(Math.ceil(mine));
+  $('#timeR').textContent = fmt(Math.ceil(theirs));
+  const my = myTurn();
+  $('#stL').classList.toggle('dim', !my);
+  $('#stR').classList.toggle('dim', my);
+  const sw = $('#switch');
+  sw.textContent = my ? '🎤 Pass the mic ➜' : '🖐 Take the mic';
+  sw.classList.toggle('take', !my);
+  sw.disabled = !roundRunning || (my ? theirs <= 0 : mine <= 0);
+}
+function endRace() {
+  if (!roundRunning) return;
+  if (net.conn && net.conn.open) { try { net.conn.send({ t: 'end' }); } catch (_) {} }
+  finishCallRound();
+}
+$('#switch').addEventListener('click', () => { if (roundRunning) passTurn(true); });
+$('#endrace').addEventListener('click', endRace);
 
 $('#mute').addEventListener('click', () => {
   const tr = stream && stream.getAudioTracks()[0];
@@ -795,26 +867,24 @@ $('#mute').addEventListener('click', () => {
   $('#mute').textContent = tr.enabled ? 'Mute 🔇' : 'Unmute 🔊';
 });
 
-$('#endcall').addEventListener('click', () => {
-  if (!roundRunning) return;
-  if (net.conn && net.conn.open) { try { net.conn.send({ t: 'early' }); } catch (_) {} }
-  finishCallRound();
-});
-
 function finishCallRound() {
   if (!roundRunning) return;
   roundRunning = false;
   stopRecognition();
   const me = state.players[0];
   if (me.interim && me.interim.trim()) { me.finalText += me.interim + ' '; me.interim = ''; }
-  me.elapsed = Math.min(state.duration, (performance.now() - roundStart) / 1000);
-  scorePlayer(me, true);
+  me.elapsed = race.on
+    ? Math.min(race.budget, Math.max(0, race.budget - race[net.role + 'Left']))
+    : Math.min(state.duration, (performance.now() - roundStart) / 1000);
+  race.on = false;
+  /* while you hold the mic it's a monologue, so score it as one */
+  scorePlayer(me);
   if (srDead) me.m.srDead = true;
   if (net.conn && net.conn.open) {
     try { net.conn.send({ t: 'result', name: me.name, m: me.m, text: me.finalText.trim().slice(0, 4000) }); } catch (_) {}
   }
   $('#cstatus').innerHTML = '<span class="pulse"></span>waiting for ' + esc(net.remoteName || 'rival') + '’s score…';
-  $('#cclock').textContent = '0:00';
+  updateRaceUI();
   clearTimeout(waitTimer);
   waitTimer = setTimeout(() => maybeShowCallResults(true), 12000);
   maybeShowCallResults();
@@ -862,6 +932,7 @@ function startRecognition(p, liveSel) {
   recActive = true;
   rec.onresult = e => {
     srFails = 0;
+    if (state.mode === 'call' && (!roundRunning || !myTurn())) return;
     let interim = '';
     for (let i = e.resultIndex; i < e.results.length; i++) {
       const r = e.results[i];
@@ -935,12 +1006,16 @@ function startDraw() { if (!rafId) rafId = requestAnimationFrame(masterDraw); }
 function stopDraw() { cancelAnimationFrame(rafId); rafId = 0; }
 
 function ringFrame(v, an, colors, frac, ts) {
-  if (!an) { v.ctx.clearRect(0, 0, v.W, v.H); return 0; }
-  an.getByteFrequencyData(freqData);
-  an.getByteTimeDomainData(timeData);
-  let sum = 0;
-  for (let i = 0; i < timeData.length; i += 4) { const x = (timeData[i] - 128) / 128; sum += x * x; }
-  const rms = Math.sqrt(sum / (timeData.length / 4));
+  let rms = 0;
+  if (an) {
+    an.getByteFrequencyData(freqData);
+    an.getByteTimeDomainData(timeData);
+    let sum = 0;
+    for (let i = 0; i < timeData.length; i += 4) { const x = (timeData[i] - 128) / 128; sum += x * x; }
+    rms = Math.sqrt(sum / (timeData.length / 4));
+  } else if (freqData) {
+    freqData.fill(0);   // no stream yet: draw the calm ring + timer arc, no bars
+  }
   v.env = Math.max(rms, v.env * 0.93);
 
   const ctx = v.ctx, W = v.W, H = v.H;
@@ -1003,16 +1078,22 @@ function masterDraw(ts) {
     const me = state.players[0];
     const myColors = me ? me.color : (net.role === 'host' ? P1 : P2);
     const theirColors = net.role === 'host' ? P2 : P1;
-    const rms = ringFrame(vizL, analyser, myColors, frac, ts);
-    ringFrame(vizR, net.remoteAnalyser, theirColors, frac, ts);
-    if (roundRunning && me) {
+    let fracMe = 1, fracThem = 1;
+    if (roundRunning && race.on) {
+      tickRace();
+      fracMe = clamp01(race[net.role + 'Left'] / race.budget);
+      fracThem = clamp01(race[(net.role === 'host' ? 'guest' : 'host') + 'Left'] / race.budget);
+      updateRaceUI();
+    }
+    const rms = ringFrame(vizL, analyser, myColors, fracMe, ts);
+    ringFrame(vizR, net.remoteAnalyser, theirColors, fracThem, ts);
+    if (roundRunning && me && myTurn()) {
       trackVoice(me, rms);
-      $('#cclock').textContent = fmt(Math.ceil(Math.max(0, state.duration - elapsed)));
-      if (elapsed > 12 && me.wordCount === 0 && me.speakFrames > 200 && !me.srWarned) {
+      const used = race.budget - race[net.role + 'Left'];
+      if (used > 12 && me.wordCount === 0 && me.speakFrames > 200 && !me.srWarned) {
         me.srWarned = true;
         $('#cstatus').innerHTML = '⚠️ transcription isn’t catching words on this phone (typical on iPhone) — you’ll be scored on voice rhythm';
       }
-      if (elapsed >= state.duration) finishCallRound();
     }
   }
 }
