@@ -417,6 +417,19 @@ const net = {
 let stream = null, actx = null, analyser = null, freqData = null, timeData = null;
 let rec = null, recActive = false, srFails = 0, srDead = false;
 let roundRunning = false, roundStart = 0, rafId = 0, angleOff = 0;
+const vad = { inSyl: false, lastSyl: 0, silStart: 0 };
+function resetVad() { vad.inSyl = false; vad.lastSyl = 0; vad.silStart = 0; }
+function trackVoice(p, rms) {
+  const now = performance.now();
+  p.totalFrames++;
+  if (rms > 0.02) p.speakFrames++;
+  // syllable-ish onset detection with hysteresis
+  if (!vad.inSyl && rms > 0.035 && now - vad.lastSyl > 110) { vad.inSyl = true; vad.lastSyl = now; p.peaks++; }
+  else if (vad.inSyl && rms < 0.022) vad.inSyl = false;
+  // hesitation pauses > 0.8s
+  if (rms < 0.015) { if (!vad.silStart) vad.silStart = now; }
+  else { if (vad.silStart && now - vad.silStart > 800) p.longPauses++; vad.silStart = 0; }
+}
 let waitTimer = 0;
 
 function show(id) {
@@ -432,7 +445,7 @@ function esc(s) { return s.replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;',
 function fmt(s) { s = Math.max(0, Math.round(s)); return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); }
 function myName() { return $('#n1').value.trim() || 'Player 1'; }
 function mkPlayer(name, color) {
-  return { name, color, finalText: '', interim: '', confSum: 0, confN: 0, speakFrames: 0, totalFrames: 0, elapsed: 0, m: null };
+  return { name, color, finalText: '', interim: '', confSum: 0, confN: 0, speakFrames: 0, totalFrames: 0, peaks: 0, longPauses: 0, elapsed: 0, m: null };
 }
 function showErr(title, msg) { cleanupNet(); stopRecognition(); roundRunning = false; $('#errtitle').textContent = title; $('#errmsg').textContent = msg; show('s-err'); }
 $('#errback').addEventListener('click', () => { setAccent(P1); show('s-setup'); });
@@ -518,6 +531,7 @@ async function beginTurn() {
   show('s-turn');
   sizeViz(vizT);
   vizT.env = 0;
+  resetVad();
   startDraw();
   await countdown(3);
   startRecognition(p, '#live');
@@ -531,6 +545,7 @@ function endTurn() {
   roundRunning = false;
   stopRecognition();
   const p = state.players[state.current];
+  if (p.interim && p.interim.trim()) { p.finalText += p.interim + ' '; p.interim = ''; }
   p.elapsed = Math.min(state.duration, (performance.now() - roundStart) / 1000);
   if (state.current < state.players.length - 1) { state.current++; handoff(); }
   else {
@@ -749,6 +764,7 @@ async function startCallRound() {
   show('s-call');
   sizeViz(vizL); sizeViz(vizR);
   vizL.env = 0; vizR.env = 0;
+  resetVad();
   startDraw();
   await countdown(3, true);
   startRecognition(me, '#clive');
@@ -774,8 +790,9 @@ function finishCallRound() {
   roundRunning = false;
   stopRecognition();
   const me = state.players[0];
+  if (me.interim && me.interim.trim()) { me.finalText += me.interim + ' '; me.interim = ''; }
   me.elapsed = Math.min(state.duration, (performance.now() - roundStart) / 1000);
-  scorePlayer(me);
+  scorePlayer(me, true);
   if (srDead) me.m.srDead = true;
   if (net.conn && net.conn.open) {
     try { net.conn.send({ t: 'result', name: me.name, m: me.m, text: me.finalText.trim().slice(0, 4000) }); } catch (_) {}
@@ -841,6 +858,8 @@ function startRecognition(p, liveSel) {
     p.interim = interim;
     const tail = (p.finalText + ' ' + p.interim).trim().split(/\s+/).slice(-14).join(' ');
     $(liveSel).innerHTML = tail ? esc(tail) : '<span class="dim">listening…</span>';
+    if (state.mode === 'call' && roundRunning)
+      $('#cstatus').innerHTML = '<span class="pulse"></span>live — ' + tokenize(p.finalText + ' ' + p.interim).length + ' words heard';
   };
   rec.onend = () => {
     if (!recActive) return;
@@ -958,8 +977,7 @@ function masterDraw(ts) {
     const p = state.players[state.current];
     const rms = ringFrame(vizT, analyser, p ? p.color : P1, frac, ts);
     if (roundRunning && p) {
-      p.totalFrames++;
-      if (rms > 0.02) p.speakFrames++;
+      trackVoice(p, rms);
       $('#clock').textContent = fmt(Math.ceil(Math.max(0, state.duration - elapsed)));
       if (elapsed >= state.duration) endTurn();
     }
@@ -970,8 +988,7 @@ function masterDraw(ts) {
     const rms = ringFrame(vizL, analyser, myColors, frac, ts);
     ringFrame(vizR, net.remoteAnalyser, theirColors, frac, ts);
     if (roundRunning && me) {
-      me.totalFrames++;
-      if (rms > 0.02) me.speakFrames++;
+      trackVoice(me, rms);
       $('#cclock').textContent = fmt(Math.ceil(Math.max(0, state.duration - elapsed)));
       if (elapsed >= state.duration) finishCallRound();
     }
@@ -988,56 +1005,129 @@ const HARD_FILLERS = new Set(['um', 'uh', 'uhm', 'er', 'erm', 'hmm', 'mmm', 'ah'
 const SOFT_UNI = new Set(['like', 'basically', 'literally', 'actually']);
 const SOFT_BI = ['you know', 'i mean', 'sort of', 'kind of'];
 
+/* ~700 most common spoken-English words; anything outside (len>=5) counts as "advanced" */
+const COMMON = new Set(("the be to of and a in that have i it for not on with he as you do at this but his by from they we say her she or an will my one all would there their what so up out if about who get which go me when make can like time no just him know take people into year your good some could them see other than then now look only come its over think also back after use two how our work first well way even new want because any these give day most us is are was were been has had did does said says am doing done was being had".split(' '))
+  .concat("man woman child world school state family student group country problem hand part place case week company system program question government number night point home water room mother area money story fact month lot right study book eye job word business issue side kind head house service friend father power hour game line end member law car city community name president team minute idea body information face others level office door health person art war history party result change morning reason research girl guy moment air teacher force education foot boy age policy everything process music market sense nation plan college interest death experience effect class control care field development role effort rate heart drug show leader light voice wife whole police mind price report decision son view relationship town road arm difference value building action model season society tax director position player record paper space ground form event official matter center couple site project activity star table need court oil situation cost industry figure street image phone data picture practice piece land product doctor wall news test movie north love support technology food mouth game brother sister dog cat weather holiday weekend restaurant coffee breakfast lunch dinner sport football music film summer winter morning evening yesterday tomorrow today tonight".split(' '))
+  .concat("leave put mean keep let begin seem help talk turn start might show hear play run move live believe hold bring happen must write provide sit stand lose pay meet include continue set learn lead understand watch follow stop create speak read allow add spend grow open walk win offer remember consider appear buy wait serve die send expect build stay fall cut reach kill remain suggest raise pass sell require decide pull return explain hope develop carry break receive agree hit produce eat cover catch draw choose cause listen realize close involve work want going gonna wanna trying tried making getting saying looking coming taking giving thinking feeling felt found knew went came said told saw got made".split(' '))
+  .concat("great little own old big high different small large next early young important few public bad same able last long free true full special easy clear recent certain personal open red difficult available likely short single medical current wrong private past foreign fine common poor natural significant similar hot dead central happy serious ready simple left physical general financial blue dark various entire legal religious cold final main green nice huge popular really still too very much often however almost always sometimes never here again there together once away yes maybe probably already ever far soon less enough quite rather better best worse worst pretty okay ok yeah stuff thing things".split(' '))
+  .concat("yourself myself himself herself itself ourselves themselves something anything nothing everything someone anyone everyone nobody each every both while during before against between under until without within along across behind beyond among around through".split(' ')));
+
+/* discourse connectives — a proxy for structured, coherent speech */
+const CONNECT_UNI = new Set(['because', 'although', 'though', 'however', 'therefore', 'especially', 'instead', 'despite', 'whereas', 'since', 'unless', 'moreover', 'furthermore', 'obviously', 'honestly', 'generally', 'usually', 'finally', 'eventually', 'specifically', 'particularly', 'anyway', 'also', 'basically', 'actually']);
+const CONNECT_BI = ['for example', 'in fact', 'of course', 'at least', 'as well', 'even though', 'so that', 'in my opinion', 'on the other hand', 'to be honest'];
+
 function tokenize(text) {
   return text.toLowerCase().replace(/[^a-z'\- ]/g, ' ').split(/\s+/).filter(Boolean);
 }
 function lin(x, a, b) { return Math.max(0, Math.min(1, (x - a) / (b - a))); }
+function clamp01(x) { return Math.max(0, Math.min(1, x)); }
 function trap(x, a, b, c, d) {
   if (x <= a || x >= d) return 0;
   if (x >= b && x <= c) return 1;
   return x < b ? (x - a) / (b - a) : (d - x) / (d - c);
 }
+function isCommon(w) {
+  w = w.replace(/^'+|'+$/g, '');
+  if (COMMON.has(w)) return true;
+  if (w.endsWith("'s") && COMMON.has(w.slice(0, -2))) return true;
+  if (w.endsWith('s') && COMMON.has(w.slice(0, -1))) return true;
+  if (w.endsWith('ing') && (COMMON.has(w.slice(0, -3)) || COMMON.has(w.slice(0, -3) + 'e'))) return true;
+  if (w.endsWith('ed') && (COMMON.has(w.slice(0, -2)) || COMMON.has(w.slice(0, -1)))) return true;
+  if (w.endsWith('ly') && COMMON.has(w.slice(0, -2))) return true;
+  return false;
+}
 
-function scorePlayer(p) {
+function scorePlayer(p, conversational) {
   const words = tokenize(p.finalText);
   const n = words.length;
-  const mins = Math.max(p.elapsed, 5) / 60;
-  const wpm = n / mins;
+  const elapsed = Math.max(p.elapsed, 5);
+  const elMin = elapsed / 60;
 
-  const fluency = trap(wpm, 35, 110, 170, 230);
+  /* --- audio-side signals (work even when transcription fails) --- */
+  const talkRatio = p.totalFrames ? p.speakFrames / p.totalFrames : 0;
+  const talkSec = Math.max(1, talkRatio * elapsed);
+  const sylRate = p.peaks / talkSec;                      // syllable-ish onsets per talking second
+  const pausesPerMin = p.longPauses / elMin;              // hesitations > 0.8s
+  const steadiness = 1 - lin(pausesPerMin, 1.5, 7);
+  /* a live call is a conversation — talking ~half the time is natural; a solo turn is a monologue */
+  const [fLo, fHi] = conversational ? [0.20, 0.55] : [0.30, 0.72];
+  const flow = clamp01(lin(talkRatio, fLo, fHi) - 0.15 * lin(pausesPerMin, 3, 8));
+  const audioGate = lin(talkSec, 4, 12);                  // too little speech → audio pace is noise
+  const paceAudio = trap(sylRate, 0.9, 2.2, 5.0, 7.5) * audioGate;
 
-  const unique = new Set(words).size;
-  const rttr = n ? unique / Math.sqrt(n) : 0;
-  const longR = n ? words.filter(w => w.length >= 7).length / n : 0;
-  const vocab = 0.65 * lin(rttr, 2.5, 8) + 0.35 * lin(longR, 0.04, 0.2);
+  /* how much of the actual talking did transcription capture? (~2 words/sec expected) */
+  const srCapture = n / (talkSec * 2.0);
+  const textReliable = n >= 12 && srCapture >= 0.4;
 
-  let hard = 0, soft = 0;
-  for (const w of words) { if (HARD_FILLERS.has(w)) hard++; else if (SOFT_UNI.has(w)) soft++; }
-  const joined = ' ' + words.join(' ') + ' ';
-  for (const bg of SOFT_BI) soft += joined.split(' ' + bg + ' ').length - 1;
-  const fillerRate = n ? (hard + 0.5 * soft) / n * 100 : 0;
-  const fillerScore = 1 - lin(fillerRate, 2, 14);
-
+  let pace, vocab, clarity, structure, fillerScore, bars, wpmShow, wordsShow;
   const avgConf = p.confN ? p.confSum / p.confN : null;
-  const clarity = avgConf !== null ? lin(avgConf, 0.55, 0.92) : (n > 0 ? 0.6 : 0);
 
-  const speakRatio = p.totalFrames ? p.speakFrames / p.totalFrames : 0;
-  const flow = lin(speakRatio, 0.25, 0.70);
+  if (textReliable) {
+    /* fluency from words per SPEAKING minute, so thinking pauses hit "flow", not pace */
+    const wptm = n / (talkSec / 60);
+    pace = 0.75 * trap(wptm, 70, 130, 210, 280) + 0.25 * paceAudio;
 
-  let overall = Math.round(100 * (0.26 * fluency + 0.22 * vocab + 0.20 * clarity + 0.14 * fillerScore + 0.18 * flow));
-  const tooShort = n < 12;
-  if (tooShort) overall = Math.min(overall, 22);
+    const unique = new Set(words).size;
+    const rttr = unique / Math.sqrt(n);
+    const content = words.filter(w => w.length >= 5 && !HARD_FILLERS.has(w));
+    const advRatio = n ? content.filter(w => !isCommon(w)).length / n : 0;
+    const longR = words.filter(w => w.length >= 7).length / n;
+    vocab = 0.45 * lin(rttr, 3, 8) + 0.35 * lin(advRatio, 0.04, 0.22) + 0.20 * lin(longR, 0.05, 0.2);
 
-  p.m = {
-    overall, tooShort,
-    words: n, wpm: Math.round(wpm), speakPct: Math.round(speakRatio * 100),
-    bars: [
-      ['Fluency', Math.round(fluency * 100)],
+    clarity = avgConf !== null ? lin(avgConf, 0.55, 0.92) : (0.5 * steadiness + 0.33);
+
+    const joined = ' ' + words.join(' ') + ' ';
+    let conn = words.filter(w => CONNECT_UNI.has(w)).length;
+    for (const bg of CONNECT_BI) conn += joined.split(' ' + bg + ' ').length - 1;
+    structure = lin(conn / n * 100, 0.8, 5);
+
+    let hard = 0, soft = 0;
+    for (const w of words) { if (HARD_FILLERS.has(w)) hard++; else if (SOFT_UNI.has(w)) soft++; }
+    for (const bg of SOFT_BI) soft += joined.split(' ' + bg + ' ').length - 1;
+    fillerScore = 1 - lin((hard + 0.5 * soft) / n * 100, 2, 14);
+
+    wpmShow = Math.round(n / elMin);
+    wordsShow = n;
+    bars = [
+      ['Fluency', Math.round(pace * 100)],
       ['Vocabulary', Math.round(vocab * 100)],
       ['Clarity', Math.round(clarity * 100)],
       ['Flow', Math.round(flow * 100)],
+      ['Structure', Math.round(structure * 100)],
       ['Filler control', Math.round(fillerScore * 100)],
-    ],
+    ];
+  } else {
+    /* transcription failed or barely caught anything: score from the voice signal */
+    pace = paceAudio;
+    clarity = steadiness;
+    vocab = structure = fillerScore = 0;
+    wpmShow = talkSec < 6 ? 0 : Math.round(sylRate * 60 / 1.6);   // rough words-from-syllables estimate
+    wordsShow = Math.round(p.peaks / 1.6);
+    bars = [
+      ['Pace', Math.round(pace * 100)],
+      ['Steadiness', Math.round(steadiness * 100)],
+      ['Flow', Math.round(flow * 100)],
+    ];
+  }
+
+  let raw;
+  if (textReliable) {
+    raw = 0.22 * pace + 0.20 * vocab + 0.16 * clarity + 0.16 * flow + 0.14 * structure + 0.12 * fillerScore;
+  } else {
+    raw = 0.34 * pace + 0.28 * steadiness + 0.38 * flow;
+  }
+  /* gentle curve so solid performances land 55-75 instead of clustering low */
+  let overall = Math.round(100 * Math.pow(clamp01(raw), 0.85));
+
+  const est = !textReliable;
+  if (est) overall = Math.min(overall, 78);
+  const tooShort = talkSec < 8 || talkRatio < 0.12;
+  if (tooShort) overall = Math.min(overall, 25);
+
+  p.m = {
+    overall, tooShort, est,
+    words: wordsShow, wpm: wpmShow, speakPct: Math.round(talkRatio * 100),
+    bars,
     grade: grade(overall),
   };
 }
@@ -1083,8 +1173,9 @@ function renderResults(list, solo, subOverride) {
     card.className = 'card pcard' + (winner === i ? ' win' : '');
     const [glabel, gcolor] = p.m.grade;
     const noteBits = [];
-    if (p.m.tooShort) noteBits.push('not enough speech detected');
-    if (p.m.srDead) noteBits.push('transcription failed on this phone');
+    if (p.m.tooShort) noteBits.push('we barely heard any speech');
+    else if (p.m.est) noteBits.push('transcription caught little — scored from voice rhythm');
+    if (p.m.srDead && !p.m.est) noteBits.push('transcription failed on this phone');
     card.innerHTML =
       (winner === i ? '<div class="crown">👑</div>' : '') +
       '<h2><span class="dot" style="background:' + p.color[0] + ';box-shadow:0 0 8px ' + p.color[0] + '"></span>' + esc(p.name) +
@@ -1095,7 +1186,7 @@ function renderResults(list, solo, subOverride) {
         '<div class="bar"><label><span>' + esc(String(b[0])) + '</span><b>' + (+b[1] || 0) + '</b></label>' +
         '<div class="track"><div class="fill" data-w="' + Math.max(0, Math.min(100, +b[1] || 0)) + '" style="background:linear-gradient(90deg,' + p.color[0] + ',' + p.color[1] + ')"></div></div></div>'
       ).join('') + '</div>' +
-      '<div class="stats">' + (+p.m.words || 0) + ' words · ' + (+p.m.wpm || 0) + ' wpm · talking ' + (+p.m.speakPct || 0) + '% of the time</div>' +
+      '<div class="stats">' + (p.m.est ? '~' : '') + (+p.m.words || 0) + ' words · ' + (p.m.est ? '~' : '') + (+p.m.wpm || 0) + ' wpm · talking ' + (+p.m.speakPct || 0) + '% of the time</div>' +
       (p.text && p.text.trim() ? '<details><summary>What we heard</summary><p>' + esc(p.text.trim()) + '</p></details>' : '');
     grid.appendChild(card);
   });
