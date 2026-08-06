@@ -9,7 +9,7 @@ builds move to WordPress after the client approves.
 | `/union/` | Union Locksmiths (Singapore) |
 | `/arc/` | ARC Home Management Services (Michael Sweet) |
 | `/1800/` | 1800 CLEANER site redesign |
-| `/speakscore/` | Internal lab - SpeakScore, English speaking duel app (Web Speech API, fully client-side) |
+| `/speakscore/` | Internal lab - SpeakScore, English speaking duel app (Web Speech API, fully client-side). Two modes: pass-the-phone, or live two-phone call over WebRTC (vendored PeerJS + free PeerJS-cloud signaling, no backend of ours) |
 
 ## Adding a new client preview
 

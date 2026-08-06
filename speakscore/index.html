@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow, noarchive">
 <title>SpeakScore — English Speaking Duel</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8E%99%EF%B8%8F%3C/text%3E%3C/svg%3E">
 <style>
   :root{
     --bg:#070b14; --ink:#eef2ff; --muted:#8b93a7; --line:rgba(255,255,255,.09);
@@ -26,8 +27,8 @@
   body::before{background:#2b5cff; top:-25vmax; left:-18vmax}
   body::after{background:#a12bff; bottom:-28vmax; right:-20vmax}
 
-  .wrap{max-width:880px; margin:0 auto; padding:40px 20px 64px}
-  header.top{display:flex; align-items:baseline; gap:10px; margin-bottom:28px}
+  .wrap{max-width:880px; margin:0 auto; padding:32px 20px 64px}
+  header.top{display:flex; align-items:baseline; gap:10px; margin-bottom:24px; flex-wrap:wrap}
   .logo{font-weight:800; font-size:1.15rem; letter-spacing:.02em}
   .logo em{font-style:normal; background:linear-gradient(90deg,var(--p1a),var(--p2a)); -webkit-background-clip:text; background-clip:text; color:transparent}
   .tag{color:var(--muted); font-size:.82rem}
@@ -38,8 +39,8 @@
 
   .card{background:var(--card); border:1px solid var(--line); border-radius:20px; padding:26px 24px;
     backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px)}
-  h1{font-size:clamp(1.6rem,4.5vw,2.3rem); margin:0 0 8px; letter-spacing:-.01em}
-  .sub{color:var(--muted); margin:0 0 26px; font-size:.95rem; max-width:52ch}
+  h1{font-size:clamp(1.5rem,4.5vw,2.2rem); margin:0 0 8px; letter-spacing:-.01em}
+  .sub{color:var(--muted); margin:0 0 24px; font-size:.95rem; max-width:56ch}
 
   label.fld{display:block; font-size:.8rem; color:var(--muted); margin:0 0 6px; letter-spacing:.04em; text-transform:uppercase}
   input[type=text]{
@@ -54,6 +55,17 @@
   .pname.p1 .dot{background:var(--p1a); box-shadow:0 0 10px var(--p1a)}
   .pname.p2 .dot{background:var(--p2a); box-shadow:0 0 10px var(--p2a)}
 
+  .modes{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:6px}
+  @media(max-width:560px){.modes{grid-template-columns:1fr}}
+  .mode{
+    text-align:left; cursor:pointer; border-radius:16px; padding:16px 18px;
+    background:rgba(255,255,255,.04); border:1px solid var(--line); color:var(--ink); transition:all .15s;
+  }
+  .mode:hover{border-color:rgba(255,255,255,.3)}
+  .mode.sel{border-color:var(--p1a); background:linear-gradient(135deg,rgba(56,225,255,.12),rgba(106,139,255,.08)); box-shadow:0 0 18px rgba(56,225,255,.15)}
+  .mode .mt{font-weight:700; font-size:1rem}
+  .mode .md{color:var(--muted); font-size:.82rem; margin-top:2px}
+
   .chips{display:flex; flex-wrap:wrap; gap:10px; margin-top:8px}
   .chip{
     border:1px solid var(--line); background:rgba(255,255,255,.04); color:var(--ink);
@@ -61,7 +73,7 @@
   }
   .chip:hover{border-color:rgba(255,255,255,.3)}
   .chip.sel{background:linear-gradient(90deg,rgba(56,225,255,.18),rgba(106,139,255,.18)); border-color:var(--p1a); box-shadow:0 0 14px rgba(56,225,255,.25)}
-  .row{margin-top:22px}
+  .row{margin-top:20px}
   .switch{display:flex; align-items:center; gap:10px; cursor:pointer; user-select:none; color:var(--muted); font-size:.9rem}
   .switch input{accent-color:var(--p1a); width:16px; height:16px}
 
@@ -72,14 +84,35 @@
     box-shadow:0 8px 30px rgba(56,225,255,.25); transition:transform .12s, filter .15s;
   }
   .btn:hover{transform:translateY(-1px); filter:brightness(1.08)}
+  .btn:disabled{opacity:.45; cursor:not-allowed; transform:none}
   .btn.ghost{background:transparent; color:var(--ink); border:1px solid var(--line); box-shadow:none}
-  .btn.big{width:100%; padding:16px; font-size:1.1rem; margin-top:26px}
+  .btn.big{width:100%; padding:16px; font-size:1.1rem; margin-top:24px}
   .note{color:var(--muted); font-size:.8rem; margin-top:14px}
   .warn{margin-top:18px; padding:12px 14px; border-radius:12px; font-size:.88rem;
     background:rgba(255,180,84,.08); border:1px solid rgba(255,180,84,.3); color:#ffd9a3; display:none}
   .warn.show{display:block}
 
-  /* ---- Turn screen ---- */
+  .joinrow{display:flex; gap:10px; margin-top:10px}
+  .joinrow input{flex:1; text-transform:uppercase; letter-spacing:.3em; font-weight:700; text-align:center}
+
+  /* ---- Lobby ---- */
+  .hand{text-align:center; padding:44px 24px}
+  .hand .who{font-size:clamp(1.6rem,5vw,2.3rem); font-weight:800; margin:10px 0 4px}
+  .hand .who span{background:linear-gradient(90deg,var(--accent),var(--accent2)); -webkit-background-clip:text; background-clip:text; color:transparent}
+  .hand p{color:var(--muted); margin:0 0 22px}
+  .mic{font-size:2.6rem; filter:drop-shadow(0 0 18px var(--accent))}
+  .codebox{
+    display:inline-block; font-size:clamp(2.4rem,10vw,3.6rem); font-weight:800; letter-spacing:.28em;
+    padding:10px 18px 10px 30px; margin:6px 0 16px; border-radius:18px;
+    background:rgba(255,255,255,.05); border:1px solid var(--line);
+    text-shadow:0 0 26px var(--accent);
+  }
+  .lobbybtns{display:flex; justify-content:center; gap:10px; flex-wrap:wrap; margin-bottom:8px}
+  .pulse{display:inline-block; width:9px; height:9px; border-radius:50%; background:var(--accent);
+    margin-right:8px; animation:pul 1.4s ease infinite}
+  @keyframes pul{0%,100%{box-shadow:0 0 0 0 rgba(56,225,255,.5)} 50%{box-shadow:0 0 0 8px rgba(56,225,255,0)}}
+
+  /* ---- Turn (pass-the-phone) ---- */
   .turnhead{display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:6px}
   .pill{
     display:inline-flex; align-items:center; gap:8px; border-radius:999px; padding:8px 18px;
@@ -87,34 +120,41 @@
   }
   .pill .dot{width:9px; height:9px; border-radius:50%; background:var(--accent); box-shadow:0 0 10px var(--accent)}
   .turnsub{text-align:center; color:var(--muted); font-size:.86rem; margin:0 0 10px}
-
   .stage{position:relative; width:min(88vw,380px); margin:6px auto 0; aspect-ratio:1}
-  canvas#viz{width:100%; height:100%; display:block}
+  .stage canvas{width:100%; height:100%; display:block}
   .center{
     position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center;
     pointer-events:none; text-align:center;
   }
   .clock{font-size:clamp(2.2rem,9vw,3rem); font-weight:800; letter-spacing:.02em; font-variant-numeric:tabular-nums}
   .clocklbl{color:var(--muted); font-size:.78rem; letter-spacing:.14em; text-transform:uppercase; margin-top:2px}
-  .cdown{
-    position:absolute; inset:0; display:none; align-items:center; justify-content:center;
-    font-size:5.4rem; font-weight:800; color:var(--ink); text-shadow:0 0 40px var(--accent);
-  }
-  .cdown.show{display:flex}
 
   .live{
-    min-height:56px; margin:18px auto 0; max-width:560px; text-align:center;
-    color:rgba(238,242,255,.85); font-size:1.02rem;
+    min-height:52px; margin:16px auto 0; max-width:560px; text-align:center;
+    color:rgba(238,242,255,.85); font-size:1rem;
   }
   .live .dim{color:var(--muted); font-style:italic}
-  .turnbtns{display:flex; justify-content:center; gap:12px; margin-top:20px}
+  .turnbtns{display:flex; justify-content:center; gap:12px; margin-top:18px; flex-wrap:wrap}
 
-  /* ---- Handoff ---- */
-  .hand{text-align:center; padding:56px 24px}
-  .hand .who{font-size:clamp(1.7rem,5vw,2.4rem); font-weight:800; margin:10px 0 4px}
-  .hand .who span{background:linear-gradient(90deg,var(--accent),var(--accent2)); -webkit-background-clip:text; background-clip:text; color:transparent}
-  .hand p{color:var(--muted); margin:0 0 28px}
-  .mic{font-size:2.6rem; filter:drop-shadow(0 0 18px var(--accent))}
+  /* ---- Call screen ---- */
+  .callgrid{display:grid; grid-template-columns:1fr auto 1fr; gap:14px; align-items:center; margin-top:6px}
+  @media(max-width:640px){.callgrid{grid-template-columns:1fr; gap:6px}}
+  .cstage{position:relative; width:min(60vw,250px); aspect-ratio:1; margin:0 auto}
+  .cstage canvas{width:100%; height:100%; display:block}
+  .cname{
+    position:absolute; left:50%; bottom:6px; transform:translateX(-50%);
+    font-size:.82rem; font-weight:700; padding:5px 14px; border-radius:999px; white-space:nowrap;
+    background:rgba(7,11,20,.75); border:1px solid var(--line);
+  }
+  .callmid{text-align:center; padding:4px 10px}
+  .cstatus{color:var(--muted); font-size:.8rem; margin-top:8px; min-height:1.2em}
+
+  /* countdown overlay */
+  #ov-cdown{
+    position:fixed; inset:0; z-index:40; display:none; align-items:center; justify-content:center;
+    background:rgba(7,11,20,.55); font-size:6rem; font-weight:800; text-shadow:0 0 44px var(--accent);
+  }
+  #ov-cdown.show{display:flex}
 
   /* ---- Results ---- */
   .banner{text-align:center; margin-bottom:26px}
@@ -129,6 +169,7 @@
   .crown{position:absolute; top:14px; right:16px; font-size:1.4rem}
   .pcard h2{margin:0; font-size:1.1rem; display:flex; align-items:center; gap:8px}
   .pcard h2 .dot{width:9px; height:9px; border-radius:50%}
+  .pcard h2 small{color:var(--muted); font-weight:500; font-size:.75rem}
   .score{font-size:3.4rem; font-weight:800; line-height:1.1; margin:10px 0 0; font-variant-numeric:tabular-nums}
   .score small{font-size:1.1rem; color:var(--muted); font-weight:600}
   .grade{font-size:.92rem; font-weight:600; margin:2px 0 18px}
@@ -141,10 +182,9 @@
   details{margin-top:14px; font-size:.85rem}
   details summary{cursor:pointer; color:var(--muted)}
   details p{color:rgba(238,242,255,.8); background:rgba(0,0,0,.25); border-radius:10px; padding:12px 14px; max-height:180px; overflow:auto}
-  .again{display:flex; justify-content:center; gap:12px; margin-top:30px}
+  .again{display:flex; justify-content:center; gap:12px; margin-top:30px; flex-wrap:wrap}
   .disclaimer{text-align:center; color:#5b6474; font-size:.75rem; margin-top:26px}
 
-  /* ---- Error ---- */
   .err{text-align:center; padding:48px 24px}
   .err h2{margin:0 0 8px}
   .err p{color:var(--muted); max-width:46ch; margin:0 auto 24px}
@@ -163,45 +203,113 @@
   <section id="s-setup" class="active">
     <div class="card">
       <h1>Who speaks better English?</h1>
-      <p class="sub">Two players, one mic. Each of you talks for the timer while the wave dances to
-        your voice — then the machine scores your fluency, vocabulary, clarity and flow.</p>
+      <p class="sub">Talk while the wave dances to your voice — then get scored on fluency, vocabulary,
+        clarity and flow. Play on one phone, or live-call a rival on their own phone.</p>
 
-      <div class="grid2">
-        <div class="pname p1">
-          <label class="fld" for="n1">Player 1</label>
-          <input type="text" id="n1" placeholder="e.g. Martin" maxlength="20" autocomplete="off">
-          <span class="dot"></span>
-        </div>
-        <div class="pname p2" id="p2field">
-          <label class="fld" for="n2">Player 2</label>
-          <input type="text" id="n2" placeholder="e.g. Kamil" maxlength="20" autocomplete="off">
-          <span class="dot"></span>
-        </div>
+      <label class="fld" for="n1">Your name</label>
+      <div class="pname p1" style="max-width:340px">
+        <input type="text" id="n1" placeholder="e.g. Martin" maxlength="20" autocomplete="off">
       </div>
 
       <div class="row">
-        <label class="fld">Speaking time each</label>
-        <div class="chips" id="chips">
-          <button class="chip" data-sec="30">30 sec</button>
-          <button class="chip sel" data-sec="60">1 min</button>
-          <button class="chip" data-sec="120">2 min</button>
-          <button class="chip" data-sec="180">3 min</button>
+        <label class="fld">Game mode</label>
+        <div class="modes">
+          <button class="mode sel" id="m-local">
+            <div class="mt">📱 One phone</div>
+            <div class="md">Take turns — pass the phone between players</div>
+          </button>
+          <button class="mode" id="m-call">
+            <div class="mt">📞 Two phones — live call</div>
+            <div class="md">Invite with a code, talk at the same time like a phone call</div>
+          </button>
         </div>
       </div>
 
-      <div class="row">
-        <label class="switch"><input type="checkbox" id="solo"> Solo practice (just me)</label>
+      <!-- local mode options -->
+      <div id="opt-local">
+        <div class="row grid2">
+          <div class="pname p2">
+            <label class="fld" for="n2">Player 2</label>
+            <input type="text" id="n2" placeholder="e.g. Kamil" maxlength="20" autocomplete="off">
+            <span class="dot"></span>
+          </div>
+          <div>
+            <label class="fld">Speaking time each</label>
+            <div class="chips" id="chips">
+              <button class="chip" data-sec="30">30 sec</button>
+              <button class="chip sel" data-sec="60">1 min</button>
+              <button class="chip" data-sec="120">2 min</button>
+              <button class="chip" data-sec="180">3 min</button>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <label class="switch"><input type="checkbox" id="solo"> Solo practice (just me)</label>
+        </div>
+        <button class="btn big" id="start">Start the duel 🎙️</button>
       </div>
 
-      <button class="btn big" id="start">Start the duel 🎙️</button>
+      <!-- call mode options -->
+      <div id="opt-call" hidden>
+        <div class="row">
+          <button class="btn big" id="host">Create a room &amp; get an invite code 📡</button>
+        </div>
+        <div class="row">
+          <label class="fld" for="code">Or join a friend's room</label>
+          <div class="joinrow">
+            <input type="text" id="code" placeholder="CODE" maxlength="4" autocomplete="off" autocapitalize="characters">
+            <button class="btn" id="join">Join</button>
+          </div>
+        </div>
+        <p class="note">Works phone-to-phone over the internet. Best with headphones — echo cancellation
+          is on, but speakerphone can still leak a little.</p>
+      </div>
+
       <div class="warn" id="supwarn">Heads up: live speech recognition needs <b>Chrome or Edge</b>
-        (desktop or Android). This browser doesn't support it, so scoring won't work here.</div>
-      <p class="note">Speech is transcribed by your browser's built-in recognition. Nothing is uploaded
-        to HeyLead — scoring runs entirely on this page.</p>
+        (desktop or Android). On this browser the call will work but scoring may be limited.</div>
+      <p class="note">Speech is transcribed by your browser's built-in recognition. Scoring runs entirely
+        on your device; in call mode your voice goes directly to your rival's phone (peer-to-peer).</p>
     </div>
   </section>
 
-  <!-- HANDOFF -->
+  <!-- LOBBY (call mode) -->
+  <section id="s-lobby">
+    <div class="card hand">
+      <div id="lb-host">
+        <div class="mic">📡</div>
+        <div class="who">Room <span id="codebig">····</span></div>
+        <div><div class="codebox" id="codebox">····</div></div>
+        <div class="lobbybtns">
+          <button class="btn ghost" id="copylink">Copy invite link</button>
+          <button class="btn ghost" id="sharelink">Share 📤</button>
+        </div>
+        <p id="hoststatus"><span class="pulse"></span>Waiting for your rival to join…</p>
+        <div id="hostready" hidden>
+          <p style="color:var(--ink)"><b id="guestname"></b> joined — you're connected! 🎉</p>
+          <label class="fld">Talking time</label>
+          <div class="chips" id="chips2" style="justify-content:center">
+            <button class="chip" data-sec="30">30 sec</button>
+            <button class="chip sel" data-sec="60">1 min</button>
+            <button class="chip" data-sec="120">2 min</button>
+            <button class="chip" data-sec="180">3 min</button>
+          </div>
+          <button class="btn" id="callstart" style="margin-top:18px">Start the duel 🎙️</button>
+        </div>
+      </div>
+      <div id="lb-guest" hidden>
+        <div class="mic">📞</div>
+        <div class="who">Connected to <span id="hostname2"></span></div>
+        <p><span class="pulse"></span>You can already talk to each other. Waiting for the host to start the round…</p>
+      </div>
+      <p class="note" id="lobbynote">Best with headphones. When the round starts, you both talk at the
+        same time — each phone listens to its own speaker.</p>
+      <div class="lobbybtns" style="margin-top:14px">
+        <button class="btn ghost" id="leave">Leave</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- HANDOFF (local mode) -->
   <section id="s-hand">
     <div class="card hand">
       <div class="mic">🎙️</div>
@@ -211,7 +319,7 @@
     </div>
   </section>
 
-  <!-- TURN -->
+  <!-- TURN (local mode) -->
   <section id="s-turn">
     <div class="turnhead"><span class="pill"><span class="dot"></span><span id="turnname"></span></span></div>
     <p class="turnsub">Speak English. Louder voice, bigger waves.</p>
@@ -221,11 +329,34 @@
         <div class="clock" id="clock">1:00</div>
         <div class="clocklbl">remaining</div>
       </div>
-      <div class="cdown" id="cdown">3</div>
     </div>
     <div class="live" id="live"><span class="dim">listening…</span></div>
     <div class="turnbtns">
       <button class="btn ghost" id="early">Finish early</button>
+    </div>
+  </section>
+
+  <!-- CALL (call mode) -->
+  <section id="s-call">
+    <div class="callgrid">
+      <div class="cstage">
+        <canvas id="vizR"></canvas>
+        <div class="cname" id="cnameR">rival</div>
+      </div>
+      <div class="callmid">
+        <div class="clock" id="cclock">1:00</div>
+        <div class="clocklbl">remaining</div>
+        <div class="cstatus" id="cstatus"><span class="pulse"></span>live</div>
+      </div>
+      <div class="cstage">
+        <canvas id="vizL"></canvas>
+        <div class="cname" id="cnameL">you</div>
+      </div>
+    </div>
+    <div class="live" id="clive"><span class="dim">listening…</span></div>
+    <div class="turnbtns">
+      <button class="btn ghost" id="mute">Mute 🔇</button>
+      <button class="btn ghost" id="endcall">End round</button>
     </div>
   </section>
 
@@ -238,7 +369,7 @@
     <div class="rgrid" id="rgrid"></div>
     <div class="again">
       <button class="btn" id="again">Rematch 🔁</button>
-      <button class="btn ghost" id="newgame">New players</button>
+      <button class="btn ghost" id="newgame">New game</button>
     </div>
     <p class="disclaimer">SpeakScore is a party-game estimate based on browser speech recognition —
       not a certified language assessment.</p>
@@ -248,78 +379,103 @@
   <section id="s-err">
     <div class="card err">
       <h2 id="errtitle">Microphone blocked</h2>
-      <p id="errmsg">We couldn't access your microphone. Allow mic access for this site in your
-        browser's address bar, then try again.</p>
+      <p id="errmsg"></p>
       <button class="btn" id="errback">Back to start</button>
     </div>
   </section>
 </div>
 
+<div id="ov-cdown">3</div>
 <canvas id="confetti"></canvas>
+<audio id="raudio" autoplay playsinline></audio>
 
+<script src="peerjs.min.js"></script>
 <script>
 'use strict';
-/* ================= state ================= */
+/* ================= helpers / state ================= */
 const $ = s => document.querySelector(s);
 const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+const P1 = ['#38e1ff', '#6a8bff'], P2 = ['#ff5fa2', '#ffb454'];
+const PEER_PREFIX = 'heylead-spksc-';
 
 const state = {
+  mode: 'local',            // 'local' | 'call'
   duration: 60,
   solo: false,
-  players: [],   // {name, color:[a,b], finalText, interim, confSum, confN, speakFrames, totalFrames, elapsed, m}
+  players: [],              // local mode: [{...},{...}] ; call mode: [localPlayer]
   current: 0,
+};
+const net = {
+  peer: null, conn: null, call: null,
+  role: null,               // 'host' | 'guest'
+  code: '',
+  remoteStream: null, remoteAnalyser: null,
+  remoteName: '', remoteResult: null,
+  open: false,
 };
 
 let stream = null, actx = null, analyser = null, freqData = null, timeData = null;
-let rec = null, recActive = false;
-let turnRunning = false, turnStart = 0, rafId = 0, angleOff = 0, env = 0;
+let rec = null, recActive = false, srFails = 0, srDead = false;
+let roundRunning = false, roundStart = 0, rafId = 0, angleOff = 0;
+let waitTimer = 0;
 
-const P1 = ['#38e1ff', '#6a8bff'], P2 = ['#ff5fa2', '#ffb454'];
-
-/* ================= screens ================= */
 function show(id) {
   document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
   $('#' + id).classList.add('active');
 }
+function screenIs(id) { return $('#' + id).classList.contains('active'); }
 function setAccent(colors) {
   document.documentElement.style.setProperty('--accent', colors[0]);
   document.documentElement.style.setProperty('--accent2', colors[1]);
 }
-
-/* ================= setup ================= */
-if (!SR) $('#supwarn').classList.add('show');
-
-$('#chips').addEventListener('click', e => {
-  const b = e.target.closest('.chip'); if (!b) return;
-  document.querySelectorAll('.chip').forEach(c => c.classList.remove('sel'));
-  b.classList.add('sel');
-  state.duration = +b.dataset.sec;
-});
-$('#solo').addEventListener('change', e => {
-  $('#p2field').style.opacity = e.target.checked ? .35 : 1;
-  $('#n2').disabled = e.target.checked;
-});
-
-$('#start').addEventListener('click', async () => {
-  if (!SR) { showErr('Browser not supported', 'Live speech recognition needs Chrome or Edge (desktop or Android). Open this page there and try again.'); return; }
-  state.solo = $('#solo').checked;
-  const n1 = $('#n1').value.trim() || 'Player 1';
-  const n2 = $('#n2').value.trim() || 'Player 2';
-  state.players = [mkPlayer(n1, P1)];
-  if (!state.solo) state.players.push(mkPlayer(n2, P2));
-  state.current = 0;
-  try { await ensureAudio(); }
-  catch (e) { showErr('Microphone blocked', "We couldn't access your microphone. Allow mic access for this site in the address bar, then try again."); return; }
-  handoff();
-});
+function esc(s) { return s.replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c])); }
+function fmt(s) { s = Math.max(0, Math.round(s)); return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); }
+function myName() { return $('#n1').value.trim() || 'Player 1'; }
 function mkPlayer(name, color) {
   return { name, color, finalText: '', interim: '', confSum: 0, confN: 0, speakFrames: 0, totalFrames: 0, elapsed: 0, m: null };
 }
+function showErr(title, msg) { cleanupNet(); stopRecognition(); roundRunning = false; $('#errtitle').textContent = title; $('#errmsg').textContent = msg; show('s-err'); }
+$('#errback').addEventListener('click', () => { setAccent(P1); show('s-setup'); });
 
+/* ================= setup screen ================= */
+if (!SR) $('#supwarn').classList.add('show');
+
+$('#m-local').addEventListener('click', () => pickMode('local'));
+$('#m-call').addEventListener('click', () => pickMode('call'));
+function pickMode(m) {
+  state.mode = m;
+  $('#m-local').classList.toggle('sel', m === 'local');
+  $('#m-call').classList.toggle('sel', m === 'call');
+  $('#opt-local').hidden = m !== 'local';
+  $('#opt-call').hidden = m !== 'call';
+}
+
+for (const id of ['#chips', '#chips2']) {
+  $(id).addEventListener('click', e => {
+    const b = e.target.closest('.chip'); if (!b) return;
+    $(id).querySelectorAll('.chip').forEach(c => c.classList.remove('sel'));
+    b.classList.add('sel');
+    state.duration = +b.dataset.sec;
+  });
+}
+$('#solo').addEventListener('change', e => { $('#n2').disabled = e.target.checked; });
+
+// deep link ?join=CODE
+(function () {
+  const c = new URLSearchParams(location.search).get('join');
+  if (c && /^[a-z0-9]{4}$/i.test(c)) { pickMode('call'); $('#code').value = c.toUpperCase(); $('#n1').focus(); }
+})();
+
+/* ================= audio ================= */
 async function ensureAudio() {
-  if (stream && stream.getAudioTracks().some(t => t.readyState === 'live')) { if (actx.state === 'suspended') await actx.resume(); return; }
-  stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+  if (stream && stream.getAudioTracks().some(t => t.readyState === 'live')) {
+    if (actx.state === 'suspended') await actx.resume(); return;
+  }
+  stream = await navigator.mediaDevices.getUserMedia({
+    audio: { echoCancellation: true, noiseSuppression: true, autoGainControl: true }
+  });
   actx = new (window.AudioContext || window.webkitAudioContext)();
+  if (actx.state === 'suspended') await actx.resume();
   const src = actx.createMediaStreamSource(stream);
   analyser = actx.createAnalyser();
   analyser.fftSize = 2048;
@@ -329,10 +485,19 @@ async function ensureAudio() {
   timeData = new Uint8Array(analyser.fftSize);
 }
 
-function showErr(title, msg) { $('#errtitle').textContent = title; $('#errmsg').textContent = msg; show('s-err'); }
-$('#errback').addEventListener('click', () => show('s-setup'));
+/* ================= LOCAL MODE (pass the phone) ================= */
+$('#start').addEventListener('click', async () => {
+  if (!SR) { showErr('Browser not supported', 'Live speech recognition needs Chrome or Edge (desktop or Android). Open this page there and try again.'); return; }
+  state.mode = 'local';
+  state.solo = $('#solo').checked;
+  state.players = [mkPlayer(myName(), P1)];
+  if (!state.solo) state.players.push(mkPlayer($('#n2').value.trim() || 'Player 2', P2));
+  state.current = 0;
+  try { await ensureAudio(); }
+  catch (e) { showErr('Microphone blocked', "We couldn't access your microphone. Allow mic access for this site in the address bar, then try again."); return; }
+  handoff();
+});
 
-/* ================= handoff ================= */
 function handoff() {
   const p = state.players[state.current];
   setAccent(p.color);
@@ -344,7 +509,6 @@ function handoff() {
 }
 $('#ready').addEventListener('click', beginTurn);
 
-/* ================= turn ================= */
 async function beginTurn() {
   const p = state.players[state.current];
   setAccent(p.color);
@@ -352,44 +516,311 @@ async function beginTurn() {
   $('#clock').textContent = fmt(state.duration);
   $('#live').innerHTML = '<span class="dim">listening…</span>';
   show('s-turn');
-  sizeCanvas();
-  env = 0;
+  sizeViz(vizT);
+  vizT.env = 0;
   startDraw();
   await countdown(3);
-  startRecognition(p);
-  turnRunning = true;
-  turnStart = performance.now();
+  startRecognition(p, '#live');
+  roundRunning = true;
+  roundStart = performance.now();
 }
 
-function countdown(n) {
-  return new Promise(res => {
-    const el = $('#cdown'); el.classList.add('show');
-    let i = n;
-    const step = () => {
-      if (i === 0) { el.classList.remove('show'); res(); return; }
-      el.textContent = i;
-      el.animate([{ transform: 'scale(1.5)', opacity: 0 }, { transform: 'scale(1)', opacity: 1, offset: .3 }, { transform: 'scale(.95)', opacity: .9 }],
-        { duration: 900, easing: 'ease-out' });
-      i--; setTimeout(step, 900);
-    };
-    step();
-  });
-}
-
-$('#early').addEventListener('click', () => { if (turnRunning) endTurn(); });
+$('#early').addEventListener('click', () => { if (roundRunning && state.mode === 'local') endTurn(); });
 
 function endTurn() {
-  turnRunning = false;
+  roundRunning = false;
   stopRecognition();
   const p = state.players[state.current];
-  p.elapsed = Math.min(state.duration, (performance.now() - turnStart) / 1000);
-  cancelAnimationFrame(rafId); rafId = 0;
+  p.elapsed = Math.min(state.duration, (performance.now() - roundStart) / 1000);
   if (state.current < state.players.length - 1) { state.current++; handoff(); }
-  else results();
+  else {
+    stopDraw();
+    state.players.forEach(scorePlayer);
+    renderResults(state.players.map(p2 => ({ name: p2.name, color: p2.color, m: p2.m, text: p2.finalText, you: false })), state.solo);
+  }
 }
 
-/* ================= speech recognition ================= */
-function startRecognition(p) {
+/* ================= CALL MODE ================= */
+const ICE = {
+  iceServers: [
+    { urls: 'stun:stun.l.google.com:19302' },
+    { urls: 'stun:stun1.l.google.com:19302' },
+    { urls: 'turn:openrelay.metered.ca:80', username: 'openrelayproject', credential: 'openrelayproject' },
+    { urls: 'turn:openrelay.metered.ca:443', username: 'openrelayproject', credential: 'openrelayproject' },
+    { urls: 'turn:openrelay.metered.ca:443?transport=tcp', username: 'openrelayproject', credential: 'openrelayproject' },
+  ]
+};
+/* window.SPEAKSCORE_PEER lets tests point at a local PeerServer; unset = PeerJS cloud */
+function peerOpts() { return Object.assign({ config: ICE }, window.SPEAKSCORE_PEER || {}); }
+const CODE_ALPHA = 'abcdefghjkmnpqrstuvwxyz23456789';
+function makeCode() { let s = ''; for (let i = 0; i < 4; i++) s += CODE_ALPHA[Math.floor(Math.random() * CODE_ALPHA.length)]; return s; }
+
+$('#host').addEventListener('click', async () => {
+  try { await ensureAudio(); }
+  catch (e) { showErr('Microphone blocked', "We couldn't access your microphone. Allow mic access for this site in the address bar, then try again."); return; }
+  net.role = 'host';
+  setAccent(P1);
+  hostWithCode(0);
+});
+
+function hostWithCode(attempt) {
+  if (attempt > 4) { showErr('Matchmaking failed', "Couldn't reserve a room code. The free signaling server may be busy — try again in a minute."); return; }
+  net.code = makeCode();
+  const peer = new Peer(PEER_PREFIX + net.code, peerOpts());
+  net.peer = peer;
+  peer.on('open', () => {
+    const codeU = net.code.toUpperCase();
+    $('#codebig').textContent = codeU;
+    $('#codebox').textContent = codeU;
+    $('#lb-host').hidden = false; $('#lb-guest').hidden = true;
+    $('#hostready').hidden = true; $('#hoststatus').hidden = false;
+    show('s-lobby');
+  });
+  peer.on('connection', c => {
+    if (net.conn && net.conn.open) { try { c.close(); } catch (_) {} return; } // room full
+    net.conn = c; wireConn(c);
+  });
+  peer.on('call', call => {
+    if (net.call) { try { call.close(); } catch (_) {} return; }
+    call.answer(stream);
+    wireCall(call);
+  });
+  peer.on('error', e => {
+    if (e.type === 'unavailable-id') { try { peer.destroy(); } catch (_) {} hostWithCode(attempt + 1); }
+    else onPeerError(e);
+  });
+  peer.on('disconnected', () => { try { peer.reconnect(); } catch (_) {} });
+}
+
+$('#join').addEventListener('click', async () => {
+  const code = $('#code').value.trim().toLowerCase();
+  if (!/^[a-z0-9]{4}$/.test(code)) { $('#code').focus(); return; }
+  try { await ensureAudio(); }
+  catch (e) { showErr('Microphone blocked', "We couldn't access your microphone. Allow mic access for this site in the address bar, then try again."); return; }
+  net.role = 'guest';
+  net.code = code;
+  setAccent(P2);
+  const peer = new Peer(peerOpts());
+  net.peer = peer;
+  peer.on('open', () => {
+    const conn = peer.connect(PEER_PREFIX + code, { reliable: true });
+    net.conn = conn; wireConn(conn);
+    const call = peer.call(PEER_PREFIX + code, stream);
+    wireCall(call);
+    $('#lb-host').hidden = true; $('#lb-guest').hidden = false;
+    $('#hostname2').textContent = '…';
+    show('s-lobby');
+  });
+  peer.on('error', onPeerError);
+  peer.on('disconnected', () => { try { peer.reconnect(); } catch (_) {} });
+});
+
+function onPeerError(e) {
+  if (e.type === 'peer-unavailable') showErr('Room not found', 'No room with that code is open right now. Double-check the code with the host — codes die when the host leaves.');
+  else if (e.type === 'network' || e.type === 'server-error' || e.type === 'socket-error')
+    showErr("Can't reach matchmaking", 'The free signaling server (PeerJS cloud) is unreachable from this network. Try again, or switch networks.');
+  else showErr('Connection error', 'Something went wrong setting up the call (' + e.type + '). Try again.');
+}
+
+function wireConn(conn) {
+  conn.on('open', () => { net.open = true; conn.send({ t: 'hello', name: myName() }); refreshLobby(); });
+  conn.on('data', onMsg);
+  conn.on('close', onPeerGone);
+  conn.on('error', () => {});
+}
+function wireCall(call) {
+  net.call = call;
+  call.on('stream', s => {
+    net.remoteStream = s;
+    const el = $('#raudio');
+    el.srcObject = s;
+    el.play().catch(() => {});
+    const src = actx.createMediaStreamSource(s);
+    net.remoteAnalyser = actx.createAnalyser();
+    net.remoteAnalyser.fftSize = 2048;
+    net.remoteAnalyser.smoothingTimeConstant = 0.8;
+    src.connect(net.remoteAnalyser);
+    refreshLobby();
+  });
+  call.on('close', onPeerGone);
+  call.on('error', () => {});
+}
+
+function refreshLobby() {
+  if (!screenIs('s-lobby')) return;
+  const ready = net.open && net.remoteStream && net.remoteName;
+  if (net.role === 'host') {
+    if (ready) {
+      $('#hoststatus').hidden = true;
+      $('#hostready').hidden = false;
+      $('#guestname').textContent = net.remoteName;
+    }
+  } else if (net.remoteName) {
+    $('#hostname2').textContent = net.remoteName;
+  }
+}
+
+function onMsg(msg) {
+  if (!msg || typeof msg !== 'object') return;
+  switch (msg.t) {
+    case 'hello':
+      net.remoteName = String(msg.name || 'Rival').slice(0, 20);
+      refreshLobby();
+      break;
+    case 'start':
+      state.duration = +msg.duration || 60;
+      startCallRound();
+      break;
+    case 'early':
+      if (roundRunning && state.mode === 'call') finishCallRound();
+      break;
+    case 'result':
+      net.remoteResult = { name: String(msg.name || net.remoteName || 'Rival').slice(0, 20), m: msg.m, text: String(msg.text || '').slice(0, 4000) };
+      maybeShowCallResults();
+      break;
+    case 'rematch':
+      resetForRematch(false);
+      break;
+    case 'bye':
+      onPeerGone();
+      break;
+  }
+}
+
+function onPeerGone() {
+  if (screenIs('s-results')) { $('#again').disabled = true; $('#again').textContent = 'Rival left'; return; }
+  if (state.mode !== 'call' && !screenIs('s-lobby')) return;
+  if (screenIs('s-lobby') && net.role === 'host') {
+    // guest left: back to waiting
+    net.conn = null; net.call = null; net.open = false; net.remoteName = ''; net.remoteStream = null; net.remoteAnalyser = null; net.remoteResult = null;
+    $('#hostready').hidden = true; $('#hoststatus').hidden = false;
+    return;
+  }
+  if (screenIs('s-call') || screenIs('s-lobby')) {
+    showErr('Call ended', 'The connection to your rival dropped (they left, or the network gave up). Create or join a room to go again.');
+  }
+}
+
+function cleanupNet() {
+  if (net.conn && net.conn.open) { try { net.conn.send({ t: 'bye' }); } catch (_) {} }
+  try { net.call && net.call.close(); } catch (_) {}
+  try { net.conn && net.conn.close(); } catch (_) {}
+  try { net.peer && net.peer.destroy(); } catch (_) {}
+  net.peer = net.conn = net.call = null;
+  net.role = null; net.code = ''; net.open = false;
+  net.remoteStream = net.remoteAnalyser = null;
+  net.remoteName = ''; net.remoteResult = null;
+  clearTimeout(waitTimer);
+  $('#raudio').srcObject = null;
+}
+
+$('#leave').addEventListener('click', () => { cleanupNet(); setAccent(P1); show('s-setup'); });
+
+function inviteLink() { return location.origin + location.pathname + '?join=' + net.code.toUpperCase(); }
+$('#copylink').addEventListener('click', async () => {
+  try { await navigator.clipboard.writeText(inviteLink()); $('#copylink').textContent = 'Copied ✓'; setTimeout(() => $('#copylink').textContent = 'Copy invite link', 1800); } catch (_) {}
+});
+$('#sharelink').addEventListener('click', () => {
+  const url = inviteLink();
+  if (navigator.share) navigator.share({ title: 'SpeakScore duel', text: 'Join my English speaking duel — room ' + net.code.toUpperCase(), url }).catch(() => {});
+  else navigator.clipboard.writeText(url).catch(() => {});
+});
+
+$('#callstart').addEventListener('click', () => {
+  if (!(net.conn && net.conn.open)) return;
+  net.conn.send({ t: 'start', duration: state.duration });
+  startCallRound();
+});
+
+async function startCallRound() {
+  state.mode = 'call';
+  net.remoteResult = null;
+  srDead = false; srFails = 0;
+  const me = mkPlayer(myName(), net.role === 'host' ? P1 : P2);
+  state.players = [me];
+  state.current = 0;
+  setAccent(me.color);
+  $('#cnameL').textContent = me.name + ' (you)';
+  $('#cnameR').textContent = net.remoteName || 'Rival';
+  $('#cclock').textContent = fmt(state.duration);
+  $('#clive').innerHTML = '<span class="dim">listening…</span>';
+  $('#cstatus').innerHTML = '<span class="pulse"></span>live — talk over each other, it’s allowed';
+  $('#mute').textContent = 'Mute 🔇';
+  show('s-call');
+  sizeViz(vizL); sizeViz(vizR);
+  vizL.env = 0; vizR.env = 0;
+  startDraw();
+  await countdown(3, true);
+  startRecognition(me, '#clive');
+  roundRunning = true;
+  roundStart = performance.now();
+}
+
+$('#mute').addEventListener('click', () => {
+  const tr = stream && stream.getAudioTracks()[0];
+  if (!tr) return;
+  tr.enabled = !tr.enabled;
+  $('#mute').textContent = tr.enabled ? 'Mute 🔇' : 'Unmute 🔊';
+});
+
+$('#endcall').addEventListener('click', () => {
+  if (!roundRunning) return;
+  if (net.conn && net.conn.open) { try { net.conn.send({ t: 'early' }); } catch (_) {} }
+  finishCallRound();
+});
+
+function finishCallRound() {
+  if (!roundRunning) return;
+  roundRunning = false;
+  stopRecognition();
+  const me = state.players[0];
+  me.elapsed = Math.min(state.duration, (performance.now() - roundStart) / 1000);
+  scorePlayer(me);
+  if (srDead) me.m.srDead = true;
+  if (net.conn && net.conn.open) {
+    try { net.conn.send({ t: 'result', name: me.name, m: me.m, text: me.finalText.trim().slice(0, 4000) }); } catch (_) {}
+  }
+  $('#cstatus').innerHTML = '<span class="pulse"></span>waiting for ' + esc(net.remoteName || 'rival') + '’s score…';
+  $('#cclock').textContent = '0:00';
+  clearTimeout(waitTimer);
+  waitTimer = setTimeout(() => maybeShowCallResults(true), 12000);
+  maybeShowCallResults();
+}
+
+function maybeShowCallResults(force) {
+  const me = state.players[0];
+  if (!me || !me.m || roundRunning) return;
+  if (!net.remoteResult && !force) return;
+  clearTimeout(waitTimer);
+  stopDraw();
+  const mine = { name: me.name, color: me.color, m: me.m, text: me.finalText, you: true };
+  let list;
+  if (net.remoteResult && net.remoteResult.m) {
+    const theirs = { name: net.remoteResult.name, color: net.role === 'host' ? P2 : P1, m: net.remoteResult.m, text: net.remoteResult.text, you: false };
+    list = net.role === 'host' ? [mine, theirs] : [theirs, mine];
+    renderResults(list, false);
+  } else {
+    renderResults([mine], true, 'Your rival’s score never arrived — connection hiccup. Here’s yours.');
+  }
+}
+
+function resetForRematch(sendMsg) {
+  if (sendMsg && net.conn && net.conn.open) { try { net.conn.send({ t: 'rematch' }); } catch (_) {} }
+  net.remoteResult = null;
+  state.players = [];
+  if (net.role === 'host') {
+    $('#hoststatus').hidden = true; $('#hostready').hidden = false;
+    $('#lb-host').hidden = false; $('#lb-guest').hidden = true;
+  } else {
+    $('#lb-host').hidden = true; $('#lb-guest').hidden = false;
+  }
+  setAccent(net.role === 'host' ? P1 : P2);
+  show('s-lobby');
+}
+
+/* ================= speech recognition (shared) ================= */
+function startRecognition(p, liveSel) {
+  if (!SR) { srDead = true; return; }
   rec = new SR();
   rec.lang = 'en-US';
   rec.continuous = true;
@@ -397,6 +828,7 @@ function startRecognition(p) {
   rec.maxAlternatives = 1;
   recActive = true;
   rec.onresult = e => {
+    srFails = 0;
     let interim = '';
     for (let i = e.resultIndex; i < e.results.length; i++) {
       const r = e.results[i];
@@ -407,115 +839,149 @@ function startRecognition(p) {
       } else interim += r[0].transcript;
     }
     p.interim = interim;
-    updateLive(p);
+    const tail = (p.finalText + ' ' + p.interim).trim().split(/\s+/).slice(-14).join(' ');
+    $(liveSel).innerHTML = tail ? esc(tail) : '<span class="dim">listening…</span>';
   };
-  rec.onend = () => { if (recActive) { try { rec.start(); } catch (_) {} } };
+  rec.onend = () => {
+    if (!recActive) return;
+    srFails++;
+    if (srFails > 6) { srDead = true; recActive = false; return; }
+    try { rec.start(); } catch (_) {}
+  };
   rec.onerror = e => {
     if (e.error === 'not-allowed' || e.error === 'service-not-allowed') {
-      recActive = false; turnRunning = false; stopRecognition();
-      showErr('Speech recognition failed', 'The browser blocked speech recognition (' + e.error + '). Check mic permissions and try again in Chrome or Edge.');
+      recActive = false; srDead = true;
+      if (state.mode === 'local') { roundRunning = false; showErr('Speech recognition failed', 'The browser blocked speech recognition (' + e.error + '). Check mic permissions and try again in Chrome or Edge.'); }
+    } else if (e.error === 'audio-capture' || e.error === 'aborted') {
+      srFails += 3; // likely mic contention on this device; give up quickly, keep the call alive
     }
   };
-  try { rec.start(); } catch (_) {}
+  try { rec.start(); } catch (_) { srDead = true; }
 }
 function stopRecognition() { recActive = false; if (rec) { try { rec.stop(); } catch (_) {} rec = null; } }
 
-function updateLive(p) {
-  const tail = (p.finalText + ' ' + p.interim).trim().split(/\s+/).slice(-14).join(' ');
-  $('#live').innerHTML = tail ? esc(tail) : '<span class="dim">listening…</span>';
+/* ================= countdown ================= */
+function countdown(n, overlay) {
+  const el = overlay ? $('#ov-cdown') : null;
+  return new Promise(res => {
+    const box = el || $('#ov-cdown');
+    box.classList.add('show');
+    let i = n;
+    const step = () => {
+      if (i === 0) { box.classList.remove('show'); res(); return; }
+      box.textContent = i;
+      box.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 250 });
+      i--; setTimeout(step, 900);
+    };
+    step();
+  });
 }
-function esc(s) { return s.replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c])); }
 
 /* ================= visualizer ================= */
-const viz = $('#viz');
-const vtx = viz.getContext('2d');
-let W = 0, H = 0, DPR = 1;
+let DPR = 1;
+function makeViz(sel) { const cv = $(sel); return { cv, ctx: cv.getContext('2d'), W: 0, H: 0, env: 0 }; }
+const vizT = makeViz('#viz'), vizL = makeViz('#vizL'), vizR = makeViz('#vizR');
 
-function sizeCanvas() {
+function sizeViz(v) {
   DPR = Math.min(window.devicePixelRatio || 1, 2);
-  const rect = viz.parentElement.getBoundingClientRect();
-  W = rect.width; H = rect.height;
-  viz.width = W * DPR; viz.height = H * DPR;
-  vtx.setTransform(DPR, 0, 0, DPR, 0, 0);
+  const rect = v.cv.parentElement.getBoundingClientRect();
+  v.W = rect.width; v.H = rect.height;
+  v.cv.width = v.W * DPR; v.cv.height = v.H * DPR;
+  v.ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
 }
-window.addEventListener('resize', () => { if ($('#s-turn').classList.contains('active')) sizeCanvas(); });
+window.addEventListener('resize', () => {
+  if (screenIs('s-turn')) sizeViz(vizT);
+  if (screenIs('s-call')) { sizeViz(vizL); sizeViz(vizR); }
+});
 
-function startDraw() { if (!rafId) rafId = requestAnimationFrame(draw); }
+function startDraw() { if (!rafId) rafId = requestAnimationFrame(masterDraw); }
+function stopDraw() { cancelAnimationFrame(rafId); rafId = 0; }
 
-function draw(ts) {
-  rafId = requestAnimationFrame(draw);
-  analyser.getByteFrequencyData(freqData);
-  analyser.getByteTimeDomainData(timeData);
-
-  // rms + envelope
+function ringFrame(v, an, colors, frac, ts) {
+  if (!an) { v.ctx.clearRect(0, 0, v.W, v.H); return 0; }
+  an.getByteFrequencyData(freqData);
+  an.getByteTimeDomainData(timeData);
   let sum = 0;
-  for (let i = 0; i < timeData.length; i += 4) { const v = (timeData[i] - 128) / 128; sum += v * v; }
+  for (let i = 0; i < timeData.length; i += 4) { const x = (timeData[i] - 128) / 128; sum += x * x; }
   const rms = Math.sqrt(sum / (timeData.length / 4));
-  env = Math.max(rms, env * 0.93);
+  v.env = Math.max(rms, v.env * 0.93);
 
-  const p = state.players[state.current];
-
-  // timing + VAD
-  if (turnRunning) {
-    p.totalFrames++;
-    if (rms > 0.02) p.speakFrames++;
-    const elapsed = (performance.now() - turnStart) / 1000;
-    const left = Math.max(0, state.duration - elapsed);
-    $('#clock').textContent = fmt(Math.ceil(left));
-    if (left <= 0) { endTurn(); return; }
-  }
-
-  // ----- paint -----
-  vtx.clearRect(0, 0, W, H);
+  const ctx = v.ctx, W = v.W, H = v.H;
+  ctx.clearRect(0, 0, W, H);
   const cx = W / 2, cy = H / 2;
   const scale = Math.min(W, H) / 380;
   const R0 = 104 * scale, MAXL = 58 * scale, RING = 176 * scale;
-  const [c1, c2] = p ? p.color : P1;
+  const [c1, c2] = colors;
 
-  // inner pulse
-  const pr = (88 + env * 120) * scale;
-  const g = vtx.createRadialGradient(cx, cy, pr * .2, cx, cy, pr);
+  const pr = (88 + v.env * 120) * scale;
+  const g = ctx.createRadialGradient(cx, cy, pr * .2, cx, cy, pr);
   g.addColorStop(0, hexA(c1, .16)); g.addColorStop(1, hexA(c1, 0));
-  vtx.fillStyle = g;
-  vtx.beginPath(); vtx.arc(cx, cy, pr, 0, Math.PI * 2); vtx.fill();
+  ctx.fillStyle = g;
+  ctx.beginPath(); ctx.arc(cx, cy, pr, 0, Math.PI * 2); ctx.fill();
 
-  // radial bars
-  angleOff += 0.0016;
   const N = 96, t0 = ts / 1000;
   for (let i = 0; i < N; i++) {
     const t = i / N;
     const bin = Math.min(freqData.length - 1, Math.floor(2 * Math.pow(160, t)));
-    const v = Math.pow(freqData[bin] / 255, 1.5);
+    const val = Math.pow(freqData[bin] / 255, 1.5);
     const shimmer = (Math.sin(t0 * 2.2 + i * 0.55) + 1) * 1.6 * scale;
-    const len = 2 * scale + shimmer + v * MAXL;
+    const len = 2 * scale + shimmer + val * MAXL;
     const a = t * Math.PI * 2 - Math.PI / 2 + angleOff;
     const x1 = cx + Math.cos(a) * R0, y1 = cy + Math.sin(a) * R0;
     const x2 = cx + Math.cos(a) * (R0 + len), y2 = cy + Math.sin(a) * (R0 + len);
-    const grad = vtx.createLinearGradient(x1, y1, x2, y2);
-    grad.addColorStop(0, hexA(c1, .28 + v * .6));
-    grad.addColorStop(1, hexA(c2, .06 + v * .8));
-    vtx.strokeStyle = grad;
-    vtx.lineWidth = 3 * scale;
-    vtx.lineCap = 'round';
-    vtx.beginPath(); vtx.moveTo(x1, y1); vtx.lineTo(x2, y2); vtx.stroke();
+    const grad = ctx.createLinearGradient(x1, y1, x2, y2);
+    grad.addColorStop(0, hexA(c1, .28 + val * .6));
+    grad.addColorStop(1, hexA(c2, .06 + val * .8));
+    ctx.strokeStyle = grad;
+    ctx.lineWidth = 3 * scale;
+    ctx.lineCap = 'round';
+    ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.stroke();
   }
 
-  // timer ring
-  vtx.lineWidth = 5 * scale; vtx.lineCap = 'round';
-  vtx.strokeStyle = 'rgba(255,255,255,.07)';
-  vtx.beginPath(); vtx.arc(cx, cy, RING, 0, Math.PI * 2); vtx.stroke();
-  const frac = turnRunning ? Math.max(0, 1 - (performance.now() - turnStart) / 1000 / state.duration) : 1;
-  vtx.strokeStyle = c1;
-  vtx.shadowColor = c1; vtx.shadowBlur = 10 * scale;
-  vtx.beginPath(); vtx.arc(cx, cy, RING, -Math.PI / 2, -Math.PI / 2 + frac * Math.PI * 2); vtx.stroke();
-  vtx.shadowBlur = 0;
+  ctx.lineWidth = 5 * scale; ctx.lineCap = 'round';
+  ctx.strokeStyle = 'rgba(255,255,255,.07)';
+  ctx.beginPath(); ctx.arc(cx, cy, RING, 0, Math.PI * 2); ctx.stroke();
+  ctx.strokeStyle = c1;
+  ctx.shadowColor = c1; ctx.shadowBlur = 10 * scale;
+  ctx.beginPath(); ctx.arc(cx, cy, RING, -Math.PI / 2, -Math.PI / 2 + frac * Math.PI * 2); ctx.stroke();
+  ctx.shadowBlur = 0;
+  return rms;
+}
+
+function masterDraw(ts) {
+  rafId = requestAnimationFrame(masterDraw);
+  angleOff += 0.0016;
+  const elapsed = roundRunning ? (performance.now() - roundStart) / 1000 : 0;
+  const frac = roundRunning ? Math.max(0, 1 - elapsed / state.duration) : 1;
+
+  if (screenIs('s-turn')) {
+    const p = state.players[state.current];
+    const rms = ringFrame(vizT, analyser, p ? p.color : P1, frac, ts);
+    if (roundRunning && p) {
+      p.totalFrames++;
+      if (rms > 0.02) p.speakFrames++;
+      $('#clock').textContent = fmt(Math.ceil(Math.max(0, state.duration - elapsed)));
+      if (elapsed >= state.duration) endTurn();
+    }
+  } else if (screenIs('s-call')) {
+    const me = state.players[0];
+    const myColors = me ? me.color : (net.role === 'host' ? P1 : P2);
+    const theirColors = net.role === 'host' ? P2 : P1;
+    const rms = ringFrame(vizL, analyser, myColors, frac, ts);
+    ringFrame(vizR, net.remoteAnalyser, theirColors, frac, ts);
+    if (roundRunning && me) {
+      me.totalFrames++;
+      if (rms > 0.02) me.speakFrames++;
+      $('#cclock').textContent = fmt(Math.ceil(Math.max(0, state.duration - elapsed)));
+      if (elapsed >= state.duration) finishCallRound();
+    }
+  }
 }
 
 function hexA(hex, a) {
   const n = parseInt(hex.slice(1), 16);
   return 'rgba(' + (n >> 16) + ',' + ((n >> 8) & 255) + ',' + (n & 255) + ',' + Math.max(0, Math.min(1, a)).toFixed(3) + ')';
 }
-function fmt(s) { s = Math.max(0, Math.round(s)); return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); }
 
 /* ================= scoring ================= */
 const HARD_FILLERS = new Set(['um', 'uh', 'uhm', 'er', 'erm', 'hmm', 'mmm', 'ah', 'eh']);
@@ -583,59 +1049,75 @@ function grade(s) {
   return ['Warming up', '#ff7a90'];
 }
 
-/* ================= results ================= */
-function results() {
-  state.players.forEach(scorePlayer);
-  const ps = state.players;
+/* ================= results (shared renderer) ================= */
+function validM(m) {
+  return m && typeof m.overall === 'number' && Array.isArray(m.bars) && Array.isArray(m.grade);
+}
+function renderResults(list, solo, subOverride) {
+  list = list.filter(p => validM(p.m));
+  if (!list.length) { showErr('No scores', 'Something went wrong computing scores. Try another round.'); return; }
   const grid = $('#rgrid');
-  grid.className = 'rgrid' + (state.solo ? ' solo' : '');
+  grid.className = 'rgrid' + (solo || list.length === 1 ? ' solo' : '');
   grid.innerHTML = '';
 
   let winner = null;
-  if (!state.solo) {
-    if (ps[0].m.overall > ps[1].m.overall) winner = 0;
-    else if (ps[1].m.overall > ps[0].m.overall) winner = 1;
+  if (list.length === 2) {
+    if (list[0].m.overall > list[1].m.overall) winner = 0;
+    else if (list[1].m.overall > list[0].m.overall) winner = 1;
   }
 
-  if (state.solo) {
-    $('#winline').innerHTML = 'Your score, <span>' + esc(ps[0].name) + '</span>';
-    $('#winsub').textContent = ps[0].m.tooShort ? 'We barely heard you — try a longer round!' : 'Nice round. Run it again and beat yourself.';
+  if (list.length === 1) {
+    $('#winline').innerHTML = 'Your score, <span>' + esc(list[0].name) + '</span>';
+    $('#winsub').textContent = subOverride || (list[0].m.tooShort ? 'We barely heard you — try a longer round!' : 'Nice round. Run it again and beat yourself.');
   } else if (winner === null) {
     $('#winline').innerHTML = 'It’s a <span>tie</span>!';
     $('#winsub').textContent = 'Same score. Only a rematch can settle this.';
   } else {
-    $('#winline').innerHTML = '<span>' + esc(ps[winner].name) + '</span> wins! 👑';
-    $('#winsub').textContent = ps[winner].m.overall - ps[1 - winner].m.overall <= 5
+    $('#winline').innerHTML = '<span>' + esc(list[winner].name) + '</span> wins! 👑';
+    $('#winsub').textContent = list[winner].m.overall - list[1 - winner].m.overall <= 5
       ? 'By a whisker — a rematch could flip it.' : 'A convincing win. Rematch to defend the crown?';
   }
 
-  ps.forEach((p, i) => {
+  list.forEach((p, i) => {
     const card = document.createElement('div');
     card.className = 'card pcard' + (winner === i ? ' win' : '');
     const [glabel, gcolor] = p.m.grade;
+    const noteBits = [];
+    if (p.m.tooShort) noteBits.push('not enough speech detected');
+    if (p.m.srDead) noteBits.push('transcription failed on this phone');
     card.innerHTML =
       (winner === i ? '<div class="crown">👑</div>' : '') +
-      '<h2><span class="dot" style="background:' + p.color[0] + ';box-shadow:0 0 8px ' + p.color[0] + '"></span>' + esc(p.name) + '</h2>' +
+      '<h2><span class="dot" style="background:' + p.color[0] + ';box-shadow:0 0 8px ' + p.color[0] + '"></span>' + esc(p.name) +
+        (p.you ? ' <small>(you)</small>' : '') + '</h2>' +
       '<div class="score"><span data-count="' + p.m.overall + '">0</span><small> / 100</small></div>' +
-      '<div class="grade" style="color:' + gcolor + '">' + glabel + (p.m.tooShort ? ' · not enough speech detected' : '') + '</div>' +
-      '<div class="bars">' + p.m.bars.map(([lab, val]) =>
-        '<div class="bar"><label><span>' + lab + '</span><b>' + val + '</b></label>' +
-        '<div class="track"><div class="fill" data-w="' + val + '" style="background:linear-gradient(90deg,' + p.color[0] + ',' + p.color[1] + ')"></div></div></div>'
+      '<div class="grade" style="color:' + gcolor + '">' + esc(glabel) + (noteBits.length ? ' · ' + noteBits.join(' · ') : '') + '</div>' +
+      '<div class="bars">' + p.m.bars.map(b =>
+        '<div class="bar"><label><span>' + esc(String(b[0])) + '</span><b>' + (+b[1] || 0) + '</b></label>' +
+        '<div class="track"><div class="fill" data-w="' + Math.max(0, Math.min(100, +b[1] || 0)) + '" style="background:linear-gradient(90deg,' + p.color[0] + ',' + p.color[1] + ')"></div></div></div>'
       ).join('') + '</div>' +
-      '<div class="stats">' + p.m.words + ' words · ' + p.m.wpm + ' wpm · talking ' + p.m.speakPct + '% of the time</div>' +
-      (p.finalText.trim() ? '<details><summary>What we heard</summary><p>' + esc(p.finalText.trim()) + '</p></details>' : '');
+      '<div class="stats">' + (+p.m.words || 0) + ' words · ' + (+p.m.wpm || 0) + ' wpm · talking ' + (+p.m.speakPct || 0) + '% of the time</div>' +
+      (p.text && p.text.trim() ? '<details><summary>What we heard</summary><p>' + esc(p.text.trim()) + '</p></details>' : '');
     grid.appendChild(card);
   });
 
-  show('s-results');
+  // buttons per mode
+  const again = $('#again');
+  again.disabled = false;
+  if (state.mode === 'call') {
+    again.textContent = 'Rematch 🔁';
+    if (!(net.conn && net.conn.open)) { again.disabled = true; again.textContent = 'Rival left'; }
+    $('#newgame').textContent = 'Leave call';
+  } else {
+    again.textContent = 'Rematch 🔁';
+    $('#newgame').textContent = 'New players';
+  }
 
-  // animate bars + numbers
+  show('s-results');
   requestAnimationFrame(() => requestAnimationFrame(() => {
     document.querySelectorAll('.fill').forEach(f => f.style.width = f.dataset.w + '%');
     document.querySelectorAll('[data-count]').forEach(el => countUp(el, +el.dataset.count));
   }));
-
-  if (winner !== null) confetti(ps[winner].color);
+  if (winner !== null) confetti(list[winner].color);
 }
 
 function countUp(el, target) {
@@ -649,17 +1131,19 @@ function countUp(el, target) {
 }
 
 $('#again').addEventListener('click', () => {
+  if (state.mode === 'call') { resetForRematch(true); return; }
   state.players = state.players.map(p => mkPlayer(p.name, p.color));
   state.current = 0;
   handoff();
 });
-$('#newgame').addEventListener('click', () => { setAccent(P1); show('s-setup'); });
+$('#newgame').addEventListener('click', () => { cleanupNet(); setAccent(P1); show('s-setup'); });
 
 /* ================= confetti ================= */
 function confetti(colors) {
   const cv = $('#confetti'), cx2 = cv.getContext('2d');
-  cv.width = innerWidth * DPR; cv.height = innerHeight * DPR;
-  cx2.setTransform(DPR, 0, 0, DPR, 0, 0);
+  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+  cv.width = innerWidth * dpr; cv.height = innerHeight * dpr;
+  cx2.setTransform(dpr, 0, 0, dpr, 0, 0);
   const parts = [];
   const palette = [colors[0], colors[1], '#ffffff', '#ffd166'];
   for (let i = 0; i < 130; i++) {
@@ -689,6 +1173,7 @@ function confetti(colors) {
 /* cleanup */
 window.addEventListener('pagehide', () => {
   stopRecognition();
+  cleanupNet();
   if (stream) stream.getTracks().forEach(t => t.stop());
 });
 </script>
