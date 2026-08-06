@@ -1,0 +1,696 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>SpeakScore — English Speaking Duel</title>
+<style>
+  :root{
+    --bg:#070b14; --ink:#eef2ff; --muted:#8b93a7; --line:rgba(255,255,255,.09);
+    --card:rgba(255,255,255,.045);
+    --p1a:#38e1ff; --p1b:#6a8bff;
+    --p2a:#ff5fa2; --p2b:#ffb454;
+    --accent:var(--p1a); --accent2:var(--p1b);
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0; font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+    background:var(--bg); color:var(--ink); line-height:1.55; overflow-x:hidden;
+  }
+  body::before,body::after{
+    content:""; position:fixed; z-index:-1; width:60vmax; height:60vmax; border-radius:50%;
+    filter:blur(90px); opacity:.16; pointer-events:none;
+  }
+  body::before{background:#2b5cff; top:-25vmax; left:-18vmax}
+  body::after{background:#a12bff; bottom:-28vmax; right:-20vmax}
+
+  .wrap{max-width:880px; margin:0 auto; padding:40px 20px 64px}
+  header.top{display:flex; align-items:baseline; gap:10px; margin-bottom:28px}
+  .logo{font-weight:800; font-size:1.15rem; letter-spacing:.02em}
+  .logo em{font-style:normal; background:linear-gradient(90deg,var(--p1a),var(--p2a)); -webkit-background-clip:text; background-clip:text; color:transparent}
+  .tag{color:var(--muted); font-size:.82rem}
+
+  section{display:none}
+  section.active{display:block; animation:fadein .35s ease}
+  @keyframes fadein{from{opacity:0; transform:translateY(8px)} to{opacity:1; transform:none}}
+
+  .card{background:var(--card); border:1px solid var(--line); border-radius:20px; padding:26px 24px;
+    backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px)}
+  h1{font-size:clamp(1.6rem,4.5vw,2.3rem); margin:0 0 8px; letter-spacing:-.01em}
+  .sub{color:var(--muted); margin:0 0 26px; font-size:.95rem; max-width:52ch}
+
+  label.fld{display:block; font-size:.8rem; color:var(--muted); margin:0 0 6px; letter-spacing:.04em; text-transform:uppercase}
+  input[type=text]{
+    width:100%; background:rgba(255,255,255,.05); border:1px solid var(--line); color:var(--ink);
+    border-radius:12px; padding:12px 14px; font-size:1rem; outline:none; transition:border-color .15s;
+  }
+  input[type=text]:focus{border-color:var(--accent)}
+  .grid2{display:grid; grid-template-columns:1fr 1fr; gap:16px}
+  @media(max-width:560px){.grid2{grid-template-columns:1fr}}
+  .pname{position:relative}
+  .pname .dot{position:absolute; right:12px; top:38px; width:10px; height:10px; border-radius:50%}
+  .pname.p1 .dot{background:var(--p1a); box-shadow:0 0 10px var(--p1a)}
+  .pname.p2 .dot{background:var(--p2a); box-shadow:0 0 10px var(--p2a)}
+
+  .chips{display:flex; flex-wrap:wrap; gap:10px; margin-top:8px}
+  .chip{
+    border:1px solid var(--line); background:rgba(255,255,255,.04); color:var(--ink);
+    border-radius:999px; padding:9px 18px; font-size:.92rem; cursor:pointer; transition:all .15s;
+  }
+  .chip:hover{border-color:rgba(255,255,255,.3)}
+  .chip.sel{background:linear-gradient(90deg,rgba(56,225,255,.18),rgba(106,139,255,.18)); border-color:var(--p1a); box-shadow:0 0 14px rgba(56,225,255,.25)}
+  .row{margin-top:22px}
+  .switch{display:flex; align-items:center; gap:10px; cursor:pointer; user-select:none; color:var(--muted); font-size:.9rem}
+  .switch input{accent-color:var(--p1a); width:16px; height:16px}
+
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center; gap:8px;
+    border:0; border-radius:14px; padding:14px 28px; font-size:1.02rem; font-weight:700; cursor:pointer;
+    color:#061018; background:linear-gradient(90deg,var(--accent),var(--accent2));
+    box-shadow:0 8px 30px rgba(56,225,255,.25); transition:transform .12s, filter .15s;
+  }
+  .btn:hover{transform:translateY(-1px); filter:brightness(1.08)}
+  .btn.ghost{background:transparent; color:var(--ink); border:1px solid var(--line); box-shadow:none}
+  .btn.big{width:100%; padding:16px; font-size:1.1rem; margin-top:26px}
+  .note{color:var(--muted); font-size:.8rem; margin-top:14px}
+  .warn{margin-top:18px; padding:12px 14px; border-radius:12px; font-size:.88rem;
+    background:rgba(255,180,84,.08); border:1px solid rgba(255,180,84,.3); color:#ffd9a3; display:none}
+  .warn.show{display:block}
+
+  /* ---- Turn screen ---- */
+  .turnhead{display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:6px}
+  .pill{
+    display:inline-flex; align-items:center; gap:8px; border-radius:999px; padding:8px 18px;
+    background:rgba(255,255,255,.05); border:1px solid var(--line); font-weight:700; font-size:1.02rem;
+  }
+  .pill .dot{width:9px; height:9px; border-radius:50%; background:var(--accent); box-shadow:0 0 10px var(--accent)}
+  .turnsub{text-align:center; color:var(--muted); font-size:.86rem; margin:0 0 10px}
+
+  .stage{position:relative; width:min(88vw,380px); margin:6px auto 0; aspect-ratio:1}
+  canvas#viz{width:100%; height:100%; display:block}
+  .center{
+    position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center;
+    pointer-events:none; text-align:center;
+  }
+  .clock{font-size:clamp(2.2rem,9vw,3rem); font-weight:800; letter-spacing:.02em; font-variant-numeric:tabular-nums}
+  .clocklbl{color:var(--muted); font-size:.78rem; letter-spacing:.14em; text-transform:uppercase; margin-top:2px}
+  .cdown{
+    position:absolute; inset:0; display:none; align-items:center; justify-content:center;
+    font-size:5.4rem; font-weight:800; color:var(--ink); text-shadow:0 0 40px var(--accent);
+  }
+  .cdown.show{display:flex}
+
+  .live{
+    min-height:56px; margin:18px auto 0; max-width:560px; text-align:center;
+    color:rgba(238,242,255,.85); font-size:1.02rem;
+  }
+  .live .dim{color:var(--muted); font-style:italic}
+  .turnbtns{display:flex; justify-content:center; gap:12px; margin-top:20px}
+
+  /* ---- Handoff ---- */
+  .hand{text-align:center; padding:56px 24px}
+  .hand .who{font-size:clamp(1.7rem,5vw,2.4rem); font-weight:800; margin:10px 0 4px}
+  .hand .who span{background:linear-gradient(90deg,var(--accent),var(--accent2)); -webkit-background-clip:text; background-clip:text; color:transparent}
+  .hand p{color:var(--muted); margin:0 0 28px}
+  .mic{font-size:2.6rem; filter:drop-shadow(0 0 18px var(--accent))}
+
+  /* ---- Results ---- */
+  .banner{text-align:center; margin-bottom:26px}
+  .banner .big{font-size:clamp(1.7rem,5vw,2.5rem); font-weight:800; margin:0}
+  .banner .big span{background:linear-gradient(90deg,var(--p1a),var(--p2a)); -webkit-background-clip:text; background-clip:text; color:transparent}
+  .banner p{color:var(--muted); margin:6px 0 0; font-size:.9rem}
+  .rgrid{display:grid; grid-template-columns:1fr 1fr; gap:18px}
+  .rgrid.solo{grid-template-columns:minmax(0,460px); justify-content:center}
+  @media(max-width:640px){.rgrid{grid-template-columns:1fr}}
+  .pcard{position:relative; overflow:hidden}
+  .pcard.win{border-color:rgba(255,214,102,.5); box-shadow:0 0 34px rgba(255,214,102,.12)}
+  .crown{position:absolute; top:14px; right:16px; font-size:1.4rem}
+  .pcard h2{margin:0; font-size:1.1rem; display:flex; align-items:center; gap:8px}
+  .pcard h2 .dot{width:9px; height:9px; border-radius:50%}
+  .score{font-size:3.4rem; font-weight:800; line-height:1.1; margin:10px 0 0; font-variant-numeric:tabular-nums}
+  .score small{font-size:1.1rem; color:var(--muted); font-weight:600}
+  .grade{font-size:.92rem; font-weight:600; margin:2px 0 18px}
+  .bars{display:flex; flex-direction:column; gap:11px}
+  .bar label{display:flex; justify-content:space-between; font-size:.8rem; color:var(--muted); margin-bottom:4px}
+  .bar label b{color:var(--ink); font-weight:600}
+  .track{height:7px; border-radius:99px; background:rgba(255,255,255,.07); overflow:hidden}
+  .fill{height:100%; width:0; border-radius:99px; transition:width 1.2s cubic-bezier(.2,.7,.2,1)}
+  .stats{color:var(--muted); font-size:.8rem; margin-top:16px}
+  details{margin-top:14px; font-size:.85rem}
+  details summary{cursor:pointer; color:var(--muted)}
+  details p{color:rgba(238,242,255,.8); background:rgba(0,0,0,.25); border-radius:10px; padding:12px 14px; max-height:180px; overflow:auto}
+  .again{display:flex; justify-content:center; gap:12px; margin-top:30px}
+  .disclaimer{text-align:center; color:#5b6474; font-size:.75rem; margin-top:26px}
+
+  /* ---- Error ---- */
+  .err{text-align:center; padding:48px 24px}
+  .err h2{margin:0 0 8px}
+  .err p{color:var(--muted); max-width:46ch; margin:0 auto 24px}
+
+  canvas#confetti{position:fixed; inset:0; width:100%; height:100%; pointer-events:none; z-index:50}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="logo">Speak<em>Score</em></div>
+    <div class="tag">English speaking duel — HeyLead lab</div>
+  </header>
+
+  <!-- SETUP -->
+  <section id="s-setup" class="active">
+    <div class="card">
+      <h1>Who speaks better English?</h1>
+      <p class="sub">Two players, one mic. Each of you talks for the timer while the wave dances to
+        your voice — then the machine scores your fluency, vocabulary, clarity and flow.</p>
+
+      <div class="grid2">
+        <div class="pname p1">
+          <label class="fld" for="n1">Player 1</label>
+          <input type="text" id="n1" placeholder="e.g. Martin" maxlength="20" autocomplete="off">
+          <span class="dot"></span>
+        </div>
+        <div class="pname p2" id="p2field">
+          <label class="fld" for="n2">Player 2</label>
+          <input type="text" id="n2" placeholder="e.g. Kamil" maxlength="20" autocomplete="off">
+          <span class="dot"></span>
+        </div>
+      </div>
+
+      <div class="row">
+        <label class="fld">Speaking time each</label>
+        <div class="chips" id="chips">
+          <button class="chip" data-sec="30">30 sec</button>
+          <button class="chip sel" data-sec="60">1 min</button>
+          <button class="chip" data-sec="120">2 min</button>
+          <button class="chip" data-sec="180">3 min</button>
+        </div>
+      </div>
+
+      <div class="row">
+        <label class="switch"><input type="checkbox" id="solo"> Solo practice (just me)</label>
+      </div>
+
+      <button class="btn big" id="start">Start the duel 🎙️</button>
+      <div class="warn" id="supwarn">Heads up: live speech recognition needs <b>Chrome or Edge</b>
+        (desktop or Android). This browser doesn't support it, so scoring won't work here.</div>
+      <p class="note">Speech is transcribed by your browser's built-in recognition. Nothing is uploaded
+        to HeyLead — scoring runs entirely on this page.</p>
+    </div>
+  </section>
+
+  <!-- HANDOFF -->
+  <section id="s-hand">
+    <div class="card hand">
+      <div class="mic">🎙️</div>
+      <div class="who">Pass the mic to <span id="handname"></span></div>
+      <p id="handsub">Talk about anything — your day, a movie, a hot take. Keep going until the timer ends.</p>
+      <button class="btn" id="ready">I'm ready — start my turn</button>
+    </div>
+  </section>
+
+  <!-- TURN -->
+  <section id="s-turn">
+    <div class="turnhead"><span class="pill"><span class="dot"></span><span id="turnname"></span></span></div>
+    <p class="turnsub">Speak English. Louder voice, bigger waves.</p>
+    <div class="stage">
+      <canvas id="viz"></canvas>
+      <div class="center">
+        <div class="clock" id="clock">1:00</div>
+        <div class="clocklbl">remaining</div>
+      </div>
+      <div class="cdown" id="cdown">3</div>
+    </div>
+    <div class="live" id="live"><span class="dim">listening…</span></div>
+    <div class="turnbtns">
+      <button class="btn ghost" id="early">Finish early</button>
+    </div>
+  </section>
+
+  <!-- RESULTS -->
+  <section id="s-results">
+    <div class="banner">
+      <p class="big" id="winline"></p>
+      <p id="winsub"></p>
+    </div>
+    <div class="rgrid" id="rgrid"></div>
+    <div class="again">
+      <button class="btn" id="again">Rematch 🔁</button>
+      <button class="btn ghost" id="newgame">New players</button>
+    </div>
+    <p class="disclaimer">SpeakScore is a party-game estimate based on browser speech recognition —
+      not a certified language assessment.</p>
+  </section>
+
+  <!-- ERROR -->
+  <section id="s-err">
+    <div class="card err">
+      <h2 id="errtitle">Microphone blocked</h2>
+      <p id="errmsg">We couldn't access your microphone. Allow mic access for this site in your
+        browser's address bar, then try again.</p>
+      <button class="btn" id="errback">Back to start</button>
+    </div>
+  </section>
+</div>
+
+<canvas id="confetti"></canvas>
+
+<script>
+'use strict';
+/* ================= state ================= */
+const $ = s => document.querySelector(s);
+const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+const state = {
+  duration: 60,
+  solo: false,
+  players: [],   // {name, color:[a,b], finalText, interim, confSum, confN, speakFrames, totalFrames, elapsed, m}
+  current: 0,
+};
+
+let stream = null, actx = null, analyser = null, freqData = null, timeData = null;
+let rec = null, recActive = false;
+let turnRunning = false, turnStart = 0, rafId = 0, angleOff = 0, env = 0;
+
+const P1 = ['#38e1ff', '#6a8bff'], P2 = ['#ff5fa2', '#ffb454'];
+
+/* ================= screens ================= */
+function show(id) {
+  document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+  $('#' + id).classList.add('active');
+}
+function setAccent(colors) {
+  document.documentElement.style.setProperty('--accent', colors[0]);
+  document.documentElement.style.setProperty('--accent2', colors[1]);
+}
+
+/* ================= setup ================= */
+if (!SR) $('#supwarn').classList.add('show');
+
+$('#chips').addEventListener('click', e => {
+  const b = e.target.closest('.chip'); if (!b) return;
+  document.querySelectorAll('.chip').forEach(c => c.classList.remove('sel'));
+  b.classList.add('sel');
+  state.duration = +b.dataset.sec;
+});
+$('#solo').addEventListener('change', e => {
+  $('#p2field').style.opacity = e.target.checked ? .35 : 1;
+  $('#n2').disabled = e.target.checked;
+});
+
+$('#start').addEventListener('click', async () => {
+  if (!SR) { showErr('Browser not supported', 'Live speech recognition needs Chrome or Edge (desktop or Android). Open this page there and try again.'); return; }
+  state.solo = $('#solo').checked;
+  const n1 = $('#n1').value.trim() || 'Player 1';
+  const n2 = $('#n2').value.trim() || 'Player 2';
+  state.players = [mkPlayer(n1, P1)];
+  if (!state.solo) state.players.push(mkPlayer(n2, P2));
+  state.current = 0;
+  try { await ensureAudio(); }
+  catch (e) { showErr('Microphone blocked', "We couldn't access your microphone. Allow mic access for this site in the address bar, then try again."); return; }
+  handoff();
+});
+function mkPlayer(name, color) {
+  return { name, color, finalText: '', interim: '', confSum: 0, confN: 0, speakFrames: 0, totalFrames: 0, elapsed: 0, m: null };
+}
+
+async function ensureAudio() {
+  if (stream && stream.getAudioTracks().some(t => t.readyState === 'live')) { if (actx.state === 'suspended') await actx.resume(); return; }
+  stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+  actx = new (window.AudioContext || window.webkitAudioContext)();
+  const src = actx.createMediaStreamSource(stream);
+  analyser = actx.createAnalyser();
+  analyser.fftSize = 2048;
+  analyser.smoothingTimeConstant = 0.8;
+  src.connect(analyser);
+  freqData = new Uint8Array(analyser.frequencyBinCount);
+  timeData = new Uint8Array(analyser.fftSize);
+}
+
+function showErr(title, msg) { $('#errtitle').textContent = title; $('#errmsg').textContent = msg; show('s-err'); }
+$('#errback').addEventListener('click', () => show('s-setup'));
+
+/* ================= handoff ================= */
+function handoff() {
+  const p = state.players[state.current];
+  setAccent(p.color);
+  $('#handname').textContent = p.name;
+  $('#handsub').textContent = state.current === 0
+    ? 'Talk about anything — your day, a movie, a hot take. Keep going until the timer ends.'
+    : 'Your rival is done. Show them how it’s really pronounced.';
+  show('s-hand');
+}
+$('#ready').addEventListener('click', beginTurn);
+
+/* ================= turn ================= */
+async function beginTurn() {
+  const p = state.players[state.current];
+  setAccent(p.color);
+  $('#turnname').textContent = p.name;
+  $('#clock').textContent = fmt(state.duration);
+  $('#live').innerHTML = '<span class="dim">listening…</span>';
+  show('s-turn');
+  sizeCanvas();
+  env = 0;
+  startDraw();
+  await countdown(3);
+  startRecognition(p);
+  turnRunning = true;
+  turnStart = performance.now();
+}
+
+function countdown(n) {
+  return new Promise(res => {
+    const el = $('#cdown'); el.classList.add('show');
+    let i = n;
+    const step = () => {
+      if (i === 0) { el.classList.remove('show'); res(); return; }
+      el.textContent = i;
+      el.animate([{ transform: 'scale(1.5)', opacity: 0 }, { transform: 'scale(1)', opacity: 1, offset: .3 }, { transform: 'scale(.95)', opacity: .9 }],
+        { duration: 900, easing: 'ease-out' });
+      i--; setTimeout(step, 900);
+    };
+    step();
+  });
+}
+
+$('#early').addEventListener('click', () => { if (turnRunning) endTurn(); });
+
+function endTurn() {
+  turnRunning = false;
+  stopRecognition();
+  const p = state.players[state.current];
+  p.elapsed = Math.min(state.duration, (performance.now() - turnStart) / 1000);
+  cancelAnimationFrame(rafId); rafId = 0;
+  if (state.current < state.players.length - 1) { state.current++; handoff(); }
+  else results();
+}
+
+/* ================= speech recognition ================= */
+function startRecognition(p) {
+  rec = new SR();
+  rec.lang = 'en-US';
+  rec.continuous = true;
+  rec.interimResults = true;
+  rec.maxAlternatives = 1;
+  recActive = true;
+  rec.onresult = e => {
+    let interim = '';
+    for (let i = e.resultIndex; i < e.results.length; i++) {
+      const r = e.results[i];
+      if (r.isFinal) {
+        p.finalText += r[0].transcript + ' ';
+        const c = r[0].confidence;
+        if (typeof c === 'number' && c > 0) { p.confSum += c; p.confN++; }
+      } else interim += r[0].transcript;
+    }
+    p.interim = interim;
+    updateLive(p);
+  };
+  rec.onend = () => { if (recActive) { try { rec.start(); } catch (_) {} } };
+  rec.onerror = e => {
+    if (e.error === 'not-allowed' || e.error === 'service-not-allowed') {
+      recActive = false; turnRunning = false; stopRecognition();
+      showErr('Speech recognition failed', 'The browser blocked speech recognition (' + e.error + '). Check mic permissions and try again in Chrome or Edge.');
+    }
+  };
+  try { rec.start(); } catch (_) {}
+}
+function stopRecognition() { recActive = false; if (rec) { try { rec.stop(); } catch (_) {} rec = null; } }
+
+function updateLive(p) {
+  const tail = (p.finalText + ' ' + p.interim).trim().split(/\s+/).slice(-14).join(' ');
+  $('#live').innerHTML = tail ? esc(tail) : '<span class="dim">listening…</span>';
+}
+function esc(s) { return s.replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c])); }
+
+/* ================= visualizer ================= */
+const viz = $('#viz');
+const vtx = viz.getContext('2d');
+let W = 0, H = 0, DPR = 1;
+
+function sizeCanvas() {
+  DPR = Math.min(window.devicePixelRatio || 1, 2);
+  const rect = viz.parentElement.getBoundingClientRect();
+  W = rect.width; H = rect.height;
+  viz.width = W * DPR; viz.height = H * DPR;
+  vtx.setTransform(DPR, 0, 0, DPR, 0, 0);
+}
+window.addEventListener('resize', () => { if ($('#s-turn').classList.contains('active')) sizeCanvas(); });
+
+function startDraw() { if (!rafId) rafId = requestAnimationFrame(draw); }
+
+function draw(ts) {
+  rafId = requestAnimationFrame(draw);
+  analyser.getByteFrequencyData(freqData);
+  analyser.getByteTimeDomainData(timeData);
+
+  // rms + envelope
+  let sum = 0;
+  for (let i = 0; i < timeData.length; i += 4) { const v = (timeData[i] - 128) / 128; sum += v * v; }
+  const rms = Math.sqrt(sum / (timeData.length / 4));
+  env = Math.max(rms, env * 0.93);
+
+  const p = state.players[state.current];
+
+  // timing + VAD
+  if (turnRunning) {
+    p.totalFrames++;
+    if (rms > 0.02) p.speakFrames++;
+    const elapsed = (performance.now() - turnStart) / 1000;
+    const left = Math.max(0, state.duration - elapsed);
+    $('#clock').textContent = fmt(Math.ceil(left));
+    if (left <= 0) { endTurn(); return; }
+  }
+
+  // ----- paint -----
+  vtx.clearRect(0, 0, W, H);
+  const cx = W / 2, cy = H / 2;
+  const scale = Math.min(W, H) / 380;
+  const R0 = 104 * scale, MAXL = 58 * scale, RING = 176 * scale;
+  const [c1, c2] = p ? p.color : P1;
+
+  // inner pulse
+  const pr = (88 + env * 120) * scale;
+  const g = vtx.createRadialGradient(cx, cy, pr * .2, cx, cy, pr);
+  g.addColorStop(0, hexA(c1, .16)); g.addColorStop(1, hexA(c1, 0));
+  vtx.fillStyle = g;
+  vtx.beginPath(); vtx.arc(cx, cy, pr, 0, Math.PI * 2); vtx.fill();
+
+  // radial bars
+  angleOff += 0.0016;
+  const N = 96, t0 = ts / 1000;
+  for (let i = 0; i < N; i++) {
+    const t = i / N;
+    const bin = Math.min(freqData.length - 1, Math.floor(2 * Math.pow(160, t)));
+    const v = Math.pow(freqData[bin] / 255, 1.5);
+    const shimmer = (Math.sin(t0 * 2.2 + i * 0.55) + 1) * 1.6 * scale;
+    const len = 2 * scale + shimmer + v * MAXL;
+    const a = t * Math.PI * 2 - Math.PI / 2 + angleOff;
+    const x1 = cx + Math.cos(a) * R0, y1 = cy + Math.sin(a) * R0;
+    const x2 = cx + Math.cos(a) * (R0 + len), y2 = cy + Math.sin(a) * (R0 + len);
+    const grad = vtx.createLinearGradient(x1, y1, x2, y2);
+    grad.addColorStop(0, hexA(c1, .28 + v * .6));
+    grad.addColorStop(1, hexA(c2, .06 + v * .8));
+    vtx.strokeStyle = grad;
+    vtx.lineWidth = 3 * scale;
+    vtx.lineCap = 'round';
+    vtx.beginPath(); vtx.moveTo(x1, y1); vtx.lineTo(x2, y2); vtx.stroke();
+  }
+
+  // timer ring
+  vtx.lineWidth = 5 * scale; vtx.lineCap = 'round';
+  vtx.strokeStyle = 'rgba(255,255,255,.07)';
+  vtx.beginPath(); vtx.arc(cx, cy, RING, 0, Math.PI * 2); vtx.stroke();
+  const frac = turnRunning ? Math.max(0, 1 - (performance.now() - turnStart) / 1000 / state.duration) : 1;
+  vtx.strokeStyle = c1;
+  vtx.shadowColor = c1; vtx.shadowBlur = 10 * scale;
+  vtx.beginPath(); vtx.arc(cx, cy, RING, -Math.PI / 2, -Math.PI / 2 + frac * Math.PI * 2); vtx.stroke();
+  vtx.shadowBlur = 0;
+}
+
+function hexA(hex, a) {
+  const n = parseInt(hex.slice(1), 16);
+  return 'rgba(' + (n >> 16) + ',' + ((n >> 8) & 255) + ',' + (n & 255) + ',' + Math.max(0, Math.min(1, a)).toFixed(3) + ')';
+}
+function fmt(s) { s = Math.max(0, Math.round(s)); return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); }
+
+/* ================= scoring ================= */
+const HARD_FILLERS = new Set(['um', 'uh', 'uhm', 'er', 'erm', 'hmm', 'mmm', 'ah', 'eh']);
+const SOFT_UNI = new Set(['like', 'basically', 'literally', 'actually']);
+const SOFT_BI = ['you know', 'i mean', 'sort of', 'kind of'];
+
+function tokenize(text) {
+  return text.toLowerCase().replace(/[^a-z'\- ]/g, ' ').split(/\s+/).filter(Boolean);
+}
+function lin(x, a, b) { return Math.max(0, Math.min(1, (x - a) / (b - a))); }
+function trap(x, a, b, c, d) {
+  if (x <= a || x >= d) return 0;
+  if (x >= b && x <= c) return 1;
+  return x < b ? (x - a) / (b - a) : (d - x) / (d - c);
+}
+
+function scorePlayer(p) {
+  const words = tokenize(p.finalText);
+  const n = words.length;
+  const mins = Math.max(p.elapsed, 5) / 60;
+  const wpm = n / mins;
+
+  const fluency = trap(wpm, 35, 110, 170, 230);
+
+  const unique = new Set(words).size;
+  const rttr = n ? unique / Math.sqrt(n) : 0;
+  const longR = n ? words.filter(w => w.length >= 7).length / n : 0;
+  const vocab = 0.65 * lin(rttr, 2.5, 8) + 0.35 * lin(longR, 0.04, 0.2);
+
+  let hard = 0, soft = 0;
+  for (const w of words) { if (HARD_FILLERS.has(w)) hard++; else if (SOFT_UNI.has(w)) soft++; }
+  const joined = ' ' + words.join(' ') + ' ';
+  for (const bg of SOFT_BI) soft += joined.split(' ' + bg + ' ').length - 1;
+  const fillerRate = n ? (hard + 0.5 * soft) / n * 100 : 0;
+  const fillerScore = 1 - lin(fillerRate, 2, 14);
+
+  const avgConf = p.confN ? p.confSum / p.confN : null;
+  const clarity = avgConf !== null ? lin(avgConf, 0.55, 0.92) : (n > 0 ? 0.6 : 0);
+
+  const speakRatio = p.totalFrames ? p.speakFrames / p.totalFrames : 0;
+  const flow = lin(speakRatio, 0.25, 0.70);
+
+  let overall = Math.round(100 * (0.26 * fluency + 0.22 * vocab + 0.20 * clarity + 0.14 * fillerScore + 0.18 * flow));
+  const tooShort = n < 12;
+  if (tooShort) overall = Math.min(overall, 22);
+
+  p.m = {
+    overall, tooShort,
+    words: n, wpm: Math.round(wpm), speakPct: Math.round(speakRatio * 100),
+    bars: [
+      ['Fluency', Math.round(fluency * 100)],
+      ['Vocabulary', Math.round(vocab * 100)],
+      ['Clarity', Math.round(clarity * 100)],
+      ['Flow', Math.round(flow * 100)],
+      ['Filler control', Math.round(fillerScore * 100)],
+    ],
+    grade: grade(overall),
+  };
+}
+function grade(s) {
+  if (s >= 85) return ['Excellent — C1+ vibes', '#7CFFB2'];
+  if (s >= 70) return ['Strong — around B2+', '#38e1ff'];
+  if (s >= 55) return ['Solid — B1–B2 zone', '#ffd166'];
+  if (s >= 40) return ['Developing — A2–B1', '#ffb454'];
+  return ['Warming up', '#ff7a90'];
+}
+
+/* ================= results ================= */
+function results() {
+  state.players.forEach(scorePlayer);
+  const ps = state.players;
+  const grid = $('#rgrid');
+  grid.className = 'rgrid' + (state.solo ? ' solo' : '');
+  grid.innerHTML = '';
+
+  let winner = null;
+  if (!state.solo) {
+    if (ps[0].m.overall > ps[1].m.overall) winner = 0;
+    else if (ps[1].m.overall > ps[0].m.overall) winner = 1;
+  }
+
+  if (state.solo) {
+    $('#winline').innerHTML = 'Your score, <span>' + esc(ps[0].name) + '</span>';
+    $('#winsub').textContent = ps[0].m.tooShort ? 'We barely heard you — try a longer round!' : 'Nice round. Run it again and beat yourself.';
+  } else if (winner === null) {
+    $('#winline').innerHTML = 'It’s a <span>tie</span>!';
+    $('#winsub').textContent = 'Same score. Only a rematch can settle this.';
+  } else {
+    $('#winline').innerHTML = '<span>' + esc(ps[winner].name) + '</span> wins! 👑';
+    $('#winsub').textContent = ps[winner].m.overall - ps[1 - winner].m.overall <= 5
+      ? 'By a whisker — a rematch could flip it.' : 'A convincing win. Rematch to defend the crown?';
+  }
+
+  ps.forEach((p, i) => {
+    const card = document.createElement('div');
+    card.className = 'card pcard' + (winner === i ? ' win' : '');
+    const [glabel, gcolor] = p.m.grade;
+    card.innerHTML =
+      (winner === i ? '<div class="crown">👑</div>' : '') +
+      '<h2><span class="dot" style="background:' + p.color[0] + ';box-shadow:0 0 8px ' + p.color[0] + '"></span>' + esc(p.name) + '</h2>' +
+      '<div class="score"><span data-count="' + p.m.overall + '">0</span><small> / 100</small></div>' +
+      '<div class="grade" style="color:' + gcolor + '">' + glabel + (p.m.tooShort ? ' · not enough speech detected' : '') + '</div>' +
+      '<div class="bars">' + p.m.bars.map(([lab, val]) =>
+        '<div class="bar"><label><span>' + lab + '</span><b>' + val + '</b></label>' +
+        '<div class="track"><div class="fill" data-w="' + val + '" style="background:linear-gradient(90deg,' + p.color[0] + ',' + p.color[1] + ')"></div></div></div>'
+      ).join('') + '</div>' +
+      '<div class="stats">' + p.m.words + ' words · ' + p.m.wpm + ' wpm · talking ' + p.m.speakPct + '% of the time</div>' +
+      (p.finalText.trim() ? '<details><summary>What we heard</summary><p>' + esc(p.finalText.trim()) + '</p></details>' : '');
+    grid.appendChild(card);
+  });
+
+  show('s-results');
+
+  // animate bars + numbers
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    document.querySelectorAll('.fill').forEach(f => f.style.width = f.dataset.w + '%');
+    document.querySelectorAll('[data-count]').forEach(el => countUp(el, +el.dataset.count));
+  }));
+
+  if (winner !== null) confetti(ps[winner].color);
+}
+
+function countUp(el, target) {
+  const t0 = performance.now(), dur = 1400;
+  const step = now => {
+    const t = Math.min(1, (now - t0) / dur);
+    el.textContent = Math.round(target * (1 - Math.pow(1 - t, 3)));
+    if (t < 1) requestAnimationFrame(step);
+  };
+  requestAnimationFrame(step);
+}
+
+$('#again').addEventListener('click', () => {
+  state.players = state.players.map(p => mkPlayer(p.name, p.color));
+  state.current = 0;
+  handoff();
+});
+$('#newgame').addEventListener('click', () => { setAccent(P1); show('s-setup'); });
+
+/* ================= confetti ================= */
+function confetti(colors) {
+  const cv = $('#confetti'), cx2 = cv.getContext('2d');
+  cv.width = innerWidth * DPR; cv.height = innerHeight * DPR;
+  cx2.setTransform(DPR, 0, 0, DPR, 0, 0);
+  const parts = [];
+  const palette = [colors[0], colors[1], '#ffffff', '#ffd166'];
+  for (let i = 0; i < 130; i++) {
+    parts.push({
+      x: Math.random() * innerWidth, y: -20 - Math.random() * innerHeight * .4,
+      vx: (Math.random() - .5) * 2.2, vy: 2 + Math.random() * 3.2,
+      s: 5 + Math.random() * 6, r: Math.random() * Math.PI, vr: (Math.random() - .5) * .25,
+      c: palette[i % palette.length],
+    });
+  }
+  const t0 = performance.now();
+  (function anim(now) {
+    const done = now - t0 > 4200;
+    cx2.clearRect(0, 0, innerWidth, innerHeight);
+    if (done) return;
+    for (const p of parts) {
+      p.x += p.vx; p.y += p.vy; p.r += p.vr;
+      cx2.save(); cx2.translate(p.x, p.y); cx2.rotate(p.r);
+      cx2.fillStyle = p.c; cx2.globalAlpha = Math.max(0, 1 - (now - t0) / 4200);
+      cx2.fillRect(-p.s / 2, -p.s / 4, p.s, p.s / 2);
+      cx2.restore();
+    }
+    requestAnimationFrame(anim);
+  })(t0);
+}
+
+/* cleanup */
+window.addEventListener('pagehide', () => {
+  stopRecognition();
+  if (stream) stream.getTracks().forEach(t => t.stop());
+});
+</script>
+</body>
+</html>

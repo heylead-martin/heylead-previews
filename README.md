@@ -9,6 +9,7 @@ builds move to WordPress after the client approves.
 | `/union/` | Union Locksmiths (Singapore) |
 | `/arc/` | ARC Home Management Services (Michael Sweet) |
 | `/1800/` | 1800 CLEANER site redesign |
+| `/speakscore/` | Internal lab - SpeakScore, English speaking duel app (Web Speech API, fully client-side) |
 
 ## Adding a new client preview
 
