@@ -278,6 +278,9 @@
 
       <div class="warn" id="supwarn">Heads up: live speech recognition needs <b>Chrome or Edge</b>
         (desktop or Android). On this browser the call will work but scoring may be limited.</div>
+      <div class="warn" id="ioswarn">📱 iPhone note: the live call and waves work, but Apple's browser
+        usually can't transcribe speech during a call — you'll be scored on voice rhythm without word
+        analysis. For full transcripts and word scoring, use <b>Chrome on Android or a computer</b>.</div>
       <p class="note">Speech is transcribed by your browser's built-in recognition. Scoring runs entirely
         on your device; in call mode your voice goes directly to your rival's phone (peer-to-peer).</p>
     </div>
@@ -456,13 +459,15 @@ function esc(s) { return s.replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;',
 function fmt(s) { s = Math.max(0, Math.round(s)); return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); }
 function myName() { return $('#n1').value.trim() || 'Player 1'; }
 function mkPlayer(name, color) {
-  return { name, color, finalText: '', interim: '', confSum: 0, confN: 0, speakFrames: 0, totalFrames: 0, peaks: 0, longPauses: 0, elapsed: 0, m: null };
+  return { name, color, finalText: '', interim: '', confSum: 0, confN: 0, speakFrames: 0, totalFrames: 0, peaks: 0, longPauses: 0, elapsed: 0, wordCount: 0, m: null };
 }
 function showErr(title, msg) { cleanupNet(); stopRecognition(); roundRunning = false; $('#errtitle').textContent = title; $('#errmsg').textContent = msg; show('s-err'); }
 $('#errback').addEventListener('click', () => { setAccent(P1); show('s-setup'); });
 
 /* ================= setup screen ================= */
 if (!SR) $('#supwarn').classList.add('show');
+const IS_IOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+if (IS_IOS) $('#ioswarn').classList.add('show');
 
 $('#m-local').addEventListener('click', () => pickMode('local'));
 $('#m-call').addEventListener('click', () => pickMode('call'));
@@ -870,6 +875,7 @@ function startRecognition(p, liveSel) {
     const all = (p.finalText + ' ' + p.interim).trim();
     const tail = all.split(/\s+/).slice(-14).join(' ');
     const wc = tokenize(all).length;
+    p.wordCount = wc;
     $(liveSel).innerHTML = tail
       ? esc(tail) + ' <span class="dim">· ' + wc + ' words</span>'
       : '<span class="dim">listening…</span>';
@@ -879,15 +885,12 @@ function startRecognition(p, liveSel) {
   rec.onend = () => {
     if (!recActive) return;
     srFails++;
-    if (srFails > 6) { srDead = true; recActive = false; return; }
-    try { rec.start(); } catch (_) {}
+    setTimeout(() => { if (recActive && rec) { try { rec.start(); } catch (_) {} } }, srFails > 4 ? 1000 : 150);
   };
   rec.onerror = e => {
     if (e.error === 'not-allowed' || e.error === 'service-not-allowed') {
       recActive = false; srDead = true;
       if (state.mode === 'local') { roundRunning = false; showErr('Speech recognition failed', 'The browser blocked speech recognition (' + e.error + '). Check mic permissions and try again in Chrome or Edge.'); }
-    } else if (e.error === 'audio-capture' || e.error === 'aborted') {
-      srFails += 3; // likely mic contention on this device; give up quickly, keep the call alive
     }
   };
   try { rec.start(); } catch (_) { srDead = true; }
@@ -1005,6 +1008,10 @@ function masterDraw(ts) {
     if (roundRunning && me) {
       trackVoice(me, rms);
       $('#cclock').textContent = fmt(Math.ceil(Math.max(0, state.duration - elapsed)));
+      if (elapsed > 12 && me.wordCount === 0 && me.speakFrames > 200 && !me.srWarned) {
+        me.srWarned = true;
+        $('#cstatus').innerHTML = '⚠️ transcription isn’t catching words on this phone (typical on iPhone) — you’ll be scored on voice rhythm';
+      }
       if (elapsed >= state.duration) finishCallRound();
     }
   }
@@ -1137,7 +1144,7 @@ function scorePlayer(p, conversational) {
   let overall = Math.round(100 * Math.pow(clamp01(raw), 0.85));
 
   const est = !textReliable;
-  if (est) overall = Math.min(overall, 78);
+  if (est) overall = Math.round(overall * 0.82);   // scaled, not clamped — keeps rankings distinct
   const tooShort = talkSec < 8 || talkRatio < 0.12;
   if (tooShort) overall = Math.min(overall, 25);
 
@@ -1213,7 +1220,9 @@ function renderResults(list, solo, subOverride) {
     $('#winsub').textContent = subOverride || (list[0].m.tooShort ? 'We barely heard you — try a longer round!' : 'Nice round. Run it again and beat yourself.');
   } else if (winner === null) {
     $('#winline').innerHTML = 'It’s a <span>tie</span>!';
-    $('#winsub').textContent = 'Same score. Only a rematch can settle this.';
+    $('#winsub').textContent = (list.length === 2 && list[0].m.est && list[1].m.est)
+      ? 'Dead even on voice rhythm — neither phone could transcribe words. Try Chrome on Android or desktop for the full word battle.'
+      : 'Same score. Only a rematch can settle this.';
   } else {
     $('#winline').innerHTML = '<span>' + esc(list[winner].name) + '</span> wins! 👑';
     $('#winsub').textContent = list[winner].m.overall - list[1 - winner].m.overall <= 5
@@ -1250,7 +1259,8 @@ function renderResults(list, solo, subOverride) {
         '</div>' : '') +
       (p.text && p.text.trim() ?
         '<details open><summary>Full transcript — <mark class="madv">advanced</mark> <mark class="mconn">connectors</mark> <mark class="mfill">fillers</mark></summary>' +
-        '<p>' + highlightTranscript(p.text) + '</p></details>' : '');
+        '<p>' + highlightTranscript(p.text) + '</p></details>' :
+        '<div class="stats" style="margin-top:12px">No transcript — this phone’s browser couldn’t transcribe during the round (typical on iPhone). Chrome on Android or desktop gets full word analysis.</div>');
     grid.appendChild(card);
   });
 
