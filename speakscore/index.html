@@ -181,7 +181,18 @@
   .stats{color:var(--muted); font-size:.8rem; margin-top:16px}
   details{margin-top:14px; font-size:.85rem}
   details summary{cursor:pointer; color:var(--muted)}
-  details p{color:rgba(238,242,255,.8); background:rgba(0,0,0,.25); border-radius:10px; padding:12px 14px; max-height:180px; overflow:auto}
+  details p{color:rgba(238,242,255,.8); background:rgba(0,0,0,.25); border-radius:10px; padding:12px 14px; max-height:260px; overflow:auto; line-height:1.75}
+  mark{background:transparent; border-radius:6px; padding:1px 4px}
+  mark.madv{color:#7CFFB2; background:rgba(124,255,178,.1)}
+  mark.mconn{color:#38e1ff; background:rgba(56,225,255,.1)}
+  mark.mfill{color:#ff7a90; background:rgba(255,122,144,.1)}
+  .wording{margin-top:14px; display:flex; flex-direction:column; gap:6px}
+  .wrow{display:flex; align-items:baseline; gap:8px; flex-wrap:wrap}
+  .wlab{color:var(--muted); font-size:.72rem; letter-spacing:.06em; text-transform:uppercase; min-width:86px}
+  .wchip{display:inline-block; padding:2px 10px; border-radius:999px; font-size:.76rem; border:1px solid; white-space:nowrap}
+  .wchip.adv{color:#7CFFB2; border-color:rgba(124,255,178,.35); background:rgba(124,255,178,.06)}
+  .wchip.conn{color:#38e1ff; border-color:rgba(56,225,255,.35); background:rgba(56,225,255,.06)}
+  .wchip.fill{color:#ff7a90; border-color:rgba(255,122,144,.35); background:rgba(255,122,144,.06)}
   .again{display:flex; justify-content:center; gap:12px; margin-top:30px; flex-wrap:wrap}
   .disclaimer{text-align:center; color:#5b6474; font-size:.75rem; margin-top:26px}
 
@@ -856,10 +867,14 @@ function startRecognition(p, liveSel) {
       } else interim += r[0].transcript;
     }
     p.interim = interim;
-    const tail = (p.finalText + ' ' + p.interim).trim().split(/\s+/).slice(-14).join(' ');
-    $(liveSel).innerHTML = tail ? esc(tail) : '<span class="dim">listening…</span>';
+    const all = (p.finalText + ' ' + p.interim).trim();
+    const tail = all.split(/\s+/).slice(-14).join(' ');
+    const wc = tokenize(all).length;
+    $(liveSel).innerHTML = tail
+      ? esc(tail) + ' <span class="dim">· ' + wc + ' words</span>'
+      : '<span class="dim">listening…</span>';
     if (state.mode === 'call' && roundRunning)
-      $('#cstatus').innerHTML = '<span class="pulse"></span>live — ' + tokenize(p.finalText + ' ' + p.interim).length + ' words heard';
+      $('#cstatus').innerHTML = '<span class="pulse"></span>live — ' + wc + ' words heard';
   };
   rec.onend = () => {
     if (!recActive) return;
@@ -1065,7 +1080,9 @@ function scorePlayer(p, conversational) {
   if (textReliable) {
     /* fluency from words per SPEAKING minute, so thinking pauses hit "flow", not pace */
     const wptm = n / (talkSec / 60);
-    pace = 0.75 * trap(wptm, 70, 130, 210, 280) + 0.25 * paceAudio;
+    /* the worse transcription capture is, the more we trust the audio pace signal */
+    const tw = 0.5 + 0.5 * lin(srCapture, 0.5, 1);
+    pace = tw * trap(wptm, 70, 130, 210, 280) + (1 - tw) * paceAudio;
 
     const unique = new Set(words).size;
     const rttr = unique / Math.sqrt(n);
@@ -1139,6 +1156,41 @@ function grade(s) {
   return ['Warming up', '#ff7a90'];
 }
 
+/* ================= word-usage analysis (render-side, works for both players) ================= */
+function analyzeWords(text) {
+  const words = tokenize(text);
+  const n = words.length;
+  if (!n) return null;
+  const freq = {};
+  for (const w of words) freq[w] = (freq[w] || 0) + 1;
+  const adv = {}, fill = {}, conn = {};
+  for (const w of words) {
+    if (HARD_FILLERS.has(w) || SOFT_UNI.has(w)) fill[w] = (fill[w] || 0) + 1;
+    else if (CONNECT_UNI.has(w)) conn[w] = (conn[w] || 0) + 1;
+    else if (w.length >= 5 && !isCommon(w)) adv[w] = (adv[w] || 0) + 1;
+  }
+  const top = o => Object.entries(o).sort((a, b) => b[1] - a[1]);
+  return {
+    n, unique: Object.keys(freq).length,
+    avgLen: words.reduce((a, w) => a + w.length, 0) / n,
+    adv: top(adv).slice(0, 10), fill: top(fill).slice(0, 6), conn: top(conn).slice(0, 8),
+  };
+}
+function highlightTranscript(text) {
+  return text.trim().split(/(\s+)/).map(tok => {
+    if (/^\s+$/.test(tok)) return tok;
+    const w = tok.toLowerCase().replace(/[^a-z'\-]/g, '');
+    if (!w) return esc(tok);
+    if (HARD_FILLERS.has(w) || SOFT_UNI.has(w)) return '<mark class="mfill">' + esc(tok) + '</mark>';
+    if (CONNECT_UNI.has(w)) return '<mark class="mconn">' + esc(tok) + '</mark>';
+    if (w.length >= 5 && !isCommon(w)) return '<mark class="madv">' + esc(tok) + '</mark>';
+    return esc(tok);
+  }).join('');
+}
+function wordChips(pairs, cls, showCount) {
+  return pairs.map(([w, c]) => '<span class="wchip ' + cls + '">' + esc(w) + (showCount && c > 1 ? ' ×' + c : '') + '</span>').join(' ');
+}
+
 /* ================= results (shared renderer) ================= */
 function validM(m) {
   return m && typeof m.overall === 'number' && Array.isArray(m.bars) && Array.isArray(m.grade);
@@ -1172,6 +1224,7 @@ function renderResults(list, solo, subOverride) {
     const card = document.createElement('div');
     card.className = 'card pcard' + (winner === i ? ' win' : '');
     const [glabel, gcolor] = p.m.grade;
+    const wa = p.text && p.text.trim() ? analyzeWords(p.text) : null;
     const noteBits = [];
     if (p.m.tooShort) noteBits.push('we barely heard any speech');
     else if (p.m.est) noteBits.push('transcription caught little — scored from voice rhythm');
@@ -1186,8 +1239,18 @@ function renderResults(list, solo, subOverride) {
         '<div class="bar"><label><span>' + esc(String(b[0])) + '</span><b>' + (+b[1] || 0) + '</b></label>' +
         '<div class="track"><div class="fill" data-w="' + Math.max(0, Math.min(100, +b[1] || 0)) + '" style="background:linear-gradient(90deg,' + p.color[0] + ',' + p.color[1] + ')"></div></div></div>'
       ).join('') + '</div>' +
-      '<div class="stats">' + (p.m.est ? '~' : '') + (+p.m.words || 0) + ' words · ' + (p.m.est ? '~' : '') + (+p.m.wpm || 0) + ' wpm · talking ' + (+p.m.speakPct || 0) + '% of the time</div>' +
-      (p.text && p.text.trim() ? '<details><summary>What we heard</summary><p>' + esc(p.text.trim()) + '</p></details>' : '');
+      '<div class="stats">' + (p.m.est ? '~' : '') + (+p.m.words || 0) + ' words' +
+        (wa ? ' · ' + wa.unique + ' unique · avg ' + wa.avgLen.toFixed(1) + ' letters' : '') +
+        ' · ' + (p.m.est ? '~' : '') + (+p.m.wpm || 0) + ' wpm · talking ' + (+p.m.speakPct || 0) + '% of the time</div>' +
+      (wa && wa.n >= 8 ?
+        '<div class="wording">' +
+          (wa.adv.length ? '<div class="wrow"><span class="wlab">Nice words</span>' + wordChips(wa.adv, 'adv', false) + '</div>' : '') +
+          (wa.conn.length ? '<div class="wrow"><span class="wlab">Connectors</span>' + wordChips(wa.conn, 'conn', true) + '</div>' : '') +
+          (wa.fill.length ? '<div class="wrow"><span class="wlab">Fillers</span>' + wordChips(wa.fill, 'fill', true) + '</div>' : '') +
+        '</div>' : '') +
+      (p.text && p.text.trim() ?
+        '<details open><summary>Full transcript — <mark class="madv">advanced</mark> <mark class="mconn">connectors</mark> <mark class="mfill">fillers</mark></summary>' +
+        '<p>' + highlightTranscript(p.text) + '</p></details>' : '');
     grid.appendChild(card);
   });
 
