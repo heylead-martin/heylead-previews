@@ -234,7 +234,7 @@
         <div class="modes">
           <button class="mode sel" id="m-local">
             <div class="mt">📱 One phone</div>
-            <div class="md">Take turns — pass the phone between players</div>
+            <div class="md">Two players share this phone — a switch button passes the mic</div>
           </button>
           <button class="mode" id="m-call">
             <div class="mt">📞 Two phones — live call</div>
@@ -529,7 +529,7 @@ $('#start').addEventListener('click', async () => {
   state.current = 0;
   try { await ensureAudio(); }
   catch (e) { showErr('Microphone blocked', "We couldn't access your microphone. Allow mic access for this site in the address bar, then try again."); return; }
-  handoff();
+  if (state.solo) handoff(); else beginLocalRace();
 });
 
 function handoff() {
@@ -555,7 +555,7 @@ async function beginTurn() {
   resetVad();
   startDraw();
   await countdown(3);
-  startRecognition(p, '#live');
+  startRecognition(() => state.players[state.current], '#live');
   roundRunning = true;
   roundStart = performance.now();
 }
@@ -780,7 +780,7 @@ async function startCallRound() {
   state.players = [me];
   state.current = 0;
   setAccent(me.color);
-  race.on = true; race.budget = state.duration;
+  race.local = false; race.on = true; race.budget = state.duration;
   race.hostLeft = state.duration; race.guestLeft = state.duration;
   race.active = 'host';
   $('#cnameL').textContent = me.name + ' (you)';
@@ -790,13 +790,14 @@ async function startCallRound() {
     ? 'you speak first — the middle button passes the mic'
     : esc(net.remoteName || 'Rival') + ' speaks first — grab the mic with the middle button');
   $('#mute').textContent = 'Mute 🔇';
+  $('#mute').style.display = '';
   show('s-call');
   sizeViz(vizL); sizeViz(vizR);
   vizL.env = 0; vizR.env = 0;
   resetVad();
   startDraw();
   await countdown(3, true);
-  startRecognition(me, '#clive');
+  startRecognition(() => state.players[0], '#clive');
   roundRunning = true;
   roundStart = performance.now();
   race.lastTick = performance.now();
@@ -804,17 +805,22 @@ async function startCallRound() {
 }
 
 /* --- mic-pass race: chess-clock turn state, synced over the data channel --- */
-const race = { on: false, active: 'host', hostLeft: 60, guestLeft: 60, budget: 60, lastTick: 0 };
+const race = { on: false, local: false, active: 'host', hostLeft: 60, guestLeft: 60, budget: 60, lastTick: 0 };
 function myTurn() { return race.active === net.role; }
+function activeLocal() { return state.players[race.active === 'host' ? 0 : 1]; }
+function bottomRole() { return race.local ? 'host' : net.role; }
 function flushMyInterim() {
   const me = state.players[0];
   if (me && me.interim && me.interim.trim()) { me.finalText += me.interim + ' '; me.interim = ''; }
 }
 function passTurn(broadcast) {
-  if (myTurn()) flushMyInterim();
+  if (race.local) {
+    const ap = activeLocal();
+    if (ap && ap.interim && ap.interim.trim()) { ap.finalText += ap.interim + ' '; ap.interim = ''; }
+  } else if (myTurn()) flushMyInterim();
   race.active = race.active === 'host' ? 'guest' : 'host';
   race.lastTick = performance.now();
-  if (broadcast && net.conn && net.conn.open) {
+  if (broadcast && !race.local && net.conn && net.conn.open) {
     try { net.conn.send({ t: 'turn', active: race.active, hostLeft: race.hostLeft, guestLeft: race.guestLeft }); } catch (_) {}
   }
   updateRaceUI();
@@ -834,28 +840,76 @@ function tickRace() {
   if (race[race.active + 'Left'] <= 0) {
     const other = race.active === 'host' ? 'guest' : 'host';
     if (race[other + 'Left'] > 0) {
-      // out of time: the expired player's own phone announces the hand-over
-      if (myTurn()) passTurn(true);
+      // out of time: hand the mic over (in call mode the expired player's phone announces it)
+      if (race.local || myTurn()) passTurn(true);
       else { race.active = other; race.lastTick = now; updateRaceUI(); }
     } else endRace();
   }
 }
 function updateRaceUI() {
-  const mine = race[net.role + 'Left'], theirs = race[(net.role === 'host' ? 'guest' : 'host') + 'Left'];
+  const b = bottomRole(), t = b === 'host' ? 'guest' : 'host';
+  const mine = race[b + 'Left'], theirs = race[t + 'Left'];
   $('#timeL').textContent = fmt(Math.ceil(mine));
   $('#timeR').textContent = fmt(Math.ceil(theirs));
-  const my = myTurn();
+  const my = race.active === b;
   $('#stL').classList.toggle('dim', !my);
   $('#stR').classList.toggle('dim', my);
   const sw = $('#switch');
-  sw.textContent = my ? '🎤 Pass the mic ➜' : '🖐 Take the mic';
-  sw.classList.toggle('take', !my);
-  sw.disabled = !roundRunning || (my ? theirs <= 0 : mine <= 0);
+  if (race.local) {
+    const nxt = state.players[race.active === 'host' ? 1 : 0];
+    sw.textContent = '🔁 Pass the mic to ' + (nxt ? nxt.name : '…');
+    sw.classList.toggle('take', !my);
+    sw.disabled = !roundRunning || race[(race.active === 'host' ? 'guest' : 'host') + 'Left'] <= 0;
+  } else {
+    sw.textContent = my ? '🎤 Pass the mic ➜' : '🖐 Take the mic';
+    sw.classList.toggle('take', !my);
+    sw.disabled = !roundRunning || (my ? theirs <= 0 : mine <= 0);
+  }
 }
 function endRace() {
   if (!roundRunning) return;
-  if (net.conn && net.conn.open) { try { net.conn.send({ t: 'end' }); } catch (_) {} }
-  finishCallRound();
+  if (!race.local && net.conn && net.conn.open) { try { net.conn.send({ t: 'end' }); } catch (_) {} }
+  if (race.local) finishLocalRace(); else finishCallRound();
+}
+
+/* --- one-phone race: same screen, same clocks, one shared mic --- */
+async function beginLocalRace() {
+  state.mode = 'local';
+  const [p1, p2] = state.players;
+  race.local = true; race.on = true; race.budget = state.duration;
+  race.hostLeft = state.duration; race.guestLeft = state.duration;
+  race.active = 'host';
+  setAccent(p1.color);
+  $('#cnameL').textContent = p1.name;
+  $('#cnameR').textContent = p2.name;
+  $('#clive').innerHTML = '<span class="dim">listening…</span>';
+  $('#cstatus').innerHTML = '<span class="pulse"></span>' + esc(p1.name) + ' speaks first — the middle button switches speaker';
+  $('#mute').style.display = 'none';           // pointless on one shared phone
+  show('s-call');
+  sizeViz(vizL); sizeViz(vizR);
+  vizL.env = 0; vizR.env = 0;
+  resetVad();
+  startDraw();
+  await countdown(3, true);
+  startRecognition(activeLocal, '#clive');     // transcription follows whoever holds the mic
+  roundRunning = true;
+  roundStart = performance.now();
+  race.lastTick = performance.now();
+  updateRaceUI();
+}
+function finishLocalRace() {
+  if (!roundRunning) return;
+  roundRunning = false;
+  stopRecognition();
+  const ap = activeLocal();
+  if (ap && ap.interim && ap.interim.trim()) { ap.finalText += ap.interim + ' '; ap.interim = ''; }
+  const [p1, p2] = state.players;
+  p1.elapsed = Math.min(race.budget, Math.max(0, race.budget - race.hostLeft));
+  p2.elapsed = Math.min(race.budget, Math.max(0, race.budget - race.guestLeft));
+  race.on = false; race.local = false;
+  stopDraw();
+  scorePlayer(p1); scorePlayer(p2);
+  renderResults(state.players.map(pl => ({ name: pl.name, color: pl.color, m: pl.m, text: pl.finalText, you: false })), false);
 }
 $('#switch').addEventListener('click', () => { if (roundRunning) passTurn(true); });
 $('#endrace').addEventListener('click', endRace);
@@ -922,7 +976,7 @@ function resetForRematch(sendMsg) {
 }
 
 /* ================= speech recognition (shared) ================= */
-function startRecognition(p, liveSel) {
+function startRecognition(getP, liveSel) {
   if (!SR) { srDead = true; return; }
   rec = new SR();
   rec.lang = 'en-US';
@@ -933,6 +987,9 @@ function startRecognition(p, liveSel) {
   rec.onresult = e => {
     srFails = 0;
     if (state.mode === 'call' && (!roundRunning || !myTurn())) return;
+    if (race.local && !roundRunning) return;
+    const p = getP();
+    if (!p) return;
     let interim = '';
     for (let i = e.resultIndex; i < e.results.length; i++) {
       const r = e.results[i];
@@ -1075,24 +1132,33 @@ function masterDraw(ts) {
       if (elapsed >= state.duration) endTurn();
     }
   } else if (screenIs('s-call')) {
-    const me = state.players[0];
-    const myColors = me ? me.color : (net.role === 'host' ? P1 : P2);
-    const theirColors = net.role === 'host' ? P2 : P1;
-    let fracMe = 1, fracThem = 1;
+    const b = bottomRole(), t = b === 'host' ? 'guest' : 'host';
+    const bottomColors = race.local ? P1 : (state.players[0] ? state.players[0].color : P1);
+    const topColors = race.local ? P2 : (net.role === 'host' ? P2 : P1);
+    let fracB = 1, fracT = 1;
     if (roundRunning && race.on) {
       tickRace();
-      fracMe = clamp01(race[net.role + 'Left'] / race.budget);
-      fracThem = clamp01(race[(net.role === 'host' ? 'guest' : 'host') + 'Left'] / race.budget);
+      fracB = clamp01(race[b + 'Left'] / race.budget);
+      fracT = clamp01(race[t + 'Left'] / race.budget);
       updateRaceUI();
     }
-    const rms = ringFrame(vizL, analyser, myColors, fracMe, ts);
-    ringFrame(vizR, net.remoteAnalyser, theirColors, fracThem, ts);
-    if (roundRunning && me && myTurn()) {
-      trackVoice(me, rms);
-      const used = race.budget - race[net.role + 'Left'];
-      if (used > 12 && me.wordCount === 0 && me.speakFrames > 200 && !me.srWarned) {
-        me.srWarned = true;
-        $('#cstatus').innerHTML = '⚠️ transcription isn’t catching words on this phone (typical on iPhone) — you’ll be scored on voice rhythm';
+    // one shared mic in local race: the active side gets the live wave, the idle side rests
+    const anBottom = race.local ? (race.active === 'host' ? analyser : null) : analyser;
+    const anTop = race.local ? (race.active === 'guest' ? analyser : null) : net.remoteAnalyser;
+    const rmsB = ringFrame(vizL, anBottom, bottomColors, fracB, ts);
+    const rmsT = ringFrame(vizR, anTop, topColors, fracT, ts);
+    if (roundRunning) {
+      if (race.local) {
+        const ap = activeLocal();
+        if (ap) trackVoice(ap, race.active === 'host' ? rmsB : rmsT);
+      } else if (state.players[0] && myTurn()) {
+        const me = state.players[0];
+        trackVoice(me, rmsB);
+        const used = race.budget - race[net.role + 'Left'];
+        if (used > 12 && me.wordCount === 0 && me.speakFrames > 200 && !me.srWarned) {
+          me.srWarned = true;
+          $('#cstatus').innerHTML = '⚠️ transcription isn’t catching words on this phone (typical on iPhone) — you’ll be scored on voice rhythm';
+        }
       }
     }
   }
@@ -1379,7 +1445,7 @@ $('#again').addEventListener('click', () => {
   if (state.mode === 'call') { resetForRematch(true); return; }
   state.players = state.players.map(p => mkPlayer(p.name, p.color));
   state.current = 0;
-  handoff();
+  if (state.solo) handoff(); else beginLocalRace();
 });
 $('#newgame').addEventListener('click', () => { cleanupNet(); setAccent(P1); show('s-setup'); });
 
