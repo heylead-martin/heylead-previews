@@ -3,7 +3,6 @@
  */
 window.PREVIEWS_AUTH = {
   email: "martin@heylead.com",
-  // SHA-256 hex of the password (client-side gate only - see README)
-  passwordHash: "4fe7cf407c2fc395fef9f32b8bd76f28f393301ead64fc81aacf8bacae5a1854",
+  passwordHash: "dab6f348e6eefe9e805d9cbaaca90e0aa482b3cdfe7305eff6ea65f4c913b6ae",
   sessionKey: 'heylead_previews_session_v1'
 };
