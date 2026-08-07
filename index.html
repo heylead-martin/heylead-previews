@@ -23,11 +23,18 @@
   .name{font-weight:700;font-size:1.05rem}
   .desc{color:#68717e;font-size:.88rem;margin-top:2px}
   .foot{margin-top:40px;color:#98a0ab;font-size:.8rem}
+  .topbar{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:4px}
+  .logout-link{flex:none;font-size:.78rem;font-weight:600;color:#68717e;text-decoration:none;
+    border:1px solid #e5e9ef;background:#fff;padding:.45rem .75rem;border-radius:999px}
+  .logout-link:hover{color:#10151d;border-color:#c9d0da}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <h1>Client Previews</h1>
+  <div class="topbar">
+    <h1>Client Previews</h1>
+    <a class="logout-link" href="/logout.html">Log out</a>
+  </div>
   <p class="sub">HeyLead - internal demo links. Not indexed; share URLs directly with clients.</p>
 
   <a class="card" href="/union/">
