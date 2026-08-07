@@ -9,7 +9,7 @@ builds move to WordPress after the client approves.
 | `/union/` | Union Locksmiths (Singapore) |
 | `/arc/` | ARC Home Management Services (Michael Sweet) |
 | `/1800/` | 1800 CLEANER site redesign |
-| `/speakscore/` | Internal lab - SpeakScore, English speaking duel app (Web Speech API, fully client-side). Two modes: pass-the-phone, or live two-phone call over WebRTC (vendored PeerJS + free PeerJS-cloud signaling, no backend of ours) |
+| `/speakscore/` | Internal lab - SpeakScore, English speaking duel app, fully client-side. Mic-pass race on one phone or between two phones over WebRTC (vendored PeerJS + free PeerJS-cloud signaling). Transcription: Web Speech API live, with free on-device Whisper fallback (transformers.js from jsDelivr - vendoring it trips GitHub push protection on a false-positive key pattern; whisper-tiny.en from HF hub, ~40 MB cached after first use) |
 
 ## Adding a new client preview
 
