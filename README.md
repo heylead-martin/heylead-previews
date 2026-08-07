@@ -33,3 +33,30 @@ builds move to WordPress after the client approves.
 - The Union build is generated from `~/Downloads/unionlocksmiths-recovery/`
   (`meta/make_staging.py /union`); ARC/1800 originated in the `heylead-theme`
   repo (`site-design/`, `clients/site-redesign/`).
+
+
+## Password gate (client-side)
+
+GitHub Pages is **static** - there is no real server authentication.
+
+This repo uses a lightweight login at `/login.html` for casual privacy
+(email `martin@heylead.com` + password). It is **not** strong security:
+the repo is public, hashes are in `auth-config.js`, and anyone can open
+raw HTML if they try hard enough.
+
+### Reset password from terminal (no "forgot password" email needed)
+
+```bash
+node scripts/set-password.js 'YourNewPassword'
+git add auth-config.js
+git commit -m "chore: rotate previews password"
+git push
+```
+
+Plain password is written only to `.password-local.txt` (gitignored).
+
+### Real lock (recommended for secrets)
+
+Use **Cloudflare Access** (Zero Trust) on `previews.heylead.com` with
+one-time email PIN to `martin@heylead.com`. That is real auth at the edge.
+Static "forgot password" is unnecessary if you reset from the terminal / GitHub.

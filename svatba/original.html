@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<script src="/auth-config.js"></script>
+<script src="/auth.js"></script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#F6F1E7">
+<meta name="description" content="Сватбена покана: Мартин и Йоана, 5 юни 2027, София.">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Мартин и Йоана | Сватбена покана">
+<meta property="og:description" content="Заповядайте на нашата сватба: 5 юни 2027, София.">
+<meta property="og:url" content="https://previews.heylead.com/svatba/">
+<meta property="og:image" content="https://previews.heylead.com/svatba/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="bg_BG">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-24 -24 48 48'><g fill='%23F2C9B8' stroke='%23E8B7A4' stroke-width='.8'><path d='M0 0 C 7 -3 8 -15 0 -21 C -8 -15 -7 -3 0 0'/><path d='M0 0 C 7 -3 8 -15 0 -21 C -8 -15 -7 -3 0 0' transform='rotate(60)'/><path d='M0 0 C 7 -3 8 -15 0 -21 C -8 -15 -7 -3 0 0' transform='rotate(120)'/><path d='M0 0 C 7 -3 8 -15 0 -21 C -8 -15 -7 -3 0 0' transform='rotate(180)'/><path d='M0 0 C 7 -3 8 -15 0 -21 C -8 -15 -7 -3 0 0' transform='rotate(240)'/><path d='M0 0 C 7 -3 8 -15 0 -21 C -8 -15 -7 -3 0 0' transform='rotate(300)'/></g><circle r='4.4' fill='%23E0A48E'/><circle r='1.9' fill='%23C98B72'/></svg>">
+<title>Мартин и Йоана | Сватбена покана</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#FFFFFF;
+  --cream:#F6F1E7;
+  --taupe:#E3DACB;
+  --sage:#A9B18F;
+  --sage-lt:#EDF0E3;
+  --olive:#77805B;
+  --olive-dk:#5E6647;
+  --blush:#F0C4B4;
+  --blush-dk:#DFA18F;
+  --berry:#7C4A2E;
+  --ink:#55554A;
+  --muted:#9A947F;
+  --line:#E7E2D2;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%}
+body{
+  background:var(--cream);
+  color:var(--ink);
+  font-family:'Jost',system-ui,sans-serif;
+  overflow:hidden;
+  -webkit-font-smoothing:antialiased;
+  line-height:1.65;
+}
+button{font-family:'Jost',sans-serif}
+::selection{background:var(--sage);color:#fff}
+.hide{display:none!important}
+.script{font-family:'Caveat',cursive}
+
+.eyebrow{
+  display:block;font-size:.6rem;font-weight:600;letter-spacing:.32em;
+  text-transform:uppercase;color:var(--muted);margin-bottom:.2rem;
+}
+.ptitle{
+  font-family:'Caveat',cursive;font-weight:600;color:var(--olive-dk);
+  font-size:2.3rem;line-height:1.1;margin-bottom:.5rem;
+}
+.lead{color:#7C7A68;font-weight:300;font-size:.97rem;max-width:19.5rem;margin:0 auto}
+
+/* ============ ENVELOPE SCENE ============ */
+.env-scene{
+  position:fixed;inset:0;z-index:20;
+  background:linear-gradient(180deg,#FFFFFF 0%,#F6F1E7 100%);
+  display:grid;place-items:center;
+  transition:opacity .7s ease,transform .7s ease;
+}
+.env-scene.bye{opacity:0;transform:translateY(34px);pointer-events:none}
+.env-stack{text-align:center;padding:1rem}
+.env-names{
+  font-size:.7rem;font-weight:500;letter-spacing:.34em;text-transform:uppercase;
+  color:var(--olive);margin-bottom:.4rem;
+}
+.env-sub{font-family:'Caveat',cursive;color:var(--blush-dk);font-size:1.35rem;margin-bottom:1.7rem}
+.env{
+  position:relative;width:min(320px,82vw);aspect-ratio:1.45;margin:0 auto;
+  perspective:900px;cursor:pointer;
+  filter:drop-shadow(0 18px 30px rgba(94,102,71,.18));
+  animation:envFloat 4.2s ease-in-out infinite;
+}
+@keyframes envFloat{50%{transform:translateY(-7px)}}
+.opening .env{animation:none}
+.env-back{position:absolute;inset:0;background:#E7DECC;border-radius:6px;z-index:1}
+.env-letter{
+  position:absolute;left:6%;right:6%;top:5%;bottom:10%;
+  background:#fff;border:1px solid #E4DECE;border-radius:4px;z-index:2;
+  display:grid;place-items:center;
+  transition:transform .85s cubic-bezier(.3,.7,.25,1);
+}
+.out .env-letter{transform:translateY(-116%)}
+.lmini{
+  width:118px;aspect-ratio:1;border-radius:50%;
+  background:radial-gradient(circle at 35% 30%,#EFE8DA,#E0D6C3);
+  display:grid;place-content:center;text-align:center;position:relative;
+}
+.lmini::before{content:"";position:absolute;inset:8px;border:1px solid #B4AB92;border-radius:50%}
+.lm-n{font-family:'Caveat',cursive;font-size:1.55rem;color:var(--olive-dk);line-height:1}
+.lm-d{font-size:.52rem;letter-spacing:.22em;color:var(--muted);margin-top:.35rem}
+.env-front{
+  position:absolute;inset:0;background:#F3EDDF;border-radius:6px;z-index:3;
+  clip-path:polygon(0 0,50% 46%,100% 0,100% 100%,0 100%);
+  box-shadow:inset 0 -16px 26px rgba(94,102,71,.08);
+}
+.env-flap{
+  position:absolute;left:0;right:0;top:0;height:60%;
+  background:#EDE5D3;z-index:4;border-radius:6px 6px 0 0;
+  clip-path:polygon(0 0,100% 0,50% 94%);
+  transform-origin:top center;
+  transition:transform .85s cubic-bezier(.55,.05,.3,1);
+}
+.opening .env-flap{transform:rotateX(180deg)}
+.flapdown .env-flap{z-index:0}
+.seal{
+  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:58px;height:58px;border-radius:50%;z-index:5;
+  background:radial-gradient(circle at 35% 30%,#F0C4B4,#DFA18F);
+  border:2px solid #D69882;box-shadow:0 5px 12px rgba(124,74,46,.28);
+  display:grid;place-items:center;
+  font-family:'Caveat',cursive;font-size:1.45rem;color:#fff;
+  transition:opacity .35s,transform .35s;
+}
+.opening .seal{opacity:0;transform:translate(-50%,-50%) scale(.55)}
+.open-btn{
+  margin-top:2.1rem;display:inline-block;
+  background:#fff;border:1.5px solid var(--olive);color:var(--olive-dk);
+  font-size:.72rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;
+  padding:.9rem 2rem;border-radius:999px;cursor:pointer;
+  box-shadow:0 8px 20px rgba(94,102,71,.12);
+  transition:background .3s,color .3s,transform .3s;
+}
+.open-btn:hover{background:var(--olive);color:#fff;transform:translateY(-2px)}
+.env-hint{margin-top:.8rem;font-size:.72rem;color:#B9B29A;font-weight:300}
+.petal{position:absolute;top:-6vh;opacity:.55;animation:fall linear infinite;pointer-events:none}
+.petal.p1{left:12%;width:16px;animation-duration:13s;animation-delay:-2s}
+.petal.p2{left:32%;width:12px;animation-duration:16s;animation-delay:-9s}
+.petal.p3{left:66%;width:18px;animation-duration:12s;animation-delay:-5s}
+.petal.p4{left:85%;width:13px;animation-duration:17s;animation-delay:-12s}
+@keyframes fall{
+  0%{transform:translateY(-6vh) translateX(0) rotate(0deg)}
+  50%{transform:translateY(52vh) translateX(-26px) rotate(160deg)}
+  100%{transform:translateY(112vh) translateX(14px) rotate(330deg)}
+}
+
+/* ============ BOOKLET ============ */
+.book{
+  position:fixed;inset:0;z-index:10;display:grid;place-items:center;padding:12px;
+  opacity:0;transform:scale(.955) translateY(16px);
+}
+.book.in{opacity:1;transform:none;transition:opacity .65s ease,transform .65s cubic-bezier(.2,.7,.3,1)}
+.card{
+  position:relative;width:100%;max-width:432px;height:100%;max-height:870px;
+  background:var(--paper);border:1px solid #CFCAB8;border-radius:6px;
+  box-shadow:0 26px 60px rgba(94,102,71,.16);
+  overflow:hidden;perspective:1200px;
+}
+.card::before{
+  content:"";position:absolute;inset:8px;border:1px solid #DDD8C6;
+  border-radius:3px;pointer-events:none;z-index:8;
+}
+.chead{
+  position:absolute;top:0;left:0;right:0;z-index:7;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:15px 22px 10px;pointer-events:none;
+  background:linear-gradient(180deg,rgba(255,255,255,.92) 40%,rgba(255,255,255,0));
+}
+.chead>*{pointer-events:auto}
+.mini-logo{font-family:'Caveat',cursive;font-size:1.3rem;color:var(--olive);background:none;border:0;cursor:pointer;line-height:1}
+.toc-btn{font-size:.6rem;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--muted);background:none;border:0;cursor:pointer}
+.toc-btn:hover{color:var(--olive)}
+
+.pagenav{
+  position:absolute;left:0;right:0;bottom:0;z-index:7;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 20px 18px;
+  background:linear-gradient(180deg,rgba(255,255,255,0),#fff 55%);
+}
+.pn-btn{
+  width:42px;height:42px;border-radius:50%;border:1px solid #C6CBAF;
+  background:#fff;color:var(--olive);display:grid;place-items:center;
+  cursor:pointer;transition:transform .25s,background .25s,opacity .25s;
+}
+.pn-btn:hover{background:var(--sage-lt)}
+.pn-btn:active{transform:scale(.9)}
+.pn-btn[disabled]{opacity:.25;pointer-events:none}
+.pn-count{font-size:.66rem;font-weight:500;letter-spacing:.32em;color:var(--muted)}
+
+.pages{position:absolute;inset:0}
+.page{
+  position:absolute;inset:0;overflow-y:auto;-webkit-overflow-scrolling:touch;
+  padding:64px 26px 92px;text-align:center;
+  opacity:0;visibility:hidden;
+  transform:translateX(56px) rotateY(-4deg);transform-origin:left center;
+  transition:opacity .55s ease,transform .55s cubic-bezier(.3,.7,.3,1),visibility 0s .55s;
+}
+.page.active{opacity:1;visibility:visible;transform:none;transition-delay:0s,0s,0s}
+.page.from-right{transition:none;opacity:0;visibility:visible;transform:translateX(56px) rotateY(-4deg)}
+.page.from-left{transition:none;opacity:0;visibility:visible;transform:translateX(-56px) rotateY(4deg)}
+.page.exit-left{opacity:0;visibility:visible;transform:translateX(-56px) rotateY(4deg)}
+.page.exit-right{opacity:0;visibility:visible;transform:translateX(56px) rotateY(-4deg)}
+
+.pi{opacity:0;transform:translateY(16px);transition:opacity .5s ease,transform .5s ease}
+.page.active .pi{opacity:1;transform:none}
+.q1{transition-delay:.18s}.q2{transition-delay:.26s}.q3{transition-delay:.34s}
+.q4{transition-delay:.42s}.q5{transition-delay:.5s}.q6{transition-delay:.58s}
+.q7{transition-delay:.66s}.q8{transition-delay:.74s}.q9{transition-delay:.82s}
+
+.corner{position:absolute;top:-8px;right:-16px;width:132px;pointer-events:none;opacity:.9}
+
+/* ---- cover ---- */
+.cover{display:flex;flex-direction:column;justify-content:center;align-items:center;padding:64px 22px 96px}
+.fl-tr{position:absolute;top:-34px;right:-46px;width:min(262px,64vw);pointer-events:none}
+.fl-bl{position:absolute;bottom:-34px;left:-46px;width:min(262px,64vw);transform:rotate(180deg);pointer-events:none}
+.disc{
+  position:relative;width:min(266px,70vw);aspect-ratio:1;border-radius:50%;
+  background:radial-gradient(circle at 35% 30%,#EFE8DA,#E0D6C3);
+  display:grid;place-content:center;text-align:center;
+  box-shadow:0 16px 36px rgba(94,102,71,.14);
+}
+.disc::before{content:"";position:absolute;inset:11px;border:1px solid #A79E87;border-radius:50%}
+.disc .save{font-size:.58rem;font-weight:600;letter-spacing:.32em;color:#8B8468;text-transform:uppercase}
+.disc .names{font-family:'Caveat',cursive;font-weight:600;color:var(--olive-dk);font-size:clamp(2.3rem,10.5vw,2.9rem);line-height:1.05;margin:.45rem 0 .55rem}
+.disc .dl{width:44px;height:1px;background:#A79E87;margin:0 auto .6rem}
+.disc .ddate{font-size:.66rem;font-weight:500;letter-spacing:.26em;color:#6E6852;text-transform:uppercase}
+.disc .dcity{font-size:.56rem;letter-spacing:.32em;color:#8B8468;text-transform:uppercase;margin-top:.3rem}
+.days{font-family:'Caveat',cursive;font-size:1.35rem;color:var(--blush-dk);margin-top:1.5rem}
+.hint{
+  margin-top:1.1rem;display:flex;gap:9px;align-items:center;justify-content:center;
+  font-size:.6rem;font-weight:500;letter-spacing:.28em;text-transform:uppercase;color:#B9AF97;
+}
+.hint svg{animation:nudge 1.7s ease-in-out infinite}
+@keyframes nudge{50%{transform:translateX(6px)}}
+
+/* ---- toc ---- */
+.toc{max-width:300px;margin:1.5rem auto 0;text-align:left}
+.toc-row{
+  display:flex;align-items:center;gap:14px;width:100%;
+  background:none;border:0;border-bottom:1px solid var(--line);
+  padding:15px 6px;cursor:pointer;color:var(--ink);font-size:.97rem;font-weight:400;
+  transition:background .25s,padding-left .25s;
+}
+.toc-row:hover{background:#FBF9F1;padding-left:12px}
+.toc-num{font-size:.64rem;font-weight:600;letter-spacing:.1em;color:var(--sage)}
+.toc-row svg{margin-left:auto;color:#C7BFA9;flex:none}
+
+/* ---- info blocks ---- */
+.info{
+  max-width:302px;margin:1.25rem auto 0;padding:1.35rem 1.2rem;
+  border:1px solid var(--line);border-radius:12px;background:#FCFAF4;
+}
+.icon{width:48px;height:48px;border-radius:50%;background:var(--sage-lt);color:var(--olive);display:grid;place-items:center;margin:0 auto .7rem}
+.info h3{font-family:'Caveat',cursive;font-weight:600;font-size:1.55rem;color:var(--olive-dk);line-height:1.1}
+.info .time{font-size:.86rem;font-weight:600;letter-spacing:.1em;color:var(--olive);margin-top:.15rem}
+.info .venue{font-weight:500;margin-top:.45rem}
+.info .addr{font-size:.86rem;font-weight:300;color:var(--muted)}
+.map-link{
+  display:inline-block;margin-top:.75rem;font-size:.64rem;font-weight:600;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--olive);
+  text-decoration:none;border-bottom:1px solid #B9C0A0;padding-bottom:2px;
+  transition:color .3s,border-color .3s;
+}
+.map-link:hover{color:var(--blush-dk);border-color:var(--blush-dk)}
+
+/* ---- timeline ---- */
+.tl{max-width:250px;margin:1.6rem auto 0;text-align:left;position:relative;padding-left:2rem}
+.tl::before{
+  content:"";position:absolute;left:7px;top:10px;bottom:10px;width:1.5px;
+  background:linear-gradient(#C9CFB2,#DFA48F);
+}
+.tl-item{display:flex;gap:.9rem;margin-bottom:1.15rem;position:relative}
+.tl-item:last-child{margin-bottom:0}
+.tl-item .fl{position:absolute;left:-2.05rem;top:2px;width:17px;height:17px}
+.tl-item .t{font-weight:600;color:var(--olive-dk);font-size:.9rem;min-width:2.9rem;letter-spacing:.03em}
+.tl-item .e{font-weight:500;font-size:.95rem}
+.tl-item .s{display:block;color:var(--muted);font-size:.82rem;font-weight:300}
+
+/* ---- traditions ---- */
+.trad{display:flex;gap:14px;text-align:left;max-width:312px;margin:1.25rem auto 0;align-items:flex-start}
+.trad .icon{width:44px;height:44px;flex:none;margin:0}
+.trad h4{font-family:'Caveat',cursive;font-weight:600;font-size:1.45rem;color:var(--olive-dk);line-height:1.1}
+.trad p{font-size:.88rem;font-weight:300;color:#84816D;margin-top:.15rem}
+
+/* ---- dresscode ---- */
+.palette{display:flex;justify-content:center;gap:.75rem;margin-top:1.5rem}
+.swatch{width:30px;height:30px;border-radius:50%;border:2px solid #fff;box-shadow:0 3px 9px rgba(85,85,74,.2)}
+
+/* ---- rsvp ---- */
+.form-wrap{max-width:302px;margin:1.4rem auto 0;text-align:left}
+.field{margin-bottom:1rem}
+.field label{display:block;font-size:.6rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:.35rem}
+.field input,.field select,.field textarea{
+  width:100%;padding:.8rem .95rem;border:1px solid var(--line);border-radius:10px;
+  background:#fff;font-family:'Jost',sans-serif;font-size:1rem;color:var(--ink);
+  transition:border-color .3s,box-shadow .3s;
+}
+.field textarea{resize:vertical;min-height:80px}
+.field select{
+  appearance:none;-webkit-appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%239A947F' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right .9rem center;
+}
+.field input:focus,.field select:focus,.field textarea:focus{
+  outline:none;border-color:var(--sage);box-shadow:0 0 0 4px rgba(169,177,143,.18);
+}
+.send-btn{
+  width:100%;background:var(--olive);color:#fff;border:0;border-radius:999px;
+  font-size:.72rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;
+  padding:1rem;cursor:pointer;box-shadow:0 10px 22px rgba(94,102,71,.25);
+  transition:background .3s,transform .3s;
+}
+.send-btn:hover{background:var(--olive-dk);transform:translateY(-2px)}
+.deadline{margin-top:.9rem;font-size:.78rem;font-weight:300;color:var(--muted);text-align:center}
+.success{display:none;text-align:center;opacity:0;transform:translateY(14px);transition:opacity .7s ease,transform .7s ease;padding:1.2rem 0}
+.success.show{display:block}
+.success.vis{opacity:1;transform:none}
+.check{width:60px;height:60px;border-radius:50%;margin:0 auto .9rem;background:var(--sage-lt);color:var(--olive);display:grid;place-items:center}
+.success h3{font-family:'Caveat',cursive;font-weight:600;color:var(--blush-dk);font-size:2.1rem}
+.success p{color:#84816D;margin-top:.3rem;font-weight:300}
+.sign{font-family:'Caveat',cursive;font-size:1.4rem;color:var(--olive);margin-top:1.8rem}
+
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .pi{opacity:1!important;transform:none!important}
+  .page{transform:none!important}
+}
+</style>
+</head>
+<body>
+
+<!-- shared floral defs -->
+<svg style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
+  <defs>
+    <path id="pt" d="M0 0 C 9 -5 11 -24 0 -34 C -11 -24 -9 -5 0 0"/>
+    <path id="pb" d="M0 0 C 7 -3 8 -15 0 -21 C -8 -15 -7 -3 0 0"/>
+    <path id="lf" d="M0 0 C 6 -7 16 -7 22 0 C 16 7 6 7 0 0 Z"/>
+    <g id="anemone">
+      <g fill="#F8F6EE" stroke="#E1DCCB" stroke-width="1">
+        <use href="#pt"/>
+        <use href="#pt" transform="rotate(51.4)"/>
+        <use href="#pt" transform="rotate(102.8)"/>
+        <use href="#pt" transform="rotate(154.2)"/>
+        <use href="#pt" transform="rotate(205.6)"/>
+        <use href="#pt" transform="rotate(257)"/>
+        <use href="#pt" transform="rotate(308.4)"/>
+      </g>
+      <circle r="7.5" fill="#93A084"/>
+      <g fill="#5E6647">
+        <circle cx="11" cy="0" r="1.4"/><circle cx="7.8" cy="7.8" r="1.4"/>
+        <circle cx="0" cy="11" r="1.4"/><circle cx="-7.8" cy="7.8" r="1.4"/>
+        <circle cx="-11" cy="0" r="1.4"/><circle cx="-7.8" cy="-7.8" r="1.4"/>
+        <circle cx="0" cy="-11" r="1.4"/><circle cx="7.8" cy="-7.8" r="1.4"/>
+      </g>
+    </g>
+    <g id="blush">
+      <g fill="#F2C9B8" stroke="#E8B7A4" stroke-width=".8">
+        <use href="#pb"/>
+        <use href="#pb" transform="rotate(60)"/>
+        <use href="#pb" transform="rotate(120)"/>
+        <use href="#pb" transform="rotate(180)"/>
+        <use href="#pb" transform="rotate(240)"/>
+        <use href="#pb" transform="rotate(300)"/>
+      </g>
+      <circle r="4.4" fill="#E0A48E"/>
+      <circle r="1.9" fill="#C98B72"/>
+    </g>
+    <g id="sprig">
+      <path d="M0 0 C 10 -16 22 -32 40 -48" fill="none" stroke="#7E8763" stroke-width="1.6"/>
+      <use href="#lf" fill="#8E9878" transform="translate(8,-13) rotate(-35) scale(.8)"/>
+      <use href="#lf" fill="#A2AC8C" transform="translate(14,-20) rotate(140) scale(.7)"/>
+      <use href="#lf" fill="#8E9878" transform="translate(20,-28) rotate(-30) scale(.85)"/>
+      <use href="#lf" fill="#77805B" transform="translate(27,-36) rotate(145) scale(.7)"/>
+      <use href="#lf" fill="#8E9878" transform="translate(33,-43) rotate(-25) scale(.75)"/>
+      <use href="#lf" fill="#A2AC8C" transform="translate(40,-48) rotate(-60) scale(.8)"/>
+    </g>
+    <g id="berries">
+      <path d="M0 0 C 4 -10 10 -18 18 -24" stroke="#8A6B4F" stroke-width="1.3" fill="none"/>
+      <circle cx="18" cy="-24" r="2.6" fill="#7C4A2E"/>
+      <circle cx="13" cy="-19" r="2.3" fill="#7C4A2E"/>
+      <circle cx="16" cy="-27" r="2" fill="#7C4A2E"/>
+      <circle cx="9" cy="-14" r="2.1" fill="#7C4A2E"/>
+    </g>
+    <g id="cluster">
+      <use href="#sprig" transform="translate(120,205) rotate(-30) scale(2.1)"/>
+      <use href="#sprig" transform="translate(215,235) rotate(-95) scale(1.8)"/>
+      <use href="#sprig" transform="translate(70,110) rotate(-15) scale(1.6)"/>
+      <use href="#sprig" transform="translate(185,140) rotate(-55) scale(1.9)"/>
+      <use href="#berries" transform="translate(110,150) rotate(-30) scale(1.7)"/>
+      <use href="#berries" transform="translate(250,215) rotate(-150) scale(1.5)"/>
+      <use href="#lf" fill="#77805B" transform="translate(150,190) rotate(-70) scale(1.3)"/>
+      <use href="#lf" fill="#A2AC8C" transform="translate(240,120) rotate(20) scale(1.2)"/>
+      <use href="#anemone" transform="translate(232,84) rotate(14) scale(1.15)"/>
+      <use href="#anemone" transform="translate(150,42) rotate(-28) scale(.85)"/>
+      <use href="#anemone" transform="translate(287,168) rotate(40) scale(.7)"/>
+      <use href="#blush" transform="translate(190,152) rotate(12)"/>
+      <use href="#blush" transform="translate(102,32) rotate(-15) scale(.8)"/>
+      <use href="#blush" transform="translate(268,34) scale(.65)"/>
+    </g>
+    <g id="cornerC">
+      <use href="#sprig" transform="translate(30,95) rotate(-35) scale(1.5)"/>
+      <use href="#sprig" transform="translate(70,105) rotate(-75) scale(1.2)"/>
+      <use href="#berries" transform="translate(45,70) rotate(-60) scale(1.2)"/>
+      <use href="#blush" transform="translate(78,52) rotate(15) scale(.75)"/>
+    </g>
+  </defs>
+</svg>
+
+<!-- ============ ENVELOPE ============ -->
+<div class="env-scene" id="scene">
+  <svg class="petal p1" viewBox="-12 -24 24 26"><path d="M0 0 C 7 -3 8 -15 0 -21 C -8 -15 -7 -3 0 0" fill="#F2C9B8"/></svg>
+  <svg class="petal p2" viewBox="-12 -24 24 26"><path d="M0 0 C 7 -3 8 -15 0 -21 C -8 -15 -7 -3 0 0" fill="#E8D9C2"/></svg>
+  <svg class="petal p3" viewBox="-12 -24 24 26"><path d="M0 0 C 7 -3 8 -15 0 -21 C -8 -15 -7 -3 0 0" fill="#F2C9B8"/></svg>
+  <svg class="petal p4" viewBox="-12 -24 24 26"><path d="M0 0 C 7 -3 8 -15 0 -21 C -8 -15 -7 -3 0 0" fill="#C9CFB2"/></svg>
+
+  <div class="env-stack">
+    <div class="env-names">Мартин и Йоана</div>
+    <div class="env-sub">Имаме нещо специално за вас</div>
+    <div class="env" id="env" role="button" aria-label="Отворете поканата" tabindex="0">
+      <div class="env-back"></div>
+      <div class="env-letter">
+        <div class="lmini">
+          <span class="lm-n">М и Й</span>
+          <span class="lm-d">05 · 06 · 2027</span>
+        </div>
+      </div>
+      <div class="env-front"></div>
+      <div class="env-flap"></div>
+      <div class="seal">МЙ</div>
+    </div>
+    <button class="open-btn" id="openBtn">Отворете поканата</button>
+    <div class="env-hint">или докоснете плика</div>
+  </div>
+</div>
+
+<!-- ============ BOOKLET ============ -->
+<div class="book hide" id="book">
+  <div class="card" id="card">
+
+    <div class="chead">
+      <button class="mini-logo" id="homeBtn">М и Й</button>
+      <button class="toc-btn" id="tocBtn">Съдържание</button>
+    </div>
+
+    <div class="pages" id="pages">
+
+      <!-- 1. cover -->
+      <section class="page cover active">
+        <svg class="fl-tr" viewBox="0 0 320 320"><use href="#cluster"/></svg>
+        <svg class="fl-bl" viewBox="0 0 320 320"><use href="#cluster"/></svg>
+        <div class="disc pi q1">
+          <span class="save">Сватбена покана</span>
+          <div class="names">Мартин и Йоана</div>
+          <div class="dl"></div>
+          <div class="ddate">Събота · 5 юни 2027</div>
+          <div class="dcity">София</div>
+        </div>
+        <div class="days pi q2" id="days"></div>
+        <div class="hint pi q3">
+          плъзнете
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </div>
+      </section>
+
+      <!-- 2. toc -->
+      <section class="page">
+        <svg class="corner" viewBox="0 0 130 130"><use href="#cornerC"/></svg>
+        <span class="eyebrow pi q1">какво ви очаква</span>
+        <h2 class="ptitle pi q2">Съдържание</h2>
+        <div class="toc">
+          <button class="toc-row pi q3" data-go="2"><span class="toc-num">01</span>Нашата история<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg></button>
+          <button class="toc-row pi q4" data-go="3"><span class="toc-num">02</span>Кога и къде<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg></button>
+          <button class="toc-row pi q5" data-go="4"><span class="toc-num">03</span>Програма на деня<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg></button>
+          <button class="toc-row pi q6" data-go="5"><span class="toc-num">04</span>Български традиции<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg></button>
+          <button class="toc-row pi q7" data-go="6"><span class="toc-num">05</span>Дрескод<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg></button>
+          <button class="toc-row pi q8" data-go="7"><span class="toc-num">06</span>Потвърждение<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg></button>
+        </div>
+      </section>
+
+      <!-- 3. story -->
+      <section class="page">
+        <svg class="corner" viewBox="0 0 130 130"><use href="#cornerC"/></svg>
+        <span class="eyebrow pi q1">как започна всичко</span>
+        <h2 class="ptitle pi q2">Нашата история</h2>
+        <p class="lead pi q3">Срещнахме се в София в една пролетна вечер, която и двамата помним до най-малкия детайл. Оттогава минахме заедно през хиляди километри, два континента и безброй чаши кафе.</p>
+        <p class="lead pi q4" style="margin-top:1rem">Тази пролет, под звездите, беше зададен най-важният въпрос. Отговорът беше "да", разбира се. Сега искаме да отпразнуваме това начало с хората, които обичаме най-много: с вас.</p>
+        <svg class="pi q5" width="40" height="40" viewBox="-24 -24 48 48" style="margin:1.6rem auto 0"><use href="#blush"/></svg>
+      </section>
+
+      <!-- 4. details -->
+      <section class="page">
+        <svg class="corner" viewBox="0 0 130 130"><use href="#cornerC"/></svg>
+        <span class="eyebrow pi q1">кога и къде</span>
+        <h2 class="ptitle pi q2">Денят в детайли</h2>
+        <div class="info pi q3">
+          <div class="icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 3l1.8 2.4L12 7.8l-1.8-2.4z"/><circle cx="9" cy="14" r="5.4"/><circle cx="15" cy="14" r="5.4"/>
+            </svg>
+          </div>
+          <h3>Церемония</h3>
+          <div class="time">15:00 ч.</div>
+          <div class="venue">Ритуална зала "Триадица"</div>
+          <div class="addr">бул. Витоша 15, София</div>
+          <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Vitosha+Blvd+15+Sofia" target="_blank" rel="noopener">Виж на картата ↗</a>
+        </div>
+        <div class="info pi q4">
+          <div class="icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 3h6l-.8 6.4a2.5 2.5 0 0 1-4.4 0L9 3z"/><path d="M12 12v6.5"/><path d="M9.3 20h5.4"/>
+            </svg>
+          </div>
+          <h3>Тържество</h3>
+          <div class="time">18:00 ч.</div>
+          <div class="venue">Ресторант "Воденицата"</div>
+          <div class="addr">Драгалевци, в полите на Витоша</div>
+          <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Vodenitsata+Restaurant+Sofia" target="_blank" rel="noopener">Виж на картата ↗</a>
+        </div>
+      </section>
+
+      <!-- 5. program -->
+      <section class="page">
+        <svg class="corner" viewBox="0 0 130 130"><use href="#cornerC"/></svg>
+        <span class="eyebrow pi q1">час по час</span>
+        <h2 class="ptitle pi q2">Програма на деня</h2>
+        <div class="tl pi q3">
+          <div class="tl-item"><svg class="fl" viewBox="-24 -24 48 48"><use href="#blush" transform="scale(.8)"/></svg><span class="t">15:00</span><span class="e">Церемония<span class="s">зала "Триадица"</span></span></div>
+          <div class="tl-item"><svg class="fl" viewBox="-24 -24 48 48"><use href="#blush" transform="scale(.8)"/></svg><span class="t">16:00</span><span class="e">Шампанско и снимки</span></div>
+          <div class="tl-item"><svg class="fl" viewBox="-24 -24 48 48"><use href="#blush" transform="scale(.8)"/></svg><span class="t">18:00</span><span class="e">Добре дошли<span class="s">коктейл във "Воденицата"</span></span></div>
+          <div class="tl-item"><svg class="fl" viewBox="-24 -24 48 48"><use href="#blush" transform="scale(.8)"/></svg><span class="t">18:30</span><span class="e">Питка с мед<span class="s">благословия от родителите</span></span></div>
+          <div class="tl-item"><svg class="fl" viewBox="-24 -24 48 48"><use href="#blush" transform="scale(.8)"/></svg><span class="t">19:30</span><span class="e">Вечеря и наздравици</span></div>
+          <div class="tl-item"><svg class="fl" viewBox="-24 -24 48 48"><use href="#blush" transform="scale(.8)"/></svg><span class="t">21:00</span><span class="e">Първи танц</span></div>
+          <div class="tl-item"><svg class="fl" viewBox="-24 -24 48 48"><use href="#blush" transform="scale(.8)"/></svg><span class="t">21:30</span><span class="e">Право хоро</span></div>
+          <div class="tl-item"><svg class="fl" viewBox="-24 -24 48 48"><use href="#blush" transform="scale(.8)"/></svg><span class="t">23:00</span><span class="e">Сватбена торта</span></div>
+          <div class="tl-item"><svg class="fl" viewBox="-24 -24 48 48"><use href="#blush" transform="scale(.8)"/></svg><span class="t">00:00</span><span class="e">Танци до зори</span></div>
+        </div>
+      </section>
+
+      <!-- 6. traditions -->
+      <section class="page">
+        <svg class="corner" viewBox="0 0 130 130"><use href="#cornerC"/></svg>
+        <span class="eyebrow pi q1">по стар обичай</span>
+        <h2 class="ptitle pi q2">Български традиции</h2>
+        <div class="trad pi q3">
+          <div class="icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4.5 15a7.5 6 0 0 1 15 0v3h-15z"/><path d="M9 10.5l1.1 2M15 10.5l-1.1 2M12 9.6v2.4"/>
+            </svg>
+          </div>
+          <div><h4>Питка с мед</h4><p>Посрещаме гостите и младоженците с топла питка и мед: за сладък, охолен и задружен живот.</p></div>
+        </div>
+        <div class="trad pi q4">
+          <div class="icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <ellipse cx="9" cy="8" rx="2.5" ry="3.6"/><ellipse cx="9" cy="14.4" rx="1.5" ry="1.2"/><ellipse cx="15" cy="11" rx="2.5" ry="3.6"/><ellipse cx="15" cy="17.4" rx="1.5" ry="1.2"/>
+            </svg>
+          </div>
+          <div><h4>Настъпването</h4><p>След "да"-то всеки от нас ще опита пръв да настъпи другия. Който успее, ще командва у дома. Залозите са отворени.</p></div>
+        </div>
+        <div class="trad pi q5">
+          <div class="icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="6" cy="7" r="1.8"/><circle cx="12" cy="6" r="1.8"/><circle cx="18" cy="7" r="1.8"/><path d="M6 9v5M12 8v5M18 9v5"/><path d="M6 11c2-1.6 4-1.6 6 0s4 1.6 6 0"/>
+            </svg>
+          </div>
+          <div><h4>Право хоро</h4><p>Няма българска сватба без хоро. Стъпките са лесни: две напред, една назад. Ще ви покажем.</p></div>
+        </div>
+      </section>
+
+      <!-- 7. dresscode -->
+      <section class="page">
+        <svg class="corner" viewBox="0 0 130 130"><use href="#cornerC"/></svg>
+        <span class="eyebrow pi q1">какво да облечете</span>
+        <h2 class="ptitle pi q2">Празнично елегантно</h2>
+        <p class="lead pi q3">Облечете се така, че да ви е красиво и удобно за дълга нощ на дансинга. Ако търсите вдъхновение, ето нашата палитра. Молим единствено бялото да остане запазено за булката.</p>
+        <div class="palette pi q4">
+          <div class="swatch" style="background:#77805B"></div>
+          <div class="swatch" style="background:#A9B18F"></div>
+          <div class="swatch" style="background:#F0C4B4"></div>
+          <div class="swatch" style="background:#E3DACB"></div>
+          <div class="swatch" style="background:#7C4A2E"></div>
+        </div>
+      </section>
+
+      <!-- 8. rsvp -->
+      <section class="page">
+        <svg class="corner" viewBox="0 0 130 130"><use href="#cornerC"/></svg>
+        <span class="eyebrow pi q1">ще дойдете ли</span>
+        <h2 class="ptitle pi q2">Потвърждение</h2>
+        <p class="lead pi q3">Ще се радваме да сте с нас. Кажете ни дали да ви очакваме.</p>
+        <div class="form-wrap pi q4">
+          <form id="rsvpForm">
+            <div class="field">
+              <label for="nm">Име и фамилия</label>
+              <input id="nm" type="text" placeholder="Вашето име" required>
+            </div>
+            <div class="field">
+              <label for="att">Ще присъствате ли</label>
+              <select id="att">
+                <option value="yes">Дааа! 💍</option>
+                <option value="yes2">Естествено че да</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="gs">Брой гости, включително вас</label>
+              <select id="gs"><option>1</option><option>2</option><option>3</option><option>4</option><option>5+</option></select>
+            </div>
+            <div class="field">
+              <label for="msg">Бележка до нас</label>
+              <textarea id="msg" placeholder="Алергии, песен за плейлиста, пожелание..."></textarea>
+            </div>
+            <button class="send-btn" type="submit">Изпрати отговор</button>
+            <p class="deadline">Моля, потвърдете до 1 април 2027 г.</p>
+          </form>
+          <div class="success" id="success">
+            <div class="check">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+            </div>
+            <h3>Благодарим ви!</h3>
+            <p id="succText"></p>
+          </div>
+          <div class="sign" style="text-align:center">С обич, Мартин и Йоана</div>
+        </div>
+      </section>
+
+    </div>
+
+    <div class="pagenav">
+      <button class="pn-btn" id="prevBtn" aria-label="Предишна страница">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg>
+      </button>
+      <span class="pn-count" id="counter">1 / 8</span>
+      <button class="pn-btn" id="nextBtn" aria-label="Следваща страница">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+      </button>
+    </div>
+
+  </div>
+</div>
+
+<script>
+(function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---- envelope ---- */
+  var scene = document.getElementById('scene');
+  var env = document.getElementById('env');
+  var book = document.getElementById('book');
+  var opened = false;
+
+  function openEnv(){
+    if(opened) return;
+    opened = true;
+    if(reduce){
+      scene.classList.add('hide');
+      book.classList.remove('hide');
+      book.classList.add('in');
+      return;
+    }
+    scene.classList.add('opening');
+    setTimeout(function(){ scene.classList.add('flapdown'); }, 380);
+    setTimeout(function(){ scene.classList.add('out'); }, 600);
+    setTimeout(function(){
+      scene.classList.add('bye');
+      book.classList.remove('hide');
+      requestAnimationFrame(function(){
+        requestAnimationFrame(function(){ book.classList.add('in'); });
+      });
+    }, 1350);
+    setTimeout(function(){ scene.classList.add('hide'); }, 2100);
+  }
+  env.addEventListener('click', openEnv);
+  env.addEventListener('keydown', function(e){ if(e.key === 'Enter' || e.key === ' ') openEnv(); });
+  document.getElementById('openBtn').addEventListener('click', openEnv);
+
+  /* ---- pages ---- */
+  var pages = Array.prototype.slice.call(document.querySelectorAll('.page'));
+  var N = pages.length, cur = 0, busy = false;
+  var counter = document.getElementById('counter');
+  var prevBtn = document.getElementById('prevBtn');
+  var nextBtn = document.getElementById('nextBtn');
+
+  function updateNav(){
+    counter.textContent = (cur + 1) + ' / ' + N;
+    if(cur === 0){ prevBtn.setAttribute('disabled',''); } else { prevBtn.removeAttribute('disabled'); }
+    if(cur === N - 1){ nextBtn.setAttribute('disabled',''); } else { nextBtn.removeAttribute('disabled'); }
+  }
+
+  function goTo(n){
+    if(n === cur || n < 0 || n >= N || busy) return;
+    busy = true;
+    var dir = n > cur ? 1 : -1;
+    var curEl = pages[cur], nextEl = pages[n];
+    nextEl.classList.add(dir > 0 ? 'from-right' : 'from-left');
+    nextEl.classList.add('active');
+    void nextEl.offsetWidth;
+    nextEl.classList.remove('from-right','from-left');
+    curEl.classList.add(dir > 0 ? 'exit-left' : 'exit-right');
+    curEl.classList.remove('active');
+    setTimeout(function(){
+      curEl.classList.remove('exit-left','exit-right');
+      nextEl.scrollTop = 0;
+      cur = n;
+      busy = false;
+      updateNav();
+    }, reduce ? 0 : 560);
+  }
+
+  prevBtn.addEventListener('click', function(){ goTo(cur - 1); });
+  nextBtn.addEventListener('click', function(){ goTo(cur + 1); });
+  document.getElementById('homeBtn').addEventListener('click', function(){ goTo(0); });
+  document.getElementById('tocBtn').addEventListener('click', function(){ goTo(1); });
+  document.querySelectorAll('.toc-row').forEach(function(row){
+    row.addEventListener('click', function(){ goTo(parseInt(row.dataset.go, 10)); });
+  });
+
+  /* swipe */
+  var sx = 0, sy = 0;
+  var card = document.getElementById('card');
+  card.addEventListener('touchstart', function(e){
+    sx = e.touches[0].clientX; sy = e.touches[0].clientY;
+  }, {passive:true});
+  card.addEventListener('touchend', function(e){
+    if(e.target.closest('input,textarea,select,button,a')) return;
+    var dx = e.changedTouches[0].clientX - sx;
+    var dy = e.changedTouches[0].clientY - sy;
+    if(Math.abs(dx) > 52 && Math.abs(dx) > Math.abs(dy) * 1.4){
+      if(dx < 0) goTo(cur + 1); else goTo(cur - 1);
+    }
+  }, {passive:true});
+
+  /* keyboard */
+  document.addEventListener('keydown', function(e){
+    if(book.classList.contains('hide')) return;
+    if(e.key === 'ArrowRight') goTo(cur + 1);
+    if(e.key === 'ArrowLeft') goTo(cur - 1);
+  });
+
+  updateNav();
+
+  /* ---- days counter ---- */
+  var target = new Date('2027-06-05T00:00:00+03:00').getTime();
+  var d = Math.ceil((target - Date.now()) / 86400000);
+  var daysEl = document.getElementById('days');
+  if(d > 1){ daysEl.textContent = 'Остават ' + d + ' дни'; }
+  else if(d === 1){ daysEl.textContent = 'Остава 1 ден'; }
+  else { daysEl.textContent = 'Днес е денят!'; }
+
+  /* ---- rsvp ---- */
+  var form = document.getElementById('rsvpForm');
+  var success = document.getElementById('success');
+  var succText = document.getElementById('succText');
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var nm = (document.getElementById('nm').value || '').trim().split(' ')[0];
+    var att = document.getElementById('att').value;
+    succText.textContent = (nm ? nm + ', о' : 'О') + 'чакваме ви с нетърпение! Ще бъде незабравимо.';
+    form.style.display = 'none';
+    success.classList.add('show');
+    requestAnimationFrame(function(){
+      requestAnimationFrame(function(){ success.classList.add('vis'); });
+    });
+  });
+})();
+</script>
+</body>
+</html>

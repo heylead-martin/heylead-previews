@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<script src="/auth-config.js"></script>
+<script src="/auth.js"></script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1">
+<meta name="theme-color" content="#FFF6E0">
+<meta name="robots" content="noindex,nofollow">
+<title>BeeWed · Match the couple</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;overflow:hidden}
+body{font-family:Nunito,system-ui,sans-serif;background:linear-gradient(180deg,#FFF6E0 0%,#FFE8B8 100%);color:#2b2118}
+.hub{position:fixed;top:max(8px,env(safe-area-inset-top));left:8px;z-index:100;font-size:.55rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;color:#8a7040;padding:.35rem .55rem;border-radius:999px;background:rgba(255,255,255,.75)}
+.app{position:fixed;inset:0;max-width:430px;margin:0 auto;display:flex;flex-direction:column}
+.top{display:flex;align-items:center;justify-content:space-between;padding:max(14px,env(safe-area-inset-top)) 16px 6px}
+.logo{font-family:Fredoka,sans-serif;font-weight:700;font-size:1.55rem;color:#2b2118}
+.logo span{color:#FFB000}
+.pill{background:#fff;border-radius:999px;padding:.4rem .75rem;font-size:.72rem;font-weight:800;color:#FF8A00;box-shadow:0 4px 12px rgba(255,176,0,.2)}
+.stack{flex:1;position:relative;margin:6px 14px 4px}
+.card{position:absolute;inset:0;border-radius:24px;overflow:hidden;background:#fff;box-shadow:0 16px 40px rgba(120,80,0,.18);will-change:transform}
+.card img{width:100%;height:68%;object-fit:cover;display:block;pointer-events:none}
+.card .body{position:absolute;left:0;right:0;bottom:0;height:38%;background:#fff;padding:1rem 1.1rem 1rem;border-radius:24px 24px 0 0;margin-top:-20px;box-shadow:0 -8px 24px rgba(0,0,0,.06)}
+.card .body h2{font-family:Fredoka,sans-serif;font-size:1.45rem;font-weight:700;line-height:1.15}
+.card .body .sub{font-size:.82rem;font-weight:700;color:#FF8A00;margin-top:.15rem}
+.card .body p{font-size:.9rem;font-weight:600;color:#5a4a38;margin-top:.45rem;line-height:1.4}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:.55rem}
+.chips span{font-size:.7rem;font-weight:800;background:#FFF3D0;color:#8a6000;padding:.3rem .55rem;border-radius:999px}
+.emoji{position:absolute;top:12px;left:12px;font-size:1.5rem;background:rgba(255,255,255,.9);width:42px;height:42px;border-radius:50%;display:grid;place-items:center;box-shadow:0 4px 12px rgba(0,0,0,.1)}
+.stamp{position:absolute;top:22%;left:50%;transform:translate(-50%,-50%) rotate(-14deg);font-family:Fredoka,sans-serif;font-size:2.2rem;font-weight:700;padding:.15rem .5rem;border:4px solid;border-radius:12px;opacity:0;z-index:3;pointer-events:none}
+.stamp.y{color:#22c55e;border-color:#22c55e}
+.stamp.n{color:#ef4444;border-color:#ef4444}
+.btns{display:flex;justify-content:center;align-items:center;padding:12px 16px calc(20px + env(safe-area-inset-bottom));min-height:100px;position:relative}
+.b.h{width:80px;height:80px;border-radius:50%;border:0;cursor:pointer;font-size:2.2rem;background:linear-gradient(145deg,#FFD54A,#FFB000);color:#fff;box-shadow:0 10px 28px rgba(255,176,0,.45);transition:transform .12s}
+.b.h:active{transform:scale(.9)}
+.hint{position:absolute;bottom:calc(6px + env(safe-area-inset-bottom));left:0;right:0;text-align:center;font-size:.68rem;font-weight:800;color:#8a7040;opacity:.65;pointer-events:none}
+.nope-run{
+  position:fixed;z-index:80;width:60px;height:60px;border-radius:50%;border:0;
+  background:#fff;color:#ef4444;font-size:1.55rem;font-weight:700;
+  cursor:not-allowed;display:grid;place-items:center;
+  box-shadow:0 8px 22px rgba(239,68,68,.3);
+  transition:left .11s ease-out, top .11s ease-out;
+  touch-action:none;user-select:none;will-change:left,top;
+}
+.nope-run.flee{transition:left .07s linear, top .07s linear}
+body.match-open .nope-run, body.profile-open .nope-run{display:none}
+
+.ov{position:fixed;inset:0;z-index:50;display:none;place-items:center;background:rgba(43,33,24,.55);padding:1rem;backdrop-filter:blur(4px)}
+.ov.on{display:grid}
+.panel{background:#fff;border-radius:28px;padding:1.6rem 1.3rem 1.4rem;width:100%;max-width:340px;text-align:center;box-shadow:0 24px 60px rgba(0,0,0,.25);animation:up .45s cubic-bezier(.2,1.3,.4,1)}
+@keyframes up{from{transform:translateY(40px) scale(.9);opacity:0}}
+.panel h1{font-family:Fredoka,sans-serif;font-size:2rem;color:#FF8A00}
+.panel p{font-weight:700;color:#5a4a38;margin:.4rem 0 1rem;line-height:1.4}
+.faces{display:flex;justify-content:center;margin-bottom:1rem}
+.faces img{width:88px;height:88px;border-radius:50%;object-fit:cover;border:4px solid #FFD54A;box-shadow:0 6px 16px rgba(0,0,0,.12)}
+.faces img+img{margin-left:-18px;border-color:#FFB000}
+.panel button{width:100%;padding:1rem;border:0;border-radius:999px;font:inherit;font-weight:800;font-size:1rem;cursor:pointer;margin-top:.5rem}
+.panel .pri{background:linear-gradient(90deg,#FFD54A,#FFB000);color:#2b2118}
+.panel .ghost{background:#FFF3D0;color:#8a6000}
+.confetti{position:fixed;inset:0;pointer-events:none;z-index:60}
+
+.sheet{position:fixed;inset:0;z-index:40;background:#FFF6E0;display:none;flex-direction:column;max-width:430px;margin:0 auto}
+.sheet.on{display:flex}
+.ss{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.sher{height:42vh;min-height:240px;position:relative}
+.sher img{width:100%;height:100%;object-fit:cover}
+.sher .cap{position:absolute;left:12px;right:12px;bottom:12px;background:rgba(255,255,255,.95);border-radius:18px;padding:1rem;box-shadow:0 8px 24px rgba(0,0,0,.12)}
+.sher .cap h2{font-family:Fredoka,sans-serif;font-size:1.5rem}
+.sher .cap div{font-weight:800;color:#FF8A00;font-size:.88rem;margin-top:.15rem}
+.sb{padding:1rem 1.1rem 2rem}
+.cardy{background:#fff;border-radius:18px;padding:1rem;margin-bottom:.75rem;box-shadow:0 4px 16px rgba(120,80,0,.08)}
+.cardy h3{font-family:Fredoka,sans-serif;font-size:1.05rem;color:#FF8A00;margin-bottom:.35rem}
+.cardy p,.cardy li{font-weight:600;color:#5a4a38;font-size:.92rem;line-height:1.45}
+.cardy ul{padding-left:1.1rem}
+.cardy a{color:#d97706;font-weight:800;text-decoration:none}
+.g{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:.75rem}
+.g img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:14px}
+.form label{display:block;font-size:.7rem;font-weight:800;color:#8a7040;margin:.55rem 0 .25rem;text-transform:uppercase;letter-spacing:.06em}
+.form input,.form select,.form textarea{width:100%;padding:.8rem;border-radius:14px;border:2px solid #FFE8B8;background:#fff;font:inherit;font-weight:700;color:#2b2118}
+.form button{width:100%;margin-top:.9rem;padding:1rem;border:0;border-radius:999px;background:linear-gradient(90deg,#FFD54A,#FFB000);font:inherit;font-weight:800;font-size:1rem;cursor:pointer;color:#2b2118}
+.ok{display:none;text-align:center;padding:1rem}
+.ok.show{display:block}
+</style>
+</head>
+<body>
+<a class="hub" href="index.html">← версии</a>
+<button class="nope-run" id="no" type="button" aria-label="Nope">✕</button>
+<canvas class="confetti" id="cf"></canvas>
+<div class="app">
+  <div class="top">
+    <div class="logo">Bee<span>Wed</span></div>
+    <div class="pill" id="days">💍</div>
+  </div>
+  <div class="stack" id="stack"></div>
+  <div class="btns">
+    <button class="b h" id="yes" type="button">♥</button>
+    <div class="hint">✕ бяга из екрана · catch me if you can</div>
+  </div>
+</div>
+
+<div class="ov" id="ov">
+  <div class="panel">
+    <div style="font-size:2.4rem;margin-bottom:.3rem">🎉</div>
+    <h1>It's a match!</h1>
+    <p>Нямаше как да кажете не - X е твърде бърз 💨</p>
+    <div class="faces">
+      <img src="photos/01-beach.jpg" alt="">
+      <img src="photos/02-park.jpg" alt="">
+    </div>
+    <button class="pri" id="open">Отвори поканата 💌</button>
+    <button class="ghost" id="more">Още ♥ свайпове</button>
+  </div>
+</div>
+
+<div class="sheet" id="sheet">
+  <div class="ss">
+    <div class="sher">
+      <img src="photos/01-beach.jpg" alt="">
+      <div class="cap">
+        <h2>Мартин &amp; Йоана</h2>
+        <div>Събота · 5 юни 2027 · София</div>
+      </div>
+    </div>
+    <div class="sb">
+      <div class="g">
+        <img src="photos/02-park.jpg" alt=""><img src="photos/04-night.jpg" alt="">
+        <img src="photos/03-resort.jpg" alt=""><img src="photos/01-beach.jpg" alt="">
+      </div>
+      <div class="cardy"><h3>☕ Как се запознахме</h3><p>Пролетна вечер в София. После хиляди км, два континента и едно "да" под звездите. Сега - хоро с вас.</p></div>
+      <div class="cardy"><h3>📍 Кога и къде</h3>
+        <p><strong>15:00</strong> Церемония · зала "Триадица", Витоша 15<br>
+        <a href="https://www.google.com/maps/search/?api=1&query=Vitosha+Blvd+15+Sofia" target="_blank" rel="noopener">Карта ↗</a></p>
+        <p style="margin-top:.6rem"><strong>18:00</strong> Тържество · "Воденицата", Драгалевци<br>
+        <a href="https://www.google.com/maps/search/?api=1&query=Vodenitsata+Restaurant+Sofia" target="_blank" rel="noopener">Карта ↗</a></p>
+      </div>
+      <div class="cardy"><h3>🗓️ Програма</h3>
+        <ul>
+          <li>15:00 Церемония</li><li>16:00 Шампанско и снимки</li>
+          <li>18:00 Добре дошли</li><li>18:30 Питка с мед</li>
+          <li>19:30 Вечеря · 21:00 Първи танц</li><li>21:30 Хоро · 23:00 Торта · 🌙</li>
+        </ul>
+      </div>
+      <div class="cardy"><h3>🍯 Традиции &amp; дрескод</h3>
+        <p>Питка с мед · Настъпване · Право хоро. Празнично елегантно - бялото е за булката.</p>
+      </div>
+      <div class="cardy form">
+        <h3>✅ Потвърждение</h3>
+        <p style="margin-bottom:.5rem">До 1 април 2027</p>
+        <form id="f">
+          <label>Име</label><input id="nm" required placeholder="Ти + приятели">
+          <label>Идваш ли?</label>
+          <select id="att"><option value="yes">Дааа! 💍</option><option value="yes2">Естествено че да</option></select>
+          <label>Колко души</label>
+          <select id="gs"><option>1</option><option>2</option><option>3</option><option>4</option><option>5+</option></select>
+          <label>Бележка</label><textarea id="msg" rows="2" placeholder="Алергии / песен..."></textarea>
+          <button type="submit">Изпрати 💛</button>
+        </form>
+        <div class="ok" id="ok"><div style="font-size:2rem">🥳</div><h3 style="font-family:Fredoka;color:#FF8A00;font-size:1.5rem;margin-top:.3rem">Супер match!</h3><p id="okT" style="font-weight:700;margin-top:.3rem;color:#5a4a38"></p></div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  var cards=[
+    {img:'photos/01-beach.jpg', emoji:'💍', title:'Мартин & Йоана', sub:'5.06.2027 · София', text:'Опитай ✕ - няма да стане. Само ♥ работи. Swipe right for the wedding!', chips:['No X','Only love'], match:true},
+    {img:'photos/02-park.jpg', emoji:'☕', title:'Meet-cute', sub:'Нашата история', text:'София, пролетна вечер. После два континента и безброй кафета. Под звездите казахме ДА.', chips:['Love story','Travel']},
+    {img:'photos/03-resort.jpg', emoji:'🗓️', title:'Timeline', sub:'Час по час', text:'15:00 Триадица → 18:00 Воденицата → питка → вечеря → танц → хоро → торта → зори.', chips:['15:00','18:00','00:00']},
+    {img:'photos/04-night.jpg', emoji:'✨', title:'The fine print', sub:'RSVP до 1.04.2027', text:'Дрескод: празнично елегантно (не в бяло!). Традиции: питка, настъпване, хоро.', chips:['Dress code','RSVP']}
+  ];
+  var stack=document.getElementById('stack'), i=0, matched=false, el=null, sx=0, cx=0, drag=false;
+
+  var target=new Date('2027-06-05T00:00:00+03:00').getTime();
+  var d=Math.ceil((target-Date.now())/86400000);
+  document.getElementById('days').textContent=d>0?(d+' дни ⏳'):'Днес! 🎉';
+
+  function render(){
+    stack.innerHTML='';
+    if(i>=cards.length){
+      if(!matched){ matched=true; boom(); openMatch(); }
+      return;
+    }
+    for(var k=Math.min(cards.length-1,i+1);k>=i;k--){
+      var c=cards[k], div=document.createElement('div');
+      div.className='card';
+      if(k>i){ div.style.transform='scale(.95) translateY(14px)'; div.style.opacity='.7'; }
+      else div.dataset.active='1';
+      div.innerHTML='<span class="emoji">'+c.emoji+'</span>'+
+        '<div class="stamp y">YES!</div><div class="stamp n">NOPE</div>'+
+        '<img src="'+c.img+'" alt="">'+
+        '<div class="body"><h2>'+c.title+'</h2><div class="sub">'+c.sub+'</div><p>'+c.text+'</p>'+
+        '<div class="chips">'+c.chips.map(function(t){return '<span>'+t+'</span>'}).join('')+'</div></div>';
+      stack.appendChild(div);
+    }
+    el=stack.querySelector('[data-active="1"]');
+    if(!el) return;
+    el.addEventListener('pointerdown', function(e){ drag=true; sx=e.clientX; cx=0; el.setPointerCapture(e.pointerId); });
+    el.addEventListener('pointermove', function(e){
+      if(!drag) return; cx=e.clientX-sx;
+      var x=cx<0?cx*0.25:cx;
+      el.style.transform='translateX('+x+'px) rotate('+(x/28)+'deg)';
+      el.querySelector('.stamp.y').style.opacity=Math.min(1,Math.max(0,cx/70));
+      el.querySelector('.stamp.n').style.opacity=Math.min(0.3,Math.max(0,-cx/140));
+    });
+    el.addEventListener('pointerup', function(){
+      if(!drag) return; drag=false;
+      if(cx>90) go(1);
+      else {
+        el.style.transition='transform .35s cubic-bezier(.2,1.4,.4,1)';
+        el.style.transform='';
+        el.querySelectorAll('.stamp').forEach(function(s){s.style.opacity=0});
+        setTimeout(function(){ if(el) el.style.transition=''; },350);
+      }
+    });
+  }
+  function go(dir){
+    if(dir<0) return;
+    var c=cards[i];
+    el.style.transition='transform .4s ease,opacity .4s';
+    el.style.transform='translateX(520px) rotate(22deg)';
+    el.style.opacity='0';
+    var hit=!!c.match;
+    setTimeout(function(){
+      i++;
+      if(hit && !matched){ matched=true; boom(); openMatch(); }
+      render();
+    }, 380);
+  }
+  function openMatch(){
+    document.body.classList.add('match-open');
+    document.getElementById('ov').classList.add('on');
+  }
+  document.getElementById('yes').onclick=function(){ if(el) go(1); };
+  document.getElementById('open').onclick=function(){
+    document.getElementById('ov').classList.remove('on');
+    document.body.classList.remove('match-open');
+    document.body.classList.add('profile-open');
+    document.getElementById('sheet').classList.add('on');
+  };
+  document.getElementById('more').onclick=function(){
+    document.getElementById('ov').classList.remove('on');
+    document.body.classList.remove('match-open');
+  };
+  document.getElementById('f').onsubmit=function(e){
+    e.preventDefault();
+    var nm=(document.getElementById('nm').value||'').trim().split(' ')[0];
+    var att=document.getElementById('att').value;
+    document.getElementById('okT').textContent=(nm?nm+', ни':'Ни')+' се виждаме на 5.06!';
+    this.style.display='none'; document.getElementById('ok').classList.add('show'); boom();
+  };
+
+  var cv=document.getElementById('cf'), ctx=cv.getContext('2d'), bits=[], run=false;
+  function resize(){ cv.width=innerWidth; cv.height=innerHeight; }
+  resize(); addEventListener('resize', resize);
+  function boom(){
+    var cols=['#FFB000','#FFD54A','#FF8A00','#22c55e','#fd267a','#fff'];
+    for(var n=0;n<80;n++) bits.push({x:innerWidth/2,y:innerHeight*.4,vx:(Math.random()-.5)*12,vy:-(Math.random()*9+3),g:.2,r:Math.random()*6+2,c:cols[n%cols.length],a:1,rot:Math.random()*360,rv:(Math.random()-.5)*10});
+    if(!run){ run=true; requestAnimationFrame(tick); }
+  }
+  function tick(){
+    ctx.clearRect(0,0,cv.width,cv.height);
+    bits=bits.filter(function(b){return b.a>.02});
+    bits.forEach(function(b){
+      b.vy+=b.g; b.x+=b.vx; b.y+=b.vy; b.a-=.01; b.rot+=b.rv;
+      ctx.save(); ctx.translate(b.x,b.y); ctx.rotate(b.rot*Math.PI/180); ctx.globalAlpha=b.a; ctx.fillStyle=b.c;
+      ctx.fillRect(-b.r,-b.r/2,b.r*2,b.r); ctx.restore();
+    });
+    if(bits.length) requestAnimationFrame(tick); else { run=false; ctx.clearRect(0,0,cv.width,cv.height); }
+  }
+
+  (function(){
+    var btn=document.getElementById('no');
+    var pad=10, size=60;
+    function clamp(v,a,b){return Math.max(a,Math.min(b,v))}
+    function place(x,y){
+      btn.style.left=clamp(x,pad,innerWidth-size-pad)+'px';
+      btn.style.top=clamp(y,pad,innerHeight-size-pad)+'px';
+    }
+    function home(){
+      var app=document.querySelector('.app').getBoundingClientRect();
+      place(app.left+app.width*0.22-size/2, app.bottom-92);
+    }
+    home(); addEventListener('resize', home);
+    document.addEventListener('pointermove', function(e){
+      if(document.body.classList.contains('match-open')||document.body.classList.contains('profile-open')) return;
+      var r=btn.getBoundingClientRect();
+      var bx=r.left+r.width/2, by=r.top+r.height/2;
+      var dx=bx-e.clientX, dy=by-e.clientY;
+      var dist=Math.sqrt(dx*dx+dy*dy)||1;
+      if(dist>110) return;
+      var force=dist<40?170:(dist<70?110:65);
+      var nx=bx+(dx/dist)*force+(Math.random()-.5)*45;
+      var ny=by+(dy/dist)*force+(Math.random()-.5)*45;
+      if(nx<pad+30) nx=pad+40+Math.random()*100;
+      if(ny<pad+30) ny=pad+40+Math.random()*80;
+      if(nx>innerWidth-pad-30) nx=innerWidth-pad-40-Math.random()*100;
+      if(ny>innerHeight-pad-30) ny=innerHeight-pad-40-Math.random()*80;
+      btn.classList.add('flee');
+      place(nx-size/2, ny-size/2);
+    }, {passive:true});
+    btn.addEventListener('pointerdown', function(e){
+      e.preventDefault(); e.stopPropagation();
+      var a=Math.random()*Math.PI*2, d=130+Math.random()*150;
+      var r=btn.getBoundingClientRect();
+      place(r.left+Math.cos(a)*d, r.top+Math.sin(a)*d);
+    }, true);
+    btn.addEventListener('click', function(e){ e.preventDefault(); e.stopPropagation(); }, true);
+    btn.addEventListener('focus', function(){
+      place(Math.random()*(innerWidth-80)+20, Math.random()*(innerHeight-80)+20);
+      btn.blur();
+    });
+  })();
+
+  render();
+})();
+</script>
+</body>
+</html>

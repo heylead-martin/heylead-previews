@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<script src="/auth-config.js"></script>
+<script src="/auth.js"></script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#1a0a12">
+<meta name="robots" content="noindex,nofollow">
+<title>Мартин и Йоана · Stories</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;overflow:hidden;background:#0d0609;color:#fff;font-family:Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.hub{position:fixed;top:max(10px,env(safe-area-inset-top));left:10px;z-index:50;font-size:.58rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;text-decoration:none;padding:.4rem .65rem;border-radius:999px;background:rgba(0,0,0,.35);backdrop-filter:blur(8px);color:rgba(255,255,255,.7)}
+.stage{position:fixed;inset:0;display:grid;place-items:center}
+.phone{position:relative;width:100%;max-width:430px;height:100%;max-height:100dvh;background:#1a0a12;overflow:hidden}
+.bars{position:absolute;top:max(10px,env(safe-area-inset-top));left:10px;right:10px;display:flex;gap:4px;z-index:20;padding-top:4px}
+.bar{flex:1;height:2.5px;background:rgba(255,255,255,.25);border-radius:2px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:#fff;border-radius:2px;transform-origin:left}
+.bar.done i{width:100%}
+.bar.active i{animation:fill var(--dur,5s) linear forwards}
+@keyframes fill{to{width:100%}}
+.paused .bar.active i{animation-play-state:paused}
+
+.head{position:absolute;top:max(22px,calc(env(safe-area-inset-top) + 14px));left:14px;right:14px;z-index:20;display:flex;align-items:center;gap:10px}
+.av{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#f0c4b4,#c45c6a);display:grid;place-items:center;font-family:'Playfair Display',serif;font-size:.75rem;font-weight:600}
+.meta{flex:1;min-width:0}
+.meta b{display:block;font-size:.78rem;font-weight:600}
+.meta span{font-size:.65rem;opacity:.65;font-weight:300}
+.close{width:32px;height:32px;border:0;background:none;color:#fff;font-size:1.3rem;cursor:pointer;opacity:.8}
+
+.slides{position:absolute;inset:0}
+.slide{position:absolute;inset:0;opacity:0;pointer-events:none;display:flex;flex-direction:column;justify-content:flex-end;padding:0 1.4rem calc(2.2rem + env(safe-area-inset-bottom));transition:opacity .25s}
+.slide.on{opacity:1;pointer-events:auto}
+.slide .bg{position:absolute;inset:0;z-index:0}
+.s0 .bg{background:radial-gradient(ellipse at 30% 20%,#5c2035 0%,#1a0a12 55%,#0a0408 100%)}
+.s1 .bg{background:linear-gradient(160deg,#2a1840 0%,#1a0a12 50%,#3d1f18 100%)}
+.s2 .bg{background:radial-gradient(ellipse at 70% 30%,#1e3a32 0%,#0f1a18 50%,#1a0a12 100%)}
+.s3 .bg{background:linear-gradient(180deg,#1a1520 0%,#2c1810 100%)}
+.s4 .bg{background:radial-gradient(circle at 50% 0%,#4a2840 0%,#1a0a12 60%)}
+.s5 .bg{background:linear-gradient(145deg,#102028 0%,#1a0a12 60%)}
+.s6 .bg{background:radial-gradient(ellipse at 40% 80%,#3a2018 0%,#12080c 70%)}
+.s7 .bg{background:linear-gradient(180deg,#1a1020,#0d0609)}
+.blob{position:absolute;border-radius:50%;filter:blur(50px);opacity:.45;pointer-events:none}
+.s0 .blob{width:220px;height:220px;background:#e8a0a8;top:15%;left:10%}
+.s1 .blob{width:180px;height:180px;background:#9b7ed9;top:25%;right:5%}
+.s2 .blob{width:200px;height:200px;background:#5ec4a8;bottom:30%;left:20%}
+
+.content{position:relative;z-index:2}
+.kicker{font-size:.62rem;font-weight:600;letter-spacing:.32em;text-transform:uppercase;opacity:.7;margin-bottom:.55rem}
+h1,h2{font-family:'Playfair Display',serif;font-weight:500;line-height:1.1;margin-bottom:.7rem}
+h1{font-size:clamp(2.4rem,10vw,3.1rem)}
+h2{font-size:clamp(1.9rem,8vw,2.5rem)}
+.ital{font-style:italic}
+.p{font-weight:300;font-size:.98rem;line-height:1.55;opacity:.9;max-width:20rem}
+.big-date{font-family:'Playfair Display',serif;font-size:clamp(2.8rem,12vw,3.6rem);line-height:1;margin:.3rem 0}
+.row{display:flex;gap:.6rem;margin-top:1rem;flex-wrap:wrap}
+.chip{padding:.55rem .9rem;border-radius:999px;background:rgba(255,255,255,.12);backdrop-filter:blur(8px);font-size:.78rem;font-weight:500;border:1px solid rgba(255,255,255,.15)}
+.cardish{margin-top:1rem;padding:1rem 1.1rem;border-radius:16px;background:rgba(255,255,255,.1);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.12);text-align:left}
+.cardish h3{font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:500;margin-bottom:.2rem}
+.cardish .t{font-size:.8rem;font-weight:600;letter-spacing:.08em;opacity:.75;margin-bottom:.35rem}
+.cardish a{display:inline-block;margin-top:.55rem;font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.4);padding-bottom:2px}
+.tl{margin-top:.8rem;text-align:left}
+.tl div{display:flex;gap:.8rem;padding:.45rem 0;border-bottom:1px solid rgba(255,255,255,.1);font-size:.9rem}
+.tl b{min-width:3rem;font-weight:600;opacity:.85}
+.tl span{font-weight:300;opacity:.9}
+.tl small{display:block;opacity:.55;font-size:.78rem}
+.trad{text-align:left;margin-top:.7rem}
+.trad + .trad{margin-top:.85rem}
+.trad h4{font-family:'Playfair Display',serif;font-size:1.15rem;margin-bottom:.15rem}
+.trad p{font-size:.88rem;font-weight:300;opacity:.85;line-height:1.45}
+.swatches{display:flex;gap:.55rem;margin-top:1rem}
+.sw{width:36px;height:36px;border-radius:50%;border:2px solid rgba(255,255,255,.35)}
+.form{margin-top:.9rem;text-align:left}
+.form label{display:block;font-size:.62rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;opacity:.65;margin:0 0 .3rem}
+.form input,.form select,.form textarea{width:100%;margin-bottom:.7rem;padding:.75rem .85rem;border-radius:12px;border:1px solid rgba(255,255,255,.2);background:rgba(0,0,0,.25);color:#fff;font:inherit;font-size:.95rem}
+.form input::placeholder,.form textarea::placeholder{color:rgba(255,255,255,.4)}
+.form select{appearance:none;color:#fff}
+.form select option{color:#111;background:#fff}
+.form button{width:100%;padding:.95rem;border:0;border-radius:999px;background:#fff;color:#1a0a12;font-weight:600;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;cursor:pointer}
+.form button:active{transform:scale(.98)}
+.ok{display:none;text-align:center;padding:1rem 0}
+.ok.show{display:block}
+.ok h3{font-family:'Playfair Display',serif;font-size:1.8rem;margin-bottom:.4rem}
+.ok p{font-weight:300;opacity:.85}
+.tap{position:absolute;inset:0;z-index:10;display:flex}
+.tap .l,.tap .r{flex:1;cursor:pointer}
+.hint-tap{position:absolute;bottom:calc(5.5rem + env(safe-area-inset-bottom));left:0;right:0;text-align:center;z-index:5;font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;opacity:.45;pointer-events:none;animation:fadehint 3s ease forwards}
+@keyframes fadehint{70%{opacity:.45}100%{opacity:0}}
+.countdown{font-family:'Playfair Display',serif;font-style:italic;font-size:1.35rem;margin-top:.8rem;opacity:.9}
+@media(prefers-reduced-motion:reduce){.bar.active i{animation:none;width:100%}}
+</style>
+</head>
+<body>
+<a class="hub" href="index.html">← версии</a>
+<div class="stage">
+  <div class="phone" id="phone">
+    <div class="bars" id="bars"></div>
+    <div class="head">
+      <div class="av">МЙ</div>
+      <div class="meta"><b>martin_i_yoana</b><span>сватбена покана</span></div>
+      <button class="close" id="pauseBtn" aria-label="Пауза" title="Пауза">⏸</button>
+    </div>
+    <div class="slides" id="slides">
+      <!-- 0 cover -->
+      <section class="slide s0 on" data-dur="5.5">
+        <div class="bg"><div class="blob"></div></div>
+        <div class="content">
+          <div class="kicker">История · 1/8</div>
+          <h1>Мартин <span class="ital">&</span> Йоана</h1>
+          <p class="p">Имаме нещо специално за вас. Докоснете, за да продължите.</p>
+          <div class="big-date">5.06.2027</div>
+          <div class="countdown" id="days"></div>
+        </div>
+      </section>
+      <!-- 1 story -->
+      <section class="slide s1" data-dur="7">
+        <div class="bg"><div class="blob"></div></div>
+        <div class="content">
+          <div class="kicker">Как започна</div>
+          <h2>Нашата история</h2>
+          <p class="p">Срещнахме се в София в една пролетна вечер. Оттогава - хиляди километри, два континента и безброй чаши кафе.</p>
+          <p class="p" style="margin-top:.7rem">Тази пролет, под звездите: "да". Сега празнуваме с вас.</p>
+        </div>
+      </section>
+      <!-- 2 when -->
+      <section class="slide s2" data-dur="7">
+        <div class="bg"><div class="blob"></div></div>
+        <div class="content">
+          <div class="kicker">Кога и къде</div>
+          <h2>Денят</h2>
+          <div class="cardish">
+            <div class="t">15:00 · ЦЕРЕМОНИЯ</div>
+            <h3>Ритуална зала "Триадица"</h3>
+            <div style="font-weight:300;opacity:.8;font-size:.9rem">бул. Витоша 15, София</div>
+            <a href="https://www.google.com/maps/search/?api=1&query=Vitosha+Blvd+15+Sofia" target="_blank" rel="noopener">Карта ↗</a>
+          </div>
+          <div class="cardish">
+            <div class="t">18:00 · ТЪРЖЕСТВО</div>
+            <h3>Ресторант "Воденицата"</h3>
+            <div style="font-weight:300;opacity:.8;font-size:.9rem">Драгалевци, полите на Витоша</div>
+            <a href="https://www.google.com/maps/search/?api=1&query=Vodenitsata+Restaurant+Sofia" target="_blank" rel="noopener">Карта ↗</a>
+          </div>
+        </div>
+      </section>
+      <!-- 3 program -->
+      <section class="slide s3" data-dur="8">
+        <div class="bg"></div>
+        <div class="content">
+          <div class="kicker">Час по час</div>
+          <h2>Програма</h2>
+          <div class="tl">
+            <div><b>15:00</b><span>Церемония<small>зала "Триадица"</small></span></div>
+            <div><b>16:00</b><span>Шампанско и снимки</span></div>
+            <div><b>18:00</b><span>Добре дошли<small>коктейл във "Воденицата"</small></span></div>
+            <div><b>18:30</b><span>Питка с мед</span></div>
+            <div><b>19:30</b><span>Вечеря и наздравици</span></div>
+            <div><b>21:00</b><span>Първи танц · после хоро</span></div>
+            <div><b>23:00</b><span>Торта · танци до зори</span></div>
+          </div>
+        </div>
+      </section>
+      <!-- 4 traditions -->
+      <section class="slide s4" data-dur="7">
+        <div class="bg"></div>
+        <div class="content">
+          <div class="kicker">По стар обичай</div>
+          <h2>Традиции</h2>
+          <div class="trad"><h4>Питка с мед</h4><p>За сладък, охолен и задружен живот.</p></div>
+          <div class="trad"><h4>Настъпването</h4><p>Който настъпи пръв, командва у дома. Залозите са отворени.</p></div>
+          <div class="trad"><h4>Право хоро</h4><p>Две напред, една назад. Ще ви покажем.</p></div>
+        </div>
+      </section>
+      <!-- 5 dress -->
+      <section class="slide s5" data-dur="5.5">
+        <div class="bg"></div>
+        <div class="content">
+          <div class="kicker">Какво да облечете</div>
+          <h2>Празнично елегантно</h2>
+          <p class="p">Красиво и удобно за дълга нощ на дансинга. Бялото остава за булката.</p>
+          <div class="swatches">
+            <div class="sw" style="background:#1a0a12"></div>
+            <div class="sw" style="background:#c45c6a"></div>
+            <div class="sw" style="background:#e8a0a8"></div>
+            <div class="sw" style="background:#5ec4a8"></div>
+            <div class="sw" style="background:#f5e6d3"></div>
+          </div>
+        </div>
+      </section>
+      <!-- 6 rsvp -->
+      <section class="slide s6" data-dur="99">
+        <div class="bg"></div>
+        <div class="content">
+          <div class="kicker">Ще дойдете ли</div>
+          <h2>Потвърждение</h2>
+          <p class="p">Моля до 1 април 2027.</p>
+          <form class="form" id="rsvpForm">
+            <label for="nm">Име</label>
+            <input id="nm" required placeholder="Вашето име">
+            <label for="att">Присъствие</label>
+            <select id="att"><option value="yes">Дааа! 💍</option><option value="yes2">Естествено че да</option></select>
+            <label for="gs">Брой гости</label>
+            <select id="gs"><option>1</option><option>2</option><option>3</option><option>4</option><option>5+</option></select>
+            <label for="msg">Бележка</label>
+            <textarea id="msg" rows="2" placeholder="Алергии, песен..."></textarea>
+            <button type="submit">Изпрати</button>
+          </form>
+          <div class="ok" id="success"><h3>Благодарим!</h3><p id="succText"></p></div>
+        </div>
+      </section>
+      <!-- 7 end -->
+      <section class="slide s7" data-dur="6">
+        <div class="bg"></div>
+        <div class="content" style="text-align:center;padding-bottom:2rem">
+          <div class="kicker">До скоро</div>
+          <h1 style="margin-top:1rem">С обич</h1>
+          <p class="p" style="margin:0 auto;text-align:center">Мартин и Йоана · София · 5 юни 2027</p>
+          <div class="row" style="justify-content:center">
+            <span class="chip" id="replay">▶ Отначало</span>
+          </div>
+        </div>
+      </section>
+    </div>
+    <div class="tap" id="tap"><div class="l" data-dir="-1"></div><div class="r" data-dir="1"></div></div>
+    <div class="hint-tap">докоснете вляво / вдясно</div>
+  </div>
+</div>
+<script>
+(function(){
+  var slides=[].slice.call(document.querySelectorAll('.slide'));
+  var N=slides.length, cur=0, timer=null, paused=false;
+  var bars=document.getElementById('bars');
+  var phone=document.getElementById('phone');
+  slides.forEach(function(_,i){
+    var b=document.createElement('div'); b.className='bar'+(i===0?' active':'');
+    b.innerHTML='<i></i>'; bars.appendChild(b);
+  });
+  var barEls=[].slice.call(bars.children);
+
+  function dur(i){ return parseFloat(slides[i].dataset.dur||5)*1000; }
+
+  function paintBars(){
+    barEls.forEach(function(b,i){
+      b.classList.remove('active','done');
+      b.querySelector('i').style.animation='none';
+      void b.offsetWidth;
+      b.querySelector('i').style.animation='';
+      if(i<cur) b.classList.add('done');
+      else if(i===cur){
+        b.classList.add('active');
+        b.style.setProperty('--dur', (dur(cur)/1000)+'s');
+      }
+    });
+  }
+
+  function show(n){
+    if(n<0) n=0;
+    if(n>=N) n=N-1;
+    slides[cur].classList.remove('on');
+    cur=n;
+    slides[cur].classList.add('on');
+    paintBars();
+    clearTimeout(timer);
+    // pause auto on RSVP form slide
+    if(cur===6 || paused) return;
+    timer=setTimeout(function(){ if(cur<N-1) show(cur+1); }, dur(cur));
+  }
+
+  function next(){ if(cur<N-1) show(cur+1); }
+  function prev(){ if(cur>0) show(cur-1); else show(0); }
+
+  document.getElementById('tap').addEventListener('click', function(e){
+    if(e.target.closest('a,button,input,select,textarea,label,form')) return;
+    var dir=parseInt(e.target.dataset.dir,10);
+    if(dir>0) next(); else prev();
+  });
+
+  // long-press pause
+  var hold=null;
+  phone.addEventListener('pointerdown', function(e){
+    if(e.target.closest('a,button,input,select,textarea,form')) return;
+    hold=setTimeout(function(){ paused=true; phone.classList.add('paused'); clearTimeout(timer); }, 200);
+  });
+  function release(){
+    clearTimeout(hold);
+    if(paused){ paused=false; phone.classList.remove('paused'); show(cur); }
+  }
+  phone.addEventListener('pointerup', release);
+  phone.addEventListener('pointercancel', release);
+  phone.addEventListener('pointerleave', release);
+
+  document.getElementById('pauseBtn').addEventListener('click', function(){
+    paused=!paused;
+    this.textContent=paused?'▶':'⏸';
+    if(paused){ phone.classList.add('paused'); clearTimeout(timer); }
+    else { phone.classList.remove('paused'); show(cur); }
+  });
+
+  document.getElementById('replay').addEventListener('click', function(){ show(0); });
+
+  document.addEventListener('keydown', function(e){
+    if(e.key==='ArrowRight'||e.key===' ') { e.preventDefault(); next(); }
+    if(e.key==='ArrowLeft') prev();
+  });
+
+  var target=new Date('2027-06-05T00:00:00+03:00').getTime();
+  var d=Math.ceil((target-Date.now())/86400000);
+  var el=document.getElementById('days');
+  el.textContent=d>1?('Остават '+d+' дни'):(d===1?'Остава 1 ден':'Днес е денят!');
+
+  document.getElementById('rsvpForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    var nm=(document.getElementById('nm').value||'').trim().split(' ')[0];
+    var att=document.getElementById('att').value;
+    document.getElementById('succText').textContent=(nm?nm+', о':'О')+'чакваме ви с нетърпение!';
+    this.style.display='none';
+    document.getElementById('success').classList.add('show');
+    setTimeout(function(){ show(7); }, 1200);
+  });
+
+  show(0);
+})();
+</script>
+</body>
+</html>

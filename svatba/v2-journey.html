@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<script src="/auth-config.js"></script>
+<script src="/auth.js"></script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0f1410">
+<meta name="robots" content="noindex,nofollow">
+<title>Мартин и Йоана · Journey</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Syne:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0f1410;--ink:#e8e4d9;--muted:#8a9080;--gold:#d4a574;--leaf:#6b8f71;--line:rgba(232,228,217,.12)}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:Syne,system-ui,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+::selection{background:var(--gold);color:#0f1410}
+
+.hub{position:fixed;top:14px;left:14px;z-index:40;font-size:.58rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;color:var(--muted);padding:.4rem .7rem;border:1px solid var(--line);border-radius:999px;background:rgba(15,20,16,.7);backdrop-filter:blur(8px)}
+.hub:hover{color:var(--gold);border-color:var(--gold)}
+
+/* progress path */
+.rail{position:fixed;right:18px;top:50%;transform:translateY(-50%);z-index:30;display:flex;flex-direction:column;align-items:center;gap:0}
+.rail-line{position:absolute;top:8px;bottom:8px;width:1px;background:var(--line);z-index:0}
+.rail a{position:relative;z-index:1;width:10px;height:10px;border-radius:50%;border:1.5px solid var(--muted);background:var(--bg);margin:10px 0;transition:all .3s;text-indent:-999px;overflow:hidden}
+.rail a.on,.rail a:hover{background:var(--gold);border-color:var(--gold);transform:scale(1.3)}
+.rail-label{position:fixed;right:40px;top:50%;transform:translateY(-50%);font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);writing-mode:vertical-rl;opacity:0;transition:opacity .3s;pointer-events:none}
+@media(max-width:700px){.rail{right:10px}.rail a{width:8px;height:8px;margin:8px 0}}
+
+/* hero */
+.hero{min-height:100vh;min-height:100dvh;display:grid;place-items:center;text-align:center;padding:2rem 1.5rem;position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background:
+  radial-gradient(ellipse at 50% 80%,rgba(107,143,113,.25) 0%,transparent 50%),
+  radial-gradient(ellipse at 20% 20%,rgba(212,165,116,.12) 0%,transparent 40%),
+  linear-gradient(180deg,#0f1410 0%,#1a2218 50%,#0f1410 100%)}
+.hero-inner{position:relative;z-index:2;max-width:36rem}
+.hero .eye{font-size:.65rem;font-weight:600;letter-spacing:.4em;text-transform:uppercase;color:var(--gold);margin-bottom:1.2rem}
+.hero h1{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(3.2rem,14vw,5.5rem);line-height:.95;margin-bottom:1rem}
+.hero h1 em{font-style:italic;color:var(--gold)}
+.hero .lead{font-weight:500;font-size:1rem;color:var(--muted);max-width:22rem;margin:0 auto 1.5rem}
+.scroll-cue{display:inline-flex;flex-direction:column;align-items:center;gap:.5rem;font-size:.6rem;letter-spacing:.28em;text-transform:uppercase;color:var(--muted);margin-top:2rem;animation:bob 2.2s ease-in-out infinite}
+.scroll-cue span{width:1px;height:40px;background:linear-gradient(var(--gold),transparent)}
+@keyframes bob{50%{transform:translateY(8px)}}
+.days{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.5rem;color:var(--leaf);margin-top:.5rem}
+
+/* chapters */
+.ch{position:relative;padding:min(18vh,7rem) 1.5rem;max-width:720px;margin:0 auto}
+.ch-num{font-size:.62rem;font-weight:700;letter-spacing:.32em;text-transform:uppercase;color:var(--gold);margin-bottom:.6rem}
+.ch h2{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(2.2rem,8vw,3.2rem);line-height:1.05;margin-bottom:1.2rem}
+.ch h2 em{font-style:italic;color:var(--gold)}
+.ch p{color:var(--muted);font-size:1.05rem;font-weight:500;max-width:32rem;line-height:1.65}
+.ch p + p{margin-top:1rem}
+
+/* split path cards */
+.path{display:grid;gap:1rem;margin-top:2rem}
+@media(min-width:560px){.path{grid-template-columns:1fr 1fr}}
+.loc{padding:1.4rem;border:1px solid var(--line);border-radius:4px;background:rgba(255,255,255,.02);transition:border-color .3s,transform .3s}
+.loc:hover{border-color:rgba(212,165,116,.4);transform:translateY(-3px)}
+.loc .when{font-size:.7rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem}
+.loc h3{font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:500;margin-bottom:.3rem}
+.loc .place{font-weight:600;margin-bottom:.2rem}
+.loc .addr{font-size:.9rem;color:var(--muted);font-weight:500}
+.loc a{display:inline-block;margin-top:.9rem;font-size:.68rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--leaf);text-decoration:none;border-bottom:1px solid rgba(107,143,113,.4)}
+.loc a:hover{color:var(--gold);border-color:var(--gold)}
+
+/* horizontal timeline scroll */
+.day-scroll{margin:2rem -1.5rem 0;padding:0 1.5rem;overflow-x:auto;scrollbar-width:thin;scrollbar-color:var(--gold) transparent;-webkit-overflow-scrolling:touch}
+.day-track{display:flex;gap:1rem;padding-bottom:1rem;width:max-content}
+.slot{width:200px;padding:1.2rem;border:1px solid var(--line);border-radius:4px;background:linear-gradient(160deg,rgba(212,165,116,.08),transparent);flex:none}
+.slot .t{font-size:1.4rem;font-family:'Cormorant Garamond',serif;color:var(--gold);font-weight:600}
+.slot .e{font-weight:600;margin-top:.4rem;font-size:.95rem}
+.slot .s{font-size:.82rem;color:var(--muted);margin-top:.2rem;font-weight:500}
+
+/* tradition grid */
+.trads{display:grid;gap:1rem;margin-top:1.8rem}
+.trad{display:grid;grid-template-columns:auto 1fr;gap:1rem;align-items:start;padding:1.2rem;border-left:2px solid var(--gold);background:rgba(255,255,255,.02)}
+.trad .n{font-family:'Cormorant Garamond',serif;font-size:2rem;color:var(--gold);line-height:1;font-style:italic}
+.trad h4{font-size:1rem;font-weight:700;margin-bottom:.3rem}
+.trad p{font-size:.92rem;color:var(--muted);font-weight:500;max-width:none}
+
+/* dress strip */
+.palette{display:flex;gap:.8rem;margin-top:1.5rem;flex-wrap:wrap}
+.sw{width:48px;height:48px;border-radius:4px;border:1px solid rgba(255,255,255,.15)}
+
+/* rsvp sticky panel */
+.rsvp-wrap{max-width:480px}
+form{margin-top:1.5rem}
+.field{margin-bottom:1rem}
+.field label{display:block;font-size:.6rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:.35rem}
+.field input,.field select,.field textarea{
+  width:100%;padding:.9rem 1rem;border:1px solid var(--line);border-radius:4px;
+  background:rgba(255,255,255,.03);color:var(--ink);font:inherit;font-size:1rem
+}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--gold)}
+.field select option{color:#111}
+.field textarea{min-height:90px;resize:vertical}
+button.send{width:100%;padding:1.05rem;border:0;border-radius:4px;background:var(--gold);color:#0f1410;font-weight:700;font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;cursor:pointer;margin-top:.3rem}
+button.send:hover{filter:brightness(1.08)}
+.deadline{margin-top:.9rem;font-size:.82rem;color:var(--muted);font-weight:500}
+.success{display:none;padding:2rem 0}
+.success.show{display:block}
+.success h3{font-family:'Cormorant Garamond',serif;font-size:2.4rem;color:var(--gold);margin-bottom:.4rem}
+.success p{color:var(--muted)}
+
+.footer{text-align:center;padding:4rem 1.5rem 5rem;border-top:1px solid var(--line);margin-top:2rem}
+.footer .sig{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.8rem;color:var(--gold)}
+.footer p{margin-top:.5rem;color:var(--muted);font-size:.9rem;font-weight:500}
+
+/* reveal */
+.rev{opacity:0;transform:translateY(28px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.3,1)}
+.rev.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.rev{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<a class="hub" href="index.html">← версии</a>
+<nav class="rail" id="rail" aria-label="Навигация">
+  <div class="rail-line"></div>
+  <a href="#top" data-i="0" title="Начало">0</a>
+  <a href="#story" data-i="1" title="История">1</a>
+  <a href="#where" data-i="2" title="Място">2</a>
+  <a href="#program" data-i="3" title="Програма">3</a>
+  <a href="#traditions" data-i="4" title="Традиции">4</a>
+  <a href="#dress" data-i="5" title="Дрескод">5</a>
+  <a href="#rsvp" data-i="6" title="RSVP">6</a>
+</nav>
+
+<section class="hero" id="top">
+  <div class="hero-inner">
+    <div class="eye">5 юни 2027 · София</div>
+    <h1>Мартин <em>&</em><br>Йоана</h1>
+    <p class="lead">Един ден. Двама души. Планина, питка, хоро - и вие.</p>
+    <div class="days" id="days"></div>
+    <div class="scroll-cue">скрол<span></span></div>
+  </div>
+</section>
+
+<section class="ch" id="story">
+  <div class="rev">
+    <div class="ch-num">01 · Началото</div>
+    <h2>Как <em>се срещнахме</em></h2>
+    <p>Срещнахме се в София в една пролетна вечер, която и двамата помним до най-малкия детайл. Оттогава минахме заедно през хиляди километри, два континента и безброй чаши кафе.</p>
+    <p>Тази пролет, под звездите, беше зададен най-важният въпрос. Отговорът беше "да", разбира се. Сега искаме да отпразнуваме това начало с хората, които обичаме най-много: с вас.</p>
+  </div>
+</section>
+
+<section class="ch" id="where">
+  <div class="rev">
+    <div class="ch-num">02 · Маршрут</div>
+    <h2>Две <em>спирки</em></h2>
+    <p>Започваме в центъра. Завършваме в полите на Витоша.</p>
+    <div class="path">
+      <article class="loc">
+        <div class="when">15:00 · Церемония</div>
+        <h3>Триадица</h3>
+        <div class="place">Ритуална зала</div>
+        <div class="addr">бул. Витоша 15, София</div>
+        <a href="https://www.google.com/maps/search/?api=1&query=Vitosha+Blvd+15+Sofia" target="_blank" rel="noopener">Отвори карта ↗</a>
+      </article>
+      <article class="loc">
+        <div class="when">18:00 · Тържество</div>
+        <h3>Воденицата</h3>
+        <div class="place">Ресторант</div>
+        <div class="addr">Драгалевци, Витоша</div>
+        <a href="https://www.google.com/maps/search/?api=1&query=Vodenitsata+Restaurant+Sofia" target="_blank" rel="noopener">Отвори карта ↗</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="ch" id="program">
+  <div class="rev">
+    <div class="ch-num">03 · Денят</div>
+    <h2>Програма <em>час по час</em></h2>
+    <p>Плъзнете настрани - като лента от филм.</p>
+  </div>
+  <div class="day-scroll rev">
+    <div class="day-track">
+      <div class="slot"><div class="t">15:00</div><div class="e">Церемония</div><div class="s">зала "Триадица"</div></div>
+      <div class="slot"><div class="t">16:00</div><div class="e">Шампанско</div><div class="s">и снимки</div></div>
+      <div class="slot"><div class="t">18:00</div><div class="e">Добре дошли</div><div class="s">коктейл във "Воденицата"</div></div>
+      <div class="slot"><div class="t">18:30</div><div class="e">Питка с мед</div><div class="s">благословия</div></div>
+      <div class="slot"><div class="t">19:30</div><div class="e">Вечеря</div><div class="s">и наздравици</div></div>
+      <div class="slot"><div class="t">21:00</div><div class="e">Първи танц</div><div class="s"></div></div>
+      <div class="slot"><div class="t">21:30</div><div class="e">Право хоро</div><div class="s"></div></div>
+      <div class="slot"><div class="t">23:00</div><div class="e">Торта</div><div class="s"></div></div>
+      <div class="slot"><div class="t">00:00</div><div class="e">Танци</div><div class="s">до зори</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="ch" id="traditions">
+  <div class="rev">
+    <div class="ch-num">04 · Обичаи</div>
+    <h2>Български <em>традиции</em></h2>
+    <div class="trads">
+      <div class="trad"><div class="n">01</div><div><h4>Питка с мед</h4><p>Посрещаме гостите и младоженците с топла питка и мед: за сладък, охолен и задружен живот.</p></div></div>
+      <div class="trad"><div class="n">02</div><div><h4>Настъпването</h4><p>След "да"-то всеки от нас ще опита пръв да настъпи другия. Който успее, ще командва у дома. Залозите са отворени.</p></div></div>
+      <div class="trad"><div class="n">03</div><div><h4>Право хоро</h4><p>Няма българска сватба без хоро. Стъпките са лесни: две напред, една назад. Ще ви покажем.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="ch" id="dress">
+  <div class="rev">
+    <div class="ch-num">05 · Визия</div>
+    <h2>Празнично <em>елегантно</em></h2>
+    <p>Облечете се така, че да ви е красиво и удобно за дълга нощ на дансинга. Бялото остава запазено за булката.</p>
+    <div class="palette">
+      <div class="sw" style="background:#0f1410"></div>
+      <div class="sw" style="background:#6b8f71"></div>
+      <div class="sw" style="background:#d4a574"></div>
+      <div class="sw" style="background:#e8e4d9"></div>
+      <div class="sw" style="background:#3d4a38"></div>
+    </div>
+  </div>
+</section>
+
+<section class="ch" id="rsvp">
+  <div class="rev rsvp-wrap">
+    <div class="ch-num">06 · Отговор</div>
+    <h2>Ще <em>бъдете</em> ли с нас?</h2>
+    <p>Ще се радваме да сте с нас. Кажете ни дали да ви очакваме.</p>
+    <form id="rsvpForm">
+      <div class="field"><label for="nm">Име и фамилия</label><input id="nm" required placeholder="Вашето име"></div>
+      <div class="field"><label for="att">Ще присъствате ли</label>
+        <select id="att"><option value="yes">Дааа! 💍</option><option value="yes2">Естествено че да</option></select>
+      </div>
+      <div class="field"><label for="gs">Брой гости, включително вас</label>
+        <select id="gs"><option>1</option><option>2</option><option>3</option><option>4</option><option>5+</option></select>
+      </div>
+      <div class="field"><label for="msg">Бележка до нас</label><textarea id="msg" placeholder="Алергии, песен за плейлиста..."></textarea></div>
+      <button class="send" type="submit">Изпрати отговор</button>
+      <p class="deadline">Моля, потвърдете до 1 април 2027 г.</p>
+    </form>
+    <div class="success" id="success">
+      <h3>Благодарим ви!</h3>
+      <p id="succText"></p>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="sig">С обич, Мартин и Йоана</div>
+  <p>София · 5 юни 2027</p>
+</footer>
+
+<script>
+(function(){
+  var revs=document.querySelectorAll('.rev');
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(ents){
+      ents.forEach(function(e){ if(e.isIntersecting) e.target.classList.add('in'); });
+    },{threshold:0.15, rootMargin:'0px 0px -8% 0px'});
+    revs.forEach(function(el){ io.observe(el); });
+  } else revs.forEach(function(el){ el.classList.add('in'); });
+
+  var sections=['top','story','where','program','traditions','dress','rsvp'];
+  var links=[].slice.call(document.querySelectorAll('.rail a'));
+  function setActive(){
+    var y=window.scrollY+window.innerHeight*0.35;
+    var idx=0;
+    sections.forEach(function(id,i){
+      var el=document.getElementById(id);
+      if(el && el.offsetTop<=y) idx=i;
+    });
+    links.forEach(function(a,i){ a.classList.toggle('on', i===idx); });
+  }
+  window.addEventListener('scroll', setActive, {passive:true});
+  setActive();
+
+  var target=new Date('2027-06-05T00:00:00+03:00').getTime();
+  var d=Math.ceil((target-Date.now())/86400000);
+  var el=document.getElementById('days');
+  el.textContent=d>1?('Остават '+d+' дни'):(d===1?'Остава 1 ден':'Днес е денят!');
+
+  document.getElementById('rsvpForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    var nm=(document.getElementById('nm').value||'').trim().split(' ')[0];
+    var att=document.getElementById('att').value;
+    document.getElementById('succText').textContent=(nm?nm+', о':'О')+'чакваме ви с нетърпение! Ще бъде незабравимо.';
+    this.style.display='none';
+    document.getElementById('success').classList.add('show');
+  });
+})();
+</script>
+</body>
+</html>

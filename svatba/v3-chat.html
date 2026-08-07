@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<script src="/auth-config.js"></script>
+<script src="/auth.js"></script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0b141a">
+<meta name="robots" content="noindex,nofollow">
+<title>Мартин и Йоана · Chat</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;overflow:hidden}
+body{font-family:'DM Sans',system-ui,sans-serif;background:#0b141a;color:#e9edef;-webkit-font-smoothing:antialiased}
+.hub{position:fixed;top:max(8px,env(safe-area-inset-top));left:8px;z-index:60;font-size:.55rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;color:rgba(255,255,255,.55);padding:.35rem .55rem;border-radius:999px;background:rgba(0,0,0,.4)}
+
+.app{position:fixed;inset:0;display:grid;place-items:center}
+.phone{width:100%;max-width:420px;height:100%;max-height:100dvh;background:#0b141a;display:flex;flex-direction:column;position:relative;box-shadow:0 0 0 1px rgba(255,255,255,.06)}
+
+/* chat header */
+.ch-head{flex:none;display:flex;align-items:center;gap:12px;padding:max(12px,env(safe-area-inset-top)) 14px 12px;background:#1f2c34;border-bottom:1px solid rgba(255,255,255,.06);z-index:5}
+.back{width:28px;height:28px;border:0;background:none;color:#8696a0;font-size:1.2rem;cursor:default}
+.av{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#25d366,#128c7e);display:grid;place-items:center;font-weight:700;font-size:.75rem;color:#fff}
+.who{flex:1;min-width:0}
+.who b{display:block;font-size:.95rem;font-weight:600}
+.who span{font-size:.72rem;color:#8696a0}
+.online{color:#25d366!important}
+
+/* wallpaper */
+.feed{flex:1;overflow-y:auto;padding:12px 12px 8px;background:
+  url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h60v60H0z' fill='%230b141a'/%3E%3Cpath d='M30 5l2 6 6 1-5 4 2 6-5-3-5 3 2-6-5-4 6-1z' fill='%23121c24' opacity='.5'/%3E%3C/svg%3E") #0b141a;
+  -webkit-overflow-scrolling:touch}
+
+.day{text-align:center;margin:10px 0 14px}
+.day span{display:inline-block;background:#182229;color:#8696a0;font-size:.72rem;padding:.3rem .7rem;border-radius:8px}
+
+.row{display:flex;margin-bottom:4px;align-items:flex-end;gap:6px;opacity:0;transform:translateY(10px);transition:opacity .35s ease,transform .35s ease}
+.row.show{opacity:1;transform:none}
+.row.them{justify-content:flex-start}
+.row.me{justify-content:flex-end}
+.row .mini{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#25d366,#128c7e);flex:none;font-size:.55rem;font-weight:700;display:grid;place-items:center;color:#fff;margin-bottom:2px}
+.row.me .mini{display:none}
+
+.b{max-width:82%;padding:8px 10px 6px;border-radius:10px;font-size:.95rem;line-height:1.4;position:relative;word-wrap:break-word}
+.them .b{background:#202c33;border-top-left-radius:0;color:#e9edef}
+.me .b{background:#005c4b;border-top-right-radius:0;color:#e9edef}
+.b .time{display:block;text-align:right;font-size:.65rem;color:rgba(255,255,255,.45);margin-top:3px;line-height:1}
+.b strong{font-weight:600}
+.b a{color:#53bdeb;text-decoration:none}
+.b .card{margin-top:6px;padding:10px;background:rgba(0,0,0,.2);border-radius:8px;border-left:3px solid #25d366}
+.b .card .lab{font-size:.68rem;color:#8696a0;text-transform:uppercase;letter-spacing:.08em;margin-bottom:2px}
+.b .card .val{font-weight:600}
+.b .card + .card{margin-top:6px}
+.b ul{margin:.35rem 0 0 1rem;font-size:.88rem}
+.b li{margin:.15rem 0}
+
+/* typing */
+.typing{display:none;align-items:center;gap:6px;margin:4px 0 8px;padding-left:34px}
+.typing.on{display:flex}
+.typing .dots{background:#202c33;padding:10px 14px;border-radius:10px;border-top-left-radius:0;display:flex;gap:4px}
+.typing .dots i{width:7px;height:7px;border-radius:50%;background:#8696a0;animation:blink 1.2s infinite}
+.typing .dots i:nth-child(2){animation-delay:.2s}
+.typing .dots i:nth-child(3){animation-delay:.4s}
+@keyframes blink{0%,100%{opacity:.3}50%{opacity:1}}
+
+/* composer / quick replies */
+.composer{flex:none;padding:8px 10px calc(10px + env(safe-area-inset-bottom));background:#1f2c34;border-top:1px solid rgba(255,255,255,.06)}
+.replies{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px;min-height:0}
+.replies:empty{margin:0}
+.chip{border:0;background:#202c33;color:#53bdeb;font:inherit;font-size:.82rem;font-weight:500;padding:.55rem .9rem;border-radius:999px;cursor:pointer;border:1px solid rgba(83,189,235,.25);transition:background .2s}
+.chip:hover,.chip:active{background:#005c4b;color:#fff;border-color:#005c4b}
+.input-row{display:flex;gap:8px;align-items:center}
+.input-row input{flex:1;border:0;background:#2a3942;color:#e9edef;padding:.75rem 1rem;border-radius:24px;font:inherit;font-size:.95rem}
+.input-row input::placeholder{color:#8696a0}
+.input-row input:focus{outline:none}
+.send{width:42px;height:42px;border-radius:50%;border:0;background:#00a884;color:#fff;font-size:1.1rem;cursor:pointer;display:grid;place-items:center;flex:none}
+.send:disabled{opacity:.4;cursor:default}
+
+.sys{text-align:center;margin:12px 0;opacity:0;transform:translateY(8px);transition:opacity .35s,transform .35s}
+.sys.show{opacity:1;transform:none}
+.sys span{display:inline-block;background:#182229;color:#8696a0;font-size:.72rem;padding:.35rem .75rem;border-radius:8px;max-width:90%;line-height:1.35}
+
+@media(prefers-reduced-motion:reduce){
+  .row,.sys{opacity:1;transform:none;transition:none}
+  .typing .dots i{animation:none}
+}
+</style>
+</head>
+<body>
+<a class="hub" href="index.html">← версии</a>
+<div class="app">
+  <div class="phone">
+    <header class="ch-head">
+      <span class="back">‹</span>
+      <div class="av">МЙ</div>
+      <div class="who">
+        <b>Мартин и Йоана</b>
+        <span id="status" class="online">онлайн</span>
+      </div>
+    </header>
+
+    <div class="feed" id="feed">
+      <div class="day"><span>Днес</span></div>
+      <div class="typing" id="typing"><div class="mini" style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#25d366,#128c7e);font-size:.55rem;font-weight:700;display:grid;place-items:center;color:#fff">МЙ</div><div class="dots"><i></i><i></i><i></i></div></div>
+    </div>
+
+    <div class="composer">
+      <div class="replies" id="replies"></div>
+      <div class="input-row">
+        <input id="input" type="text" placeholder="Съобщение" autocomplete="off" disabled>
+        <button class="send" id="sendBtn" disabled aria-label="Изпрати">➤</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  var feed=document.getElementById('feed');
+  var typing=document.getElementById('typing');
+  var replies=document.getElementById('replies');
+  var input=document.getElementById('input');
+  var sendBtn=document.getElementById('sendBtn');
+  var status=document.getElementById('status');
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var step=0;
+  var guestName='';
+
+  function scrollBottom(){
+    requestAnimationFrame(function(){ feed.scrollTop=feed.scrollHeight; });
+  }
+
+  function timeNow(){
+    var d=new Date();
+    return (d.getHours()<10?'0':'')+d.getHours()+':'+(d.getMinutes()<10?'0':'')+d.getMinutes();
+  }
+
+  function showTyping(on){
+    typing.classList.toggle('on', !!on);
+    if(on) scrollBottom();
+  }
+
+  function addBubble(who, html, delay){
+    return new Promise(function(resolve){
+      var wait=reduce?0:(delay==null?600:delay);
+      if(who==='them' && wait>0) showTyping(true);
+      setTimeout(function(){
+        showTyping(false);
+        var row=document.createElement('div');
+        row.className='row '+who;
+        if(who==='them') row.innerHTML='<div class="mini">МЙ</div><div class="b">'+html+'<span class="time">'+timeNow()+'</span></div>';
+        else row.innerHTML='<div class="b">'+html+'<span class="time">'+timeNow()+'</span></div>';
+        feed.insertBefore(row, typing);
+        requestAnimationFrame(function(){ row.classList.add('show'); });
+        scrollBottom();
+        resolve();
+      }, wait);
+    });
+  }
+
+  function addSys(text, delay){
+    return new Promise(function(resolve){
+      setTimeout(function(){
+        var el=document.createElement('div');
+        el.className='sys';
+        el.innerHTML='<span>'+text+'</span>';
+        feed.insertBefore(el, typing);
+        requestAnimationFrame(function(){ el.classList.add('show'); });
+        scrollBottom();
+        resolve();
+      }, reduce?0:(delay||400));
+    });
+  }
+
+  function setReplies(items){
+    replies.innerHTML='';
+    input.disabled=true;
+    sendBtn.disabled=true;
+    items.forEach(function(it){
+      var b=document.createElement('button');
+      b.type='button';
+      b.className='chip';
+      b.textContent=it.label;
+      b.addEventListener('click', function(){ it.action(); });
+      replies.appendChild(b);
+    });
+  }
+
+  function clearReplies(){ replies.innerHTML=''; }
+
+  function enableFreeText(placeholder, onSend){
+    clearReplies();
+    input.disabled=false;
+    sendBtn.disabled=false;
+    input.placeholder=placeholder||'Съобщение';
+    input.focus();
+    function go(){
+      var v=input.value.trim();
+      if(!v) return;
+      input.value='';
+      input.disabled=true;
+      sendBtn.disabled=true;
+      onSend(v);
+    }
+    sendBtn.onclick=go;
+    input.onkeydown=function(e){ if(e.key==='Enter'){ e.preventDefault(); go(); } };
+  }
+
+  async function sequence(list){
+    for(var i=0;i<list.length;i++) await list[i]();
+  }
+
+  // ---- script ----
+  async function start(){
+    await addSys('Мартин и Йоана ви добавиха в чат', 300);
+    await addBubble('them', 'Здравейте! 👋', 900);
+    await addBubble('them', 'Пишем ви с една <strong>важна новина</strong>…', 1100);
+    await addBubble('them', 'На <strong>5 юни 2027</strong> се женим в <strong>София</strong> 💍', 1300);
+    setReplies([
+      {label:'🎉 Честито!!!', action:function(){ react('🎉 Честито!!!'); }},
+      {label:'Разкажете повече', action:function(){ react('Разкажете повече!'); }},
+      {label:'Къде ще е?', action:function(){ react('Къде ще е?'); }}
+    ]);
+  }
+
+  async function react(text){
+    clearReplies();
+    await addBubble('me', text, 200);
+    await story();
+  }
+
+  async function story(){
+    await addBubble('them', 'Благодарим! 💛', 800);
+    await addBubble('them', 'Срещнахме се в София в една пролетна вечер. После - хиляди километри, два континента и безброй кафета.', 1400);
+    await addBubble('them', 'Тази пролет, под звездите, казахме <strong>"да"</strong>. Искаме да празнуваме с вас.', 1400);
+    await addBubble('them', 'Ето детайлите:', 700);
+    await addBubble('them',
+      '<div class="card"><div class="lab">Церемония · 15:00</div><div class="val">Ритуална зала "Триадица"</div>бул. Витоша 15<br><a href="https://www.google.com/maps/search/?api=1&query=Vitosha+Blvd+15+Sofia" target="_blank" rel="noopener">Виж на картата ↗</a></div>'+
+      '<div class="card"><div class="lab">Тържество · 18:00</div><div class="val">Ресторант "Воденицата"</div>Драгалевци, Витоша<br><a href="https://www.google.com/maps/search/?api=1&query=Vodenitsata+Restaurant+Sofia" target="_blank" rel="noopener">Виж на картата ↗</a></div>',
+      1200);
+    setReplies([
+      {label:'А програмата?', action:function(){ askProgram(); }},
+      {label:'Какво да облека?', action:function(){ askDress(); }},
+      {label:'Дааа! 💍', action:function(){ startRsvp('Дааа! 💍'); }},
+      {label:'Естествено че да', action:function(){ startRsvp('Естествено че да'); }}
+    ]);
+  }
+
+  async function askProgram(){
+    clearReplies();
+    await addBubble('me', 'А програмата?', 200);
+    await addBubble('them', 'Час по час 👇', 800);
+    await addBubble('them',
+      '<ul>'+
+      '<li><strong>15:00</strong> Церемония</li>'+
+      '<li><strong>16:00</strong> Шампанско и снимки</li>'+
+      '<li><strong>18:00</strong> Добре дошли · Воденицата</li>'+
+      '<li><strong>18:30</strong> Питка с мед</li>'+
+      '<li><strong>19:30</strong> Вечеря и наздравици</li>'+
+      '<li><strong>21:00</strong> Първи танц</li>'+
+      '<li><strong>21:30</strong> Право хоро</li>'+
+      '<li><strong>23:00</strong> Торта · после танци до зори</li>'+
+      '</ul>', 1400);
+    await traditions();
+  }
+
+  async function askDress(){
+    clearReplies();
+    await addBubble('me', 'Какво да облека?', 200);
+    await addBubble('them', 'Празнично елегантно - красиво и удобно за дансинга 💃', 1000);
+    await addBubble('them', 'Палитра: маслина, blush, крем, бордо. <strong>Бялото е само за булката</strong> 😉', 1200);
+    setReplies([
+      {label:'А програмата?', action:function(){ askProgram(); }},
+      {label:'Дааа! 💍', action:function(){ startRsvp('Дааа! 💍'); }},
+      {label:'Естествено че да', action:function(){ startRsvp('Естествено че да'); }}
+    ]);
+  }
+
+  async function traditions(){
+    await addBubble('them', 'Има и български традиции:', 900);
+    await addBubble('them', '🍞 <strong>Питка с мед</strong> - за сладък живот<br>👟 <strong>Настъпването</strong> - който стъпи пръв, командва у дома (залозите са отворени)<br>💃 <strong>Право хоро</strong> - две напред, една назад. Ще ви покажем!', 1500);
+    setReplies([
+      {label:'Какво да облека?', action:function(){ askDress(); }},
+      {label:'Дааа! 💍', action:function(){ startRsvp('Дааа! 💍'); }},
+      {label:'Естествено че да', action:function(){ startRsvp('Естествено че да'); }}
+    ]);
+  }
+
+  async function startRsvp(replyLabel){
+    clearReplies();
+    await addBubble('me', replyLabel || 'Дааа! 💍', 200);
+    await addBubble('them', 'Супер!!! Как да ви запишем? Напишете <strong>името си</strong> ✍️', 1000);
+    enableFreeText('Вашето име…', async function(name){
+      guestName=name;
+      await addBubble('me', name, 150);
+      await addBubble('them', 'Здравейте, '+name.split(' ')[0]+'! С колко души идвате (вкл. вас)?', 900);
+      setReplies([1,2,3,4,'5+'].map(function(n){
+        return {label: String(n)+(n===1?' човек':' души'), action:function(){ guests(n); }};
+      }));
+    });
+  }
+
+  async function guests(n){
+    clearReplies();
+    await addBubble('me', String(n)+(n===1?' човек':' души'), 200);
+    await addBubble('them', 'Записано: <strong>'+guestName+'</strong> · '+n+(n===1?' гост':' гости')+' ✓', 900);
+    await addBubble('them', 'Искате ли да добавите бележка? (алергии, песен…)', 900);
+    setReplies([
+      {label:'Да, имам бележка', action:function(){ note(); }},
+      {label:'Не, готово', action:function(){ finishRsvp(''); }}
+    ]);
+  }
+
+  async function note(){
+    clearReplies();
+    await addBubble('me', 'Да, имам бележка', 200);
+    enableFreeText('Бележката ви…', async function(text){
+      await addBubble('me', text, 150);
+      await finishRsvp(text);
+    });
+  }
+
+  async function finishRsvp(noteText){
+    clearReplies();
+    input.disabled=true; sendBtn.disabled=true;
+    await addBubble('them', 'Перфектно! Очакваме ви на <strong>5 юни 2027</strong> 🥂', 900);
+    await addBubble('them', 'Моля потвърдете окончателно до <strong>1 април 2027</strong>. До скоро!', 1000);
+    await addSys('RSVP получено'+(noteText?' · с бележка':'')+' · С обич, Мартин и Йоана', 500);
+    status.textContent='последно онлайн току-що';
+    status.classList.remove('online');
+    await bye();
+  }
+
+  async function bye(){
+    setReplies([
+      {label:'▶ Отначало', action:function(){ location.reload(); }}
+    ]);
+  }
+
+  // countdown easter egg if idle - inject day count early
+  var target=new Date('2027-06-05T00:00:00+03:00').getTime();
+  var d=Math.ceil((target-Date.now())/86400000);
+  var dayLine=d>1?('Остават '+d+' дни'):(d===1?'Остава 1 ден':'Днес е денят!');
+
+  // start after short beat
+  setTimeout(async function(){
+    await start();
+    // after first replies available, quietly add countdown as later message if they wait - optional
+  }, 400);
+
+  // expose day for status after first messages
+  setTimeout(function(){
+    if(status.classList.contains('online')) status.textContent='онлайн · '+dayLine;
+  }, 5000);
+})();
+</script>
+</body>
+</html>

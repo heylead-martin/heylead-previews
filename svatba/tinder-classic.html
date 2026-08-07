@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<script src="/auth-config.js"></script>
+<script src="/auth.js"></script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1">
+<meta name="theme-color" content="#111418">
+<meta name="robots" content="noindex,nofollow">
+<title>Svatba · Classic Swipe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;overflow:hidden}
+body{font-family:Nunito,system-ui,sans-serif;background:#111418;color:#fff}
+.hub{position:fixed;top:max(8px,env(safe-area-inset-top));left:8px;z-index:100;font-size:.55rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;color:rgba(255,255,255,.55);padding:.35rem .55rem;border-radius:999px;background:rgba(0,0,0,.4)}
+.app{position:fixed;inset:0;display:flex;flex-direction:column;max-width:430px;margin:0 auto;background:#111418}
+.top{flex:none;display:flex;align-items:center;justify-content:space-between;padding:max(12px,env(safe-area-inset-top)) 16px 8px}
+.logo{font-weight:800;font-size:1.45rem;background:linear-gradient(90deg,#fd267a,#ff6036);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.top-ico{width:36px;height:36px;border-radius:50%;border:0;background:#1e2329;color:#fd267a;font-size:1rem}
+.deck-wrap{flex:1;position:relative;margin:4px 12px;touch-action:none}
+.card{position:absolute;inset:0;border-radius:16px;overflow:hidden;background:#222;box-shadow:0 10px 40px rgba(0,0,0,.45);will-change:transform;user-select:none}
+.card img{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none}
+.card .grad{position:absolute;left:0;right:0;bottom:0;padding:5.5rem 1.15rem 1.25rem;background:linear-gradient(transparent,rgba(0,0,0,.85) 55%)}
+.card h2{font-size:1.65rem;font-weight:800;line-height:1.15}
+.card h2 span{font-weight:600;opacity:.85;font-size:1.15rem}
+.card .bio{margin-top:.4rem;font-size:.92rem;font-weight:600;opacity:.92;line-height:1.4}
+.card .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:.65rem}
+.tag{font-size:.72rem;font-weight:700;padding:.3rem .55rem;border-radius:999px;background:rgba(255,255,255,.15);backdrop-filter:blur(6px)}
+.stamp{position:absolute;top:28%;left:50%;transform:translate(-50%,-50%) rotate(-18deg);font-size:2.4rem;font-weight:800;letter-spacing:.08em;padding:.2rem .6rem;border:5px solid;border-radius:8px;opacity:0;pointer-events:none;z-index:5}
+.stamp.like{color:#2ee66d;border-color:#2ee66d}
+.stamp.nope{color:#fd267a;border-color:#fd267a}
+.dots{position:absolute;top:10px;left:10px;right:10px;display:flex;gap:4px;z-index:4}
+.dots i{flex:1;height:3px;border-radius:2px;background:rgba(255,255,255,.35)}
+.dots i.on{background:#fff}
+.love-only-wrap{flex:none;display:flex;justify-content:center;align-items:center;padding:12px 16px calc(22px + env(safe-area-inset-bottom));min-height:96px;position:relative}
+.btn-love{width:76px;height:76px;border-radius:50%;border:0;cursor:pointer;display:grid;place-items:center;font-size:2.1rem;background:#1e2329;color:#2ee66d;box-shadow:0 8px 28px rgba(46,230,109,.25);transition:transform .15s}
+.btn-love:active{transform:scale(.92)}
+.hint-x{position:absolute;bottom:calc(8px + env(safe-area-inset-bottom));left:0;right:0;text-align:center;font-size:.65rem;font-weight:700;color:rgba(255,255,255,.35);pointer-events:none}
+.nope-run{
+  position:fixed;z-index:80;width:58px;height:58px;border-radius:50%;border:0;
+  cursor:not-allowed;display:grid;place-items:center;font-size:1.55rem;font-weight:700;
+  background:#1e2329;color:#fd267a;box-shadow:0 8px 24px rgba(253,38,122,.35);
+  transition:left .11s ease-out, top .11s ease-out;
+  touch-action:none;user-select:none;will-change:left,top;
+}
+.nope-run.flee{transition:left .07s linear, top .07s linear}
+
+.overlay{position:fixed;inset:0;z-index:50;background:rgba(0,0,0,.72);display:none;align-items:center;justify-content:center;padding:1.2rem;backdrop-filter:blur(6px)}
+.overlay.on{display:flex}
+.match{width:100%;max-width:360px;text-align:center;animation:pop .45s cubic-bezier(.2,1.2,.4,1)}
+@keyframes pop{from{transform:scale(.7);opacity:0}}
+.match h1{font-size:2.6rem;font-weight:800;background:linear-gradient(90deg,#fd267a,#ff6036);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:.3rem}
+.match p{color:rgba(255,255,255,.8);font-weight:600;margin-bottom:1.2rem}
+.match-photos{display:flex;justify-content:center;margin-bottom:1.3rem}
+.match-photos img{width:100px;height:100px;border-radius:50%;object-fit:cover;border:3px solid #fd267a;box-shadow:0 8px 24px rgba(0,0,0,.4)}
+.match-photos img:first-child{margin-right:-16px;z-index:1;border-color:#fff}
+.mbtn{display:block;width:100%;padding:1rem;border:0;border-radius:999px;font:inherit;font-weight:800;font-size:.95rem;cursor:pointer;margin-top:.6rem}
+.mbtn.primary{background:linear-gradient(90deg,#fd267a,#ff6036);color:#fff}
+.mbtn.ghost{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.3)}
+
+.profile{position:fixed;inset:0;z-index:40;background:#111418;display:none;flex-direction:column;max-width:430px;margin:0 auto;overflow:hidden}
+.profile.on{display:flex}
+.prof-scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.prof-hero{position:relative;height:52vh;min-height:280px}
+.prof-hero img{width:100%;height:100%;object-fit:cover}
+.prof-hero .grad{position:absolute;inset:auto 0 0;padding:3rem 1.2rem 1rem;background:linear-gradient(transparent,rgba(17,20,24,.95))}
+.prof-body{padding:0 1.2rem 2rem}
+.section{margin-top:1.2rem;padding:1rem;background:#1e2329;border-radius:14px}
+.section h3{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:#fd267a;margin-bottom:.5rem;font-weight:800}
+.section p,.section li{font-size:.95rem;font-weight:600;line-height:1.45;color:rgba(255,255,255,.9)}
+.section ul{padding-left:1.1rem}
+.section li{margin:.25rem 0}
+.section a{color:#3cc4ff;font-weight:700;text-decoration:none}
+.gallery{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:1.2rem}
+.gallery img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px}
+.form label{display:block;font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.5);margin:.7rem 0 .3rem}
+.form input,.form select,.form textarea{width:100%;padding:.8rem;border-radius:12px;border:1px solid #2a3139;background:#15191e;color:#fff;font:inherit;font-weight:600}
+.form button{width:100%;margin-top:1rem;padding:1rem;border:0;border-radius:999px;background:linear-gradient(90deg,#fd267a,#ff6036);color:#fff;font:inherit;font-weight:800;cursor:pointer}
+.ok{display:none;text-align:center;padding:1rem}
+.ok.show{display:block}
+.empty{position:absolute;inset:0;display:none;place-items:center;text-align:center;padding:2rem;color:rgba(255,255,255,.6);font-weight:700}
+.empty.on{display:grid}
+body.match-open .nope-run, body.profile-open .nope-run{display:none}
+</style>
+</head>
+<body>
+<a class="hub" href="index.html">← версии</a>
+<button class="nope-run" id="btnNope" type="button" aria-label="Nope" title="Опитай да ме хванеш">✕</button>
+<div class="app" id="app">
+  <div class="top">
+    <span class="top-ico" style="display:grid;place-items:center">👤</span>
+    <div class="logo">svatbaʻ</div>
+    <span class="top-ico" style="display:grid;place-items:center">💬</span>
+  </div>
+  <div class="deck-wrap" id="deck">
+    <div class="empty" id="empty">Само love е опция 💍<br>Отвори match-а!</div>
+  </div>
+  <div class="love-only-wrap">
+    <button class="btn-love" id="btnLike" title="Like" type="button">♥</button>
+    <div class="hint-x">✕ бяга · ♥ е единственият отговор</div>
+  </div>
+</div>
+
+<div class="overlay" id="matchOverlay">
+  <div class="match">
+    <h1>It's a Match!</h1>
+    <p>Вие и <strong>Мартин &amp; Йоана</strong> се харесахте<br><span style="opacity:.7;font-size:.85rem">(X така и така не работеше 😉)</span></p>
+    <div class="match-photos">
+      <img src="photos/01-beach.jpg" alt="">
+      <img src="photos/02-park.jpg" alt="">
+    </div>
+    <button class="mbtn primary" id="openProfile">Виж поканата 💌</button>
+    <button class="mbtn ghost" id="keepSwiping">Продължи с ♥</button>
+  </div>
+</div>
+
+<div class="profile" id="profile">
+  <div class="prof-scroll">
+    <div class="prof-hero">
+      <img src="photos/01-beach.jpg" alt="Мартин и Йоана">
+      <div class="grad">
+        <h2 style="font-size:1.8rem;font-weight:800">Мартин &amp; Йоана</h2>
+        <div style="font-weight:700;opacity:.85">Събота · 5 юни 2027 · София</div>
+      </div>
+    </div>
+    <div class="prof-body">
+      <div class="section"><h3>За нас</h3><p>Срещнахме се в София в една пролетна вечер. Хиляди километри, два континента, безброй кафета - и едно "да" под звездите. Сега празнуваме с вас.</p></div>
+      <div class="gallery">
+        <img src="photos/02-park.jpg" alt=""><img src="photos/03-resort.jpg" alt="">
+        <img src="photos/04-night.jpg" alt=""><img src="photos/01-beach.jpg" alt="">
+      </div>
+      <div class="section"><h3>Церемония · 15:00</h3><p>Ритуална зала "Триадица"<br>бул. Витоша 15, София<br><a href="https://www.google.com/maps/search/?api=1&query=Vitosha+Blvd+15+Sofia" target="_blank" rel="noopener">Карта ↗</a></p></div>
+      <div class="section"><h3>Тържество · 18:00</h3><p>Ресторант "Воденицата"<br>Драгалевци, Витоша<br><a href="https://www.google.com/maps/search/?api=1&query=Vodenitsata+Restaurant+Sofia" target="_blank" rel="noopener">Карта ↗</a></p></div>
+      <div class="section"><h3>Програма</h3><ul>
+        <li>15:00 Церемония</li><li>16:00 Шампанско и снимки</li>
+        <li>18:00 Добре дошли · Воденицата</li><li>18:30 Питка с мед</li>
+        <li>19:30 Вечеря · 21:00 Първи танц</li><li>21:30 Хоро · 23:00 Торта · танци до зори</li>
+      </ul></div>
+      <div class="section"><h3>Традиции</h3><p>Питка с мед · Настъпване · Право хоро</p></div>
+      <div class="section"><h3>Дрескод</h3><p>Празнично елегантно. Бялото е за булката.</p></div>
+      <div class="section form" id="rsvpBox">
+        <h3>Потвърждение · до 1.04.2027</h3>
+        <form id="rsvpForm">
+          <label>Име</label><input id="nm" required placeholder="Вашето име">
+          <label>Ще дойдете ли?</label>
+          <select id="att"><option value="yes">Дааа! 💍</option><option value="yes2">Естествено че да</option></select>
+          <label>Гости</label><select id="gs"><option>1</option><option>2</option><option>3</option><option>4</option><option>5+</option></select>
+          <label>Бележка</label><textarea id="msg" rows="2" placeholder="Алергии, песен..."></textarea>
+          <button type="submit">Изпрати match ➜</button>
+        </form>
+        <div class="ok" id="ok"><h3 style="color:#2ee66d;font-size:1.4rem">It's a double match!</h3><p id="okT" style="margin-top:.4rem;font-weight:600"></p></div>
+      </div>
+      <p style="text-align:center;margin:1.5rem 0;font-weight:700;opacity:.6">С обич, М &amp; Й</p>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  var cards=[
+    {img:'photos/01-beach.jpg', title:'Мартин & Йоана', age:'5.06.2027', bio:'Търсим +1 за най-голямото ни приключение. Само ♥ работи - X бяга 💍', tags:['София','Триадица','Воденицата'], match:true},
+    {img:'photos/02-park.jpg', title:'Нашата история', age:'', bio:'Пролетна вечер в София → хиляди км → два континента → "да" под звездите.', tags:['Любов','Кафе','Пътешествия']},
+    {img:'photos/03-resort.jpg', title:'Програма на деня', age:'15:00→∞', bio:'Церемония 15:00 · Шампанско 16:00 · Воденицата 18:00 · Питка · Вечеря · Танц · Хоро · Торта', tags:['Час по час','Хоро','Торта']},
+    {img:'photos/04-night.jpg', title:'Детайли & RSVP', age:'до 1.04.2027', bio:'Дрескод: празнично елегантно (без бяло). Традиции: питка, настъпване, хоро.', tags:['Дрескод','Традиции','RSVP']}
+  ];
+  var deck=document.getElementById('deck');
+  var i=0, matched=false, startX=0, curX=0, dragging=false, active=null;
+
+  function render(){
+    deck.querySelectorAll('.card').forEach(function(c){c.remove()});
+    if(i>=cards.length){ document.getElementById('empty').classList.add('on'); return; }
+    document.getElementById('empty').classList.remove('on');
+    for(var k=Math.min(cards.length-1,i+1);k>=i;k--){
+      var d=cards[k], el=document.createElement('div');
+      el.className='card';
+      el.dataset.idx=k;
+      if(k===i) el.dataset.active='1';
+      else { el.style.transform='scale(.96) translateY(10px)'; el.style.opacity='.85'; }
+      el.innerHTML='<div class="dots">'+cards.map(function(_,j){return '<i class="'+(j===k?'on':'')+'"></i>'}).join('')+'</div>'+
+        '<img src="'+d.img+'" alt="">'+
+        '<div class="stamp like">LIKE</div><div class="stamp nope">NOPE</div>'+
+        '<div class="grad"><h2>'+d.title+(d.age?' <span>'+d.age+'</span>':'')+'</h2>'+
+        '<div class="bio">'+d.bio+'</div>'+
+        '<div class="tags">'+d.tags.map(function(t){return '<span class="tag">'+t+'</span>'}).join('')+'</div></div>';
+      deck.appendChild(el);
+    }
+    active=deck.querySelector('.card[data-active="1"]');
+    bind(active);
+  }
+
+  function bind(el){
+    if(!el) return;
+    el.addEventListener('pointerdown', onDown);
+  }
+  function onDown(e){
+    if(e.button!=null && e.button!==0) return;
+    dragging=true; startX=e.clientX; curX=0;
+    active.setPointerCapture(e.pointerId);
+    active.addEventListener('pointermove', onMove);
+    active.addEventListener('pointerup', onUp);
+    active.addEventListener('pointercancel', onUp);
+  }
+  function onMove(e){
+    if(!dragging) return;
+    curX=e.clientX-startX;
+    // left swipe resistance - rubber band, can't fully reject
+    var x=curX;
+    if(x<0) x=x*0.25;
+    var rot=x/30;
+    active.style.transform='translateX('+x+'px) rotate('+rot+'deg)';
+    var like=active.querySelector('.stamp.like'), nope=active.querySelector('.stamp.nope');
+    like.style.opacity=Math.min(1, Math.max(0, curX/80));
+    nope.style.opacity=Math.min(0.35, Math.max(0, -curX/120));
+  }
+  function onUp(){
+    if(!dragging) return;
+    dragging=false;
+    active.removeEventListener('pointermove', onMove);
+    active.removeEventListener('pointerup', onUp);
+    active.removeEventListener('pointercancel', onUp);
+    if(curX>100) swipe(1);
+    else {
+      // left swipe or short: bounce back (nope blocked)
+      active.style.transition='transform .35s cubic-bezier(.2,1.4,.4,1)';
+      active.style.transform='';
+      setTimeout(function(){ if(active) active.style.transition=''; },350);
+      active.querySelectorAll('.stamp').forEach(function(s){s.style.opacity=0});
+    }
+  }
+  function swipe(dir){
+    if(dir<0) return; // never nope
+    var el=active;
+    var card=cards[i];
+    el.style.transition='transform .4s ease, opacity .4s';
+    el.style.transform='translateX(500px) rotate(25deg)';
+    el.style.opacity='0';
+    var wasMatch=card.match;
+    setTimeout(function(){
+      i++;
+      render();
+      if(wasMatch && !matched){ matched=true; showMatch(); }
+      else if(i>=cards.length && !matched){ matched=true; showMatch(); }
+    }, 380);
+  }
+  function showMatch(){
+    document.body.classList.add('match-open');
+    document.getElementById('matchOverlay').classList.add('on');
+  }
+  document.getElementById('btnLike').onclick=function(){ if(active) swipe(1); };
+  document.getElementById('openProfile').onclick=function(){
+    document.getElementById('matchOverlay').classList.remove('on');
+    document.body.classList.remove('match-open');
+    document.body.classList.add('profile-open');
+    document.getElementById('profile').classList.add('on');
+  };
+  document.getElementById('keepSwiping').onclick=function(){
+    document.getElementById('matchOverlay').classList.remove('on');
+    document.body.classList.remove('match-open');
+  };
+  document.getElementById('rsvpForm').onsubmit=function(e){
+    e.preventDefault();
+    var nm=(document.getElementById('nm').value||'').trim().split(' ')[0];
+    var att=document.getElementById('att').value;
+    document.getElementById('okT').textContent=(nm?nm+', о':'О')+'чакваме ви на 5.06.2027!';
+    this.style.display='none';
+    document.getElementById('ok').classList.add('show');
+  };
+
+  /* runaway X */
+  (function(){
+    var btn=document.getElementById('btnNope');
+    var pad=10, size=58;
+    function clamp(v,a,b){return Math.max(a,Math.min(b,v))}
+    function place(x,y){
+      btn.style.left=clamp(x,pad,innerWidth-size-pad)+'px';
+      btn.style.top=clamp(y,pad,innerHeight-size-pad)+'px';
+    }
+    function home(){
+      var app=document.getElementById('app').getBoundingClientRect();
+      place(app.left+app.width*0.22-size/2, app.bottom-88);
+    }
+    home();
+    addEventListener('resize', home);
+    document.addEventListener('pointermove', function(e){
+      if(document.body.classList.contains('match-open')||document.body.classList.contains('profile-open')) return;
+      var r=btn.getBoundingClientRect();
+      var bx=r.left+r.width/2, by=r.top+r.height/2;
+      var dx=bx-e.clientX, dy=by-e.clientY;
+      var dist=Math.sqrt(dx*dx+dy*dy)||1;
+      if(dist>110) return;
+      var force=dist<40?160:(dist<70?100:60);
+      var nx=bx+(dx/dist)*force+(Math.random()-.5)*40;
+      var ny=by+(dy/dist)*force+(Math.random()-.5)*40;
+      if(nx<pad+30) nx=pad+40+Math.random()*100;
+      if(ny<pad+30) ny=pad+40+Math.random()*80;
+      if(nx>innerWidth-pad-30) nx=innerWidth-pad-40-Math.random()*100;
+      if(ny>innerHeight-pad-30) ny=innerHeight-pad-40-Math.random()*80;
+      btn.classList.add('flee');
+      place(nx-size/2, ny-size/2);
+    }, {passive:true});
+    btn.addEventListener('pointerdown', function(e){
+      e.preventDefault(); e.stopPropagation();
+      var a=Math.random()*Math.PI*2, d=120+Math.random()*140;
+      var r=btn.getBoundingClientRect();
+      place(r.left+Math.cos(a)*d, r.top+Math.sin(a)*d);
+    }, true);
+    btn.addEventListener('click', function(e){ e.preventDefault(); e.stopPropagation(); }, true);
+    btn.addEventListener('focus', function(){
+      place(Math.random()*(innerWidth-80)+20, Math.random()*(innerHeight-80)+20);
+      btn.blur();
+    });
+  })();
+
+  render();
+})();
+</script>
+</body>
+</html>
