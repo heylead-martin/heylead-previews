@@ -40,13 +40,6 @@ button:disabled{opacity:.6;cursor:wait}
 .err{display:none;background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.35);color:#fca5a5;
   padding:.7rem .85rem;border-radius:10px;font-size:.88rem;margin-bottom:1rem}
 .err.on{display:block}
-.forgot{margin-top:1.1rem;text-align:center}
-.forgot a{color:#8b9bb0;font-size:.85rem;text-decoration:none;border-bottom:1px solid rgba(139,155,176,.35)}
-.forgot a:hover{color:#c5cdd8}
-#forgotPanel{display:none;margin-top:1.2rem;padding-top:1.2rem;border-top:1px solid rgba(255,255,255,.1);font-size:.88rem;color:#8b9bb0;line-height:1.55;text-align:left}
-#forgotPanel.on{display:block}
-#forgotPanel code{display:block;background:rgba(0,0,0,.35);padding:.7rem .8rem;border-radius:8px;color:#e8ecf1;font-size:.78rem;margin:.6rem 0;overflow-x:auto;white-space:pre}
-#forgotPanel strong{color:#c5cdd8}
 .foot{margin-top:1.2rem;text-align:center;font-size:.75rem;color:#5c6675}
 </style>
 </head>
@@ -66,20 +59,6 @@ button:disabled{opacity:.6;cursor:wait}
     </div>
     <button type="submit" id="btn">Sign in</button>
   </form>
-  <div class="forgot">
-    <a href="#" id="forgotLink">Forgot password?</a>
-  </div>
-  <div id="forgotPanel">
-    <p><strong>No email reset on this static site</strong> (GitHub Pages has no server).</p>
-    <p style="margin-top:.55rem">You control the password from your machine / GitHub:</p>
-    <code>cd ~/heylead-previews
-node scripts/set-password.js 'NewPasswordHere'
-git add auth-config.js
-git commit -m "chore: rotate previews password"
-git push</code>
-    <p>Or open <code style="display:inline;padding:.15rem .35rem">.password-local.txt</code> on this computer if you still have the last generated one (gitignored).</p>
-    <p style="margin-top:.55rem">Forgot password is optional - you never need it if you reset from the terminal.</p>
-  </div>
   <p class="foot">previews.heylead.com</p>
 </div>
 <script src="/auth-config.js"></script>
@@ -128,11 +107,6 @@ git push</code>
       err.classList.add('on');
       btn.disabled = false;
     }
-  });
-
-  document.getElementById('forgotLink').addEventListener('click', function(e){
-    e.preventDefault();
-    document.getElementById('forgotPanel').classList.toggle('on');
   });
 })();
 </script>
