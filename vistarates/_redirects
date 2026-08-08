@@ -1,0 +1,2 @@
+# Cloudflare Pages redirects. One per line: /old-path /new-path 301
+# CI rule: any removed published URL must get an entry here in the same commit.

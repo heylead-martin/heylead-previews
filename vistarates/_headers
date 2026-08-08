@@ -1,0 +1,4 @@
+# PRELAUNCH: noindex the entire site at the HTTP level too.
+# At launch, delete this block and the meta robots tag in src/layouts/Base.astro.
+/*
+  X-Robots-Tag: noindex, nofollow

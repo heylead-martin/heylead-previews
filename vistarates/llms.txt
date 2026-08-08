@@ -1,0 +1,29 @@
+# Vistarates
+
+> Vistarates is a US personal finance comparison site covering credit cards, savings and loan rates, and bank bonuses. Its defining feature is data freshness: rate tables are refreshed by an automated pipeline from official sources (FRED, Freddie Mac PMMS, FDIC) and every number carries the date it was last verified. Offers are matched to credit score ranges so users see products they can realistically get approved for.
+
+## Core pages
+- [Vistarates](https://previews.heylead.com/vistarates/): Compare credit cards, savings rates, loans and bank bonuses. Every number dated and verified against primary sources.
+- [Rates hub](https://previews.heylead.com/vistarates/rates/): Timestamped savings, mortgage and benchmark rates. Data verified 2026-08-06.
+- [High yield savings rates](https://previews.heylead.com/vistarates/rates/savings/): Auto-refreshed savings APYs and benchmark rates. Data verified 2026-08-06.
+- [Mortgage rates](https://previews.heylead.com/vistarates/rates/mortgage/): Freddie Mac PMMS 30-year and 15-year averages with verification dates.
+- [Live bank bonuses](https://previews.heylead.com/vistarates/bonuses/): Every live bank bonus with requirements, expiry and verification dates.
+- [Credit cards](https://previews.heylead.com/vistarates/credit-cards/): Score-matched credit cards by category, reviews and head-to-head compares.
+- [Guides](https://previews.heylead.com/vistarates/guides/): Evergreen personal finance guides with visible update dates.
+- [About](https://previews.heylead.com/vistarates/about/): Why Vistarates exists and how the data-first comparison site is built.
+- [Authors](https://previews.heylead.com/vistarates/authors/): Who writes and reviews Vistarates content.
+- [Editorial policy](https://previews.heylead.com/vistarates/editorial-policy/): Sources, corrections, and YMYL standards.
+- [Advertiser disclosure](https://previews.heylead.com/vistarates/advertiser-disclosure/): How Vistarates makes money and why it never changes rankings.
+- [Privacy policy](https://previews.heylead.com/vistarates/privacy/): How Vistarates handles visitor and newsletter data.
+
+## Bonuses
+- [Bank bonus tracker: every live offer, dated and verified](https://previews.heylead.com/vistarates/bonuses/bank-bonus-tracker/): How our bank bonus tracker works: requirements, expiration dates, verification stamps, and the rules we use before an offer stays listed.
+
+## Guides
+- [APY vs APR: the difference that costs you money](https://previews.heylead.com/vistarates/guides/apy-vs-apr-explained/): APY is for what you earn; APR is for what you pay. Worked examples for savings, cards, and loans so you stop comparing the wrong number.
+- [How balance transfers actually work](https://previews.heylead.com/vistarates/guides/how-balance-transfers-work/): Fees, intro APR windows, and the payoff math for credit card balance transfers, including when a transfer is a bad deal.
+- [How credit scores are calculated](https://previews.heylead.com/vistarates/guides/how-credit-scores-are-calculated/): FICO factor weights in plain language: payment history, amounts owed, length of history, new credit, and credit mix, plus what actually moves a score.
+- [Secured vs unsecured credit cards](https://previews.heylead.com/vistarates/guides/secured-vs-unsecured-cards/): Which builds credit faster, how security deposits work, when to graduate to unsecured, and what to avoid while rebuilding.
+- [What is APY and why it beats APR for savers](https://previews.heylead.com/vistarates/guides/what-is-apy/): APY includes compounding, APR does not. Here is how to read both numbers when comparing savings accounts and why a small APY difference compounds into real money.
+
+- [llms-full.txt](https://previews.heylead.com/vistarates/llms-full.txt): expanded index with every page and verification date.
