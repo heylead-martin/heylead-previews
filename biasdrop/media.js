@@ -18,17 +18,21 @@ window.BiasDropMedia = (function () {
   }
 
   function attrs(photo, context) {
-    const credit = `Photo by ${photo.photographer} on Pexels`;
-    const base = photo.desc || "Free stock photo";
+    const isYt = photo && photo.url && String(photo.url).includes("youtube.com");
+    const credit = isYt
+      ? `${photo.photographer || "YouTube"} · ${photo.url}`
+      : `Photo by ${photo.photographer} on Pexels`;
+    const base = photo.desc || (isYt ? "Official music video thumbnail" : "Free stock photo");
     const ctx = context ? `${context}. ` : "";
+    const srcSm = photo.srcSm || photo.src;
     return {
       src: photo.src,
-      srcset: `${photo.srcSm} 480w, ${photo.src} 900w`,
-      alt: `${ctx}${base}. ${credit}. Source: ${photo.url}`,
-      title: `${credit} · ${photo.url}`,
+      srcset: `${srcSm} 480w, ${photo.src} 900w`,
+      alt: `${ctx}${base}. ${credit}`,
+      title: `${credit}`,
       credit,
       photographer: photo.photographer,
-      photographerUrl: photo.photographerUrl,
+      photographerUrl: photo.photographerUrl || photo.url,
       pageUrl: photo.url,
     };
   }
