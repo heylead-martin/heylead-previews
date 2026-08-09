@@ -10,6 +10,8 @@
 <title>BiasDrop · K-Pop Superfan HQ</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://images.pexels.com" crossorigin>
+<link rel="preconnect" href="https://videos.pexels.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -42,6 +44,7 @@
       <a href="#loot">Loot</a>
       <a href="#collect">Collect</a>
       <a href="#pulse">Pulse</a>
+      <a href="#vibe">Vibe</a>
       <a href="#quiz">Bias Quiz</a>
     </nav>
 
@@ -65,6 +68,7 @@
     <a href="#loot">Loot Shop</a>
     <a href="#collect">Collectibles</a>
     <a href="#pulse">Fan Pulse</a>
+    <a href="#vibe">Concert vibe</a>
     <a href="#quiz">Bias Quiz</a>
     <a href="#stash">My Stash</a>
   </nav>
@@ -74,6 +78,15 @@
   <!-- HERO -->
   <section class="hero">
     <div class="hero-bg" aria-hidden="true">
+      <video
+        id="hero-video"
+        class="hero-video"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="metadata"></video>
+      <div class="hero-video-scrim"></div>
       <div class="orb orb-a"></div>
       <div class="orb orb-b"></div>
       <div class="orb orb-c"></div>
@@ -98,25 +111,30 @@
         <div role="listitem"><strong>SSR</strong><span>Pull rates live</span></div>
         <div role="listitem"><strong>24/7</strong><span>Drop radar</span></div>
       </div>
+      <p class="media-credit" id="hero-video-credit"></p>
     </div>
-    <div class="hero-stage" aria-hidden="true">
-      <div class="lightstick">
-        <div class="ls-glow"></div>
-        <div class="ls-head"></div>
-        <div class="ls-body"></div>
-        <div class="ls-base"></div>
-      </div>
-      <div class="float-card fc-1">
-        <span class="rarity ssr">SSR</span>
-        <span>Photocard pull</span>
-      </div>
-      <div class="float-card fc-2">
-        <span class="rarity sr">NEW</span>
-        <span>Season's Greetings</span>
-      </div>
-      <div class="float-card fc-3">
-        <span class="rarity r">LIVE</span>
-        <span>Pop-up Seoul</span>
+    <div class="hero-stage">
+      <div class="hero-video-frame">
+        <video
+          id="hero-side-video"
+          class="hero-side-video"
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="metadata"></video>
+        <div class="float-card fc-1">
+          <span class="rarity ssr">SSR</span>
+          <span>Photocard pull</span>
+        </div>
+        <div class="float-card fc-2">
+          <span class="rarity sr">NEW</span>
+          <span>Season's Greetings</span>
+        </div>
+        <div class="float-card fc-3">
+          <span class="rarity r">LIVE</span>
+          <span>Pop-up Seoul</span>
+        </div>
       </div>
     </div>
   </section>
@@ -295,6 +313,18 @@
     </div>
   </section>
 
+  <!-- FREE STOCK CONCERT VIDEOS -->
+  <section class="section section-alt" id="vibe">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">Free stock on YouTube</p>
+        <h2>Concert <span class="accent">vibe reels</span></h2>
+        <p class="section-sub">Royalty-free / free-stock concert crowd footage for the era energy. Not official idol MVs - free-to-use stock labeled by their channels. Captions credit each source.</p>
+      </div>
+    </div>
+    <div class="yt-grid" id="yt-grid"></div>
+  </section>
+
   <!-- BIAS QUIZ -->
   <section class="section section-quiz" id="quiz">
     <div class="quiz-shell">
@@ -380,6 +410,13 @@
       </div>
     </div>
   </div>
+  <div class="credits-block" id="credits">
+    <div class="credits-inner">
+      <h3>Media credits &amp; sources</h3>
+      <p>Photos and ambient clips from <a href="https://www.pexels.com/" target="_blank" rel="noopener noreferrer">Pexels</a> (free license). Portrait images are stock models used as aesthetic vibes - not real idol likenesses. YouTube embeds are free-stock concert footage as labeled by their channels. Each image uses <code>alt</code> + <code>title</code> with photographer and source URL.</p>
+      <ul class="credits-list" id="credits-list"></ul>
+    </div>
+  </div>
   <p class="footer-copy">© 2026 BiasDrop concept · previews.heylead.com/biasdrop · noindex</p>
 </footer>
 
@@ -414,6 +451,7 @@
 <!-- Toast -->
 <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
 
+<script src="media.js"></script>
 <script src="app.js"></script>
 </body>
 </html>
