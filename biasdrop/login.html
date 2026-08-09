@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="theme-color" content="#07070f">
+<title>Login · BiasDrop</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  min-height:100vh;display:grid;place-items:center;
+  font-family:Outfit,Inter,system-ui,-apple-system,sans-serif;
+  background:
+    radial-gradient(ellipse at 20% 10%, rgba(255,45,149,.25), transparent 45%),
+    radial-gradient(ellipse at 80% 90%, rgba(0,240,255,.15), transparent 40%),
+    #07070f;
+  color:#f5f3ff;padding:1.25rem;
+}
+.card{
+  width:100%;max-width:400px;
+  background:rgba(18,18,31,.92);
+  border:1px solid rgba(168,85,247,.28);
+  border-radius:20px;padding:1.85rem 1.55rem 1.5rem;
+  box-shadow:0 24px 60px rgba(0,0,0,.45), 0 0 40px rgba(255,45,149,.12);
+}
+.logo{
+  font-size:.72rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
+  background:linear-gradient(120deg,#ff2d95,#00f0ff);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  margin-bottom:.55rem;
+}
+h1{font-size:1.45rem;font-weight:800;margin-bottom:.4rem;letter-spacing:-.02em}
+.sub{font-size:.92rem;color:#9b97b8;line-height:1.5;margin-bottom:1.35rem}
+label{display:block;font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#9b97b8;margin:0 0 .35rem}
+input[type=password]{
+  width:100%;padding:.9rem 1rem;border-radius:12px;
+  border:1px solid rgba(168,85,247,.25);
+  background:rgba(0,0,0,.35);color:#fff;font:inherit;font-size:1rem;margin-bottom:1rem;
+}
+input:focus{outline:none;border-color:#00f0ff;box-shadow:0 0 0 3px rgba(0,240,255,.18)}
+.row{display:flex;align-items:center;gap:.45rem;margin:.15rem 0 1.15rem}
+.row label{display:flex;align-items:center;gap:.45rem;margin:0;text-transform:none;letter-spacing:0;font-size:.88rem;font-weight:500;color:#c5cdd8;cursor:pointer}
+.row input{width:auto;margin:0}
+button{
+  width:100%;padding:1rem;border:0;border-radius:999px;
+  background:linear-gradient(120deg,#ff2d95,#a855f7 50%,#00f0ff);
+  color:#fff;font:inherit;font-weight:800;font-size:.95rem;cursor:pointer;
+  box-shadow:0 8px 28px rgba(255,45,149,.35);
+}
+button:hover{filter:brightness(1.06)}
+button:disabled{opacity:.6;cursor:wait}
+.err{display:none;background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.35);color:#fca5a5;
+  padding:.7rem .85rem;border-radius:10px;font-size:.88rem;margin-bottom:1rem}
+.err.on{display:block}
+.foot{margin-top:1.25rem;text-align:center;font-size:.75rem;color:#5c6675;line-height:1.45}
+.foot strong{color:#9b97b8;font-weight:600}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="logo">BiasDrop</div>
+  <h1>Private preview</h1>
+  <p class="sub">Enter the password to open this K-pop demo only. It does not unlock other HeyLead previews.</p>
+  <div class="err" id="err" role="alert"></div>
+  <form id="form" autocomplete="on">
+    <label for="password">Password</label>
+    <input id="password" name="password" type="password" required autocomplete="current-password" placeholder="••••••••" autofocus>
+    <div class="row">
+      <label><input type="checkbox" id="remember"> Remember on this device</label>
+    </div>
+    <button type="submit" id="btn">Enter BiasDrop</button>
+  </form>
+  <p class="foot">BiasDrop client preview · <strong>not</strong> the full previews directory</p>
+</div>
+<script src="auth-config.js"></script>
+<script>
+(function () {
+  var cfg = window.BIASDROP_AUTH;
+  if (!cfg) return;
+  var form = document.getElementById("form");
+  var err = document.getElementById("err");
+  var btn = document.getElementById("btn");
+  var params = new URLSearchParams(location.search);
+  var next = params.get("next") || "./";
+  // only allow redirects inside /biasdrop/
+  try {
+    if (next.indexOf("//") !== -1) next = "./";
+    if (next.indexOf("login") !== -1) next = "./";
+    if (next.indexOf("/biasdrop") === -1 && next.charAt(0) === "/") next = "./";
+    // block escape to previews root
+    if (next === "/" || next === "/index.html" || /^\/(union|arc|1800|vistarates|ketch)/i.test(next)) {
+      next = "./";
+    }
+  } catch (e) {
+    next = "./";
+  }
+
+  function sha256(str) {
+    var data = new TextEncoder().encode(str);
+    return crypto.subtle.digest("SHA-256", data).then(function (buf) {
+      return Array.from(new Uint8Array(buf))
+        .map(function (b) { return b.toString(16).padStart(2, "0"); })
+        .join("");
+    });
+  }
+
+  // already logged into BiasDrop?
+  try {
+    if (
+      sessionStorage.getItem(cfg.sessionKey) === cfg.passwordHash ||
+      localStorage.getItem(cfg.sessionKey) === cfg.passwordHash
+    ) {
+      location.replace(next);
+      return;
+    }
+  } catch (e) {}
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    err.classList.remove("on");
+    btn.disabled = true;
+    var pw = document.getElementById("password").value;
+    sha256(pw)
+      .then(function (hash) {
+        if (hash !== cfg.passwordHash) {
+          err.textContent = "Wrong password.";
+          err.classList.add("on");
+          btn.disabled = false;
+          return;
+        }
+        try {
+          if (document.getElementById("remember").checked) {
+            localStorage.setItem(cfg.sessionKey, cfg.passwordHash);
+            sessionStorage.removeItem(cfg.sessionKey);
+          } else {
+            sessionStorage.setItem(cfg.sessionKey, cfg.passwordHash);
+            localStorage.removeItem(cfg.sessionKey);
+          }
+        } catch (err2) {}
+        location.replace(next);
+      })
+      .catch(function () {
+        err.textContent = "Could not verify password in this browser.";
+        err.classList.add("on");
+        btn.disabled = false;
+      });
+  });
+})();
+</script>
+</body>
+</html>

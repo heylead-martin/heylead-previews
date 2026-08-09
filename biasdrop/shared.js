@@ -143,7 +143,6 @@ window.BiasDropShared = (function () {
       </div>
       <div>
         <h4 data-i18n="footer_preview">${t("footer_preview")}</h4>
-        <a href="https://previews.heylead.com/">HeyLead Previews</a>
         <a href="${base}legal/privacy/" data-i18n="nav_privacy">${t("nav_privacy")}</a>
         <a href="${base}legal/terms/" data-i18n="nav_terms">${t("nav_terms")}</a>
         <a href="https://weverse.io/" target="_blank" rel="noopener noreferrer">Weverse</a>

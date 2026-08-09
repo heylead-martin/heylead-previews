@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Log out · BiasDrop</title>
+<script src="auth-config.js"></script>
+<script>
+(function () {
+  var cfg = window.BIASDROP_AUTH;
+  try {
+    if (cfg) {
+      sessionStorage.removeItem(cfg.sessionKey);
+      localStorage.removeItem(cfg.sessionKey);
+    }
+  } catch (e) {}
+  location.replace("login.html");
+})();
+</script>
+</head>
+<body>
+<p>Logging out…</p>
+</body>
+</html>
