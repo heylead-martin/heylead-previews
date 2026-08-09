@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+<head>
+<script src="/auth-config.js"></script>
+<script src="/auth.js"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>ApplyLab · Remote job co-pilot</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark">AL</div>
+        <div>
+          <div class="brand-name">ApplyLab</div>
+          <div class="brand-sub">Personal · semi-auto</div>
+        </div>
+      </div>
+      <nav class="nav" id="nav">
+        <button type="button" data-view="dashboard" class="nav-item active">Dashboard</button>
+        <button type="button" data-view="jobs" class="nav-item">Job feed</button>
+        <button type="button" data-view="tracker" class="nav-item">Tracker</button>
+        <button type="button" data-view="profile" class="nav-item">Profile</button>
+        <button type="button" data-view="settings" class="nav-item">Settings</button>
+      </nav>
+      <div class="sidebar-foot">
+        <div class="pill" id="api-status">API: not set</div>
+        <a class="muted-link" href="/">← Previews home</a>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="top">
+        <div>
+          <h1 id="view-title">Dashboard</h1>
+          <p class="lede" id="view-lede">Find remote roles, score matches, tailor materials, track applications.</p>
+        </div>
+        <div class="top-actions">
+          <button type="button" class="btn ghost" id="btn-refresh-jobs">Refresh jobs</button>
+          <button type="button" class="btn primary" id="btn-open-settings-quick">Connect API</button>
+        </div>
+      </header>
+
+      <!-- DASHBOARD -->
+      <section class="view" id="view-dashboard">
+        <div class="stats" id="dash-stats">
+          <div class="stat"><div class="stat-val" id="stat-jobs">-</div><div class="stat-lbl">Jobs cached</div></div>
+          <div class="stat"><div class="stat-val" id="stat-strong">-</div><div class="stat-lbl">Strong matches (70+)</div></div>
+          <div class="stat"><div class="stat-val" id="stat-apps">-</div><div class="stat-lbl">Applications</div></div>
+          <div class="stat"><div class="stat-val" id="stat-prepared">-</div><div class="stat-lbl">Ready to submit</div></div>
+        </div>
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-h">
+              <h2>Top matches</h2>
+              <button type="button" class="btn sm ghost" data-goto="jobs">See all</button>
+            </div>
+            <div id="dash-matches" class="list"></div>
+          </div>
+          <div class="card">
+            <div class="card-h">
+              <h2>Recent applications</h2>
+              <button type="button" class="btn sm ghost" data-goto="tracker">Tracker</button>
+            </div>
+            <div id="dash-apps" class="list"></div>
+          </div>
+        </div>
+        <div class="card howto">
+          <h2>How ApplyLab works (v1)</h2>
+          <ol>
+            <li><strong>Connect</strong> your Worker URL + APP_TOKEN in Settings.</li>
+            <li><strong>Fill Profile</strong> with resume text, skills, and target roles.</li>
+            <li><strong>Browse</strong> remote full-time jobs scored against your profile.</li>
+            <li><strong>Tailor</strong> resume + cover letter with xAI for a role you like.</li>
+            <li><strong>Apply</strong> on the job board (semi-auto: we prepare, you submit), then mark status in Tracker.</li>
+          </ol>
+          <p class="hint">Inspired by AIApply - personal private build first. No form-fill bots yet.</p>
+        </div>
+      </section>
+
+      <!-- JOBS -->
+      <section class="view hidden" id="view-jobs">
+        <div class="toolbar">
+          <input type="search" id="jobs-q" placeholder="Search title, company, skill..." class="input grow">
+          <select id="jobs-source" class="input">
+            <option value="">All sources</option>
+            <option value="remotive">Remotive</option>
+            <option value="jobicy">Jobicy</option>
+            <option value="remoteok">RemoteOK</option>
+          </select>
+          <select id="jobs-min-score" class="input">
+            <option value="0">Any score</option>
+            <option value="50">50+</option>
+            <option value="70" selected>70+</option>
+            <option value="80">80+</option>
+          </select>
+          <button type="button" class="btn primary" id="btn-load-jobs">Search</button>
+        </div>
+        <div class="jobs-layout">
+          <div class="job-list card" id="job-list"></div>
+          <div class="job-detail card" id="job-detail">
+            <div class="empty">Select a job to preview and tailor materials.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TRACKER -->
+      <section class="view hidden" id="view-tracker">
+        <div class="toolbar">
+          <select id="tracker-status" class="input">
+            <option value="">All statuses</option>
+            <option value="prepared">Prepared</option>
+            <option value="applied">Applied</option>
+            <option value="interview">Interview</option>
+            <option value="offer">Offer</option>
+            <option value="rejected">Rejected</option>
+            <option value="archived">Archived</option>
+          </select>
+          <button type="button" class="btn ghost" id="btn-reload-apps">Reload</button>
+        </div>
+        <div class="card">
+          <div id="tracker-list" class="table-wrap"></div>
+        </div>
+      </section>
+
+      <!-- PROFILE -->
+      <section class="view hidden" id="view-profile">
+        <form id="profile-form" class="card form-grid">
+          <div class="form-row two">
+            <label>Full name<input name="fullName" class="input" autocomplete="name"></label>
+            <label>Email<input name="email" type="email" class="input" autocomplete="email"></label>
+          </div>
+          <div class="form-row two">
+            <label>Phone<input name="phone" class="input"></label>
+            <label>Location<input name="location" class="input" placeholder="e.g. Sofia, EU timezone"></label>
+          </div>
+          <div class="form-row two">
+            <label>LinkedIn<input name="linkedin" class="input" placeholder="https://linkedin.com/in/..."></label>
+            <label>Portfolio / site<input name="portfolio" class="input"></label>
+          </div>
+          <label>Headline<input name="headline" class="input" placeholder="e.g. Growth marketer | SEO + paid + analytics"></label>
+          <label>Professional summary<textarea name="summary" class="input" rows="3" placeholder="Short summary of who you are and what you want next"></textarea></label>
+          <div class="form-row two">
+            <label>Target roles <span class="soft">(comma-separated)</span><input name="targetRoles" class="input" placeholder="SEO Manager, Growth Lead, Digital Marketing Manager"></label>
+            <label>Skills <span class="soft">(comma-separated)</span><input name="skills" class="input" placeholder="SEO, GA4, Meta Ads, HubSpot, copywriting"></label>
+          </div>
+          <div class="form-row three">
+            <label>Years experience<input name="yearsExperience" type="number" min="0" max="50" class="input"></label>
+            <label>Min salary<input name="salaryMin" type="number" class="input" placeholder="optional"></label>
+            <label>Currency<input name="salaryCurrency" class="input" value="EUR"></label>
+          </div>
+          <label>Preferred locations <span class="soft">(comma-separated)</span><input name="preferredLocations" class="input" placeholder="Worldwide, Europe, EU, Remote"></label>
+          <label>Exclude companies <span class="soft">(comma-separated)</span><input name="excludeCompanies" class="input"></label>
+          <label>Resume text <span class="soft">(paste full resume - used for AI tailoring)</span><textarea name="resumeText" class="input mono" rows="12" placeholder="Paste your current resume as plain text..."></textarea></label>
+          <div class="form-actions">
+            <button type="submit" class="btn primary">Save profile</button>
+            <span class="hint" id="profile-status"></span>
+          </div>
+        </form>
+      </section>
+
+      <!-- SETTINGS -->
+      <section class="view hidden" id="view-settings">
+        <div class="card form-grid">
+          <h2>API connection</h2>
+          <p class="hint">Worker holds your xAI key and profile data. Token never leaves this browser except as a header to your Worker.</p>
+          <label>Worker base URL<input id="cfg-api" class="input mono" placeholder="https://applylab-api.xxx.workers.dev"></label>
+          <label>APP_TOKEN<input id="cfg-token" class="input mono" type="password" placeholder="same value as wrangler secret APP_TOKEN"></label>
+          <div class="form-actions">
+            <button type="button" class="btn primary" id="btn-save-cfg">Save &amp; test</button>
+            <button type="button" class="btn ghost" id="btn-clear-cfg">Clear</button>
+            <span class="hint" id="cfg-status"></span>
+          </div>
+          <hr class="sep">
+          <h2>Deploy checklist</h2>
+          <ol class="checklist">
+            <li>In <code>~/applylab-api</code>: <code>npx wrangler secret put APP_TOKEN</code></li>
+            <li><code>npx wrangler secret put XAI_API_KEY</code> (from console.x.ai)</li>
+            <li><code>npx wrangler deploy</code></li>
+            <li>Paste workers.dev URL + token here</li>
+            <li>Save profile, refresh jobs, tailor a match</li>
+          </ol>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div class="toast hidden" id="toast"></div>
+  <script src="app.js"></script>
+</body>
+</html>

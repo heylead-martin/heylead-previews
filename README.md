@@ -14,6 +14,7 @@ builds move to WordPress after the client approves.
 | `/vistarates/` | Vistarates - US personal finance comparison staging build (Astro static). Source: private `heylead-martin/vistarates`. Production target: vistarates.com |
 | `/biasdrop/` | BiasDrop - K-pop superfan hub concept (idols, merch drops, photocards, light sticks, toys/gadgets, bias quiz). Neon dark entertainment demo for review. |
 | `/imoti-bg/` | Имоти BG - Bulgarian real-estate market intelligence (cities, quarters, rates charts). Source: `~/imoti-bg`. Domain TBD. |
+| `/applylab/` | ApplyLab - personal remote-job co-pilot (semi-auto apply, AI tailor). API: `~/applylab-api` Cloudflare Worker. |
 
 ## Adding a new client preview
 
