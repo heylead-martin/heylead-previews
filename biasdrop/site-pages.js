@@ -68,6 +68,73 @@ window.BiasDropPages = (function () {
       .replace(/"/g, "&quot;");
   }
 
+  /** Split encyclopedia bio text into lead + titled sections for nicer layout */
+  function formatBioHtml(fullBio) {
+    const paras = String(fullBio || "")
+      .split(/\n\n+/)
+      .map((p) => p.trim())
+      .filter(Boolean);
+    if (!paras.length) return "";
+
+    const sections = [];
+    paras.forEach((p, i) => {
+      // "Heading. Body..." or "Heading: Body..." when heading is short
+      const m = p.match(/^(.{3,90}?)([.!?：:])\s+([\s\S]+)$/);
+      if (m && m[1].split(/\s+/).length <= 12 && m[3].length > 40) {
+        sections.push({ title: m[1].trim(), body: m[3].trim(), lead: i === 0 && sections.length === 0 });
+      } else if (i === 0) {
+        sections.push({ title: null, body: p, lead: true });
+      } else {
+        sections.push({ title: null, body: p, lead: false });
+      }
+    });
+
+    let html = '<div class="bio-prose bio-prose-rich">';
+    const lead = sections.find((s) => s.lead);
+    const rest = sections.filter((s) => !s.lead);
+
+    if (lead) {
+      html += `<p class="bio-lead">${escape(lead.title ? lead.title + ". " + lead.body : lead.body)}</p>`;
+    }
+
+    if (rest.length) {
+      html += '<div class="bio-sections">';
+      rest.forEach((s) => {
+        if (s.title) {
+          html += `<article class="bio-section">
+            <h3 class="bio-section-title">${escape(s.title)}</h3>
+            <p>${escape(s.body)}</p>
+          </article>`;
+        } else {
+          html += `<article class="bio-section bio-section-plain"><p>${escape(s.body)}</p></article>`;
+        }
+      });
+      html += "</div>";
+    }
+    html += "</div>";
+    return html;
+  }
+
+  /** Polish blog HTML: drop duplicate title, lead paragraph, nicer lists */
+  function formatBlogHtml(html, title) {
+    let h = String(html || "");
+    // remove leading <p><strong>Title</strong> is part of...</p> if it repeats the title
+    h = h.replace(/^\s*<p><strong>[^<]+<\/strong>\s*е част от[\s\S]*?<\/p>/i, "");
+    h = h.replace(/^\s*<p><strong>[^<]+<\/strong>\s*is part of[\s\S]*?<\/p>/i, "");
+    // first remaining paragraph becomes lead
+    let first = true;
+    h = h.replace(/<p>([\s\S]*?)<\/p>/, (match, inner) => {
+      if (!first) return match;
+      first = false;
+      return `<p class="blog-lead">${inner}</p>`;
+    });
+    // wrap h2 blocks as section cards via class on h2 (CSS handles)
+    h = h.replace(/<h2>/g, '<h2 class="blog-h2">');
+    h = h.replace(/<ul>/g, '<ul class="blog-list">');
+    h = h.replace(/<p class="muted">/g, '<p class="blog-disclaimer">');
+    return h;
+  }
+
   function renderArtistsIndex() {
     const root = document.getElementById("page-root");
     if (!root || !D()) return;
@@ -113,7 +180,13 @@ window.BiasDropPages = (function () {
     const L = a.links || {};
     const tr = a.trivia || null;
     const fullBio = D().bio(a, lang());
-    const bioParas = fullBio.split(/\n\n+/).filter(Boolean);
+    const leadSnippet = (() => {
+      const first = String(fullBio || "").split(/\n\n+/).map((p) => p.trim()).filter(Boolean)[0] || "";
+      if (first.length <= 280) return first;
+      const cut = first.slice(0, 277);
+      const sp = cut.lastIndexOf(" ");
+      return (sp > 120 ? cut.slice(0, sp) : cut) + "…";
+    })();
 
     document.title = `${a.name} · BiasDrop`;
 
@@ -134,7 +207,8 @@ window.BiasDropPages = (function () {
       <div class="profile-copy">
         <p class="eyebrow">${a.fandom} · ${a.gen} gen</p>
         <h1>${a.name}</h1>
-        <p class="profile-bio lead-bio">${escape(bioParas[0] || "")}</p>
+        <p class="profile-bio lead-bio">${escape(leadSnippet)}</p>
+        <p class="jump-bio"><a href="#full-bio">${t("artists_full_bio")} ↓</a></p>
         <dl class="profile-facts">
           <div><dt>${t("artists_debut")}</dt><dd>${a.debut}</dd></div>
           <div><dt>${t("artists_agency")}</dt><dd>${escape(a.agency)}</dd></div>
@@ -162,12 +236,13 @@ window.BiasDropPages = (function () {
       </div>
     </section>` : ""}
 
-    <section class="content-block bio-long">
-      <h2>${t("artists_full_bio")}</h2>
-      <div class="bio-prose">
-        ${bioParas.map((p) => `<p>${escape(p)}</p>`).join("")}
+    <section class="content-block bio-long" id="full-bio">
+      <div class="bio-header">
+        <p class="eyebrow">${a.name}</p>
+        <h2>${t("artists_full_bio")}</h2>
       </div>
-      <p class="muted tiny-note">${t("bio_disclaimer")}</p>
+      ${formatBioHtml(fullBio)}
+      <p class="bio-disclaimer">${t("bio_disclaimer")}</p>
     </section>
 
     <section class="content-block">
@@ -685,10 +760,14 @@ window.BiasDropPages = (function () {
       <div class="blog-grid">
         ${posts
           .map(
-            (p) => `<article class="blog-card">
-            <p class="muted">${p.date}</p>
+            (p, i) => `<article class="blog-card">
+            <div class="blog-card-top">
+              <span class="blog-num">#${String(p.num || i + 1).padStart(2, "0")}</span>
+              <time class="blog-date" datetime="${escape(p.date)}">${escape(p.date)}</time>
+            </div>
             <h2><a href="${base}blog/${p.slug}/">${escape(p.title)}</a></h2>
-            <p>${escape(p.excerpt)}</p>
+            <p class="blog-excerpt">${escape(p.excerpt)}</p>
+            <div class="blog-card-tags">${(p.tags || []).map((tg) => `<span class="tag">${escape(tg)}</span>`).join("")}</div>
             <a class="btn btn-sm btn-neon" href="${base}blog/${p.slug}/">${t("blog_read")}</a>
           </article>`
           )
@@ -701,19 +780,33 @@ window.BiasDropPages = (function () {
     const X = window.BiasDropExtra;
     if (!root || !X) return;
     const base = S().getBase();
-    const post = (X.blogs || []).find((p) => p.slug === slug || p.id === slug);
+    const posts = X.blogs || [];
+    const post = posts.find((p) => p.slug === slug || p.id === slug);
     if (!post) {
       root.innerHTML = `<p class="empty-state">${t("no_results")}</p><p><a href="${base}blog/">${t("nav_blog")}</a></p>`;
       return;
     }
+    const idx = posts.indexOf(post);
+    const prev = idx > 0 ? posts[idx - 1] : null;
+    const next = idx >= 0 && idx < posts.length - 1 ? posts[idx + 1] : null;
     document.title = `${post.title} · BiasDrop`;
     root.innerHTML = `
       <nav class="crumbs"><a href="${base}index.html">${t("breadcrumb_home")}</a><span>/</span><a href="${base}blog/">${t("nav_blog")}</a><span>/</span><span>${escape(post.title)}</span></nav>
       <article class="blog-article">
-        <p class="muted">${post.date}</p>
-        <h1>${escape(post.title)}</h1>
-        <div class="blog-body">${post.html}</div>
-        <p class="back-row"><a href="${base}blog/">← ${t("nav_blog")}</a></p>
+        <header class="blog-article-head">
+          <div class="blog-card-top">
+            <span class="blog-num">#${String(post.num || idx + 1).padStart(2, "0")}</span>
+            <time class="blog-date" datetime="${escape(post.date)}">${escape(post.date)}</time>
+          </div>
+          <h1>${escape(post.title)}</h1>
+          <div class="blog-card-tags">${(post.tags || []).map((tg) => `<span class="tag">${escape(tg)}</span>`).join("")}</div>
+        </header>
+        <div class="blog-body">${formatBlogHtml(post.html, post.title)}</div>
+        <nav class="blog-pager">
+          ${prev ? `<a class="blog-pager-link prev" href="${base}blog/${prev.slug}/"><span>${t("blog_prev")}</span><strong>${escape(prev.title)}</strong></a>` : `<span></span>`}
+          <a class="btn btn-sm btn-ghost" href="${base}blog/">${t("nav_blog")}</a>
+          ${next ? `<a class="blog-pager-link next" href="${base}blog/${next.slug}/"><span>${t("blog_next")}</span><strong>${escape(next.title)}</strong></a>` : `<span></span>`}
+        </nav>
       </article>`;
   }
 
