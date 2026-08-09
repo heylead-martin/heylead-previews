@@ -128,7 +128,7 @@ window.BiasDropPages = (function () {
 
     <header class="profile-hero" style="--accent:${a.color}">
       <div class="profile-media">
-        
+        <img src="${attrs.src}" alt="${escape(attrs.alt)}" title="${escape(attrs.title)}" width="640" height="640" decoding="async" ${attrs.fallback ? `data-fb="${attrs.fallback}"` : ""} ${attrs.onerror ? `onerror='${attrs.onerror}'` : ""}>
         ${a.imageSource ? `<p class="img-credit"><a href="${a.imageSource}" target="_blank" rel="noopener noreferrer">${escape(a.imageCredit || "YouTube")}</a></p>` : ""}
       </div>
       <div class="profile-copy">
