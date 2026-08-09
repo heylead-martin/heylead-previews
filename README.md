@@ -12,6 +12,7 @@ builds move to WordPress after the client approves.
 | `/speakscore/` | Internal lab - SpeakScore, English speaking duel app, fully client-side. Mic-pass race on one phone or between two phones over WebRTC (vendored PeerJS + free PeerJS-cloud signaling). Transcription: Web Speech API live, with free on-device Whisper fallback (transformers.js from jsDelivr - vendoring it trips GitHub push protection on a false-positive key pattern; whisper-tiny.en from HF hub, ~40 MB cached after first use) |
 | `/svatba/` | Personal - wedding invitation for Мартин и Йоана (Bulgarian, single-file, front-end only RSVP for now) |
 | `/vistarates/` | Vistarates - US personal finance comparison staging build (Astro static). Source: private `heylead-martin/vistarates`. Production target: vistarates.com |
+| `/biasdrop/` | BiasDrop - K-pop superfan hub concept (idols, merch drops, photocards, light sticks, toys/gadgets, bias quiz). Neon dark entertainment demo for review. |
 
 ## Adding a new client preview
 

@@ -1,0 +1,419 @@
+<!doctype html>
+<html lang="en">
+<head>
+<script src="/auth-config.js"></script>
+<script src="/auth.js"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="description" content="BiasDrop - the neon K-pop superfan hub. Idols, photocards, light sticks, toys, gadgets, hot drops and more.">
+<title>BiasDrop · K-Pop Superfan HQ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- Floating sparkles layer -->
+<div class="spark-layer" aria-hidden="true" id="spark-layer"></div>
+
+<header class="site-header" id="top">
+  <div class="header-inner">
+    <a class="logo" href="#top" aria-label="BiasDrop home">
+      <span class="logo-mark" aria-hidden="true">
+        <svg viewBox="0 0 40 40" width="36" height="36" fill="none">
+          <defs>
+            <linearGradient id="lg" x1="0" y1="0" x2="40" y2="40">
+              <stop stop-color="#FF2D95"/><stop offset="1" stop-color="#00F0FF"/>
+            </linearGradient>
+          </defs>
+          <circle cx="20" cy="20" r="18" stroke="url(#lg)" stroke-width="2.5"/>
+          <path d="M20 8l2.4 7.4H30l-6 4.4 2.3 7.2L20 22.6l-6.3 4.4 2.3-7.2-6-4.4h7.6z" fill="url(#lg)"/>
+        </svg>
+      </span>
+      <span class="logo-text">Bias<span>Drop</span></span>
+    </a>
+
+    <nav class="nav-desktop" aria-label="Primary">
+      <a href="#drops">Drops</a>
+      <a href="#idols">Idols</a>
+      <a href="#loot">Loot</a>
+      <a href="#collect">Collect</a>
+      <a href="#pulse">Pulse</a>
+      <a href="#quiz">Bias Quiz</a>
+    </nav>
+
+    <div class="header-actions">
+      <button type="button" class="icon-btn" id="wishlist-btn" aria-label="Open wishlist">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/>
+        </svg>
+        <span class="badge" id="wishlist-count">0</span>
+      </button>
+      <button type="button" class="btn btn-sm btn-neon" id="open-pack-btn">Open a Pack</button>
+      <button type="button" class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+
+  <nav class="nav-mobile" id="mobile-nav" aria-label="Mobile" hidden>
+    <a href="#drops">Hot Drops</a>
+    <a href="#idols">Idols</a>
+    <a href="#loot">Loot Shop</a>
+    <a href="#collect">Collectibles</a>
+    <a href="#pulse">Fan Pulse</a>
+    <a href="#quiz">Bias Quiz</a>
+    <a href="#stash">My Stash</a>
+  </nav>
+</header>
+
+<main id="main">
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg" aria-hidden="true">
+      <div class="orb orb-a"></div>
+      <div class="orb orb-b"></div>
+      <div class="orb orb-c"></div>
+      <div class="grid-fade"></div>
+    </div>
+    <div class="hero-content">
+      <p class="eyebrow pulse-dot">Live for super fans · Preview demo</p>
+      <h1>
+        Everything your<br>
+        <span class="gradient-text">bias</span> era needs
+      </h1>
+      <p class="hero-lead">
+        Idols, photocards, light sticks, plushies, gadgets, comeback drops, and the chaos of stan culture - all in one neon HQ built for collectors who never miss a pre-order.
+      </p>
+      <div class="hero-cta">
+        <a class="btn btn-lg btn-neon" href="#drops">Shop Hot Drops</a>
+        <a class="btn btn-lg btn-ghost" href="#quiz">Find Your Bias</a>
+      </div>
+      <div class="hero-stats" role="list">
+        <div role="listitem"><strong>2.4k+</strong><span>Loot SKUs</span></div>
+        <div role="listitem"><strong>180</strong><span>Active idols</span></div>
+        <div role="listitem"><strong>SSR</strong><span>Pull rates live</span></div>
+        <div role="listitem"><strong>24/7</strong><span>Drop radar</span></div>
+      </div>
+    </div>
+    <div class="hero-stage" aria-hidden="true">
+      <div class="lightstick">
+        <div class="ls-glow"></div>
+        <div class="ls-head"></div>
+        <div class="ls-body"></div>
+        <div class="ls-base"></div>
+      </div>
+      <div class="float-card fc-1">
+        <span class="rarity ssr">SSR</span>
+        <span>Photocard pull</span>
+      </div>
+      <div class="float-card fc-2">
+        <span class="rarity sr">NEW</span>
+        <span>Season's Greetings</span>
+      </div>
+      <div class="float-card fc-3">
+        <span class="rarity r">LIVE</span>
+        <span>Pop-up Seoul</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span>PRE-ORDER LIVE</span><span>·</span>
+      <span>LIGHT STICK RESTOCK</span><span>·</span>
+      <span>PHOTOCARD RAIDS</span><span>·</span>
+      <span>SEASON'S GREETINGS 2026</span><span>·</span>
+      <span>LUCKY DRAW OPEN</span><span>·</span>
+      <span>CHARTING FOR HANTEO</span><span>·</span>
+      <span>BIAS PROTECTION SQUAD</span><span>·</span>
+      <span>PRE-ORDER LIVE</span><span>·</span>
+      <span>LIGHT STICK RESTOCK</span><span>·</span>
+      <span>PHOTOCARD RAIDS</span><span>·</span>
+      <span>SEASON'S GREETINGS 2026</span><span>·</span>
+      <span>LUCKY DRAW OPEN</span><span>·</span>
+      <span>CHARTING FOR HANTEO</span><span>·</span>
+      <span>BIAS PROTECTION SQUAD</span><span>·</span>
+    </div>
+  </div>
+
+  <!-- HOT DROPS -->
+  <section class="section" id="drops">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">Radar online</p>
+        <h2>Hot Drops <span class="accent">&amp; Pre-Orders</span></h2>
+        <p class="section-sub">Countdown culture. Miss it and cry later - we keep the rarest MD, albums, and limited kits in one feed.</p>
+      </div>
+      <div class="filter-pills" role="tablist" aria-label="Drop filters">
+        <button type="button" class="pill active" data-filter="all" role="tab" aria-selected="true">All</button>
+        <button type="button" class="pill" data-filter="preorder" role="tab" aria-selected="false">Pre-order</button>
+        <button type="button" class="pill" data-filter="restock" role="tab" aria-selected="false">Restock</button>
+        <button type="button" class="pill" data-filter="exclusive" role="tab" aria-selected="false">Exclusive</button>
+      </div>
+    </div>
+    <div class="drop-grid" id="drop-grid"></div>
+  </section>
+
+  <!-- IDOLS / BIAS -->
+  <section class="section section-alt" id="idols">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">Stan directory</p>
+        <h2>Meet the <span class="accent">Idols</span></h2>
+        <p class="section-sub">Pick a bias, track comebacks, and jump straight into their merch universe. Profiles designed for super fans - not casual listeners.</p>
+      </div>
+      <a class="btn btn-ghost" href="#quiz">Not sure? Take the quiz</a>
+    </div>
+    <div class="idol-rail" id="idol-rail" tabindex="0" aria-label="Idol cards, scroll horizontally"></div>
+  </section>
+
+  <!-- LOOT CATEGORIES -->
+  <section class="section" id="loot">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">Loot shop</p>
+        <h2>Toys, gadgets <span class="accent">&amp; MD</span></h2>
+        <p class="section-sub">From official light sticks to desk dolls, griptoks, keyrings, and the random pull you didn't budget for. Built like a collector's arcade.</p>
+      </div>
+    </div>
+
+    <div class="cat-bento">
+      <button type="button" class="cat-card cat-hero" data-cat="lightsticks">
+        <div class="cat-visual ls-mini" aria-hidden="true"></div>
+        <div class="cat-copy">
+          <span class="cat-tag">Concert kit</span>
+          <h3>Light Sticks</h3>
+          <p>Official + mini keyring versions. Sync-ready for the next dome show.</p>
+          <span class="cat-count">168 items</span>
+        </div>
+      </button>
+      <button type="button" class="cat-card" data-cat="plush">
+        <div class="cat-visual plush-mini" aria-hidden="true"></div>
+        <div class="cat-copy">
+          <span class="cat-tag">Cuteness overdrive</span>
+          <h3>Plush &amp; Dolls</h3>
+          <p>SKZOO, BT21-style mascots, monitor dolls, and desk chaos.</p>
+          <span class="cat-count">412 items</span>
+        </div>
+      </button>
+      <button type="button" class="cat-card" data-cat="gadgets">
+        <div class="cat-visual gadget-mini" aria-hidden="true"></div>
+        <div class="cat-copy">
+          <span class="cat-tag">Daily carry</span>
+          <h3>Gadgets</h3>
+          <p>Griptoks, card wallets, tablet pouches, and glow keycaps.</p>
+          <span class="cat-count">290 items</span>
+        </div>
+      </button>
+      <button type="button" class="cat-card" data-cat="albums">
+        <div class="cat-visual album-mini" aria-hidden="true"></div>
+        <div class="cat-copy">
+          <span class="cat-tag">Chart fuel</span>
+          <h3>Albums</h3>
+          <p>Counted for Hanteo &amp; Billboard. Photocards included (RNG).</p>
+          <span class="cat-count">1.2k items</span>
+        </div>
+      </button>
+      <button type="button" class="cat-card" data-cat="fashion">
+        <div class="cat-visual fashion-mini" aria-hidden="true"></div>
+        <div class="cat-copy">
+          <span class="cat-tag">Wear the era</span>
+          <h3>Fashion MD</h3>
+          <p>Tour tees, hoodies, baseball jerseys, room slippers - yes really.</p>
+          <span class="cat-count">640 items</span>
+        </div>
+      </button>
+      <button type="button" class="cat-card" data-cat="beauty">
+        <div class="cat-visual beauty-mini" aria-hidden="true"></div>
+        <div class="cat-copy">
+          <span class="cat-tag">Glow like them</span>
+          <h3>K-Beauty Collabs</h3>
+          <p>Idol-backed skincare, lip tints, and limited packaging drops.</p>
+          <span class="cat-count">168 items</span>
+        </div>
+      </button>
+    </div>
+
+    <div class="product-panel">
+      <div class="panel-head">
+        <h3 id="product-panel-title">Featured loot</h3>
+        <p id="product-panel-sub">Tap a category above or wishlist anything that makes your heart race.</p>
+      </div>
+      <div class="product-grid" id="product-grid"></div>
+    </div>
+  </section>
+
+  <!-- COLLECTIBLES / PHOTOCARDS -->
+  <section class="section section-alt" id="collect">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">Collector mode</p>
+        <h2>Photocards &amp; <span class="accent">rarity</span></h2>
+        <p class="section-sub">The heart of super-fandom. Rarity tiers, pack pulls, and binders - without the messy DM trading chaos (unless you want it).</p>
+      </div>
+      <button type="button" class="btn btn-neon" id="open-pack-btn-2">Pull a pack</button>
+    </div>
+
+    <div class="rarity-legend" aria-label="Rarity legend">
+      <span><i class="dot r"></i> R · Common</span>
+      <span><i class="dot sr"></i> SR · Rare</span>
+      <span><i class="dot ssr"></i> SSR · Ultra</span>
+      <span><i class="dot ur"></i> UR · Secret</span>
+    </div>
+
+    <div class="pc-grid" id="pc-grid"></div>
+  </section>
+
+  <!-- FAN PULSE -->
+  <section class="section" id="pulse">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">Culture feed</p>
+        <h2>Fan <span class="accent">Pulse</span></h2>
+        <p class="section-sub">Charts, comebacks, Seoul pop-ups, and the gossip you need before your group chat does.</p>
+      </div>
+    </div>
+
+    <div class="pulse-layout">
+      <div class="pulse-col">
+        <h3 class="pulse-title">Comeback calendar</h3>
+        <ul class="calendar-list" id="calendar-list"></ul>
+      </div>
+      <div class="pulse-col">
+        <h3 class="pulse-title">Chart radar</h3>
+        <ol class="chart-list" id="chart-list"></ol>
+      </div>
+      <div class="pulse-col pulse-wide">
+        <h3 class="pulse-title">Scene intel</h3>
+        <div class="intel-cards" id="intel-cards"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BIAS QUIZ -->
+  <section class="section section-quiz" id="quiz">
+    <div class="quiz-shell">
+      <div class="quiz-intro" id="quiz-intro">
+        <p class="eyebrow">Interactive</p>
+        <h2>Find your <span class="accent">bias</span></h2>
+        <p>4 spicy questions. Zero judgment. Maximum delulu. We'll match you with a BiasDrop idol vibe and a starter loot kit.</p>
+        <button type="button" class="btn btn-lg btn-neon" id="quiz-start">Start the chaos</button>
+      </div>
+      <div class="quiz-play" id="quiz-play" hidden>
+        <div class="quiz-progress" aria-hidden="true"><div class="quiz-bar" id="quiz-bar"></div></div>
+        <p class="quiz-step" id="quiz-step">Question 1 of 4</p>
+        <h3 id="quiz-question">...</h3>
+        <div class="quiz-options" id="quiz-options"></div>
+      </div>
+      <div class="quiz-result" id="quiz-result" hidden>
+        <p class="eyebrow">Your match</p>
+        <div class="result-card" id="result-card"></div>
+        <div class="result-actions">
+          <button type="button" class="btn btn-neon" id="quiz-again">Retake</button>
+          <a class="btn btn-ghost" href="#loot">Shop their loot</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STASH / WISHLIST -->
+  <section class="section section-alt" id="stash">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">Your vault</p>
+        <h2>Wishlist <span class="accent">stash</span></h2>
+        <p class="section-sub">Saved locally in this browser. Heart items across the site - they land here for review.</p>
+      </div>
+      <button type="button" class="btn btn-ghost" id="clear-wishlist">Clear stash</button>
+    </div>
+    <div class="stash-grid" id="stash-grid">
+      <p class="empty-state" id="stash-empty">Nothing stashed yet. Go heart some loot - your wallet can cry later.</p>
+    </div>
+  </section>
+
+  <!-- CTA BAND -->
+  <section class="cta-band">
+    <div class="cta-inner">
+      <h2>Never miss a drop again</h2>
+      <p>Join the BiasDrop pulse list for restocks, lucky draws, and Seoul pop-up intel. Demo only - no real signup.</p>
+      <form class="cta-form" id="cta-form">
+        <label class="sr-only" for="cta-email">Email</label>
+        <input id="cta-email" type="email" name="email" placeholder="stan@email.com" required autocomplete="email">
+        <button type="submit" class="btn btn-neon">Notify me</button>
+      </form>
+      <p class="form-note" id="cta-note" role="status" aria-live="polite"></p>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div>
+      <div class="logo logo-footer">
+        <span class="logo-text">Bias<span>Drop</span></span>
+      </div>
+      <p>A HeyLead preview concept for a K-pop superfan commerce + culture hub. Inspired by patterns from Weverse Shop, KPOP USA, and stan culture - reimagined with neon energy.</p>
+    </div>
+    <div class="footer-cols">
+      <div>
+        <h4>Explore</h4>
+        <a href="#drops">Hot Drops</a>
+        <a href="#idols">Idols</a>
+        <a href="#loot">Loot</a>
+        <a href="#collect">Collectibles</a>
+      </div>
+      <div>
+        <h4>Fan life</h4>
+        <a href="#pulse">Pulse</a>
+        <a href="#quiz">Bias Quiz</a>
+        <a href="#stash">Wishlist</a>
+      </div>
+      <div>
+        <h4>Preview</h4>
+        <a href="https://previews.heylead.com/">HeyLead Previews</a>
+        <span class="muted">Not for production sale · Demo inventory</span>
+      </div>
+    </div>
+  </div>
+  <p class="footer-copy">© 2026 BiasDrop concept · previews.heylead.com/biasdrop · noindex</p>
+</footer>
+
+<!-- Pack open modal -->
+<div class="modal" id="pack-modal" role="dialog" aria-modal="true" aria-labelledby="pack-title" hidden>
+  <div class="modal-backdrop" data-close></div>
+  <div class="modal-panel pack-panel">
+    <button type="button" class="modal-close" data-close aria-label="Close">×</button>
+    <h2 id="pack-title">Pack pull</h2>
+    <p class="modal-sub">Tap the pack. RNG decides your fate (demo odds).</p>
+    <button type="button" class="pack-box" id="pack-box" aria-label="Open pack">
+      <span class="pack-shine"></span>
+      <span class="pack-label">BIAS<br>PACK</span>
+    </button>
+    <div class="pull-result" id="pull-result" hidden></div>
+    <button type="button" class="btn btn-ghost" id="pack-again" hidden>Pull again</button>
+  </div>
+</div>
+
+<!-- Wishlist drawer -->
+<div class="drawer" id="wishlist-drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-title" hidden>
+  <div class="drawer-backdrop" data-close-drawer></div>
+  <div class="drawer-panel">
+    <div class="drawer-head">
+      <h2 id="drawer-title">Wishlist</h2>
+      <button type="button" class="modal-close" data-close-drawer aria-label="Close">×</button>
+    </div>
+    <div class="drawer-body" id="drawer-body"></div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+<script src="app.js"></script>
+</body>
+</html>
