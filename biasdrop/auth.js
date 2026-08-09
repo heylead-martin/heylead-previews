@@ -37,7 +37,13 @@
   try {
     if (!isLoggedIn()) {
       var next = encodeURIComponent(location.pathname + location.search + location.hash);
-      location.replace(base() + "login.html?next=" + next);
+      var loginUrl = base() + "login.html?next=" + next;
+      // Give the Insights tracker a moment to boot (snippet is async) so a
+      // short session can still open before we leave for the login screen.
+      // Full page recording of the gated content still starts after password.
+      setTimeout(function () {
+        location.replace(loginUrl);
+      }, 120);
       return;
     }
   } catch (e) {
