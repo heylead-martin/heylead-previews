@@ -725,22 +725,31 @@
     }
   }
 
-  function bindEvents() {
-    const toggle = $("#nav-toggle");
-    const mobile = $("#mobile-nav");
-    if (toggle && mobile) {
-      toggle.addEventListener("click", () => {
-        const open = mobile.hidden;
-        mobile.hidden = !open;
-        toggle.setAttribute("aria-expanded", String(open));
-      });
-      mobile.querySelectorAll("a").forEach((a) =>
-        a.addEventListener("click", () => {
-          mobile.hidden = true;
-          toggle.setAttribute("aria-expanded", "false");
-        })
-      );
+  function bindMerchChrome() {
+    const pack = $("#open-pack-btn");
+    if (pack && !pack.dataset.bound) {
+      pack.dataset.bound = "1";
+      pack.addEventListener("click", openPackModal);
     }
+    const wish = $("#wishlist-btn");
+    if (wish && !wish.dataset.bound) {
+      wish.dataset.bound = "1";
+      wish.addEventListener("click", () => {
+        const d = $("#wishlist-drawer");
+        if (!d) return;
+        d.hidden = false;
+        document.body.style.overflow = "hidden";
+        renderDrawer();
+      });
+    }
+    updateWishlistUI();
+  }
+  window.BiasDropMerchRebind = bindMerchChrome;
+
+  function bindEvents() {
+    bindMerchChrome();
+
+    // nav chrome handled by shared.js when present
 
     $$(".filter-pills .pill").forEach((pill) => {
       pill.addEventListener("click", () => {
@@ -796,14 +805,6 @@
       if (opt) answerQuiz(Number(opt.dataset.opt));
     });
 
-    $("#wishlist-btn")?.addEventListener("click", () => {
-      const d = $("#wishlist-drawer");
-      if (!d) return;
-      d.hidden = false;
-      document.body.style.overflow = "hidden";
-      renderDrawer();
-    });
-
     $$("[data-close-drawer]").forEach((el) =>
       el.addEventListener("click", () => {
         $("#wishlist-drawer").hidden = true;
@@ -811,7 +812,6 @@
       })
     );
 
-    $("#open-pack-btn")?.addEventListener("click", openPackModal);
     $("#open-pack-btn-2")?.addEventListener("click", openPackModal);
     $$("#pack-modal [data-close]").forEach((el) => el.addEventListener("click", closePackModal));
     $("#pack-box")?.addEventListener("click", doPull);
@@ -878,30 +878,20 @@
   }
 
   function init() {
-    I18n.init();
+    // i18n + chrome are owned by shared.js on multi-page; home also boots shared first
+    if (!document.documentElement.dataset.lang) I18n.init();
     spawnSparks();
     renderAllDynamic();
     bindEvents();
 
-    document.querySelectorAll("[data-lang]").forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const next = btn.getAttribute("data-lang");
-        if (!next || next === I18n.getLang()) return;
-        I18n.setLang(next);
-        renderAllDynamic();
-        // refresh quiz UI if mid-flow
-        const play = $("#quiz-play");
-        const result = $("#quiz-result");
-        if (play && !play.hidden) showQuizStep();
-        else if (result && !result.hidden) {
-          // recompute last result from scores if any
-          try { finishQuiz(); } catch (e) { /* ignore */ }
-        }
-      });
-    });
-
     window.addEventListener("biasdrop:lang", () => {
-      // static already applied in setLang; keep drawers labels if open
+      renderAllDynamic();
+      const play = $("#quiz-play");
+      const result = $("#quiz-result");
+      if (play && !play.hidden) showQuizStep();
+      else if (result && !result.hidden) {
+        try { finishQuiz(); } catch (e) { /* ignore */ }
+      }
       const note = $("#cta-note");
       if (note && note.textContent) note.textContent = t("cta_ok");
     });
