@@ -515,14 +515,35 @@
 
   function fillSettings() {
     const cfg = getCfg();
-    $('#cfg-api').value = cfg.apiBase || '';
+    $('#cfg-api').value = cfg.apiBase || DEFAULT_API;
+    // Always re-populate from localStorage so a saved token is visible after reload
     $('#cfg-token').value = cfg.token || '';
+    const hint = $('#cfg-token-hint');
+    if (cfg.token) {
+      const mask = cfg.token.length > 8
+        ? cfg.token.slice(0, 4) + '…' + cfg.token.slice(-4)
+        : '••••';
+      hint.textContent = 'Saved in this browser: ' + mask + ' (' + cfg.token.length + ' chars). Leave blank on save to keep it.';
+    } else {
+      hint.textContent = 'No token in this browser yet. Paste APP_TOKEN and click Save & test.';
+    }
   }
 
   async function saveSettings() {
-    const apiBase = $('#cfg-api').value.trim().replace(/\/+$/, '');
-    const token = $('#cfg-token').value.trim();
+    const prev = getCfg();
+    const apiBase = ($('#cfg-api').value.trim() || DEFAULT_API).replace(/\/+$/, '');
+    // Do not wipe an existing token if the field is left blank (common after password managers / reloads)
+    const typed = $('#cfg-token').value.trim();
+    const token = typed || prev.token || '';
+    if (!token) {
+      $('#cfg-status').textContent = 'Token required.';
+      toast('Paste APP_TOKEN first', true);
+      return;
+    }
     saveCfg({ apiBase, token });
+    // Keep field filled so it does not "disappear" after save
+    $('#cfg-token').value = token;
+    fillSettings();
     $('#cfg-status').textContent = 'Testing…';
     const ok = await testConnection();
     $('#cfg-status').textContent = ok ? 'Connected.' : 'Failed - check URL and token.';
@@ -579,8 +600,17 @@
     $('#tracker-status').addEventListener('change', renderTracker);
     $('#profile-form').addEventListener('submit', saveProfile);
     $('#btn-save-cfg').addEventListener('click', saveSettings);
+    $('#btn-toggle-token').addEventListener('click', () => {
+      const input = $('#cfg-token');
+      const btn = $('#btn-toggle-token');
+      const show = input.type === 'password';
+      input.type = show ? 'text' : 'password';
+      btn.textContent = show ? 'Hide' : 'Show';
+    });
     $('#btn-clear-cfg').addEventListener('click', () => {
+      if (!confirm('Clear API URL and token from this browser?')) return;
       localStorage.removeItem(CFG_KEY);
+      $('#cfg-token').value = '';
       fillSettings();
       setApiStatus(false, 'API: not set');
       toast('Cleared local config');

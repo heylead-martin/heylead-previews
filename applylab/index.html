@@ -169,9 +169,15 @@
       <section class="view hidden" id="view-settings">
         <div class="card form-grid">
           <h2>API connection</h2>
-          <p class="hint">Worker holds your xAI key and profile data. Token never leaves this browser except as a header to your Worker.</p>
-          <label>Worker base URL<input id="cfg-api" class="input mono" placeholder="https://applylab-api.xxx.workers.dev"></label>
-          <label>APP_TOKEN<input id="cfg-token" class="input mono" type="password" placeholder="same value as wrangler secret APP_TOKEN"></label>
+          <p class="hint">Worker holds your xAI key and profile data. Token is stored only in this browser (localStorage). If the field looks empty, paste it again from <code>~/applylab-api/.app-token-local.txt</code> - Saving with a blank field no longer wipes a saved token.</p>
+          <label>Worker base URL<input id="cfg-api" class="input mono" placeholder="https://applylab-api.xxx.workers.dev" autocomplete="off"></label>
+          <label>APP_TOKEN
+            <div class="token-row">
+              <input id="cfg-token" class="input mono grow" type="password" placeholder="paste token, then Save &amp; test" autocomplete="off" spellcheck="false">
+              <button type="button" class="btn ghost" id="btn-toggle-token" title="Show or hide token">Show</button>
+            </div>
+          </label>
+          <p class="hint" id="cfg-token-hint"></p>
           <div class="form-actions">
             <button type="button" class="btn primary" id="btn-save-cfg">Save &amp; test</button>
             <button type="button" class="btn ghost" id="btn-clear-cfg">Clear</button>
