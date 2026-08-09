@@ -76,37 +76,33 @@ window.BiasDropPages = (function () {
       .filter(Boolean);
     if (!paras.length) return "";
 
-    const sections = [];
-    paras.forEach((p, i) => {
-      // "Heading. Body..." or "Heading: Body..." when heading is short
-      const m = p.match(/^(.{3,90}?)([.!?：:])\s+([\s\S]+)$/);
-      if (m && m[1].split(/\s+/).length <= 12 && m[3].length > 40) {
-        sections.push({ title: m[1].trim(), body: m[3].trim(), lead: i === 0 && sections.length === 0 });
-      } else if (i === 0) {
-        sections.push({ title: null, body: p, lead: true });
-      } else {
-        sections.push({ title: null, body: p, lead: false });
-      }
-    });
-
-    let html = '<div class="bio-prose bio-prose-rich">';
-    const lead = sections.find((s) => s.lead);
-    const rest = sections.filter((s) => !s.lead);
-
-    if (lead) {
-      html += `<p class="bio-lead">${escape(lead.title ? lead.title + ". " + lead.body : lead.body)}</p>`;
+    function splitHeading(p) {
+      // "Short heading. Rest of body..." — heading must be brief, no years, not a full sentence dump
+      const m = p.match(/^(.{3,70}?)([.!?])\s+([\s\S]{40,})$/);
+      if (!m) return null;
+      const title = m[1].trim();
+      const words = title.split(/\s+/).filter(Boolean);
+      if (words.length < 1 || words.length > 8) return null;
+      if (/\d{4}/.test(title)) return null; // avoid "debut on 8 August 2016"
+      if (/[,;]/.test(title) && words.length > 4) return null;
+      return { title, body: m[3].trim() };
     }
 
-    if (rest.length) {
+    let html = '<div class="bio-prose bio-prose-rich">';
+    // First paragraph is always the lead (full text)
+    html += `<p class="bio-lead">${escape(paras[0])}</p>`;
+
+    if (paras.length > 1) {
       html += '<div class="bio-sections">';
-      rest.forEach((s) => {
-        if (s.title) {
+      paras.slice(1).forEach((p) => {
+        const split = splitHeading(p);
+        if (split) {
           html += `<article class="bio-section">
-            <h3 class="bio-section-title">${escape(s.title)}</h3>
-            <p>${escape(s.body)}</p>
+            <h3 class="bio-section-title">${escape(split.title)}</h3>
+            <p>${escape(split.body)}</p>
           </article>`;
         } else {
-          html += `<article class="bio-section bio-section-plain"><p>${escape(s.body)}</p></article>`;
+          html += `<article class="bio-section bio-section-plain"><p>${escape(p)}</p></article>`;
         }
       });
       html += "</div>";
