@@ -25,10 +25,14 @@ window.BiasDropPages = (function () {
 
   function artistImage(a) {
     if (a.image) {
+      const fb = a.imageFallback || a.image.replace("hq720", "hqdefault").replace("maxresdefault", "hqdefault");
       return {
         src: a.image,
         alt: `${a.name} — official MV thumbnail (YouTube). Source: ${a.imageSource || "YouTube"}`,
         title: `${a.imageCredit || "Official MV thumbnail"} · ${a.imageSource || ""}`,
+        fallback: fb,
+        onerror:
+          "if(this.dataset.step==='1'){this.src=this.src.replace('hqdefault','mqdefault');this.dataset.step='2';}else if(this.dataset.step==='2'){this.onerror=null;this.src=this.dataset.fb||this.src;}else{this.dataset.step='1';this.src=this.dataset.fb||this.src.replace('hq720','hqdefault');}",
       };
     }
     const photo = S().photoFor(a.photoKey);
@@ -40,7 +44,7 @@ window.BiasDropPages = (function () {
     return `
     <article class="wiki-card">
       <a class="wiki-card-media" href="${base}artists/${a.id}/" style="--accent:${a.color}">
-        <img src="${attrs.src}" alt="${escape(attrs.alt)}" title="${escape(attrs.title)}" loading="lazy" width="600" height="600">
+        <img src="${attrs.src}" alt="${escape(attrs.alt)}" title="${escape(attrs.title)}" loading="lazy" width="600" height="640" decoding="async" ${attrs.fallback ? `data-fb="${attrs.fallback}"` : ""} ${attrs.onerror ? `onerror='${attrs.onerror}'` : ""}>
         <span class="wiki-chip">${a.fandom}</span>
       </a>
       <div class="wiki-card-body">
@@ -124,7 +128,7 @@ window.BiasDropPages = (function () {
 
     <header class="profile-hero" style="--accent:${a.color}">
       <div class="profile-media">
-        <img src="${attrs.src}" alt="${escape(attrs.alt)}" title="${escape(attrs.title)}" width="640" height="640">
+        
         ${a.imageSource ? `<p class="img-credit"><a href="${a.imageSource}" target="_blank" rel="noopener noreferrer">${escape(a.imageCredit || "YouTube")}</a></p>` : ""}
       </div>
       <div class="profile-copy">

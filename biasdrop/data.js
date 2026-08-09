@@ -277,7 +277,7 @@ window.BiasDropData = (function () {
         { title: "ROMANCE : UNTOLD", year: 2024, type: "Studio", highlight: "XO (Only If You Say Yes)", spotify: "https://open.spotify.com/search/ENHYPEN%20ROMANCE%20UNTOLD" },
       ],
       songs: [
-        { title: "Given-Taken", year: 2020, album: "BORDER : DAY ONE", spotify: "https://open.spotify.com/search/ENHYPEN%20Given-Taken", yt: "https://www.youtube.com/watch?v=jDW4ADBCTT8" },
+        { title: "Given-Taken", year: 2020, album: "BORDER : DAY ONE", spotify: "https://open.spotify.com/search/ENHYPEN%20Given-Taken", yt: "https://www.youtube.com/watch?v=nQ6wLuYvGd4" },
         { title: "Fever", year: 2021, album: "BORDER : CARNIVAL", spotify: "https://open.spotify.com/search/ENHYPEN%20Fever", yt: "https://www.youtube.com/results?search_query=ENHYPEN+Fever+MV" },
         { title: "Bite Me", year: 2023, album: "DARK BLOOD", spotify: "https://open.spotify.com/search/ENHYPEN%20Bite%20Me", yt: "https://www.youtube.com/results?search_query=ENHYPEN+Bite+Me+MV" },
         { title: "Sweet Venom", year: 2023, album: "ORANGE BLOOD", spotify: "https://open.spotify.com/search/ENHYPEN%20Sweet%20Venom", yt: "https://www.youtube.com/results?search_query=ENHYPEN+Sweet+Venom" },
@@ -316,7 +316,7 @@ window.BiasDropData = (function () {
         { title: "GOLDEN HOUR : Part.1", year: 2024, type: "Mini", highlight: "Work", spotify: "https://open.spotify.com/search/ATEEZ%20GOLDEN%20HOUR" },
       ],
       songs: [
-        { title: "Wonderland", year: 2019, album: "All to Action", spotify: "https://open.spotify.com/search/ATEEZ%20Wonderland%20track", yt: "https://www.youtube.com/watch?v=nMAVDFskS9E" },
+        { title: "Wonderland", year: 2019, album: "All to Action", spotify: "https://open.spotify.com/search/ATEEZ%20Wonderland%20track", yt: "https://www.youtube.com/watch?v=Z_BhMhZpAug" },
         { title: "Answer", year: 2020, album: "Answer", spotify: "https://open.spotify.com/search/ATEEZ%20Answer", yt: "https://www.youtube.com/watch?v=UOxkGD8qRB4" },
         { title: "Guerrilla", year: 2022, album: "THE WORLD EP.1", spotify: "https://open.spotify.com/search/ATEEZ%20Guerrilla", yt: "https://www.youtube.com/results?search_query=ATEEZ+Guerrilla+MV" },
         { title: "Crazy Form", year: 2023, album: "WILL", spotify: "https://open.spotify.com/search/ATEEZ%20Crazy%20Form", yt: "https://www.youtube.com/results?search_query=ATEEZ+Crazy+Form" },
