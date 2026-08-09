@@ -350,6 +350,75 @@ window.BiasDropPages = (function () {
     document.getElementById("f-region")?.addEventListener("change", renderConcerts);
   }
 
+  function openAlbumModal(album) {
+    const existing = document.getElementById("album-modal");
+    if (existing) existing.remove();
+    const tracks = album.tracks || [];
+    const modal = document.createElement("div");
+    modal.id = "album-modal";
+    modal.className = "album-modal";
+    modal.setAttribute("role", "dialog");
+    modal.setAttribute("aria-modal", "true");
+    modal.setAttribute("aria-labelledby", "album-modal-title");
+    modal.innerHTML = `
+      <div class="album-modal-backdrop" data-close-album></div>
+      <div class="album-modal-panel" style="--accent:${album.color || "var(--violet)"}">
+        <button type="button" class="modal-close" data-close-album aria-label="${t("close")}">×</button>
+        <p class="eyebrow">${escape(album.artistName)} · ${album.year}</p>
+        <h2 id="album-modal-title">${escape(album.title)}</h2>
+        <p class="muted"><span class="tag">${escape(album.type || "")}</span>
+          ${album.highlight ? ` · ${t("albums_highlight")}: <strong>${escape(album.highlight)}</strong>` : ""}
+          · ${tracks.length} ${t("album_tracks_count")}
+        </p>
+        <div class="song-actions" style="margin:0.75rem 0 1rem">
+          ${album.spotify ? S().extLink(album.spotify, "Spotify", "btn btn-sm btn-neon") : ""}
+          ${album.apple ? S().extLink(album.apple, "Apple", "btn btn-sm btn-ghost") : ""}
+          ${album.youtubeMusic ? S().extLink(album.youtubeMusic, "YT Music", "btn btn-sm btn-ghost") : ""}
+        </div>
+        <div class="album-tracklist">
+          ${
+            tracks.length
+              ? tracks
+                  .map(
+                    (tr) => `<div class="album-track-row">
+              <span class="track-no">${tr.no}</span>
+              <span class="track-title">${escape(tr.title)}</span>
+              <span class="track-links">
+                ${tr.spotify ? S().extLink(tr.spotify, "Spotify", "text-link") : ""}
+                ${tr.apple ? S().extLink(tr.apple, "Apple", "text-link") : ""}
+                ${tr.youtubeMusic ? S().extLink(tr.youtubeMusic, "YT Music", "text-link") : ""}
+                ${tr.yt ? S().extLink(tr.yt, "MV", "text-link") : ""}
+              </span>
+            </div>`
+                  )
+                  .join("")
+              : `<p class="muted">${t("album_no_tracks")}</p>`
+          }
+        </div>
+        <p class="muted tiny-note">${t("album_modal_note")}</p>
+      </div>`;
+    document.body.appendChild(modal);
+    document.body.style.overflow = "hidden";
+    const close = () => {
+      modal.remove();
+      document.body.style.overflow = "";
+    };
+    modal.querySelectorAll("[data-close-album]").forEach((el) => el.addEventListener("click", close));
+    modal.addEventListener("click", (e) => {
+      // don't close when clicking stream links
+      if (e.target.closest("a")) e.stopPropagation();
+    });
+    document.addEventListener(
+      "keydown",
+      function esc(e) {
+        if (e.key === "Escape") {
+          close();
+          document.removeEventListener("keydown", esc);
+        }
+      }
+    );
+  }
+
   function renderAlbums() {
     const root = document.getElementById("page-root");
     if (!root || !D()) return;
@@ -364,6 +433,9 @@ window.BiasDropPages = (function () {
       songs = songs.filter((s) => s.artistId === artistFilter);
     }
 
+    // stash for click handlers
+    window.__biasdropAlbums = albums;
+
     const opts = D().artists
       .map((a) => `<option value="${a.id}" ${artistFilter === a.id ? "selected" : ""}>${a.name}</option>`)
       .join("");
@@ -372,7 +444,7 @@ window.BiasDropPages = (function () {
       <section class="page-hero">
         <p class="eyebrow">${t("nav_albums_page")}</p>
         <h1>${mode === "songs" ? t("songs_title") : t("albums_title")}</h1>
-        <p class="section-sub">${mode === "songs" ? t("songs_sub") : t("albums_sub")}</p>
+        <p class="section-sub">${mode === "songs" ? t("songs_sub") : t("albums_click_hint")}</p>
         <div class="filter-bar">
           <label>
             <span>${t("concerts_artist")}</span>
@@ -416,12 +488,15 @@ window.BiasDropPages = (function () {
               albums.length
                 ? albums
                     .map(
-                      (d) => `<article class="album-card" style="--accent:${d.color}">
+                      (d, idx) => `<article class="album-card album-card-clickable" style="--accent:${d.color}" data-album-idx="${idx}" role="button" tabindex="0" aria-label="${escape(d.title)} - ${t("album_show_tracks")}">
                 <div class="album-year">${d.year}</div>
                 <h3>${escape(d.title)}</h3>
-                <p class="muted"><a href="${base}artists/${d.artistId}/">${escape(d.artistName)}</a></p>
-                <p><span class="tag">${escape(d.type)}</span> ${d.highlight ? `· ${escape(d.highlight)}` : ""}</p>
-                <div class="song-actions">
+                <p class="muted"><a href="${base}artists/${d.artistId}/" data-stop>${escape(d.artistName)}</a></p>
+                <p><span class="tag">${escape(d.type)}</span> ${d.highlight ? `· ${escape(d.highlight)}` : ""}
+                  ${(d.tracks && d.tracks.length) ? ` · <span class="track-count">${d.tracks.length} ${t("album_tracks_count")}</span>` : ""}
+                </p>
+                <p class="album-tap-hint">${t("album_show_tracks")}</p>
+                <div class="song-actions" data-stop>
                   ${d.spotify ? S().extLink(d.spotify, "Spotify", "btn btn-sm btn-neon") : ""}
                   ${d.apple ? S().extLink(d.apple, "Apple", "btn btn-sm btn-ghost") : ""}
                   ${d.youtubeMusic ? S().extLink(d.youtubeMusic, "YT Music", "btn btn-sm btn-ghost") : ""}
@@ -436,6 +511,24 @@ window.BiasDropPages = (function () {
 
     document.getElementById("alb-artist")?.addEventListener("change", renderAlbums);
     document.getElementById("alb-mode")?.addEventListener("change", renderAlbums);
+
+    root.querySelectorAll("[data-album-idx]").forEach((card) => {
+      const open = () => {
+        const idx = Number(card.getAttribute("data-album-idx"));
+        const album = (window.__biasdropAlbums || [])[idx];
+        if (album) openAlbumModal(album);
+      };
+      card.addEventListener("click", (e) => {
+        if (e.target.closest("[data-stop], a, button")) return;
+        open();
+      });
+      card.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          open();
+        }
+      });
+    });
   }
 
   function renderFaq() {

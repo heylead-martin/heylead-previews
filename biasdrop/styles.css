@@ -2108,3 +2108,91 @@ body.page-shell .hero-bg { display: none; }
 .legal-prose { max-width: 70ch; }
 .concert-hubs { margin-bottom: 1.5rem; }
 .trivia-grid .about-card h3 { font-size: 0.95rem; color: var(--pink); margin-bottom: 0.4rem; }
+
+/* Album modal + clickable cards */
+.album-card-clickable {
+  cursor: pointer;
+  transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+}
+.album-card-clickable:hover,
+.album-card-clickable:focus-visible {
+  transform: translateY(-3px);
+  border-color: rgba(0, 240, 255, 0.45);
+  box-shadow: 0 12px 32px rgba(168, 85, 247, 0.2);
+  outline: none;
+}
+.album-tap-hint {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--cyan);
+  margin: 0.15rem 0 0.35rem;
+}
+.track-count { color: var(--pink); font-weight: 700; font-size: 0.85em; }
+.album-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 400;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+}
+.album-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.72);
+  backdrop-filter: blur(6px);
+}
+.album-modal-panel {
+  position: relative;
+  z-index: 1;
+  width: min(560px, 100%);
+  max-height: min(86dvh, 720px);
+  overflow: auto;
+  border-radius: 22px;
+  border: 1px solid var(--line);
+  background:
+    radial-gradient(circle at 100% 0%, color-mix(in srgb, var(--accent, var(--pink)) 22%, transparent), transparent 50%),
+    var(--bg-card);
+  padding: 1.35rem 1.25rem 1.25rem;
+  box-shadow: var(--shadow);
+}
+.album-modal-panel h2 {
+  font-size: 1.45rem;
+  margin: 0.2rem 0 0.45rem;
+}
+.album-tracklist {
+  display: grid;
+  gap: 0.35rem;
+  margin-top: 0.5rem;
+}
+.album-track-row {
+  display: grid;
+  grid-template-columns: 2rem 1fr;
+  gap: 0.5rem 0.65rem;
+  align-items: center;
+  padding: 0.55rem 0.65rem;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.06);
+  background: rgba(0,0,0,0.2);
+}
+@media (min-width: 520px) {
+  .album-track-row {
+    grid-template-columns: 2rem 1fr auto;
+  }
+}
+.track-no {
+  font-variant-numeric: tabular-nums;
+  font-weight: 800;
+  color: var(--cyan);
+  font-size: 0.85rem;
+}
+.track-title { font-weight: 600; font-size: 0.95rem; }
+.track-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem 0.65rem;
+  grid-column: 2 / -1;
+}
+@media (min-width: 520px) {
+  .track-links { grid-column: auto; justify-content: flex-end; }
+}
