@@ -63,21 +63,25 @@ button:disabled{opacity:.6;cursor:wait}
   <h1>Private preview</h1>
   <p class="sub">Enter the password to open this K-pop demo only. It does not unlock other HeyLead previews.</p>
   <div class="err" id="err" role="alert"></div>
-  <form id="form" autocomplete="on">
+  <form id="form" autocomplete="off">
     <label for="password">Password</label>
-    <input id="password" name="password" type="password" required autocomplete="current-password" placeholder="••••••••" autofocus>
+    <input id="password" name="biasdrop-password" type="password" required autocomplete="off" spellcheck="false" autocapitalize="off" autocorrect="off" placeholder="••••••••" autofocus>
     <div class="row">
       <label><input type="checkbox" id="remember"> Remember on this device</label>
     </div>
     <button type="submit" id="btn">Enter BiasDrop</button>
   </form>
-  <p class="foot">BiasDrop client preview · <strong>not</strong> the full previews directory</p>
+  <p class="foot">BiasDrop client preview · <strong>not</strong> the full previews directory<br>Password is case-sensitive · no spaces</p>
 </div>
 <script src="auth-config.js"></script>
 <script>
 (function () {
   var cfg = window.BIASDROP_AUTH;
-  if (!cfg) return;
+  if (!cfg || !cfg.passwordHash) {
+    document.getElementById("err").textContent = "Auth config failed to load. Hard-refresh and try again.";
+    document.getElementById("err").classList.add("on");
+    return;
+  }
   var form = document.getElementById("form");
   var err = document.getElementById("err");
   var btn = document.getElementById("btn");
@@ -97,6 +101,9 @@ button:disabled{opacity:.6;cursor:wait}
   }
 
   function sha256(str) {
+    if (!window.crypto || !crypto.subtle) {
+      return Promise.reject(new Error("no-subtle"));
+    }
     var data = new TextEncoder().encode(str);
     return crypto.subtle.digest("SHA-256", data).then(function (buf) {
       return Array.from(new Uint8Array(buf))
@@ -120,13 +127,21 @@ button:disabled{opacity:.6;cursor:wait}
     e.preventDefault();
     err.classList.remove("on");
     btn.disabled = true;
-    var pw = document.getElementById("password").value;
+    // trim spaces from copy-paste / autofill accidents
+    var pw = String(document.getElementById("password").value || "").trim();
+    if (!pw) {
+      err.textContent = "Enter the password.";
+      err.classList.add("on");
+      btn.disabled = false;
+      return;
+    }
     sha256(pw)
       .then(function (hash) {
         if (hash !== cfg.passwordHash) {
-          err.textContent = "Wrong password.";
+          err.textContent = "Wrong password. Check spelling (case-sensitive, no spaces).";
           err.classList.add("on");
           btn.disabled = false;
+          document.getElementById("password").select();
           return;
         }
         try {
@@ -141,7 +156,7 @@ button:disabled{opacity:.6;cursor:wait}
         location.replace(next);
       })
       .catch(function () {
-        err.textContent = "Could not verify password in this browser.";
+        err.textContent = "Could not verify password in this browser. Use HTTPS and try again.";
         err.classList.add("on");
         btn.disabled = false;
       });
