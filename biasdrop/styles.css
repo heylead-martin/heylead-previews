@@ -2470,3 +2470,15 @@ body.page-shell .hero-bg { display: none; }
   }
   .blog-pager-link.next { text-align: left; justify-self: stretch; }
 }
+
+/* Crop YouTube thumbs toward faces on idol/photocard cards */
+.idol-avatar .media-fill,
+.pc-face .media-fill,
+.pull-art img,
+.result-photo {
+  object-fit: cover;
+  object-position: center 20%;
+}
+.pc-face {
+  background: #0a0a12;
+}
