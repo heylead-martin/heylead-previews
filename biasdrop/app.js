@@ -51,15 +51,16 @@
   }
 
   function getIdols() {
+    // Thumbnails from official solo MVs / member-focused official clips only
     return [
-      { id: "idol-felix", name: "Felix", group: "Stray Kids", roleKey: "idol_felix_r", tags: ["Baking", "Aussie", "Yongbok"], photo: ytImg("OvioeS1ZZ7o", "Stray Kids MANIAC / Felix era"), initials: "FX", artistPath: "stray-kids" },
-      { id: "idol-karina", name: "Karina", group: "aespa", roleKey: "idol_karina_r", tags: ["Metaverse", "Power", "Stage"], photo: ytImg("4TWR90KJl84", "aespa Next Level / Karina"), initials: "KR", artistPath: "aespa" },
-      { id: "idol-jungkook", name: "Jungkook", group: "BTS", roleKey: "idol_jk_r", tags: ["Solo era", "Golden", "All-rounder"], photo: ytImg("QU9c0053UAU", "Jungkook Seven official MV"), initials: "JK", artistPath: "bts" },
-      { id: "idol-wonyoung", name: "Wonyoung", group: "IVE", roleKey: "idol_wy_r", tags: ["Icon", "Fashion", "Aura"], photo: ytImg("Y8JFxS1HlDo", "IVE LOVE DIVE / Wonyoung"), initials: "WY", artistPath: "ive" },
-      { id: "idol-yeonjun", name: "Yeonjun", group: "TXT", roleKey: "idol_yj_r", tags: ["4th gen it", "Dance", "Runway"], photo: ytImg("AG-erEMhumc", "TXT 0X1=LOVESONG / Yeonjun"), initials: "YJ", artistPath: "txt" },
-      { id: "idol-ningning", name: "Ningning", group: "aespa", roleKey: "idol_nn_r", tags: ["Vocal", "China line", "Live"], photo: ytImg("Os_heh8vPfs", "aespa Spicy / Ningning"), initials: "NN", artistPath: "aespa" },
-      { id: "idol-san", name: "San", group: "ATEEZ", roleKey: "idol_san_r", tags: ["Stage beast", "Abs", "Fangs"], photo: ytImg("UOxkGD8qRB4", "ATEEZ Answer / San"), initials: "SN", artistPath: "ateez" },
-      { id: "idol-jisoo", name: "Jisoo", group: "BLACKPINK", roleKey: "idol_jisoo_r", tags: ["Flower", "Solo", "Dior"], photo: ytImg("gQlMMD8auMs", "BLACKPINK Pink Venom / Jisoo"), initials: "JS", artistPath: "blackpink" },
+      { id: "idol-felix", name: "Felix", group: "Stray Kids", roleKey: "idol_felix_r", tags: ["Baking", "Aussie", "Yongbok"], photo: ytImg("oe4XJ851oOk", "Felix · LiSA ReawakeR feat. Felix (official)"), initials: "FX", artistPath: "stray-kids" },
+      { id: "idol-karina", name: "Karina", group: "aespa", roleKey: "idol_karina_r", tags: ["Metaverse", "Power", "Stage"], photo: ytImg("4TWR90KJl84", "Karina · aespa Next Level official MV"), initials: "KR", artistPath: "aespa" },
+      { id: "idol-jungkook", name: "Jungkook", group: "BTS", roleKey: "idol_jk_r", tags: ["Solo era", "Golden", "All-rounder"], photo: ytImg("QU9c0053UAU", "Jungkook · Seven official MV"), initials: "JK", artistPath: "bts" },
+      { id: "idol-wonyoung", name: "Wonyoung", group: "IVE", roleKey: "idol_wy_r", tags: ["Icon", "Fashion", "Aura"], photo: ytImg("Y8JFxS1HlDo", "Wonyoung · IVE LOVE DIVE official MV"), initials: "WY", artistPath: "ive" },
+      { id: "idol-yeonjun", name: "Yeonjun", group: "TXT", roleKey: "idol_yj_r", tags: ["4th gen it", "Dance", "Runway"], photo: ytImg("1T9tLMh99Wo", "Yeonjun · GGUM official MV"), initials: "YJ", artistPath: "txt" },
+      { id: "idol-ningning", name: "Ningning", group: "aespa", roleKey: "idol_nn_r", tags: ["Vocal", "China line", "Live"], photo: ytImg("Os_heh8vPfs", "Ningning · aespa Spicy official MV"), initials: "NN", artistPath: "aespa" },
+      { id: "idol-san", name: "San", group: "ATEEZ", roleKey: "idol_san_r", tags: ["Stage beast", "Abs", "Fangs"], photo: ytImg("7xIsS7pUoao", "San · ATEEZ Present Creep (official)"), initials: "SN", artistPath: "ateez" },
+      { id: "idol-jisoo", name: "Jisoo", group: "BLACKPINK", roleKey: "idol_jisoo_r", tags: ["Flower", "Solo", "Dior"], photo: ytImg("YudHcBIxlYw", "Jisoo · FLOWER official MV"), initials: "JS", artistPath: "blackpink" },
     ].map((i) => ({ ...i, role: t(i.roleKey) }));
   }
 
@@ -81,19 +82,20 @@
   }
 
   function getPhotocards() {
+    // Prefer solo / member-focused official YouTube MVs so the face matches the card name
     return [
-      { id: "pc1", name: "Felix", set: "5-STAR", rarity: "SSR", photo: ytImg("OvioeS1ZZ7o", "Felix") },
-      { id: "pc2", name: "Karina", set: "Armageddon", rarity: "UR", photo: ytImg("4TWR90KJl84", "Karina") },
-      { id: "pc3", name: "Jungkook", set: "GOLDEN", rarity: "SSR", photo: ytImg("QU9c0053UAU", "Jungkook") },
-      { id: "pc4", name: "Wonyoung", set: "IVE SWITCH", rarity: "SR", photo: ytImg("Y8JFxS1HlDo", "Wonyoung") },
-      { id: "pc5", name: "Yeonjun", set: "minisode 3", rarity: "SR", photo: ytImg("AG-erEMhumc", "Yeonjun") },
-      { id: "pc6", name: "San", set: "GOLDEN HOUR", rarity: "R", photo: ytImg("UOxkGD8qRB4", "San") },
-      { id: "pc7", name: "Ningning", set: "Whiplash", rarity: "SSR", photo: ytImg("Os_heh8vPfs", "Ningning") },
-      { id: "pc8", name: "Jisoo", set: "AMORTAGE", rarity: "UR", photo: ytImg("gQlMMD8auMs", "Jisoo") },
-      { id: "pc9", name: "Hyunjin", set: "ATE", rarity: "SR", photo: ytImg("jYSlpC6Ud2A", "Hyunjin") },
-      { id: "pc10", name: "Winter", set: "Drama", rarity: "R", photo: ytImg("WPdWvnAAurg", "Winter") },
-      { id: "pc11", name: "Beomgyu", set: "The Name Chapter", rarity: "SSR", photo: ytImg("AG-erEMhumc", "Beomgyu") },
-      { id: "pc12", name: "Yujin", set: "HEYA", rarity: "SR", photo: ytImg("6ZUIwj3FgUY", "Yujin") },
+      { id: "pc1", name: "Felix", set: "5-STAR", rarity: "SSR", photo: ytImg("oe4XJ851oOk", "Felix official") },
+      { id: "pc2", name: "Karina", set: "Armageddon", rarity: "UR", photo: ytImg("4TWR90KJl84", "Karina · Next Level") },
+      { id: "pc3", name: "Jungkook", set: "GOLDEN", rarity: "SSR", photo: ytImg("QU9c0053UAU", "Jungkook · Seven") },
+      { id: "pc4", name: "Wonyoung", set: "IVE SWITCH", rarity: "SR", photo: ytImg("Y8JFxS1HlDo", "Wonyoung · LOVE DIVE") },
+      { id: "pc5", name: "Yeonjun", set: "minisode 3", rarity: "SR", photo: ytImg("1T9tLMh99Wo", "Yeonjun · GGUM") },
+      { id: "pc6", name: "San", set: "GOLDEN HOUR", rarity: "R", photo: ytImg("7xIsS7pUoao", "San · Creep ATEEZ Present") },
+      { id: "pc7", name: "Ningning", set: "Whiplash", rarity: "SSR", photo: ytImg("Os_heh8vPfs", "Ningning · Spicy") },
+      { id: "pc8", name: "Jisoo", set: "AMORTAGE", rarity: "UR", photo: ytImg("YudHcBIxlYw", "Jisoo · FLOWER") },
+      { id: "pc9", name: "Hyunjin", set: "ATE", rarity: "SR", photo: ytImg("3yp17XEP5ck", "Hyunjin · So Good SKZ-PLAYER") },
+      { id: "pc10", name: "Winter", set: "Drama", rarity: "R", photo: ytImg("D8VEhcPeSlc", "Winter · Drama") },
+      { id: "pc11", name: "Beomgyu", set: "The Name Chapter", rarity: "SSR", photo: ytImg("VNWX3qWBd-A", "Beomgyu · Take My Half") },
+      { id: "pc12", name: "Yujin", set: "HEYA", rarity: "SR", photo: ytImg("07EzMbVH3QE", "Yujin · HEYA") },
     ];
   }
 
@@ -163,11 +165,11 @@
 
   function getQuizResults() {
     return {
-      performer: { name: "San", group: "ATEEZ", vibe: t("res_performer_v"), blurb: t("res_performer_b"), kit: [t("kit_ls"), t("kit_tee"), t("kit_ssr")], photo: ytImg("UOxkGD8qRB4", "San") },
+      performer: { name: "San", group: "ATEEZ", vibe: t("res_performer_v"), blurb: t("res_performer_b"), kit: [t("kit_ls"), t("kit_tee"), t("kit_ssr")], photo: ytImg("7xIsS7pUoao", "San") },
       vocal: { name: "Ningning", group: "aespa", vibe: t("res_vocal_v"), blurb: t("res_vocal_b"), kit: [t("kit_pc"), t("kit_key"), t("kit_sg")], photo: ytImg("Os_heh8vPfs", "Ningning") },
       visual: { name: "Wonyoung", group: "IVE", vibe: t("res_visual_v"), blurb: t("res_visual_b"), kit: [t("kit_pb"), t("kit_jersey"), t("kit_ur")], photo: ytImg("Y8JFxS1HlDo", "Wonyoung") },
-      soft: { name: "Felix", group: "Stray Kids", vibe: t("res_soft_v"), blurb: t("res_soft_b"), kit: [t("kit_plush"), t("kit_voice"), t("kit_bakery")], photo: ytImg("OvioeS1ZZ7o", "Felix") },
-      chaos: { name: "Yeonjun", group: "TXT", vibe: t("res_chaos_v"), blurb: t("res_chaos_b"), kit: [t("kit_grip"), t("kit_hoodie"), t("kit_lucky")], photo: ytImg("AG-erEMhumc", "Yeonjun") },
+      soft: { name: "Felix", group: "Stray Kids", vibe: t("res_soft_v"), blurb: t("res_soft_b"), kit: [t("kit_plush"), t("kit_voice"), t("kit_bakery")], photo: ytImg("oe4XJ851oOk", "Felix") },
+      chaos: { name: "Yeonjun", group: "TXT", vibe: t("res_chaos_v"), blurb: t("res_chaos_b"), kit: [t("kit_grip"), t("kit_hoodie"), t("kit_lucky")], photo: ytImg("1T9tLMh99Wo", "Yeonjun") },
     };
   }
 
