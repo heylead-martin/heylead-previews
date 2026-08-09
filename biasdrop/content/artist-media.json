@@ -1,0 +1,97 @@
+{
+  "stray-kids": {
+    "ytFace": "TQTlCHxyuu8",
+    "ytHome": [
+      "TQTlCHxyuu8",
+      "OvioeS1ZZ7o",
+      "jYSlpC6Ud2A"
+    ],
+    "appleArtist": "https://music.apple.com/us/artist/stray-kids/1359981020",
+    "ytMusic": "https://music.youtube.com/channel/UCdKuE7a2QZeHPhDntXVZ91w"
+  },
+  "bts": {
+    "ytFace": "gdZLi9oWNZg",
+    "ytHome": [
+      "gdZLi9oWNZg",
+      "WMweEpGlu_U",
+      "xEeFrLSkMm8"
+    ],
+    "appleArtist": "https://music.apple.com/us/artist/bts/883131348",
+    "ytMusic": "https://music.youtube.com/channel/UCLkAepWjdylmXSltofFvsYQ"
+  },
+  "blackpink": {
+    "ytFace": "ioNng23DkIM",
+    "ytHome": [
+      "ioNng23DkIM",
+      "gQlMMD8auMs",
+      "POe9SOEKotk"
+    ],
+    "appleArtist": "https://music.apple.com/us/artist/blackpink/1146855862",
+    "ytMusic": "https://music.youtube.com/channel/UCOmHUn--16B90oW2L6FRR3A"
+  },
+  "aespa": {
+    "ytFace": "4TWR90KJl84",
+    "ytHome": [
+      "4TWR90KJl84",
+      "WPdWvnAAurg",
+      "Os_heh8vPfs"
+    ],
+    "appleArtist": "https://music.apple.com/us/artist/aespa/1540443179",
+    "ytMusic": "https://music.youtube.com/channel/UC9GtSLeksfK4yuJ_g1lgQbg"
+  },
+  "ive": {
+    "ytFace": "Y8JFxS1HlDo",
+    "ytHome": [
+      "Y8JFxS1HlDo",
+      "F0B7HDiY-10",
+      "6ZUIwj3FgUY"
+    ],
+    "appleArtist": "https://music.apple.com/us/artist/ive/1592603517",
+    "ytMusic": "https://music.youtube.com/channel/UC-Fnix71s68j_qEwOy4dElQ"
+  },
+  "txt": {
+    "ytFace": "AG-erEMhumc",
+    "ytHome": [
+      "WdinMrYQ0RU",
+      "AG-erEMhumc"
+    ],
+    "appleArtist": "https://music.apple.com/us/artist/tomorrow-x-together/1451822345",
+    "ytMusic": "https://music.youtube.com/channel/UCtiObj3CsEAdNU6ZPWDsddQ"
+  },
+  "enhypen": {
+    "ytFace": "jDW4ADBCTT8",
+    "ytHome": [
+      "jDW4ADBCTT8"
+    ],
+    "appleArtist": "https://music.apple.com/us/artist/enhypen/1543605837",
+    "ytMusic": "https://music.youtube.com/channel/UC9rMiEjNaCSsebs31MRDCRA"
+  },
+  "ateez": {
+    "ytFace": "nMAVDFskS9E",
+    "ytHome": [
+      "nMAVDFskS9E",
+      "UOxkGD8qRB4"
+    ],
+    "appleArtist": "https://music.apple.com/us/artist/ateez/1439281960",
+    "ytMusic": "https://music.youtube.com/channel/UCp-rN-1gF2sU_LGJXGVn1nA"
+  },
+  "seventeen": {
+    "ytFace": "gRnuFC4Ualw",
+    "ytHome": [
+      "gRnuFC4Ualw",
+      "zEkg4GBQumc"
+    ],
+    "appleArtist": "https://music.apple.com/us/artist/seventeen/1008410184",
+    "ytMusic": "https://music.youtube.com/channel/UCfkXDY7vwkcJ8ddFGz8KusA"
+  },
+  "twice": {
+    "ytFace": "kOHB85vDuow",
+    "ytHome": [
+      "kOHB85vDuow",
+      "ePpPVE-GGJw",
+      "c7rCyll5AeY"
+    ],
+    "appleArtist": "https://music.apple.com/us/artist/twice/1033581567",
+    "ytMusic": "https://music.youtube.com/channel/UCzgxx_DM2Dcb9Y1spb9mUJA"
+  }
+}

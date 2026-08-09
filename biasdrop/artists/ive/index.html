@@ -24,11 +24,12 @@
 <div id="site-footer"></div>
 <script src="../../media.js"></script>
 <script src="../../data.js"></script>
+<script src="../../content-extra.js"></script>
 <script src="../../i18n.js"></script>
 <script src="../../shared.js"></script>
 <script src="../../site-pages.js"></script>
 <script>
-  BiasDropShared.boot(function () { BiasDropPages.renderArtistProfile("ive"); });
+  BiasDropShared.boot(function () { if (window.BiasDropExtra) BiasDropExtra.apply();  BiasDropPages.renderArtistProfile("ive"); });
 </script>
 </body>
 </html>

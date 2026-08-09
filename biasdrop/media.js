@@ -299,11 +299,11 @@ window.BiasDropMedia = (function () {
       desc: "Music festival crowd free stock video by Tom Fisk on Pexels",
     },
     neonDance: {
-      src: "https://videos.pexels.com/video-files/8111735/8111735-hd_1080_1920_30fps.mp4",
-      poster: photos.neonLove.src,
-      photographer: "RDNE Stock project",
-      url: "https://www.pexels.com/video/woman-dancing-in-front-of-neon-lights-8111735/",
-      desc: "Woman dancing in front of neon lights by RDNE Stock project on Pexels",
+      src: "https://videos.pexels.com/video-files/7326295/7326295-hd_1280_720_25fps.mp4",
+      poster: photos.dancer.src,
+      photographer: "MART PRODUCTION",
+      url: "https://www.pexels.com/video/three-women-dancing-7326295/",
+      desc: "Three women dancing (group choreography practice vibe) by MART PRODUCTION on Pexels",
     },
     cityNight: {
       src: "https://videos.pexels.com/video-files/11336556/11336556-hd_1280_720_30fps.mp4",

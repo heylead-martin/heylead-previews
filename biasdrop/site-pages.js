@@ -23,9 +23,20 @@ window.BiasDropPages = (function () {
     return "region_global";
   }
 
-  function artistCard(a, base) {
+  function artistImage(a) {
+    if (a.image) {
+      return {
+        src: a.image,
+        alt: `${a.name} — official MV thumbnail (YouTube). Source: ${a.imageSource || "YouTube"}`,
+        title: `${a.imageCredit || "Official MV thumbnail"} · ${a.imageSource || ""}`,
+      };
+    }
     const photo = S().photoFor(a.photoKey);
-    const attrs = S().imgAttrs(photo, a.name);
+    return S().imgAttrs(photo, a.name);
+  }
+
+  function artistCard(a, base) {
+    const attrs = artistImage(a);
     return `
     <article class="wiki-card">
       <a class="wiki-card-media" href="${base}artists/${a.id}/" style="--accent:${a.color}">
@@ -93,10 +104,12 @@ window.BiasDropPages = (function () {
       root.innerHTML = `<p class="empty-state">${t("no_results")}</p><p><a href="${base}artists/">${t("artists_back")}</a></p>`;
       return;
     }
-    const photo = S().photoFor(a.photoKey);
-    const attrs = S().imgAttrs(photo, a.name);
+    const attrs = artistImage(a);
     const concerts = D().getConcertsByArtist(a.id);
     const L = a.links || {};
+    const tr = a.trivia || null;
+    const fullBio = D().bio(a, lang());
+    const bioParas = fullBio.split(/\n\n+/).filter(Boolean);
 
     document.title = `${a.name} · BiasDrop`;
 
@@ -112,11 +125,12 @@ window.BiasDropPages = (function () {
     <header class="profile-hero" style="--accent:${a.color}">
       <div class="profile-media">
         <img src="${attrs.src}" alt="${escape(attrs.alt)}" title="${escape(attrs.title)}" width="640" height="640">
+        ${a.imageSource ? `<p class="img-credit"><a href="${a.imageSource}" target="_blank" rel="noopener noreferrer">${escape(a.imageCredit || "YouTube")}</a></p>` : ""}
       </div>
       <div class="profile-copy">
         <p class="eyebrow">${a.fandom} · ${a.gen} gen</p>
         <h1>${a.name}</h1>
-        <p class="profile-bio">${escape(D().bio(a, lang()))}</p>
+        <p class="profile-bio lead-bio">${escape(bioParas[0] || "")}</p>
         <dl class="profile-facts">
           <div><dt>${t("artists_debut")}</dt><dd>${a.debut}</dd></div>
           <div><dt>${t("artists_agency")}</dt><dd>${escape(a.agency)}</dd></div>
@@ -127,10 +141,30 @@ window.BiasDropPages = (function () {
           ${L.official ? S().extLink(L.official, t("open_official"), "btn btn-sm btn-neon") : ""}
           ${L.weverse ? S().extLink(L.weverse, t("open_weverse"), "btn btn-sm btn-ghost") : ""}
           ${L.spotify ? S().extLink(L.spotify, t("open_spotify"), "btn btn-sm btn-ghost") : ""}
+          ${L.apple ? S().extLink(L.apple, t("open_apple"), "btn btn-sm btn-ghost") : ""}
+          ${L.youtubeMusic ? S().extLink(L.youtubeMusic, t("open_ytmusic"), "btn btn-sm btn-ghost") : ""}
           ${L.youtube ? S().extLink(L.youtube, t("open_youtube"), "btn btn-sm btn-ghost") : ""}
         </div>
       </div>
     </header>
+
+    ${tr ? `<section class="content-block trivia-grid">
+      <h2>${t("artists_trivia")}</h2>
+      <div class="about-grid">
+        <article class="about-card"><h3>${t("trivia_origin")}</h3><p>${escape((tr.origin && tr.origin[lang()]) || (tr.origin && tr.origin.en) || "")}</p></article>
+        <article class="about-card"><h3>${t("trivia_food")}</h3><p>${escape((tr.food && tr.food[lang()]) || (tr.food && tr.food.en) || "")}</p></article>
+        <article class="about-card"><h3>${t("trivia_drink")}</h3><p>${escape((tr.drink && tr.drink[lang()]) || (tr.drink && tr.drink.en) || "")}</p></article>
+        <article class="about-card"><h3>${t("trivia_fun")}</h3><p>${escape((tr.fun && tr.fun[lang()]) || (tr.fun && tr.fun.en) || "")}</p></article>
+      </div>
+    </section>` : ""}
+
+    <section class="content-block bio-long">
+      <h2>${t("artists_full_bio")}</h2>
+      <div class="bio-prose">
+        ${bioParas.map((p) => `<p>${escape(p)}</p>`).join("")}
+      </div>
+      <p class="muted tiny-note">${t("bio_disclaimer")}</p>
+    </section>
 
     <section class="content-block">
       <h2>${t("artists_members")}</h2>
@@ -144,6 +178,7 @@ window.BiasDropPages = (function () {
       <div class="link-cloud">
         ${L.spotify ? S().extLink(L.spotify, t("open_spotify")) : ""}
         ${L.apple ? S().extLink(L.apple, t("open_apple")) : ""}
+        ${L.youtubeMusic ? S().extLink(L.youtubeMusic, t("open_ytmusic")) : ""}
         ${L.youtube ? S().extLink(L.youtube, t("open_youtube")) : ""}
         ${L.weverse ? S().extLink(L.weverse, t("open_weverse")) : ""}
         ${L.instagram ? S().extLink(L.instagram, t("open_ig")) : ""}
@@ -163,7 +198,7 @@ window.BiasDropPages = (function () {
               <th>Title</th>
               <th>${t("albums_type")}</th>
               <th>${t("albums_highlight")}</th>
-              <th></th>
+              <th>Stream</th>
             </tr>
           </thead>
           <tbody>
@@ -174,7 +209,11 @@ window.BiasDropPages = (function () {
               <td><strong>${escape(d.title)}</strong></td>
               <td>${escape(d.type)}</td>
               <td>${escape(d.highlight || "")}</td>
-              <td>${d.spotify ? S().extLink(d.spotify, "Spotify", "text-link") : ""}</td>
+              <td class="stream-links">
+                ${d.spotify ? S().extLink(d.spotify, "Spotify", "text-link") : ""}
+                ${d.apple ? S().extLink(d.apple, "Apple", "text-link") : ""}
+                ${d.youtubeMusic ? S().extLink(d.youtubeMusic, "YT Music", "text-link") : ""}
+              </td>
             </tr>`
               )
               .join("")}
@@ -194,7 +233,9 @@ window.BiasDropPages = (function () {
               <p class="muted">${escape(s.album)} · ${s.year}</p>
             </div>
             <div class="song-actions">
-              ${s.spotify ? S().extLink(s.spotify, t("artists_listen"), "btn btn-sm btn-ghost") : ""}
+              ${s.spotify ? S().extLink(s.spotify, "Spotify", "btn btn-sm btn-ghost") : ""}
+              ${s.apple ? S().extLink(s.apple, "Apple", "btn btn-sm btn-ghost") : ""}
+              ${s.youtubeMusic ? S().extLink(s.youtubeMusic, "YT Music", "btn btn-sm btn-ghost") : ""}
               ${s.yt ? S().extLink(s.yt, t("artists_watch"), "btn btn-sm btn-neon") : ""}
             </div>
           </article>`
@@ -286,6 +327,15 @@ window.BiasDropPages = (function () {
           </label>
         </div>
       </section>
+      <div class="hub-grid concert-hubs">
+        <a class="hub-card" href="https://www.ticketmaster.com/" target="_blank" rel="noopener noreferrer"><strong>Ticketmaster</strong><span>Global tickets hub</span></a>
+        <a class="hub-card" href="https://www.globalinterpark.com/" target="_blank" rel="noopener noreferrer"><strong>Interpark Global</strong><span>Korea tickets for intl fans</span></a>
+        <a class="hub-card" href="https://www.songkick.com/" target="_blank" rel="noopener noreferrer"><strong>Songkick</strong><span>Tour alerts</span></a>
+        <a class="hub-card" href="https://www.bandsintown.com/" target="_blank" rel="noopener noreferrer"><strong>Bandsintown</strong><span>Artist alerts</span></a>
+        <a class="hub-card" href="https://weverse.io/" target="_blank" rel="noopener noreferrer"><strong>Weverse</strong><span>Official notices</span></a>
+        <a class="hub-card" href="https://kpop.fandom.com/wiki/Category:2026_concerts" target="_blank" rel="noopener noreferrer"><strong>Kpop Wiki 2026</strong><span>Community tour index</span></a>
+      </div>
+      <p class="muted tiny-note">${t("concerts_count", { n: list.length })}</p>
       <div class="concert-list">
         ${list.length ? list.map((c) => concertCard(c, base)).join("") : `<p class="empty-state">${t("no_results")}</p>`}
       </div>
@@ -348,7 +398,9 @@ window.BiasDropPages = (function () {
                   <p class="muted"><a href="${base}artists/${s.artistId}/">${escape(s.artistName)}</a> · ${escape(s.album)} · ${s.year}</p>
                 </div>
                 <div class="song-actions">
-                  ${s.spotify ? S().extLink(s.spotify, t("artists_listen"), "btn btn-sm btn-ghost") : ""}
+                  ${s.spotify ? S().extLink(s.spotify, "Spotify", "btn btn-sm btn-ghost") : ""}
+                  ${s.apple ? S().extLink(s.apple, "Apple", "btn btn-sm btn-ghost") : ""}
+                  ${s.youtubeMusic ? S().extLink(s.youtubeMusic, "YT Music", "btn btn-sm btn-ghost") : ""}
                   ${s.yt ? S().extLink(s.yt, t("artists_watch"), "btn btn-sm btn-neon") : ""}
                 </div>
               </article>`
@@ -365,7 +417,11 @@ window.BiasDropPages = (function () {
                 <h3>${escape(d.title)}</h3>
                 <p class="muted"><a href="${base}artists/${d.artistId}/">${escape(d.artistName)}</a></p>
                 <p><span class="tag">${escape(d.type)}</span> ${d.highlight ? `· ${escape(d.highlight)}` : ""}</p>
-                ${d.spotify ? S().extLink(d.spotify, t("albums_open_spotify"), "btn btn-sm btn-neon") : ""}
+                <div class="song-actions">
+                  ${d.spotify ? S().extLink(d.spotify, "Spotify", "btn btn-sm btn-neon") : ""}
+                  ${d.apple ? S().extLink(d.apple, "Apple", "btn btn-sm btn-ghost") : ""}
+                  ${d.youtubeMusic ? S().extLink(d.youtubeMusic, "YT Music", "btn btn-sm btn-ghost") : ""}
+                </div>
               </article>`
                     )
                     .join("")
@@ -468,6 +524,7 @@ window.BiasDropPages = (function () {
     const mount = document.getElementById("home-wiki-hub");
     if (!mount || !D()) return;
     const base = S().getBase();
+    const vids = (window.BiasDropExtra && window.BiasDropExtra.homeVideos) || [];
     mount.innerHTML = `
       <div class="section-head">
         <div>
@@ -480,11 +537,108 @@ window.BiasDropPages = (function () {
         <a class="hub-card" href="${base}albums/"><strong>${t("home_explore_albums")}</strong><span>${D().getAllAlbums().length}+ releases</span></a>
         <a class="hub-card" href="${base}concerts/"><strong>${t("home_explore_concerts")}</strong><span>${D().concerts.length} dates</span></a>
         <a class="hub-card" href="${base}faq/"><strong>${t("home_explore_faq")}</strong><span>${D().faqs.length} Q&A</span></a>
+        <a class="hub-card" href="${base}blog/"><strong>${t("nav_blog")}</strong><span>20 ${t("blog_posts")}</span></a>
       </div>
       <div class="wiki-grid wiki-grid-home">
         ${D().artists.slice(0, 4).map((a) => artistCard(a, base)).join("")}
       </div>
     `;
+
+    const ytMount = document.getElementById("home-yt-mvs");
+    if (ytMount && vids.length) {
+      ytMount.innerHTML = `
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">YouTube</p>
+            <h2>${t("home_mv_title")}</h2>
+            <p class="section-sub">${t("home_mv_sub")}</p>
+          </div>
+        </div>
+        <div class="yt-grid">
+          ${vids
+            .map(
+              (v) => `<figure class="yt-card">
+              <div class="yt-frame">
+                <iframe src="https://www.youtube-nocookie.com/embed/${v.id}?rel=0" title="${escape(v.title)}" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+              </div>
+              <figcaption>
+                <strong>${escape(v.title)}</strong>
+                <span>${escape(v.artist)} · Official MV</span>
+                <a href="https://www.youtube.com/watch?v=${v.id}" target="_blank" rel="noopener noreferrer">YouTube</a>
+              </figcaption>
+            </figure>`
+            )
+            .join("")}
+        </div>`;
+    }
+  }
+
+  function renderBlogIndex() {
+    const root = document.getElementById("page-root");
+    const X = window.BiasDropExtra;
+    if (!root || !X) return;
+    const base = S().getBase();
+    const posts = X.blogs || [];
+    root.innerHTML = `
+      <section class="page-hero">
+        <p class="eyebrow">Blog</p>
+        <h1>${t("blog_title")}</h1>
+        <p class="section-sub">${t("blog_sub")}</p>
+      </section>
+      <div class="blog-grid">
+        ${posts
+          .map(
+            (p) => `<article class="blog-card">
+            <p class="muted">${p.date}</p>
+            <h2><a href="${base}blog/${p.slug}/">${escape(p.title)}</a></h2>
+            <p>${escape(p.excerpt)}</p>
+            <a class="btn btn-sm btn-neon" href="${base}blog/${p.slug}/">${t("blog_read")}</a>
+          </article>`
+          )
+          .join("")}
+      </div>`;
+  }
+
+  function renderBlogPost(slug) {
+    const root = document.getElementById("page-root");
+    const X = window.BiasDropExtra;
+    if (!root || !X) return;
+    const base = S().getBase();
+    const post = (X.blogs || []).find((p) => p.slug === slug || p.id === slug);
+    if (!post) {
+      root.innerHTML = `<p class="empty-state">${t("no_results")}</p><p><a href="${base}blog/">${t("nav_blog")}</a></p>`;
+      return;
+    }
+    document.title = `${post.title} · BiasDrop`;
+    root.innerHTML = `
+      <nav class="crumbs"><a href="${base}index.html">${t("breadcrumb_home")}</a><span>/</span><a href="${base}blog/">${t("nav_blog")}</a><span>/</span><span>${escape(post.title)}</span></nav>
+      <article class="blog-article">
+        <p class="muted">${post.date}</p>
+        <h1>${escape(post.title)}</h1>
+        <div class="blog-body">${post.html}</div>
+        <p class="back-row"><a href="${base}blog/">← ${t("nav_blog")}</a></p>
+      </article>`;
+  }
+
+  function renderLegal(kind) {
+    const root = document.getElementById("page-root");
+    if (!root) return;
+    const base = S().getBase();
+    const isPrivacy = kind === "privacy";
+    document.title = `${isPrivacy ? t("nav_privacy") : t("nav_terms")} · BiasDrop`;
+    root.innerHTML = `
+      <section class="page-hero">
+        <h1>${isPrivacy ? t("nav_privacy") : t("nav_terms")}</h1>
+        <p class="section-sub">${t("legal_updated")}</p>
+      </section>
+      <article class="bio-prose legal-prose">
+        ${
+          isPrivacy
+            ? `<p>${t("privacy_p1")}</p><h2>${t("privacy_h2")}</h2><p>${t("privacy_p2")}</p><h2>${t("privacy_h3")}</h2><p>${t("privacy_p3")}</p><h2>${t("privacy_h4")}</h2><p>${t("privacy_p4")}</p>`
+            : `<p>${t("terms_p1")}</p><h2>${t("terms_h2")}</h2><p>${t("terms_p2")}</p><h2>${t("terms_h3")}</h2><p>${t("terms_p3")}</p><h2>${t("terms_h4")}</h2><p>${t("terms_p4")}</p>`
+        }
+        <p class="back-row"><a href="${base}index.html">← ${t("breadcrumb_home")}</a></p>
+      </article>`;
   }
 
   return {
@@ -495,5 +649,8 @@ window.BiasDropPages = (function () {
     renderFaq,
     renderAbout,
     renderHomeHub,
+    renderBlogIndex,
+    renderBlogPost,
+    renderLegal,
   };
 })();

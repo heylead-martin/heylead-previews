@@ -35,6 +35,7 @@ window.BiasDropShared = (function () {
       { href: base + "concerts/", key: "nav_concerts", match: "concerts" },
       { href: base + "index.html#loot", key: "nav_loot", match: "loot" },
       { href: base + "faq/", key: "nav_faq", match: "faq" },
+      { href: base + "blog/", key: "nav_blog", match: "blog" },
       { href: base + "about/", key: "nav_about", match: "about" },
     ];
   }
@@ -45,7 +46,8 @@ window.BiasDropShared = (function () {
     if (p.includes("/albums")) return "albums";
     if (p.includes("/concerts")) return "concerts";
     if (p.includes("/faq")) return "faq";
-    if (p.includes("/about")) return "about";
+    if (p.includes("/blog")) return "blog";
+    if (p.includes("/about") || p.includes("/legal")) return "about";
     return "home";
   }
 
@@ -135,6 +137,7 @@ window.BiasDropShared = (function () {
       </div>
       <div>
         <h4 data-i18n="footer_fan">${t("footer_fan")}</h4>
+        <a href="${base}blog/" data-i18n="nav_blog">${t("nav_blog")}</a>
         <a href="${base}faq/" data-i18n="nav_faq">${t("nav_faq")}</a>
         <a href="${base}about/" data-i18n="nav_about">${t("nav_about")}</a>
         <a href="${base}index.html#quiz" data-i18n="nav_quiz">${t("nav_quiz")}</a>
@@ -142,6 +145,8 @@ window.BiasDropShared = (function () {
       <div>
         <h4 data-i18n="footer_preview">${t("footer_preview")}</h4>
         <a href="https://previews.heylead.com/">HeyLead Previews</a>
+        <a href="${base}legal/privacy/" data-i18n="nav_privacy">${t("nav_privacy")}</a>
+        <a href="${base}legal/terms/" data-i18n="nav_terms">${t("nav_terms")}</a>
         <a href="https://weverse.io/" target="_blank" rel="noopener noreferrer">Weverse</a>
         <a href="https://shop.weverse.io/en/home" target="_blank" rel="noopener noreferrer">Weverse Shop</a>
         <span class="muted" data-i18n="footer_demo">${t("footer_demo")}</span>
