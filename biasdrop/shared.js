@@ -36,7 +36,6 @@ window.BiasDropShared = (function () {
       { href: base + "index.html#loot", key: "nav_loot", match: "loot" },
       { href: base + "faq/", key: "nav_faq", match: "faq" },
       { href: base + "blog/", key: "nav_blog", match: "blog" },
-      { href: base + "about/", key: "nav_about", match: "about" },
     ];
   }
 
