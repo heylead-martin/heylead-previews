@@ -1,12 +1,12 @@
 <!doctype html>
-<html lang="en">
+<html lang="bg" data-lang="bg">
 <head>
 <script src="/auth-config.js"></script>
 <script src="/auth.js"></script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow, noarchive">
-<meta name="description" content="BiasDrop - the neon K-pop superfan hub. Idols, photocards, light sticks, toys, gadgets, hot drops and more.">
+<meta name="description" content="BiasDrop - неоновият hub за K-pop супер фенове. Идоли, photocard-и, light sticks, играчки, гаджети, hot drops и още.">
 <title>BiasDrop · K-Pop Superfan HQ</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,14 +16,13 @@
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<a class="skip-link" href="#main">Skip to content</a>
+<a class="skip-link" href="#main" data-i18n="skip">Към съдържанието</a>
 
-<!-- Floating sparkles layer -->
 <div class="spark-layer" aria-hidden="true" id="spark-layer"></div>
 
 <header class="site-header" id="top">
   <div class="header-inner">
-    <a class="logo" href="#top" aria-label="BiasDrop home">
+    <a class="logo" href="#top" data-i18n-aria="logo_home" aria-label="BiasDrop начална">
       <span class="logo-mark" aria-hidden="true">
         <svg viewBox="0 0 40 40" width="36" height="36" fill="none">
           <defs>
@@ -38,54 +37,46 @@
       <span class="logo-text">Bias<span>Drop</span></span>
     </a>
 
-    <nav class="nav-desktop" aria-label="Primary">
-      <a href="#drops">Drops</a>
-      <a href="#idols">Idols</a>
-      <a href="#loot">Loot</a>
-      <a href="#collect">Collect</a>
-      <a href="#pulse">Pulse</a>
-      <a href="#vibe">Vibe</a>
-      <a href="#quiz">Bias Quiz</a>
+    <nav class="nav-desktop" data-i18n-aria="nav_primary" aria-label="Основна навигация">
+      <a href="#drops" data-i18n="nav_drops">Дропове</a>
+      <a href="#idols" data-i18n="nav_idols">Идоли</a>
+      <a href="#loot" data-i18n="nav_loot">Лут</a>
+      <a href="#collect" data-i18n="nav_collect">Колекция</a>
+      <a href="#pulse" data-i18n="nav_pulse">Пулс</a>
+      <a href="#vibe" data-i18n="nav_vibe">Вайб</a>
+      <a href="#quiz" data-i18n="nav_quiz">Bias тест</a>
     </nav>
 
     <div class="header-actions">
-      <button type="button" class="icon-btn" id="wishlist-btn" aria-label="Open wishlist">
+      <button type="button" class="icon-btn" id="wishlist-btn" data-i18n-aria="wishlist_open" aria-label="Отвори wishlist">
         <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
           <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/>
         </svg>
         <span class="badge" id="wishlist-count">0</span>
       </button>
-      <button type="button" class="btn btn-sm btn-neon" id="open-pack-btn">Open a Pack</button>
-      <button type="button" class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
+      <button type="button" class="btn btn-sm btn-neon" id="open-pack-btn" data-i18n="open_pack">Отвори пак</button>
+      <button type="button" class="nav-toggle" id="nav-toggle" data-i18n-aria="menu_open" aria-label="Отвори менюто" aria-expanded="false" aria-controls="mobile-nav">
         <span></span><span></span><span></span>
       </button>
     </div>
   </div>
 
-  <nav class="nav-mobile" id="mobile-nav" aria-label="Mobile" hidden>
-    <a href="#drops">Hot Drops</a>
-    <a href="#idols">Idols</a>
-    <a href="#loot">Loot Shop</a>
-    <a href="#collect">Collectibles</a>
-    <a href="#pulse">Fan Pulse</a>
-    <a href="#vibe">Concert vibe</a>
-    <a href="#quiz">Bias Quiz</a>
-    <a href="#stash">My Stash</a>
+  <nav class="nav-mobile" id="mobile-nav" data-i18n-aria="nav_mobile" aria-label="Мобилно меню" hidden>
+    <a href="#drops" data-i18n="nav_drops_m">Горещи дропове</a>
+    <a href="#idols" data-i18n="nav_idols">Идоли</a>
+    <a href="#loot" data-i18n="nav_loot_m">Лут магазин</a>
+    <a href="#collect" data-i18n="nav_collect_m">Колекционерски</a>
+    <a href="#pulse" data-i18n="nav_pulse_m">Фен пулс</a>
+    <a href="#vibe" data-i18n="nav_vibe_m">Концертен вайб</a>
+    <a href="#quiz" data-i18n="nav_quiz">Bias тест</a>
+    <a href="#stash" data-i18n="nav_stash_m">Моят stash</a>
   </nav>
 </header>
 
 <main id="main">
-  <!-- HERO -->
   <section class="hero">
     <div class="hero-bg" aria-hidden="true">
-      <video
-        id="hero-video"
-        class="hero-video"
-        autoplay
-        muted
-        loop
-        playsinline
-        preload="metadata"></video>
+      <video id="hero-video" class="hero-video" autoplay muted loop playsinline preload="metadata"></video>
       <div class="hero-video-scrim"></div>
       <div class="orb orb-a"></div>
       <div class="orb orb-b"></div>
@@ -93,110 +84,85 @@
       <div class="grid-fade"></div>
     </div>
     <div class="hero-content">
-      <p class="eyebrow pulse-dot">Live for super fans · Preview demo</p>
+      <p class="eyebrow pulse-dot" data-i18n="hero_eyebrow">На живо за супер фенове · Preview демо</p>
       <h1>
-        Everything your<br>
-        <span class="gradient-text">bias</span> era needs
+        <span data-i18n="hero_h1_a">Всичко, от което</span><br>
+        <span class="gradient-text" data-i18n="hero_h1_b">bias</span>
+        <span data-i18n="hero_h1_c">ерата ти има нужда</span>
       </h1>
-      <p class="hero-lead">
-        Idols, photocards, light sticks, plushies, gadgets, comeback drops, and the chaos of stan culture - all in one neon HQ built for collectors who never miss a pre-order.
+      <p class="hero-lead" data-i18n="hero_lead">
+        Идоли, photocard-и, light sticks, плюшени, гаджети, comeback дропове и целият stan chaos - в едно неоново HQ за колекционери, които никога не пропускат pre-order.
       </p>
       <div class="hero-cta">
-        <a class="btn btn-lg btn-neon" href="#drops">Shop Hot Drops</a>
-        <a class="btn btn-lg btn-ghost" href="#quiz">Find Your Bias</a>
+        <a class="btn btn-lg btn-neon" href="#drops" data-i18n="hero_cta_drops">Към горещите дропове</a>
+        <a class="btn btn-lg btn-ghost" href="#quiz" data-i18n="hero_cta_quiz">Намери своя bias</a>
       </div>
       <div class="hero-stats" role="list">
-        <div role="listitem"><strong>2.4k+</strong><span>Loot SKUs</span></div>
-        <div role="listitem"><strong>180</strong><span>Active idols</span></div>
-        <div role="listitem"><strong>SSR</strong><span>Pull rates live</span></div>
-        <div role="listitem"><strong>24/7</strong><span>Drop radar</span></div>
+        <div role="listitem"><strong>2.4k+</strong><span data-i18n="hero_stat_loot">Лут SKU-та</span></div>
+        <div role="listitem"><strong>180</strong><span data-i18n="hero_stat_idols">Активни идоли</span></div>
+        <div role="listitem"><strong>SSR</strong><span data-i18n="hero_stat_ssr">Pull rates live</span></div>
+        <div role="listitem"><strong>24/7</strong><span data-i18n="hero_stat_radar">Drop радар</span></div>
       </div>
       <p class="media-credit" id="hero-video-credit"></p>
     </div>
     <div class="hero-stage">
       <div class="hero-video-frame">
-        <video
-          id="hero-side-video"
-          class="hero-side-video"
-          autoplay
-          muted
-          loop
-          playsinline
-          preload="metadata"></video>
+        <video id="hero-side-video" class="hero-side-video" autoplay muted loop playsinline preload="metadata"></video>
         <div class="float-card fc-1">
           <span class="rarity ssr">SSR</span>
-          <span>Photocard pull</span>
+          <span data-i18n="float_pc">Photocard pull</span>
         </div>
         <div class="float-card fc-2">
           <span class="rarity sr">NEW</span>
-          <span>Season's Greetings</span>
+          <span data-i18n="float_sg">Season's Greetings</span>
         </div>
         <div class="float-card fc-3">
           <span class="rarity r">LIVE</span>
-          <span>Pop-up Seoul</span>
+          <span data-i18n="float_popup">Pop-up Сеул</span>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- MARQUEE -->
   <div class="marquee" aria-hidden="true">
-    <div class="marquee-track">
-      <span>PRE-ORDER LIVE</span><span>·</span>
-      <span>LIGHT STICK RESTOCK</span><span>·</span>
-      <span>PHOTOCARD RAIDS</span><span>·</span>
-      <span>SEASON'S GREETINGS 2026</span><span>·</span>
-      <span>LUCKY DRAW OPEN</span><span>·</span>
-      <span>CHARTING FOR HANTEO</span><span>·</span>
-      <span>BIAS PROTECTION SQUAD</span><span>·</span>
-      <span>PRE-ORDER LIVE</span><span>·</span>
-      <span>LIGHT STICK RESTOCK</span><span>·</span>
-      <span>PHOTOCARD RAIDS</span><span>·</span>
-      <span>SEASON'S GREETINGS 2026</span><span>·</span>
-      <span>LUCKY DRAW OPEN</span><span>·</span>
-      <span>CHARTING FOR HANTEO</span><span>·</span>
-      <span>BIAS PROTECTION SQUAD</span><span>·</span>
-    </div>
+    <div class="marquee-track"></div>
   </div>
 
-  <!-- HOT DROPS -->
   <section class="section" id="drops">
     <div class="section-head">
       <div>
-        <p class="eyebrow">Radar online</p>
-        <h2>Hot Drops <span class="accent">&amp; Pre-Orders</span></h2>
-        <p class="section-sub">Countdown culture. Miss it and cry later - we keep the rarest MD, albums, and limited kits in one feed.</p>
+        <p class="eyebrow" data-i18n="drops_eyebrow">Радарът е онлайн</p>
+        <h2><span data-i18n="drops_h2">Горещи дропове</span> <span class="accent" data-i18n="drops_h2_accent">и pre-order-и</span></h2>
+        <p class="section-sub" data-i18n="drops_sub">Култура на countdown-а. Пропуснеш ли - плачеш после. Най-редките MD, албуми и limited китове на едно място.</p>
       </div>
-      <div class="filter-pills" role="tablist" aria-label="Drop filters">
-        <button type="button" class="pill active" data-filter="all" role="tab" aria-selected="true">All</button>
-        <button type="button" class="pill" data-filter="preorder" role="tab" aria-selected="false">Pre-order</button>
-        <button type="button" class="pill" data-filter="restock" role="tab" aria-selected="false">Restock</button>
-        <button type="button" class="pill" data-filter="exclusive" role="tab" aria-selected="false">Exclusive</button>
+      <div class="filter-pills" role="tablist" data-i18n-aria="filter_label" aria-label="Филтри за дропове">
+        <button type="button" class="pill active" data-filter="all" role="tab" aria-selected="true" data-i18n="filter_all">Всички</button>
+        <button type="button" class="pill" data-filter="preorder" role="tab" aria-selected="false" data-i18n="filter_preorder">Pre-order</button>
+        <button type="button" class="pill" data-filter="restock" role="tab" aria-selected="false" data-i18n="filter_restock">Restock</button>
+        <button type="button" class="pill" data-filter="exclusive" role="tab" aria-selected="false" data-i18n="filter_exclusive">Exclusive</button>
       </div>
     </div>
     <div class="drop-grid" id="drop-grid"></div>
   </section>
 
-  <!-- IDOLS / BIAS -->
   <section class="section section-alt" id="idols">
     <div class="section-head">
       <div>
-        <p class="eyebrow">Stan directory</p>
-        <h2>Meet the <span class="accent">Idols</span></h2>
-        <p class="section-sub">Pick a bias, track comebacks, and jump straight into their merch universe. Profiles designed for super fans - not casual listeners.</p>
+        <p class="eyebrow" data-i18n="idols_eyebrow">Stan директория</p>
+        <h2><span data-i18n="idols_h2">Запознай се с</span> <span class="accent" data-i18n="idols_h2_accent">идолите</span></h2>
+        <p class="section-sub" data-i18n="idols_sub">Избери bias, следи comeback-и и влез директно в merch вселената им. Профили за супер фенове - не за casual слушатели.</p>
       </div>
-      <a class="btn btn-ghost" href="#quiz">Not sure? Take the quiz</a>
+      <a class="btn btn-ghost" href="#quiz" data-i18n="idols_quiz_cta">Не си сигурен? Направи теста</a>
     </div>
-    <div class="idol-rail" id="idol-rail" tabindex="0" aria-label="Idol cards, scroll horizontally"></div>
+    <div class="idol-rail" id="idol-rail" tabindex="0" data-i18n-aria="idols_rail" aria-label="Карти на идоли, хоризонтален скрол"></div>
   </section>
 
-  <!-- LOOT CATEGORIES -->
   <section class="section" id="loot">
     <div class="section-head">
       <div>
-        <p class="eyebrow">Loot shop</p>
-        <h2>Toys, gadgets <span class="accent">&amp; MD</span></h2>
-        <p class="section-sub">From official light sticks to desk dolls, griptoks, keyrings, and the random pull you didn't budget for. Built like a collector's arcade.</p>
+        <p class="eyebrow" data-i18n="loot_eyebrow">Лут магазин</p>
+        <h2><span data-i18n="loot_h2">Играчки, гаджети</span> <span class="accent" data-i18n="loot_h2_accent">и MD</span></h2>
+        <p class="section-sub" data-i18n="loot_sub">От официални light sticks до desk dolls, griptok-ове, keyring-и и random pull, за който нямаше бюджет. Като колекционерски аркаден салон.</p>
       </div>
     </div>
 
@@ -204,177 +170,171 @@
       <button type="button" class="cat-card cat-hero" data-cat="lightsticks">
         <div class="cat-visual ls-mini" aria-hidden="true"></div>
         <div class="cat-copy">
-          <span class="cat-tag">Concert kit</span>
-          <h3>Light Sticks</h3>
-          <p>Official + mini keyring versions. Sync-ready for the next dome show.</p>
-          <span class="cat-count">168 items</span>
+          <span class="cat-tag" data-i18n="cat_ls_tag">Концертен кит</span>
+          <h3 data-i18n="cat_ls_h">Light Sticks</h3>
+          <p data-i18n="cat_ls_p">Официални + mini keyring версии. Готови за следващия dome show.</p>
+          <span class="cat-count" data-i18n="cat_ls_n">168 артикула</span>
         </div>
       </button>
       <button type="button" class="cat-card" data-cat="plush">
         <div class="cat-visual plush-mini" aria-hidden="true"></div>
         <div class="cat-copy">
-          <span class="cat-tag">Cuteness overdrive</span>
-          <h3>Plush &amp; Dolls</h3>
-          <p>SKZOO, BT21-style mascots, monitor dolls, and desk chaos.</p>
-          <span class="cat-count">412 items</span>
+          <span class="cat-tag" data-i18n="cat_pl_tag">Cuteness overdrive</span>
+          <h3 data-i18n="cat_pl_h">Плюшени и кукли</h3>
+          <p data-i18n="cat_pl_p">SKZOO, mascot стил, monitor dolls и desk chaos.</p>
+          <span class="cat-count" data-i18n="cat_pl_n">412 артикула</span>
         </div>
       </button>
       <button type="button" class="cat-card" data-cat="gadgets">
         <div class="cat-visual gadget-mini" aria-hidden="true"></div>
         <div class="cat-copy">
-          <span class="cat-tag">Daily carry</span>
-          <h3>Gadgets</h3>
-          <p>Griptoks, card wallets, tablet pouches, and glow keycaps.</p>
-          <span class="cat-count">290 items</span>
+          <span class="cat-tag" data-i18n="cat_gd_tag">Daily carry</span>
+          <h3 data-i18n="cat_gd_h">Гаджети</h3>
+          <p data-i18n="cat_gd_p">Griptok-ове, card wallets, tablet pouches и glow keycaps.</p>
+          <span class="cat-count" data-i18n="cat_gd_n">290 артикула</span>
         </div>
       </button>
       <button type="button" class="cat-card" data-cat="albums">
         <div class="cat-visual album-mini" aria-hidden="true"></div>
         <div class="cat-copy">
-          <span class="cat-tag">Chart fuel</span>
-          <h3>Albums</h3>
-          <p>Counted for Hanteo &amp; Billboard. Photocards included (RNG).</p>
-          <span class="cat-count">1.2k items</span>
+          <span class="cat-tag" data-i18n="cat_al_tag">Chart fuel</span>
+          <h3 data-i18n="cat_al_h">Албуми</h3>
+          <p data-i18n="cat_al_p">Броят за Hanteo и Billboard. С photocard-и (RNG).</p>
+          <span class="cat-count" data-i18n="cat_al_n">1.2k артикула</span>
         </div>
       </button>
       <button type="button" class="cat-card" data-cat="fashion">
         <div class="cat-visual fashion-mini" aria-hidden="true"></div>
         <div class="cat-copy">
-          <span class="cat-tag">Wear the era</span>
-          <h3>Fashion MD</h3>
-          <p>Tour tees, hoodies, baseball jerseys, room slippers - yes really.</p>
-          <span class="cat-count">640 items</span>
+          <span class="cat-tag" data-i18n="cat_fa_tag">Носи ерата</span>
+          <h3 data-i18n="cat_fa_h">Fashion MD</h3>
+          <p data-i18n="cat_fa_p">Tour тениски, суичъри, baseball jersey-та, room slippers - да, наистина.</p>
+          <span class="cat-count" data-i18n="cat_fa_n">640 артикула</span>
         </div>
       </button>
       <button type="button" class="cat-card" data-cat="beauty">
         <div class="cat-visual beauty-mini" aria-hidden="true"></div>
         <div class="cat-copy">
-          <span class="cat-tag">Glow like them</span>
-          <h3>K-Beauty Collabs</h3>
-          <p>Idol-backed skincare, lip tints, and limited packaging drops.</p>
-          <span class="cat-count">168 items</span>
+          <span class="cat-tag" data-i18n="cat_be_tag">Glow като тях</span>
+          <h3 data-i18n="cat_be_h">K-Beauty колаби</h3>
+          <p data-i18n="cat_be_p">Skincare с идоли, lip tints и limited опаковки.</p>
+          <span class="cat-count" data-i18n="cat_be_n">168 артикула</span>
         </div>
       </button>
     </div>
 
     <div class="product-panel">
       <div class="panel-head">
-        <h3 id="product-panel-title">Featured loot</h3>
-        <p id="product-panel-sub">Tap a category above or wishlist anything that makes your heart race.</p>
+        <h3 id="product-panel-title">Избран лут</h3>
+        <p id="product-panel-sub">Докосни категория горе или добави в wishlist всичко, което ускорява пулса.</p>
       </div>
       <div class="product-grid" id="product-grid"></div>
     </div>
   </section>
 
-  <!-- COLLECTIBLES / PHOTOCARDS -->
   <section class="section section-alt" id="collect">
     <div class="section-head">
       <div>
-        <p class="eyebrow">Collector mode</p>
-        <h2>Photocards &amp; <span class="accent">rarity</span></h2>
-        <p class="section-sub">The heart of super-fandom. Rarity tiers, pack pulls, and binders - without the messy DM trading chaos (unless you want it).</p>
+        <p class="eyebrow" data-i18n="collect_eyebrow">Collector mode</p>
+        <h2><span data-i18n="collect_h2">Photocard-и и</span> <span class="accent" data-i18n="collect_h2_accent">rarity</span></h2>
+        <p class="section-sub" data-i18n="collect_sub">Сърцето на super-fandom. Rarity нива, pack pull-ове и binders - без хаотичните DM размени (освен ако не ги искаш).</p>
       </div>
-      <button type="button" class="btn btn-neon" id="open-pack-btn-2">Pull a pack</button>
+      <button type="button" class="btn btn-neon" id="open-pack-btn-2" data-i18n="pull_pack">Дръпни пак</button>
     </div>
 
-    <div class="rarity-legend" aria-label="Rarity legend">
-      <span><i class="dot r"></i> R · Common</span>
-      <span><i class="dot sr"></i> SR · Rare</span>
-      <span><i class="dot ssr"></i> SSR · Ultra</span>
-      <span><i class="dot ur"></i> UR · Secret</span>
+    <div class="rarity-legend" data-i18n-aria="rarity_legend" aria-label="Легенда за rarity">
+      <span><i class="dot r"></i> <span data-i18n="rarity_r">R · Common</span></span>
+      <span><i class="dot sr"></i> <span data-i18n="rarity_sr">SR · Rare</span></span>
+      <span><i class="dot ssr"></i> <span data-i18n="rarity_ssr">SSR · Ultra</span></span>
+      <span><i class="dot ur"></i> <span data-i18n="rarity_ur">UR · Secret</span></span>
     </div>
 
     <div class="pc-grid" id="pc-grid"></div>
   </section>
 
-  <!-- FAN PULSE -->
   <section class="section" id="pulse">
     <div class="section-head">
       <div>
-        <p class="eyebrow">Culture feed</p>
-        <h2>Fan <span class="accent">Pulse</span></h2>
-        <p class="section-sub">Charts, comebacks, Seoul pop-ups, and the gossip you need before your group chat does.</p>
+        <p class="eyebrow" data-i18n="pulse_eyebrow">Културен фийд</p>
+        <h2><span data-i18n="pulse_h2">Фен</span> <span class="accent" data-i18n="pulse_h2_accent">Пулс</span></h2>
+        <p class="section-sub" data-i18n="pulse_sub">Класации, comeback-и, pop-up-и в Сеул и gossip преди group chat-а ти.</p>
       </div>
     </div>
 
     <div class="pulse-layout">
       <div class="pulse-col">
-        <h3 class="pulse-title">Comeback calendar</h3>
+        <h3 class="pulse-title" data-i18n="pulse_cal">Comeback календар</h3>
         <ul class="calendar-list" id="calendar-list"></ul>
       </div>
       <div class="pulse-col">
-        <h3 class="pulse-title">Chart radar</h3>
+        <h3 class="pulse-title" data-i18n="pulse_chart">Chart радар</h3>
         <ol class="chart-list" id="chart-list"></ol>
       </div>
       <div class="pulse-col pulse-wide">
-        <h3 class="pulse-title">Scene intel</h3>
+        <h3 class="pulse-title" data-i18n="pulse_intel">Scene intel</h3>
         <div class="intel-cards" id="intel-cards"></div>
       </div>
     </div>
   </section>
 
-  <!-- FREE STOCK CONCERT VIDEOS -->
   <section class="section section-alt" id="vibe">
     <div class="section-head">
       <div>
-        <p class="eyebrow">Free stock on YouTube</p>
-        <h2>Concert <span class="accent">vibe reels</span></h2>
-        <p class="section-sub">Royalty-free / free-stock concert crowd footage for the era energy. Not official idol MVs - free-to-use stock labeled by their channels. Captions credit each source.</p>
+        <p class="eyebrow" data-i18n="vibe_eyebrow">Free stock в YouTube</p>
+        <h2><span data-i18n="vibe_h2">Концертни</span> <span class="accent" data-i18n="vibe_h2_accent">вайб клипове</span></h2>
+        <p class="section-sub" data-i18n="vibe_sub">Royalty-free / free-stock кадри от концертни тълпи за era енергията. Не са официални idol MV-та - free-to-use stock, както са етикетирани от каналите. Надписите кредитират всеки източник.</p>
       </div>
     </div>
     <div class="yt-grid" id="yt-grid"></div>
   </section>
 
-  <!-- BIAS QUIZ -->
   <section class="section section-quiz" id="quiz">
     <div class="quiz-shell">
       <div class="quiz-intro" id="quiz-intro">
-        <p class="eyebrow">Interactive</p>
-        <h2>Find your <span class="accent">bias</span></h2>
-        <p>4 spicy questions. Zero judgment. Maximum delulu. We'll match you with a BiasDrop idol vibe and a starter loot kit.</p>
-        <button type="button" class="btn btn-lg btn-neon" id="quiz-start">Start the chaos</button>
+        <p class="eyebrow" data-i18n="quiz_eyebrow">Интерактивно</p>
+        <h2><span data-i18n="quiz_h2">Намери своя</span> <span class="accent" data-i18n="quiz_h2_accent">bias</span></h2>
+        <p data-i18n="quiz_intro">4 пикантни въпроса. Без съдене. Максимум delulu. Ще те match-нем с BiasDrop idol вайб и starter loot кит.</p>
+        <button type="button" class="btn btn-lg btn-neon" id="quiz-start" data-i18n="quiz_start">Пусни хаоса</button>
       </div>
       <div class="quiz-play" id="quiz-play" hidden>
         <div class="quiz-progress" aria-hidden="true"><div class="quiz-bar" id="quiz-bar"></div></div>
-        <p class="quiz-step" id="quiz-step">Question 1 of 4</p>
+        <p class="quiz-step" id="quiz-step">Въпрос 1 от 4</p>
         <h3 id="quiz-question">...</h3>
         <div class="quiz-options" id="quiz-options"></div>
       </div>
       <div class="quiz-result" id="quiz-result" hidden>
-        <p class="eyebrow">Your match</p>
+        <p class="eyebrow" data-i18n="quiz_match">Твоят match</p>
         <div class="result-card" id="result-card"></div>
         <div class="result-actions">
-          <button type="button" class="btn btn-neon" id="quiz-again">Retake</button>
-          <a class="btn btn-ghost" href="#loot">Shop their loot</a>
+          <button type="button" class="btn btn-neon" id="quiz-again" data-i18n="quiz_again">Отново</button>
+          <a class="btn btn-ghost" href="#loot" data-i18n="quiz_shop">Към техния лут</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- STASH / WISHLIST -->
   <section class="section section-alt" id="stash">
     <div class="section-head">
       <div>
-        <p class="eyebrow">Your vault</p>
-        <h2>Wishlist <span class="accent">stash</span></h2>
-        <p class="section-sub">Saved locally in this browser. Heart items across the site - they land here for review.</p>
+        <p class="eyebrow" data-i18n="stash_eyebrow">Твоят vault</p>
+        <h2><span data-i18n="stash_h2">Wishlist</span> <span class="accent" data-i18n="stash_h2_accent">stash</span></h2>
+        <p class="section-sub" data-i18n="stash_sub">Запазено локално в този браузър. Сърцай артикули из сайта - кацат тук за преглед.</p>
       </div>
-      <button type="button" class="btn btn-ghost" id="clear-wishlist">Clear stash</button>
+      <button type="button" class="btn btn-ghost" id="clear-wishlist" data-i18n="clear_stash">Изчисти stash</button>
     </div>
     <div class="stash-grid" id="stash-grid">
-      <p class="empty-state" id="stash-empty">Nothing stashed yet. Go heart some loot - your wallet can cry later.</p>
+      <p class="empty-state" id="stash-empty" data-i18n="stash_empty">Все още празно. Сърцай лут - портфейлът може да плаче после.</p>
     </div>
   </section>
 
-  <!-- CTA BAND -->
   <section class="cta-band">
     <div class="cta-inner">
-      <h2>Never miss a drop again</h2>
-      <p>Join the BiasDrop pulse list for restocks, lucky draws, and Seoul pop-up intel. Demo only - no real signup.</p>
+      <h2 data-i18n="cta_h2">Никога повече не пропускай drop</h2>
+      <p data-i18n="cta_p">Влез в BiasDrop pulse списъка за restock-и, lucky draw-и и intel за pop-up-и в Сеул. Само демо - без реална регистрация.</p>
       <form class="cta-form" id="cta-form">
-        <label class="sr-only" for="cta-email">Email</label>
-        <input id="cta-email" type="email" name="email" placeholder="stan@email.com" required autocomplete="email">
-        <button type="submit" class="btn btn-neon">Notify me</button>
+        <label class="sr-only" for="cta-email" data-i18n="cta_email">Имейл</label>
+        <input id="cta-email" type="email" name="email" data-i18n-placeholder="cta_placeholder" placeholder="stan@email.com" required autocomplete="email">
+        <button type="submit" class="btn btn-neon" data-i18n="cta_btn">Уведоми ме</button>
       </form>
       <p class="form-note" id="cta-note" role="status" aria-live="polite"></p>
     </div>
@@ -387,71 +347,84 @@
       <div class="logo logo-footer">
         <span class="logo-text">Bias<span>Drop</span></span>
       </div>
-      <p>A HeyLead preview concept for a K-pop superfan commerce + culture hub. Inspired by patterns from Weverse Shop, KPOP USA, and stan culture - reimagined with neon energy.</p>
+      <p data-i18n="footer_blurb">HeyLead preview концепт за K-pop superfan commerce + culture hub. Вдъхновено от Weverse Shop, KPOP USA и stan културата - преосмислено с неонова енергия.</p>
     </div>
     <div class="footer-cols">
       <div>
-        <h4>Explore</h4>
-        <a href="#drops">Hot Drops</a>
-        <a href="#idols">Idols</a>
-        <a href="#loot">Loot</a>
-        <a href="#collect">Collectibles</a>
+        <h4 data-i18n="footer_explore">Разгледай</h4>
+        <a href="#drops" data-i18n="nav_drops_m">Горещи дропове</a>
+        <a href="#idols" data-i18n="nav_idols">Идоли</a>
+        <a href="#loot" data-i18n="nav_loot">Лут</a>
+        <a href="#collect" data-i18n="nav_collect_m">Колекционерски</a>
       </div>
       <div>
-        <h4>Fan life</h4>
-        <a href="#pulse">Pulse</a>
-        <a href="#quiz">Bias Quiz</a>
-        <a href="#stash">Wishlist</a>
+        <h4 data-i18n="footer_fan">Фен живот</h4>
+        <a href="#pulse" data-i18n="nav_pulse">Пулс</a>
+        <a href="#quiz" data-i18n="nav_quiz">Bias тест</a>
+        <a href="#stash" data-i18n="wishlist">Wishlist</a>
       </div>
       <div>
-        <h4>Preview</h4>
+        <h4 data-i18n="footer_preview">Preview</h4>
         <a href="https://previews.heylead.com/">HeyLead Previews</a>
-        <span class="muted">Not for production sale · Demo inventory</span>
+        <span class="muted" data-i18n="footer_demo">Не е за реални продажби · Демо инвентар</span>
       </div>
     </div>
   </div>
+
+  <div class="lang-bar" role="group" data-i18n-aria="lang_label" aria-label="Език">
+    <span class="lang-bar-label" data-i18n="lang_label">Език</span>
+    <div class="lang-pills">
+      <button type="button" class="lang-pill is-active" data-lang="bg" aria-pressed="true" title="Български">
+        <span class="lang-flag" aria-hidden="true">BG</span>
+        <span class="lang-name" data-i18n="lang_bg_full">Български</span>
+      </button>
+      <button type="button" class="lang-pill" data-lang="en" aria-pressed="false" title="English (UK)">
+        <span class="lang-flag" aria-hidden="true">EN · UK</span>
+        <span class="lang-name" data-i18n="lang_en_full">English (UK)</span>
+      </button>
+    </div>
+  </div>
+
   <div class="credits-block" id="credits">
     <div class="credits-inner">
-      <h3>Media credits &amp; sources</h3>
-      <p>Photos and ambient clips from <a href="https://www.pexels.com/" target="_blank" rel="noopener noreferrer">Pexels</a> (free license). Portrait images are stock models used as aesthetic vibes - not real idol likenesses. YouTube embeds are free-stock concert footage as labeled by their channels. Each image uses <code>alt</code> + <code>title</code> with photographer and source URL.</p>
+      <h3 data-i18n="credits_h">Медия кредити и източници</h3>
+      <p data-i18n="credits_p">Снимки и ambient клипове от Pexels (безплатен лиценз). Портретите са stock модели за естетика - не са реални идоли. YouTube embed-ите са free-stock концертни кадри, както са етикетирани от каналите. Всяко изображение ползва alt + title с фотограф и URL на източника.</p>
       <ul class="credits-list" id="credits-list"></ul>
     </div>
   </div>
-  <p class="footer-copy">© 2026 BiasDrop concept · previews.heylead.com/biasdrop · noindex</p>
+  <p class="footer-copy" data-i18n="footer_copy">© 2026 BiasDrop концепт · previews.heylead.com/biasdrop · noindex</p>
 </footer>
 
-<!-- Pack open modal -->
 <div class="modal" id="pack-modal" role="dialog" aria-modal="true" aria-labelledby="pack-title" hidden>
   <div class="modal-backdrop" data-close></div>
   <div class="modal-panel pack-panel">
-    <button type="button" class="modal-close" data-close aria-label="Close">×</button>
-    <h2 id="pack-title">Pack pull</h2>
-    <p class="modal-sub">Tap the pack. RNG decides your fate (demo odds).</p>
-    <button type="button" class="pack-box" id="pack-box" aria-label="Open pack">
+    <button type="button" class="modal-close" data-close data-i18n-aria="close" aria-label="Затвори">×</button>
+    <h2 id="pack-title" data-i18n="pack_title">Pack pull</h2>
+    <p class="modal-sub" data-i18n="pack_sub">Докосни пака. RNG решава съдбата ти (демо шансове).</p>
+    <button type="button" class="pack-box" id="pack-box" data-i18n-aria="pack_open" aria-label="Отвори пак">
       <span class="pack-shine"></span>
       <span class="pack-label">BIAS<br>PACK</span>
     </button>
     <div class="pull-result" id="pull-result" hidden></div>
-    <button type="button" class="btn btn-ghost" id="pack-again" hidden>Pull again</button>
+    <button type="button" class="btn btn-ghost" id="pack-again" hidden data-i18n="pack_again">Дръпни отново</button>
   </div>
 </div>
 
-<!-- Wishlist drawer -->
 <div class="drawer" id="wishlist-drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-title" hidden>
   <div class="drawer-backdrop" data-close-drawer></div>
   <div class="drawer-panel">
     <div class="drawer-head">
-      <h2 id="drawer-title">Wishlist</h2>
-      <button type="button" class="modal-close" data-close-drawer aria-label="Close">×</button>
+      <h2 id="drawer-title" data-i18n="drawer_title">Wishlist</h2>
+      <button type="button" class="modal-close" data-close-drawer data-i18n-aria="close" aria-label="Затвори">×</button>
     </div>
     <div class="drawer-body" id="drawer-body"></div>
   </div>
 </div>
 
-<!-- Toast -->
 <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
 
 <script src="media.js"></script>
+<script src="i18n.js"></script>
 <script src="app.js"></script>
 </body>
 </html>

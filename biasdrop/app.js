@@ -1,113 +1,71 @@
-/* BiasDrop - interactive demo with Pexels + free stock video media */
+/* BiasDrop - interactive demo with Pexels + free stock video media + i18n */
 (function () {
   "use strict";
 
   const M = window.BiasDropMedia;
-  if (!M) {
-    console.error("BiasDropMedia missing - load media.js first");
+  const I18n = window.BiasDropI18n;
+  if (!M || !I18n) {
+    console.error("BiasDropMedia / BiasDropI18n missing - load media.js + i18n.js first");
     return;
   }
   const P = M.photos;
+  const t = (k, v) => I18n.t(k, v);
 
   const STORAGE_KEY = "biasdrop-wishlist-v1";
 
-  const DROPS = [
-    {
-      id: "drop-skz",
-      title: "STRAY KIDS THIS & THAT Official MD Kit",
-      group: "Stray Kids",
-      type: "preorder",
-      tag: "Pre-order",
-      price: 54.99,
-      was: 64.99,
-      ends: hoursFromNow(38),
-      photo: P.concertHands,
-      blurb: "Plush keyrings, necklace, mesh long sleeve - full era fit.",
-    },
-    {
-      id: "drop-exo",
-      title: "EXO We are DOLL! Mungchiz Pack",
-      group: "EXO",
-      type: "preorder",
-      tag: "Pre-order",
-      price: 39.99,
-      ends: hoursFromNow(72),
-      photo: P.plushPink,
-      blurb: "Random figures, badges, monitor dolls. Peak second-gen chaos.",
-    },
-    {
-      id: "drop-aespa",
-      title: "aespa Mini Light Keyring Ver.2",
-      group: "aespa",
-      type: "restock",
-      tag: "Restock",
-      price: 29.99,
-      ends: hoursFromNow(12),
-      photo: P.neonLove,
-      blurb: "Pocket-sized glow. Last restock sold out in 11 minutes.",
-    },
-    {
-      id: "drop-bts",
-      title: "BTS Official Lightstick Keyring Ver.4",
-      group: "BTS",
-      type: "restock",
-      tag: "Restock",
-      price: 32.99,
-      ends: hoursFromNow(20),
-      photo: P.concertCrowd,
-      blurb: "Army bomb energy on a keyring. Chart-eligible album bundles too.",
-    },
-    {
-      id: "drop-ive",
-      title: "IVE × MINIVE Dive Pop-up Exclusive",
-      group: "IVE",
-      type: "exclusive",
-      tag: "Exclusive",
-      price: 48.0,
-      ends: hoursFromNow(96),
-      photo: P.seoulStreet,
-      blurb: "Seoul pop-up exclusive binder + limited PC set. Ships worldwide.",
-    },
-    {
-      id: "drop-enha",
-      title: "ENHYPEN Season's Greetings 2026",
-      group: "ENHYPEN",
-      type: "preorder",
-      tag: "Pre-order",
-      price: 62.5,
-      ends: hoursFromNow(140),
-      photo: P.stageMic,
-      blurb: "Calendar, diary, photocards, desk kit - annual must-buy.",
-    },
-  ];
 
-  const IDOLS = [
-    { id: "idol-felix", name: "Felix", group: "Stray Kids", role: "Rapper · Visual · Deep-voice legend", tags: ["Baking", "Aussie", "Yongbok"], photo: P.fashionMan2, initials: "FX" },
-    { id: "idol-karina", name: "Karina", group: "aespa", role: "Leader · Main dancer · Center", tags: ["Metaverse", "Power", "Stage"], photo: P.fashionWoman, initials: "KR" },
-    { id: "idol-jungkook", name: "Jungkook", group: "BTS", role: "Main vocal · Golden maknae", tags: ["Solo era", "Golden", "All-rounder"], photo: P.fashionMan, initials: "JK" },
-    { id: "idol-wonyoung", name: "Wonyoung", group: "IVE", role: "Center · Visual · Variety", tags: ["Icon", "Fashion", "Aura"], photo: P.fashionWoman2, initials: "WY" },
-    { id: "idol-yeonjun", name: "Yeonjun", group: "TXT", role: "Performer · Fashion chaos", tags: ["4th gen it", "Dance", "Runway"], photo: P.fashionMan3, initials: "YJ" },
-    { id: "idol-ningning", name: "Ningning", group: "aespa", role: "Main vocal · High notes", tags: ["Vocal", "China line", "Live"], photo: P.stageWoman, initials: "NN" },
-    { id: "idol-san", name: "San", group: "ATEEZ", role: "Performer · Cat energy", tags: ["Stage beast", "Abs", "Fangs"], photo: P.stageSinger, initials: "SN" },
-    { id: "idol-jisoo", name: "Jisoo", group: "BLACKPINK", role: "Visual · Actress · Vocal", tags: ["Flower", "Solo", "Dior"], photo: P.fashionWoman4, initials: "JS" },
-  ];
+  function tagFor(type) {
+    if (type === "preorder") return t("tag_preorder");
+    if (type === "restock") return t("tag_restock");
+    if (type === "exclusive") return t("tag_exclusive");
+    return type;
+  }
 
-  const PRODUCTS = {
-    all: [
-      { id: "p-ls-skz", name: "SKZ Official Light Stick Ver.2", cat: "lightsticks", price: 59.99, group: "Stray Kids", photo: P.concertHands },
-      { id: "p-ls-aespa", name: "aespa Official Light Stick", cat: "lightsticks", price: 54.99, group: "aespa", photo: P.neonLove },
-      { id: "p-plush-bbok", name: "BbokAri Costume Plush", cat: "plush", price: 28.99, group: "Stray Kids", photo: P.plushPink },
-      { id: "p-plush-minive", name: "MINIVE Desk Doll Set", cat: "plush", price: 34.5, group: "IVE", photo: P.plushShelf },
-      { id: "p-gad-grip", name: "Magnetic Griptok Random", cat: "gadgets", price: 17.99, group: "EXO", photo: P.polaroidPink },
-      { id: "p-gad-wallet", name: "Photocard Wallet Set", cat: "gadgets", price: 19.99, group: "ENHYPEN", photo: P.gadgetsTablet },
-      { id: "p-alb-txt", name: "TXT The Star Chapter Album", cat: "albums", price: 24.99, group: "TXT", photo: P.vinylStack },
-      { id: "p-alb-bp", name: "BLACKPINK Deadline Photobook", cat: "albums", price: 42.0, group: "BLACKPINK", photo: P.cdsBox },
-      { id: "p-fit-mesh", name: "Era Mesh Long Sleeve", cat: "fashion", price: 79.99, group: "Stray Kids", photo: P.boomboxPink },
-      { id: "p-fit-jersey", name: "Character Baseball Uniform", cat: "fashion", price: 105.99, group: "EXO", photo: P.fashionWoman3 },
-      { id: "p-beauty-tint", name: "Idol Lip Tint Collab", cat: "beauty", price: 22.0, group: "aespa", photo: P.beautyLip },
-      { id: "p-beauty-kit", name: "Glow Skincare Duo", cat: "beauty", price: 48.0, group: "IVE", photo: P.beautyFlat },
-    ],
-  };
+  function getDrops() {
+    return [
+      { id: "drop-skz", titleKey: "drop_skz_t", blurbKey: "drop_skz_b", group: "Stray Kids", type: "preorder", price: 54.99, was: 64.99, ends: hoursFromNow(38), photo: P.concertHands },
+      { id: "drop-exo", titleKey: "drop_exo_t", blurbKey: "drop_exo_b", group: "EXO", type: "preorder", price: 39.99, ends: hoursFromNow(72), photo: P.plushPink },
+      { id: "drop-aespa", titleKey: "drop_aespa_t", blurbKey: "drop_aespa_b", group: "aespa", type: "restock", price: 29.99, ends: hoursFromNow(12), photo: P.neonLove },
+      { id: "drop-bts", titleKey: "drop_bts_t", blurbKey: "drop_bts_b", group: "BTS", type: "restock", price: 32.99, ends: hoursFromNow(20), photo: P.concertCrowd },
+      { id: "drop-ive", titleKey: "drop_ive_t", blurbKey: "drop_ive_b", group: "IVE", type: "exclusive", price: 48.0, ends: hoursFromNow(96), photo: P.seoulStreet },
+      { id: "drop-enha", titleKey: "drop_enha_t", blurbKey: "drop_enha_b", group: "ENHYPEN", type: "preorder", price: 62.5, ends: hoursFromNow(140), photo: P.stageMic },
+    ].map((d) => ({
+      ...d,
+      title: t(d.titleKey),
+      blurb: t(d.blurbKey),
+      tag: tagFor(d.type),
+    }));
+  }
+
+  function getIdols() {
+    return [
+      { id: "idol-felix", name: "Felix", group: "Stray Kids", roleKey: "idol_felix_r", tags: ["Baking", "Aussie", "Yongbok"], photo: P.fashionMan2, initials: "FX" },
+      { id: "idol-karina", name: "Karina", group: "aespa", roleKey: "idol_karina_r", tags: ["Metaverse", "Power", "Stage"], photo: P.fashionWoman, initials: "KR" },
+      { id: "idol-jungkook", name: "Jungkook", group: "BTS", roleKey: "idol_jk_r", tags: ["Solo era", "Golden", "All-rounder"], photo: P.fashionMan, initials: "JK" },
+      { id: "idol-wonyoung", name: "Wonyoung", group: "IVE", roleKey: "idol_wy_r", tags: ["Icon", "Fashion", "Aura"], photo: P.fashionWoman2, initials: "WY" },
+      { id: "idol-yeonjun", name: "Yeonjun", group: "TXT", roleKey: "idol_yj_r", tags: ["4th gen it", "Dance", "Runway"], photo: P.fashionMan3, initials: "YJ" },
+      { id: "idol-ningning", name: "Ningning", group: "aespa", roleKey: "idol_nn_r", tags: ["Vocal", "China line", "Live"], photo: P.stageWoman, initials: "NN" },
+      { id: "idol-san", name: "San", group: "ATEEZ", roleKey: "idol_san_r", tags: ["Stage beast", "Abs", "Fangs"], photo: P.stageSinger, initials: "SN" },
+      { id: "idol-jisoo", name: "Jisoo", group: "BLACKPINK", roleKey: "idol_jisoo_r", tags: ["Flower", "Solo", "Dior"], photo: P.fashionWoman4, initials: "JS" },
+    ].map((i) => ({ ...i, role: t(i.roleKey) }));
+  }
+
+  function getProducts() {
+    return [
+      { id: "p-ls-skz", nameKey: "p_ls_skz", cat: "lightsticks", price: 59.99, group: "Stray Kids", photo: P.concertHands },
+      { id: "p-ls-aespa", nameKey: "p_ls_aespa", cat: "lightsticks", price: 54.99, group: "aespa", photo: P.neonLove },
+      { id: "p-plush-bbok", nameKey: "p_plush_bbok", cat: "plush", price: 28.99, group: "Stray Kids", photo: P.plushPink },
+      { id: "p-plush-minive", nameKey: "p_plush_minive", cat: "plush", price: 34.5, group: "IVE", photo: P.plushShelf },
+      { id: "p-gad-grip", nameKey: "p_gad_grip", cat: "gadgets", price: 17.99, group: "EXO", photo: P.polaroidPink },
+      { id: "p-gad-wallet", nameKey: "p_gad_wallet", cat: "gadgets", price: 19.99, group: "ENHYPEN", photo: P.gadgetsTablet },
+      { id: "p-alb-txt", nameKey: "p_alb_txt", cat: "albums", price: 24.99, group: "TXT", photo: P.vinylStack },
+      { id: "p-alb-bp", nameKey: "p_alb_bp", cat: "albums", price: 42.0, group: "BLACKPINK", photo: P.cdsBox },
+      { id: "p-fit-mesh", nameKey: "p_fit_mesh", cat: "fashion", price: 79.99, group: "Stray Kids", photo: P.boomboxPink },
+      { id: "p-fit-jersey", nameKey: "p_fit_jersey", cat: "fashion", price: 105.99, group: "EXO", photo: P.fashionWoman3 },
+      { id: "p-beauty-tint", nameKey: "p_beauty_tint", cat: "beauty", price: 22.0, group: "aespa", photo: P.beautyLip },
+      { id: "p-beauty-kit", nameKey: "p_beauty_kit", cat: "beauty", price: 48.0, group: "IVE", photo: P.beautyFlat },
+    ].map((p) => ({ ...p, name: t(p.nameKey) }));
+  }
 
   const PHOTOCARDS = [
     { id: "pc1", name: "Felix", set: "5-STAR", rarity: "SSR", photo: P.fashionMan2 },
@@ -124,13 +82,15 @@
     { id: "pc12", name: "Yujin", set: "HEYA", rarity: "SR", photo: P.fashionWoman3 },
   ];
 
-  const CALENDAR = [
-    { date: "Aug 12", title: "ATEEZ world tour film", meta: "Cinema · Limited merch", badge: "Soon" },
-    { date: "Aug 18", title: "NewJeans special clip", meta: "Digital drop · PC event", badge: "Teaser" },
-    { date: "Aug 22", title: "SEVENTEEN fancon MD", meta: "Pre-order window opens", badge: "MD" },
-    { date: "Sep 02", title: "LE SSERAFIM comeback", meta: "Title track + album 4 versions", badge: "CB" },
-    { date: "Sep 10", title: "Seoul Sanrio × K-pop fest", meta: "Collab booths · Lucky draw", badge: "Pop-up" },
-  ];
+  function getCalendar() {
+    return [
+      { date: "Aug 12", titleKey: "cal1_t", metaKey: "cal1_m", badgeKey: "badge_soon" },
+      { date: "Aug 18", titleKey: "cal2_t", metaKey: "cal2_m", badgeKey: "badge_teaser" },
+      { date: "Aug 22", titleKey: "cal3_t", metaKey: "cal3_m", badgeKey: "badge_md" },
+      { date: "Sep 02", titleKey: "cal4_t", metaKey: "cal4_m", badgeKey: "badge_cb" },
+      { date: "Sep 10", titleKey: "cal5_t", metaKey: "cal5_m", badgeKey: "badge_popup" },
+    ].map((c) => ({ date: c.date, title: t(c.titleKey), meta: t(c.metaKey), badge: t(c.badgeKey) }));
+  }
 
   const CHARTS = [
     { rank: 1, title: "Supernova (Remix)", artist: "aespa" },
@@ -140,26 +100,13 @@
     { rank: 5, title: "Home Work", artist: "TXT" },
   ];
 
-  const INTEL = [
-    {
-      label: "Pop-up",
-      title: "THIS & THAT Seoul zone",
-      body: "Photo zones, exclusive keyrings, and a night-only lucky draw. Queue apps recommended.",
-      photo: P.seoulNeon,
-    },
-    {
-      label: "Collector tip",
-      title: "Sleeve your SSRs",
-      body: "Penny sleeve + top loader + binder ring guards. Humidity is the enemy of holograms.",
-      photo: P.cardsCase,
-    },
-    {
-      label: "Stan culture",
-      title: "Bias protection 101",
-      body: "Mute the anti tags, stream the title track, and never reveal your full binder value in public.",
-      photo: P.concertFan,
-    },
-  ];
+  function getIntel() {
+    return [
+      { labelKey: "intel1_l", titleKey: "intel1_t", bodyKey: "intel1_b", photo: P.seoulNeon },
+      { labelKey: "intel2_l", titleKey: "intel2_t", bodyKey: "intel2_b", photo: P.cardsCase },
+      { labelKey: "intel3_l", titleKey: "intel3_t", bodyKey: "intel3_b", photo: P.concertFan },
+    ].map((i) => ({ label: t(i.labelKey), title: t(i.titleKey), body: t(i.bodyKey), photo: i.photo }));
+  }
 
   const CAT_PHOTOS = {
     lightsticks: P.concertCrowd,
@@ -170,87 +117,44 @@
     beauty: P.beautyKit,
   };
 
-  const QUIZ = [
-    {
-      q: "Friday night energy?",
-      options: [
-        { t: "Dome concert, light stick up", scores: { performer: 2, vocal: 1 } },
-        { t: "Vinyl + headphones, eyes closed", scores: { vocal: 2, soft: 1 } },
-        { t: "Fashion week front row energy", scores: { visual: 2, performer: 1 } },
-        { t: "Late-night variety clips on loop", scores: { chaos: 2, soft: 1 } },
-      ],
-    },
-    {
-      q: "Your ideal bias sends you…",
-      options: [
-        { t: "A deep-voice ASMR goodnight", scores: { soft: 2, vocal: 1 } },
-        { t: "A fancam that breaks the internet", scores: { performer: 2, visual: 1 } },
-        { t: "A chaotic live eating snacks", scores: { chaos: 2, soft: 1 } },
-        { t: "A high note that rearranges your soul", scores: { vocal: 2, performer: 1 } },
-      ],
-    },
-    {
-      q: "Merch budget mood?",
-      options: [
-        { t: "One legendary light stick", scores: { performer: 2 } },
-        { t: "Binder full of photocards", scores: { visual: 2, soft: 1 } },
-        { t: "Plush mountain on the bed", scores: { soft: 2, chaos: 1 } },
-        { t: "Every album version. Charting.", scores: { vocal: 1, chaos: 2 } },
-      ],
-    },
-    {
-      q: "Pick an aesthetic",
-      options: [
-        { t: "Neon cyber / metaverse", scores: { visual: 2, performer: 1 } },
-        { t: "Soft pastel bakery", scores: { soft: 2 } },
-        { t: "Black stage smoke + lasers", scores: { performer: 2, vocal: 1 } },
-        { t: "Y2K stickers everywhere", scores: { chaos: 2, visual: 1 } },
-      ],
-    },
-  ];
+  function getQuiz() {
+    return [
+      { q: t("q1"), options: [
+        { t: t("q1_a"), scores: { performer: 2, vocal: 1 } },
+        { t: t("q1_b"), scores: { vocal: 2, soft: 1 } },
+        { t: t("q1_c"), scores: { visual: 2, performer: 1 } },
+        { t: t("q1_d"), scores: { chaos: 2, soft: 1 } },
+      ]},
+      { q: t("q2"), options: [
+        { t: t("q2_a"), scores: { soft: 2, vocal: 1 } },
+        { t: t("q2_b"), scores: { performer: 2, visual: 1 } },
+        { t: t("q2_c"), scores: { chaos: 2, soft: 1 } },
+        { t: t("q2_d"), scores: { vocal: 2, performer: 1 } },
+      ]},
+      { q: t("q3"), options: [
+        { t: t("q3_a"), scores: { performer: 2 } },
+        { t: t("q3_b"), scores: { visual: 2, soft: 1 } },
+        { t: t("q3_c"), scores: { soft: 2, chaos: 1 } },
+        { t: t("q3_d"), scores: { vocal: 1, chaos: 2 } },
+      ]},
+      { q: t("q4"), options: [
+        { t: t("q4_a"), scores: { visual: 2, performer: 1 } },
+        { t: t("q4_b"), scores: { soft: 2 } },
+        { t: t("q4_c"), scores: { performer: 2, vocal: 1 } },
+        { t: t("q4_d"), scores: { chaos: 2, visual: 1 } },
+      ]},
+    ];
+  }
 
-  const QUIZ_RESULTS = {
-    performer: {
-      name: "San",
-      group: "ATEEZ",
-      vibe: "Stage beast energy",
-      blurb: "You crave impact. Fancams, formations, and that one move that makes the crowd lose it.",
-      kit: ["Official light stick", "Tour tee", "SSR stage PC"],
-      photo: P.stageSinger,
-    },
-    vocal: {
-      name: "Ningning",
-      group: "aespa",
-      vibe: "High-note heartbreak",
-      blurb: "Live vocals first. You stream the high notes and argue about stability in the comments.",
-      kit: ["Album random PC", "Mini light keyring", "Season's greetings"],
-      photo: P.stageWoman,
-    },
-    visual: {
-      name: "Wonyoung",
-      group: "IVE",
-      vibe: "Main character aura",
-      blurb: "Aesthetic is a lifestyle. Mag covers, fashion MD, and photocards that glow different.",
-      kit: ["Photobook", "Fashion MD jersey", "UR concept PC"],
-      photo: P.fashionWoman2,
-    },
-    soft: {
-      name: "Felix",
-      group: "Stray Kids",
-      vibe: "Soft chaos, deep voice",
-      blurb: "You want comfort bias energy - plushies, baking lives, and voice notes for the soul.",
-      kit: ["BbokAri plush", "Voice keyring", "Season bakery PC"],
-      photo: P.fashionMan2,
-    },
-    chaos: {
-      name: "Yeonjun",
-      group: "TXT",
-      vibe: "Fashion chaos agent",
-      blurb: "Predictable is boring. You collect weird collabs, limited drops, and unhinged live moments.",
-      kit: ["Random griptok", "Era hoodie", "Lucky draw ticket"],
-      photo: P.fashionMan3,
-    },
-  };
+  function getQuizResults() {
+    return {
+      performer: { name: "San", group: "ATEEZ", vibe: t("res_performer_v"), blurb: t("res_performer_b"), kit: [t("kit_ls"), t("kit_tee"), t("kit_ssr")], photo: P.stageSinger },
+      vocal: { name: "Ningning", group: "aespa", vibe: t("res_vocal_v"), blurb: t("res_vocal_b"), kit: [t("kit_pc"), t("kit_key"), t("kit_sg")], photo: P.stageWoman },
+      visual: { name: "Wonyoung", group: "IVE", vibe: t("res_visual_v"), blurb: t("res_visual_b"), kit: [t("kit_pb"), t("kit_jersey"), t("kit_ur")], photo: P.fashionWoman2 },
+      soft: { name: "Felix", group: "Stray Kids", vibe: t("res_soft_v"), blurb: t("res_soft_b"), kit: [t("kit_plush"), t("kit_voice"), t("kit_bakery")], photo: P.fashionMan2 },
+      chaos: { name: "Yeonjun", group: "TXT", vibe: t("res_chaos_v"), blurb: t("res_chaos_b"), kit: [t("kit_grip"), t("kit_hoodie"), t("kit_lucky")], photo: P.fashionMan3 },
+    };
+  }
 
   function hoursFromNow(h) {
     return Date.now() + h * 3600 * 1000;
@@ -329,7 +233,7 @@
   function renderDrops() {
     const grid = $("#drop-grid");
     if (!grid) return;
-    const items = DROPS.filter((d) => currentFilter === "all" || d.type === currentFilter);
+    const items = getDrops().filter((d) => currentFilter === "all" || d.type === currentFilter);
     grid.innerHTML = items
       .map(
         (d) => `
@@ -347,7 +251,7 @@
           <p>${d.blurb}</p>
           <div class="drop-foot">
             <div class="price">${formatMoney(d.price)}${d.was ? ` <s>${formatMoney(d.was)}</s>` : ""}</div>
-            <button type="button" class="wish-btn ${isWished(d.id) ? "on" : ""}" data-wish='${escapeAttr(JSON.stringify(wishPayload(d, "drop")))}' aria-label="Add ${escapeHtml(d.title)} to wishlist" aria-pressed="${isWished(d.id)}">
+            <button type="button" class="wish-btn ${isWished(d.id) ? "on" : ""}" data-wish='${escapeAttr(JSON.stringify(wishPayload(d, "drop")))}' aria-label="${escapeHtml(t("add_wishlist", { title: d.title }))}" aria-pressed="${isWished(d.id)}">
               ${heartSvg(isWished(d.id))}
             </button>
           </div>
@@ -360,11 +264,11 @@
   function renderIdols() {
     const rail = $("#idol-rail");
     if (!rail) return;
-    rail.innerHTML = IDOLS.map(
+    rail.innerHTML = getIdols().map(
       (i) => `
       <article class="idol-card">
         <div class="idol-avatar">
-          ${imgTag(i.photo, `Stock portrait vibe for ${i.name} card (not the real idol)`, "media-fill", { sizes: "260px" })}
+          ${imgTag(i.photo, t("stock_portrait", { name: i.name }), "media-fill", { sizes: "260px" })}
           <span class="group-chip">${i.group}</span>
         </div>
         <div class="idol-info">
@@ -372,8 +276,8 @@
           <p class="role">${i.role}</p>
           <div class="idol-tags">${i.tags.map((t) => `<span class="tag">${t}</span>`).join("")}</div>
           <div class="idol-actions">
-            <button type="button" class="btn btn-sm btn-neon bias-btn" data-bias="${i.name}">Set as bias</button>
-            <button type="button" class="btn btn-sm btn-ghost" data-wish='${escapeAttr(JSON.stringify(wishPayload({ id: i.id, title: i.name + " merch universe", price: 0, group: i.group, photo: i.photo }, "idol")))}'>Stash</button>
+            <button type="button" class="btn btn-sm btn-neon bias-btn" data-bias="${i.name}">${t("set_bias")}</button>
+            <button type="button" class="btn btn-sm btn-ghost" data-wish='${escapeAttr(JSON.stringify(wishPayload({ id: i.id, title: i.name + " " + t("merch_universe"), price: 0, group: i.group, photo: i.photo }, "idol")))}'>${t("stash")}</button>
           </div>
         </div>
       </article>`
@@ -386,24 +290,24 @@
     const sub = $("#product-panel-sub");
     if (!grid) return;
     const labels = {
-      all: "Featured loot",
-      lightsticks: "Light sticks",
-      plush: "Plush & dolls",
-      gadgets: "Gadgets",
-      albums: "Albums",
-      fashion: "Fashion MD",
-      beauty: "K-beauty collabs",
+      all: t("product_featured"),
+      lightsticks: t("label_lightsticks"),
+      plush: t("label_plush"),
+      gadgets: t("label_gadgets"),
+      albums: t("label_albums"),
+      fashion: t("label_fashion"),
+      beauty: t("label_beauty"),
     };
     const list =
       currentCat === "all"
-        ? PRODUCTS.all.slice(0, 8)
-        : PRODUCTS.all.filter((p) => p.cat === currentCat);
-    if (title) title.textContent = labels[currentCat] || "Featured loot";
+        ? getProducts().slice(0, 8)
+        : getProducts().filter((p) => p.cat === currentCat);
+    if (title) title.textContent = labels[currentCat] || t("product_featured");
     if (sub)
       sub.textContent =
         currentCat === "all"
-          ? "Tap a category above or wishlist anything that makes your heart race."
-          : `Showing ${list.length} demo items in ${labels[currentCat]}.`;
+          ? t("product_sub")
+          : t("product_sub_cat", { n: list.length, label: labels[currentCat] });
     grid.innerHTML = list
       .map(
         (p) => `
@@ -416,7 +320,7 @@
           <div class="meta">${p.group} · ${p.cat}</div>
           <div class="product-foot">
             <span class="price">${formatMoney(p.price)}</span>
-            <button type="button" class="wish-btn ${isWished(p.id) ? "on" : ""}" data-wish='${escapeAttr(JSON.stringify(wishPayload({ id: p.id, title: p.name, price: p.price, group: p.group, photo: p.photo }, "product")))}' aria-label="Wishlist ${escapeHtml(p.name)}" aria-pressed="${isWished(p.id)}">
+            <button type="button" class="wish-btn ${isWished(p.id) ? "on" : ""}" data-wish='${escapeAttr(JSON.stringify(wishPayload({ id: p.id, title: p.name, price: p.price, group: p.group, photo: p.photo }, "product")))}' aria-label="${escapeHtml(t("wishlist_item", { title: p.name }))}" aria-pressed="${isWished(p.id)}">
               ${heartSvg(isWished(p.id))}
             </button>
           </div>
@@ -445,14 +349,14 @@
       (pc) => `
       <article class="pc-card ${pc.rarity === "UR" || pc.rarity === "SSR" ? "holographic" : ""}">
         <div class="pc-face">
-          ${imgTag(pc.photo, `${pc.name} photocard vibe stock portrait`, "media-fill", { sizes: "180px" })}
+          ${imgTag(pc.photo, t("pc_vibe", { name: pc.name }), "media-fill", { sizes: "180px" })}
           <span class="pc-rarity rarity ${pc.rarity.toLowerCase()}">${pc.rarity}</span>
         </div>
         <div class="pc-meta">
           <strong>${pc.name}</strong>
           <span>${pc.set}</span>
           <button type="button" class="btn btn-sm btn-ghost" style="margin-top:0.35rem" data-wish='${escapeAttr(JSON.stringify(wishPayload({ id: pc.id, title: pc.name + " · " + pc.set + " PC", price: pc.rarity === "UR" ? 89 : pc.rarity === "SSR" ? 45 : pc.rarity === "SR" ? 18 : 8, group: pc.set, photo: pc.photo }, "pc")))}'>
-            Wishlist
+            ${t("wishlist")}
           </button>
         </div>
       </article>`
@@ -460,6 +364,8 @@
   }
 
   function renderPulse() {
+    const CALENDAR = getCalendar();
+    const INTEL = getIntel();
     const cal = $("#calendar-list");
     const chart = $("#chart-list");
     const intel = $("#intel-cards");
@@ -519,7 +425,7 @@
         <figcaption>
           <strong>${escapeHtml(y.title)}</strong>
           <span>${escapeHtml(y.channel)} · ${escapeHtml(y.note)}</span>
-          <a href="https://www.youtube.com/watch?v=${y.id}" target="_blank" rel="noopener noreferrer">Watch on YouTube</a>
+          <a href="https://www.youtube.com/watch?v=${y.id}" target="_blank" rel="noopener noreferrer">${t("watch_yt")}</a>
         </figcaption>
       </figure>`
       )
@@ -532,11 +438,11 @@
     const credits = M.allCredits();
     list.innerHTML = credits
       .map((c) => {
-        const kind = c.type === "youtube" ? "YouTube" : c.type === "video" ? "Pexels video" : "Pexels photo";
+        const kind = c.type === "youtube" ? t("credits_yt") : c.type === "video" ? t("credits_video") : t("credits_photo");
         return `<li>
           <span class="credit-kind">${kind}</span>
           <a href="${escapeHtml(c.url)}" target="_blank" rel="noopener noreferrer" title="Source: ${escapeHtml(c.url)}">${escapeHtml(c.desc)}</a>
-          <span class="credit-by">by <a href="${escapeHtml(c.photographerUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(c.photographer)}</a></span>
+          <span class="credit-by">${t("credits_by")} <a href="${escapeHtml(c.photographerUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(c.photographer)}</a></span>
         </li>`;
       })
       .join("");
@@ -553,7 +459,7 @@
       el.setAttribute("aria-label", v.desc);
     }
     if (credit) {
-      credit.innerHTML = `Background video: <a href="${v.url}" target="_blank" rel="noopener noreferrer" title="${escapeHtml(v.desc)}">${escapeHtml(v.photographer)} on Pexels</a>`;
+      credit.innerHTML = `${t("bg_video")} <a href="${v.url}" target="_blank" rel="noopener noreferrer" title="${escapeHtml(v.desc)}">${escapeHtml(v.photographer)} ${t("on_pexels")}</a>`;
     }
 
     // side ambient video
@@ -606,7 +512,7 @@
     if (!grid) return;
     if (!wishlist.length) {
       grid.innerHTML =
-        '<p class="empty-state" id="stash-empty">Nothing stashed yet. Go heart some loot - your wallet can cry later.</p>';
+        `<p class="empty-state" id="stash-empty">${t("stash_empty")}</p>`;
       return;
     }
     grid.innerHTML = wishlist
@@ -618,7 +524,7 @@
           <strong>${escapeHtml(w.title)}</strong>
           <span>${escapeHtml(w.group || w.kind)}${w.price ? " · " + formatMoney(w.price) : ""}</span>
         </div>
-        <button type="button" class="wish-btn on" data-remove="${w.id}" aria-label="Remove ${escapeHtml(w.title)}">
+        <button type="button" class="wish-btn on" data-remove="${w.id}" aria-label="${escapeHtml(t("remove_item", { title: w.title }))}">
           ${heartSvg(true)}
         </button>
       </div>`
@@ -630,7 +536,7 @@
     const body = $("#drawer-body");
     if (!body) return;
     if (!wishlist.length) {
-      body.innerHTML = '<p class="empty-state">Wishlist is empty. Heart drops, loot, or photocards.</p>';
+      body.innerHTML = `<p class="empty-state">${t("stash_empty_drawer")}</p>`;
       return;
     }
     body.innerHTML =
@@ -641,25 +547,25 @@
         <div class="stash-swatch" ${w.img ? `style="background-image:url('${w.img}')"` : ""} title="${escapeHtml(w.credit || "")}"></div>
         <div style="flex:1;min-width:0">
           <strong>${escapeHtml(w.title)}</strong>
-          <span>${w.price ? formatMoney(w.price) : "Saved"}</span>
+          <span>${w.price ? formatMoney(w.price) : t("saved")}</span>
         </div>
-        <button type="button" class="btn btn-sm btn-ghost" data-remove="${w.id}">Remove</button>
+        <button type="button" class="btn btn-sm btn-ghost" data-remove="${w.id}">${t("remove")}</button>
       </div>`
         )
         .join("") +
-      `<p style="color:var(--muted);font-size:0.85rem;margin-top:0.5rem">Demo only - no checkout. Total vibe: ${formatMoney(
+      `<p style="color:var(--muted);font-size:0.85rem;margin-top:0.5rem">${t("demo_total", { total: formatMoney(
         wishlist.reduce((s, w) => s + (w.price || 0), 0)
-      )}</p>`;
+      )})}</p>`;
   }
 
   function toggleWish(item) {
     const idx = wishlist.findIndex((w) => w.id === item.id);
     if (idx >= 0) {
       wishlist.splice(idx, 1);
-      toast("Removed from stash");
+      toast(t("toast_removed"));
     } else {
       wishlist.unshift(item);
-      toast("Stashed · " + item.title);
+      toast(t("toast_stashed", { title: item.title }));
     }
     saveWishlist(wishlist);
     updateWishlistUI();
@@ -716,7 +622,7 @@
     box.classList.add("opening");
     setTimeout(() => {
       const pull = weightedPull();
-      const a = M.attrs(pull.photo, `Pulled ${pull.name} photocard`);
+      const a = M.attrs(pull.photo, t("pull_pc", { name: pull.name }));
       box.hidden = true;
       result.hidden = false;
       if (again) again.hidden = false;
@@ -725,8 +631,8 @@
           <img src="${a.src}" alt="${escapeHtml(a.alt)}" title="${escapeHtml(a.title)}" width="200" height="280" loading="eager">
           <span class="rarity ${pull.rarity.toLowerCase()}" style="position:absolute;top:8px;right:8px">${pull.rarity}</span>
         </div>
-        <h3>You pulled ${pull.name}!</h3>
-        <p>${pull.set} · ${pull.rarity} rarity (demo RNG)</p>
+        <h3>${t("you_pulled", { name: pull.name })}</h3>
+        <p>${t("rarity_demo", { set: pull.set, rarity: pull.rarity })}</p>
         <p class="pull-credit">${escapeHtml(a.credit)}</p>
         <button type="button" class="btn btn-sm btn-neon" style="margin-top:0.75rem" data-wish='${escapeAttr(
           JSON.stringify(
@@ -741,7 +647,7 @@
               "pull"
             )
           )
-        )}'>Stash this pull</button>`;
+        )}'>${t("stash_pull")}</button>`;
     }, 480);
   }
 
@@ -755,9 +661,10 @@
   }
 
   function showQuizStep() {
+    const QUIZ = getQuiz();
     const step = QUIZ[quizIndex];
-    $("#quiz-step").textContent = `Question ${quizIndex + 1} of ${QUIZ.length}`;
-    $("#quiz-bar").style.width = ((quizIndex + 1) / QUIZ.length) * 100 + "%";
+    $("#quiz-step").textContent = t("quiz_step", { n: quizIndex + 1, total: getQuiz().length });
+    $("#quiz-bar").style.width = ((quizIndex + 1) / getQuiz().length) * 100 + "%";
     $("#quiz-question").textContent = step.q;
     const opts = $("#quiz-options");
     opts.innerHTML = step.options
@@ -766,12 +673,12 @@
   }
 
   function answerQuiz(optIndex) {
-    const opt = QUIZ[quizIndex].options[optIndex];
+    const opt = getQuiz()[quizIndex].options[optIndex];
     Object.keys(opt.scores).forEach((k) => {
       quizScores[k] = (quizScores[k] || 0) + opt.scores[k];
     });
     quizIndex++;
-    if (quizIndex >= QUIZ.length) finishQuiz();
+    if (quizIndex >= getQuiz().length) finishQuiz();
     else showQuizStep();
   }
 
@@ -784,8 +691,8 @@
         best = k;
       }
     });
-    const r = QUIZ_RESULTS[best];
-    const a = M.attrs(r.photo, `Bias match ${r.name} vibe (stock photo)`);
+    const r = getQuizResults()[best];
+    const a = M.attrs(r.photo, t("bias_match", { name: r.name }));
     $("#quiz-play").hidden = true;
     $("#quiz-result").hidden = false;
     $("#result-card").innerHTML = `
@@ -875,13 +782,13 @@
         wishlist = wishlist.filter((w) => w.id !== id);
         saveWishlist(wishlist);
         updateWishlistUI();
-        toast("Removed from stash");
+        toast(t("toast_removed"));
         return;
       }
 
       const biasBtn = e.target.closest(".bias-btn");
       if (biasBtn) {
-        toast("Bias set · " + biasBtn.dataset.bias);
+        toast(t("toast_bias", { name: biasBtn.dataset.bias }));
         return;
       }
 
@@ -928,13 +835,13 @@
       wishlist = [];
       saveWishlist(wishlist);
       updateWishlistUI();
-      toast("Stash cleared");
+      toast(t("toast_cleared"));
     });
 
     $("#cta-form")?.addEventListener("submit", (e) => {
       e.preventDefault();
       const note = $("#cta-note");
-      if (note) note.textContent = "You're on the pulse list (demo). No email was stored.";
+      if (note) note.textContent = t("cta_ok");
       e.target.reset();
     });
 
@@ -956,8 +863,7 @@
     });
   }
 
-  function init() {
-    spawnSparks();
+  function renderAllDynamic() {
     setupHeroVideo();
     styleCatCards();
     renderDrops();
@@ -968,7 +874,37 @@
     renderYoutube();
     renderCredits();
     updateWishlistUI();
+    // reset quiz view to intro on lang change if not mid-play is ok; keep state
+  }
+
+  function init() {
+    I18n.init();
+    spawnSparks();
+    renderAllDynamic();
     bindEvents();
+
+    document.querySelectorAll("[data-lang]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const next = btn.getAttribute("data-lang");
+        if (!next || next === I18n.getLang()) return;
+        I18n.setLang(next);
+        renderAllDynamic();
+        // refresh quiz UI if mid-flow
+        const play = $("#quiz-play");
+        const result = $("#quiz-result");
+        if (play && !play.hidden) showQuizStep();
+        else if (result && !result.hidden) {
+          // recompute last result from scores if any
+          try { finishQuiz(); } catch (e) { /* ignore */ }
+        }
+      });
+    });
+
+    window.addEventListener("biasdrop:lang", () => {
+      // static already applied in setLang; keep drawers labels if open
+      const note = $("#cta-note");
+      if (note && note.textContent) note.textContent = t("cta_ok");
+    });
   }
 
   if (document.readyState === "loading") {

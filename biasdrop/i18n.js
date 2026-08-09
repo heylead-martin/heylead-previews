@@ -1,0 +1,759 @@
+/* BiasDrop i18n - Bulgarian primary, English (UK) secondary */
+window.BiasDropI18n = (function () {
+  "use strict";
+
+  const STORAGE_KEY = "biasdrop-lang";
+  const DEFAULT = "bg";
+  const SUPPORTED = ["bg", "en"];
+
+  const dict = {
+    bg: {
+      meta_title: "BiasDrop · K-Pop Superfan HQ",
+      meta_desc:
+        "BiasDrop - неоновият hub за K-pop супер фенове. Идоли, photocard-и, light sticks, играчки, гаджети, hot drops и още.",
+      skip: "Към съдържанието",
+      logo_home: "BiasDrop начална",
+      nav_primary: "Основна навигация",
+      nav_mobile: "Мобилно меню",
+      nav_drops: "Дропове",
+      nav_idols: "Идоли",
+      nav_loot: "Лут",
+      nav_collect: "Колекция",
+      nav_pulse: "Пулс",
+      nav_vibe: "Вайб",
+      nav_quiz: "Bias тест",
+      nav_drops_m: "Горещи дропове",
+      nav_loot_m: "Лут магазин",
+      nav_collect_m: "Колекционерски",
+      nav_pulse_m: "Фен пулс",
+      nav_vibe_m: "Концертен вайб",
+      nav_stash_m: "Моят stash",
+      wishlist_open: "Отвори wishlist",
+      open_pack: "Отвори пак",
+      menu_open: "Отвори менюто",
+      menu_close: "Затвори менюто",
+
+      hero_eyebrow: "На живо за супер фенове · Preview демо",
+      hero_h1_a: "Всичко, от което",
+      hero_h1_b: "bias",
+      hero_h1_c: "ерата ти има нужда",
+      hero_lead:
+        "Идоли, photocard-и, light sticks, плюшени, гаджети, comeback дропове и целият stan chaos - в едно неоново HQ за колекционери, които никога не пропускат pre-order.",
+      hero_cta_drops: "Към горещите дропове",
+      hero_cta_quiz: "Намери своя bias",
+      hero_stat_loot: "Лут SKU-та",
+      hero_stat_idols: "Активни идоли",
+      hero_stat_ssr: "Pull rates live",
+      hero_stat_radar: "Drop радар",
+      float_pc: "Photocard pull",
+      float_sg: "Season's Greetings",
+      float_popup: "Pop-up Сеул",
+
+      marquee:
+        "PRE-ORDER LIVE · LIGHT STICK RESTOCK · PHOTOCARD RAIDS · SEASON'S GREETINGS 2026 · LUCKY DRAW OPEN · CHARTING FOR HANTEO · BIAS PROTECTION SQUAD · ",
+
+      drops_eyebrow: "Радарът е онлайн",
+      drops_h2: "Горещи дропове",
+      drops_h2_accent: "и pre-order-и",
+      drops_sub:
+        "Култура на countdown-а. Пропуснеш ли - плачеш после. Най-редките MD, албуми и limited китове на едно място.",
+      filter_all: "Всички",
+      filter_preorder: "Pre-order",
+      filter_restock: "Restock",
+      filter_exclusive: "Exclusive",
+      filter_label: "Филтри за дропове",
+      tag_preorder: "Pre-order",
+      tag_restock: "Restock",
+      tag_exclusive: "Exclusive",
+
+      idols_eyebrow: "Stan директория",
+      idols_h2: "Запознай се с",
+      idols_h2_accent: "идолите",
+      idols_sub:
+        "Избери bias, следи comeback-и и влез директно в merch вселената им. Профили за супер фенове - не за casual слушатели.",
+      idols_quiz_cta: "Не си сигурен? Направи теста",
+      idols_rail: "Карти на идоли, хоризонтален скрол",
+      set_bias: "Задай като bias",
+      stash: "Stash",
+      merch_universe: "merch вселена",
+
+      loot_eyebrow: "Лут магазин",
+      loot_h2: "Играчки, гаджети",
+      loot_h2_accent: "и MD",
+      loot_sub:
+        "От официални light sticks до desk dolls, griptok-ове, keyring-и и random pull, за който нямаше бюджет. Като колекционерски аркаден салон.",
+      cat_ls_tag: "Концертен кит",
+      cat_ls_h: "Light Sticks",
+      cat_ls_p: "Официални + mini keyring версии. Готови за следващия dome show.",
+      cat_ls_n: "168 артикула",
+      cat_pl_tag: "Cuteness overdrive",
+      cat_pl_h: "Плюшени и кукли",
+      cat_pl_p: "SKZOO, mascot стил, monitor dolls и desk chaos.",
+      cat_pl_n: "412 артикула",
+      cat_gd_tag: "Daily carry",
+      cat_gd_h: "Гаджети",
+      cat_gd_p: "Griptok-ове, card wallets, tablet pouches и glow keycaps.",
+      cat_gd_n: "290 артикула",
+      cat_al_tag: "Chart fuel",
+      cat_al_h: "Албуми",
+      cat_al_p: "Броят за Hanteo и Billboard. С photocard-и (RNG).",
+      cat_al_n: "1.2k артикула",
+      cat_fa_tag: "Носи ерата",
+      cat_fa_h: "Fashion MD",
+      cat_fa_p: "Tour тениски, суичъри, baseball jersey-та, room slippers - да, наистина.",
+      cat_fa_n: "640 артикула",
+      cat_be_tag: "Glow като тях",
+      cat_be_h: "K-Beauty колаби",
+      cat_be_p: "Skincare с идоли, lip tints и limited опаковки.",
+      cat_be_n: "168 артикула",
+      product_featured: "Избран лут",
+      product_sub: "Докосни категория горе или добави в wishlist всичко, което ускорява пулса.",
+      product_sub_cat: "Показваме {n} демо артикула в {label}.",
+      label_lightsticks: "Light sticks",
+      label_plush: "Плюшени и кукли",
+      label_gadgets: "Гаджети",
+      label_albums: "Албуми",
+      label_fashion: "Fashion MD",
+      label_beauty: "K-beauty колаби",
+
+      collect_eyebrow: "Collector mode",
+      collect_h2: "Photocard-и и",
+      collect_h2_accent: "rarity",
+      collect_sub:
+        "Сърцето на super-fandom. Rarity нива, pack pull-ове и binders - без хаотичните DM размени (освен ако не ги искаш).",
+      pull_pack: "Дръпни пак",
+      rarity_legend: "Легенда за rarity",
+      rarity_r: "R · Common",
+      rarity_sr: "SR · Rare",
+      rarity_ssr: "SSR · Ultra",
+      rarity_ur: "UR · Secret",
+      wishlist: "Wishlist",
+
+      pulse_eyebrow: "Културен фийд",
+      pulse_h2: "Фен",
+      pulse_h2_accent: "Пулс",
+      pulse_sub: "Класации, comeback-и, pop-up-и в Сеул и gossip преди group chat-а ти.",
+      pulse_cal: "Comeback календар",
+      pulse_chart: "Chart радар",
+      pulse_intel: "Scene intel",
+
+      vibe_eyebrow: "Free stock в YouTube",
+      vibe_h2: "Концертни",
+      vibe_h2_accent: "вайб клипове",
+      vibe_sub:
+        "Royalty-free / free-stock кадри от концертни тълпи за era енергията. Не са официални idol MV-та - free-to-use stock, както са етикетирани от каналите. Надписите кредитират всеки източник.",
+      watch_yt: "Гледай в YouTube",
+
+      quiz_eyebrow: "Интерактивно",
+      quiz_h2: "Намери своя",
+      quiz_h2_accent: "bias",
+      quiz_intro:
+        "4 пикантни въпроса. Без съдене. Максимум delulu. Ще те match-нем с BiasDrop idol вайб и starter loot кит.",
+      quiz_start: "Пусни хаоса",
+      quiz_step: "Въпрос {n} от {total}",
+      quiz_match: "Твоят match",
+      quiz_again: "Отново",
+      quiz_shop: "Към техния лут",
+
+      stash_eyebrow: "Твоят vault",
+      stash_h2: "Wishlist",
+      stash_h2_accent: "stash",
+      stash_sub: "Запазено локално в този браузър. Сърцай артикули из сайта - кацат тук за преглед.",
+      clear_stash: "Изчисти stash",
+      stash_empty: "Все още празно. Сърцай лут - портфейлът може да плаче после.",
+      stash_empty_drawer: "Wishlist-ът е празен. Сърцай дропове, лут или photocard-и.",
+      remove: "Премахни",
+      saved: "Запазено",
+      demo_total: "Само демо - без checkout. Общ вайб: {total}",
+
+      cta_h2: "Никога повече не пропускай drop",
+      cta_p:
+        "Влез в BiasDrop pulse списъка за restock-и, lucky draw-и и intel за pop-up-и в Сеул. Само демо - без реална регистрация.",
+      cta_email: "Имейл",
+      cta_placeholder: "stan@email.com",
+      cta_btn: "Уведоми ме",
+      cta_ok: "В списъка си (демо). Имейл не се записва.",
+
+      footer_blurb:
+        "HeyLead preview концепт за K-pop superfan commerce + culture hub. Вдъхновено от Weverse Shop, KPOP USA и stan културата - преосмислено с неонова енергия.",
+      footer_explore: "Разгледай",
+      footer_fan: "Фен живот",
+      footer_preview: "Preview",
+      footer_demo: "Не е за реални продажби · Демо инвентар",
+      footer_copy: "© 2026 BiasDrop концепт · previews.heylead.com/biasdrop · noindex",
+      credits_h: "Медия кредити и източници",
+      credits_p:
+        "Снимки и ambient клипове от Pexels (безплатен лиценз). Портретите са stock модели за естетика - не са реални идоли. YouTube embed-ите са free-stock концертни кадри, както са етикетирани от каналите. Всяко изображение ползва alt + title с фотограф и URL на източника.",
+      credits_photo: "Pexels снимка",
+      credits_video: "Pexels видео",
+      credits_yt: "YouTube",
+      credits_by: "от",
+      lang_label: "Език",
+      lang_bg: "BG",
+      lang_en: "EN · UK",
+      lang_bg_full: "Български",
+      lang_en_full: "English (UK)",
+
+      pack_title: "Pack pull",
+      pack_sub: "Докосни пака. RNG решава съдбата ти (демо шансове).",
+      pack_open: "Отвори пак",
+      pack_again: "Дръпни отново",
+      close: "Затвори",
+      drawer_title: "Wishlist",
+      bg_video: "Фоново видео:",
+      on_pexels: "в Pexels",
+      you_pulled: "Дръпна {name}!",
+      rarity_demo: "{set} · {rarity} rarity (демо RNG)",
+      stash_pull: "Запази този pull",
+      toast_removed: "Премахнато от stash",
+      toast_stashed: "В stash · {title}",
+      toast_bias: "Bias зададен · {name}",
+      toast_cleared: "Stash-ът е изчистен",
+      add_wishlist: "Добави {title} към wishlist",
+      remove_item: "Премахни {title}",
+      wishlist_item: "Wishlist {title}",
+      stock_portrait: "Stock портрет вайб за карта {name} (не е реалният идол)",
+      pc_vibe: "{name} photocard вайб stock портрет",
+      pull_pc: "Дръпнат {name} photocard",
+      bias_match: "Bias match {name} вайб (stock снимка)",
+      photo_by: "Снимка от {name} в Pexels",
+
+      // Drops content
+      drop_skz_t: "STRAY KIDS THIS & THAT Official MD Kit",
+      drop_skz_b: "Плюшени keyring-и, колие, mesh long sleeve - пълен era look.",
+      drop_exo_t: "EXO We are DOLL! Mungchiz Pack",
+      drop_exo_b: "Random фигури, badges, monitor dolls. Чист second-gen chaos.",
+      drop_aespa_t: "aespa Mini Light Keyring Ver.2",
+      drop_aespa_b: "Glow в джоба. Последният restock свърши за 11 минути.",
+      drop_bts_t: "BTS Official Lightstick Keyring Ver.4",
+      drop_bts_b: "Army bomb енергия на keyring. Bundle-и с албуми за chart-ове.",
+      drop_ive_t: "IVE × MINIVE Dive Pop-up Exclusive",
+      drop_ive_b: "Exclusive binder + limited PC set от Сеул pop-up. Световна доставка.",
+      drop_enha_t: "ENHYPEN Season's Greetings 2026",
+      drop_enha_b: "Календар, дневник, photocard-и, desk kit - годишният must-buy.",
+
+      // Idols
+      idol_felix_r: "Rapper · Visual · Deep-voice легенда",
+      idol_karina_r: "Leader · Main dancer · Center",
+      idol_jk_r: "Main vocal · Golden maknae",
+      idol_wy_r: "Center · Visual · Variety",
+      idol_yj_r: "Performer · Fashion chaos",
+      idol_nn_r: "Main vocal · Високи ноти",
+      idol_san_r: "Performer · Cat energy",
+      idol_jisoo_r: "Visual · Actress · Vocal",
+
+      // Products
+      p_ls_skz: "SKZ Official Light Stick Ver.2",
+      p_ls_aespa: "aespa Official Light Stick",
+      p_plush_bbok: "BbokAri Costume Plush",
+      p_plush_minive: "MINIVE Desk Doll Set",
+      p_gad_grip: "Magnetic Griptok Random",
+      p_gad_wallet: "Photocard Wallet Set",
+      p_alb_txt: "TXT The Star Chapter Album",
+      p_alb_bp: "BLACKPINK Deadline Photobook",
+      p_fit_mesh: "Era Mesh Long Sleeve",
+      p_fit_jersey: "Character Baseball Uniform",
+      p_beauty_tint: "Idol Lip Tint Collab",
+      p_beauty_kit: "Glow Skincare Duo",
+
+      // Calendar / intel
+      cal1_t: "ATEEZ world tour film",
+      cal1_m: "Кино · Limited merch",
+      cal2_t: "NewJeans special clip",
+      cal2_m: "Digital drop · PC event",
+      cal3_t: "SEVENTEEN fancon MD",
+      cal3_m: "Pre-order прозорецът се отваря",
+      cal4_t: "LE SSERAFIM comeback",
+      cal4_m: "Title track + албум 4 версии",
+      cal5_t: "Сеул Sanrio × K-pop fest",
+      cal5_m: "Collab щандове · Lucky draw",
+      badge_soon: "Скоро",
+      badge_teaser: "Teaser",
+      badge_md: "MD",
+      badge_cb: "CB",
+      badge_popup: "Pop-up",
+      intel1_l: "Pop-up",
+      intel1_t: "THIS & THAT зона в Сеул",
+      intel1_b: "Photo zones, exclusive keyring-и и night-only lucky draw. Препоръчваме queue app.",
+      intel2_l: "Collector tip",
+      intel2_t: "Sleeve-вай SSR-ите",
+      intel2_b: "Penny sleeve + top loader + binder ring guards. Влажността е враг на холограмите.",
+      intel3_l: "Stan culture",
+      intel3_t: "Bias protection 101",
+      intel3_b: "Mute anti таговете, стриймвай title track-а и никога не казвай стойността на binder-а на глас.",
+
+      // Quiz
+      q1: "Енергия в петък вечер?",
+      q1_a: "Dome концерт, light stick нагоре",
+      q1_b: "Vinyl + слушалки, очи затворени",
+      q1_c: "Fashion week front row енергия",
+      q1_d: "Късни variety клипове на loop",
+      q2: "Идеалният ти bias ти праща…",
+      q2_a: "Deep-voice ASMR лека нощ",
+      q2_b: "Fancam, който чупи интернет",
+      q2_c: "Хаотичен live със снакс",
+      q2_d: "Висока нота, която пренарежда душата",
+      q3: "Merch бюджет mood?",
+      q3_a: "Един легендарен light stick",
+      q3_b: "Binder пълен с photocard-и",
+      q3_c: "Планина от плюшени на леглото",
+      q3_d: "Всяка версия на албума. Charting.",
+      q4: "Избери естетика",
+      q4_a: "Neon cyber / metaverse",
+      q4_b: "Soft pastel bakery",
+      q4_c: "Черен stage smoke + лазери",
+      q4_d: "Y2K стикери навсякъде",
+
+      res_performer_v: "Stage beast енергия",
+      res_performer_b: "Искаш impact. Fancam-и, формации и онзи move, от който тълпата полудява.",
+      res_vocal_v: "High-note heartbreak",
+      res_vocal_b: "Live вокали на първо място. Стриймваш високите ноти и спориш за stability в коментарите.",
+      res_visual_v: "Main character aura",
+      res_visual_b: "Естетиката е lifestyle. Mag covers, fashion MD и photocard-и, които светят различно.",
+      res_soft_v: "Soft chaos, deep voice",
+      res_soft_b: "Искаш comfort bias - плюшени, baking live-ове и voice notes за душата.",
+      res_chaos_v: "Fashion chaos агент",
+      res_chaos_b: "Предвидимото е скучно. Събираш странни колаби, limited дропове и unhinged live моменти.",
+      kit_ls: "Официален light stick",
+      kit_tee: "Tour тениска",
+      kit_ssr: "SSR stage PC",
+      kit_pc: "Album random PC",
+      kit_key: "Mini light keyring",
+      kit_sg: "Season's greetings",
+      kit_pb: "Photobook",
+      kit_jersey: "Fashion MD jersey",
+      kit_ur: "UR concept PC",
+      kit_plush: "BbokAri plush",
+      kit_voice: "Voice keyring",
+      kit_bakery: "Season bakery PC",
+      kit_grip: "Random griptok",
+      kit_hoodie: "Era hoodie",
+      kit_lucky: "Lucky draw билет",
+    },
+
+    en: {
+      meta_title: "BiasDrop · K-Pop Superfan HQ",
+      meta_desc:
+        "BiasDrop - the neon K-pop superfan hub. Idols, photocards, light sticks, toys, gadgets, hot drops and more.",
+      skip: "Skip to content",
+      logo_home: "BiasDrop home",
+      nav_primary: "Primary",
+      nav_mobile: "Mobile menu",
+      nav_drops: "Drops",
+      nav_idols: "Idols",
+      nav_loot: "Loot",
+      nav_collect: "Collect",
+      nav_pulse: "Pulse",
+      nav_vibe: "Vibe",
+      nav_quiz: "Bias Quiz",
+      nav_drops_m: "Hot Drops",
+      nav_loot_m: "Loot Shop",
+      nav_collect_m: "Collectibles",
+      nav_pulse_m: "Fan Pulse",
+      nav_vibe_m: "Concert vibe",
+      nav_stash_m: "My Stash",
+      wishlist_open: "Open wishlist",
+      open_pack: "Open a Pack",
+      menu_open: "Open menu",
+      menu_close: "Close menu",
+
+      hero_eyebrow: "Live for super fans · Preview demo",
+      hero_h1_a: "Everything your",
+      hero_h1_b: "bias",
+      hero_h1_c: "era needs",
+      hero_lead:
+        "Idols, photocards, light sticks, plushies, gadgets, comeback drops, and the chaos of stan culture - all in one neon HQ built for collectors who never miss a pre-order.",
+      hero_cta_drops: "Shop Hot Drops",
+      hero_cta_quiz: "Find Your Bias",
+      hero_stat_loot: "Loot SKUs",
+      hero_stat_idols: "Active idols",
+      hero_stat_ssr: "Pull rates live",
+      hero_stat_radar: "Drop radar",
+      float_pc: "Photocard pull",
+      float_sg: "Season's Greetings",
+      float_popup: "Pop-up Seoul",
+
+      marquee:
+        "PRE-ORDER LIVE · LIGHT STICK RESTOCK · PHOTOCARD RAIDS · SEASON'S GREETINGS 2026 · LUCKY DRAW OPEN · CHARTING FOR HANTEO · BIAS PROTECTION SQUAD · ",
+
+      drops_eyebrow: "Radar online",
+      drops_h2: "Hot Drops",
+      drops_h2_accent: "& Pre-Orders",
+      drops_sub:
+        "Countdown culture. Miss it and cry later - we keep the rarest MD, albums, and limited kits in one feed.",
+      filter_all: "All",
+      filter_preorder: "Pre-order",
+      filter_restock: "Restock",
+      filter_exclusive: "Exclusive",
+      filter_label: "Drop filters",
+      tag_preorder: "Pre-order",
+      tag_restock: "Restock",
+      tag_exclusive: "Exclusive",
+
+      idols_eyebrow: "Stan directory",
+      idols_h2: "Meet the",
+      idols_h2_accent: "Idols",
+      idols_sub:
+        "Pick a bias, track comebacks, and jump straight into their merch universe. Profiles designed for super fans - not casual listeners.",
+      idols_quiz_cta: "Not sure? Take the quiz",
+      idols_rail: "Idol cards, scroll horizontally",
+      set_bias: "Set as bias",
+      stash: "Stash",
+      merch_universe: "merch universe",
+
+      loot_eyebrow: "Loot shop",
+      loot_h2: "Toys, gadgets",
+      loot_h2_accent: "& MD",
+      loot_sub:
+        "From official light sticks to desk dolls, griptoks, keyrings, and the random pull you didn't budget for. Built like a collector's arcade.",
+      cat_ls_tag: "Concert kit",
+      cat_ls_h: "Light Sticks",
+      cat_ls_p: "Official + mini keyring versions. Sync-ready for the next dome show.",
+      cat_ls_n: "168 items",
+      cat_pl_tag: "Cuteness overdrive",
+      cat_pl_h: "Plush & Dolls",
+      cat_pl_p: "SKZOO, BT21-style mascots, monitor dolls, and desk chaos.",
+      cat_pl_n: "412 items",
+      cat_gd_tag: "Daily carry",
+      cat_gd_h: "Gadgets",
+      cat_gd_p: "Griptoks, card wallets, tablet pouches, and glow keycaps.",
+      cat_gd_n: "290 items",
+      cat_al_tag: "Chart fuel",
+      cat_al_h: "Albums",
+      cat_al_p: "Counted for Hanteo & Billboard. Photocards included (RNG).",
+      cat_al_n: "1.2k items",
+      cat_fa_tag: "Wear the era",
+      cat_fa_h: "Fashion MD",
+      cat_fa_p: "Tour tees, hoodies, baseball jerseys, room slippers - yes really.",
+      cat_fa_n: "640 items",
+      cat_be_tag: "Glow like them",
+      cat_be_h: "K-Beauty Collabs",
+      cat_be_p: "Idol-backed skincare, lip tints, and limited packaging drops.",
+      cat_be_n: "168 items",
+      product_featured: "Featured loot",
+      product_sub: "Tap a category above or wishlist anything that makes your heart race.",
+      product_sub_cat: "Showing {n} demo items in {label}.",
+      label_lightsticks: "Light sticks",
+      label_plush: "Plush & dolls",
+      label_gadgets: "Gadgets",
+      label_albums: "Albums",
+      label_fashion: "Fashion MD",
+      label_beauty: "K-beauty collabs",
+
+      collect_eyebrow: "Collector mode",
+      collect_h2: "Photocards &",
+      collect_h2_accent: "rarity",
+      collect_sub:
+        "The heart of super-fandom. Rarity tiers, pack pulls, and binders - without the messy DM trading chaos (unless you want it).",
+      pull_pack: "Pull a pack",
+      rarity_legend: "Rarity legend",
+      rarity_r: "R · Common",
+      rarity_sr: "SR · Rare",
+      rarity_ssr: "SSR · Ultra",
+      rarity_ur: "UR · Secret",
+      wishlist: "Wishlist",
+
+      pulse_eyebrow: "Culture feed",
+      pulse_h2: "Fan",
+      pulse_h2_accent: "Pulse",
+      pulse_sub: "Charts, comebacks, Seoul pop-ups, and the gossip you need before your group chat does.",
+      pulse_cal: "Comeback calendar",
+      pulse_chart: "Chart radar",
+      pulse_intel: "Scene intel",
+
+      vibe_eyebrow: "Free stock on YouTube",
+      vibe_h2: "Concert",
+      vibe_h2_accent: "vibe reels",
+      vibe_sub:
+        "Royalty-free / free-stock concert crowd footage for the era energy. Not official idol MVs - free-to-use stock labelled by their channels. Captions credit each source.",
+      watch_yt: "Watch on YouTube",
+
+      quiz_eyebrow: "Interactive",
+      quiz_h2: "Find your",
+      quiz_h2_accent: "bias",
+      quiz_intro:
+        "4 spicy questions. Zero judgement. Maximum delulu. We'll match you with a BiasDrop idol vibe and a starter loot kit.",
+      quiz_start: "Start the chaos",
+      quiz_step: "Question {n} of {total}",
+      quiz_match: "Your match",
+      quiz_again: "Retake",
+      quiz_shop: "Shop their loot",
+
+      stash_eyebrow: "Your vault",
+      stash_h2: "Wishlist",
+      stash_h2_accent: "stash",
+      stash_sub: "Saved locally in this browser. Heart items across the site - they land here for review.",
+      clear_stash: "Clear stash",
+      stash_empty: "Nothing stashed yet. Go heart some loot - your wallet can cry later.",
+      stash_empty_drawer: "Wishlist is empty. Heart drops, loot, or photocards.",
+      remove: "Remove",
+      saved: "Saved",
+      demo_total: "Demo only - no checkout. Total vibe: {total}",
+
+      cta_h2: "Never miss a drop again",
+      cta_p:
+        "Join the BiasDrop pulse list for restocks, lucky draws, and Seoul pop-up intel. Demo only - no real signup.",
+      cta_email: "Email",
+      cta_placeholder: "stan@email.com",
+      cta_btn: "Notify me",
+      cta_ok: "You're on the pulse list (demo). No email was stored.",
+
+      footer_blurb:
+        "A HeyLead preview concept for a K-pop superfan commerce + culture hub. Inspired by patterns from Weverse Shop, KPOP USA, and stan culture - reimagined with neon energy.",
+      footer_explore: "Explore",
+      footer_fan: "Fan life",
+      footer_preview: "Preview",
+      footer_demo: "Not for production sale · Demo inventory",
+      footer_copy: "© 2026 BiasDrop concept · previews.heylead.com/biasdrop · noindex",
+      credits_h: "Media credits & sources",
+      credits_p:
+        "Photos and ambient clips from Pexels (free licence). Portrait images are stock models used as aesthetic vibes - not real idol likenesses. YouTube embeds are free-stock concert footage as labelled by their channels. Each image uses alt + title with photographer and source URL.",
+      credits_photo: "Pexels photo",
+      credits_video: "Pexels video",
+      credits_yt: "YouTube",
+      credits_by: "by",
+      lang_label: "Language",
+      lang_bg: "BG",
+      lang_en: "EN · UK",
+      lang_bg_full: "Bulgarian",
+      lang_en_full: "English (UK)",
+
+      pack_title: "Pack pull",
+      pack_sub: "Tap the pack. RNG decides your fate (demo odds).",
+      pack_open: "Open pack",
+      pack_again: "Pull again",
+      close: "Close",
+      drawer_title: "Wishlist",
+      bg_video: "Background video:",
+      on_pexels: "on Pexels",
+      you_pulled: "You pulled {name}!",
+      rarity_demo: "{set} · {rarity} rarity (demo RNG)",
+      stash_pull: "Stash this pull",
+      toast_removed: "Removed from stash",
+      toast_stashed: "Stashed · {title}",
+      toast_bias: "Bias set · {name}",
+      toast_cleared: "Stash cleared",
+      add_wishlist: "Add {title} to wishlist",
+      remove_item: "Remove {title}",
+      wishlist_item: "Wishlist {title}",
+      stock_portrait: "Stock portrait vibe for {name} card (not the real idol)",
+      pc_vibe: "{name} photocard vibe stock portrait",
+      pull_pc: "Pulled {name} photocard",
+      bias_match: "Bias match {name} vibe (stock photo)",
+      photo_by: "Photo by {name} on Pexels",
+
+      drop_skz_t: "STRAY KIDS THIS & THAT Official MD Kit",
+      drop_skz_b: "Plush keyrings, necklace, mesh long sleeve - full era fit.",
+      drop_exo_t: "EXO We are DOLL! Mungchiz Pack",
+      drop_exo_b: "Random figures, badges, monitor dolls. Peak second-gen chaos.",
+      drop_aespa_t: "aespa Mini Light Keyring Ver.2",
+      drop_aespa_b: "Pocket-sized glow. Last restock sold out in 11 minutes.",
+      drop_bts_t: "BTS Official Lightstick Keyring Ver.4",
+      drop_bts_b: "Army bomb energy on a keyring. Chart-eligible album bundles too.",
+      drop_ive_t: "IVE × MINIVE Dive Pop-up Exclusive",
+      drop_ive_b: "Seoul pop-up exclusive binder + limited PC set. Ships worldwide.",
+      drop_enha_t: "ENHYPEN Season's Greetings 2026",
+      drop_enha_b: "Calendar, diary, photocards, desk kit - annual must-buy.",
+
+      idol_felix_r: "Rapper · Visual · Deep-voice legend",
+      idol_karina_r: "Leader · Main dancer · Center",
+      idol_jk_r: "Main vocal · Golden maknae",
+      idol_wy_r: "Center · Visual · Variety",
+      idol_yj_r: "Performer · Fashion chaos",
+      idol_nn_r: "Main vocal · High notes",
+      idol_san_r: "Performer · Cat energy",
+      idol_jisoo_r: "Visual · Actress · Vocal",
+
+      p_ls_skz: "SKZ Official Light Stick Ver.2",
+      p_ls_aespa: "aespa Official Light Stick",
+      p_plush_bbok: "BbokAri Costume Plush",
+      p_plush_minive: "MINIVE Desk Doll Set",
+      p_gad_grip: "Magnetic Griptok Random",
+      p_gad_wallet: "Photocard Wallet Set",
+      p_alb_txt: "TXT The Star Chapter Album",
+      p_alb_bp: "BLACKPINK Deadline Photobook",
+      p_fit_mesh: "Era Mesh Long Sleeve",
+      p_fit_jersey: "Character Baseball Uniform",
+      p_beauty_tint: "Idol Lip Tint Collab",
+      p_beauty_kit: "Glow Skincare Duo",
+
+      cal1_t: "ATEEZ world tour film",
+      cal1_m: "Cinema · Limited merch",
+      cal2_t: "NewJeans special clip",
+      cal2_m: "Digital drop · PC event",
+      cal3_t: "SEVENTEEN fancon MD",
+      cal3_m: "Pre-order window opens",
+      cal4_t: "LE SSERAFIM comeback",
+      cal4_m: "Title track + album 4 versions",
+      cal5_t: "Seoul Sanrio × K-pop fest",
+      cal5_m: "Collab booths · Lucky draw",
+      badge_soon: "Soon",
+      badge_teaser: "Teaser",
+      badge_md: "MD",
+      badge_cb: "CB",
+      badge_popup: "Pop-up",
+      intel1_l: "Pop-up",
+      intel1_t: "THIS & THAT Seoul zone",
+      intel1_b: "Photo zones, exclusive keyrings, and a night-only lucky draw. Queue apps recommended.",
+      intel2_l: "Collector tip",
+      intel2_t: "Sleeve your SSRs",
+      intel2_b: "Penny sleeve + top loader + binder ring guards. Humidity is the enemy of holograms.",
+      intel3_l: "Stan culture",
+      intel3_t: "Bias protection 101",
+      intel3_b: "Mute the anti tags, stream the title track, and never reveal your full binder value in public.",
+
+      q1: "Friday night energy?",
+      q1_a: "Dome concert, light stick up",
+      q1_b: "Vinyl + headphones, eyes closed",
+      q1_c: "Fashion week front row energy",
+      q1_d: "Late-night variety clips on loop",
+      q2: "Your ideal bias sends you…",
+      q2_a: "A deep-voice ASMR goodnight",
+      q2_b: "A fancam that breaks the internet",
+      q2_c: "A chaotic live eating snacks",
+      q2_d: "A high note that rearranges your soul",
+      q3: "Merch budget mood?",
+      q3_a: "One legendary light stick",
+      q3_b: "Binder full of photocards",
+      q3_c: "Plush mountain on the bed",
+      q3_d: "Every album version. Charting.",
+      q4: "Pick an aesthetic",
+      q4_a: "Neon cyber / metaverse",
+      q4_b: "Soft pastel bakery",
+      q4_c: "Black stage smoke + lasers",
+      q4_d: "Y2K stickers everywhere",
+
+      res_performer_v: "Stage beast energy",
+      res_performer_b:
+        "You crave impact. Fancams, formations, and that one move that makes the crowd lose it.",
+      res_vocal_v: "High-note heartbreak",
+      res_vocal_b:
+        "Live vocals first. You stream the high notes and argue about stability in the comments.",
+      res_visual_v: "Main character aura",
+      res_visual_b:
+        "Aesthetic is a lifestyle. Mag covers, fashion MD, and photocards that glow different.",
+      res_soft_v: "Soft chaos, deep voice",
+      res_soft_b:
+        "You want comfort bias energy - plushies, baking lives, and voice notes for the soul.",
+      res_chaos_v: "Fashion chaos agent",
+      res_chaos_b:
+        "Predictable is boring. You collect weird collabs, limited drops, and unhinged live moments.",
+      kit_ls: "Official light stick",
+      kit_tee: "Tour tee",
+      kit_ssr: "SSR stage PC",
+      kit_pc: "Album random PC",
+      kit_key: "Mini light keyring",
+      kit_sg: "Season's greetings",
+      kit_pb: "Photobook",
+      kit_jersey: "Fashion MD jersey",
+      kit_ur: "UR concept PC",
+      kit_plush: "BbokAri plush",
+      kit_voice: "Voice keyring",
+      kit_bakery: "Season bakery PC",
+      kit_grip: "Random griptok",
+      kit_hoodie: "Era hoodie",
+      kit_lucky: "Lucky draw ticket",
+    },
+  };
+
+  let lang = DEFAULT;
+
+  function detect() {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved && SUPPORTED.includes(saved)) return saved;
+    } catch {
+      /* ignore */
+    }
+    return DEFAULT;
+  }
+
+  function t(key, vars) {
+    const table = dict[lang] || dict[DEFAULT];
+    let str = table[key] ?? dict.en[key] ?? key;
+    if (vars) {
+      Object.keys(vars).forEach((k) => {
+        str = str.replace(new RegExp("\\{" + k + "\\}", "g"), String(vars[k]));
+      });
+    }
+    return str;
+  }
+
+  function getLang() {
+    return lang;
+  }
+
+  function setLang(next) {
+    if (!SUPPORTED.includes(next)) return lang;
+    lang = next;
+    try {
+      localStorage.setItem(STORAGE_KEY, lang);
+    } catch {
+      /* ignore */
+    }
+    document.documentElement.lang = lang === "en" ? "en-GB" : "bg";
+    document.documentElement.dataset.lang = lang;
+    applyStatic();
+    window.dispatchEvent(new CustomEvent("biasdrop:lang", { detail: { lang } }));
+    return lang;
+  }
+
+  function applyStatic() {
+    document.title = t("meta_title");
+    const meta = document.querySelector('meta[name="description"]');
+    if (meta) meta.setAttribute("content", t("meta_desc"));
+
+    document.querySelectorAll("[data-i18n]").forEach((el) => {
+      const key = el.getAttribute("data-i18n");
+      if (!key) return;
+      el.textContent = t(key);
+    });
+
+    document.querySelectorAll("[data-i18n-html]").forEach((el) => {
+      const key = el.getAttribute("data-i18n-html");
+      if (!key) return;
+      el.innerHTML = t(key);
+    });
+
+    document.querySelectorAll("[data-i18n-placeholder]").forEach((el) => {
+      const key = el.getAttribute("data-i18n-placeholder");
+      if (key) el.setAttribute("placeholder", t(key));
+    });
+
+    document.querySelectorAll("[data-i18n-aria]").forEach((el) => {
+      const key = el.getAttribute("data-i18n-aria");
+      if (key) el.setAttribute("aria-label", t(key));
+    });
+
+    document.querySelectorAll("[data-i18n-title]").forEach((el) => {
+      const key = el.getAttribute("data-i18n-title");
+      if (key) el.setAttribute("title", t(key));
+    });
+
+    // marquee
+    const track = document.querySelector(".marquee-track");
+    if (track) {
+      const parts = t("marquee").split("·").map((s) => s.trim()).filter(Boolean);
+      const doubled = parts.concat(parts);
+      track.innerHTML = doubled
+        .map((p, i) => `<span>${p}</span>${i < doubled.length - 1 ? "<span>·</span>" : ""}`)
+        .join("");
+    }
+
+    // lang pills active state
+    document.querySelectorAll("[data-lang]").forEach((btn) => {
+      const active = btn.getAttribute("data-lang") === lang;
+      btn.classList.toggle("is-active", active);
+      btn.setAttribute("aria-pressed", String(active));
+    });
+  }
+
+  function init() {
+    lang = detect();
+    document.documentElement.lang = lang === "en" ? "en-GB" : "bg";
+    document.documentElement.dataset.lang = lang;
+    applyStatic();
+  }
+
+  return { t, getLang, setLang, init, applyStatic, SUPPORTED, DEFAULT };
+})();
