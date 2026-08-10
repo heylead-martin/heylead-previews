@@ -1,6 +1,8 @@
 /* ApplyLab client - talks to Cloudflare Worker API */
 (function () {
   const CFG_KEY = 'applylab.cfg.v1';
+  const COOKIE_NAME = 'applylab_cfg';
+  const COOKIE_MAX_AGE = 60 * 60 * 24 * 400; // ~13 months
   const titles = {
     dashboard: ['Dashboard', 'Find remote roles, score matches, tailor materials, track applications.'],
     jobs: ['Job feed', 'Remote full-time listings scored against your profile.'],
@@ -25,20 +27,116 @@
 
   const DEFAULT_API = 'https://applylab-api.martin-656.workers.dev';
 
-  function loadCfg() {
+  /* ---- durable config: localStorage + sessionStorage + long-lived cookie ---- */
+
+  function readCookie(name) {
     try {
-      const cfg = JSON.parse(localStorage.getItem(CFG_KEY) || '{}');
-      if (!cfg.apiBase) cfg.apiBase = DEFAULT_API;
+      const parts = String(document.cookie || '').split(';');
+      for (const part of parts) {
+        const i = part.indexOf('=');
+        if (i < 0) continue;
+        const k = part.slice(0, i).trim();
+        if (k === name) return decodeURIComponent(part.slice(i + 1).trim());
+      }
+    } catch (_) {}
+    return '';
+  }
+
+  function writeCookie(name, value, maxAge) {
+    try {
+      const secure = location.protocol === 'https:' ? '; Secure' : '';
+      document.cookie =
+        name +
+        '=' +
+        encodeURIComponent(value) +
+        '; Path=/' +
+        '; Max-Age=' +
+        maxAge +
+        '; SameSite=Lax' +
+        secure;
+    } catch (_) {}
+  }
+
+  function deleteCookie(name) {
+    try {
+      document.cookie = name + '=; Path=/; Max-Age=0; SameSite=Lax';
+    } catch (_) {}
+  }
+
+  function parseCfgRaw(raw) {
+    if (!raw) return null;
+    try {
+      const cfg = typeof raw === 'string' ? JSON.parse(raw) : raw;
+      if (!cfg || typeof cfg !== 'object') return null;
       return cfg;
-    } catch {
-      return { apiBase: DEFAULT_API };
+    } catch (_) {
+      return null;
     }
   }
-  function saveCfg(cfg) {
-    localStorage.setItem(CFG_KEY, JSON.stringify(cfg));
+
+  function normalizeCfg(cfg) {
+    return {
+      apiBase: String((cfg && cfg.apiBase) || DEFAULT_API).replace(/\/+$/, '') || DEFAULT_API,
+      token: String((cfg && cfg.token) || '').trim(),
+      savedAt: (cfg && cfg.savedAt) || null,
+    };
   }
+
+  function loadCfg() {
+    const layers = [];
+    try {
+      layers.push(parseCfgRaw(localStorage.getItem(CFG_KEY)));
+    } catch (_) {}
+    try {
+      layers.push(parseCfgRaw(sessionStorage.getItem(CFG_KEY)));
+    } catch (_) {}
+    try {
+      layers.push(parseCfgRaw(readCookie(COOKIE_NAME)));
+    } catch (_) {}
+
+    let merged = { apiBase: DEFAULT_API, token: '', savedAt: null };
+    for (const layer of layers) {
+      if (!layer) continue;
+      if (layer.apiBase) merged.apiBase = layer.apiBase;
+      if (layer.token) merged.token = layer.token;
+      if (layer.savedAt) merged.savedAt = layer.savedAt;
+    }
+    return normalizeCfg(merged);
+  }
+
+  function saveCfg(cfg) {
+    const payload = normalizeCfg(cfg);
+    payload.savedAt = new Date().toISOString();
+    const raw = JSON.stringify(payload);
+    try {
+      localStorage.setItem(CFG_KEY, raw);
+    } catch (_) {}
+    try {
+      sessionStorage.setItem(CFG_KEY, raw);
+    } catch (_) {}
+    writeCookie(COOKIE_NAME, raw, COOKIE_MAX_AGE);
+    return payload;
+  }
+
+  function clearCfg() {
+    try {
+      localStorage.removeItem(CFG_KEY);
+    } catch (_) {}
+    try {
+      sessionStorage.removeItem(CFG_KEY);
+    } catch (_) {}
+    deleteCookie(COOKIE_NAME);
+  }
+
   function getCfg() {
     return loadCfg();
+  }
+
+  /** Heal partial clears: if token exists in any layer, rewrite all layers */
+  function persistCfgEverywhere() {
+    const cfg = loadCfg();
+    if (cfg.token) saveCfg(cfg);
+    return cfg;
   }
 
   function toast(msg, isErr) {
@@ -81,9 +179,17 @@
 
   function setApiStatus(ok, label) {
     const el = $('#api-status');
-    el.textContent = label;
-    el.classList.toggle('ok', !!ok);
-    el.classList.toggle('bad', ok === false);
+    if (el) {
+      el.textContent = label;
+      el.classList.toggle('ok', !!ok);
+      el.classList.toggle('bad', ok === false);
+    }
+    const btn = $('#btn-open-settings-quick');
+    if (btn) {
+      btn.textContent = ok ? 'API connected' : 'Connect API';
+      btn.classList.toggle('primary', !ok);
+      btn.classList.toggle('ghost', !!ok);
+    }
   }
 
   async function testConnection() {
@@ -92,11 +198,17 @@
       setApiStatus(false, 'API: not set');
       return false;
     }
+    if (!cfg.token) {
+      setApiStatus(false, 'API: token missing');
+      return false;
+    }
     try {
       const h = await api('/api/health');
       if (!h?.ok) throw new Error('bad health');
       // also verify auth works
       await api('/api/profile');
+      // Refresh durable storage so cookie Max-Age keeps extending
+      saveCfg(cfg);
       setApiStatus(true, 'API: connected');
       return true;
     } catch (e) {
@@ -762,26 +874,37 @@
   /* ---------- settings ---------- */
 
   function fillSettings() {
-    const cfg = getCfg();
-    $('#cfg-api').value = cfg.apiBase || DEFAULT_API;
-    // Always re-populate from localStorage so a saved token is visible after reload
-    $('#cfg-token').value = cfg.token || '';
+    const cfg = persistCfgEverywhere();
+    const apiInput = $('#cfg-api');
+    const tokenInput = $('#cfg-token');
+    if (apiInput) apiInput.value = cfg.apiBase || DEFAULT_API;
+    // Always re-hydrate token into the field from durable storage
+    if (tokenInput) tokenInput.value = cfg.token || '';
     const hint = $('#cfg-token-hint');
+    if (!hint) return;
     if (cfg.token) {
-      const mask = cfg.token.length > 8
-        ? cfg.token.slice(0, 4) + '…' + cfg.token.slice(-4)
-        : '••••';
-      hint.textContent = 'Saved in this browser: ' + mask + ' (' + cfg.token.length + ' chars). Leave blank on save to keep it.';
+      const mask =
+        cfg.token.length > 8 ? cfg.token.slice(0, 4) + '…' + cfg.token.slice(-4) : '••••';
+      const when = cfg.savedAt ? ' · saved ' + fmtDate(cfg.savedAt) : '';
+      hint.textContent =
+        'Persistent on this device: ' +
+        mask +
+        ' (' +
+        cfg.token.length +
+        ' chars)' +
+        when +
+        '. Stored in localStorage + cookie (~13 months). Leave blank on Save to keep it.';
     } else {
-      hint.textContent = 'No token in this browser yet. Paste APP_TOKEN and click Save & test.';
+      hint.textContent =
+        'No token on this device yet. Paste APP_TOKEN once, click Save & test - it will stick across reloads.';
     }
   }
 
   async function saveSettings() {
     const prev = getCfg();
     const apiBase = ($('#cfg-api').value.trim() || DEFAULT_API).replace(/\/+$/, '');
-    // Do not wipe an existing token if the field is left blank (common after password managers / reloads)
-    const typed = $('#cfg-token').value.trim();
+    // Do not wipe an existing token if the field is left blank (password managers / reloads)
+    const typed = ($('#cfg-token').value || '').trim();
     const token = typed || prev.token || '';
     if (!token) {
       $('#cfg-status').textContent = 'Token required.';
@@ -794,8 +917,10 @@
     fillSettings();
     $('#cfg-status').textContent = 'Testing…';
     const ok = await testConnection();
-    $('#cfg-status').textContent = ok ? 'Connected.' : 'Failed - check URL and token.';
-    toast(ok ? 'API connected' : 'Connection failed', !ok);
+    $('#cfg-status').textContent = ok
+      ? 'Connected - token saved persistently on this device.'
+      : 'Failed - check URL and token.';
+    toast(ok ? 'API connected & saved' : 'Connection failed', !ok);
   }
 
   /* ---------- utils ---------- */
@@ -862,17 +987,18 @@
     $('#btn-toggle-token').addEventListener('click', () => {
       const input = $('#cfg-token');
       const btn = $('#btn-toggle-token');
-      const show = input.type === 'password';
-      input.type = show ? 'text' : 'password';
-      btn.textContent = show ? 'Hide' : 'Show';
+      // Prefer text field (survives password-manager wipes); toggle masks via CSS class
+      const hidden = input.classList.toggle('token-masked');
+      btn.textContent = hidden ? 'Show' : 'Hide';
     });
     $('#btn-clear-cfg').addEventListener('click', () => {
-      if (!confirm('Clear API URL and token from this browser?')) return;
-      localStorage.removeItem(CFG_KEY);
+      if (!confirm('Clear API URL and token from this device (storage + cookie)?')) return;
+      clearCfg();
       $('#cfg-token').value = '';
+      $('#cfg-api').value = DEFAULT_API;
       fillSettings();
       setApiStatus(false, 'API: not set');
-      toast('Cleared local config');
+      toast('Cleared saved config on this device');
     });
 
     document.addEventListener('click', (e) => {
@@ -930,6 +1056,8 @@
   }
 
   bind();
+  // Heal any partial storage and rehydrate UI from durable layers
+  persistCfgEverywhere();
   fillSettings();
   testConnection().then((ok) => {
     if (ok) showView('dashboard');

@@ -211,6 +211,11 @@ a { color: var(--accent); }
   align-items: stretch;
 }
 .token-row .grow { flex: 1; min-width: 0; }
+/* Mask token without type=password (password managers often wipe those) */
+#cfg-token.token-masked {
+  -webkit-text-security: disc;
+  text-security: disc;
+}
 .card-inset {
   background: var(--bg-elev);
   border: 1px solid var(--line-soft);

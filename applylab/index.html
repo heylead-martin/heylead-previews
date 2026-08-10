@@ -183,12 +183,12 @@
       <section class="view hidden" id="view-settings">
         <div class="card form-grid">
           <h2>API connection</h2>
-          <p class="hint">Worker holds your xAI key and profile data. Token is stored only in this browser (localStorage). If the field looks empty, paste it again from <code>~/applylab-api/.app-token-local.txt</code> - Saving with a blank field no longer wipes a saved token.</p>
-          <label>Worker base URL<input id="cfg-api" class="input mono" placeholder="https://applylab-api.xxx.workers.dev" autocomplete="off"></label>
+          <p class="hint">Paste APP_TOKEN <strong>once</strong>. It is saved on this device in localStorage, sessionStorage, and a long-lived cookie (~13 months), and refreshed every time the API connects. Blank Save does not wipe a saved token. Only <strong>Clear</strong> removes it.</p>
+          <label>Worker base URL<input id="cfg-api" class="input mono" placeholder="https://applylab-api.xxx.workers.dev" autocomplete="off" data-1p-ignore data-lpignore="true"></label>
           <label>APP_TOKEN
             <div class="token-row">
-              <input id="cfg-token" class="input mono grow" type="password" placeholder="paste token, then Save &amp; test" autocomplete="off" spellcheck="false">
-              <button type="button" class="btn ghost" id="btn-toggle-token" title="Show or hide token">Show</button>
+              <input id="cfg-token" class="input mono grow" type="text" placeholder="paste token, then Save &amp; test" autocomplete="off" spellcheck="false" data-1p-ignore data-lpignore="true" data-form-type="other">
+              <button type="button" class="btn ghost" id="btn-toggle-token" title="Show or hide token">Hide</button>
             </div>
           </label>
           <p class="hint" id="cfg-token-hint"></p>
@@ -198,13 +198,12 @@
             <span class="hint" id="cfg-status"></span>
           </div>
           <hr class="sep">
-          <h2>Deploy checklist</h2>
+          <h2>One-time setup</h2>
           <ol class="checklist">
-            <li>In <code>~/applylab-api</code>: <code>npx wrangler secret put APP_TOKEN</code></li>
-            <li><code>npx wrangler secret put XAI_API_KEY</code> (from console.x.ai)</li>
-            <li><code>npx wrangler deploy</code></li>
-            <li>Paste workers.dev URL + token here</li>
-            <li>Save profile, refresh jobs, tailor a match</li>
+            <li>Worker URL is prefilled for this project</li>
+            <li>Paste APP_TOKEN from <code>~/applylab-api/.app-token-local.txt</code></li>
+            <li>Click <strong>Save &amp; test</strong> once</li>
+            <li>Reload anytime - connection should stay</li>
           </ol>
         </div>
       </section>
