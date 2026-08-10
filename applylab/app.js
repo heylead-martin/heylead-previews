@@ -16,6 +16,7 @@
     applications: [],
     profile: null,
     tailorCache: {},
+    lastJobsMeta: null,
     loading: false,
   };
 
@@ -135,6 +136,12 @@
       if (source) params.set('source', source);
       const data = await api('/api/jobs?' + params.toString());
       state.jobs = (data.jobs || []).filter((j) => (j.matchScore || 0) >= minScore);
+      state.lastJobsMeta = {
+        totalCached: data.totalCached || 0,
+        apiCount: data.count || 0,
+        q,
+        minScore,
+      };
       renderJobList();
       if (state.selectedJobId) {
         const still = state.jobs.find((j) => j.id === state.selectedJobId);
@@ -143,7 +150,7 @@
       const total = data.totalCached || (data.jobs || []).length;
       toast(`Showing ${state.jobs.length} of ${total} jobs` + (minScore ? ` (score ≥ ${minScore})` : ''));
     } catch (e) {
-      list.innerHTML = `<div class="empty">${esc(e.message)}</div>`;
+      list.innerHTML = `<div class="empty">${esc(e.message)}<br><br>Open <strong>Settings</strong>, paste APP_TOKEN, Save &amp; test, then try again.</div>`;
       toast(e.message, true);
     }
   }
@@ -151,8 +158,13 @@
   function renderJobList() {
     const list = $('#job-list');
     if (!state.jobs.length) {
-      list.innerHTML =
-        '<div class="empty">No jobs in this view. Set score filter to <strong>Any score</strong>, clear search, then click Search. If it still fails, reconnect APP_TOKEN in Settings.</div>';
+      const meta = state.lastJobsMeta || {};
+      const bits = [];
+      if (meta.q) bits.push(`No results for “${meta.q}”.`);
+      else bits.push('No jobs in this view.');
+      if (meta.totalCached) bits.push(`Cache has ${meta.totalCached} jobs total.`);
+      bits.push('Clear search, set score to <strong>Any score</strong>, then Search - or click <strong>Refresh jobs</strong> in the top bar.');
+      list.innerHTML = `<div class="empty">${bits.join(' ')}</div>`;
       return;
     }
     list.innerHTML = state.jobs
