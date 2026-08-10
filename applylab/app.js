@@ -181,6 +181,104 @@
       .join('');
   }
 
+  function decodeEntities(s) {
+    return String(s || '')
+      .replace(/&amp;/gi, '&')
+      .replace(/&lt;/gi, '<')
+      .replace(/&gt;/gi, '>')
+      .replace(/&quot;/gi, '"')
+      .replace(/&#39;|&apos;/gi, "'")
+      .replace(/&nbsp;/gi, ' ')
+      .replace(/&#(\d+);/g, (_, n) => String.fromCharCode(Number(n)))
+      .replace(/&#x([0-9a-f]+);/gi, (_, h) => String.fromCharCode(parseInt(h, 16)));
+  }
+
+  function cleanLabel(s) {
+    return decodeEntities(s)
+      .replace(/\s+/g, ' ')
+      .replace(/[—–]/g, '-')
+      .trim();
+  }
+
+  /** Turn messy job-board text into readable HTML sections */
+  function formatJobDescription(raw) {
+    let text = decodeEntities(raw || '');
+    text = text
+      .replace(/<br\s*\/?>/gi, '\n')
+      .replace(/<\/p>/gi, '\n\n')
+      .replace(/<\/div>/gi, '\n')
+      .replace(/<\/li>/gi, '\n')
+      .replace(/<li[^>]*>/gi, '• ')
+      .replace(/<[^>]+>/g, ' ')
+      .replace(/\r/g, '')
+      .replace(/[ \t]+\n/g, '\n')
+      .replace(/\n{3,}/g, '\n\n')
+      .replace(/[ \t]{2,}/g, ' ')
+      .replace(/[—–]/g, '-')
+      .trim();
+
+    // Insert breaks before common section headers glued into walls of text
+    const headers =
+      'About the role|About the company|What you.?ll be doing|What you will do|Responsibilities|Requirements|Qualifications|Who you are|Who we.?re looking for|Nice to have|Benefits|What we offer|The role|Your role|Key responsibilities|Must have|Preferred|About us|The opportunity|How to apply';
+    text = text.replace(new RegExp(`\\s*(${headers})\\s*`, 'gi'), '\n\n$1\n');
+
+    // Break very long paragraphs after sentence ends if no newlines
+    if (!text.includes('\n') && text.length > 280) {
+      text = text.replace(/([.!?])\s+(?=[A-Z])/g, '$1\n\n');
+    }
+
+    const blocks = text.split(/\n{2,}/).map((b) => b.trim()).filter(Boolean);
+    if (!blocks.length) return '<p class="jd-muted">No description available.</p>';
+
+    const headerRe = new RegExp(`^(${headers})[:\\s-]*$`, 'i');
+    let html = '';
+    let i = 0;
+    while (i < blocks.length) {
+      const block = blocks[i];
+      const lines = block.split('\n').map((l) => l.trim()).filter(Boolean);
+      const first = lines[0] || '';
+      const isHeader =
+        headerRe.test(first) ||
+        (first.length < 48 && !/[.!?]$/.test(first) && /^[A-Z0-9]/.test(first) && lines.length === 1);
+
+      if (isHeader) {
+        html += `<h3 class="jd-h">${esc(first.replace(/[:\s-]+$/, ''))}</h3>`;
+        i++;
+        continue;
+      }
+
+      const bullets = lines.filter((l) => /^([•\-\*]|\d+[.)])\s+/.test(l));
+      if (bullets.length >= 2 || (lines.length >= 2 && lines.every((l) => /^([•\-\*]|\d+[.)])\s+/.test(l)))) {
+        html += '<ul class="jd-list">';
+        for (const l of lines) {
+          const item = l.replace(/^([•\-\*]|\d+[.)])\s+/, '');
+          html += `<li>${esc(item)}</li>`;
+        }
+        html += '</ul>';
+      } else {
+        // Soft-split mega paragraphs
+        let para = lines.join(' ');
+        if (para.length > 520) {
+          const parts = para.split(/(?<=[.!?])\s+(?=[A-Z])/);
+          let chunk = '';
+          for (const sent of parts) {
+            if ((chunk + ' ' + sent).trim().length > 420 && chunk) {
+              html += `<p class="jd-p">${esc(chunk.trim())}</p>`;
+              chunk = sent;
+            } else {
+              chunk = (chunk + ' ' + sent).trim();
+            }
+          }
+          if (chunk) html += `<p class="jd-p">${esc(chunk.trim())}</p>`;
+        } else {
+          html += `<p class="jd-p">${esc(para)}</p>`;
+        }
+      }
+      i++;
+    }
+    return html;
+  }
+
   function selectJob(id) {
     state.selectedJobId = id;
     renderJobList();
@@ -191,29 +289,56 @@
       return;
     }
     const cached = state.tailorCache[id];
+    const title = cleanLabel(j.title);
+    const company = cleanLabel(j.company);
+    const tags = (j.tags || [])
+      .map(cleanLabel)
+      .filter(Boolean)
+      .filter((t, idx, arr) => arr.findIndex((x) => x.toLowerCase() === t.toLowerCase()) === idx)
+      .slice(0, 10);
+    const jobType = cleanLabel(j.jobType || '');
+    const category = cleanLabel(j.category || '');
+    const chips = [
+      j.location ? cleanLabel(j.location) : 'Remote',
+      j.source,
+      j.salary ? cleanLabel(j.salary) : '',
+      jobType && !/full.?time/i.test(String(j.jobType)) ? jobType : jobType ? 'Full-time' : '',
+      j.postedAt ? fmtDate(j.postedAt) : '',
+      category,
+      ...tags,
+    ].filter(Boolean);
+    // de-dupe chips case-insensitively
+    const seen = new Set();
+    const chipHtml = chips
+      .filter((c) => {
+        const k = c.toLowerCase();
+        if (seen.has(k)) return false;
+        seen.add(k);
+        return true;
+      })
+      .slice(0, 12)
+      .map((c) => `<span class="chip">${esc(c)}</span>`)
+      .join('');
+
     box.innerHTML = `
-      <div class="meta-row" style="justify-content:space-between;align-items:flex-start">
-        <div>
-          <h2>${esc(j.title)}</h2>
-          <div class="company">${esc(j.company)}</div>
+      <div class="job-head">
+        <div class="job-head-main">
+          <h2>${esc(title)}</h2>
+          <div class="company">${esc(company)}</div>
         </div>
         <span class="score ${scoreClass(j.matchScore || 0)}">${j.matchScore ?? '-'} match</span>
       </div>
-      <div class="meta-row">
-        <span class="chip">${esc(j.location || 'Remote')}</span>
-        <span class="chip">${esc(j.source)}</span>
-        ${j.salary ? `<span class="chip">${esc(j.salary)}</span>` : ''}
-        ${j.jobType ? `<span class="chip">${esc(j.jobType)}</span>` : ''}
-        ${j.postedAt ? `<span class="chip">${esc(fmtDate(j.postedAt))}</span>` : ''}
-        ${(j.tags || []).slice(0, 8).map((t) => `<span class="chip">${esc(t)}</span>`).join('')}
-      </div>
+      <div class="meta-row">${chipHtml}</div>
       <div class="detail-actions">
         <button type="button" class="btn primary" id="btn-tailor" data-id="${escAttr(j.id)}">AI tailor materials</button>
         <a class="btn" href="${escAttr(j.url)}" target="_blank" rel="noopener">Open job listing</a>
         <button type="button" class="btn ghost" id="btn-save-prepared" data-id="${escAttr(j.id)}">Save to tracker</button>
         <button type="button" class="btn ghost" id="btn-copy-cover" ${cached?.coverLetter ? '' : 'disabled'}>Copy cover letter</button>
       </div>
-      <div class="desc">${esc((j.description || '').slice(0, 2500))}${(j.description || '').length > 2500 ? '…' : ''}</div>
+      <div class="jd">
+        <div class="jd-label">Job description</div>
+        <div class="jd-body">${formatJobDescription(j.description || '')}</div>
+      </div>
       <div class="materials" id="materials">${cached ? renderMaterials(cached) : ''}</div>
     `;
   }

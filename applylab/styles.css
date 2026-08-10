@@ -262,16 +262,73 @@ label { display: grid; gap: 6px; font-size: 0.86rem; font-weight: 600; color: #c
   overflow: auto;
 }
 .empty { color: var(--muted); padding: 24px 8px; text-align: center; }
-.job-detail h2 { margin: 0 0 4px; font-size: 1.25rem; letter-spacing: -0.02em; }
-.job-detail .company { color: var(--muted); margin-bottom: 12px; }
+.job-detail h2 { margin: 0 0 4px; font-size: 1.28rem; letter-spacing: -0.02em; line-height: 1.25; }
+.job-detail .company { color: var(--muted); margin: 0; font-size: 0.95rem; }
+.job-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.job-head-main { min-width: 0; flex: 1; }
 .meta-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
 .chip {
-  font-size: 0.75rem;
-  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: #a8b6c8;
   border: 1px solid var(--line);
+  background: rgba(255,255,255,0.03);
   border-radius: 999px;
-  padding: 4px 9px;
+  padding: 5px 10px;
+  text-transform: capitalize;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
+.jd {
+  border-top: 1px solid var(--line-soft);
+  margin-top: 4px;
+  padding-top: 14px;
+}
+.jd-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--faint);
+  margin-bottom: 10px;
+}
+.jd-body {
+  color: #c8d3e2;
+  font-size: 0.92rem;
+  line-height: 1.65;
+  max-height: min(48vh, 420px);
+  overflow: auto;
+  padding-right: 6px;
+  scrollbar-width: thin;
+  scrollbar-color: #334155 transparent;
+}
+.jd-h {
+  margin: 18px 0 8px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #e8eef7;
+  letter-spacing: -0.01em;
+}
+.jd-h:first-child { margin-top: 0; }
+.jd-p {
+  margin: 0 0 12px;
+  color: #c3cedd;
+}
+.jd-list {
+  margin: 0 0 14px;
+  padding-left: 1.15rem;
+  color: #c3cedd;
+}
+.jd-list li { margin-bottom: 6px; padding-left: 2px; }
+.jd-muted { color: var(--muted); margin: 0; }
 .desc {
   color: #c3cedd;
   font-size: 0.9rem;
