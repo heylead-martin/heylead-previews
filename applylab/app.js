@@ -202,11 +202,51 @@
 
   /** Turn messy job-board text into readable HTML sections */
   function formatJobDescription(raw) {
+    const headers =
+      'About the role|About the company|About us|What your day will look like|What you.?ll be doing|What you will do|Responsibilities|Key responsibilities|Requirements|Qualifications|Who you are|Who we.?re looking for|Nice to have|Benefits|What we offer|The role|Your role|Must have|Preferred|The opportunity|How to apply|Location';
+    const headerOnlyRe = new RegExp(`^(${headers})[:\\s-]*$`, 'i');
+    const headerStartRe = new RegExp(`^(${headers})[:\\s-]*`, 'i');
+
+    function renderLines(lines) {
+      if (!lines.length) return '';
+      const bullets = lines.filter((l) => /^([•\-\*]|\d+[.)])\s+/.test(l));
+      let out = '';
+      if (bullets.length >= 2 || (lines.length >= 2 && lines.every((l) => /^([•\-\*]|\d+[.)])\s+/.test(l)))) {
+        out += '<ul class="jd-list">';
+        for (const l of lines) {
+          const item = l.replace(/^([•\-\*]|\d+[.)])\s+/, '');
+          if (item) out += `<li>${esc(item)}</li>`;
+        }
+        out += '</ul>';
+        return out;
+      }
+      let para = lines.join(' ').replace(/\s+/g, ' ').trim();
+      if (!para) return '';
+      if (para.length > 520) {
+        const parts = para.split(/(?<=[.!?])\s+(?=[A-Z])/);
+        let chunk = '';
+        for (const sent of parts) {
+          if ((chunk + ' ' + sent).trim().length > 420 && chunk) {
+            out += `<p class="jd-p">${esc(chunk.trim())}</p>`;
+            chunk = sent;
+          } else {
+            chunk = (chunk + ' ' + sent).trim();
+          }
+        }
+        if (chunk) out += `<p class="jd-p">${esc(chunk.trim())}</p>`;
+      } else {
+        out += `<p class="jd-p">${esc(para)}</p>`;
+      }
+      return out;
+    }
+
     let text = decodeEntities(raw || '');
     text = text
       .replace(/<br\s*\/?>/gi, '\n')
       .replace(/<\/p>/gi, '\n\n')
       .replace(/<\/div>/gi, '\n')
+      .replace(/<\/h[1-6]>/gi, '\n\n')
+      .replace(/<h[1-6][^>]*>/gi, '\n\n')
       .replace(/<\/li>/gi, '\n')
       .replace(/<li[^>]*>/gi, '• ')
       .replace(/<[^>]+>/g, ' ')
@@ -217,64 +257,70 @@
       .replace(/[—–]/g, '-')
       .trim();
 
-    // Insert breaks before common section headers glued into walls of text
-    const headers =
-      'About the role|About the company|What you.?ll be doing|What you will do|Responsibilities|Requirements|Qualifications|Who you are|Who we.?re looking for|Nice to have|Benefits|What we offer|The role|Your role|Key responsibilities|Must have|Preferred|About us|The opportunity|How to apply';
-    text = text.replace(new RegExp(`\\s*(${headers})\\s*`, 'gi'), '\n\n$1\n');
+    if (!text) return '<p class="jd-muted">No description available.</p>';
 
-    // Break very long paragraphs after sentence ends if no newlines
-    if (!text.includes('\n') && text.length > 280) {
+    // Split headers onto their own blocks WITHOUT dropping following text
+    // e.g. "About the role We are hiring" -> "About the role\n\nWe are hiring"
+    text = text.replace(new RegExp(`(?:^|\\n)\\s*(${headers})\\s*[:\\-]?\\s*`, 'gi'), '\n\n$1\n\n');
+    // Also split mid-string glued headers: "...markets. What you'll be doing Own the..."
+    text = text.replace(new RegExp(`([.!?])\\s+(${headers})\\s*[:\\-]?\\s*`, 'gi'), '$1\n\n$2\n\n');
+    text = text.replace(/\n{3,}/g, '\n\n').trim();
+
+    // Break very long walls with no structure
+    if ((text.match(/\n/g) || []).length < 3 && text.length > 400) {
       text = text.replace(/([.!?])\s+(?=[A-Z])/g, '$1\n\n');
     }
 
     const blocks = text.split(/\n{2,}/).map((b) => b.trim()).filter(Boolean);
-    if (!blocks.length) return '<p class="jd-muted">No description available.</p>';
-
-    const headerRe = new RegExp(`^(${headers})[:\\s-]*$`, 'i');
     let html = '';
-    let i = 0;
-    while (i < blocks.length) {
-      const block = blocks[i];
-      const lines = block.split('\n').map((l) => l.trim()).filter(Boolean);
-      const first = lines[0] || '';
-      const isHeader =
-        headerRe.test(first) ||
-        (first.length < 48 && !/[.!?]$/.test(first) && /^[A-Z0-9]/.test(first) && lines.length === 1);
+    let bodyChars = 0;
 
-      if (isHeader) {
-        html += `<h3 class="jd-h">${esc(first.replace(/[:\s-]+$/, ''))}</h3>`;
-        i++;
+    for (const block of blocks) {
+      let lines = block.split('\n').map((l) => l.trim()).filter(Boolean);
+      if (!lines.length) continue;
+
+      // Header alone, or header + body on following lines in same block
+      if (headerOnlyRe.test(lines[0]) || (headerStartRe.test(lines[0]) && lines[0].length < 60)) {
+        const m = lines[0].match(headerStartRe);
+        const heading = (m ? m[0] : lines[0]).replace(/[:\s-]+$/, '').trim();
+        const remainderOnFirst = lines[0].replace(headerStartRe, '').trim();
+        html += `<h3 class="jd-h">${esc(heading)}</h3>`;
+        const rest = [];
+        if (remainderOnFirst) rest.push(remainderOnFirst);
+        rest.push(...lines.slice(1));
+        const body = renderLines(rest);
+        html += body;
+        bodyChars += rest.join(' ').length;
         continue;
       }
 
-      const bullets = lines.filter((l) => /^([•\-\*]|\d+[.)])\s+/.test(l));
-      if (bullets.length >= 2 || (lines.length >= 2 && lines.every((l) => /^([•\-\*]|\d+[.)])\s+/.test(l)))) {
-        html += '<ul class="jd-list">';
-        for (const l of lines) {
-          const item = l.replace(/^([•\-\*]|\d+[.)])\s+/, '');
-          html += `<li>${esc(item)}</li>`;
-        }
-        html += '</ul>';
-      } else {
-        // Soft-split mega paragraphs
-        let para = lines.join(' ');
-        if (para.length > 520) {
-          const parts = para.split(/(?<=[.!?])\s+(?=[A-Z])/);
-          let chunk = '';
-          for (const sent of parts) {
-            if ((chunk + ' ' + sent).trim().length > 420 && chunk) {
-              html += `<p class="jd-p">${esc(chunk.trim())}</p>`;
-              chunk = sent;
+      const body = renderLines(lines);
+      html += body;
+      bodyChars += lines.join(' ').length;
+    }
+
+    // Safety: if we only produced headings (or almost nothing), show raw text
+    if (bodyChars < 40) {
+      const plain = decodeEntities(raw || '')
+        .replace(/<[^>]+>/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim();
+      if (plain.length > 40) {
+        return plain
+          .split(/(?<=[.!?])\s+(?=[A-Z])/)
+          .reduce((acc, sent) => {
+            // group into ~2 sentence paragraphs
+            if (!acc.length || acc[acc.length - 1].split(/(?<=[.!?])/).length >= 2) {
+              acc.push(sent);
             } else {
-              chunk = (chunk + ' ' + sent).trim();
+              acc[acc.length - 1] += ' ' + sent;
             }
-          }
-          if (chunk) html += `<p class="jd-p">${esc(chunk.trim())}</p>`;
-        } else {
-          html += `<p class="jd-p">${esc(para)}</p>`;
-        }
+            return acc;
+          }, [])
+          .map((p) => `<p class="jd-p">${esc(p.trim())}</p>`)
+          .join('');
       }
-      i++;
+      if (!html) return '<p class="jd-muted">No description available.</p>';
     }
     return html;
   }
