@@ -140,7 +140,8 @@
         const still = state.jobs.find((j) => j.id === state.selectedJobId);
         if (still) selectJob(still.id);
       }
-      toast(`Loaded ${state.jobs.length} jobs` + (data.totalCached ? ` (${data.totalCached} cached)` : ''));
+      const total = data.totalCached || (data.jobs || []).length;
+      toast(`Showing ${state.jobs.length} of ${total} jobs` + (minScore ? ` (score ≥ ${minScore})` : ''));
     } catch (e) {
       list.innerHTML = `<div class="empty">${esc(e.message)}</div>`;
       toast(e.message, true);
@@ -150,7 +151,8 @@
   function renderJobList() {
     const list = $('#job-list');
     if (!state.jobs.length) {
-      list.innerHTML = '<div class="empty">No jobs match. Lower the score filter or broaden search.</div>';
+      list.innerHTML =
+        '<div class="empty">No jobs in this view. Set score filter to <strong>Any score</strong>, clear search, then click Search. If it still fails, reconnect APP_TOKEN in Settings.</div>';
       return;
     }
     list.innerHTML = state.jobs
