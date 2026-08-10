@@ -1,6 +1,6 @@
 # ApplyLab (preview)
 
-Personal AIApply-style remote job co-pilot.
+Personal remote job co-pilot.
 
 **URL:** https://previews.heylead.com/applylab/
 
