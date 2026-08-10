@@ -704,9 +704,34 @@ window.BiasDropPages = (function () {
         <a class="hub-card" href="${base}artists/"><strong>${t("home_explore_artists")}</strong><span>${D().artists.length} groups</span></a>
         <a class="hub-card" href="${base}albums/"><strong>${t("home_explore_albums")}</strong><span>${D().getAllAlbums().length}+ releases</span></a>
         <a class="hub-card" href="${base}concerts/"><strong>${t("home_explore_concerts")}</strong><span>${D().concerts.length} dates</span></a>
+        <a class="hub-card" href="${base}guides/"><strong>${t("nav_guides")}</strong><span>${((window.BiasDropExtra && window.BiasDropExtra.guides) || []).length} ${t("guides_label")}</span></a>
         <a class="hub-card" href="${base}faq/"><strong>${t("home_explore_faq")}</strong><span>${D().faqs.length} Q&A</span></a>
-        <a class="hub-card" href="${base}blog/"><strong>${t("nav_blog")}</strong><span>20 ${t("blog_posts")}</span></a>
+        <a class="hub-card" href="${base}blog/"><strong>${t("nav_blog")}</strong><span>${((window.BiasDropExtra && window.BiasDropExtra.blogs) || []).length} ${t("blog_posts")}</span></a>
       </div>
+      ${(() => {
+        const X = window.BiasDropExtra;
+        const L = lang();
+        const guides = (X && X.guides) || [];
+        if (!guides.length) return "";
+        return `
+      <div class="home-guides-strip">
+        <div class="section-head section-head-tight">
+          <div>
+            <p class="eyebrow">${t("guides_evergreen")}</p>
+            <h3>${t("guides_title")}</h3>
+          </div>
+          <a class="btn btn-sm btn-ghost" href="${base}guides/">${t("guides_open")}</a>
+        </div>
+        <div class="guide-chip-row">
+          ${guides
+            .map(
+              (g) =>
+                `<a class="guide-chip" href="${base}guides/${g.slug}/">${escape(typeof g.title === "string" ? g.title : g.title[L] || g.title.bg || g.title.en)}</a>`
+            )
+            .join("")}
+        </div>
+      </div>`;
+      })()}
       <div class="wiki-grid wiki-grid-home">
         ${D().artists.slice(0, 4).map((a) => artistCard(a, base)).join("")}
       </div>
@@ -741,17 +766,102 @@ window.BiasDropPages = (function () {
     }
   }
 
+  function pickLocale(field, L) {
+    if (!field) return "";
+    if (typeof field === "string") return field;
+    return field[L] || field.bg || field.en || "";
+  }
+
+  function renderGuides() {
+    const root = document.getElementById("page-root");
+    const X = window.BiasDropExtra;
+    if (!root || !X) return;
+    const base = S().getBase();
+    const L = lang();
+    const guides = X.guides || [];
+    document.title = `${t("guides_title")} · BiasDrop`;
+    root.innerHTML = `
+      <section class="page-hero">
+        <p class="eyebrow">${t("nav_guides")}</p>
+        <h1>${t("guides_title")}</h1>
+        <p class="section-sub">${t("guides_sub")}</p>
+      </section>
+      <div class="guide-grid">
+        ${guides
+          .map(
+            (g) => `<article class="guide-card">
+            <div class="blog-card-tags">${(g.tags || []).map((tg) => `<span class="tag">${escape(tg)}</span>`).join("")}</div>
+            <h2><a href="${base}guides/${g.slug}/">${escape(pickLocale(g.title, L))}</a></h2>
+            <p class="blog-excerpt">${escape(pickLocale(g.excerpt, L))}</p>
+            <a class="btn btn-sm btn-neon" href="${base}guides/${g.slug}/">${t("guides_open")}</a>
+          </article>`
+          )
+          .join("")}
+      </div>
+      <section class="guides-related">
+        <p class="section-sub">${t("guides_also")}</p>
+        <div class="hub-grid hub-grid-compact">
+          <a class="hub-card" href="${base}blog/"><strong>${t("nav_blog")}</strong><span>${(X.blogs || []).length} ${t("blog_posts")}</span></a>
+          <a class="hub-card" href="${base}faq/"><strong>${t("nav_faq")}</strong><span>${(D().faqs || []).length} Q&A</span></a>
+          <a class="hub-card" href="${base}artists/"><strong>${t("nav_artists")}</strong><span>${(D().artists || []).length} groups</span></a>
+        </div>
+      </section>`;
+  }
+
+  function renderGuideDetail(slug) {
+    const root = document.getElementById("page-root");
+    const X = window.BiasDropExtra;
+    if (!root || !X) return;
+    const base = S().getBase();
+    const L = lang();
+    const guides = X.guides || [];
+    const guide = guides.find((g) => g.slug === slug || g.id === slug);
+    if (!guide) {
+      root.innerHTML = `<p class="empty-state">${t("no_results")}</p><p><a href="${base}guides/">${t("nav_guides")}</a></p>`;
+      return;
+    }
+    const idx = guides.indexOf(guide);
+    const prev = idx > 0 ? guides[idx - 1] : null;
+    const next = idx >= 0 && idx < guides.length - 1 ? guides[idx + 1] : null;
+    const title = pickLocale(guide.title, L);
+    const html = pickLocale(guide.html, L);
+    document.title = `${title} · BiasDrop`;
+    root.innerHTML = `
+      <nav class="crumbs"><a href="${base}index.html">${t("breadcrumb_home")}</a><span>/</span><a href="${base}guides/">${t("nav_guides")}</a><span>/</span><span>${escape(title)}</span></nav>
+      <article class="blog-article guide-article">
+        <header class="blog-article-head">
+          <p class="eyebrow">${t("guides_evergreen")}</p>
+          <h1>${escape(title)}</h1>
+          <div class="blog-card-tags">${(guide.tags || []).map((tg) => `<span class="tag">${escape(tg)}</span>`).join("")}</div>
+          <p class="section-sub">${escape(pickLocale(guide.excerpt, L))}</p>
+        </header>
+        <div class="blog-body guide-body">${html}</div>
+        <nav class="blog-pager">
+          ${prev ? `<a class="blog-pager-link prev" href="${base}guides/${prev.slug}/"><span>${t("blog_prev")}</span><strong>${escape(pickLocale(prev.title, L))}</strong></a>` : `<span></span>`}
+          <a class="btn btn-sm btn-ghost" href="${base}guides/">${t("nav_guides")}</a>
+          ${next ? `<a class="blog-pager-link next" href="${base}guides/${next.slug}/"><span>${t("blog_next")}</span><strong>${escape(pickLocale(next.title, L))}</strong></a>` : `<span></span>`}
+        </nav>
+        <p class="back-row guides-crosslinks">
+          <a href="${base}blog/">${t("nav_blog")}</a>
+          <a href="${base}faq/">${t("nav_faq")}</a>
+          <a href="${base}concerts/">${t("nav_concerts")}</a>
+        </p>
+      </article>`;
+  }
+
   function renderBlogIndex() {
     const root = document.getElementById("page-root");
     const X = window.BiasDropExtra;
     if (!root || !X) return;
     const base = S().getBase();
     const posts = X.blogs || [];
+    document.title = `${t("blog_title")} · BiasDrop`;
     root.innerHTML = `
       <section class="page-hero">
         <p class="eyebrow">Blog</p>
         <h1>${t("blog_title")}</h1>
         <p class="section-sub">${t("blog_sub")}</p>
+        <p class="blog-guides-cta"><a class="btn btn-sm btn-ghost" href="${base}guides/">${t("nav_guides")}</a></p>
       </section>
       <div class="blog-grid">
         ${posts
@@ -803,6 +913,10 @@ window.BiasDropPages = (function () {
           <a class="btn btn-sm btn-ghost" href="${base}blog/">${t("nav_blog")}</a>
           ${next ? `<a class="blog-pager-link next" href="${base}blog/${next.slug}/"><span>${t("blog_next")}</span><strong>${escape(next.title)}</strong></a>` : `<span></span>`}
         </nav>
+        <p class="back-row guides-crosslinks">
+          <a href="${base}guides/">${t("nav_guides")}</a>
+          <a href="${base}faq/">${t("nav_faq")}</a>
+        </p>
       </article>`;
   }
 
@@ -835,6 +949,8 @@ window.BiasDropPages = (function () {
     renderFaq,
     renderAbout,
     renderHomeHub,
+    renderGuides,
+    renderGuideDetail,
     renderBlogIndex,
     renderBlogPost,
     renderLegal,

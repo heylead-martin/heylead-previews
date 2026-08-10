@@ -6,9 +6,11 @@ window.BiasDropShared = (function () {
     const meta = document.querySelector('meta[name="biasdrop-base"]');
     if (meta && meta.content) return meta.content.endsWith("/") ? meta.content : meta.content + "/";
     const path = location.pathname.replace(/\/index\.html$/, "/");
-    if (/\/artists\/[^/]+\/?$/.test(path)) return "../../";
-    if (/\/(artists|albums|concerts|faq|about)\/?$/.test(path)) return "../";
+    if (/\/(artists|guides|blog|legal)\/[^/]+\/?$/.test(path)) return "../../";
+    if (/\/(artists|albums|concerts|faq|about|blog|guides)\/?$/.test(path)) return "../";
     if (path.includes("/artists/") && path.split("/artists/")[1]) return "../../";
+    if (path.includes("/guides/") && path.split("/guides/")[1]) return "../../";
+    if (path.includes("/blog/") && path.split("/blog/")[1]) return "../../";
     return "./";
   }
 
@@ -33,7 +35,7 @@ window.BiasDropShared = (function () {
       { href: base + "artists/", key: "nav_artists", match: "artists" },
       { href: base + "albums/", key: "nav_albums_page", match: "albums" },
       { href: base + "concerts/", key: "nav_concerts", match: "concerts" },
-      { href: base + "index.html#loot", key: "nav_loot", match: "loot" },
+      { href: base + "guides/", key: "nav_guides", match: "guides" },
       { href: base + "faq/", key: "nav_faq", match: "faq" },
       { href: base + "blog/", key: "nav_blog", match: "blog" },
     ];
@@ -44,6 +46,7 @@ window.BiasDropShared = (function () {
     if (p.includes("/artists")) return "artists";
     if (p.includes("/albums")) return "albums";
     if (p.includes("/concerts")) return "concerts";
+    if (p.includes("/guides")) return "guides";
     if (p.includes("/faq")) return "faq";
     if (p.includes("/blog")) return "blog";
     if (p.includes("/about") || p.includes("/legal")) return "about";
@@ -136,6 +139,7 @@ window.BiasDropShared = (function () {
       </div>
       <div>
         <h4 data-i18n="footer_fan">${t("footer_fan")}</h4>
+        <a href="${base}guides/" data-i18n="nav_guides">${t("nav_guides")}</a>
         <a href="${base}blog/" data-i18n="nav_blog">${t("nav_blog")}</a>
         <a href="${base}faq/" data-i18n="nav_faq">${t("nav_faq")}</a>
         <a href="${base}about/" data-i18n="nav_about">${t("nav_about")}</a>

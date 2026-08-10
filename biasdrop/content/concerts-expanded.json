@@ -2,7 +2,7 @@
   {
     "id": "bts-goyang-1",
     "artistId": "bts",
-    "title": "BTS WORLD TOUR 'ARIRANG' — Goyang",
+    "title": "BTS WORLD TOUR 'ARIRANG' - Goyang",
     "date": "2026-04-09",
     "city": "Goyang",
     "country": "South Korea",
@@ -11,12 +11,12 @@
     "status": "onsale",
     "tickets": "https://www.ticketmaster.com/search?q=BTS+ARIRANG",
     "source": "https://ibighit.com/en/bts/tour/",
-    "note": "Opening stadium nights — confirm via Weverse / HYBE"
+    "note": "Opening stadium nights - confirm via Weverse / HYBE"
   },
   {
     "id": "bts-goyang-2",
     "artistId": "bts",
-    "title": "BTS WORLD TOUR 'ARIRANG' — Goyang",
+    "title": "BTS WORLD TOUR 'ARIRANG' - Goyang",
     "date": "2026-04-11",
     "city": "Goyang",
     "country": "South Korea",
@@ -29,7 +29,7 @@
   {
     "id": "bts-goyang-3",
     "artistId": "bts",
-    "title": "BTS WORLD TOUR 'ARIRANG' — Goyang",
+    "title": "BTS WORLD TOUR 'ARIRANG' - Goyang",
     "date": "2026-04-12",
     "city": "Goyang",
     "country": "South Korea",
@@ -42,7 +42,7 @@
   {
     "id": "bts-tokyo-1",
     "artistId": "bts",
-    "title": "BTS WORLD TOUR 'ARIRANG' — Tokyo",
+    "title": "BTS WORLD TOUR 'ARIRANG' - Tokyo",
     "date": "2026-04-17",
     "city": "Tokyo",
     "country": "Japan",
@@ -55,7 +55,7 @@
   {
     "id": "bts-tokyo-2",
     "artistId": "bts",
-    "title": "BTS WORLD TOUR 'ARIRANG' — Tokyo",
+    "title": "BTS WORLD TOUR 'ARIRANG' - Tokyo",
     "date": "2026-04-18",
     "city": "Tokyo",
     "country": "Japan",
@@ -68,7 +68,7 @@
   {
     "id": "bts-tampa",
     "artistId": "bts",
-    "title": "BTS WORLD TOUR 'ARIRANG' — Tampa",
+    "title": "BTS WORLD TOUR 'ARIRANG' - Tampa",
     "date": "2026-04-25",
     "city": "Tampa",
     "country": "USA",
@@ -81,7 +81,7 @@
   {
     "id": "bts-baltimore-1",
     "artistId": "bts",
-    "title": "BTS WORLD TOUR 'ARIRANG' — Baltimore",
+    "title": "BTS WORLD TOUR 'ARIRANG' - Baltimore",
     "date": "2026-08-10",
     "city": "Baltimore",
     "country": "USA",
@@ -95,7 +95,7 @@
   {
     "id": "bts-baltimore-2",
     "artistId": "bts",
-    "title": "BTS WORLD TOUR 'ARIRANG' — Baltimore",
+    "title": "BTS WORLD TOUR 'ARIRANG' - Baltimore",
     "date": "2026-08-11",
     "city": "Baltimore",
     "country": "USA",
@@ -108,7 +108,7 @@
   {
     "id": "bts-arlington",
     "artistId": "bts",
-    "title": "BTS WORLD TOUR 'ARIRANG' — Arlington",
+    "title": "BTS WORLD TOUR 'ARIRANG' - Arlington",
     "date": "2026-08-15",
     "city": "Arlington",
     "country": "USA",
@@ -121,7 +121,7 @@
   {
     "id": "skz-queens",
     "artistId": "stray-kids",
-    "title": "Stray Kids — Flushing Meadows / SKZ Anthem",
+    "title": "Stray Kids - Flushing Meadows / SKZ Anthem",
     "date": "2026-06-06",
     "city": "Queens",
     "country": "USA",
@@ -134,7 +134,7 @@
   {
     "id": "skz-seoul-aug",
     "artistId": "stray-kids",
-    "title": "Stray Kids RUN IT — KSPO Dome",
+    "title": "Stray Kids RUN IT - KSPO Dome",
     "date": "2026-08-02",
     "city": "Seoul",
     "country": "South Korea",
@@ -147,7 +147,7 @@
   {
     "id": "skz-rio",
     "artistId": "stray-kids",
-    "title": "Stray Kids — Rock in Rio 2026",
+    "title": "Stray Kids - Rock in Rio 2026",
     "date": "2026-09-11",
     "city": "Rio de Janeiro",
     "country": "Brazil",
@@ -186,7 +186,7 @@
   {
     "id": "svt-tacoma",
     "artistId": "seventeen",
-    "title": "SEVENTEEN World Tour [NEW_] — Tacoma",
+    "title": "SEVENTEEN World Tour [NEW_] - Tacoma",
     "date": "2026-10-11",
     "city": "Tacoma",
     "country": "USA",
@@ -199,7 +199,7 @@
   {
     "id": "svt-la-1",
     "artistId": "seventeen",
-    "title": "SEVENTEEN World Tour [NEW_] — Los Angeles",
+    "title": "SEVENTEEN World Tour [NEW_] - Los Angeles",
     "date": "2026-10-16",
     "city": "Los Angeles",
     "country": "USA",
@@ -212,7 +212,7 @@
   {
     "id": "svt-la-2",
     "artistId": "seventeen",
-    "title": "SEVENTEEN World Tour [NEW_] — Los Angeles",
+    "title": "SEVENTEEN World Tour [NEW_] - Los Angeles",
     "date": "2026-10-17",
     "city": "Los Angeles",
     "country": "USA",
@@ -225,7 +225,7 @@
   {
     "id": "svt-austin-1",
     "artistId": "seventeen",
-    "title": "SEVENTEEN World Tour [NEW_] — Austin",
+    "title": "SEVENTEEN World Tour [NEW_] - Austin",
     "date": "2026-10-21",
     "city": "Austin",
     "country": "USA",
@@ -238,7 +238,7 @@
   {
     "id": "svt-austin-2",
     "artistId": "seventeen",
-    "title": "SEVENTEEN World Tour [NEW_] — Austin",
+    "title": "SEVENTEEN World Tour [NEW_] - Austin",
     "date": "2026-10-22",
     "city": "Austin",
     "country": "USA",
@@ -251,7 +251,7 @@
   {
     "id": "svt-sunrise-1",
     "artistId": "seventeen",
-    "title": "SEVENTEEN World Tour [NEW_] — Sunrise",
+    "title": "SEVENTEEN World Tour [NEW_] - Sunrise",
     "date": "2026-10-26",
     "city": "Sunrise",
     "country": "USA",
@@ -264,7 +264,7 @@
   {
     "id": "svt-sunrise-2",
     "artistId": "seventeen",
-    "title": "SEVENTEEN World Tour [NEW_] — Sunrise",
+    "title": "SEVENTEEN World Tour [NEW_] - Sunrise",
     "date": "2026-10-27",
     "city": "Sunrise",
     "country": "USA",
@@ -277,7 +277,7 @@
   {
     "id": "svt-dc",
     "artistId": "seventeen",
-    "title": "SEVENTEEN World Tour [NEW_] — Washington DC",
+    "title": "SEVENTEEN World Tour [NEW_] - Washington DC",
     "date": "2026-10-30",
     "city": "Washington",
     "country": "USA",
@@ -290,7 +290,7 @@
   {
     "id": "enha-seoul-1",
     "artistId": "enhypen",
-    "title": "ENHYPEN World Tour 'Blood Saga' — Seoul",
+    "title": "ENHYPEN World Tour 'Blood Saga' - Seoul",
     "date": "2026-05-01",
     "city": "Seoul",
     "country": "South Korea",
@@ -303,7 +303,7 @@
   {
     "id": "enha-seoul-2",
     "artistId": "enhypen",
-    "title": "ENHYPEN World Tour 'Blood Saga' — Seoul",
+    "title": "ENHYPEN World Tour 'Blood Saga' - Seoul",
     "date": "2026-05-02",
     "city": "Seoul",
     "country": "South Korea",
@@ -316,7 +316,7 @@
   {
     "id": "enha-seoul-3",
     "artistId": "enhypen",
-    "title": "ENHYPEN World Tour 'Blood Saga' — Seoul",
+    "title": "ENHYPEN World Tour 'Blood Saga' - Seoul",
     "date": "2026-05-03",
     "city": "Seoul",
     "country": "South Korea",
@@ -329,7 +329,7 @@
   {
     "id": "ive-kl",
     "artistId": "ive",
-    "title": "IVE The 2nd World Tour <Show What I Am> — KL",
+    "title": "IVE The 2nd World Tour <Show What I Am> - KL",
     "date": "2026-04-04",
     "city": "Kuala Lumpur",
     "country": "Malaysia",
@@ -342,7 +342,7 @@
   {
     "id": "ive-osaka-1",
     "artistId": "ive",
-    "title": "IVE World Tour — Osaka",
+    "title": "IVE World Tour - Osaka",
     "date": "2026-04-18",
     "city": "Osaka",
     "country": "Japan",
@@ -355,7 +355,7 @@
   {
     "id": "ive-osaka-2",
     "artistId": "ive",
-    "title": "IVE World Tour — Osaka",
+    "title": "IVE World Tour - Osaka",
     "date": "2026-04-19",
     "city": "Osaka",
     "country": "Japan",
@@ -368,7 +368,7 @@
   {
     "id": "ive-manila",
     "artistId": "ive",
-    "title": "IVE World Tour — Manila",
+    "title": "IVE World Tour - Manila",
     "date": "2026-04-25",
     "city": "Manila",
     "country": "Philippines",
@@ -381,7 +381,7 @@
   {
     "id": "ive-sg",
     "artistId": "ive",
-    "title": "IVE World Tour — Singapore",
+    "title": "IVE World Tour - Singapore",
     "date": "2026-05-09",
     "city": "Singapore",
     "country": "Singapore",
@@ -394,7 +394,7 @@
   {
     "id": "ive-macao",
     "artistId": "ive",
-    "title": "IVE World Tour — Macao",
+    "title": "IVE World Tour - Macao",
     "date": "2026-05-23",
     "city": "Macao",
     "country": "Macao",
@@ -417,12 +417,12 @@
     "status": "announced",
     "tickets": "https://www.alamodome.com/events/detail/kpopworld-festival-2026",
     "source": "https://www.alamodome.com/events/detail/kpopworld-festival-2026",
-    "note": "Multi-artist festival — check official lineup"
+    "note": "Multi-artist festival - check official lineup"
   },
   {
     "id": "ateez-ams",
     "artistId": "ateez",
-    "title": "ATEEZ Europe — Amsterdam (check official)",
+    "title": "ATEEZ Europe - Amsterdam (check official)",
     "date": "2026-01-15",
     "city": "Amsterdam",
     "country": "Netherlands",
@@ -496,7 +496,7 @@
     "status": "tba",
     "tickets": "https://www.songkick.com/search?query=k-pop",
     "source": "https://www.songkick.com/",
-    "note": "Live aggregator — filter by artist"
+    "note": "Live aggregator - filter by artist"
   },
   {
     "id": "hub-bandsintown",
