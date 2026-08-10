@@ -211,6 +211,16 @@ a { color: var(--accent); }
   align-items: stretch;
 }
 .token-row .grow { flex: 1; min-width: 0; }
+.card-inset {
+  background: var(--bg-elev);
+  border: 1px solid var(--line-soft);
+  border-radius: 12px;
+  padding: 14px;
+}
+input[type="file"].input {
+  padding: 8px 10px;
+  font-size: 0.85rem;
+}
 
 .toolbar {
   display: flex;

@@ -74,13 +74,13 @@
         <div class="card howto">
           <h2>How ApplyLab works (v1)</h2>
           <ol>
-            <li><strong>Connect</strong> your Worker URL + APP_TOKEN in Settings.</li>
-            <li><strong>Fill Profile</strong> with resume text, skills, and target roles.</li>
-            <li><strong>Browse</strong> remote full-time jobs scored against your profile.</li>
-            <li><strong>Tailor</strong> resume + cover letter with xAI for a role you like.</li>
-            <li><strong>Apply</strong> on the job board (semi-auto: we prepare, you submit), then mark status in Tracker.</li>
+            <li><strong>Connect</strong> Worker URL + APP_TOKEN in Settings (once per browser).</li>
+            <li><strong>Upload resume</strong> on Profile (PDF or TXT) + skills and target roles. Save once.</li>
+            <li><strong>Browse</strong> remote jobs from Remotive, Jobicy, and RemoteOK (scored to your profile).</li>
+            <li><strong>AI tailor</strong> on a job: rewrites your resume + cover letter from that job description.</li>
+            <li><strong>Apply</strong> yourself on the listing (semi-auto), copy materials, mark status in Tracker.</li>
           </ol>
-          <p class="hint">Inspired by AIApply - personal private build first. No form-fill bots yet.</p>
+          <p class="hint">Job boards scanned: Remotive, Jobicy, RemoteOK. Cache refreshes about every 4 hours (or Refresh jobs).</p>
         </div>
       </section>
 
@@ -157,7 +157,19 @@
           </div>
           <label>Preferred locations <span class="soft">(comma-separated)</span><input name="preferredLocations" class="input" placeholder="Worldwide, Europe, EU, Remote"></label>
           <label>Exclude companies <span class="soft">(comma-separated)</span><input name="excludeCompanies" class="input"></label>
-          <label>Resume text <span class="soft">(paste full resume - used for AI tailoring)</span><textarea name="resumeText" class="input mono" rows="12" placeholder="Paste your current resume as plain text..."></textarea></label>
+          <div class="resume-upload card-inset">
+            <div class="card-h" style="margin:0 0 8px">
+              <h2 style="font-size:0.95rem">Base resume</h2>
+              <span class="soft" id="resume-file-label">No file yet</span>
+            </div>
+            <p class="hint" style="margin:0 0 10px">Upload once. For each job, ApplyLab rewrites this resume + a cover letter from the <strong>job title, company, tags, and full description</strong>.</p>
+            <div class="token-row">
+              <input type="file" id="resume-file" accept=".txt,.md,.pdf,text/plain,application/pdf" class="input grow">
+              <button type="button" class="btn ghost" id="btn-clear-resume">Clear text</button>
+            </div>
+            <p class="hint" id="resume-upload-status"></p>
+          </div>
+          <label>Resume text <span class="soft">(editable - this is what AI uses)</span><textarea name="resumeText" class="input mono" rows="12" placeholder="Paste or upload your current resume as plain text..."></textarea></label>
           <div class="form-actions">
             <button type="submit" class="btn primary">Save profile</button>
             <span class="hint" id="profile-status"></span>

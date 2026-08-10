@@ -446,6 +446,69 @@
     }
   }
 
+  /* ---------- resume upload (txt / pdf → plain text) ---------- */
+
+  let pdfJsLoading = null;
+  function loadPdfJs() {
+    if (window.pdfjsLib) return Promise.resolve(window.pdfjsLib);
+    if (pdfJsLoading) return pdfJsLoading;
+    pdfJsLoading = new Promise((resolve, reject) => {
+      const s = document.createElement('script');
+      s.src = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js';
+      s.onload = () => {
+        window.pdfjsLib.GlobalWorkerOptions.workerSrc =
+          'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+        resolve(window.pdfjsLib);
+      };
+      s.onerror = () => reject(new Error('Could not load PDF parser'));
+      document.head.appendChild(s);
+    });
+    return pdfJsLoading;
+  }
+
+  async function extractPdfText(file) {
+    const pdfjsLib = await loadPdfJs();
+    const buf = await file.arrayBuffer();
+    const pdf = await pdfjsLib.getDocument({ data: buf }).promise;
+    const parts = [];
+    const maxPages = Math.min(pdf.numPages, 12);
+    for (let i = 1; i <= maxPages; i++) {
+      const page = await pdf.getPage(i);
+      const content = await page.getTextContent();
+      const line = content.items.map((it) => it.str).join(' ');
+      parts.push(line);
+    }
+    return parts.join('\n').replace(/[ \t]+\n/g, '\n').replace(/\n{3,}/g, '\n\n').trim();
+  }
+
+  async function handleResumeFile(file) {
+    const status = $('#resume-upload-status');
+    const label = $('#resume-file-label');
+    if (!file) return;
+    status.textContent = 'Reading ' + file.name + '…';
+    label.textContent = file.name;
+    try {
+      let text = '';
+      const name = (file.name || '').toLowerCase();
+      if (file.type === 'application/pdf' || name.endsWith('.pdf')) {
+        text = await extractPdfText(file);
+      } else {
+        text = await file.text();
+      }
+      text = (text || '').trim();
+      if (!text || text.length < 40) {
+        throw new Error('Could not extract enough text. Try a text-based PDF or paste manually.');
+      }
+      const f = $('#profile-form');
+      f.resumeText.value = text.slice(0, 50000);
+      status.textContent = 'Loaded ' + text.length + ' characters. Click Save profile to store it for AI tailoring.';
+      toast('Resume loaded - save profile next');
+    } catch (e) {
+      status.textContent = e.message || 'Upload failed';
+      toast(e.message || 'Upload failed', true);
+    }
+  }
+
   /* ---------- dashboard ---------- */
 
   async function refreshDashboard() {
@@ -599,6 +662,17 @@
     $('#btn-reload-apps').addEventListener('click', () => loadApplications());
     $('#tracker-status').addEventListener('change', renderTracker);
     $('#profile-form').addEventListener('submit', saveProfile);
+    $('#resume-file').addEventListener('change', (e) => {
+      const file = e.target.files && e.target.files[0];
+      if (file) handleResumeFile(file);
+    });
+    $('#btn-clear-resume').addEventListener('click', () => {
+      const f = $('#profile-form');
+      f.resumeText.value = '';
+      $('#resume-file').value = '';
+      $('#resume-file-label').textContent = 'No file yet';
+      $('#resume-upload-status').textContent = 'Cleared. Save profile to update the server copy.';
+    });
     $('#btn-save-cfg').addEventListener('click', saveSettings);
     $('#btn-toggle-token').addEventListener('click', () => {
       const input = $('#cfg-token');
