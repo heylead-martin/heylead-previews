@@ -1,0 +1,2 @@
+# Cloudflare Pages - SPA-style fallback not needed (static export with trailingSlash)
+# Ensure clean www redirect handled at DNS/Pages custom domain level
