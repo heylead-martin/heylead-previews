@@ -226,7 +226,7 @@
     };
   }
 
-  function econtUrl(items, customer) {
+  function econtUrl(items) {
     var params = new URLSearchParams({
       id_shop: ECONT_SHOP,
       order_total: cartTotal(items).toFixed(2),
@@ -235,9 +235,6 @@
       ignore_history: "1",
       confirm_txt: "Потвърди доставката"
     });
-    if (customer.name) params.set("customer_name", customer.name);
-    if (customer.phone) params.set("customer_phone", customer.phone);
-    if (customer.email) params.set("customer_email", customer.email);
     return ECONT_FORM + "?" + params.toString();
   }
 
@@ -255,14 +252,8 @@
 
     $("app").innerHTML =
       '<div class="checkout container">' +
-      '<div><div class="panel" style="margin-bottom:16px"><h2>1. Твоите данни</h2>' +
-      '<div class="row2"><div class="field"><label>Име</label><input id="first" autocomplete="given-name"></div>' +
-      '<div class="field"><label>Фамилия</label><input id="last" autocomplete="family-name"></div></div>' +
-      '<div class="row2"><div class="field"><label>Телефон</label><input id="phone" autocomplete="tel" placeholder="08..."></div>' +
-      '<div class="field"><label>Имейл</label><input id="email" type="email" autocomplete="email"></div></div>' +
-      "</div>" +
-      '<div class="panel"><h2>2. Доставка с Еконт</h2>' +
-      '<div class="note">Това е формата на Еконт за този магазин (shop id ' + ECONT_SHOP + "), не WooCommerce плъгинът. Избираш офис, еконтомат или адрес. Еконт връща точната цена, после потвърждаваш тук.</div>" +
+      '<div><div class="panel"><h2>Доставка с Еконт</h2>' +
+      '<div class="note">Име, телефон и адрес се попълват в формата на Еконт. Избираш офис, еконтомат или адрес, те връщат точната цена.</div>' +
       '<div id="econt-box">' +
       (econtChoice ? econtSummaryHtml() : '<div class="econt-frame-wrap"><iframe id="econt-frame" title="Еконт доставка" allow="geolocation" src="about:blank"></iframe></div>') +
       "</div>" +
@@ -284,7 +275,8 @@
   function econtSummaryHtml() {
     var c = econtChoice;
     return '<div class="econt-summary"><h3>Еконт потвърди доставката</h3>' +
-      "<p><strong>" + esc(c.label) + "</strong></p>" +
+      "<p><strong>" + esc(c.name || c.label) + "</strong>" + (c.phone ? " · " + esc(c.phone) : "") + "</p>" +
+      "<p>" + esc(c.label) + "</p>" +
       "<p>" + esc(c.destination) + "</p>" +
       "<p>Цена с наложен платеж: <strong>" + money(c.shipping) + "</strong> " + esc(c.currency || "EUR") + "</p>" +
       '<button class="btn btn-ghost" type="button" id="econt-change">Промени адреса</button>' +
@@ -292,31 +284,14 @@
       "</div>";
   }
 
-  function customerFromForm() {
-    return {
-      first: ($("first") && $("first").value.trim()) || "",
-      last: ($("last") && $("last").value.trim()) || "",
-      name: ((($("first") && $("first").value) || "") + " " + (($("last") && $("last").value) || "")).trim(),
-      phone: ($("phone") && $("phone").value.trim()) || "",
-      email: ($("email") && $("email").value.trim()) || ""
-    };
-  }
-
   function loadFrame(items) {
     var frame = $("econt-frame");
     if (!frame) return;
-    frame.src = econtUrl(items, customerFromForm());
+    frame.src = econtUrl(items);
   }
 
   function bindCheckout(items) {
-    if (!econtChoice) {
-      loadFrame(items);
-      ["first", "last", "phone", "email"].forEach(function (id) {
-        var el = $(id);
-        if (!el) return;
-        el.addEventListener("change", function () { if (!econtChoice) loadFrame(items); });
-      });
-    }
+    if (!econtChoice) loadFrame(items);
     var change = $("econt-change");
     if (change) {
       change.onclick = function () {
@@ -326,11 +301,6 @@
       };
     }
     $("place").onclick = function () {
-      var c = customerFromForm();
-      if (!c.first || !c.last || !c.phone) {
-        $("place-err").textContent = "Попълни име, фамилия и телефон.";
-        return;
-      }
       if (!econtChoice) {
         $("place-err").textContent = "Първо потвърди доставката в формата на Еконт.";
         return;
@@ -338,7 +308,11 @@
       var order = {
         id: "KG-" + Date.now().toString(36).toUpperCase(),
         at: new Date().toISOString(),
-        customer: c,
+        customer: {
+          name: econtChoice.name || "",
+          phone: econtChoice.phone || "",
+          email: econtChoice.email || ""
+        },
         items: items,
         econt: econtChoice,
         products: cartTotal(items),
@@ -375,8 +349,9 @@
       address: data.address || "",
       destination: dest || "Еконт доставка",
       label: office ? "До офис / еконтомат на Еконт" : "До адрес с Еконт",
-      name: data.name || "",
-      phone: data.phone || ""
+      name: data.name || data.face || "",
+      phone: data.phone || "",
+      email: data.email || ""
     };
     if (location.hash.indexOf("checkout") !== -1) renderCheckout();
   }
