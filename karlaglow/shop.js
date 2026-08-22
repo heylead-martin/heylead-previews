@@ -1,10 +1,11 @@
 (function () {
   var BGN = 1.95583;
-  var ECONT_SHOP = "8663702";
-  var ECONT_FORM = "https://delivery.econt.com/customer_info.php";
   var ECONT_OFFICES = "https://ee.econt.com/services/Nomenclatures/NomenclaturesService.getOffices.json";
+  var ECONT_STREETS = "https://ee.econt.com/services/Nomenclatures/NomenclaturesService.getStreets.json";
   var CART_KEY = "kg_preview_cart";
   var ORDER_KEY = "kg_preview_last_order";
+  var SHIP_OFFICE = 4.12;
+  var SHIP_ADDRESS = 5.32;
 
   var MODELS = [
     { group: "iPhone 17 серия", items: [
@@ -38,7 +39,12 @@
 
   var catalog = { products: [] };
   var econtChoice = null;
-  var econtRaw = null;
+  var cities = [];
+  var officesByCity = {};
+  var streetsByCity = {};
+  var pickedCity = null;
+  var pickedOffice = null;
+  var deliveryMode = "office";
 
   function $(id) { return document.getElementById(id); }
   function esc(s) {
@@ -226,16 +232,146 @@
     };
   }
 
-  function econtUrl(items) {
-    var params = new URLSearchParams({
-      id_shop: ECONT_SHOP,
-      order_total: cartTotal(items).toFixed(2),
-      order_currency: "EUR",
-      order_weight: cartWeight(items).toFixed(3),
-      ignore_history: "1",
-      confirm_txt: "Потвърди доставката"
+  function shipCost() {
+    return deliveryMode === "address" ? SHIP_ADDRESS : SHIP_OFFICE;
+  }
+
+  function officeAddress(o) {
+    var a = (o && o.address) || {};
+    return a.fullAddress || [a.street, a.num || a.streetNumber].filter(Boolean).join(" ") || "";
+  }
+
+  function filterCities(q) {
+    q = (q || "").trim().toLowerCase();
+    if (q.length < 1) return [];
+    var out = [];
+    for (var i = 0; i < cities.length && out.length < 12; i++) {
+      var c = cities[i];
+      var blob = ((c.name || "") + " " + (c.nameEn || "") + " " + (c.postCode || "")).toLowerCase();
+      if (blob.indexOf(q) !== -1) out.push(c);
+    }
+    return out;
+  }
+
+  function renderSuggest(el, items, renderItem, onPick) {
+    if (!el) return;
+    if (!items.length) {
+      el.hidden = true;
+      el.innerHTML = "";
+      return;
+    }
+    el.hidden = false;
+    el.innerHTML = items.map(renderItem).join("");
+    el.querySelectorAll("[data-pick]").forEach(function (btn) {
+      btn.onclick = function () { onPick(btn); };
     });
-    return ECONT_FORM + "?" + params.toString();
+  }
+
+  function loadOffices(cityId) {
+    if (officesByCity[cityId]) return Promise.resolve(officesByCity[cityId]);
+    return fetch(ECONT_OFFICES, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ countryCode: "BGR", cityID: cityId })
+    }).then(function (r) { return r.json(); }).then(function (d) {
+      var list = (d.offices || []).map(function (o) {
+        return {
+          id: o.id,
+          code: o.code,
+          name: o.name,
+          isAPS: !!o.isAPS,
+          isMPS: !!o.isMPS,
+          address: officeAddress(o)
+        };
+      });
+      officesByCity[cityId] = list;
+      return list;
+    });
+  }
+
+  function loadStreets(cityId) {
+    if (streetsByCity[cityId]) return Promise.resolve(streetsByCity[cityId]);
+    return fetch(ECONT_STREETS, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ cityID: cityId })
+    }).then(function (r) { return r.json(); }).then(function (d) {
+      var list = (d.streets || []).map(function (s) {
+        return { id: s.id, name: s.name, nameEn: s.nameEn };
+      });
+      streetsByCity[cityId] = list;
+      return list;
+    });
+  }
+
+  function officesForMode() {
+    if (!pickedCity) return [];
+    var list = officesByCity[pickedCity.id] || [];
+    if (deliveryMode === "locker") return list.filter(function (o) { return o.isAPS; });
+    if (deliveryMode === "office") return list.filter(function (o) { return !o.isAPS; });
+    return [];
+  }
+
+  function renderOfficeList(filter) {
+    var box = $("office-list");
+    if (!box) return;
+    var list = officesForMode();
+    var q = (filter || "").trim().toLowerCase();
+    if (q) {
+      list = list.filter(function (o) {
+        return (o.name + " " + o.address + " " + o.code).toLowerCase().indexOf(q) !== -1;
+      });
+    }
+    if (!pickedCity) {
+      box.innerHTML = '<p class="muted">Първо избери населено място.</p>';
+      return;
+    }
+    if (!list.length) {
+      box.innerHTML = '<p class="muted">' + (deliveryMode === "locker" ? "Няма еконтомат в този град." : "Няма офис в този град.") + "</p>";
+      return;
+    }
+    box.innerHTML = list.slice(0, 40).map(function (o) {
+      var on = pickedOffice && pickedOffice.code === o.code ? " on" : "";
+      return '<button type="button" class="office-item' + on + '" data-code="' + esc(o.code) + '">' +
+        "<strong>" + esc(o.name) + "</strong>" +
+        '<span class="muted">' + esc(o.address || ("код " + o.code)) + "</span></button>";
+    }).join("");
+    box.querySelectorAll(".office-item").forEach(function (btn) {
+      btn.onclick = function () {
+        var code = btn.getAttribute("data-code");
+        pickedOffice = officesForMode().find(function (o) { return o.code === code; }) || null;
+        econtChoice = null;
+        var host = $("econt-summary-host");
+        if (host) host.innerHTML = "";
+        renderOfficeList($("office-search") && $("office-search").value);
+        refreshTotals();
+      };
+    });
+  }
+
+  function refreshTotals() {
+    var shipping = null;
+    if (deliveryMode === "address" && pickedCity) shipping = SHIP_ADDRESS;
+    if ((deliveryMode === "office" || deliveryMode === "locker") && pickedOffice) shipping = SHIP_OFFICE;
+    var ship = $("ship-line");
+    var grand = $("grand");
+    var place = $("place");
+    var items = cart();
+    if (ship) ship.textContent = shipping != null ? money(shipping) : "потвърди доставката";
+    if (grand) grand.textContent = money(cartTotal(items) + (shipping || 0));
+    if (place) place.disabled = !econtChoice;
+  }
+
+  function showModePanels() {
+    var pickup = $("pickup-panel");
+    var address = $("address-panel");
+    if (pickup) pickup.hidden = deliveryMode === "address";
+    if (address) address.hidden = deliveryMode !== "address";
+    document.querySelectorAll('input[name="billing_delivery_mode"]').forEach(function (r) {
+      r.checked = r.value === deliveryMode;
+    });
+    renderOfficeList($("office-search") && $("office-search").value);
+    refreshTotals();
   }
 
   function renderCheckout() {
@@ -249,69 +385,219 @@
         esc(i.deviceLabel || "") + (i.qty > 1 ? " · x" + i.qty : "") +
         "</div></div><div>" + money(i.price * i.qty) + "</div></div>";
     }).join("");
+    var shipping = econtChoice ? econtChoice.shipping : null;
 
     $("app").innerHTML =
       '<div class="checkout container">' +
       '<div><div class="panel"><h2>Доставка с Еконт</h2>' +
-      '<div class="note">Име, телефон и адрес се попълват в формата на Еконт. Избираш офис, еконтомат или адрес, те връщат точната цена.</div>' +
-      '<div id="econt-box">' +
-      (econtChoice ? econtSummaryHtml() : '<div class="econt-frame-wrap"><iframe id="econt-frame" title="Еконт доставка" allow="geolocation" src="about:blank"></iframe></div>') +
+      '<p class="note">Полетата са на KarlaGlow. Населените места и офисите се зареждат от Еконт API, без iframe и без плъгина.</p>' +
+      '<div class="field"><label for="billing_name">Име и фамилия *</label>' +
+      '<input id="billing_name" name="billing_name" autocomplete="name" required></div>' +
+      '<div class="field"><label for="billing_company">Лице за контакт <span class="muted">(ако е фирма)</span></label>' +
+      '<input id="billing_company" name="billing_company" autocomplete="organization"></div>' +
+      '<div class="field"><label for="billing_phone">Телефон *</label>' +
+      '<input id="billing_phone" name="billing_phone" autocomplete="tel" required></div>' +
+      '<div class="field"><label for="billing_email">E-mail</label>' +
+      '<input id="billing_email" name="billing_email" type="email" autocomplete="email"></div>' +
+      '<div class="field"><label>Държава *</label>' +
+      '<div class="static-field">България</div></div>' +
+      '<div class="field suggest-wrap"><label for="billing_city">Населено място *</label>' +
+      '<input id="billing_city" name="billing_city" autocomplete="off" placeholder="напр. София">' +
+      '<div class="suggest" id="city-suggest" hidden></div></div>' +
+      '<div class="radio-row" role="radiogroup" aria-label="Начин на доставка">' +
+      '<label class="radio"><input type="radio" name="billing_delivery_mode" value="office" checked> До офис на Еконт</label>' +
+      '<label class="radio"><input type="radio" name="billing_delivery_mode" value="address"> Адрес</label>' +
+      '<label class="radio"><input type="radio" name="billing_delivery_mode" value="locker"> Еконтомат</label>' +
       "</div>" +
+      '<div id="pickup-panel">' +
+      '<div class="field"><label for="office-search">Търси офис</label>' +
+      '<input id="office-search" autocomplete="off" placeholder="име, квартал, улица"></div>' +
+      '<div class="office-list" id="office-list"><p class="muted">Избери град, за да заредим офисите от Еконт.</p></div>' +
+      "</div>" +
+      '<div id="address-panel" hidden>' +
+      '<div class="field suggest-wrap"><label for="billing_address_1">Улица *</label>' +
+      '<input id="billing_address_1" name="billing_address_1" autocomplete="off">' +
+      '<div class="suggest" id="street-suggest" hidden></div></div>' +
+      '<div class="row2"><div class="field"><label for="billing_street_number">Номер</label>' +
+      '<input id="billing_street_number"></div>' +
+      '<div class="field"><label for="billing_postcode">Пощенски код</label>' +
+      '<input id="billing_postcode" autocomplete="postal-code"></div></div>' +
+      '<div class="field"><label for="billing_address_2">Блок, вход, етаж</label>' +
+      '<input id="billing_address_2"></div>' +
+      "</div>" +
+      '<button type="button" class="btn btn-confirm" id="confirm-delivery">Потвърди доставката</button>' +
       '<div class="err" id="econt-err"></div>' +
+      '<div id="econt-summary-host"></div>' +
       "</div></div>" +
       '<aside class="panel"><h2>Поръчка</h2>' + lines +
       '<div class="summary-line"><span>Продукти</span><span>' + money(cartTotal(items)) + "</span></div>" +
-      '<div class="summary-line"><span>Доставка Еконт</span><span id="ship-line">' + (econtChoice ? money(econtChoice.shipping) : "избери в формата") + "</span></div>" +
+      '<div class="summary-line"><span>Доставка Еконт</span><span id="ship-line">' + (shipping != null ? money(shipping) : "потвърди доставката") + "</span></div>" +
       '<div class="summary-line summary-total"><span>За плащане при доставка</span><span id="grand">' +
-      money(cartTotal(items) + (econtChoice ? econtChoice.shipping : 0)) + "</span></div>" +
+      money(cartTotal(items) + (shipping || 0)) + "</span></div>" +
       '<p class="muted">Наложен платеж. Плащаш на куриера.</p>' +
-      '<button class="btn btn-accent" id="place" style="width:100%;margin-top:8px"' + (econtChoice ? "" : " disabled") + ">Поръчай</button>" +
+      '<button class="btn btn-accent" id="place" style="width:100%;margin-top:8px" disabled>Поръчай</button>' +
       '<div class="err" id="place-err"></div>' +
       "</aside></div>";
 
     bindCheckout(items);
   }
 
-  function econtSummaryHtml() {
-    var c = econtChoice;
-    return '<div class="econt-summary"><h3>Еконт потвърди доставката</h3>' +
-      "<p><strong>" + esc(c.name || c.label) + "</strong>" + (c.phone ? " · " + esc(c.phone) : "") + "</p>" +
-      "<p>" + esc(c.label) + "</p>" +
-      "<p>" + esc(c.destination) + "</p>" +
-      "<p>Цена с наложен платеж: <strong>" + money(c.shipping) + "</strong> " + esc(c.currency || "EUR") + "</p>" +
-      '<button class="btn btn-ghost" type="button" id="econt-change">Промени адреса</button>' +
-      '<details><summary class="muted">Данни, върнати от Еконт</summary><pre class="payload">' + esc(JSON.stringify(econtRaw, null, 2)) + "</pre></details>" +
-      "</div>";
-  }
-
-  function loadFrame(items) {
-    var frame = $("econt-frame");
-    if (!frame) return;
-    frame.src = econtUrl(items);
+  function confirmDelivery() {
+    var err = $("econt-err");
+    var name = ($("billing_name") && $("billing_name").value.trim()) || "";
+    var phone = ($("billing_phone") && $("billing_phone").value.trim()) || "";
+    if (!name || !phone) {
+      err.textContent = "Попълни име и телефон.";
+      return;
+    }
+    if (!pickedCity) {
+      err.textContent = "Избери населено място от списъка.";
+      return;
+    }
+    if (deliveryMode !== "address" && !pickedOffice) {
+      err.textContent = deliveryMode === "locker" ? "Избери еконтомат." : "Избери офис.";
+      return;
+    }
+    if (deliveryMode === "address") {
+      var street = ($("billing_address_1") && $("billing_address_1").value.trim()) || "";
+      if (!street) {
+        err.textContent = "Попълни улица.";
+        return;
+      }
+    }
+    err.textContent = "";
+    var dest;
+    var label;
+    if (deliveryMode === "address") {
+      dest = [
+        $("billing_address_1").value.trim(),
+        ($("billing_street_number") && $("billing_street_number").value.trim()) || "",
+        pickedCity.name,
+        ($("billing_postcode") && $("billing_postcode").value.trim()) || pickedCity.postCode || ""
+      ].filter(Boolean).join(", ");
+      label = "До адрес с Еконт";
+    } else {
+      dest = pickedOffice.name + (pickedOffice.address ? " - " + pickedOffice.address : "");
+      label = deliveryMode === "locker" ? "До еконтомат" : "До офис на Еконт";
+    }
+    econtChoice = {
+      name: name,
+      face: ($("billing_company") && $("billing_company").value.trim()) || "",
+      phone: phone,
+      email: ($("billing_email") && $("billing_email").value.trim()) || "",
+      city: pickedCity.name,
+      cityId: pickedCity.id,
+      postCode: (deliveryMode === "address" && $("billing_postcode") && $("billing_postcode").value.trim()) || pickedCity.postCode || "",
+      officeCode: pickedOffice ? pickedOffice.code : "",
+      officeName: pickedOffice ? pickedOffice.name : "",
+      address: dest,
+      destination: dest,
+      label: label,
+      mode: deliveryMode,
+      shipping: shipCost(),
+      currency: "EUR"
+    };
+    var host = $("econt-summary-host");
+    if (host) {
+      host.innerHTML = '<div class="econt-summary"><h3>' + esc(label) + "</h3><p>" + esc(dest) +
+        "</p><p>Доставка: <strong>" + money(econtChoice.shipping) + "</strong></p></div>";
+    }
+    refreshTotals();
+    var place = $("place");
+    if (place) place.disabled = false;
   }
 
   function bindCheckout(items) {
-    if (!econtChoice) loadFrame(items);
-    var change = $("econt-change");
-    if (change) {
-      change.onclick = function () {
+    ensureCities().then(function () {
+      if ($("billing_city") && pickedCity) $("billing_city").value = pickedCity.name;
+    });
+
+    document.querySelectorAll('input[name="billing_delivery_mode"]').forEach(function (r) {
+      r.addEventListener("change", function () {
+        deliveryMode = r.value;
+        pickedOffice = null;
         econtChoice = null;
-        econtRaw = null;
-        renderCheckout();
-      };
+        var host = $("econt-summary-host");
+        if (host) host.innerHTML = "";
+        showModePanels();
+        if (pickedCity && deliveryMode !== "address") {
+          loadOffices(pickedCity.id).then(function () { renderOfficeList($("office-search") && $("office-search").value); });
+        }
+        if (pickedCity && deliveryMode === "address") {
+          if ($("billing_postcode") && !$("billing_postcode").value) $("billing_postcode").value = pickedCity.postCode || "";
+          loadStreets(pickedCity.id).catch(function () {});
+        }
+      });
+    });
+
+    var cityInput = $("billing_city");
+    var citySuggest = $("city-suggest");
+    if (cityInput) {
+      cityInput.addEventListener("input", function () {
+        pickedCity = null;
+        pickedOffice = null;
+        econtChoice = null;
+        var sum = $("econt-summary-host");
+        if (sum) sum.innerHTML = "";
+        refreshTotals();
+        renderSuggest(citySuggest, filterCities(cityInput.value), function (c) {
+          return '<button type="button" data-pick data-id="' + c.id + '"><strong>' + esc(c.name) +
+            "</strong> <span class='muted'>" + esc(c.postCode || "") + " · " + esc(c.region || "") + "</span></button>";
+        }, function (btn) {
+          var id = Number(btn.getAttribute("data-id"));
+          pickedCity = cities.find(function (c) { return c.id === id; }) || null;
+          if (pickedCity) {
+            cityInput.value = pickedCity.name;
+            if ($("billing_postcode")) $("billing_postcode").value = pickedCity.postCode || "";
+          }
+          citySuggest.hidden = true;
+          if (pickedCity && deliveryMode !== "address") {
+            $("office-list").innerHTML = '<p class="muted">Зареждаме офиси от Еконт…</p>';
+            loadOffices(pickedCity.id).then(function () { renderOfficeList(""); }).catch(function () {
+              $("office-list").innerHTML = '<p class="err">Не успяхме да заредим офисите.</p>';
+            });
+          }
+          if (pickedCity && deliveryMode === "address") loadStreets(pickedCity.id).catch(function () {});
+        });
+      });
     }
+
+    var officeSearch = $("office-search");
+    if (officeSearch) officeSearch.addEventListener("input", function () { renderOfficeList(officeSearch.value); });
+
+    var streetInput = $("billing_address_1");
+    var streetSuggest = $("street-suggest");
+    if (streetInput) {
+      streetInput.addEventListener("input", function () {
+        if (!pickedCity) return;
+        loadStreets(pickedCity.id).then(function (list) {
+          var q = streetInput.value.trim().toLowerCase();
+          var hits = (list || []).filter(function (s) {
+            return ((s.name || "") + " " + (s.nameEn || "")).toLowerCase().indexOf(q) !== -1;
+          }).slice(0, 12);
+          renderSuggest(streetSuggest, q.length ? hits : [], function (s) {
+            return '<button type="button" data-pick data-name="' + esc(s.name) + '">' + esc(s.name) + "</button>";
+          }, function (btn) {
+            streetInput.value = btn.getAttribute("data-name") || "";
+            streetSuggest.hidden = true;
+          });
+        }).catch(function () {});
+      });
+    }
+
+    $("confirm-delivery").onclick = confirmDelivery;
     $("place").onclick = function () {
       if (!econtChoice) {
-        $("place-err").textContent = "Първо потвърди доставката в формата на Еконт.";
+        $("place-err").textContent = "Първо потвърди доставката.";
         return;
       }
       var order = {
         id: "KG-" + Date.now().toString(36).toUpperCase(),
         at: new Date().toISOString(),
         customer: {
-          name: econtChoice.name || "",
-          phone: econtChoice.phone || "",
-          email: econtChoice.email || ""
+          name: econtChoice.name,
+          phone: econtChoice.phone,
+          email: econtChoice.email
         },
         items: items,
         econt: econtChoice,
@@ -323,37 +609,15 @@
       setCart([]);
       location.hash = "#/thanks/" + order.id;
     };
+    showModePanels();
   }
 
-  function onEcontMessage(event) {
-    if (!event.origin || event.origin.indexOf("delivery.econt.com") === -1) return;
-    var data = event.data;
-    if (!data || typeof data !== "object") return;
-    if (data.shipment_error) {
-      var err = $("econt-err");
-      if (err) err.textContent = String(data.shipment_error);
-      return;
-    }
-    if (!data.id && data.shipping_price == null && data.shipping_price_cod == null) return;
-    econtRaw = data;
-    var ship = Number(data.shipping_price_cod != null ? data.shipping_price_cod : data.shipping_price) || 0;
-    var office = data.office_code || data.officeCode || "";
-    var dest = [data.city_name || data.cityName, data.address, office ? "офис " + office : ""]
-      .filter(Boolean).join(", ");
-    econtChoice = {
-      id: data.id || "",
-      shipping: ship,
-      currency: data.shipping_price_currency || "EUR",
-      officeCode: office,
-      city: data.city_name || "",
-      address: data.address || "",
-      destination: dest || "Еконт доставка",
-      label: office ? "До офис / еконтомат на Еконт" : "До адрес с Еконт",
-      name: data.name || data.face || "",
-      phone: data.phone || "",
-      email: data.email || ""
-    };
-    if (location.hash.indexOf("checkout") !== -1) renderCheckout();
+  function ensureCities() {
+    if (cities.length) return Promise.resolve(cities);
+    return fetch("data/cities.json").then(function (r) { return r.json(); }).then(function (list) {
+      cities = list || [];
+      return cities;
+    });
   }
 
   function renderThanks(id) {
@@ -368,7 +632,7 @@
       "<p>Поръчка <strong>" + esc(order.id) + "</strong> е записана в този браузър.</p>" +
       "<p>" + esc(order.econt.label) + ": " + esc(order.econt.destination) + "</p>" +
       "<p>За плащане при доставка: <strong>" + money(order.total) + "</strong></p>" +
-      '<div class="note" style="text-align:left;margin-top:18px">Това е прегледът. Еконт вече калкулира цената през тяхната форма. Следващата стъпка (когато кажеш) е да пратим поръчката с <code>OrdersService.updateOrder</code> и кода за свързване, без плъгина и без да пипаме admin.karlaglow.com преди да си видял потока.</div>' +
+      '<div class="note" style="text-align:left;margin-top:18px">Преглед: всички полета са наши, офисите идват от Еконт API. Live цена в Еконт Delivery ще мине през сървъра, когато вържем поръчката към karlaglow.com.</div>' +
       '<p style="margin-top:18px"><a class="btn" href="#/" data-link>Нова поръчка</a></p>' +
       '<details style="text-align:left;margin-top:18px"><summary>Пълен запис</summary><pre class="payload">' + esc(JSON.stringify(order, null, 2)) + "</pre></details>" +
       "</div>";
@@ -395,7 +659,6 @@
   });
 
   window.addEventListener("hashchange", render);
-  window.addEventListener("message", onEcontMessage);
 
   function pingEcont() {
     var el = $("econt-ping");
@@ -419,6 +682,7 @@
       renderCartCount();
       render();
       pingEcont();
+      ensureCities();
     })
     .catch(function () {
       $("app").innerHTML = '<div class="container">Не можах да заредя продуктите.</div>';
