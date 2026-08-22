@@ -15,6 +15,7 @@ builds move to WordPress after the client approves.
 | `/biasdrop/` | BiasDrop - K-pop superfan hub concept (idols, merch drops, photocards, light sticks, toys/gadgets, bias quiz). Neon dark entertainment demo for review. |
 | `/imoti-bg/` | Имоти BG - Bulgarian real-estate market intelligence (cities, quarters, rates charts). Source: `~/imoti-bg`. Domain TBD. |
 | `/applylab/` | ApplyLab - personal remote-job co-pilot (semi-auto apply, AI tailor). API: `~/applylab-api` Cloudflare Worker. |
+| `/karlaglow/` | KarlaGlow - product page + checkout testing Econt without the WooCommerce plugin. Uses delivery.econt.com customer_info form (shop pairing id) and live offices API. Preview orders stay in the browser until a backend write is added. |
 
 ## Adding a new client preview
 

@@ -1,0 +1,861 @@
+{
+  "currency": "EUR",
+  "bgnRate": 1.95583,
+  "products": [
+    {
+      "id": 948,
+      "name": "LV Vintage Case",
+      "slug": "lv-vintage-case",
+      "kind": "case",
+      "category": "Brand Cases",
+      "categorySlug": "brand-cases",
+      "price": 17.0,
+      "regularPrice": 26.0,
+      "images": [
+        "https://karlaglow.com/wp-content/uploads/2026/08/brand-lv-vintage.webp"
+      ],
+      "image": "https://karlaglow.com/wp-content/uploads/2026/08/brand-lv-vintage.webp",
+      "short": "Стилен дизайнерски калъф, вдъхновен от култов моден бранд — качествена изработка и надеждна защита за твоя iPhone.",
+      "permalink": "https://karlaglow.com/product/lv-vintage-case/",
+      "key": "lv-vintage-case"
+    },
+    {
+      "id": 946,
+      "name": "Hugo Case",
+      "slug": "hugo-case",
+      "kind": "case",
+      "category": "Brand Cases",
+      "categorySlug": "brand-cases",
+      "price": 17.0,
+      "regularPrice": 26.0,
+      "images": [
+        "https://karlaglow.com/wp-content/uploads/2026/08/brand-hugo.webp"
+      ],
+      "image": "https://karlaglow.com/wp-content/uploads/2026/08/brand-hugo.webp",
+      "short": "Стилен дизайнерски калъф, вдъхновен от култов моден бранд — качествена изработка и надеждна защита за твоя iPhone.",
+      "permalink": "https://karlaglow.com/product/hugo-case/",
+      "key": "hugo-case"
+    },
+    {
+      "id": 945,
+      "name": "Nike Air Dior Case",
+      "slug": "nike-air-dior-case",
+      "kind": "case",
+      "category": "Brand Cases",
+      "categorySlug": "brand-cases",
+      "price": 17.0,
+      "regularPrice": 26.0,
+      "images": [
+        "https://karlaglow.com/wp-content/uploads/2026/08/brand-nike-airdior.webp"
+      ],
+      "image": "https://karlaglow.com/wp-content/uploads/2026/08/brand-nike-airdior.webp",
+      "short": "Стилен дизайнерски калъф, вдъхновен от култов моден бранд — качествена изработка и надеждна защита за твоя iPhone.",
+      "permalink": "https://karlaglow.com/product/nike-air-dior-case/",
+      "key": "nike-air-dior-case"
+    },
+    {
+      "id": 944,
+      "name": "Black Marble I Don’t Care Case",
+      "slug": "black-marble-i-dont-care-case",
+      "kind": "case",
+      "category": "Brand Cases",
+      "categorySlug": "brand-cases",
+      "price": 17.0,
+      "regularPrice": 26.0,
+      "images": [
+        "https://karlaglow.com/wp-content/uploads/2026/08/brand-marble-dontcare.webp"
+      ],
+      "image": "https://karlaglow.com/wp-content/uploads/2026/08/brand-marble-dontcare.webp",
+      "short": "Стилен дизайнерски калъф, вдъхновен от култов моден бранд — качествена изработка и надеждна защита за твоя iPhone.",
+      "permalink": "https://karlaglow.com/product/black-marble-i-dont-care-case/",
+      "key": "black-marble-i-dont-care-case"
+    },
+    {
+      "id": 940,
+      "name": "MagSafe Clear Case за iPhone",
+      "slug": "magsafe-clear-case-%d0%b7%d0%b0-iphone",
+      "kind": "case",
+      "category": "Apple Cases",
+      "categorySlug": "apple-cases",
+      "price": 14.0,
+      "regularPrice": 20.0,
+      "images": [
+        "https://karlaglow.com/wp-content/uploads/2026/08/magsafe-clear-hero.webp",
+        "https://karlaglow.com/wp-content/uploads/2026/08/magsafe-clear-box.webp"
+      ],
+      "image": "https://karlaglow.com/wp-content/uploads/2026/08/magsafe-clear-hero.webp",
+      "short": "Прозрачен MagSafe кейс, съвместим с всички модели iPhone.",
+      "permalink": "https://karlaglow.com/product/magsafe-clear-case-%d0%b7%d0%b0-iphone/",
+      "key": "magsafe-clear-case-iphone"
+    },
+    {
+      "id": 922,
+      "name": "LV Heritage Case",
+      "slug": "lv-heritage-case",
+      "kind": "case",
+      "category": "Brand Cases",
+      "categorySlug": "brand-cases",
+      "price": 17.0,
+      "regularPrice": 26.0,
+      "images": [
+        "https://karlaglow.com/wp-content/uploads/2026/08/brand-lv-word-1.webp",
+        "https://karlaglow.com/wp-content/uploads/2026/08/brand-lv-word-2.webp",
+        "https://karlaglow.com/wp-content/uploads/2026/08/brand-lv-word-3.webp"
+      ],
+      "image": "https://karlaglow.com/wp-content/uploads/2026/08/brand-lv-word-1.webp",
+      "short": "Стилен дизайнерски калъф, вдъхновен от култов моден бранд — качествена изработка и надеждна защита за твоя iPhone.",
+      "permalink": "https://karlaglow.com/product/lv-heritage-case/",
+      "key": "lv-heritage-case"
+    },
+    {
+      "id": 905,
+      "name": "Official Apple Silicone Case – Лавандула",
+      "slug": "official-apple-silicone-case-%d0%bb%d0%b0%d0%b2%d0%b0%d0%bd%d0%b4%d1%83%d0%bb%d0%b0",
+      "kind": "case",
+      "category": "Apple Cases",
+      "categorySlug": "apple-cases",
+      "price": 14.0,
+      "regularPrice": 26.0,
+      "images": [
+        "https://karlaglow.com/wp-content/uploads/2026/08/apple-lavandula-hero.webp",
+        "https://karlaglow.com/wp-content/uploads/2026/08/apple-lavandula-flatlay1.webp",
+        "https://karlaglow.com/wp-content/uploads/2026/08/apple-lavandula-flatlay2.webp"
+      ],
+      "image": "https://karlaglow.com/wp-content/uploads/2026/08/apple-lavandula-hero.webp",
+      "short": "Изчистен и стилен дизайн, създаден специално за iPhone.Кейсът осигурява надеждна защита, перфектно прилягане и усещане за премиум качество – съчетавайки простота, функционалност и елегантност в едно.",
+      "permalink": "https://karlaglow.com/product/official-apple-silicone-case-%d0%bb%d0%b0%d0%b2%d0%b0%d0%bd%d0%b4%d1%83%d0%bb%d0%b0/",
+      "key": "official-apple-silicone-case"
+    },
+    {
+      "id": 897,
+      "name": "Official Apple Silicone Case – Barbie Pink",
+      "slug": "official-apple-silicone-case-barbie-pink",
+      "kind": "case",
+      "category": "Apple Cases",
+      "categorySlug": "apple-cases",
+      "price": 14.0,
+      "regularPrice": 26.0,
+      "images": [
+        "https://karlaglow.com/wp-content/uploads/2026/08/apple-barbiepink-1080.webp"
+      ],
+      "image": "https://karlaglow.com/wp-content/uploads/2026/08/apple-barbiepink-1080.webp",
+      "short": "Изчистен и стилен дизайн, създаден специално за iPhone.Кейсът осигурява надеждна защита, перфектно прилягане и усещане за премиум качество – съчетавайки простота, функционалност и елегантност в едно.",
+      "permalink": "https://karlaglow.com/product/official-apple-silicone-case-barbie-pink/",
+      "key": "official-apple-silicone-case-barbie-pink"
+    },
+    {
+      "id": 896,
+      "name": "Official Apple Silicone Case – Люляк",
+      "slug": "official-apple-silicone-case-%d0%bb%d1%8e%d0%bb%d1%8f%d0%ba",
+      "kind": "case",
+      "category": "Apple Cases",
+      "categorySlug": "apple-cases",
+      "price": 14.0,
+      "regularPrice": 26.0,
+      "images": [
+        "https://karlaglow.com/wp-content/uploads/2026/08/apple-lilac-white1.webp",
+        "https://karlaglow.com/wp-content/uploads/2026/08/apple-lilac-white2.webp",
+        "https://karlaglow.com/wp-content/uploads/2026/08/apple-lilac-lifestyle.webp"
+      ],
+      "image": "https://karlaglow.com/wp-content/uploads/2026/08/apple-lilac-white1.webp",
+      "short": "Изчистен и стилен дизайн, създаден специално за iPhone.Кейсът осигурява надеждна защита, перфектно прилягане и усещане за премиум качество – съчетавайки простота, функционалност и елегантност в едно.",
+      "permalink": "https://karlaglow.com/product/official-apple-silicone-case-%d0%bb%d1%8e%d0%bb%d1%8f%d0%ba/",
+      "key": "official-apple-silicone-case-896"
+    },
+    {
+      "id": 895,
+      "name": "Official Apple Silicone Case – Черен",
+      "slug": "official-apple-silicone-case-%d1%87%d0%b5%d1%80%d0%b5%d0%bd",
+      "kind": "case",
+      "category": "Apple Cases",
+      "categorySlug": "apple-cases",
+      "price": 14.0,
+      "regularPrice": 26.0,
+      "images": [
+        "https://karlaglow.com/wp-content/uploads/2026/08/apple-black-new-1.webp"
+      ],
+      "image": "https://karlaglow.com/wp-content/uploads/2026/08/apple-black-new-1.webp",
+      "short": "Изчистен и стилен дизайн, създаден специално за iPhone.Кейсът осигурява надеждна защита, перфектно прилягане и усещане за премиум качество – съчетавайки простота, функционалност и елегантност в едно.",
+      "permalink": "https://karlaglow.com/product/official-apple-silicone-case-%d1%87%d0%b5%d1%80%d0%b5%d0%bd/",
+      "key": "official-apple-silicone-case-895"
+    },
+    {
+      "id": 317,
+      "name": "Orange Swarovski",
+      "slug": "orange-swarovski-%d0%ba%d0%be%d0%bf%d0%b8%d0%b5",
+      "kind": "case",
+      "category": "Swarovski Cases",
+      "categorySlug": "swarovski-cases",
+      "price": 20.0,
+      "regularPrice": 45.0,
+      "images": [
+        "https://karlaglow.com/wp-content/uploads/2026/08/swarovski-orange-square-fixed-v2.webp",
+        "https://karlaglow.com/wp-content/uploads/2026/04/710FTc7ZxOL._AC_SL1080_.jpg",
+        "https://karlaglow.com/wp-content/uploads/2026/04/716KoK823ZL._AC_SL1080_.webp",
+        "https://karlaglow.com/wp-content/uploads/2026/04/71a2xOuyqeL._AC_SL1080_.webp",
+        "https://karlaglow.com/wp-content/uploads/2026/04/202602251004191972_task_01kj9nmardfg9brbnv25dykcv2_1771998715_img_1_1080x.webp"
+      ],
+      "image": "https://karlaglow.com/wp-content/uploads/2026/08/swarovski-orange-square-fixed-v2.webp",
+      "short": "",
+      "permalink": "https://karlaglow.com/product/orange-swarovski-%d0%ba%d0%be%d0%bf%d0%b8%d0%b5/",
+      "key": "orange-swarovski"
+    },
+    {
+      "id": 276,
+      "name": "5D стъклен протектор Full privacy",
+      "slug": "5d-%d1%81%d1%82%d1%8a%d0%ba%d0%bb%d0%b5%d0%bd-%d0%bf%d1%80%d0%be%d1%82%d0%b5%d0%ba%d1%82%d0%be%d1%80-full-privacy",
+      "kind": "accessory",
+      "category": "Accessories",
+      "categorySlug": "accessories",
+      "price": 10.5,
+      "regularPrice": 10.5,
+      "images": [
+        "https://karlaglow.com/wp-content/uploads/2026/04/5d-staklen-protektor-full-privacy-62e3eac46bbc8_1280x1280.jpeg",
+        "https://karlaglow.com/wp-content/uploads/2026/04/5d-staklen-protektor-full-privacy-62e3eac216b95_1280x1280.jpeg",
+        "https://karlaglow.com/wp-content/uploads/2026/04/5d-staklen-protektor-full-privacy-62e3eac3d7799_1280x1280.jpeg"
+      ],
+      "image": "https://karlaglow.com/wp-content/uploads/2026/04/5d-staklen-protektor-full-privacy-62e3eac46bbc8_1280x1280.jpeg",
+      "short": "5D Full Privacy протектор – притъмнява дисплея при странично гледане.",
+      "permalink": "https://karlaglow.com/product/5d-%d1%81%d1%82%d1%8a%d0%ba%d0%bb%d0%b5%d0%bd-%d0%bf%d1%80%d0%be%d1%82%d0%b5%d0%ba%d1%82%d0%be%d1%80-full-privacy/",
+      "key": "5d-full-privacy"
+    },
+    {
+      "id": 274,
+      "name": "Стъклен протектор за дисплей iPhone",
+      "slug": "%d1%81%d1%82%d1%8a%d0%ba%d0%bb%d0%b5%d0%bd-%d0%bf%d1%80%d0%be%d1%82%d0%b5%d0%ba%d1%82%d0%be%d1%80-%d0%b7%d0%b0-%d0%b4%d0%b8%d1%81%d0%bf%d0%bb%d0%b5%d0%b9-iphone-copy",
+      "kind": "accessory",
+      "category": "Accessories",
+      "categorySlug": "accessories",
+      "price": 5.0,
+      "regularPrice": 5.0,
+      "images": [
+        "https://karlaglow.com/wp-content/uploads/2026/04/staklen-protektor-za-displej-iphone-copy-6582cdfaa6d40_600x600.jpeg"
+      ],
+      "image": "https://karlaglow.com/wp-content/uploads/2026/04/staklen-protektor-za-displej-iphone-copy-6582cdfaa6d40_600x600.jpeg",
+      "short": "Премиум стъклен протектор за дисплей – пълно покритие от край до край.",
+      "permalink": "https://karlaglow.com/product/%d1%81%d1%82%d1%8a%d0%ba%d0%bb%d0%b5%d0%bd-%d0%bf%d1%80%d0%be%d1%82%d0%b5%d0%ba%d1%82%d0%be%d1%80-%d0%b7%d0%b0-%d0%b4%d0%b8%d1%81%d0%bf%d0%bb%d0%b5%d0%b9-iphone-copy/",
+      "key": "iphone-copy"
+    },
+    {
+      "id": 272,
+      "name": "Протектор за камера закaлено стъкло 9H",
+      "slug": "%d0%bf%d1%80%d0%be%d1%82%d0%b5%d0%ba%d1%82%d0%be%d1%80-%d0%b7%d0%b0-%d0%ba%d0%b0%d0%bc%d0%b5%d1%80%d0%b0-%d0%b7%d0%b0%d0%baa%d0%bb%d0%b5%d0%bd%d0%be-%d1%81%d1%82%d1%8a%d0%ba%d0%bb%d0%be-9h",
+      "kind": "accessory",
+      "category": "Accessories",
+      "categorySlug": "accessories",
+      "price": 5.0,
+      "regularPrice": 5.0,
+      "images": [
+        "https://karlaglow.com/wp-content/uploads/2026/04/618XRTuB-9L._AC_UF8941000_QL80_.jpg",
+        "https://karlaglow.com/wp-content/uploads/2026/04/protektor-za-kamera-zakaleno-staklo-9h-65b0b27468879_800x800.jpeg",
+        "https://karlaglow.com/wp-content/uploads/2026/04/protektor-za-kamera-zakaleno-staklo-9h-65b0b27696465_800x800.jpeg"
+      ],
+      "image": "https://karlaglow.com/wp-content/uploads/2026/04/618XRTuB-9L._AC_UF8941000_QL80_.jpg",
+      "short": "Закалено стъкло 9H за камера – за iPhone 11-16 серии.",
+      "permalink": "https://karlaglow.com/product/%d0%bf%d1%80%d0%be%d1%82%d0%b5%d0%ba%d1%82%d0%be%d1%80-%d0%b7%d0%b0-%d0%ba%d0%b0%d0%bc%d0%b5%d1%80%d0%b0-%d0%b7%d0%b0%d0%baa%d0%bb%d0%b5%d0%bd%d0%be-%d1%81%d1%82%d1%8a%d0%ba%d0%bb%d0%be-9h/",
+      "key": "a-9h"
+    },
+    {
+      "id": 270,
+      "name": "Протектори за Камера тип леща",
+      "slug": "%d0%bf%d1%80%d0%be%d1%82%d0%b5%d0%ba%d1%82%d0%be%d1%80%d0%b8-%d0%b7%d0%b0-%d0%ba%d0%b0%d0%bc%d0%b5%d1%80%d0%b0-%d1%82%d0%b8%d0%bf-%d0%bb%d0%b5%d1%89%d0%b0",
+      "kind": "accessory",
+      "category": "Accessories",
+      "categorySlug": "accessories",
+      "price": 5.0,
+      "regularPrice": 5.0,
+      "images": [
+        "https://karlaglow.com/wp-content/uploads/2026/04/CameraRings.webp",
+        "https://karlaglow.com/wp-content/uploads/2026/04/protektor-za-kamera-zakaleno-staklo-9h-copy-65b0b2ccbb398_800x800.jpeg",
+        "https://karlaglow.com/wp-content/uploads/2026/04/protektor-za-kamera-zakaleno-staklo-9h-copy-65b0b2caaf914_600x600.jpeg",
+        "https://karlaglow.com/wp-content/uploads/2026/04/protektor-za-kamera-zakaleno-staklo-9h-copy-65b0b2c81980e_600x600.jpeg",
+        "https://karlaglow.com/wp-content/uploads/2026/04/protektor-za-kamera-zakaleno-staklo-9h-copy-65b0b2bcc76ac_800x800.jpeg",
+        "https://karlaglow.com/wp-content/uploads/2026/04/protektor-za-kamera-zakaleno-staklo-9h-copy-65b0b2bef325c_600x600.jpeg"
+      ],
+      "image": "https://karlaglow.com/wp-content/uploads/2026/04/CameraRings.webp",
+      "short": "Протектор за камера тип леща за iPhone 11-15 серии – наличен в множество цветове.",
+      "permalink": "https://karlaglow.com/product/%d0%bf%d1%80%d0%be%d1%82%d0%b5%d0%ba%d1%82%d0%be%d1%80%d0%b8-%d0%b7%d0%b0-%d0%ba%d0%b0%d0%bc%d0%b5%d1%80%d0%b0-%d1%82%d0%b8%d0%bf-%d0%bb%d0%b5%d1%89%d0%b0/",
+      "key": "270"
+    },
+    {
+      "id": 268,
+      "name": "Anti-broken матов керамичен протектор",
+      "slug": "anti-broken-%d0%bc%d0%b0%d1%82%d0%be%d0%b2-%d0%ba%d0%b5%d1%80%d0%b0%d0%bc%d0%b8%d1%87%d0%b5%d0%bd-%d0%bf%d1%80%d0%be%d1%82%d0%b5%d0%ba%d1%82%d0%be%d1%80",
+      "kind": "accessory",
+      "category": "Accessories",
+      "categorySlug": "accessories",
+      "price": 5.5,
+      "regularPrice": 5.5,
+      "images": [
+        "https://karlaglow.com/wp-content/uploads/2026/04/protektor-za-kamera-zakaleno-staklo-9h-copy-65b0b50bad8df_1280x1280.jpeg",
+        "https://karlaglow.com/wp-content/uploads/2026/04/protektor-za-kamera-zakaleno-staklo-9h-copy-65b0b5152c3d1_1920x1920.webp",
+        "https://karlaglow.com/wp-content/uploads/2026/04/protektor-za-kamera-zakaleno-staklo-9h-copy-65b0b50feaf98_1280x1280.jpeg",
+        "https://karlaglow.com/wp-content/uploads/2026/04/protektor-za-kamera-zakaleno-staklo-9h-copy-65b0b5189073d_1280x1280.jpeg"
+      ],
+      "image": "https://karlaglow.com/wp-content/uploads/2026/04/protektor-za-kamera-zakaleno-staklo-9h-copy-65b0b50bad8df_1280x1280.jpeg",
+      "short": "Протектор който не се чупи! Матов ефект за по-добра видимост при слънчева светлина.",
+      "permalink": "https://karlaglow.com/product/anti-broken-%d0%bc%d0%b0%d1%82%d0%be%d0%b2-%d0%ba%d0%b5%d1%80%d0%b0%d0%bc%d0%b8%d1%87%d0%b5%d0%bd-%d0%bf%d1%80%d0%be%d1%82%d0%b5%d0%ba%d1%82%d0%be%d1%80/",
+      "key": "anti-broken"
+    },
+    {
+      "id": 266,
+      "name": "Протектори за Камера с камъни",
+      "slug": "%d0%bf%d1%80%d0%be%d1%82%d0%b5%d0%ba%d1%82%d0%be%d1%80%d0%b8-%d0%b7%d0%b0-%d0%ba%d0%b0%d0%bc%d0%b5%d1%80%d0%b0-%d1%81-%d0%ba%d0%b0%d0%bc%d1%8a%d0%bd%d0%b8",
+      "kind": "accessory",
+      "category": "Accessories",
+      "categorySlug": "accessories",
+      "price": 8.5,
+      "regularPrice": 8.5,
+      "images": [
+        "https://karlaglow.com/wp-content/uploads/2026/04/protektori-za-kamera-tip-lesa-copy-65fabd2490457_1920x1920.webp",
+        "https://karlaglow.com/wp-content/uploads/2026/04/protektori-za-kamera-tip-lesa-copy-65fabd22a02e8_1920x1920.webp",
+        "https://karlaglow.com/wp-content/uploads/2026/04/protektori-za-kamera-tip-lesa-copy-65fabd20aa9cc_1920x1920.jpeg",
+        "https://karlaglow.com/wp-content/uploads/2026/04/protektori-za-kamera-tip-lesa-copy-65fabd1c2536e_1920x1920.webp"
+      ],
+      "image": "https://karlaglow.com/wp-content/uploads/2026/04/protektori-za-kamera-tip-lesa-copy-65fabd2490457_1920x1920.webp",
+      "short": "Протектори за камера с декоративни камъни за iPhone 12 – 15 серия.",
+      "permalink": "https://karlaglow.com/product/%d0%bf%d1%80%d0%be%d1%82%d0%b5%d0%ba%d1%82%d0%be%d1%80%d0%b8-%d0%b7%d0%b0-%d0%ba%d0%b0%d0%bc%d0%b5%d1%80%d0%b0-%d1%81-%d0%ba%d0%b0%d0%bc%d1%8a%d0%bd%d0%b8/",
+      "key": "266"
+    },
+    {
+      "id": 264,
+      "name": "Силиконова стойка за телефон",
+      "slug": "%d1%81%d0%b8%d0%bb%d0%b8%d0%ba%d0%be%d0%bd%d0%be%d0%b2%d0%b0-%d1%81%d1%82%d0%be%d0%b9%d0%ba%d0%b0-%d0%b7%d0%b0-%d1%82%d0%b5%d0%bb%d0%b5%d1%84%d0%be%d0%bd",
+      "kind": "accessory",
+      "category": "Accessories",
+      "categorySlug": "accessories",
+      "price": 6.0,
+      "regularPrice": 6.0,
+      "images": [
+        "https://karlaglow.com/wp-content/uploads/2026/04/silikonova-stojka-za-telefon-65fabf4c60ae8_800x800.jpeg",
+        "https://karlaglow.com/wp-content/uploads/2026/04/silikonova-stojka-za-telefon-65fabf549f01e_800x800.jpeg",
+        "https://karlaglow.com/wp-content/uploads/2026/04/silikonova-stojka-za-telefon-65fabf52ba90d_800x800.jpeg",
+        "https://karlaglow.com/wp-content/uploads/2026/04/silikonova-stojka-za-telefon-65fabf50e51cb_800x800.jpeg"
+      ],
+      "image": "https://karlaglow.com/wp-content/uploads/2026/04/silikonova-stojka-za-telefon-65fabf4c60ae8_800x800.jpeg",
+      "short": "Силиконова стойка за телефон с вендуза – залепва към всяка гладка повърхност.",
+      "permalink": "https://karlaglow.com/product/%d1%81%d0%b8%d0%bb%d0%b8%d0%ba%d0%be%d0%bd%d0%be%d0%b2%d0%b0-%d1%81%d1%82%d0%be%d0%b9%d0%ba%d0%b0-%d0%b7%d0%b0-%d1%82%d0%b5%d0%bb%d0%b5%d1%84%d0%be%d0%bd/",
+      "key": "264"
+    },
+    {
+      "id": 262,
+      "name": "Стикери за телефон / таблет / лаптоп — Черна луксозна тема",
+      "slug": "%d1%81%d1%82%d0%b8%d0%ba%d0%b5%d1%80%d0%b8-%d0%b7%d0%b0-%d1%82%d0%b5%d0%bb%d0%b5%d1%84%d0%be%d0%bd-%d1%82%d0%b0%d0%b1%d0%bb%d0%b5%d1%82-%d0%bb%d0%b0%d0%bf%d1%82%d0%be%d0%bf",
+      "kind": "accessory",
+      "category": "Accessories",
+      "categorySlug": "accessories",
+      "price": 11.25,
+      "regularPrice": 11.25,
+      "images": [
+        "https://karlaglow.com/wp-content/uploads/2026/04/stikeri-za-telefon-tablet-laptop-preorder-67e11137d0e75_1280x1280.webp"
+      ],
+      "image": "https://karlaglow.com/wp-content/uploads/2026/04/stikeri-za-telefon-tablet-laptop-preorder-67e11137d0e75_1280x1280.webp",
+      "short": "Висококачествени обемни стикери за персонализиране на вашите устройства.",
+      "permalink": "https://karlaglow.com/product/%d1%81%d1%82%d0%b8%d0%ba%d0%b5%d1%80%d0%b8-%d0%b7%d0%b0-%d1%82%d0%b5%d0%bb%d0%b5%d1%84%d0%be%d0%bd-%d1%82%d0%b0%d0%b1%d0%bb%d0%b5%d1%82-%d0%bb%d0%b0%d0%bf%d1%82%d0%be%d0%bf/",
+      "key": "262"
+    },
+    {
+      "id": 261,
+      "name": "Стикери за телефон / таблет / лаптоп — Розова тема",
+      "slug": "%d1%81%d1%82%d0%b8%d0%ba%d0%b5%d1%80%d0%b8-%d0%b7%d0%b0-%d1%82%d0%b5%d0%bb%d0%b5%d1%84%d0%be%d0%bd-%d1%82%d0%b0%d0%b1%d0%bb%d0%b5%d1%82-%d0%bb%d0%b0%d0%bf%d1%82%d0%be%d0%bf-3",
+      "kind": "accessory",
+      "category": "Accessories",
+      "categorySlug": "accessories",
+      "price": 11.25,
+      "regularPrice": 11.25,
+      "images": [
+        "https://karlaglow.com/wp-content/uploads/2026/04/stikeri-za-telefon-tablet-laptop-preorder-67e1118b630dd_1280x1280.webp"
+      ],
+      "image": "https://karlaglow.com/wp-content/uploads/2026/04/stikeri-za-telefon-tablet-laptop-preorder-67e1118b630dd_1280x1280.webp",
+      "short": "Висококачествени обемни стикери за персонализиране на вашите устройства.",
+      "permalink": "https://karlaglow.com/product/%d1%81%d1%82%d0%b8%d0%ba%d0%b5%d1%80%d0%b8-%d0%b7%d0%b0-%d1%82%d0%b5%d0%bb%d0%b5%d1%84%d0%be%d0%bd-%d1%82%d0%b0%d0%b1%d0%bb%d0%b5%d1%82-%d0%bb%d0%b0%d0%bf%d1%82%d0%be%d0%bf-3/",
+      "key": "3"
+    },
+    {
+      "id": 94,
+      "name": "Balenciaga Case",
+      "slug": "balenciaga-case",
+      "kind": "case",
+      "category": "Brand Cases",
+      "categorySlug": "brand-cases",
+      "price": 17.0,
+      "regularPrice": 26.0,
+      "images": [
+        "https://karlaglow.com/wp-content/uploads/2026/08/brand-fix-p94-231.webp",
+        "https://karlaglow.com/wp-content/uploads/2026/08/brand-fix-p94-232.webp"
+      ],
+      "image": "https://karlaglow.com/wp-content/uploads/2026/08/brand-fix-p94-231.webp",
+      "short": "Стилен дизайнерски калъф, вдъхновен от култов моден бранд — качествена изработка и надеждна защита за твоя iPhone.",
+      "permalink": "https://karlaglow.com/product/balenciaga-case/",
+      "key": "balenciaga-case"
+    },
+    {
+      "id": 93,
+      "name": "Polo Bear Case",
+      "slug": "polo-bear-case",
+      "kind": "case",
+      "category": "Brand Cases",
+      "categorySlug": "brand-cases",
+      "price": 17.0,
+      "regularPrice": 26.0,
+      "images": [
+        "https://karlaglow.com/wp-content/uploads/2026/08/brand-fix-p93-218.webp",
+        "https://karlaglow.com/wp-content/uploads/2026/08/brand-fix-p93-219.webp",
+        "https://karlaglow.com/wp-content/uploads/2026/08/brand-fix-p93-220.webp",
+        "https://karlaglow.com/wp-content/uploads/2026/08/brand-fix-p93-221.webp",
+        "https://karlaglow.com/wp-content/uploads/2026/08/brand-fix-p93-222.webp",
+        "https://karlaglow.com/wp-content/uploads/2026/08/brand-fix-p93-223.webp"
+      ],
+      "image": "https://karlaglow.com/wp-content/uploads/2026/08/brand-fix-p93-218.webp",
+      "short": "Стилен дизайнерски калъф, вдъхновен от култов моден бранд — качествена изработка и надеждна защита за твоя iPhone.",
+      "permalink": "https://karlaglow.com/product/polo-bear-case/",
+      "key": "polo-bear-case"
+    },
+    {
+      "id": 92,
+      "name": "LV Case",
+      "slug": "lv-case",
+      "kind": "case",
+      "category": "Brand Cases",
+      "categorySlug": "brand-cases",
+      "price": 17.0,
+      "regularPrice": 26.0,
+      "images": [
+        "https://karlaglow.com/wp-content/uploads/2026/08/brand-fix-p92-359.webp",
+        "https://karlaglow.com/wp-content/uploads/2026/08/brand-fix-p92-361.webp",
+        "https://karlaglow.com/wp-content/uploads/2026/08/brand-fix-p92-362.webp"
+      ],
+      "image": "https://karlaglow.com/wp-content/uploads/2026/08/brand-fix-p92-359.webp",
+      "short": "Стилен дизайнерски калъф, вдъхновен от култов моден бранд — качествена изработка и надеждна защита за твоя iPhone.",
+      "permalink": "https://karlaglow.com/product/lv-case/",
+      "key": "lv-case"
+    },
+    {
+      "id": 91,
+      "name": "Dior Grey Case",
+      "slug": "dior-grey-case",
+      "kind": "case",
+      "category": "Brand Cases",
+      "categorySlug": "brand-cases",
+      "price": 17.0,
+      "regularPrice": 26.0,
+      "images": [
+        "https://karlaglow.com/wp-content/uploads/2026/08/brand-fix-p91-356.webp",
+        "https://karlaglow.com/wp-content/uploads/2026/08/brand-fix-p91-357.webp",
+        "https://karlaglow.com/wp-content/uploads/2026/08/brand-fix-p91-355.webp"
+      ],
+      "image": "https://karlaglow.com/wp-content/uploads/2026/08/brand-fix-p91-356.webp",
+      "short": "Стилен дизайнерски калъф, вдъхновен от култов моден бранд — качествена изработка и надеждна защита за твоя iPhone.",
+      "permalink": "https://karlaglow.com/product/dior-grey-case/",
+      "key": "dior-grey-case"
+    },
+    {
+      "id": 90,
+      "name": "Official Apple Silicone Case – Бял",
+      "slug": "official-apple-silicone-case-%d0%b1%d1%8f%d0%bb",
+      "kind": "case",
+      "category": "Apple Cases",
+      "categorySlug": "apple-cases",
+      "price": 14.0,
+      "regularPrice": 26.0,
+      "images": [
+        "https://karlaglow.com/wp-content/uploads/2026/08/apple-white-1080.webp"
+      ],
+      "image": "https://karlaglow.com/wp-content/uploads/2026/08/apple-white-1080.webp",
+      "short": "Изчистен и стилен дизайн, създаден специално за iPhone.Кейсът осигурява надеждна защита, перфектно прилягане и усещане за премиум качество – съчетавайки простота, функционалност и елегантност в едно.",
+      "permalink": "https://karlaglow.com/product/official-apple-silicone-case-%d0%b1%d1%8f%d0%bb/",
+      "key": "official-apple-silicone-case-90"
+    },
+    {
+      "id": 89,
+      "name": "Official Apple Silicone Case – Кралско Син",
+      "slug": "official-apple-silicone-case-%d0%ba%d1%80%d0%b0%d0%bb%d1%81%d0%ba%d0%be-%d1%81%d0%b8%d0%bd",
+      "kind": "case",
+      "category": "Apple Cases",
+      "categorySlug": "apple-cases",
+      "price": 14.0,
+      "regularPrice": 26.0,
+      "images": [
+        "https://karlaglow.com/wp-content/uploads/2026/04/resized_blue_720x720.webp"
+      ],
+      "image": "https://karlaglow.com/wp-content/uploads/2026/04/resized_blue_720x720.webp",
+      "short": "Изчистен и стилен дизайн, създаден специално за iPhone.Кейсът осигурява надеждна защита, перфектно прилягане и усещане за премиум качество – съчетавайки простота, функционалност и елегантност в едно.",
+      "permalink": "https://karlaglow.com/product/official-apple-silicone-case-%d0%ba%d1%80%d0%b0%d0%bb%d1%81%d0%ba%d0%be-%d1%81%d0%b8%d0%bd/",
+      "key": "official-apple-silicone-case-89"
+    },
+    {
+      "id": 88,
+      "name": "Official Apple Silicone Case – Жълт",
+      "slug": "official-apple-silicone-case-%d0%b6%d1%8a%d0%bb%d1%82",
+      "kind": "case",
+      "category": "Apple Cases",
+      "categorySlug": "apple-cases",
+      "price": 14.0,
+      "regularPrice": 26.0,
+      "images": [
+        "https://karlaglow.com/wp-content/uploads/2026/04/official-apple-silicone-case-zalt-658c0c86b260f_1920x1920.jpeg",
+        "https://karlaglow.com/wp-content/uploads/2026/04/official-apple-silicone-case-kralsko-sin-copy-6569d3b8ceca0_1280x1280.jpeg"
+      ],
+      "image": "https://karlaglow.com/wp-content/uploads/2026/04/official-apple-silicone-case-zalt-658c0c86b260f_1920x1920.jpeg",
+      "short": "Изчистен и стилен дизайн, създаден специално за iPhone.Кейсът осигурява надеждна защита, перфектно прилягане и усещане за премиум качество – съчетавайки простота, функционалност и елегантност в едно.",
+      "permalink": "https://karlaglow.com/product/official-apple-silicone-case-%d0%b6%d1%8a%d0%bb%d1%82/",
+      "key": "official-apple-silicone-case-88"
+    },
+    {
+      "id": 87,
+      "name": "Official Apple Silicone Case",
+      "slug": "official-apple-silicone-case",
+      "kind": "case",
+      "category": "Apple Cases",
+      "categorySlug": "apple-cases",
+      "price": 14.0,
+      "regularPrice": 26.0,
+      "images": [
+        "https://karlaglow.com/wp-content/uploads/2026/04/official-apple-silicone-case-ceren-658c0c5249a4a.webp"
+      ],
+      "image": "https://karlaglow.com/wp-content/uploads/2026/04/official-apple-silicone-case-ceren-658c0c5249a4a.webp",
+      "short": "Изчистен и стилен дизайн, създаден специално за iPhone.Кейсът осигурява надеждна защита, перфектно прилягане и усещане за премиум качество – съчетавайки простота, функционалност и елегантност в едно.",
+      "permalink": "https://karlaglow.com/product/official-apple-silicone-case/",
+      "key": "official-apple-silicone-case-87"
+    },
+    {
+      "id": 86,
+      "name": "Official Apple Silicone Case – Розов",
+      "slug": "official-apple-silicone-case-%d1%80%d0%be%d0%b7%d0%be%d0%b2",
+      "kind": "case",
+      "category": "Apple Cases",
+      "categorySlug": "apple-cases",
+      "price": 14.0,
+      "regularPrice": 26.0,
+      "images": [
+        "https://karlaglow.com/wp-content/uploads/2026/08/apple-pink-square-fixed.webp",
+        "https://karlaglow.com/wp-content/uploads/2026/04/official-apple-silicone-case-rozov-658c0c3579401.webp"
+      ],
+      "image": "https://karlaglow.com/wp-content/uploads/2026/08/apple-pink-square-fixed.webp",
+      "short": "Изчистен и стилен дизайн, създаден специално за iPhone.Кейсът осигурява надеждна защита, перфектно прилягане и усещане за премиум качество – съчетавайки простота, функционалност и елегантност в едно.",
+      "permalink": "https://karlaglow.com/product/official-apple-silicone-case-%d1%80%d0%be%d0%b7%d0%be%d0%b2/",
+      "key": "official-apple-silicone-case-86"
+    },
+    {
+      "id": 85,
+      "name": "Official Apple Silicone Case – Бордо",
+      "slug": "official-apple-silicone-case-%d0%b1%d0%be%d1%80%d0%b4%d0%be",
+      "kind": "case",
+      "category": "Apple Cases",
+      "categorySlug": "apple-cases",
+      "price": 14.0,
+      "regularPrice": 26.0,
+      "images": [
+        "https://karlaglow.com/wp-content/uploads/2026/08/apple-bordo-white.webp",
+        "https://karlaglow.com/wp-content/uploads/2026/04/Official_Apple_Silicone_Case_720x720.webp"
+      ],
+      "image": "https://karlaglow.com/wp-content/uploads/2026/08/apple-bordo-white.webp",
+      "short": "Изчистен и стилен дизайн, създаден специално за iPhone.Кейсът осигурява надеждна защита, перфектно прилягане и усещане за премиум качество – съчетавайки простота, функционалност и елегантност в едно.",
+      "permalink": "https://karlaglow.com/product/official-apple-silicone-case-%d0%b1%d0%be%d1%80%d0%b4%d0%be/",
+      "key": "official-apple-silicone-case-85"
+    },
+    {
+      "id": 84,
+      "name": "Official Apple Silicone Case – Корал",
+      "slug": "official-apple-silicone-case-%d0%ba%d0%be%d1%80%d0%b0%d0%bb",
+      "kind": "case",
+      "category": "Apple Cases",
+      "categorySlug": "apple-cases",
+      "price": 14.0,
+      "regularPrice": 26.0,
+      "images": [
+        "https://karlaglow.com/wp-content/uploads/2026/04/resized_pink_720x720.webp"
+      ],
+      "image": "https://karlaglow.com/wp-content/uploads/2026/04/resized_pink_720x720.webp",
+      "short": "Изчистен и стилен дизайн, създаден специално за iPhone.Кейсът осигурява надеждна защита, перфектно прилягане и усещане за премиум качество – съчетавайки простота, функционалност и елегантност в едно.",
+      "permalink": "https://karlaglow.com/product/official-apple-silicone-case-%d0%ba%d0%be%d1%80%d0%b0%d0%bb/",
+      "key": "official-apple-silicone-case-84"
+    },
+    {
+      "id": 83,
+      "name": "Official Apple Silicone Case – Червен",
+      "slug": "official-apple-silicone-case-%d1%87%d0%b5%d1%80%d0%b2%d0%b5%d0%bd",
+      "kind": "case",
+      "category": "Apple Cases",
+      "categorySlug": "apple-cases",
+      "price": 14.0,
+      "regularPrice": 26.0,
+      "images": [
+        "https://karlaglow.com/wp-content/uploads/2026/08/apple-red-1-1.webp",
+        "https://karlaglow.com/wp-content/uploads/2026/08/apple-red-3-1.webp",
+        "https://karlaglow.com/wp-content/uploads/2026/04/official-apple-silicone-case-koral-copy-658c17fb91429_150x150-1.jpeg"
+      ],
+      "image": "https://karlaglow.com/wp-content/uploads/2026/08/apple-red-1-1.webp",
+      "short": "Изчистен и стилен дизайн, създаден специално за iPhone.Кейсът осигурява надеждна защита, перфектно прилягане и усещане за премиум качество – съчетавайки простота, функционалност и елегантност в едно.",
+      "permalink": "https://karlaglow.com/product/official-apple-silicone-case-%d1%87%d0%b5%d1%80%d0%b2%d0%b5%d0%bd/",
+      "key": "official-apple-silicone-case-83"
+    },
+    {
+      "id": 82,
+      "name": "Official Apple Silicone Case – Лилав",
+      "slug": "official-apple-silicone-case-%d0%bb%d0%b8%d0%bb%d0%b0%d0%b2",
+      "kind": "case",
+      "category": "Apple Cases",
+      "categorySlug": "apple-cases",
+      "price": 14.0,
+      "regularPrice": 26.0,
+      "images": [
+        "https://karlaglow.com/wp-content/uploads/2026/08/apple-purple-fixed-1.webp"
+      ],
+      "image": "https://karlaglow.com/wp-content/uploads/2026/08/apple-purple-fixed-1.webp",
+      "short": "Изчистен и стилен дизайн, създаден специално за iPhone.Кейсът осигурява надеждна защита, перфектно прилягане и усещане за премиум качество – съчетавайки простота, функционалност и елегантност в едно.",
+      "permalink": "https://karlaglow.com/product/official-apple-silicone-case-%d0%bb%d0%b8%d0%bb%d0%b0%d0%b2/",
+      "key": "official-apple-silicone-case-82"
+    },
+    {
+      "id": 81,
+      "name": "Official Apple Silicone Case – Бледо Розов",
+      "slug": "official-apple-silicone-case-%d0%b1%d0%bb%d0%b5%d0%b4%d0%be-%d1%80%d0%be%d0%b7%d0%be%d0%b2",
+      "kind": "case",
+      "category": "Apple Cases",
+      "categorySlug": "apple-cases",
+      "price": 14.0,
+      "regularPrice": 26.0,
+      "images": [
+        "https://karlaglow.com/wp-content/uploads/2026/04/resized_720x720.webp"
+      ],
+      "image": "https://karlaglow.com/wp-content/uploads/2026/04/resized_720x720.webp",
+      "short": "Изчистен и стилен дизайн, създаден специално за iPhone.Кейсът осигурява надеждна защита, перфектно прилягане и усещане за премиум качество – съчетавайки простота, функционалност и елегантност в едно.",
+      "permalink": "https://karlaglow.com/product/official-apple-silicone-case-%d0%b1%d0%bb%d0%b5%d0%b4%d0%be-%d1%80%d0%be%d0%b7%d0%be%d0%b2/",
+      "key": "official-apple-silicone-case-81"
+    },
+    {
+      "id": 80,
+      "name": "Official Apple Silicone Case – Неоново Зелен",
+      "slug": "official-apple-silicone-case-%d0%bd%d0%b5%d0%be%d0%bd%d0%be%d0%b2%d0%be-%d0%b7%d0%b5%d0%bb%d0%b5%d0%bd",
+      "kind": "case",
+      "category": "Apple Cases",
+      "categorySlug": "apple-cases",
+      "price": 14.0,
+      "regularPrice": 26.0,
+      "images": [
+        "https://karlaglow.com/wp-content/uploads/2026/08/apple-neongreen-1-1.webp",
+        "https://karlaglow.com/wp-content/uploads/2026/08/apple-neongreen-2-1.webp",
+        "https://karlaglow.com/wp-content/uploads/2026/04/official-apple-silicone-case-neonovo-zelen-659d49876b693_150x150.jpeg"
+      ],
+      "image": "https://karlaglow.com/wp-content/uploads/2026/08/apple-neongreen-1-1.webp",
+      "short": "Изчистен и стилен дизайн, създаден специално за iPhone.Кейсът осигурява надеждна защита, перфектно прилягане и усещане за премиум качество – съчетавайки простота, функционалност и елегантност в едно.",
+      "permalink": "https://karlaglow.com/product/official-apple-silicone-case-%d0%bd%d0%b5%d0%be%d0%bd%d0%be%d0%b2%d0%be-%d0%b7%d0%b5%d0%bb%d0%b5%d0%bd/",
+      "key": "official-apple-silicone-case-80"
+    },
+    {
+      "id": 79,
+      "name": "Official Apple Silicone Case – Прасковен",
+      "slug": "official-apple-silicone-case-%d0%bf%d1%80%d0%b0%d1%81%d0%ba%d0%be%d0%b2%d0%b5%d0%bd",
+      "kind": "case",
+      "category": "Apple Cases",
+      "categorySlug": "apple-cases",
+      "price": 14.0,
+      "regularPrice": 26.0,
+      "images": [
+        "https://karlaglow.com/wp-content/uploads/2026/08/apple-praskoven-white.webp",
+        "https://karlaglow.com/wp-content/uploads/2026/04/image1_720x720.webp",
+        "https://karlaglow.com/wp-content/uploads/2026/04/official-apple-silicone-case-neonovo-zelen-copy-659d48578494f.webp"
+      ],
+      "image": "https://karlaglow.com/wp-content/uploads/2026/08/apple-praskoven-white.webp",
+      "short": "Изчистен и стилен дизайн, създаден специално за iPhone.Кейсът осигурява надеждна защита, перфектно прилягане и усещане за премиум качество – съчетавайки простота, функционалност и елегантност в едно.",
+      "permalink": "https://karlaglow.com/product/official-apple-silicone-case-%d0%bf%d1%80%d0%b0%d1%81%d0%ba%d0%be%d0%b2%d0%b5%d0%bd/",
+      "key": "official-apple-silicone-case-79"
+    },
+    {
+      "id": 78,
+      "name": "Official Apple Silicone Case – Дънково Син",
+      "slug": "official-apple-silicone-case-%d0%b4%d1%8a%d0%bd%d0%ba%d0%be%d0%b2%d0%be-%d1%81%d0%b8%d0%bd",
+      "kind": "case",
+      "category": "Apple Cases",
+      "categorySlug": "apple-cases",
+      "price": 14.0,
+      "regularPrice": 26.0,
+      "images": [
+        "https://karlaglow.com/wp-content/uploads/2026/04/image2_720x720.webp"
+      ],
+      "image": "https://karlaglow.com/wp-content/uploads/2026/04/image2_720x720.webp",
+      "short": "Изчистен и стилен дизайн, създаден специално за iPhone.Кейсът осигурява надеждна защита, перфектно прилягане и усещане за премиум качество – съчетавайки простота, функционалност и елегантност в едно.",
+      "permalink": "https://karlaglow.com/product/official-apple-silicone-case-%d0%b4%d1%8a%d0%bd%d0%ba%d0%be%d0%b2%d0%be-%d1%81%d0%b8%d0%bd/",
+      "key": "official-apple-silicone-case-78"
+    },
+    {
+      "id": 77,
+      "name": "Black Swarovski",
+      "slug": "black-swarovski",
+      "kind": "case",
+      "category": "Swarovski Cases",
+      "categorySlug": "swarovski-cases",
+      "price": 20.0,
+      "regularPrice": 45.0,
+      "images": [
+        "https://karlaglow.com/wp-content/uploads/2026/04/Untitleddesign_5_0d069508-fed6-40d3-9036-ac7351fb11fe.webp",
+        "https://karlaglow.com/wp-content/uploads/2026/04/2.webp",
+        "https://karlaglow.com/wp-content/uploads/2026/04/1.webp",
+        "https://karlaglow.com/wp-content/uploads/2026/04/2024-09-19-15.32.jpg",
+        "https://karlaglow.com/wp-content/uploads/2026/04/71qJZq94qPL._AC_SL1085_.webp",
+        "https://karlaglow.com/wp-content/uploads/2026/04/51LHiY0moPL._AC_SL1104_.jpg"
+      ],
+      "image": "https://karlaglow.com/wp-content/uploads/2026/04/Untitleddesign_5_0d069508-fed6-40d3-9036-ac7351fb11fe.webp",
+      "short": "",
+      "permalink": "https://karlaglow.com/product/black-swarovski/",
+      "key": "black-swarovski"
+    },
+    {
+      "id": 76,
+      "name": "Blue Swarovski",
+      "slug": "blue-swarovski-2",
+      "kind": "case",
+      "category": "Swarovski Cases",
+      "categorySlug": "swarovski-cases",
+      "price": 20.0,
+      "regularPrice": 45.0,
+      "images": [
+        "https://karlaglow.com/wp-content/uploads/2026/08/swarovski-blue-square-fixed.webp",
+        "https://karlaglow.com/wp-content/uploads/2026/04/swarovski-kejs-sinbezplaten-protektor-za-ekran-image_680d6ccb0c25f_1920x1920-2.webp",
+        "https://karlaglow.com/wp-content/uploads/2026/04/swarovski-kejs-sinbezplaten-protektor-za-ekran-image_680d6ce7a9646_1920x1920-1.webp",
+        "https://karlaglow.com/wp-content/uploads/2026/04/swarovski-kejs-sinbezplaten-protektor-za-ekran-image_680d6ccb0c25f_1920x1920-1-1.webp",
+        "https://karlaglow.com/wp-content/uploads/2026/04/6-1.webp"
+      ],
+      "image": "https://karlaglow.com/wp-content/uploads/2026/08/swarovski-blue-square-fixed.webp",
+      "short": "Стилен и изискан дизайн, украсен с кристали Swarovski за неповторим блясък и елегантност.\nИзработен от премиум материали за луксозно усещане и надеждна защита от удари и надрасквания.\nПерфектно приляга на твоя iPhone и допълва всяка визия –",
+      "permalink": "https://karlaglow.com/product/blue-swarovski-2/",
+      "key": "blue-swarovski-2"
+    },
+    {
+      "id": 75,
+      "name": "Pink Swarovski",
+      "slug": "pink-swarovski",
+      "kind": "case",
+      "category": "Swarovski Cases",
+      "categorySlug": "swarovski-cases",
+      "price": 20.0,
+      "regularPrice": 45.0,
+      "images": [
+        "https://karlaglow.com/wp-content/uploads/2026/04/SWROVSKI.webp",
+        "https://karlaglow.com/wp-content/uploads/2026/04/D21FBF01-B256-4C70-B9C8-5BCF84A40D39-1.webp",
+        "https://karlaglow.com/wp-content/uploads/2026/04/16_2_2c4926e9-bc88-4b0d-a55e-97f3c798eeaa-1.webp",
+        "https://karlaglow.com/wp-content/uploads/2026/04/swarovski_diamonds10-1000x1000-1-1.webp",
+        "https://karlaglow.com/wp-content/uploads/2026/04/swarovski_diamonds9-1000x1000-1-1.webp",
+        "https://karlaglow.com/wp-content/uploads/2026/04/swarovski_diamonds11-1000x1000-1-1.webp"
+      ],
+      "image": "https://karlaglow.com/wp-content/uploads/2026/04/SWROVSKI.webp",
+      "short": "Стилен и изискан дизайн, украсен с кристали Swarovski за неповторим блясък и елегантност.\nИзработен от премиум материали за луксозно усещане и надеждна защита от удари и надрасквания.\nПерфектно приляга на твоя iPhone и допълва всяка визия –",
+      "permalink": "https://karlaglow.com/product/pink-swarovski/",
+      "key": "pink-swarovski"
+    },
+    {
+      "id": 74,
+      "name": "White Swarovski",
+      "slug": "white-swarovski-2",
+      "kind": "case",
+      "category": "Swarovski Cases",
+      "categorySlug": "swarovski-cases",
+      "price": 20.0,
+      "regularPrice": 45.0,
+      "images": [
+        "https://karlaglow.com/wp-content/uploads/2026/08/swarovski-white-square-fixed.webp",
+        "https://karlaglow.com/wp-content/uploads/2026/04/swarovski_diamonds7-1000x1000-2-1.webp",
+        "https://karlaglow.com/wp-content/uploads/2026/04/3-1.webp",
+        "https://karlaglow.com/wp-content/uploads/2026/04/2024-09-19-15.23-1-1.jpg",
+        "https://karlaglow.com/wp-content/uploads/2026/04/20580af2-709d-435a-b27d-b3dc9d99c21b-1-e1775075047966.webp",
+        "https://karlaglow.com/wp-content/uploads/2026/04/7-1.webp"
+      ],
+      "image": "https://karlaglow.com/wp-content/uploads/2026/08/swarovski-white-square-fixed.webp",
+      "short": "Стилен и изискан дизайн, украсен с кристали Swarovski за неповторим блясък и елегантност.\nИзработен от премиум материали за луксозно усещане и надеждна защита от удари и надрасквания.\nПерфектно приляга на твоя iPhone и допълва всяка визия –",
+      "permalink": "https://karlaglow.com/product/white-swarovski-2/",
+      "key": "white-swarovski-2"
+    },
+    {
+      "id": 73,
+      "name": "White Dior Case",
+      "slug": "white-dior-case",
+      "kind": "case",
+      "category": "Brand Cases",
+      "categorySlug": "brand-cases",
+      "price": 17.0,
+      "regularPrice": 26.0,
+      "images": [
+        "https://karlaglow.com/wp-content/uploads/2026/04/ChatGPT-Image-Oct-30-2025-11_38_01-AM.webp",
+        "https://karlaglow.com/wp-content/uploads/2026/04/dior-kejs-za-iphonesamsung-copy-68b049a41a937_1920x1920.webp"
+      ],
+      "image": "https://karlaglow.com/wp-content/uploads/2026/04/ChatGPT-Image-Oct-30-2025-11_38_01-AM.webp",
+      "short": "Стилен дизайнерски калъф, вдъхновен от култов моден бранд — качествена изработка и надеждна защита за твоя iPhone.",
+      "permalink": "https://karlaglow.com/product/white-dior-case/",
+      "key": "white-dior-case"
+    },
+    {
+      "id": 72,
+      "name": "Dior Black Case",
+      "slug": "dior-black-case",
+      "kind": "case",
+      "category": "Brand Cases",
+      "categorySlug": "brand-cases",
+      "price": 17.0,
+      "regularPrice": 26.0,
+      "images": [
+        "https://karlaglow.com/wp-content/uploads/2026/04/ChatGPT-Image-Oct-29-2025-12_17_22-AM.webp",
+        "https://karlaglow.com/wp-content/uploads/2026/04/dior-kejs-za-iphonesamsung-copy-68b0493c2ce38_1920x1920.webp"
+      ],
+      "image": "https://karlaglow.com/wp-content/uploads/2026/04/ChatGPT-Image-Oct-29-2025-12_17_22-AM.webp",
+      "short": "Стилен дизайнерски калъф, вдъхновен от култов моден бранд — качествена изработка и надеждна защита за твоя iPhone.",
+      "permalink": "https://karlaglow.com/product/dior-black-case/",
+      "key": "dior-black-case"
+    },
+    {
+      "id": 71,
+      "name": "Apple Case – Бежов",
+      "slug": "apple-case-%d0%b1%d0%b5%d0%b6%d0%be%d0%b2",
+      "kind": "case",
+      "category": "Apple Cases",
+      "categorySlug": "apple-cases",
+      "price": 14.0,
+      "regularPrice": 26.0,
+      "images": [
+        "https://karlaglow.com/wp-content/uploads/2026/08/apple-beige-1080.webp",
+        "https://karlaglow.com/wp-content/uploads/2026/08/apple-beige-2-1.webp",
+        "https://karlaglow.com/wp-content/uploads/2026/04/official-apple-silicone-case-dankovo-sin-copy-65c4a5466ccc6_1280x1280-1.png",
+        "https://karlaglow.com/wp-content/uploads/2026/04/unnamed-file-1.png"
+      ],
+      "image": "https://karlaglow.com/wp-content/uploads/2026/08/apple-beige-1080.webp",
+      "short": "Минималистичен дизайн: съчетава изчистена визия и елегантен силует.\n\n\nПремиум изработка: използвани са висококачествени силиконови и TPU материали за комфортно усещане и дълготрайност.\n\n\nПерфектно прилягане: създаден специално за моде",
+      "permalink": "https://karlaglow.com/product/apple-case-%d0%b1%d0%b5%d0%b6%d0%be%d0%b2/",
+      "key": "apple-case"
+    },
+    {
+      "id": 70,
+      "name": "Apple Case – Касис",
+      "slug": "apple-case-%d0%ba%d0%b0%d1%81%d0%b8%d1%81",
+      "kind": "case",
+      "category": "Apple Cases",
+      "categorySlug": "apple-cases",
+      "price": 14.0,
+      "regularPrice": 26.0,
+      "images": [
+        "https://karlaglow.com/wp-content/uploads/2026/08/apple-kasis-plum.webp",
+        "https://karlaglow.com/wp-content/uploads/2026/08/apple-kasis-lifestyle.webp"
+      ],
+      "image": "https://karlaglow.com/wp-content/uploads/2026/08/apple-kasis-plum.webp",
+      "short": "Открий силата на минимализма с нашите Apple кейсове, създадени да подчертаят изтънчения дизайн на твоя iPhone, без да го скриват. Всеки калъф е изработен от висококачествени материали, които осигуряват надеждна защита срещу удари, надрасква",
+      "permalink": "https://karlaglow.com/product/apple-case-%d0%ba%d0%b0%d1%81%d0%b8%d1%81/",
+      "key": "apple-case-70"
+    },
+    {
+      "id": 69,
+      "name": "Apple Case – Войнишко Зелен",
+      "slug": "apple-case-%d0%b2%d0%be%d0%b9%d0%bd%d0%b8%d1%88%d0%ba%d0%be-%d0%b7%d0%b5%d0%bb%d0%b5%d0%bd",
+      "kind": "case",
+      "category": "Apple Cases",
+      "categorySlug": "apple-cases",
+      "price": 14.0,
+      "regularPrice": 26.0,
+      "images": [
+        "https://karlaglow.com/wp-content/uploads/2026/08/apple-voynishko-olive.webp"
+      ],
+      "image": "https://karlaglow.com/wp-content/uploads/2026/08/apple-voynishko-olive.webp",
+      "short": "Минималистичен дизайн: съчетава изчистена визия и елегантен силует.\n\n\nПремиум изработка: използвани са висококачествени силиконови и TPU материали за комфортно усещане и дълготрайност.\n\n\nПерфектно прилягане: създаден специално за модела н",
+      "permalink": "https://karlaglow.com/product/apple-case-%d0%b2%d0%be%d0%b9%d0%bd%d0%b8%d1%88%d0%ba%d0%be-%d0%b7%d0%b5%d0%bb%d0%b5%d0%bd/",
+      "key": "apple-case-69"
+    }
+  ]
+}
