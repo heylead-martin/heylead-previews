@@ -1,6 +1,7 @@
 (function () {
   var BGN = 1.95583;
   var ECONT_SHOP = "8663702";
+  var ECONT_FORM = "https://delivery.econt.com/customer_info.php";
   var ECONT_LOCATOR = "https://officelocator.econt.com/";
   var ECONT_OFFICES = "https://ee.econt.com/services/Nomenclatures/NomenclaturesService.getOffices.json";
   var CART_KEY = "kg_preview_cart";
@@ -236,6 +237,18 @@
     return u.toString();
   }
 
+  function econtFormUrl(items) {
+    var params = new URLSearchParams({
+      id_shop: ECONT_SHOP,
+      order_total: cartTotal(items).toFixed(2),
+      order_currency: "EUR",
+      order_weight: cartWeight(items).toFixed(3),
+      ignore_history: "1",
+      confirm_txt: "Потвърди"
+    });
+    return ECONT_FORM + "?" + params.toString();
+  }
+
   function officeFromMessage(data) {
     if (!data || typeof data !== "object") return null;
     var office = data.office || data;
@@ -300,6 +313,7 @@
   }
 
   function canPlace() {
+    if (econtChoice && (econtChoice.id || econtChoice.officeCode)) return true;
     if (deliveryMode === "pickup") return !!(econtChoice && econtChoice.mode === "pickup");
     var city = $("addr-city");
     var street = $("addr-street");
@@ -322,16 +336,19 @@
 
     $("app").innerHTML =
       '<div class="checkout container">' +
-      '<div><div class="panel"><h2>Къде да доставим</h2>' +
-      '<div class="mode-tabs" role="tablist">' +
-      '<button type="button" class="mode-tab' + (pickupOn ? " on" : "") + '" data-mode="pickup">Офис / еконтомат</button>' +
-      '<button type="button" class="mode-tab' + (pickupOn ? "" : " on") + '" data-mode="address">До адрес</button>' +
+      '<div><div class="panel"><h2>Доставка с Еконт</h2>' +
+      '<div id="econt-summary-host">' +
+      (econtChoice ? econtSummaryHtml() : "") +
+      "</div>" +
+      '<div class="econt-form-wrap">' +
+      '<iframe id="econt-form" title="Еконт доставка" allow="geolocation" src="' + esc(econtFormUrl(items)) + '"></iframe>' +
+      "</div>" +
+      '<div class="mode-tabs" role="tablist" style="margin-top:16px">' +
+      '<button type="button" class="mode-tab' + (pickupOn ? " on" : "") + '" data-mode="pickup">Карта за офис</button>' +
+      '<button type="button" class="mode-tab' + (pickupOn ? "" : " on") + '" data-mode="address">До адрес тук</button>' +
       "</div>" +
       '<div id="pickup-panel" class="' + (pickupOn ? "" : "is-hidden") + '">' +
-      '<p class="note">Картата на Еконт е в страницата. Избери пин или офис от списъка вляво.</p>' +
-      '<div id="econt-summary-host">' +
-      (pickupOn && econtChoice && econtChoice.mode === "pickup" ? econtSummaryHtml() : "") +
-      "</div>" +
+      '<p class="note">Ако Еконт отвори картата в нов прозорец, ползвай тази тук. Кликни пин, после Потвърди във формата отгоре.</p>' +
       '<div class="econt-frame-wrap"><iframe id="econt-frame" title="Еконт карта" allow="geolocation" src="' + esc(locatorUrl()) + '"></iframe></div>' +
       "</div>" +
       '<div id="address-panel" class="' + (pickupOn ? "is-hidden" : "") + '">' +
@@ -465,9 +482,40 @@
       event.origin.indexOf("delivery.econt.com") !== -1 ||
       event.origin.indexOf("azurestaticapps.net") !== -1;
     if (!ok) return;
-    var office = officeFromMessage(event.data);
-    if (!office) return;
-    applyOffice(office);
+    var data = event.data;
+    if (data && typeof data === "object" && (data.shipping_price != null || data.shipping_price_cod != null || data.city_name || data.office_code || data.confirm_txt)) {
+      if (data.shipment_error) {
+        var err = $("econt-err");
+        if (err) err.textContent = String(data.shipment_error);
+        return;
+      }
+      var ship = Number(data.shipping_price_cod != null ? data.shipping_price_cod : data.shipping_price) || 0;
+      var office = data.office_code || data.officeCode || "";
+      var dest = [data.city_name || data.cityName, data.address, office ? "офис " + office : ""]
+        .filter(Boolean).join(", ");
+      econtRaw = data;
+      econtChoice = {
+        id: data.id || "",
+        shipping: ship,
+        currency: data.shipping_price_currency || "EUR",
+        officeCode: office,
+        city: data.city_name || "",
+        address: data.address || "",
+        destination: dest || "Еконт доставка",
+        label: office ? "До офис / еконтомат на Еконт" : "До адрес с Еконт",
+        mode: office ? "pickup" : "address",
+        name: data.name || data.face || "",
+        phone: data.phone || "",
+        email: data.email || ""
+      };
+      if (econtChoice.name && $("cust-name") && !$("cust-name").value) $("cust-name").value = econtChoice.name;
+      if (econtChoice.phone && $("cust-phone") && !$("cust-phone").value) $("cust-phone").value = econtChoice.phone;
+      if (econtChoice.email && $("cust-email") && !$("cust-email").value) $("cust-email").value = econtChoice.email;
+      paintCheckoutSelection();
+      return;
+    }
+    var officeObj = officeFromMessage(data);
+    if (officeObj) applyOffice(officeObj);
   }
 
   function renderThanks(id) {
