@@ -394,15 +394,15 @@
     $("app").innerHTML =
       '<div class="checkout container">' +
       '<div><div class="panel"><h2>Доставка с Еконт</h2>' +
-      '<p class="note">Полетата са на KarlaGlow. Населените места и офисите се зареждат от Еконт API, без iframe и без плъгина.</p>' +
       '<div class="field"><label for="billing_name">Име и фамилия *</label>' +
       '<input id="billing_name" name="billing_name" autocomplete="name" required></div>' +
       '<div class="field"><label for="billing_phone">Телефон *</label>' +
-      '<input id="billing_phone" name="billing_phone" autocomplete="tel" required></div>' +
+      '<input id="billing_phone" name="billing_phone" type="tel" inputmode="numeric" autocomplete="tel" required></div>' +
       '<div class="field"><label for="billing_email">E-mail *</label>' +
       '<input id="billing_email" name="billing_email" type="email" autocomplete="email" required></div>' +
       '<div class="field"><label>Държава *</label>' +
       '<div class="static-field">България</div></div>' +
+      '<div id="econt-picker">' +
       '<div class="field suggest-wrap"><label for="billing_city">Населено място *</label>' +
       '<input id="billing_city" name="billing_city" autocomplete="off" placeholder="напр. София">' +
       '<div class="suggest" id="city-suggest" hidden></div></div>' +
@@ -421,16 +421,22 @@
       '<input id="billing_address_1" name="billing_address_1" autocomplete="off">' +
       '<div class="suggest" id="street-suggest" hidden></div></div>' +
       '<div class="row2"><div class="field"><label for="billing_street_number">Номер</label>' +
-      '<input id="billing_street_number"></div>' +
+      '<input id="billing_street_number" inputmode="numeric" autocomplete="off"></div>' +
       '<div class="field"><label for="billing_postcode">Пощенски код</label>' +
-      '<input id="billing_postcode" autocomplete="postal-code"></div></div>' +
+      '<input id="billing_postcode" inputmode="numeric" autocomplete="postal-code"></div></div>' +
       '<div class="field"><label for="billing_address_2">Блок, вход, етаж</label>' +
       '<input id="billing_address_2"></div>' +
       "</div>" +
       '<button type="button" class="btn btn-confirm" id="confirm-delivery">Потвърди доставката</button>' +
       '<div class="err" id="econt-err"></div>' +
+      "</div>" +
       '<div id="econt-summary-host"></div>' +
       "</div></div>" +
+      '<div class="checkout-side">' +
+      '<div class="panel extra-info"><h2>Допълнителна информация</h2>' +
+      '<label class="lbl" for="order-note">Бележки към поръчката (по избор)</label>' +
+      '<textarea id="order-note" rows="3" maxlength="400" placeholder="Бележки към поръчката (относно доставката или друго)."></textarea>' +
+      "</div>" +
       '<aside class="panel"><h2>Поръчка</h2>' + lines +
       '<div class="summary-line"><span>Продукти</span><span>' + money(cartTotal(items)) + "</span></div>" +
       '<div class="summary-line"><span>Доставка Еконт</span><span id="ship-line">' + (shipping != null ? money(shipping) : "потвърди доставката") + "</span></div>" +
@@ -439,7 +445,7 @@
       '<p class="muted">Наложен платеж. Плащаш на куриера.</p>' +
       '<button class="btn btn-accent" id="place" style="width:100%;margin-top:8px" disabled>Поръчай</button>' +
       '<div class="err" id="place-err"></div>' +
-      "</aside></div>";
+      "</aside></div></div>";
 
     bindCheckout(items);
   }
@@ -479,6 +485,7 @@
       dest = [
         $("billing_address_1").value.trim(),
         ($("billing_street_number") && $("billing_street_number").value.trim()) || "",
+        ($("billing_address_2") && $("billing_address_2").value.trim()) || "",
         pickedCity.name,
         ($("billing_postcode") && $("billing_postcode").value.trim()) || pickedCity.postCode || ""
       ].filter(Boolean).join(", ");
@@ -503,14 +510,39 @@
       shipping: shipCost(),
       currency: "EUR"
     };
-    var host = $("econt-summary-host");
-    if (host) {
-      host.innerHTML = '<div class="econt-summary"><h3>' + esc(label) + "</h3><p>" + esc(dest) +
-        "</p><p>Доставка: <strong>" + money(econtChoice.shipping) + "</strong></p></div>";
-    }
+    setPickerOpen(false);
+    renderEcontSummary();
     refreshTotals();
-    var place = $("place");
-    if (place) place.disabled = false;
+  }
+
+  function setPickerOpen(open) {
+    var picker = $("econt-picker");
+    if (picker) picker.hidden = !open;
+  }
+
+  function renderEcontSummary() {
+    var host = $("econt-summary-host");
+    if (!host) return;
+    if (!econtChoice) {
+      host.innerHTML = "";
+      return;
+    }
+    host.innerHTML =
+      '<div class="econt-summary"><div class="econt-summary-top"><h3>' + esc(econtChoice.label) +
+      '</h3><button type="button" class="econt-edit" id="edit-delivery">Промени доставката</button></div><p>' +
+      esc(econtChoice.destination) + "</p><p>Доставка: <strong>" + money(econtChoice.shipping) +
+      "</strong></p></div>";
+    var btn = $("edit-delivery");
+    if (btn) btn.onclick = editDelivery;
+  }
+
+  function editDelivery() {
+    setPickerOpen(true);
+    var host = $("econt-summary-host");
+    if (host) host.innerHTML = "";
+    showModePanels();
+    var city = $("billing_city");
+    if (city) city.focus();
   }
 
   function bindCheckout(items) {
@@ -592,6 +624,10 @@
     }
 
     $("confirm-delivery").onclick = confirmDelivery;
+    if (econtChoice) {
+      setPickerOpen(false);
+      renderEcontSummary();
+    }
     $("place").onclick = function () {
       if (!econtChoice) {
         $("place-err").textContent = "Първо потвърди доставката.";
@@ -610,13 +646,17 @@
       };
       if (!isEmail(customer.email)) {
         err.textContent = "Попълни валиден e-mail.";
+        btn.disabled = false;
+        btn.textContent = "Поръчай";
         return;
       }
+      var note = ($("order-note") && $("order-note").value.trim()) || "";
       fetch(CHECKOUT_API, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           customer: customer,
+          note: note,
           items: items.map(function (i) {
             return {
               id: i.id,
