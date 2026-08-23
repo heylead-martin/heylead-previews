@@ -244,6 +244,24 @@
     var a = (o && o.address) || {};
     return a.fullAddress || [a.street, a.num || a.streetNumber].filter(Boolean).join(" ") || "";
   }
+  function foldBg(s) {
+    s = String(s || "").toLowerCase();
+    var map = {
+      "а": "a", "б": "b", "в": "v", "г": "g", "д": "d", "е": "e", "ж": "zh", "з": "z",
+      "и": "i", "й": "y", "к": "k", "л": "l", "м": "m", "н": "n", "о": "o", "п": "p",
+      "р": "r", "с": "s", "т": "t", "у": "u", "ф": "f", "х": "h", "ц": "ts", "ч": "ch",
+      "ш": "sh", "щ": "sht", "ъ": "a", "ь": "", "ю": "yu", "я": "ya"
+    };
+    var out = "";
+    for (var i = 0; i < s.length; i++) out += map[s[i]] || s[i];
+    return out.replace(/ul\.?|zhk|ж\.?\s*к\.?|ул\.?|№|#|,|\.|\"|'/g, " ").replace(/\s+/g, " ").trim();
+  }
+  function officeMatches(o, q) {
+    var nq = foldBg(q);
+    if (!nq) return true;
+    var hay = foldBg(o.search || [o.name, o.nameEn, o.address, o.street, o.quarter, o.code].join(" "));
+    return hay.indexOf(nq) !== -1;
+  }
 
   function filterCities(q) {
     q = (q || "").trim().toLowerCase();
@@ -279,13 +297,18 @@
       body: JSON.stringify({ countryCode: "BGR", cityID: cityId })
     }).then(function (r) { return r.json(); }).then(function (d) {
       var list = (d.offices || []).map(function (o) {
+        var a = o.address || {};
         return {
           id: o.id,
           code: o.code,
           name: o.name,
+          nameEn: o.nameEn || "",
           isAPS: !!o.isAPS,
           isMPS: !!o.isMPS,
-          address: officeAddress(o)
+          address: officeAddress(o),
+          street: a.street || "",
+          quarter: a.quarter || "",
+          search: [o.name, o.nameEn, o.code, a.fullAddress, a.fullAddressEn, a.street, a.quarter, a.other].filter(Boolean).join(" ")
         };
       });
       officesByCity[cityId] = list;
@@ -319,26 +342,27 @@
   function renderOfficeList(filter) {
     var box = $("office-list");
     if (!box) return;
-    var list = officesForMode();
-    var q = (filter || "").trim().toLowerCase();
-    if (q) {
-      list = list.filter(function (o) {
-        return (o.name + " " + o.address + " " + o.code).toLowerCase().indexOf(q) !== -1;
-      });
-    }
+    var all = officesForMode();
+    var q = (filter || "").trim();
+    var list = q ? all.filter(function (o) { return officeMatches(o, q); }) : all;
     if (!pickedCity) {
       box.innerHTML = '<p class="muted">Първо избери населено място.</p>';
       return;
     }
-    if (!list.length) {
+    if (!all.length) {
       box.innerHTML = '<p class="muted">' + (deliveryMode === "locker" ? "Няма еконтомат в този град." : "Няма офис в този град.") + "</p>";
       return;
     }
-    box.innerHTML = list.slice(0, 40).map(function (o) {
+    if (!list.length) {
+      box.innerHTML = '<p class="muted">Няма офис по това търсене. Пробвай улица, квартал или име, напр. Марагидик или Черковна.</p>';
+      return;
+    }
+    box.innerHTML = list.map(function (o) {
       var on = pickedOffice && pickedOffice.code === o.code ? " on" : "";
+      var line = o.address || o.street || ("код " + o.code);
       return '<button type="button" class="office-item' + on + '" data-code="' + esc(o.code) + '">' +
         "<strong>" + esc(o.name) + "</strong>" +
-        '<span class="muted">' + esc(o.address || ("код " + o.code)) + "</span></button>";
+        '<span class="muted">' + esc(line) + "</span></button>";
     }).join("");
     box.querySelectorAll(".office-item").forEach(function (btn) {
       btn.onclick = function () {
