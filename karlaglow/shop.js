@@ -58,6 +58,9 @@
   function dash(s) {
     return String(s || "").replace(/[\u2013\u2014]/g, "-");
   }
+  function isEmail(s) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(s || "").trim());
+  }
   function money(n) {
     var v = Number(n) || 0;
     return v.toFixed(2) + " € / " + (v * BGN).toFixed(2) + " лв.";
@@ -394,12 +397,10 @@
       '<p class="note">Полетата са на KarlaGlow. Населените места и офисите се зареждат от Еконт API, без iframe и без плъгина.</p>' +
       '<div class="field"><label for="billing_name">Име и фамилия *</label>' +
       '<input id="billing_name" name="billing_name" autocomplete="name" required></div>' +
-      '<div class="field"><label for="billing_company">Лице за контакт <span class="muted">(ако е фирма)</span></label>' +
-      '<input id="billing_company" name="billing_company" autocomplete="organization"></div>' +
       '<div class="field"><label for="billing_phone">Телефон *</label>' +
       '<input id="billing_phone" name="billing_phone" autocomplete="tel" required></div>' +
-      '<div class="field"><label for="billing_email">E-mail</label>' +
-      '<input id="billing_email" name="billing_email" type="email" autocomplete="email"></div>' +
+      '<div class="field"><label for="billing_email">E-mail *</label>' +
+      '<input id="billing_email" name="billing_email" type="email" autocomplete="email" required></div>' +
       '<div class="field"><label>Държава *</label>' +
       '<div class="static-field">България</div></div>' +
       '<div class="field suggest-wrap"><label for="billing_city">Населено място *</label>' +
@@ -447,8 +448,13 @@
     var err = $("econt-err");
     var name = ($("billing_name") && $("billing_name").value.trim()) || "";
     var phone = ($("billing_phone") && $("billing_phone").value.trim()) || "";
+    var email = ($("billing_email") && $("billing_email").value.trim()) || "";
     if (!name || !phone) {
       err.textContent = "Попълни име и телефон.";
+      return;
+    }
+    if (!isEmail(email)) {
+      err.textContent = "Попълни валиден e-mail.";
       return;
     }
     if (!pickedCity) {
@@ -483,9 +489,8 @@
     }
     econtChoice = {
       name: name,
-      face: ($("billing_company") && $("billing_company").value.trim()) || "",
       phone: phone,
-      email: ($("billing_email") && $("billing_email").value.trim()) || "",
+      email: email,
       city: pickedCity.name,
       cityId: pickedCity.id,
       postCode: (deliveryMode === "address" && $("billing_postcode") && $("billing_postcode").value.trim()) || pickedCity.postCode || "",
@@ -603,6 +608,10 @@
         phone: ($("billing_phone") && $("billing_phone").value.trim()) || econtChoice.phone,
         email: ($("billing_email") && $("billing_email").value.trim()) || econtChoice.email || ""
       };
+      if (!isEmail(customer.email)) {
+        err.textContent = "Попълни валиден e-mail.";
+        return;
+      }
       fetch(CHECKOUT_API, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
