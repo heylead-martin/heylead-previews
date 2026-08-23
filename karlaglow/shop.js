@@ -394,8 +394,10 @@
     $("app").innerHTML =
       '<div class="checkout container">' +
       '<div><div class="panel"><h2>Доставка с Еконт</h2>' +
-      '<div class="field"><label for="billing_name">Име и фамилия *</label>' +
-      '<input id="billing_name" name="billing_name" autocomplete="name" required></div>' +
+      '<div class="row2"><div class="field"><label for="billing_first_name">Име *</label>' +
+      '<input id="billing_first_name" name="billing_first_name" autocomplete="given-name" required></div>' +
+      '<div class="field"><label for="billing_last_name">Фамилия *</label>' +
+      '<input id="billing_last_name" name="billing_last_name" autocomplete="family-name" required></div></div>' +
       '<div class="field"><label for="billing_phone">Телефон *</label>' +
       '<input id="billing_phone" name="billing_phone" type="tel" inputmode="numeric" autocomplete="tel" required></div>' +
       '<div class="field"><label for="billing_email">E-mail *</label>' +
@@ -452,13 +454,15 @@
 
   function confirmDelivery() {
     var err = $("econt-err");
-    var name = ($("billing_name") && $("billing_name").value.trim()) || "";
+    var first = ($("billing_first_name") && $("billing_first_name").value.trim()) || "";
+    var last = ($("billing_last_name") && $("billing_last_name").value.trim()) || "";
     var phone = ($("billing_phone") && $("billing_phone").value.trim()) || "";
     var email = ($("billing_email") && $("billing_email").value.trim()) || "";
-    if (!name || !phone) {
-      err.textContent = "Попълни име и телефон.";
+    if (!first || !last || !phone) {
+      err.textContent = "Попълни име, фамилия и телефон.";
       return;
     }
+    var name = first + " " + last;
     if (!isEmail(email)) {
       err.textContent = "Попълни валиден e-mail.";
       return;
@@ -640,7 +644,7 @@
       btn.textContent = "Изпращаме…";
       err.textContent = "";
       var customer = {
-        name: ($("billing_name") && $("billing_name").value.trim()) || econtChoice.name,
+        name: [($("billing_first_name") && $("billing_first_name").value.trim()) || "", ($("billing_last_name") && $("billing_last_name").value.trim()) || ""].filter(Boolean).join(" ") || econtChoice.name,
         phone: ($("billing_phone") && $("billing_phone").value.trim()) || econtChoice.phone,
         email: ($("billing_email") && $("billing_email").value.trim()) || econtChoice.email || ""
       };
