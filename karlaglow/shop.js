@@ -644,6 +644,8 @@
       btn.textContent = "Изпращаме…";
       err.textContent = "";
       var customer = {
+        firstName: ($("billing_first_name") && $("billing_first_name").value.trim()) || "",
+        lastName: ($("billing_last_name") && $("billing_last_name").value.trim()) || "",
         name: [($("billing_first_name") && $("billing_first_name").value.trim()) || "", ($("billing_last_name") && $("billing_last_name").value.trim()) || ""].filter(Boolean).join(" ") || econtChoice.name,
         phone: ($("billing_phone") && $("billing_phone").value.trim()) || econtChoice.phone,
         email: ($("billing_email") && $("billing_email").value.trim()) || econtChoice.email || ""
