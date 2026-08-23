@@ -4,6 +4,7 @@
   var ECONT_STREETS = "https://ee.econt.com/services/Nomenclatures/NomenclaturesService.getStreets.json";
   var CART_KEY = "kg_preview_cart";
   var ORDER_KEY = "kg_preview_last_order";
+  var CHECKOUT_API = "https://admin.karlaglow.com/api/checkout/order";
   var SHIP_OFFICE = 4.12;
   var SHIP_ADDRESS = 5.32;
 
@@ -591,23 +592,63 @@
         $("place-err").textContent = "Първо потвърди доставката.";
         return;
       }
-      var order = {
-        id: "KG-" + Date.now().toString(36).toUpperCase(),
-        at: new Date().toISOString(),
-        customer: {
-          name: econtChoice.name,
-          phone: econtChoice.phone,
-          email: econtChoice.email
-        },
-        items: items,
-        econt: econtChoice,
-        products: cartTotal(items),
-        shipping: econtChoice.shipping,
-        total: cartTotal(items) + econtChoice.shipping
+      var btn = $("place");
+      var err = $("place-err");
+      if (btn.disabled) return;
+      btn.disabled = true;
+      btn.textContent = "Изпращаме…";
+      err.textContent = "";
+      var customer = {
+        name: ($("billing_name") && $("billing_name").value.trim()) || econtChoice.name,
+        phone: ($("billing_phone") && $("billing_phone").value.trim()) || econtChoice.phone,
+        email: ($("billing_email") && $("billing_email").value.trim()) || econtChoice.email || ""
       };
-      localStorage.setItem(ORDER_KEY, JSON.stringify(order));
-      setCart([]);
-      location.hash = "#/thanks/" + order.id;
+      fetch(CHECKOUT_API, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          customer: customer,
+          items: items.map(function (i) {
+            return {
+              id: i.id,
+              qty: i.qty,
+              name: i.name,
+              price: i.price,
+              device: i.device,
+              deviceLabel: i.deviceLabel
+            };
+          }),
+          econt: econtChoice
+        })
+      }).then(function (r) {
+        return r.json().then(function (data) {
+          if (!r.ok || !data.ok) throw new Error((data && data.error) || "Неуспешна поръчка");
+          return data;
+        }, function () {
+          throw new Error("Сървърът върна неочакван отговор.");
+        });
+      }).then(function (data) {
+        var order = {
+          id: String(data.orderId),
+          at: new Date().toISOString(),
+          customer: customer,
+          items: items,
+          econt: econtChoice,
+          products: cartTotal(items),
+          shipping: econtChoice.shipping,
+          total: Number(data.total) || (cartTotal(items) + econtChoice.shipping),
+          thanks: data.thanks || "",
+          admin: data.admin || "",
+          econtId: data.econtId || null
+        };
+        localStorage.setItem(ORDER_KEY, JSON.stringify(order));
+        setCart([]);
+        location.hash = "#/thanks/" + order.id;
+      }).catch(function (e) {
+        err.textContent = (e && e.message) || "Неуспешна поръчка. Опитай пак.";
+        btn.disabled = false;
+        btn.textContent = "Поръчай";
+      });
     };
     showModePanels();
   }
@@ -627,14 +668,16 @@
       $("app").innerHTML = '<div class="container thanks"><h1>Няма такава поръчка</h1><a class="btn" href="#/" data-link>Начало</a></div>';
       return;
     }
+    var thanksHref = order.thanks || ("https://karlaglow.com/checkout/order-received/" + encodeURIComponent(order.id) + "/");
+    var adminHref = order.admin || ("https://karlaglow.com/wp-admin/admin.php?page=wc-orders&action=edit&id=" + encodeURIComponent(order.id));
     $("app").innerHTML =
       '<div class="container thanks"><h1>Готово</h1>' +
-      "<p>Поръчка <strong>" + esc(order.id) + "</strong> е записана в този браузър.</p>" +
+      "<p>Поръчка <strong>#" + esc(order.id) + "</strong> е в WooCommerce.</p>" +
       "<p>" + esc(order.econt.label) + ": " + esc(order.econt.destination) + "</p>" +
       "<p>За плащане при доставка: <strong>" + money(order.total) + "</strong></p>" +
-      '<div class="note" style="text-align:left;margin-top:18px">Преглед: всички полета са наши, офисите идват от Еконт API. Live цена в Еконт Delivery ще мине през сървъра, когато вържем поръчката към karlaglow.com.</div>' +
+      '<p style="margin-top:18px"><a class="btn btn-accent" href="' + esc(thanksHref) + '">Страница за благодарност</a></p>' +
+      '<p><a href="' + esc(adminHref) + '">Отвори в wp-admin</a></p>' +
       '<p style="margin-top:18px"><a class="btn" href="#/" data-link>Нова поръчка</a></p>' +
-      '<details style="text-align:left;margin-top:18px"><summary>Пълен запис</summary><pre class="payload">' + esc(JSON.stringify(order, null, 2)) + "</pre></details>" +
       "</div>";
   }
 
