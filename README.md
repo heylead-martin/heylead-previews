@@ -14,6 +14,7 @@ builds move to WordPress after the client approves.
 | `/vistarates/` | Vistarates - US personal finance comparison staging build (Astro static). Source: private `heylead-martin/vistarates`. Production target: vistarates.com |
 | `/biasdrop/` | BiasDrop - K-pop superfan hub concept (idols, merch drops, photocards, light sticks, toys/gadgets, bias quiz). Neon dark entertainment demo for review. |
 | `/imoti-bg/` | Имоти BG - Bulgarian real-estate market intelligence (cities, quarters, rates charts). Source: `~/imoti-bg`. Domain TBD. |
+| `/avto-bg/` | Avto BG - Bulgarian used-car market intelligence (MVR fleet, first registrations, price checker, VIN). Source: `~/avto-bg`. Brand and domain TBD. |
 | `/applylab/` | ApplyLab - personal remote-job co-pilot (semi-auto apply, AI tailor). API: `~/applylab-api` Cloudflare Worker. |
 | `/karlaglow/` | KarlaGlow - product page + checkout testing Econt without the WooCommerce plugin. Uses delivery.econt.com customer_info form (shop pairing id) and live offices API. Preview orders stay in the browser until a backend write is added. |
 
