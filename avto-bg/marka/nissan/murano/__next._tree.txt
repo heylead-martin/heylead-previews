@@ -1,0 +1,8 @@
+:HL["/avto-bg/_next/static/chunks/2tgnr6akfw6cd.css","style"]
+:HL["/avto-bg/_next/static/media/1a69062cfe6f77f8-s.p.0o-3_g79811ob.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/avto-bg/_next/static/media/23b7a97ae3b5c134-s.p.226pwps5o-gq_.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/avto-bg/_next/static/media/a343f882a40d2cc9-s.p.1sj6eobyi31rd.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/avto-bg/_next/static/media/a7afbb44bec2bb18-s.p.1qc6dx89jd2qv.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/avto-bg/_next/static/media/d3fe2f289711ac3f-s.p.1l2zhvq5eocqf.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/avto-bg/_next/static/media/effe91970fc4db64-s.p.0oace-s_gkfks.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+0:{"tree":{"name":"","param":null,"prefetchHints":4176,"slots":{"children":{"name":"marka","param":null,"prefetchHints":4192,"slots":{"children":{"name":"make","param":{"type":"d","key":"nissan","siblings":[]},"prefetchHints":4192,"slots":{"children":{"name":"model","param":{"type":"d","key":"murano","siblings":[]},"prefetchHints":4192,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}}}}}},"staleTime":300,"buildId":"MfQ7ZVV3OBe3xTVbY9Vyc"}
