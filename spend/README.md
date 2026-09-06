@@ -21,3 +21,5 @@ python3 ~/.grok/scripts/collect-spend.py --plan-only
 ```
 
 Then commit `data.json` in this folder.
+
+The Refresh button in the top right reloads that published snapshot. It does not re-run the collector.

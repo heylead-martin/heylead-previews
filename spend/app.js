@@ -182,14 +182,18 @@
     return '<div class="extras">' + bits.join("") + "</div>";
   }
 
-  function render(data) {
-    $("stamp").textContent =
+  function render(data, meta) {
+    var stamp =
       "Snapshot " +
       when(data.generated_at) +
       " · month " +
       (data.month || "") +
       " · today " +
       (data.today || "");
+    if (meta && meta.reloaded) {
+      stamp += " · reloaded " + when(new Date().toISOString());
+    }
+    $("stamp").textContent = stamp;
 
     const ga = data.github_actions || {};
     const grok = data.grok || {};
@@ -441,17 +445,54 @@
       .join("");
   }
 
-  fetch("data.json", { cache: "no-store" })
-    .then(function (r) {
-      if (!r.ok) throw new Error("Could not load data.json (" + r.status + ")");
-      return r.json();
-    })
-    .then(render)
-    .catch(function (err) {
-      $("stamp").textContent = "No snapshot yet";
-      $("fatal").hidden = false;
-      $("fatal").textContent =
-        String(err.message || err) +
-        ". Run: python3 ~/.grok/scripts/collect-spend.py";
-    });
+  var loading = false;
+  var loadedOnce = false;
+
+  function setRefreshing(on) {
+    var btn = $("btn-refresh");
+    if (!btn) return;
+    btn.disabled = on;
+    btn.setAttribute("aria-busy", on ? "true" : "false");
+    var label = btn.querySelector(".btn-label");
+    if (label) label.textContent = on ? "Refreshing" : "Refresh";
+    btn.classList.toggle("is-loading", on);
+  }
+
+  function loadSnapshot(manual) {
+    if (loading) return;
+    loading = true;
+    setRefreshing(true);
+    var fatal = $("fatal");
+    if (fatal) {
+      fatal.hidden = true;
+      fatal.textContent = "";
+    }
+    fetch("data.json?t=" + Date.now(), { cache: "no-store" })
+      .then(function (r) {
+        if (!r.ok) throw new Error("Could not load data.json (" + r.status + ")");
+        return r.json();
+      })
+      .then(function (data) {
+        loadedOnce = true;
+        render(data, { reloaded: !!manual });
+      })
+      .catch(function (err) {
+        if (!loadedOnce) $("stamp").textContent = "No snapshot yet";
+        if (fatal) {
+          fatal.hidden = false;
+          fatal.textContent =
+            String(err.message || err) +
+            ". Run: python3 ~/.grok/scripts/collect-spend.py";
+        }
+      })
+      .then(function () {
+        loading = false;
+        setRefreshing(false);
+      });
+  }
+
+  $("btn-refresh").addEventListener("click", function () {
+    loadSnapshot(true);
+  });
+  loadSnapshot(false);
 })();
