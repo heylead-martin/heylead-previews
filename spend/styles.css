@@ -107,6 +107,77 @@ h1 {
 .bar.claude > i { background: linear-gradient(90deg, #d97706, #f59e0b); }
 .bar.gpt > i { background: linear-gradient(90deg, #7c3aed, #a78bfa); }
 
+.meters {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin: 0 0 18px;
+}
+@media (max-width: 860px) {
+  .meters { grid-template-columns: 1fr; }
+}
+.usage-card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 16px 16px 14px;
+}
+.usage-card header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.usage-card header h2 {
+  margin: 0;
+  font-size: 1.02rem;
+}
+.plan-pill {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  padding: 3px 8px;
+  border-radius: 99px;
+  background: #1c2633;
+  color: var(--muted);
+  text-transform: capitalize;
+}
+.usage-card.grok .bar > i { background: linear-gradient(90deg, #15803d, #22c55e); }
+.usage-card.claude .bar > i { background: linear-gradient(90deg, #d97706, #f59e0b); }
+.usage-card.gpt .bar > i { background: linear-gradient(90deg, #7c3aed, #a78bfa); }
+.meter { margin: 0 0 14px; }
+.meter-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 0.88rem;
+  margin-bottom: 6px;
+}
+.meter-head strong { font-variant-numeric: tabular-nums; }
+.meter-foot {
+  color: var(--muted);
+  font-size: 0.75rem;
+  margin-top: 6px;
+}
+.extras {
+  border-top: 1px solid var(--line);
+  padding-top: 10px;
+  margin-top: 4px;
+  font-size: 0.8rem;
+  color: var(--muted);
+  display: grid;
+  gap: 4px;
+}
+.extras strong { color: var(--ink); font-weight: 650; }
+.src {
+  margin-top: 10px;
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  color: #64748b;
+  word-break: break-all;
+}
+
 .grid {
   display: grid;
   grid-template-columns: 1.3fr 0.7fr;

@@ -1,23 +1,23 @@
 {
-  "generated_at": "2026-09-06T12:49:05Z",
+  "generated_at": "2026-09-06T13:14:06Z",
   "month": "2026-09",
   "today": "2026-09-06",
   "owner": "heylead-martin",
   "plans": {
     "grok": {
-      "label": "Grok Build TUI",
-      "plan": "xAI / Grok 4.6",
-      "meter": "sessions and turns (local). Token $ is not in the CLI."
+      "label": "Grok / SuperGrok",
+      "plan": "xAI SuperGrok (Grok Build + Chat share one weekly pool)",
+      "meter": "weekly included usage % from grok.com Settings > Usage"
     },
     "claude": {
       "label": "Claude Code",
-      "plan": "Claude Max (martin@heylead.com)",
-      "meter": "dual-review passes. Token $ is on the Max subscription."
+      "plan": "claude.ai subscription (same pool as Claude Code)",
+      "meter": "session and weekly % from Settings > Usage"
     },
     "chatgpt": {
       "label": "Codex / ChatGPT",
       "plan": "ChatGPT account on this Mac",
-      "meter": "dual-review passes. Token $ is on the ChatGPT plan."
+      "meter": "Codex window % from chatgpt.com usage"
     },
     "github_actions": {
       "label": "GitHub Actions",
@@ -1752,10 +1752,99 @@
     "recent": []
   },
   "notes": [
+    "Product bars are the same remaining/used % as grok.com Settings > Usage, Claude Code Settings > Usage, and Codex usage.",
+    "Grok weekly pool is shared across Chat, Imagine, Voice, and Build. Extra credits are prepaid on-demand dollars.",
+    "Claude session is the rolling 5-hour window. Weekly is all models. Desktop cache is used when the CLI has no OAuth access token.",
     "GitHub Free includes 2,000 minutes/month for private repos. Public repos are usually free.",
     "Billable minutes can lag wall-clock. A 13s job may show 0 billable until GitHub rounds it.",
-    "Grok token dollars are not exported by the local CLI. We show sessions, turns, and messages.",
-    "Claude Max and ChatGPT/Codex are subscriptions. We count dual-review passes logged on this Mac.",
+    "Local Grok sessions/turns and dual-review counts are extra, not the subscription meter.",
     "To log reviews going forward, dual-review-pass.sh appends ~/.grok/spend/reviews.jsonl."
-  ]
+  ],
+  "usage": {
+    "grok": {
+      "ok": true,
+      "source": "cli-chat-proxy.grok.com/v1/billing?format=credits",
+      "error": null,
+      "windows": [
+        {
+          "id": "weekly",
+          "label": "Weekly SuperGrok Heavy Limit",
+          "used_pct": 55.0,
+          "resets_at": "2026-09-07T21:25:04.688365+00:00",
+          "starts_at": "2026-08-31T21:25:04.688365+00:00"
+        },
+        {
+          "id": "GrokBuild",
+          "label": "Grok Build",
+          "used_pct": 55.0
+        }
+      ],
+      "tier": 5,
+      "plan": "SuperGrok Heavy",
+      "used_pct": 55.0,
+      "remaining_pct": 45.0,
+      "resets_at": "2026-09-07T21:25:04.688365+00:00",
+      "starts_at": "2026-08-31T21:25:04.688365+00:00",
+      "period": "weekly",
+      "extra_credits_usd": 0.0,
+      "on_demand_used_usd": 0.0,
+      "on_demand_cap_usd": 0.0,
+      "auto_topup": "TOP_UP_METHOD_SAVED_PAYMENT_METHOD",
+      "unified": true,
+      "reset_available": {
+        "count": 1,
+        "expires_at": "2026-09-12T18:49:00Z"
+      }
+    },
+    "claude": {
+      "ok": true,
+      "source": "Claude desktop plan-usage-history.json",
+      "windows": [
+        {
+          "id": "session",
+          "label": "Current session",
+          "used_pct": 0.0
+        },
+        {
+          "id": "weekly_all",
+          "label": "All models",
+          "used_pct": 15.0
+        }
+      ],
+      "error": null,
+      "plan": null,
+      "extra_usage_enabled": false,
+      "sampled_at": "2026-09-06T13:07:32Z",
+      "used_pct": 15.0,
+      "remaining_pct": 85.0,
+      "stale": false
+    },
+    "chatgpt": {
+      "ok": true,
+      "source": "chatgpt.com/backend-api/wham/usage",
+      "windows": [
+        {
+          "id": "primary",
+          "label": "Monthly window",
+          "used_pct": 60.0,
+          "resets_at": "2026-10-03T22:50:50Z",
+          "window_seconds": 2592000
+        }
+      ],
+      "error": null,
+      "plan": "go",
+      "used_pct": 60.0,
+      "remaining_pct": 40.0,
+      "resets_at": "2026-10-03T22:50:50Z",
+      "allowed": true,
+      "limit_reached": false,
+      "credits": {
+        "has_credits": false,
+        "balance": null
+      },
+      "reset_available": {
+        "count": 1
+      }
+    }
+  }
 }

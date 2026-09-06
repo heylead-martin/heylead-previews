@@ -11,6 +11,11 @@
     if (!cap) return 0;
     return Math.max(0, Math.min(100, (used / cap) * 100));
   }
+  function usedPct(n) {
+    n = Number(n);
+    if (!Number.isFinite(n)) return 0;
+    return Math.max(0, Math.min(100, n));
+  }
   function when(iso) {
     if (!iso) return "";
     const d = new Date(iso);
@@ -22,6 +27,36 @@
       minute: "2-digit",
     });
   }
+  function resetLabel(iso) {
+    if (!iso) return "";
+    const d = new Date(iso);
+    if (Number.isNaN(d.getTime())) return iso;
+    const now = Date.now();
+    const diff = d.getTime() - now;
+    if (diff > 0 && diff < 48 * 3600 * 1000) {
+      const h = Math.floor(diff / 3600000);
+      const m = Math.round((diff % 3600000) / 60000);
+      return "Resets in " + h + " hr " + m + " min";
+    }
+    return (
+      "Resets " +
+      d.toLocaleString(undefined, {
+        month: "long",
+        day: "numeric",
+        year: "numeric",
+        hour: "numeric",
+        minute: "2-digit",
+      })
+    );
+  }
+  function money(n) {
+    n = Number(n);
+    if (!Number.isFinite(n)) return "$0.00";
+    return (
+      "$" +
+      n.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+    );
+  }
   function esc(s) {
     return String(s == null ? "" : s)
       .replace(/&/g, "&amp;")
@@ -30,7 +65,7 @@
   }
 
   function ring(title, value, unit, sub, barClass, used, cap) {
-    const width = pct(used, cap);
+    const width = cap == null ? usedPct(used) : pct(used, cap);
     return (
       '<article class="ring-card"><h2>' +
       esc(title) +
@@ -48,6 +83,105 @@
     );
   }
 
+  function meterRow(label, used, extra) {
+    const p = usedPct(used);
+    const remain = Math.max(0, Math.round(100 - p));
+    return (
+      '<div class="meter"><div class="meter-head"><span>' +
+      esc(label) +
+      "</span><strong>" +
+      Math.round(p) +
+      "% used</strong></div><div class=\"bar\"><i style=\"width:" +
+      p +
+      '%"></i></div><div class="meter-foot">' +
+      remain +
+      "% remaining" +
+      (extra ? " · " + esc(extra) : "") +
+      "</div></div>"
+    );
+  }
+
+  function usageCard(kind, title, plan, block, extraHtml) {
+    const ok = block && block.ok;
+    const windows = (block && block.windows) || [];
+    let body;
+    if (!ok) {
+      body =
+        '<p class="empty">' +
+        esc((block && block.error) || "No live usage yet. Run collect-spend.py.") +
+        "</p>";
+    } else {
+      body = windows
+        .map(function (w) {
+          return meterRow(w.label || w.id, w.used_pct, w.resets_at ? resetLabel(w.resets_at) : "");
+        })
+        .join("");
+      if (!windows.length && block.used_pct != null) {
+        body = meterRow(title, block.used_pct, resetLabel(block.resets_at));
+      }
+    }
+    const source = block && block.source ? '<div class="src">' + esc(block.source) + "</div>" : "";
+    return (
+      '<article class="usage-card ' +
+      kind +
+      '"><header><h2>' +
+      esc(title) +
+      '</h2><span class="plan-pill">' +
+      esc(plan || "") +
+      "</span></header>" +
+      body +
+      (extraHtml || "") +
+      source +
+      "</article>"
+    );
+  }
+
+  function grokExtras(g) {
+    if (!g || !g.ok) return "";
+    const bits = [];
+    const ra = g.reset_available || {};
+    if (ra.count) {
+      bits.push(
+        "<div><strong>Reset Available</strong> · expires " +
+          esc(when(ra.expires_at) || "soon") +
+          "</div>"
+      );
+    }
+    bits.push(
+      "<div>Extra Usage Credits <strong>" + money(g.extra_credits_usd) + "</strong></div>"
+    );
+    if (g.auto_topup && g.auto_topup !== "TOP_UP_METHOD_UNSPECIFIED") {
+      const on = Number(g.on_demand_cap_usd) > 0;
+      bits.push(
+        "<div>Auto Top-Up " +
+          (on ? money(g.on_demand_cap_usd) : "off (cap " + money(g.on_demand_cap_usd) + ")") +
+          "</div>"
+      );
+    }
+    return '<div class="extras">' + bits.join("") + "</div>";
+  }
+
+  function claudeExtras(c) {
+    if (!c || !c.ok) return "";
+    const bits = [];
+    if (c.sampled_at) bits.push("<div>Sampled " + esc(when(c.sampled_at)) + "</div>");
+    if (c.stale) bits.push("<div>Cache is more than 6 hours old. Open Claude desktop to refresh.</div>");
+    if (c.extra_usage_enabled === false) bits.push("<div>Usage credits off</div>");
+    if (c.extra_usage_enabled === true) bits.push("<div>Usage credits on</div>");
+    return bits.length ? '<div class="extras">' + bits.join("") + "</div>" : "";
+  }
+
+  function gptExtras(g) {
+    if (!g || !g.ok) return "";
+    const bits = [];
+    const ra = g.reset_available || {};
+    if (ra.count) bits.push("<div>Reset credits available: " + ra.count + "</div>");
+    const cr = g.credits || {};
+    if (cr.has_credits) bits.push("<div>Usage credits " + money(cr.balance) + "</div>");
+    else bits.push("<div>No extra usage credits</div>");
+    return '<div class="extras">' + bits.join("") + "</div>";
+  }
+
   function render(data) {
     $("stamp").textContent =
       "Snapshot " +
@@ -60,6 +194,10 @@
     const ga = data.github_actions || {};
     const grok = data.grok || {};
     const rev = data.reviews || {};
+    const usage = data.usage || {};
+    const ug = usage.grok || {};
+    const uc = usage.claude || {};
+    const ut = usage.chatgpt || {};
     const claudeM = (rev.month && rev.month.claude) || {};
     const gptM = (rev.month && rev.month.codex) || {};
     const claudeT = (rev.today && rev.today.claude) || {};
@@ -67,57 +205,113 @@
 
     $("hero").innerHTML =
       ring(
+        "Grok weekly pool",
+        ug.ok && ug.used_pct != null ? String(Math.round(ug.used_pct)) : "-",
+        "% used",
+        ug.ok
+          ? Math.round(ug.remaining_pct || 0) +
+              "% remaining · " +
+              (ug.plan || "SuperGrok") +
+              (ug.resets_at ? " · " + resetLabel(ug.resets_at) : "")
+          : ug.error || "no live meter",
+        "grok",
+        ug.used_pct,
+        null
+      ) +
+      ring(
+        "Claude weekly",
+        uc.ok && uc.used_pct != null ? String(Math.round(uc.used_pct)) : "-",
+        "% used",
+        uc.ok
+          ? Math.round(uc.remaining_pct || 0) +
+              "% remaining · all models" +
+              (uc.resets_at ? " · " + resetLabel(uc.resets_at) : "")
+          : uc.error || "no live meter",
+        "claude",
+        uc.used_pct,
+        null
+      ) +
+      ring(
+        "Codex / ChatGPT",
+        ut.ok && ut.used_pct != null ? String(Math.round(ut.used_pct)) : "-",
+        "% used",
+        ut.ok
+          ? Math.round(ut.remaining_pct || 0) +
+              "% remaining · " +
+              (ut.plan || "ChatGPT") +
+              (ut.resets_at ? " · " + resetLabel(ut.resets_at) : "")
+          : ut.error || "no live meter",
+        "gpt",
+        ut.used_pct,
+        null
+      ) +
+      ring(
         "GitHub Actions this month",
-        fmtMin(ga.wall_month_min || ga.used_month_min),
-        "min",
-        fmtMin(ga.used_month_min) +
-          " billed of " +
+        fmtMin(ga.used_month_min),
+        "billed min",
+        fmtMin(ga.wall_month_min) +
+          " wall · " +
+          fmtMin(ga.remaining_min) +
+          " of " +
           fmtMin(ga.allowance_min) +
-          " included · " +
+          " left · " +
           (ga.runs_today || 0) +
           " runs today",
         "gh",
         ga.used_month_min,
         ga.allowance_min
-      ) +
-      ring(
-        "Grok this month",
-        String(grok.sessions_month || 0),
-        "sessions",
-        (grok.turns_month || 0) +
-          " turns · " +
-          (grok.sessions_today || 0) +
-          " sessions today",
-        "grok",
-        grok.sessions_month || 0,
-        Math.max(20, (grok.sessions_month || 0) + 4)
-      ) +
-      ring(
-        "Claude reviews",
-        String(claudeM.runs || 0),
-        "this month",
-        (claudeT.runs || 0) +
-          " today · " +
-          (claudeM.fail || 0) +
-          " failed · Max plan",
-        "claude",
-        claudeM.runs || 0,
-        Math.max(10, (claudeM.runs || 0) + 3)
-      ) +
-      ring(
-        "Codex reviews",
-        String(gptM.runs || 0),
-        "this month",
-        (gptT.runs || 0) +
-          " today · " +
-          (gptM.fail || 0) +
-          " failed · ChatGPT plan",
+      );
+
+    $("meters").innerHTML =
+      usageCard("grok", "Grok", ug.plan || "SuperGrok", ug, grokExtras(ug)) +
+      usageCard("claude", "Claude Code", uc.plan || "claude.ai", uc, claudeExtras(uc)) +
+      usageCard(
         "gpt",
-        gptM.runs || 0,
-        Math.max(10, (gptM.runs || 0) + 3)
+        "Codex / ChatGPT",
+        ({ go: "ChatGPT Go", plus: "ChatGPT Plus", pro: "Pro" }[String(ut.plan || "").toLowerCase()] ||
+          ut.plan ||
+          "ChatGPT"),
+        ut,
+        gptExtras(ut)
       );
 
     const products = [
+      {
+        color: "var(--grok)",
+        name: "Grok / SuperGrok",
+        plan: ug.plan || ((data.plans && data.plans.grok && data.plans.grok.plan) || ""),
+        line: ug.ok
+          ? Math.round(ug.used_pct || 0) +
+            "% of weekly pool used · " +
+            (grok.sessions_month || 0) +
+            " local sessions · " +
+            (grok.turns_month || 0) +
+            " turns"
+          : (grok.sessions_month || 0) + " local sessions this month",
+      },
+      {
+        color: "var(--claude)",
+        name: "Claude Code",
+        plan: (data.plans && data.plans.claude && data.plans.claude.plan) || "",
+        line: uc.ok
+          ? "Weekly " +
+            Math.round(uc.used_pct || 0) +
+            "% · " +
+            (claudeM.runs || 0) +
+            " dual-review passes this month"
+          : (claudeM.runs || 0) + " dual-review passes this month",
+      },
+      {
+        color: "var(--gpt)",
+        name: "Codex / ChatGPT",
+        plan: ut.plan || ((data.plans && data.plans.chatgpt && data.plans.chatgpt.plan) || ""),
+        line: ut.ok
+          ? Math.round(ut.used_pct || 0) +
+            "% of window · " +
+            (gptM.runs || 0) +
+            " dual-review passes this month"
+          : (gptM.runs || 0) + " dual-review passes this month",
+      },
       {
         color: "var(--gh)",
         name: "GitHub Actions",
@@ -131,38 +325,6 @@
           " · " +
           (ga.runs_month || 0) +
           " runs",
-      },
-      {
-        color: "var(--grok)",
-        name: "Grok Build TUI",
-        plan: (data.plans && data.plans.grok && data.plans.grok.plan) || "",
-        line:
-          (grok.sessions_month || 0) +
-          " sessions · " +
-          (grok.turns_month || 0) +
-          " turns · " +
-          (grok.messages_month || 0) +
-          " messages",
-      },
-      {
-        color: "var(--claude)",
-        name: "Claude Code (Max)",
-        plan: (data.plans && data.plans.claude && data.plans.claude.plan) || "",
-        line:
-          (claudeM.runs || 0) +
-          " dual-review passes this month · " +
-          Math.round((claudeM.duration_ms || 0) / 60000) +
-          " min wall",
-      },
-      {
-        color: "var(--gpt)",
-        name: "Codex / ChatGPT",
-        plan: (data.plans && data.plans.chatgpt && data.plans.chatgpt.plan) || "",
-        line:
-          (gptM.runs || 0) +
-          " dual-review passes this month · " +
-          Math.round((gptM.duration_ms || 0) / 60000) +
-          " min wall",
       },
       {
         color: "#64748b",
@@ -272,9 +434,11 @@
       : '<div class="empty">No Grok sessions this month.</div>';
 
     const notes = data.notes || [];
-    $("notes").innerHTML = notes.map(function (n) {
-      return "<li>" + esc(n) + "</li>";
-    }).join("");
+    $("notes").innerHTML = notes
+      .map(function (n) {
+        return "<li>" + esc(n) + "</li>";
+      })
+      .join("");
   }
 
   fetch("data.json", { cache: "no-store" })
