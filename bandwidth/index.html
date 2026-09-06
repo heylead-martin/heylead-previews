@@ -18,7 +18,7 @@
       <div>
         <a class="back" href="/">← Previews</a>
         <h1>Bandwidth</h1>
-        <p class="lede">How much capacity is left on the network you are on right now. Parallel streams to Cloudflare (same endpoints as speed.cloudflare.com). When other devices hog the line, available speed drops.</p>
+        <p class="lede">How much capacity is left on the network you are on right now. Full test uses the official Cloudflare speedtest engine. Live monitor is 6 download streams, updating Available now every 1 second. When other devices hog the line, available speed drops.</p>
       </div>
       <div class="top-actions">
         <button type="button" class="btn ghost" id="btn-monitor" aria-pressed="false">Live monitor</button>
@@ -45,6 +45,7 @@
       <div class="metric">
         <div class="metric-label">Available now</div>
         <div class="metric-val"><span id="val-live">-</span><span class="unit">Mbps</span></div>
+        <div class="metric-bar"><div id="bar-live"></div></div>
         <div class="metric-sub" id="sub-live">idle</div>
       </div>
     </section>
@@ -80,7 +81,7 @@
     <section class="card note">
       <h2>What this can and cannot see</h2>
       <ul>
-        <li><strong>Can:</strong> measure available path capacity with the official Cloudflare speedtest engine (same ramp as speed.cloudflare.com). Congestion from other phones, TVs, and downloads shows up as lower available Mbps.</li>
+        <li><strong>Can:</strong> full test uses the official Cloudflare speedtest engine (same ramp as speed.cloudflare.com). Live monitor is a 6-stream download that updates Available now every 1 second. Congestion from other phones, TVs, and downloads shows up as lower available Mbps.</li>
         <li><strong>Cannot:</strong> list other devices on your Wi-Fi or show per-device usage from a website. Browsers are sandboxed; they cannot sniff LAN traffic.</li>
         <li><strong>For device discovery on this Mac:</strong> run local <code>~/wifiwatch</code> (<code>python3 wifiwatch.py watch</code>). Real per-device bandwidth needs the router (Ubiquiti, Firewalla, ASUS) or a forced DNS path (NextDNS / Pi-hole).</li>
       </ul>

@@ -149,6 +149,7 @@ h1 {
   transition: width 0.25s ease;
 }
 #bar-up { background: linear-gradient(90deg, var(--accent-2), #86efac); }
+#bar-live { background: linear-gradient(90deg, #a78bfa, #c4b5fd); }
 
 .card {
   background: var(--panel);

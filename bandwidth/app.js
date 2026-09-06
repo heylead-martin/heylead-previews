@@ -2,11 +2,11 @@ import SpeedTest from "https://cdn.jsdelivr.net/npm/@cloudflare/speedtest@1.3.0/
 
 const DOWN_URL = "https://speed.cloudflare.com/__down";
 const TRACE_URL = "https://cloudflare.com/cdn-cgi/trace";
-const HISTORY_KEY = "heylead-bandwidth-history-v3";
+const HISTORY_KEY = "heylead-bandwidth-history-v4";
 const MAX_HISTORY = 12;
 const MAX_POINTS = 120;
 const LIVE_STREAMS = 6;
-const LIVE_CHUNK = 8e6; // 8 MB chunks, recycled continuously while monitoring
+const LIVE_FAIL_LIMIT = 8;
 
 // Same ramp as speed.cloudflare.com, without packetLoss (needs a TURN server).
 const FULL_MEASUREMENTS = [
@@ -35,6 +35,7 @@ const el = {
   liveSub: document.getElementById("sub-live"),
   barDown: document.getElementById("bar-down"),
   barUp: document.getElementById("bar-up"),
+  barLive: document.getElementById("bar-live"),
   statusPill: document.getElementById("status-pill"),
   statusText: document.getElementById("status-text"),
   history: document.getElementById("history"),
@@ -54,13 +55,19 @@ const state = {
   monitoring: false,
   monitorTimer: null,
   uiTickTimer: null,
+  engineTimeout: null,
   engine: null,
   liveXhrs: [],
   liveBytesWindow: 0,
   liveWindowStart: 0,
+  liveFails: 0,
+  lastLiveMbps: null,
+  lastPushed: { down: null, up: null, live: null },
+  connBound: false,
   points: [],
   peakDown: 200,
   peakUp: 50,
+  peakLive: 200,
 };
 
 function fmt(n, digits) {
@@ -70,7 +77,7 @@ function fmt(n, digits) {
 }
 
 function bpsToMbps(bps) {
-  if (bps == null || !isFinite(bps)) return null;
+  if (bps == null || !isFinite(bps) || bps <= 0) return null;
   return bps / 1e6;
 }
 
@@ -81,6 +88,7 @@ function setStatus(kind, pill, text) {
 }
 
 function setBar(node, mbps, peak) {
+  if (!node) return;
   const pct = Math.max(0, Math.min(100, (mbps / peak) * 100));
   node.style.width = pct.toFixed(1) + "%";
 }
@@ -93,8 +101,11 @@ function nowLabel() {
   });
 }
 
-function pushPoint(mbps, kind) {
-  if (mbps == null || !isFinite(mbps)) return;
+function pushPoint(mbps, kind, force) {
+  if (mbps == null || !isFinite(mbps) || mbps <= 0) return;
+  const prev = state.lastPushed[kind];
+  if (!force && prev != null && Math.abs(prev - mbps) < 0.02 * Math.max(1, mbps)) return;
+  state.lastPushed[kind] = mbps;
   state.points.push({ t: Date.now(), mbps, kind: kind || "down" });
   if (state.points.length > MAX_POINTS) state.points.shift();
   drawChart();
@@ -142,17 +153,20 @@ function drawChart() {
 
   if (state.points.length < 2) {
     ctx.fillStyle = "#5b6b80";
-    ctx.fillText("Waiting for samples…", padL + 8, padT + 20);
+    ctx.fillText("Waiting for samples...", padL + 8, padT + 20);
     return;
   }
+
+  const tMin = state.points[0].t;
+  const tMax = state.points[state.points.length - 1].t;
+  const span = Math.max(1000, tMax - tMin);
 
   function pathFor(kind, color) {
     const pts = state.points.filter((p) => p.kind === kind);
     if (pts.length < 2) return;
     ctx.beginPath();
     pts.forEach((p, i) => {
-      const idx = state.points.indexOf(p);
-      const x = padL + (idx / Math.max(1, MAX_POINTS - 1)) * w;
+      const x = padL + ((p.t - tMin) / span) * w;
       const y2 = padT + h - (p.mbps / maxY) * h;
       if (i === 0) ctx.moveTo(x, y2);
       else ctx.lineTo(x, y2);
@@ -211,8 +225,8 @@ function renderHistory() {
         fmt(r.up) +
         "</span>" +
         "<span>" +
-        fmt(r.lat, r.lat < 10 ? 1 : 0) +
-        " ms</span>" +
+        (r.lat > 0 ? fmt(r.lat, r.lat < 10 ? 1 : 0) + " ms" : "-") +
+        "</span>" +
         "</div>"
     )
     .join("");
@@ -233,7 +247,8 @@ function readConnectionFacts() {
   el.factDownlink.textContent = c.downlink != null ? c.downlink + " Mbps (estimate)" : "-";
   el.factRtt.textContent = c.rtt != null ? c.rtt + " ms" : "-";
   el.factSave.textContent = c.saveData ? "on" : "off";
-  if (typeof c.addEventListener === "function") {
+  if (!state.connBound && typeof c.addEventListener === "function") {
+    state.connBound = true;
     c.addEventListener("change", readConnectionFacts);
   }
 }
@@ -255,23 +270,23 @@ async function loadTrace() {
   }
 }
 
-function applySummary(summary, kinds) {
+function applySummary(summary, kinds, chart) {
   const down = bpsToMbps(summary.download);
   const up = bpsToMbps(summary.upload);
-  const lat = summary.latency;
-  const jitter = summary.jitter;
+  const lat = summary.latency > 0 ? summary.latency : null;
+  const jitter = summary.jitter > 0 ? summary.jitter : null;
 
   if (down != null && kinds.down) {
     el.down.textContent = fmt(down);
     state.peakDown = Math.max(state.peakDown, down * 1.1, 100);
     setBar(el.barDown, down, state.peakDown);
-    pushPoint(down, "down");
+    if (chart) pushPoint(down, "down");
   }
   if (up != null && kinds.up) {
     el.up.textContent = fmt(up);
     state.peakUp = Math.max(state.peakUp, up * 1.1, 20);
     setBar(el.barUp, up, state.peakUp);
-    pushPoint(up, "up");
+    if (chart) pushPoint(up, "up");
   }
   if (lat != null && kinds.lat) {
     el.lat.textContent = fmt(lat, lat < 10 ? 1 : 0);
@@ -287,13 +302,19 @@ function clearUiTick() {
   }
 }
 
+function clearEngineTimeout() {
+  if (state.engineTimeout) {
+    clearTimeout(state.engineTimeout);
+    state.engineTimeout = null;
+  }
+}
+
 function runEngine(measurements) {
   return new Promise((resolve, reject) => {
     let settled = false;
     const engine = new SpeedTest({
       autoStart: false,
       measurements,
-      // Match Cloudflare site: 90th percentile of good samples.
       bandwidthPercentile: 0.9,
       latencyPercentile: 0.5,
       measureDownloadLoadedLatency: true,
@@ -301,39 +322,39 @@ function runEngine(measurements) {
     });
     state.engine = engine;
 
-    const paint = (type) => {
+    const paint = (type, chart) => {
       const summary = engine.results.getSummary();
-      applySummary(summary, {
-        down: true,
-        up: true,
-        lat: true,
-      });
+      const kinds = {
+        down: !type || type === "download",
+        up: !type || type === "upload",
+        lat: !type || type === "latency",
+      };
+      applySummary(summary, kinds, chart);
       if (type === "download") {
-        setStatus("run", "Testing", "Downloading (Cloudflare engine ramp)…");
+        setStatus("run", "Testing", "Downloading (Cloudflare engine ramp)...");
       } else if (type === "upload") {
-        setStatus("run", "Testing", "Uploading (Cloudflare engine ramp)…");
+        setStatus("run", "Testing", "Uploading (Cloudflare engine ramp)...");
       } else if (type === "latency") {
-        setStatus("run", "Testing", "Measuring latency…");
+        setStatus("run", "Testing", "Measuring latency...");
       }
     };
 
     engine.onResultsChange = ({ type }) => {
       if (type === "download" || type === "upload" || type === "latency") {
-        paint(type);
+        paint(type, true);
       }
     };
 
-    // 1 Hz UI refresh while the engine is working (not only on discrete sample completion).
-    // Stopped via clearUiTick() in finish(); do not gate on engine.isRunning (not reliable across builds).
     clearUiTick();
     state.uiTickTimer = setInterval(() => {
-      paint();
+      paint(null, false);
     }, 1000);
 
     const finish = (summary, err) => {
       if (settled) return;
       settled = true;
       clearUiTick();
+      clearEngineTimeout();
       state.engine = null;
       if (err) reject(err);
       else resolve(summary);
@@ -344,20 +365,18 @@ function runEngine(measurements) {
     };
 
     engine.onError = (error) => {
-      // Non-fatal measurement errors still let the engine finish; only reject if finished never fires.
       console.warn("speedtest measurement error:", error);
     };
 
     engine.play();
 
-    // Safety timeout - gigabit ramp can take a while with 250MB downloads.
-    setTimeout(() => {
+    state.engineTimeout = setTimeout(() => {
       if (settled) return;
       try {
         engine.pause();
       } catch (e) {}
       const partial = engine.results.getSummary();
-      if (partial && (partial.download || partial.upload || partial.latency)) {
+      if (partial && (partial.download > 0 || partial.upload > 0 || partial.latency > 0)) {
         finish(partial);
       } else {
         finish(null, new Error("Speed test timed out"));
@@ -368,14 +387,20 @@ function runEngine(measurements) {
 
 async function runFullTest() {
   if (state.running) return;
+  if (state.monitoring) stopMonitor(true);
   state.running = true;
+  state.peakDown = 200;
+  state.peakUp = 50;
+  state.lastPushed.down = null;
+  state.lastPushed.up = null;
   el.btnRun.disabled = true;
   el.btnMonitor.disabled = true;
-  setStatus("run", "Testing", "Starting Cloudflare measurement engine…");
+  if (el.liveSub.textContent !== "idle") el.liveSub.textContent = "paused";
+  setStatus("run", "Testing", "Starting Cloudflare measurement engine...");
 
   try {
     const summary = await runEngine(FULL_MEASUREMENTS);
-    const final = applySummary(summary, { down: true, up: true, lat: true });
+    const final = applySummary(summary, { down: true, up: true, lat: true }, true);
 
     if (final.down == null && final.up == null) {
       throw new Error("No bandwidth samples returned. Check blockers on speed.cloudflare.com.");
@@ -422,44 +447,88 @@ function noteLiveBytes(delta) {
   state.liveBytesWindow += delta;
 }
 
+function liveChunkBytes() {
+  const last = state.lastLiveMbps;
+  if (last > 200) return 25e6;
+  if (last > 50) return 12e6;
+  if (last > 10) return 4e6;
+  return 2e6;
+}
+
 function liveDownloadOnce() {
   return new Promise((resolve) => {
     if (!state.monitoring) {
       resolve(false);
       return;
     }
-    const url = DOWN_URL + "?bytes=" + LIVE_CHUNK + "&r=" + Math.random();
+    const url = DOWN_URL + "?bytes=" + liveChunkBytes() + "&r=" + Math.random();
     const xhr = new XMLHttpRequest();
     let lastLoaded = 0;
     state.liveXhrs.push(xhr);
     xhr.open("GET", url, true);
     xhr.responseType = "arraybuffer";
-    xhr.timeout = 60000;
+    xhr.timeout = 120000;
     xhr.onprogress = (ev) => {
       const loaded = ev.loaded || 0;
       const delta = loaded - lastLoaded;
       if (delta > 0) noteLiveBytes(delta);
       lastLoaded = loaded;
     };
-    const done = () => {
+    const drop = () => {
       state.liveXhrs = state.liveXhrs.filter((x) => x !== xhr);
-      resolve(state.monitoring);
     };
     xhr.onload = () => {
-      if (xhr.response && xhr.response.byteLength > lastLoaded) {
-        noteLiveBytes(xhr.response.byteLength - lastLoaded);
+      if (xhr.status >= 200 && xhr.status < 300) {
+        state.liveFails = 0;
+        if (xhr.response && xhr.response.byteLength > lastLoaded) {
+          noteLiveBytes(xhr.response.byteLength - lastLoaded);
+        }
+        drop();
+        resolve(state.monitoring);
+        return;
       }
-      done();
+      state.liveFails += 1;
+      drop();
+      resolve(state.monitoring);
     };
-    xhr.onerror = done;
-    xhr.ontimeout = done;
-    xhr.onabort = done;
+    xhr.onerror = () => {
+      state.liveFails += 1;
+      drop();
+      resolve(state.monitoring);
+    };
+    xhr.ontimeout = () => {
+      state.liveFails += 1;
+      drop();
+      resolve(state.monitoring);
+    };
+    xhr.onabort = () => {
+      drop();
+      resolve(false);
+    };
     xhr.send();
   });
 }
 
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
 async function liveWorker() {
   while (state.monitoring) {
+    if (state.liveFails >= LIVE_FAIL_LIMIT) {
+      setStatus(
+        "err",
+        "Monitor",
+        "Live download failed repeatedly. Check blockers on speed.cloudflare.com."
+      );
+      el.liveSub.textContent = "failed";
+      stopMonitor(true);
+      return;
+    }
+    if (state.liveFails > 0) {
+      await sleep(Math.min(4000, 300 * Math.pow(2, state.liveFails - 1)));
+      if (!state.monitoring) return;
+    }
     const keepGoing = await liveDownloadOnce();
     if (!keepGoing) break;
   }
@@ -469,21 +538,21 @@ function tickLiveUi() {
   if (!state.monitoring) return;
   const now = performance.now();
   const bytes = state.liveBytesWindow;
+  if (!(bytes > 0)) {
+    if (state.lastLiveMbps == null) el.liveSub.textContent = "warming up...";
+    return;
+  }
   const elapsed = Math.max(0.2, (now - state.liveWindowStart) / 1000);
   state.liveBytesWindow = 0;
   state.liveWindowStart = now;
-  // Skip empty first windows before any XHR progress arrives.
-  if (!(bytes > 0)) {
-    el.liveSub.textContent = "warming up…";
-    return;
-  }
   const mbps = (bytes * 8) / elapsed / 1e6;
+  state.lastLiveMbps = mbps;
 
   el.live.textContent = fmt(mbps);
   el.liveSub.textContent = "every 1s · " + nowLabel();
-  pushPoint(mbps, "live");
-  state.peakDown = Math.max(state.peakDown, mbps * 1.1, 100);
-  setBar(el.barDown, mbps, state.peakDown);
+  pushPoint(mbps, "live", true);
+  state.peakLive = Math.max(state.peakLive, mbps * 1.1, 100);
+  setBar(el.barLive, mbps, state.peakLive);
 }
 
 function startMonitor() {
@@ -492,20 +561,22 @@ function startMonitor() {
   state.liveBytesWindow = 0;
   state.liveWindowStart = performance.now();
   state.liveXhrs = [];
+  state.liveFails = 0;
+  state.peakLive = Math.max(state.peakLive, 100);
   el.btnMonitor.setAttribute("aria-pressed", "true");
   el.btnMonitor.textContent = "Stop monitor";
-  el.liveSub.textContent = "warming up…";
+  el.liveSub.textContent = "warming up...";
   setStatus(
     "live",
     "Live",
-    "Streaming parallel downloads; Available now updates every 1 second. Congestion shows as lower Mbps."
+    "6 parallel download streams; Available now updates every 1 second. Congestion shows as lower Mbps."
   );
 
   for (let i = 0; i < LIVE_STREAMS; i++) liveWorker();
   state.monitorTimer = setInterval(tickLiveUi, 1000);
 }
 
-function stopMonitor() {
+function stopMonitor(silent) {
   state.monitoring = false;
   el.btnMonitor.setAttribute("aria-pressed", "false");
   el.btnMonitor.textContent = "Live monitor";
@@ -520,18 +591,14 @@ function stopMonitor() {
   });
   state.liveXhrs = [];
   state.liveBytesWindow = 0;
-  if (state.engine) {
-    try {
-      state.engine.pause();
-    } catch (e) {}
-    state.engine = null;
-  }
   clearUiTick();
-  setStatus("", "Ready", "Monitor stopped. Run a full speed test anytime.");
+  if (!silent) {
+    el.liveSub.textContent = state.lastLiveMbps != null ? "idle (last)" : "idle";
+    setStatus("", "Ready", "Monitor stopped. Run a full speed test anytime.");
+  }
 }
 
 el.btnRun.addEventListener("click", () => {
-  if (state.monitoring) stopMonitor();
   runFullTest();
 });
 
@@ -541,6 +608,16 @@ el.btnMonitor.addEventListener("click", () => {
 });
 
 window.addEventListener("resize", drawChart);
+window.addEventListener("pagehide", () => {
+  if (state.monitoring) stopMonitor(true);
+  if (state.engine) {
+    try {
+      state.engine.pause();
+    } catch (e) {}
+  }
+  clearEngineTimeout();
+  clearUiTick();
+});
 
 readConnectionFacts();
 loadTrace();
@@ -549,5 +626,5 @@ drawChart();
 setStatus(
   "",
   "Ready",
-  "Full test uses @cloudflare/speedtest (same as speed.cloudflare.com). Live monitor updates Available now every 1 second."
+  "Full test uses the official Cloudflare engine. Live monitor is 6 download streams updating Available now every 1 second."
 );
