@@ -18,7 +18,7 @@
       <div>
         <a class="back" href="/">← Previews</a>
         <h1>Bandwidth</h1>
-        <p class="lede">How much capacity is left on the network you are on right now. Measures your path to the internet (latency, download, upload). When other devices hog the line, available speed drops.</p>
+        <p class="lede">How much capacity is left on the network you are on right now. Parallel streams to Cloudflare (same endpoints as speed.cloudflare.com). When other devices hog the line, available speed drops.</p>
       </div>
       <div class="top-actions">
         <button type="button" class="btn ghost" id="btn-monitor" aria-pressed="false">Live monitor</button>
@@ -80,12 +80,12 @@
     <section class="card note">
       <h2>What this can and cannot see</h2>
       <ul>
-        <li><strong>Can:</strong> measure how much bandwidth is available on the path from this device to the internet. Congestion from other phones, TVs, and downloads shows up as lower available Mbps.</li>
+        <li><strong>Can:</strong> measure available path capacity with the official Cloudflare speedtest engine (same ramp as speed.cloudflare.com). Congestion from other phones, TVs, and downloads shows up as lower available Mbps.</li>
         <li><strong>Cannot:</strong> list other devices on your Wi-Fi or show per-device usage from a website. Browsers are sandboxed; they cannot sniff LAN traffic.</li>
         <li><strong>For device discovery on this Mac:</strong> run local <code>~/wifiwatch</code> (<code>python3 wifiwatch.py watch</code>). Real per-device bandwidth needs the router (Ubiquiti, Firewalla, ASUS) or a forced DNS path (NextDNS / Pi-hole).</li>
       </ul>
     </section>
   </div>
-  <script src="app.js"></script>
+  <script type="module" src="app.js"></script>
 </body>
 </html>
