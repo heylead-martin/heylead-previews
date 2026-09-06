@@ -1,12 +1,16 @@
 import SpeedTest from "https://cdn.jsdelivr.net/npm/@cloudflare/speedtest@1.3.0/+esm";
 
 const DOWN_URL = "https://speed.cloudflare.com/__down";
+const UP_URL = "https://speed.cloudflare.com/__up";
 const TRACE_URL = "https://cloudflare.com/cdn-cgi/trace";
 const HISTORY_KEY = "heylead-bandwidth-history-v4";
 const MAX_HISTORY = 12;
 const MAX_POINTS = 120;
 const LIVE_STREAMS = 6;
+const LIVE_UP_STREAMS = 1;
 const LIVE_FAIL_LIMIT = 8;
+const LIVE_PING_WINDOW = 8;
+const LIVE_UP_GAP_MS = 5000;
 
 // Same ramp as speed.cloudflare.com, without packetLoss (needs a TURN server).
 const FULL_MEASUREMENTS = [
@@ -32,6 +36,8 @@ const el = {
   lat: document.getElementById("val-lat"),
   live: document.getElementById("val-live"),
   jitter: document.getElementById("sub-jitter"),
+  subDown: document.getElementById("sub-down"),
+  subUp: document.getElementById("sub-up"),
   liveSub: document.getElementById("sub-live"),
   barDown: document.getElementById("bar-down"),
   barUp: document.getElementById("bar-up"),
@@ -57,11 +63,18 @@ const state = {
   uiTickTimer: null,
   engineTimeout: null,
   engine: null,
-  liveXhrs: [],
+  liveDownXhrs: [],
+  liveUpXhrs: [],
+  liveHoldDown: false,
   liveBytesWindow: 0,
   liveWindowStart: 0,
   liveFails: 0,
+  liveUpFails: 0,
   lastLiveMbps: null,
+  lastLiveUpMbps: null,
+  pingTimes: [],
+  pingAbort: null,
+  upBuf: null,
   lastPushed: { down: null, up: null, live: null },
   connBound: false,
   points: [],
@@ -271,6 +284,7 @@ async function loadTrace() {
 }
 
 function applySummary(summary, kinds, chart) {
+  if (!summary) return { down: null, up: null, lat: null, jitter: null };
   const down = bpsToMbps(summary.download);
   const up = bpsToMbps(summary.upload);
   const lat = summary.latency > 0 ? summary.latency : null;
@@ -278,12 +292,14 @@ function applySummary(summary, kinds, chart) {
 
   if (down != null && kinds.down) {
     el.down.textContent = fmt(down);
+    el.subDown.textContent = "full test";
     state.peakDown = Math.max(state.peakDown, down * 1.1, 100);
     setBar(el.barDown, down, state.peakDown);
     if (chart) pushPoint(down, "down");
   }
   if (up != null && kinds.up) {
     el.up.textContent = fmt(up);
+    el.subUp.textContent = "full test";
     state.peakUp = Math.max(state.peakUp, up * 1.1, 20);
     setBar(el.barUp, up, state.peakUp);
     if (chart) pushPoint(up, "up");
@@ -396,6 +412,8 @@ async function runFullTest() {
   el.btnRun.disabled = true;
   el.btnMonitor.disabled = true;
   if (el.liveSub.textContent !== "idle") el.liveSub.textContent = "paused";
+  el.subDown.textContent = "testing...";
+  el.subUp.textContent = "testing...";
   setStatus("run", "Testing", "Starting Cloudflare measurement engine...");
 
   try {
@@ -433,7 +451,7 @@ async function runFullTest() {
     setStatus(
       "err",
       "Error",
-      (err && err.message) || "Speed test failed. Check network or blockers on speed.cloudflare.com."
+      (err && err.message) || "Speed test failed. Check blockers on speed.cloudflare.com."
     );
   } finally {
     state.running = false;
@@ -443,7 +461,7 @@ async function runFullTest() {
 }
 
 function noteLiveBytes(delta) {
-  if (!state.monitoring || !(delta > 0)) return;
+  if (!state.monitoring || state.liveHoldDown || !(delta > 0)) return;
   state.liveBytesWindow += delta;
 }
 
@@ -455,16 +473,83 @@ function liveChunkBytes() {
   return 2e6;
 }
 
+function liveUpChunkBytes() {
+  const last = state.lastLiveUpMbps;
+  if (last > 50) return 8e6;
+  if (last > 10) return 2e6;
+  return 1e6;
+}
+
+function uploadBody(bytes) {
+  const n = Math.max(1, Math.floor(bytes));
+  if (!state.upBuf || state.upBuf.byteLength < n) {
+    state.upBuf = new Uint8Array(n);
+  }
+  return n === state.upBuf.byteLength ? state.upBuf : state.upBuf.subarray(0, n);
+}
+
+function paintLiveUp(mbps, chart) {
+  if (!(mbps > 0) || !isFinite(mbps)) return;
+  state.lastLiveUpMbps = mbps;
+  el.up.textContent = fmt(mbps);
+  el.subUp.textContent = "live sample";
+  state.peakUp = Math.max(state.peakUp, mbps * 1.1, 20);
+  setBar(el.barUp, mbps, state.peakUp);
+  if (chart) pushPoint(mbps, "up", true);
+}
+
+function paintLatencyFromPings() {
+  const times = state.pingTimes.slice().sort((a, b) => a - b);
+  if (!times.length) return;
+  const mid = times[Math.floor(times.length / 2)];
+  const mean = times.reduce((s, x) => s + x, 0) / times.length;
+  const jitter = Math.sqrt(times.reduce((s, x) => s + Math.pow(x - mean, 2), 0) / times.length);
+  el.lat.textContent = fmt(mid, mid < 10 ? 1 : 0);
+  el.jitter.textContent = "jitter " + fmt(jitter, 1) + " ms";
+}
+
+async function pingOnce(signal) {
+  const t0 = performance.now();
+  const res = await fetch(TRACE_URL + "?r=" + Math.random(), {
+    cache: "no-store",
+    signal,
+  });
+  await res.text();
+  return performance.now() - t0;
+}
+
+async function pingLoop() {
+  const abort = new AbortController();
+  state.pingAbort = abort;
+  while (state.monitoring) {
+    try {
+      const ms = await pingOnce(abort.signal);
+      if (!state.monitoring) return;
+      state.pingTimes.push(ms);
+      if (state.pingTimes.length > LIVE_PING_WINDOW) state.pingTimes.shift();
+      paintLatencyFromPings();
+    } catch (err) {
+      if (err && err.name === "AbortError") return;
+    }
+    if (!state.monitoring) return;
+    await sleep(1000);
+  }
+}
+
 function liveDownloadOnce() {
   return new Promise((resolve) => {
     if (!state.monitoring) {
       resolve(false);
       return;
     }
+    if (state.liveHoldDown) {
+      resolve("abort");
+      return;
+    }
     const url = DOWN_URL + "?bytes=" + liveChunkBytes() + "&r=" + Math.random();
     const xhr = new XMLHttpRequest();
     let lastLoaded = 0;
-    state.liveXhrs.push(xhr);
+    state.liveDownXhrs.push(xhr);
     xhr.open("GET", url, true);
     xhr.responseType = "arraybuffer";
     xhr.timeout = 120000;
@@ -475,7 +560,7 @@ function liveDownloadOnce() {
       lastLoaded = loaded;
     };
     const drop = () => {
-      state.liveXhrs = state.liveXhrs.filter((x) => x !== xhr);
+      state.liveDownXhrs = state.liveDownXhrs.filter((x) => x !== xhr);
     };
     xhr.onload = () => {
       if (xhr.status >= 200 && xhr.status < 300) {
@@ -503,9 +588,72 @@ function liveDownloadOnce() {
     };
     xhr.onabort = () => {
       drop();
-      resolve(false);
+      resolve("abort");
     };
     xhr.send();
+  });
+}
+
+function liveUploadOnce() {
+  return new Promise((resolve) => {
+    if (!state.monitoring) {
+      resolve(false);
+      return;
+    }
+    const bytes = liveUpChunkBytes();
+    const xhr = new XMLHttpRequest();
+    const t0 = performance.now();
+    let lastLoaded = 0;
+    state.liveUpXhrs.push(xhr);
+    xhr.open("POST", UP_URL + "?r=" + Math.random(), true);
+    xhr.timeout = 30000;
+    xhr.setRequestHeader("Content-Type", "application/octet-stream");
+    xhr.upload.onprogress = (ev) => {
+      lastLoaded = ev.loaded || lastLoaded;
+      const ms = Math.max(1, performance.now() - t0);
+      if (lastLoaded > 80e3) paintLiveUp((lastLoaded * 8) / (ms / 1000) / 1e6, false);
+    };
+    const drop = () => {
+      state.liveUpXhrs = state.liveUpXhrs.filter((x) => x !== xhr);
+    };
+    const finishOk = (loaded) => {
+      const ms = Math.max(1, performance.now() - t0);
+      const n = Math.max(loaded, lastLoaded);
+      if (n > 0) paintLiveUp((n * 8) / (ms / 1000) / 1e6, true);
+      drop();
+      resolve(state.monitoring);
+    };
+    xhr.onload = () => {
+      if (xhr.status >= 200 && xhr.status < 300) {
+        state.liveUpFails = 0;
+        finishOk(bytes);
+        return;
+      }
+      state.liveUpFails += 1;
+      drop();
+      resolve(state.monitoring);
+    };
+    xhr.onerror = () => {
+      state.liveUpFails += 1;
+      drop();
+      resolve(state.monitoring);
+    };
+    xhr.ontimeout = () => {
+      state.liveUpFails += 1;
+      drop();
+      resolve(state.monitoring);
+    };
+    xhr.onabort = () => {
+      drop();
+      resolve("abort");
+    };
+    try {
+      xhr.send(uploadBody(bytes));
+    } catch (err) {
+      state.liveUpFails += 1;
+      drop();
+      resolve(state.monitoring);
+    }
   });
 }
 
@@ -522,6 +670,7 @@ async function liveWorker() {
         "Live download failed repeatedly. Check blockers on speed.cloudflare.com."
       );
       el.liveSub.textContent = "failed";
+      el.subDown.textContent = "failed";
       stopMonitor(true);
       return;
     }
@@ -529,30 +678,76 @@ async function liveWorker() {
       await sleep(Math.min(4000, 300 * Math.pow(2, state.liveFails - 1)));
       if (!state.monitoring) return;
     }
+    while (state.monitoring && state.liveHoldDown) await sleep(80);
+    if (!state.monitoring) return;
     const keepGoing = await liveDownloadOnce();
-    if (!keepGoing) break;
+    if (!state.monitoring || keepGoing === false) return;
+  }
+}
+
+function abortDownXhrs() {
+  state.liveDownXhrs.forEach((xhr) => {
+    try {
+      xhr.abort();
+    } catch (e) {}
+  });
+  state.liveDownXhrs = [];
+}
+
+function abortUpXhrs() {
+  state.liveUpXhrs.forEach((xhr) => {
+    try {
+      xhr.abort();
+    } catch (e) {}
+  });
+  state.liveUpXhrs = [];
+}
+
+async function liveUpWorker() {
+  while (state.monitoring) {
+    if (state.liveUpFails >= LIVE_FAIL_LIMIT) {
+      el.subUp.textContent = "failed";
+      state.liveHoldDown = false;
+      return;
+    }
+    if (state.liveUpFails > 0) {
+      await sleep(Math.min(4000, 300 * Math.pow(2, state.liveUpFails - 1)));
+      if (!state.monitoring) return;
+    }
+    state.liveHoldDown = true;
+    abortDownXhrs();
+    const keepGoing = await liveUploadOnce();
+    state.liveHoldDown = false;
+    if (!state.monitoring || keepGoing === false) return;
+    await sleep(LIVE_UP_GAP_MS);
   }
 }
 
 function tickLiveUi() {
   if (!state.monitoring) return;
   const now = performance.now();
-  const bytes = state.liveBytesWindow;
-  if (!(bytes > 0)) {
-    if (state.lastLiveMbps == null) el.liveSub.textContent = "warming up...";
+  const downBytes = state.liveBytesWindow;
+  if (!(downBytes > 0)) {
+    if (state.lastLiveMbps == null) {
+      el.liveSub.textContent = "warming up...";
+      el.subDown.textContent = "warming up...";
+    }
     return;
   }
   const elapsed = Math.max(0.2, (now - state.liveWindowStart) / 1000);
   state.liveBytesWindow = 0;
   state.liveWindowStart = now;
-  const mbps = (bytes * 8) / elapsed / 1e6;
+  const mbps = (downBytes * 8) / elapsed / 1e6;
   state.lastLiveMbps = mbps;
-
   el.live.textContent = fmt(mbps);
   el.liveSub.textContent = "every 1s · " + nowLabel();
+  el.down.textContent = fmt(mbps);
+  el.subDown.textContent = "live · 1s";
   pushPoint(mbps, "live", true);
   state.peakLive = Math.max(state.peakLive, mbps * 1.1, 100);
+  state.peakDown = Math.max(state.peakDown, mbps * 1.1, 100);
   setBar(el.barLive, mbps, state.peakLive);
+  setBar(el.barDown, mbps, state.peakDown);
 }
 
 function startMonitor() {
@@ -560,19 +755,27 @@ function startMonitor() {
   state.monitoring = true;
   state.liveBytesWindow = 0;
   state.liveWindowStart = performance.now();
-  state.liveXhrs = [];
+  state.liveDownXhrs = [];
+  state.liveUpXhrs = [];
+  state.liveHoldDown = true;
   state.liveFails = 0;
+  state.liveUpFails = 0;
+  state.pingTimes = [];
   state.peakLive = Math.max(state.peakLive, 100);
   el.btnMonitor.setAttribute("aria-pressed", "true");
   el.btnMonitor.textContent = "Stop monitor";
   el.liveSub.textContent = "warming up...";
+  el.subDown.textContent = "warming up...";
+  el.subUp.textContent = "warming up...";
   setStatus(
     "live",
     "Live",
-    "6 parallel download streams; Available now updates every 1 second. Congestion shows as lower Mbps."
+    "6 download streams, upload samples, ping every 1s. Download, Upload, Latency, and Available now all stay current. Congestion shows as lower Mbps."
   );
 
+  pingLoop();
   for (let i = 0; i < LIVE_STREAMS; i++) liveWorker();
+  for (let i = 0; i < LIVE_UP_STREAMS; i++) liveUpWorker();
   state.monitorTimer = setInterval(tickLiveUi, 1000);
 }
 
@@ -584,16 +787,21 @@ function stopMonitor(silent) {
     clearInterval(state.monitorTimer);
     state.monitorTimer = null;
   }
-  state.liveXhrs.forEach((xhr) => {
+  if (state.pingAbort) {
     try {
-      xhr.abort();
+      state.pingAbort.abort();
     } catch (e) {}
-  });
-  state.liveXhrs = [];
+    state.pingAbort = null;
+  }
+  state.liveHoldDown = false;
+  abortDownXhrs();
+  abortUpXhrs();
   state.liveBytesWindow = 0;
   clearUiTick();
   if (!silent) {
     el.liveSub.textContent = state.lastLiveMbps != null ? "idle (last)" : "idle";
+    el.subDown.textContent = state.lastLiveMbps != null ? "idle (last)" : "idle";
+    el.subUp.textContent = state.lastLiveUpMbps != null ? "idle (last)" : "idle";
     setStatus("", "Ready", "Monitor stopped. Run a full speed test anytime.");
   }
 }
@@ -626,5 +834,5 @@ drawChart();
 setStatus(
   "",
   "Ready",
-  "Full test uses the official Cloudflare engine. Live monitor is 6 download streams updating Available now every 1 second."
+  "Full test uses the official Cloudflare engine. Live monitor updates download, upload, latency, and Available now every 1 second."
 );
