@@ -18,6 +18,7 @@ builds move to WordPress after the client approves.
 | `/applylab/` | ApplyLab - personal remote-job co-pilot (semi-auto apply, AI tailor). API: `~/applylab-api` Cloudflare Worker. |
 | `/karlaglow/` | KarlaGlow - product page + checkout testing Econt without the WooCommerce plugin. Uses delivery.econt.com customer_info form (shop pairing id) and live offices API. Preview orders stay in the browser until a backend write is added. |
 | `/bandwidth/` | Internal lab - connection bandwidth meter. Full test uses the official `@cloudflare/speedtest` engine (same ramp as speed.cloudflare.com). Live monitor is 6 download streams updating Available now every 1 second. Cannot list other LAN devices from the browser; see `~/wifiwatch` for local device discovery. |
+| `/spend/` | Internal lab - GitHub Actions minutes, Grok sessions, Claude/Codex dual-review passes. Snapshot from `python3 ~/.grok/scripts/collect-spend.py`. |
 
 ## Adding a new client preview
 

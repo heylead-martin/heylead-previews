@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+<script src="/auth-config.js"></script>
+<script src="/auth.js"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Spend · HeyLead Previews</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app">
+    <a class="back" href="/">← Previews</a>
+    <h1>What this month used</h1>
+    <p class="lede">GitHub Actions minutes, Grok sessions, and Claude / Codex review passes. Remaining is against GitHub Free's 2,000 private-repo minutes. Grok, Claude Max, and ChatGPT are subscriptions, so we count work (sessions, turns, reviews), not a hidden token invoice.</p>
+    <div class="stamp" id="stamp">Loading snapshot...</div>
+
+    <div id="fatal" hidden class="err"></div>
+
+    <section class="hero" id="hero"></section>
+
+    <div class="grid">
+      <section class="card">
+        <h2>Commits and Actions this month</h2>
+        <div id="commits" class="empty">Collecting...</div>
+      </section>
+      <section class="card">
+        <h2>Products</h2>
+        <div id="products"></div>
+      </section>
+    </div>
+
+    <div class="grid" style="margin-top:12px">
+      <section class="card">
+        <h2>Actions by repo</h2>
+        <div id="repos" class="empty"></div>
+      </section>
+      <section class="card">
+        <h2>Grok sessions</h2>
+        <div id="sessions" class="empty"></div>
+      </section>
+    </div>
+
+    <ul class="notes" id="notes"></ul>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
