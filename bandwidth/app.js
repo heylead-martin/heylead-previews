@@ -11,6 +11,7 @@ const LIVE_UP_STREAMS = 1;
 const LIVE_FAIL_LIMIT = 8;
 const LIVE_PING_WINDOW = 8;
 const LIVE_UP_GAP_MS = 5000;
+const LIVE_DURATION_MS = 15000;
 
 // Same ramp as speed.cloudflare.com, without packetLoss (needs a TURN server).
 const FULL_MEASUREMENTS = [
@@ -60,6 +61,8 @@ const state = {
   running: false,
   monitoring: false,
   monitorTimer: null,
+  monitorStopTimer: null,
+  monitorDeadline: null,
   uiTickTimer: null,
   engineTimeout: null,
   engine: null,
@@ -723,14 +726,61 @@ async function liveUpWorker() {
   }
 }
 
+function liveSecondsLeft() {
+  if (state.monitorDeadline == null) return 0;
+  return Math.max(0, Math.ceil((state.monitorDeadline - performance.now()) / 1000));
+}
+
+function currentLatency() {
+  if (!state.pingTimes.length) return null;
+  const times = state.pingTimes.slice().sort((a, b) => a - b);
+  return times[Math.floor(times.length / 2)];
+}
+
+function saveLiveSample() {
+  const down = state.lastLiveMbps;
+  const up = state.lastLiveUpMbps;
+  const lat = currentLatency();
+  if (down == null && up == null) return;
+  const rows = loadHistory();
+  rows.unshift({
+    when: new Date().toLocaleString([], {
+      month: "short",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+    }),
+    down,
+    up,
+    lat,
+  });
+  saveHistory(rows);
+  renderHistory();
+}
+
+function finishMonitor() {
+  if (!state.monitoring) return;
+  saveLiveSample();
+  stopMonitor(true);
+  const stamp = nowLabel();
+  el.liveSub.textContent = state.lastLiveMbps != null ? "15s sample" : "idle";
+  el.subDown.textContent = state.lastLiveMbps != null ? "15s sample" : "idle";
+  el.subUp.textContent = state.lastLiveUpMbps != null ? "15s sample" : "idle";
+  setStatus("", "Done", "15 second sample finished at " + stamp + ".");
+}
+
 function tickLiveUi() {
   if (!state.monitoring) return;
+  const left = liveSecondsLeft();
+  el.statusPill.textContent = left + "s";
   const now = performance.now();
   const downBytes = state.liveBytesWindow;
   if (!(downBytes > 0)) {
     if (state.lastLiveMbps == null) {
-      el.liveSub.textContent = "warming up...";
+      el.liveSub.textContent = "warming up · " + left + "s left";
       el.subDown.textContent = "warming up...";
+    } else {
+      el.liveSub.textContent = left + "s left · " + nowLabel();
     }
     return;
   }
@@ -740,9 +790,9 @@ function tickLiveUi() {
   const mbps = (downBytes * 8) / elapsed / 1e6;
   state.lastLiveMbps = mbps;
   el.live.textContent = fmt(mbps);
-  el.liveSub.textContent = "every 1s · " + nowLabel();
+  el.liveSub.textContent = left + "s left · " + nowLabel();
   el.down.textContent = fmt(mbps);
-  el.subDown.textContent = "live · 1s";
+  el.subDown.textContent = left + "s left";
   pushPoint(mbps, "live", true);
   state.peakLive = Math.max(state.peakLive, mbps * 1.1, 100);
   state.peakDown = Math.max(state.peakDown, mbps * 1.1, 100);
@@ -755,6 +805,7 @@ function startMonitor() {
   state.monitoring = true;
   state.liveBytesWindow = 0;
   state.liveWindowStart = performance.now();
+  state.monitorDeadline = state.liveWindowStart + LIVE_DURATION_MS;
   state.liveDownXhrs = [];
   state.liveUpXhrs = [];
   state.liveHoldDown = true;
@@ -764,19 +815,21 @@ function startMonitor() {
   state.peakLive = Math.max(state.peakLive, 100);
   el.btnMonitor.setAttribute("aria-pressed", "true");
   el.btnMonitor.textContent = "Stop monitor";
-  el.liveSub.textContent = "warming up...";
+  el.liveSub.textContent = "warming up · 15s left";
   el.subDown.textContent = "warming up...";
   el.subUp.textContent = "warming up...";
   setStatus(
     "live",
-    "Live",
-    "6 download streams, upload samples, ping every 1s. Download, Upload, Latency, and Available now all stay current. Congestion shows as lower Mbps."
+    "15s",
+    "15 second sample: download, upload, and ping. Stops on its own."
   );
 
   pingLoop();
   for (let i = 0; i < LIVE_STREAMS; i++) liveWorker();
   for (let i = 0; i < LIVE_UP_STREAMS; i++) liveUpWorker();
   state.monitorTimer = setInterval(tickLiveUi, 1000);
+  if (state.monitorStopTimer) clearTimeout(state.monitorStopTimer);
+  state.monitorStopTimer = setTimeout(finishMonitor, LIVE_DURATION_MS);
 }
 
 function stopMonitor(silent) {
@@ -787,6 +840,11 @@ function stopMonitor(silent) {
     clearInterval(state.monitorTimer);
     state.monitorTimer = null;
   }
+  if (state.monitorStopTimer) {
+    clearTimeout(state.monitorStopTimer);
+    state.monitorStopTimer = null;
+  }
+  state.monitorDeadline = null;
   if (state.pingAbort) {
     try {
       state.pingAbort.abort();
@@ -802,7 +860,7 @@ function stopMonitor(silent) {
     el.liveSub.textContent = state.lastLiveMbps != null ? "idle (last)" : "idle";
     el.subDown.textContent = state.lastLiveMbps != null ? "idle (last)" : "idle";
     el.subUp.textContent = state.lastLiveUpMbps != null ? "idle (last)" : "idle";
-    setStatus("", "Ready", "Monitor stopped. Run a full speed test anytime.");
+    setStatus("", "Ready", "Sample stopped. Start live monitor for another 15 second run, or run a full speed test.");
   }
 }
 
@@ -834,5 +892,5 @@ drawChart();
 setStatus(
   "",
   "Ready",
-  "Full test uses the official Cloudflare engine. Live monitor updates download, upload, latency, and Available now every 1 second."
+  "Full test uses the official Cloudflare engine. Live monitor runs 15 seconds, then stops."
 );

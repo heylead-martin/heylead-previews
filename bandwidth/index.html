@@ -18,7 +18,7 @@
       <div>
         <a class="back" href="/">← Previews</a>
         <h1>Bandwidth</h1>
-        <p class="lede">How much capacity is left on the network you are on right now. Full test uses the official Cloudflare speedtest engine. Live monitor streams download and upload, pings for latency, and updates all four meters every 1 second. When other devices hog the line, available speed drops.</p>
+        <p class="lede">How much capacity is left on the network you are on right now. Full test uses the official Cloudflare speedtest engine. Live monitor runs 15 seconds of download, upload, and ping, then stops on its own. When other devices hog the line, available speed drops.</p>
       </div>
       <div class="top-actions">
         <button type="button" class="btn ghost" id="btn-monitor" aria-pressed="false">Live monitor</button>
@@ -58,7 +58,7 @@
         <span class="pill" id="status-pill">Ready</span>
       </div>
       <canvas id="chart" width="900" height="220" aria-label="Bandwidth chart"></canvas>
-      <p class="hint" id="status-text">Press Run speed test for a full measurement, or Live monitor to update download, upload, latency, and Available now every 1 second.</p>
+      <p class="hint" id="status-text">Press Run speed test for a full measurement, or Live monitor for a 15 second sample that then stops.</p>
     </section>
 
     <div class="grid-2">
@@ -83,7 +83,7 @@
     <section class="card note">
       <h2>What this can and cannot see</h2>
       <ul>
-        <li><strong>Can:</strong> full test uses the official Cloudflare speedtest engine (same ramp as speed.cloudflare.com). Live monitor is 6 download streams, periodic upload samples, and a ping every second, so Download, Upload, Latency, and Available now all stay current. Congestion from other phones, TVs, and downloads shows up as lower Mbps and higher ping.</li>
+        <li><strong>Can:</strong> full test uses the official Cloudflare speedtest engine (same ramp as speed.cloudflare.com). Live monitor is a 15 second sample: 6 download streams, upload samples, and a ping every second. It stops on its own. Congestion from other phones, TVs, and downloads shows up as lower Mbps and higher ping.</li>
         <li><strong>Cannot:</strong> list other devices on your Wi-Fi or show per-device usage from a website. Browsers are sandboxed; they cannot sniff LAN traffic.</li>
         <li><strong>For device discovery on this Mac:</strong> run local <code>~/wifiwatch</code> (<code>python3 wifiwatch.py watch</code>). Real per-device bandwidth needs the router (Ubiquiti, Firewalla, ASUS) or a forced DNS path (NextDNS / Pi-hole).</li>
       </ul>
