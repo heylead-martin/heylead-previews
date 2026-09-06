@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+<script src="/auth-config.js"></script>
+<script src="/auth.js"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Bandwidth · HeyLead Previews</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app">
+    <header class="top">
+      <div>
+        <a class="back" href="/">← Previews</a>
+        <h1>Bandwidth</h1>
+        <p class="lede">How much capacity is left on the network you are on right now. Measures your path to the internet (latency, download, upload). When other devices hog the line, available speed drops.</p>
+      </div>
+      <div class="top-actions">
+        <button type="button" class="btn ghost" id="btn-monitor" aria-pressed="false">Live monitor</button>
+        <button type="button" class="btn primary" id="btn-run">Run speed test</button>
+      </div>
+    </header>
+
+    <section class="hero-metrics" aria-live="polite">
+      <div class="metric">
+        <div class="metric-label">Download</div>
+        <div class="metric-val"><span id="val-down">-</span><span class="unit">Mbps</span></div>
+        <div class="metric-bar"><div id="bar-down"></div></div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">Upload</div>
+        <div class="metric-val"><span id="val-up">-</span><span class="unit">Mbps</span></div>
+        <div class="metric-bar"><div id="bar-up"></div></div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">Latency</div>
+        <div class="metric-val"><span id="val-lat">-</span><span class="unit">ms</span></div>
+        <div class="metric-sub" id="sub-jitter">jitter -</div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">Available now</div>
+        <div class="metric-val"><span id="val-live">-</span><span class="unit">Mbps</span></div>
+        <div class="metric-sub" id="sub-live">idle</div>
+      </div>
+    </section>
+
+    <section class="card chart-card">
+      <div class="card-h">
+        <h2>Throughput over time</h2>
+        <span class="pill" id="status-pill">Ready</span>
+      </div>
+      <canvas id="chart" width="900" height="220" aria-label="Bandwidth chart"></canvas>
+      <p class="hint" id="status-text">Press Run speed test for a full measurement, or Live monitor to sample available download every few seconds.</p>
+    </section>
+
+    <div class="grid-2">
+      <section class="card">
+        <div class="card-h"><h2>This connection</h2></div>
+        <dl class="facts" id="facts">
+          <div><dt>Network type</dt><dd id="fact-type">-</dd></div>
+          <div><dt>Browser estimate</dt><dd id="fact-downlink">-</dd></div>
+          <div><dt>RTT (browser)</dt><dd id="fact-rtt">-</dd></div>
+          <div><dt>Save-Data</dt><dd id="fact-save">-</dd></div>
+          <div><dt>Cloudflare colo</dt><dd id="fact-colo">-</dd></div>
+          <div><dt>Client IP (edge)</dt><dd id="fact-ip">-</dd></div>
+        </dl>
+      </section>
+
+      <section class="card">
+        <div class="card-h"><h2>Recent tests</h2></div>
+        <div id="history" class="history empty">No tests yet in this browser.</div>
+      </section>
+    </div>
+
+    <section class="card note">
+      <h2>What this can and cannot see</h2>
+      <ul>
+        <li><strong>Can:</strong> measure how much bandwidth is available on the path from this device to the internet. Congestion from other phones, TVs, and downloads shows up as lower available Mbps.</li>
+        <li><strong>Cannot:</strong> list other devices on your Wi-Fi or show per-device usage from a website. Browsers are sandboxed; they cannot sniff LAN traffic.</li>
+        <li><strong>For device discovery on this Mac:</strong> run local <code>~/wifiwatch</code> (<code>python3 wifiwatch.py watch</code>). Real per-device bandwidth needs the router (Ubiquiti, Firewalla, ASUS) or a forced DNS path (NextDNS / Pi-hole).</li>
+      </ul>
+    </section>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
