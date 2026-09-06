@@ -10,8 +10,9 @@ const LIVE_STREAMS = 6;
 const LIVE_UP_STREAMS = 1;
 const LIVE_FAIL_LIMIT = 8;
 const LIVE_PING_WINDOW = 8;
-const LIVE_UP_GAP_MS = 5000;
+const LIVE_UP_DELAY_MS = 4000;
 const LIVE_DURATION_MS = 15000;
+const MIN_LIVE_BYTES = 100e3;
 
 // Same ramp as speed.cloudflare.com, without packetLoss (needs a TURN server).
 const FULL_MEASUREMENTS = [
@@ -167,7 +168,7 @@ function drawChart() {
     ctx.fillText(fmt(maxY * (1 - g / 4), maxY >= 100 ? 0 : 1), 4, y + 3);
   }
 
-  if (state.points.length < 2) {
+  if (!state.points.length) {
     ctx.fillStyle = "#5b6b80";
     ctx.fillText("Waiting for samples...", padL + 8, padT + 20);
     return;
@@ -179,7 +180,17 @@ function drawChart() {
 
   function pathFor(kind, color) {
     const pts = state.points.filter((p) => p.kind === kind);
-    if (pts.length < 2) return;
+    if (!pts.length) return;
+    if (pts.length === 1) {
+      const p = pts[0];
+      const x = padL + ((p.t - tMin) / span) * w;
+      const y2 = padT + h - (p.mbps / maxY) * h;
+      ctx.fillStyle = color;
+      ctx.beginPath();
+      ctx.arc(x, y2, 3, 0, Math.PI * 2);
+      ctx.fill();
+      return;
+    }
     ctx.beginPath();
     pts.forEach((p, i) => {
       const x = padL + ((p.t - tMin) / span) * w;
@@ -503,7 +514,7 @@ function paintLiveUp(mbps, chart) {
 
 function paintLatencyFromPings() {
   const times = state.pingTimes.slice().sort((a, b) => a - b);
-  if (!times.length) return;
+  if (times.length < 2) return;
   const mid = times[Math.floor(times.length / 2)];
   const mean = times.reduce((s, x) => s + x, 0) / times.length;
   const jitter = Math.sqrt(times.reduce((s, x) => s + Math.pow(x - mean, 2), 0) / times.length);
@@ -524,6 +535,11 @@ async function pingOnce(signal) {
 async function pingLoop() {
   const abort = new AbortController();
   state.pingAbort = abort;
+  try {
+    await pingOnce(abort.signal);
+  } catch (err) {
+    if (err && err.name === "AbortError") return;
+  }
   while (state.monitoring) {
     try {
       const ms = await pingOnce(abort.signal);
@@ -707,23 +723,16 @@ function abortUpXhrs() {
 }
 
 async function liveUpWorker() {
-  while (state.monitoring) {
-    if (state.liveUpFails >= LIVE_FAIL_LIMIT) {
-      el.subUp.textContent = "failed";
-      state.liveHoldDown = false;
-      return;
-    }
-    if (state.liveUpFails > 0) {
-      await sleep(Math.min(4000, 300 * Math.pow(2, state.liveUpFails - 1)));
-      if (!state.monitoring) return;
-    }
-    state.liveHoldDown = true;
-    abortDownXhrs();
-    const keepGoing = await liveUploadOnce();
-    state.liveHoldDown = false;
-    if (!state.monitoring || keepGoing === false) return;
-    await sleep(LIVE_UP_GAP_MS);
+  await sleep(LIVE_UP_DELAY_MS);
+  if (!state.monitoring) return;
+  if (state.liveUpFails >= LIVE_FAIL_LIMIT) {
+    el.subUp.textContent = "failed";
+    return;
   }
+  state.liveHoldDown = true;
+  abortDownXhrs();
+  await liveUploadOnce();
+  state.liveHoldDown = false;
 }
 
 function liveSecondsLeft() {
@@ -775,7 +784,7 @@ function tickLiveUi() {
   el.statusPill.textContent = left + "s";
   const now = performance.now();
   const downBytes = state.liveBytesWindow;
-  if (!(downBytes > 0)) {
+  if (!(downBytes > 0) || (state.lastLiveMbps == null && downBytes < MIN_LIVE_BYTES)) {
     if (state.lastLiveMbps == null) {
       el.liveSub.textContent = "warming up · " + left + "s left";
       el.subDown.textContent = "warming up...";
@@ -808,11 +817,24 @@ function startMonitor() {
   state.monitorDeadline = state.liveWindowStart + LIVE_DURATION_MS;
   state.liveDownXhrs = [];
   state.liveUpXhrs = [];
-  state.liveHoldDown = true;
+  state.liveHoldDown = false;
   state.liveFails = 0;
   state.liveUpFails = 0;
   state.pingTimes = [];
+  state.lastLiveMbps = null;
+  state.lastLiveUpMbps = null;
+  state.lastPushed = { down: null, up: null, live: null };
+  state.points = [];
   state.peakLive = Math.max(state.peakLive, 100);
+  el.down.textContent = "-";
+  el.up.textContent = "-";
+  el.lat.textContent = "-";
+  el.live.textContent = "-";
+  el.jitter.textContent = "jitter -";
+  setBar(el.barDown, 0, 1);
+  setBar(el.barUp, 0, 1);
+  setBar(el.barLive, 0, 1);
+  drawChart();
   el.btnMonitor.setAttribute("aria-pressed", "true");
   el.btnMonitor.textContent = "Stop monitor";
   el.liveSub.textContent = "warming up · 15s left";
@@ -828,6 +850,7 @@ function startMonitor() {
   for (let i = 0; i < LIVE_STREAMS; i++) liveWorker();
   for (let i = 0; i < LIVE_UP_STREAMS; i++) liveUpWorker();
   state.monitorTimer = setInterval(tickLiveUi, 1000);
+  setTimeout(tickLiveUi, 300);
   if (state.monitorStopTimer) clearTimeout(state.monitorStopTimer);
   state.monitorStopTimer = setTimeout(finishMonitor, LIVE_DURATION_MS);
 }
