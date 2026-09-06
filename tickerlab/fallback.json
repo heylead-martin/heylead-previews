@@ -1,0 +1,44 @@
+{
+  "_note": "Cached sample data. Shown only when live feeds fail. Not current prices.",
+  "_date": "2026-09-06",
+  "stocks": [
+    {"symbol":"NVDA","exchange":"NASDAQ","name":"NVIDIA Corporation","close":230.36,"change":0.84,"volume":135351569,"relVol":0.87,"marketCap":5551676014709,"recommend":0.558,"rsi":60.4,"perfW":1.32,"perfM":6.23,"sector":"Electronic Technology","volD":0.024},
+    {"symbol":"AAPL","exchange":"NASDAQ","name":"Apple Inc.","close":319.97,"change":-2.51,"volume":39605721,"relVol":1.05,"marketCap":4669699692425,"recommend":0.355,"rsi":53.9,"perfW":0.99,"perfM":3.43,"sector":"Electronic Technology","volD":0.018},
+    {"symbol":"MSFT","exchange":"NASDAQ","name":"Microsoft Corporation","close":499.70,"change":-2.04,"volume":18101758,"relVol":0.80,"marketCap":3710545132099,"recommend":0.221,"rsi":59.4,"perfW":-1.11,"perfM":0.67,"sector":"Technology Services","volD":0.016},
+    {"symbol":"GOOG","exchange":"NASDAQ","name":"Alphabet Inc.","close":335.31,"change":-1.11,"volume":12700311,"relVol":0.78,"marketCap":4121955679230,"recommend":-0.448,"rsi":43.97,"perfW":-0.68,"perfM":-11.76,"sector":"Technology Services","volD":0.019},
+    {"symbol":"AMZN","exchange":"NASDAQ","name":"Amazon.com Inc.","close":258.51,"change":-0.15,"volume":30749804,"relVol":0.95,"marketCap":2788370254612,"recommend":0,"rsi":49.5,"perfW":0.07,"perfM":-8.20,"sector":"Retail Trade","volD":0.015},
+    {"symbol":"META","exchange":"NASDAQ","name":"Meta Platforms Inc.","close":768.42,"change":1.22,"volume":10453200,"relVol":0.91,"marketCap":1950000000000,"recommend":0.62,"rsi":61.2,"perfW":2.1,"perfM":8.4,"sector":"Technology Services","volD":0.021},
+    {"symbol":"TSLA","exchange":"NASDAQ","name":"Tesla Inc.","close":285.17,"change":2.45,"volume":52312000,"relVol":1.21,"marketCap":910000000000,"recommend":0.28,"rsi":54.8,"perfW":3.2,"perfM":-5.1,"sector":"Consumer Durables","volD":0.038},
+    {"symbol":"JPM","exchange":"NYSE","name":"JPMorgan Chase & Co.","close":267.83,"change":-0.42,"volume":8234500,"relVol":0.88,"marketCap":765000000000,"recommend":0.41,"rsi":57.3,"perfW":-0.3,"perfM":4.2,"sector":"Finance","volD":0.014}
+  ],
+  "etfs": [
+    {"symbol":"SPY","exchange":"AMEX","name":"SPDR S&P 500 ETF Trust","close":587.52,"change":-0.32,"volume":42000000,"relVol":0.94,"recommend":0.18,"rsi":51.4,"perfW":-0.4,"perfM":1.2,"volD":0.01},
+    {"symbol":"QQQ","exchange":"NASDAQ","name":"Invesco QQQ Trust","close":498.71,"change":-0.65,"volume":31000000,"relVol":0.88,"recommend":0.22,"rsi":52.1,"perfW":-0.7,"perfM":0.9,"volD":0.013},
+    {"symbol":"VOO","exchange":"AMEX","name":"Vanguard S&P 500 ETF","close":539.84,"change":-0.31,"volume":5100000,"relVol":0.92,"recommend":0.19,"rsi":51.6,"perfW":-0.3,"perfM":1.1,"volD":0.01},
+    {"symbol":"VTI","exchange":"AMEX","name":"Vanguard Total Stock Market ETF","close":284.17,"change":-0.28,"volume":4200000,"relVol":0.91,"recommend":0.17,"rsi":51.2,"perfW":-0.3,"perfM":0.9,"volD":0.01},
+    {"symbol":"XLK","exchange":"AMEX","name":"Technology Select Sector SPDR","close":238.42,"change":-0.88,"volume":6800000,"relVol":1.02,"recommend":0.31,"rsi":53.7,"perfW":-0.9,"perfM":2.1,"volD":0.014},
+    {"symbol":"GLD","exchange":"AMEX","name":"SPDR Gold Shares","close":241.17,"change":0.52,"volume":7200000,"relVol":1.05,"recommend":0.44,"rsi":58.2,"perfW":1.1,"perfM":5.3,"volD":0.011},
+    {"symbol":"IBIT","exchange":"AMEX","name":"iShares Bitcoin Trust","close":48.32,"change":1.84,"volume":22000000,"relVol":1.18,"recommend":0.51,"rsi":60.1,"perfW":2.3,"perfM":9.4,"volD":0.032},
+    {"symbol":"SMH","exchange":"AMEX","name":"VanEck Semiconductor ETF","close":231.85,"change":0.72,"volume":4500000,"relVol":0.96,"recommend":0.42,"rsi":57.8,"perfW":1.4,"perfM":5.8,"volD":0.02}
+  ],
+  "crypto": [
+    {"symbol":"btc","name":"Bitcoin","close":79975,"change":0.33,"volume":38000000000,"marketCap":1589000000000,"high24h":81200,"low24h":78900},
+    {"symbol":"eth","name":"Ethereum","close":2502,"change":1.78,"volume":14000000000,"marketCap":301000000000,"high24h":2560,"low24h":2450},
+    {"symbol":"bnb","name":"BNB","close":756,"change":-0.28,"volume":1800000000,"marketCap":107000000000,"high24h":762,"low24h":748},
+    {"symbol":"xrp","name":"XRP","close":1.42,"change":0.79,"volume":4200000000,"marketCap":82000000000,"high24h":1.46,"low24h":1.39},
+    {"symbol":"sol","name":"Solana","close":192.4,"change":2.14,"volume":4800000000,"marketCap":93000000000,"high24h":197,"low24h":187},
+    {"symbol":"doge","name":"Dogecoin","close":0.1912,"change":1.22,"volume":2100000000,"marketCap":28000000000,"high24h":0.196,"low24h":0.188},
+    {"symbol":"ada","name":"Cardano","close":0.672,"change":-0.44,"volume":820000000,"marketCap":24000000000,"high24h":0.681,"low24h":0.664},
+    {"symbol":"avax","name":"Avalanche","close":28.14,"change":1.85,"volume":620000000,"marketCap":11700000000,"high24h":28.9,"low24h":27.4}
+  ],
+  "pennies": [
+    {"symbol":"SOUN","exchange":"NASDAQ","name":"SoundHound AI Inc.","close":4.12,"change":3.21,"volume":45000000,"relVol":1.88,"recommend":0.44,"rsi":62.1,"perfW":4.1,"perfM":12.3,"volD":0.06},
+    {"symbol":"MARA","exchange":"NASDAQ","name":"MARA Holdings Inc.","close":3.88,"change":2.18,"volume":38000000,"relVol":1.42,"recommend":0.31,"rsi":57.4,"perfW":3.2,"perfM":8.7,"volD":0.055},
+    {"symbol":"SOFI","exchange":"NASDAQ","name":"SoFi Technologies Inc.","close":4.67,"change":1.05,"volume":31000000,"relVol":1.11,"recommend":0.27,"rsi":54.2,"perfW":1.8,"perfM":5.4,"volD":0.04},
+    {"symbol":"CLSK","exchange":"NASDAQ","name":"CleanSpark Inc.","close":3.41,"change":4.12,"volume":28000000,"relVol":2.14,"recommend":0.52,"rsi":64.8,"perfW":5.3,"perfM":14.2,"volD":0.07},
+    {"symbol":"LUNR","exchange":"NASDAQ","name":"Intuitive Machines Inc.","close":2.89,"change":-1.23,"volume":22000000,"relVol":0.95,"recommend":0.12,"rsi":44.1,"perfW":-2.1,"perfM":-8.4,"volD":0.065},
+    {"symbol":"BBAI","exchange":"NYSE","name":"BigBear.ai Holdings Inc.","close":1.87,"change":2.74,"volume":19000000,"relVol":1.62,"recommend":0.38,"rsi":58.7,"perfW":3.8,"perfM":7.2,"volD":0.08},
+    {"symbol":"RIG","exchange":"NYSE","name":"Transocean Ltd.","close":2.14,"change":-0.93,"volume":17000000,"relVol":0.84,"recommend":-0.12,"rsi":42.3,"perfW":-1.4,"perfM":-6.8,"volD":0.045},
+    {"symbol":"HIMS","exchange":"NYSE","name":"Hims & Hers Health Inc.","close":4.92,"change":1.85,"volume":25000000,"relVol":1.32,"recommend":0.45,"rsi":60.3,"perfW":2.9,"perfM":10.1,"volD":0.05}
+  ]
+}
