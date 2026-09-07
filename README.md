@@ -19,7 +19,7 @@ builds move to WordPress after the client approves.
 | `/karlaglow/` | KarlaGlow - product page + checkout testing Econt without the WooCommerce plugin. Uses delivery.econt.com customer_info form (shop pairing id) and live offices API. Preview orders stay in the browser until a backend write is added. |
 | `/bandwidth/` | Internal lab - connection bandwidth meter. Full test uses the official `@cloudflare/speedtest` engine (same ramp as speed.cloudflare.com). Live monitor is a 15 second sample of download, upload, and ping, then stops. Cannot list other LAN devices from the browser; see `~/wifiwatch` for local device discovery. |
 | `/spend/` | Internal lab - Grok / Claude / Codex remaining-vs-used % (same bars as each product's Settings > Usage) plus GitHub Actions minutes. Snapshot from `python3 ~/.grok/scripts/collect-spend.py`. |
-| `/tickerlab/` | Internal lab - market intelligence desk (US stocks, ETFs, crypto, pennies). Four paper playbooks (passive / balanced / aggressive / ultra), single-name pick, headline pulse, virtual bankroll with $/day and $/sec. Live quotes via TradingView scanner + CoinGecko/Binance. Demo scoring, not advice. |
+| `/tickerlab/` | Internal lab - AI CIO morning note. Grok reads live tape, web, and X, then says what to own (paper book). API: `~/applylab-api` `GET /desk/brief`. Not advice. |
 
 ## Adding a new client preview
 
