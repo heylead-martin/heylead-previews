@@ -80,6 +80,7 @@
   };
 
   let ws = null;
+  let wsTimer = null;
   let wsBackoff = 1000;
 
   function num(v) {
@@ -581,9 +582,15 @@
   }
 
   function connectWs() {
+    if (wsTimer) {
+      clearTimeout(wsTimer);
+      wsTimer = null;
+    }
     if (ws) {
-      try { ws.close(); } catch (e) {}
+      const old = ws;
       ws = null;
+      old.onclose = null;
+      try { old.close(); } catch (e) {}
     }
     const pairs = state.quotes.crypto.map((q) => (q.binance || (q.symbol + "USDT")).toLowerCase());
     if (!pairs.length) return;
@@ -608,7 +615,7 @@
     };
     ws.onclose = () => {
       ws = null;
-      setTimeout(connectWs, wsBackoff);
+      wsTimer = setTimeout(connectWs, wsBackoff);
       wsBackoff = Math.min(wsBackoff * 2, 15000);
     };
   }
@@ -709,6 +716,22 @@
       el.textContent = "Feeds: " + tv + " / " + cg;
       el.className = "pill";
     }
+    const cp = $("#crypto-pill");
+    if (cp) {
+      if (cg === "live") {
+        cp.textContent = "Crypto 24/7";
+        cp.className = "pill live";
+      } else if (cg === "cached") {
+        cp.textContent = "Crypto cached";
+        cp.className = "pill cached";
+      } else if (cg === "error") {
+        cp.textContent = "Crypto error";
+        cp.className = "pill err";
+      } else {
+        cp.textContent = "Crypto loading";
+        cp.className = "pill";
+      }
+    }
   }
 
   function renderSession() {
@@ -726,12 +749,16 @@
   function renderTape() {
     const items = allQuotes().slice().sort((a, b) => Math.abs(b.change) - Math.abs(a.change)).slice(0, 24);
     const html = items.map((q) => (
-      '<span class="tape-item"><span class="tape-sym">' + q.symbol +
+      '<span class="tape-item"><span class="tape-sym">' + escapeHtml(q.symbol) +
       '</span><span class="tape-price">' + px(q.close) +
       '</span><span class="tape-chg ' + clsPnL(q.change) + '">' + pct(q.change) + "</span></span>"
     )).join("");
-    $("#tape").innerHTML = html + html;
-    $("#tape").classList.toggle("paused", state.tapePaused);
+    const el = $("#tape");
+    if (el.dataset.sig !== html) {
+      el.dataset.sig = html;
+      el.innerHTML = html + html;
+    }
+    el.classList.toggle("paused", state.tapePaused);
   }
 
   function renderHero() {
@@ -741,12 +768,12 @@
     const r = usingBook ? marked : pb.basketRates;
     const equity = usingBook ? marked.equity : state.amount + r.day;
     $("#hero-label").textContent = usingBook
-      ? (state.book.label || "Deployed book") + " - live mark"
+      ? (state.book.label || "Deployed book") + " - live mark, unrealized " + money(marked.pnl)
       : "If you deploy " + money(state.amount, 0, false) + " into " + pb.spec.name;
     const el = $("#hero-equity");
     el.textContent = money(equity, 2, false);
     el.className = "hero-equity " + clsPnL(usingBook ? marked.pnl : r.day);
-    setRate("#hero-day", usingBook ? marked.pnl : r.day);
+    setRate("#hero-day", r.day);
     setRate("#hero-hour", r.hour);
     setRate("#hero-min", r.min);
     setRate("#hero-sec", r.sec, true);
@@ -785,15 +812,15 @@
     const b = buildPlaybook(pb.id);
     const r = b.basketRates;
     const holds = b.holdings.slice(0, 5).map((h) => (
-      '<div class="hold-mini-row"><span class="sym">' + h.q.symbol +
-      '</span><span>' + h.q.name.slice(0, 28) + '</span><span class="w">' +
+      '<div class="hold-mini-row"><span class="sym">' + escapeHtml(h.q.symbol) +
+      '</span><span>' + escapeHtml(h.q.name.slice(0, 28)) + '</span><span class="w">' +
       (h.weight * 100).toFixed(0) + "%</span></div>"
     )).join("");
     const hd = (b.single && b.single.headlines && b.single.headlines[0]) ? b.single.headlines[0].title : "";
     return '<article class="playbook-card ' + pb.id + (selected ? " selected" : "") + '" data-playbook="' + pb.id + '">' +
-      '<div class="playbook-kicker"><h3 class="playbook-name">' + pb.name + '</h3>' +
-      '<span class="pill ' + (pb.id === "ultra" ? "err" : pb.id === "passive" ? "open" : "") + '">' + pb.risk + "</span></div>" +
-      '<p class="playbook-blurb">' + pb.blurb + "</p>" +
+      '<div class="playbook-kicker"><h3 class="playbook-name">' + escapeHtml(pb.name) + '</h3>' +
+      '<span class="pill ' + (pb.id === "ultra" ? "err" : pb.id === "passive" ? "open" : "") + '">' + escapeHtml(pb.risk) + "</span></div>" +
+      '<p class="playbook-blurb">' + escapeHtml(pb.blurb) + "</p>" +
       mixBar(pb.mix) +
       '<div class="playbook-rates">' +
       '<div class="playbook-rate-box"><div class="lbl">If ' + money(state.amount, 0, false) + ' / day</div><div class="val ' + clsPnL(r.day) + '">' + money(r.day) + "</div></div>" +
@@ -802,7 +829,7 @@
       '<div class="hold-mini">' + holds + "</div>" +
       '<div class="single-callout">' +
       '<div class="k">If you only buy one</div>' +
-      '<div class="sym">' + (b.single ? b.single.symbol : "-") + "</div>" +
+      '<div class="sym">' + (b.single ? escapeHtml(b.single.symbol) : "-") + "</div>" +
       '<div class="why">' + (b.single ? whyText(b.single) : "") + "</div>" +
       (hd ? '<div class="headline">' + escapeHtml(hd) + "</div>" : "") +
       "</div>" +
@@ -819,16 +846,17 @@
       .concat(topRanked(state.quotes.etfs, 1, (q) => q.score))
       .concat(topRanked(state.quotes.crypto, 1, (q) => q.score));
     $("#desk-top5").innerHTML = top.map((q, i) => (
-      '<button type="button" class="top5-row" data-focus="' + q.id + '">' +
+      '<button type="button" class="top5-row" data-focus="' + escapeHtml(q.id) + '">' +
       '<div class="top5-left"><span class="top5-rank">' + (i + 1) + '</span><div>' +
-      '<div class="top5-sym">' + q.symbol + '</div><div class="top5-name">' + escapeHtml(q.name) + "</div></div></div>" +
+      '<div class="top5-sym">' + escapeHtml(q.symbol) + '</div><div class="top5-name">' + escapeHtml(q.name) + "</div></div></div>" +
       '<div class="top5-right"><span class="rec-chip ' + q.labelClass + '">' + q.label + "</span>" +
       '<span class="chg-cell ' + clsPnL(q.change) + '">' + pct(q.change) + "</span></div></button>"
     )).join("") || '<div class="empty-state">Waiting on quotes.</div>';
     const news = (state.marketNews.length ? state.marketNews : [].concat(...Object.values(state.news))).slice(0, 5);
     $("#desk-news").innerHTML = news.length ? news.map(newsItemHtml).join("") : '<div class="empty-state">No headlines yet.</div>';
-    $("#news-pill").textContent = state.feeds.news === "live" ? "Live" : "Off";
-    $("#news-pill").className = "pill " + (state.feeds.news === "live" ? "live" : "cached");
+    const ns = state.feeds.news;
+    $("#news-pill").textContent = ns === "live" ? "Live" : ns === "error" ? "Error" : ns === "loading" ? "Loading" : "Off";
+    $("#news-pill").className = "pill " + (ns === "live" ? "live" : ns === "error" ? "err" : "cached");
   }
 
   function newsItemHtml(n) {
@@ -847,7 +875,7 @@
     const rows = b.holdings.map((h) => {
       const alloc = state.amount * h.weight;
       const r = rates(alloc, h.q.change, h.q.sleeve);
-      return "<tr data-focus=\"" + h.q.id + "\"><td class=\"sym-cell\">" + h.q.symbol + "</td><td class=\"name-cell\">" +
+      return "<tr data-focus=\"" + escapeHtml(h.q.id) + "\"><td class=\"sym-cell\">" + escapeHtml(h.q.symbol) + "</td><td class=\"name-cell\">" +
         escapeHtml(h.q.name) + "</td><td>" + (h.weight * 100).toFixed(1) + "%</td><td class=\"mono\">" + px(h.q.close) +
         "</td><td class=\"chg-cell " + clsPnL(h.q.change) + "\">" + pct(h.q.change) +
         "</td><td><span class=\"rec-chip " + h.q.labelClass + "\">" + h.q.label + "</span></td>" +
@@ -871,6 +899,25 @@
       t.classList.toggle("active", on);
       t.setAttribute("aria-selected", on ? "true" : "false");
     });
+    $$("#market-table thead th").forEach((th) => {
+      const on = th.dataset.sort === state.sort.key;
+      th.classList.toggle("sort-asc", on && state.sort.dir === "asc");
+      th.classList.toggle("sort-desc", on && state.sort.dir === "desc");
+      th.setAttribute("aria-sort", on ? (state.sort.dir === "asc" ? "ascending" : "descending") : "none");
+    });
+    const dayTh = $("#th-day-pnl");
+    if (dayTh) dayTh.textContent = "If " + money(state.amount, 0, false) + " / day";
+    const err = $("#market-error");
+    if (err) {
+      const sleeveFeed = state.sleeve === "crypto" ? state.feeds.crypto : state.feeds.tv;
+      if (sleeveFeed === "error") {
+        err.innerHTML = '<div class="feed-error">This sleeve failed to load. Cached sample if present below. Refresh to retry.</div>';
+      } else if (sleeveFeed === "cached") {
+        err.innerHTML = '<div class="warn-banner">Cached sample. Not current prices.</div>';
+      } else {
+        err.innerHTML = "";
+      }
+    }
     const qstr = state.search.trim().toLowerCase();
     let rows = state.quotes[state.sleeve].slice();
     if (qstr) rows = rows.filter((q) => (q.symbol + " " + q.name).toLowerCase().includes(qstr));
@@ -892,8 +939,8 @@
     }
     $("#market-body").innerHTML = rows.map((q) => {
       const r = rates(state.amount, q.change, q.sleeve);
-      return "<tr data-focus=\"" + q.id + "\">" +
-        "<td class=\"sym-cell\">" + q.symbol + "</td>" +
+      return "<tr data-focus=\"" + escapeHtml(q.id) + "\">" +
+        "<td class=\"sym-cell\">" + escapeHtml(q.symbol) + "</td>" +
         "<td class=\"name-cell\">" + escapeHtml(q.name) + "</td>" +
         "<td class=\"mono\">" + px(q.close) + "</td>" +
         "<td class=\"chg-cell " + clsPnL(q.change) + "\">" + pct(q.change) + "</td>" +
@@ -914,8 +961,8 @@
     box.hidden = false;
     const r = rates(state.amount, q.change, q.sleeve);
     const news = (q.headlines && q.headlines.length ? q.headlines : (state.news[q.symbol] || [])).slice(0, 4);
-    box.innerHTML = '<div class="detail-head"><div><h2 class="detail-sym">' + q.symbol + '</h2>' +
-      '<p class="detail-name">' + escapeHtml(q.name) + " · " + q.sleeve + "</p></div>" +
+    box.innerHTML = '<div class="detail-head"><div><h2 class="detail-sym">' + escapeHtml(q.symbol) + '</h2>' +
+      '<p class="detail-name">' + escapeHtml(q.name) + " · " + escapeHtml(q.sleeve) + "</p></div>" +
       '<span class="rec-chip ' + q.labelClass + '">' + q.label + " · " + q.score + "</span></div>" +
       "<p>" + px(q.close) + " · " + pct(q.change) + " · If " + money(state.amount, 0, false) + " then " +
       money(r.day) + "/day · " + perSec(r.sec) + "</p>" +
@@ -930,12 +977,15 @@
   function renderPaper() {
     $("#amount-input").value = String(state.amount);
     $("#playbook-presets").innerHTML = PLAYBOOKS.map((p) =>
-      '<button type="button" class="preset-btn' + (state.playbook === p.id ? " active" : "") + '" data-playbook="' + p.id + '">' + p.name + "</button>"
+      '<button type="button" class="preset-btn' + (state.playbook === p.id ? " active" : "") +
+      '" data-playbook="' + p.id + '" aria-pressed="' + (state.playbook === p.id ? "true" : "false") + '">' +
+      escapeHtml(p.name) + "</button>"
     ).join("");
     const mix = state.mix;
     $("#sliders").innerHTML = ["stocks", "etfs", "crypto", "pennies"].map((k) => (
       '<div class="slider-row"><div class="slider-header"><span>' + k + '</span><span class="slider-pct">' + mix[k] +
-      '%</span></div><input type="range" min="0" max="100" value="' + mix[k] + '" data-mix="' + k + '"></div>'
+      '%</span></div><input type="range" min="0" max="100" value="' + mix[k] + '" data-mix="' + k +
+      '" aria-label="' + k + ' allocation"></div>'
     )).join("");
     const marked = markBook();
     const using = !!(state.book && state.book.positions && state.book.positions.length);
@@ -949,14 +999,14 @@
     $("#paper-label").textContent = using ? (state.book.label || "Deployed") : "Hypothetical mix (not deployed)";
     const eq = $("#paper-equity");
     eq.textContent = money(equity, 2, false);
-    eq.className = "paper-equity-val " + clsPnL(using ? marked.pnl || r.day : r.day);
+    eq.className = "paper-equity-val " + clsPnL(using ? marked.pnl : r.day);
     setRate("#paper-day", r.day);
     setRate("#paper-hour", r.hour);
     setRate("#paper-min", r.min);
     setRate("#paper-sec", r.sec, true);
     const rows = using ? marked.rows : [];
     $("#holdings-body").innerHTML = rows.length ? rows.map((p) => (
-      "<tr><td><div class=\"sym-cell\">" + p.symbol + "</div><div class=\"name-cell\">" + escapeHtml(p.name) +
+      "<tr><td><div class=\"sym-cell\">" + escapeHtml(p.symbol) + "</div><div class=\"name-cell\">" + escapeHtml(p.name) +
       "</div></td><td class=\"mono\">" + p.qty.toPrecision(4) + "</td><td class=\"mono\">" + px(p.fill) +
       "</td><td class=\"mono\">" + px(p.last) + "</td><td class=\"mono " + (p.pnl >= 0 ? "gain" : "loss") + "\">" +
       money(p.pnl) + "</td><td class=\"mono " + clsPnL(p.day) + "\">" + money(p.day) +
