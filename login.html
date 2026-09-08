@@ -47,11 +47,11 @@ button:disabled{opacity:.6;cursor:wait}
 <div class="card">
   <div class="logo">HeyLead Previews</div>
   <h1>Sign in</h1>
-  <p class="sub">Private client demos. Access for <strong style="color:#c5cdd8">martin@heylead.com</strong> only.</p>
+  <p class="sub">Private client demos. Sign in with the email and password you were given.</p>
   <div class="err" id="err"></div>
   <form id="form" autocomplete="on">
     <label for="email">Email</label>
-    <input id="email" name="email" type="email" required autocomplete="username" placeholder="martin@heylead.com" value="martin@heylead.com">
+    <input id="email" name="email" type="email" required autocomplete="username" placeholder="you@company.com">
     <label for="password">Password</label>
     <input id="password" name="password" type="password" required autocomplete="current-password" placeholder="••••••••">
     <div class="row">
@@ -72,11 +72,46 @@ button:disabled{opacity:.6;cursor:wait}
   var next = params.get('next') || '/';
   if (next.indexOf('//') !== -1 || next.indexOf('login') !== -1) next = '/';
 
+  function users() { return (cfg && cfg.users) || []; }
+
+  function findUserByHash(h) {
+    if (!h) return null;
+    for (var i = 0; i < users().length; i++) {
+      if (users()[i].passwordHash === h) return users()[i];
+    }
+    return null;
+  }
+
+  function findUserByEmail(email) {
+    for (var i = 0; i < users().length; i++) {
+      if ((users()[i].email || '').toLowerCase() === email) return users()[i];
+    }
+    return null;
+  }
+
+  function pathAllowed(user, pathname) {
+    if (!user) return false;
+    var allow = user.allow || ['*'];
+    if (pathname === '/' || pathname === '') return true;
+    for (var i = 0; i < allow.length; i++) {
+      var prefix = allow[i];
+      if (prefix === '*') return true;
+      if (pathname === prefix || pathname.indexOf(prefix + '/') === 0) return true;
+    }
+    return false;
+  }
+
+  function safeNext(user, dest) {
+    var path = dest.split('?')[0].split('#')[0] || '/';
+    if (pathAllowed(user, path)) return dest;
+    return '/';
+  }
+
   // already logged in?
   try {
-    if (sessionStorage.getItem(cfg.sessionKey) === cfg.passwordHash
-      || localStorage.getItem(cfg.sessionKey) === cfg.passwordHash) {
-      location.replace(next);
+    var existing = findUserByHash(sessionStorage.getItem(cfg.sessionKey) || localStorage.getItem(cfg.sessionKey));
+    if (existing) {
+      location.replace(safeNext(existing, next));
       return;
     }
   } catch (e) {}
@@ -95,13 +130,14 @@ button:disabled{opacity:.6;cursor:wait}
     var password = document.getElementById('password').value || '';
     var remember = document.getElementById('remember').checked;
     try {
-      if (email !== cfg.email.toLowerCase()) throw new Error('Unknown account.');
+      var account = findUserByEmail(email);
+      if (!account) throw new Error('Unknown account.');
       var h = await sha256(password);
-      if (h !== cfg.passwordHash) throw new Error('Wrong password.');
-      sessionStorage.setItem(cfg.sessionKey, cfg.passwordHash);
-      if (remember) localStorage.setItem(cfg.sessionKey, cfg.passwordHash);
+      if (h !== account.passwordHash) throw new Error('Wrong password.');
+      sessionStorage.setItem(cfg.sessionKey, account.passwordHash);
+      if (remember) localStorage.setItem(cfg.sessionKey, account.passwordHash);
       else localStorage.removeItem(cfg.sessionKey);
-      location.replace(next);
+      location.replace(safeNext(account, next));
     } catch (ex) {
       err.textContent = ex.message || 'Login failed.';
       err.classList.add('on');

@@ -50,10 +50,16 @@ builds move to WordPress after the client approves.
 
 GitHub Pages is **static** - there is no real server authentication.
 
-This repo uses a lightweight login at `/login.html` for casual privacy
-(email `martin@heylead.com` + password). It is **not** strong security:
-the repo is public, hashes are in `auth-config.js`, and anyone can open
-raw HTML if they try hard enough.
+This repo uses a lightweight login at `/login.html` for casual privacy.
+Accounts are listed in `auth-config.js` (email + SHA-256 hash, no plain
+passwords). Martin sees every preview. `team@oculogica.com` is limited to
+`/oculogica/` and `/snap/` (including `/snap/lp/`). It is **not** strong
+security: the repo is public, hashes are in `auth-config.js`, and anyone
+can open raw HTML if they try hard enough.
+
+Plain Oculogica preview password is stored as GitHub Actions secrets on
+`heylead-martin/heylead-previews` (`PREVIEWS_OCULOGICA_EMAIL`,
+`PREVIEWS_OCULOGICA_PASSWORD`), not in git.
 
 ### Reset password from terminal (no "forgot password" email needed)
 

@@ -104,5 +104,24 @@
 
   <p class="foot">previews.heylead.com &middot; static demos - production builds move to WordPress after client sign-off. Login required.</p>
 </div>
+<script>
+(function () {
+  var user = window.PREVIEWS_USER;
+  if (!user || !user.allow || user.allow.indexOf('*') !== -1) return;
+  var allow = user.allow;
+  var cards = document.querySelectorAll('a.card');
+  for (var i = 0; i < cards.length; i++) {
+    var href = cards[i].getAttribute('href') || '';
+    var ok = false;
+    for (var j = 0; j < allow.length; j++) {
+      var prefix = allow[j];
+      if (href === prefix || href.indexOf(prefix + '/') === 0) ok = true;
+    }
+    if (!ok) cards[i].style.display = 'none';
+  }
+  var sub = document.querySelector('.sub');
+  if (sub) sub.textContent = 'Oculogica preview links. Not indexed.';
+})();
+</script>
 </body>
 </html>
