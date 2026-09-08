@@ -17,6 +17,7 @@ builds move to WordPress after the client approves.
 | `/avto-bg/` | Avto BG - Bulgarian used-car market intelligence (MVR fleet, first registrations, price checker, VIN). Source: `~/avto-bg`. Brand and domain TBD. |
 | `/applylab/` | ApplyLab - personal remote-job co-pilot (semi-auto apply, AI tailor). API: `~/applylab-api` Cloudflare Worker. |
 | `/karlaglow/` | KarlaGlow - product page + checkout testing Econt without the WooCommerce plugin. Uses delivery.econt.com customer_info form (shop pairing id) and live offices API. Preview orders stay in the browser until a backend write is added. |
+| `/oculogica/` | Oculogica landing-page drafts (oculogica.com copy). Source: private `heylead-martin/oculogica-heylead-lp`. Not the live client Lovable repo. |
 | `/bandwidth/` | Internal lab - connection bandwidth meter. Full test uses the official `@cloudflare/speedtest` engine (same ramp as speed.cloudflare.com). Live monitor is a 15 second sample of download, upload, and ping, then stops. Cannot list other LAN devices from the browser; see `~/wifiwatch` for local device discovery. |
 | `/spend/` | Internal lab - Grok / Claude / Codex remaining-vs-used % (same bars as each product's Settings > Usage) plus GitHub Actions minutes. Snapshot from `python3 ~/.grok/scripts/collect-spend.py`. |
 | `/tickerlab/` | Internal lab - AI CIO morning note. Grok reads live tape, web, and X, then says what to own (paper book). API: `~/applylab-api` `GET /desk/brief`. Not advice. |
