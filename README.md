@@ -61,6 +61,11 @@ Plain Oculogica preview password is stored as GitHub Actions secrets on
 `heylead-martin/heylead-previews` (`PREVIEWS_OCULOGICA_EMAIL`,
 `PREVIEWS_OCULOGICA_PASSWORD`), not in git.
 
+SNAP / Oculogica Calendly PAT is `CALENDLY_PAT` plus `CALENDLY_EVENT_URL` on
+this repo and `heylead-martin/snap-heylead-lp`. Local copy:
+`~/.config/heylead/oculogica-calendly.env`. Never commit it. Never ship it in
+the static Pages bundle (`VITE_` would leak it). Booking API needs a backend.
+
 ### Reset password from terminal (no "forgot password" email needed)
 
 ```bash
