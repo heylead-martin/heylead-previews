@@ -1,14 +1,14 @@
 #!/usr/bin/env node
 /**
- * Copy HeyLead /lp-sg/ landers into this GitHub Pages repo so they are
- * visible at previews.heylead.com/lp-sg/ (login) and not on public heylead.com.
+ * Copy only the /lp-sg/ hub (folder index) into this GitHub Pages repo.
+ * Individual landers stay public on heylead.com.
  *
  * Usage:
- *   node scripts/sync-lp-sg.mjs --from-live
  *   node scripts/sync-lp-sg.mjs /path/to/heylead/static-build/site/dist/lp-sg
+ *   node scripts/sync-lp-sg.mjs --from-live   (fails if heylead.com/lp-sg/ 302s)
  */
-import { mkdirSync, writeFileSync, readFileSync, readdirSync, statSync } from 'node:fs';
-import { dirname, join, relative } from 'node:path';
+import { mkdirSync, writeFileSync, readFileSync, statSync } from 'node:fs';
+import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
@@ -17,16 +17,7 @@ const OUT = join(ROOT, 'lp-sg');
 const LIVE = 'https://heylead.com';
 const PREVIEWS = 'https://previews.heylead.com';
 
-const SLUGS = [
-  '',
-  'seo',
-  'sem',
-  'meta-ads',
-  'website-optimization',
-  'website-development',
-  'website-performance',
-  'leads',
-];
+const SLUGS = [''];
 
 const AUTH_SNIPPET = `<script src="/auth-config.js"></script>
 <script src="/auth.js"></script>
@@ -51,10 +42,14 @@ const AUTH_SNIPPET = `<script src="/auth-config.js"></script>
 </script>
 `;
 
+function isHubPath(path) {
+  const p = String(path || '').split('?')[0].split('#')[0];
+  return p === '/lp-sg' || p === '/lp-sg/';
+}
+
 function keepRelative(path) {
   return (
-    path === '/lp-sg' ||
-    path.startsWith('/lp-sg/') ||
+    isHubPath(path) ||
     path.startsWith('/auth') ||
     path.startsWith('/login') ||
     path.startsWith('/logout')
@@ -64,7 +59,9 @@ function keepRelative(path) {
 function rewriteUrl(value) {
   if (!value) return value;
   if (value.startsWith('https://heylead.com/lp-sg')) {
-    return PREVIEWS + value.slice(LIVE.length);
+    const path = value.slice(LIVE.length);
+    if (isHubPath(path)) return PREVIEWS + path;
+    return value;
   }
   if (value.startsWith(LIVE + '/')) {
     const path = value.slice(LIVE.length);
@@ -79,7 +76,7 @@ function rewriteUrl(value) {
 }
 
 function rewriteHtml(html) {
-  let out = html.replace(/https:\/\/heylead\.com\/lp-sg/g, PREVIEWS + '/lp-sg');
+  let out = html.replace(/https:\/\/heylead\.com\/lp-sg\/?(?=["'#?\s<]|$)/g, PREVIEWS + '/lp-sg/');
   out = out.replace(/\b(href|src|action)=("|')([^"']+)\2/g, (m, attr, q, url) => {
     return attr + '=' + q + rewriteUrl(url) + q;
   });
@@ -99,18 +96,15 @@ function rewriteHtml(html) {
 
 async function fetchLive(slug) {
   const path = slug ? '/lp-sg/' + slug + '/' : '/lp-sg/';
-  const res = await fetch(LIVE + path, { redirect: 'follow' });
+  const res = await fetch(LIVE + path, { redirect: 'manual' });
+  if (res.status >= 300 && res.status < 400) {
+    throw new Error(
+      'GET ' + path + ' -> ' + res.status + ' ' + (res.headers.get('location') || '') +
+        '. Pass a local dist/lp-sg path instead of --from-live.',
+    );
+  }
   if (!res.ok) throw new Error('GET ' + path + ' -> ' + res.status);
   return res.text();
-}
-
-function walkHtml(dir, base = dir, out = []) {
-  for (const name of readdirSync(dir)) {
-    const p = join(dir, name);
-    if (statSync(p).isDirectory()) walkHtml(p, base, out);
-    else if (name.endsWith('.html')) out.push(p);
-  }
-  return out;
 }
 
 function writePage(relDir, html) {
@@ -133,18 +127,17 @@ async function fromLive() {
 }
 
 function fromDir(src) {
-  const files = walkHtml(src);
-  if (!files.length) throw new Error('No HTML in ' + src);
-  let n = 0;
-  for (const file of files) {
-    const rel = relative(src, dirname(file));
-    writePage(rel === '.' ? '' : rel, readFileSync(file, 'utf8'));
-    n++;
-    console.log('wrote lp-sg/' + (rel === '.' ? '' : rel + '/') + 'index.html');
-  }
-  return n;
+  const hub = join(src, 'index.html');
+  if (!statSync(hub).isFile()) throw new Error('Missing hub index at ' + hub);
+  writePage('', readFileSync(hub, 'utf8'));
+  console.log('wrote lp-sg/index.html');
+  return 1;
 }
 
-const arg = process.argv[2] || '--from-live';
+const arg = process.argv[2];
+if (!arg) {
+  console.error('Usage: node scripts/sync-lp-sg.mjs /path/to/dist/lp-sg');
+  process.exit(1);
+}
 const count = arg === '--from-live' ? await fromLive() : fromDir(arg);
 console.log('sync-lp-sg: ' + count + ' pages -> ' + OUT);
