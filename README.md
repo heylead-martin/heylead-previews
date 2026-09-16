@@ -22,6 +22,7 @@ builds move to WordPress after the client approves.
 | `/bandwidth/` | Internal lab - connection bandwidth meter. Full test uses the official `@cloudflare/speedtest` engine (same ramp as speed.cloudflare.com). Live monitor is a 15 second sample of download, upload, and ping, then stops. Cannot list other LAN devices from the browser; see `~/wifiwatch` for local device discovery. |
 | `/spend/` | Internal lab - Grok / Claude / Codex remaining-vs-used % (same bars as each product's Settings > Usage) plus GitHub Actions minutes. Snapshot from `python3 ~/.grok/scripts/collect-spend.py`. |
 | `/tickerlab/` | Internal lab - AI CIO morning note. Grok reads live tape, web, and X, then says what to own (paper book). API: `~/applylab-api` `GET /desk/brief`. Not advice. |
+| `/lp-sg/` | HeyLead's own Singapore paid landers. Public `heylead.com/lp-sg/` 302s here until ads go live. Refresh with `node scripts/sync-lp-sg.mjs --from-live` (must run before the production gate, or from a local Astro `dist/lp-sg`). Source: `heylead-theme` `static-build/site/src/pages/lp-sg/`. |
 
 ## Adding a new client preview
 
