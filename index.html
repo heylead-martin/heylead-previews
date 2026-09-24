@@ -9,128 +9,269 @@
 <meta name="robots" content="noindex, nofollow, noarchive">
 <title>HeyLead - Client Previews</title>
 <style>
-  :root{--ink:#10151d;--muted:#68717e;--line:#e5e9ef}
+  :root{--ink:#10151d;--muted:#68717e;--line:#e5e9ef;--soft:#f4f6f9}
   *{box-sizing:border-box}
   body{margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
-    background:#f6f7fa;color:#10151d;line-height:1.6}
-  .wrap{max-width:720px;margin:0 auto;padding:64px 22px}
-  h1{font-size:1.5rem;margin:0 0 4px}
-  .sub{color:#68717e;margin:0 0 32px;font-size:.95rem}
-  a.card{display:block;background:#fff;border:1px solid #e5e9ef;border-radius:12px;
-    padding:18px 20px;margin-bottom:14px;text-decoration:none;color:inherit;
-    transition:box-shadow .15s,transform .15s}
-  a.card:hover{box-shadow:0 6px 22px rgba(16,21,29,.09);transform:translateY(-1px)}
-  .name{font-weight:700;font-size:1.05rem}
-  .desc{color:#68717e;font-size:.88rem;margin-top:2px}
-  .foot{margin-top:40px;color:#98a0ab;font-size:.8rem}
-  .topbar{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:4px}
-  .logout-link{flex:none;font-size:.78rem;font-weight:600;color:#68717e;text-decoration:none;
-    border:1px solid #e5e9ef;background:#fff;padding:.45rem .75rem;border-radius:999px}
-  .logout-link:hover{color:#10151d;border-color:#c9d0da}
+    background:#f6f7fa;color:var(--ink);line-height:1.5}
+  .wrap{max-width:880px;margin:0 auto;padding:48px 22px 72px}
+  h1{font-size:1.55rem;margin:0;letter-spacing:-0.02em}
+  .sub{color:var(--muted);margin:8px 0 0;font-size:.95rem}
+  .topbar{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem}
+  .logout-link{flex:none;margin-top:4px;font-size:.78rem;font-weight:600;color:var(--muted);text-decoration:none;
+    border:1px solid var(--line);background:#fff;padding:.45rem .75rem;border-radius:999px}
+  .logout-link:hover{color:var(--ink);border-color:#c9d0da}
+  .group{margin-top:36px}
+  .group h2{margin:0 0 12px;font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#8b949e}
+  .domain{background:#fff;border:1px solid var(--line);border-radius:14px;margin-bottom:12px;overflow:hidden}
+  .domain-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;padding:14px 16px 0}
+  .domain-head h3{margin:0;font-size:1.02rem}
+  .host{flex:none;color:#98a0ab;font-size:.75rem;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+  .links{display:grid;gap:2px;padding:8px}
+  a.card{display:block;padding:10px 12px;border-radius:10px;text-decoration:none;color:inherit}
+  a.card:hover{background:var(--soft)}
+  .row{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+  .name{font-weight:650;font-size:.96rem}
+  .desc{color:var(--muted);font-size:.84rem;margin-top:2px}
+  .path{margin-top:4px;color:#98a0ab;font-size:.75rem;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+  .pill{display:inline-block;margin-left:8px;padding:1px 7px;border-radius:999px;background:#e7f0ff;color:#0b4db5;
+    font-size:.68rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;vertical-align:1px}
+  .solo{padding:0}
+  .solo a.card{padding:14px 16px}
+  .foot{margin-top:36px;color:#98a0ab;font-size:.8rem}
+  @media (max-width:640px){
+    .wrap{padding:28px 16px 64px}
+    .row,.domain-head{flex-direction:column;gap:2px}
+    .host{font-size:.72rem}
+  }
 </style>
 </head>
 <body>
 <div class="wrap">
   <div class="topbar">
-    <h1>Client Previews</h1>
+    <div>
+      <h1>Client Previews</h1>
+      <p class="sub">HeyLead demo links, grouped by site. Not indexed. Share a URL directly.</p>
+    </div>
     <a class="logout-link" href="/logout.html">Log out</a>
   </div>
-  <p class="sub">HeyLead - internal demo links. Not indexed; share URLs directly with clients.</p>
 
-  <a class="card" href="/union/">
-    <div class="name">Union Locksmiths</div>
-    <div class="desc">24/7 locksmith, Singapore - recovered &amp; rebuilt site</div>
-  </a>
-  <a class="card" href="/arc/">
-    <div class="name">ARC Home Management Services</div>
-    <div class="desc">Umbrella brand site - 1800 CLEANER / Michael Sweet</div>
-  </a>
-  <a class="card" href="/1800/">
-    <div class="name">1800 CLEANER</div>
-    <div class="desc">Site redesign preview</div>
-  </a>
-  <a class="card" href="/speakscore/">
-    <div class="name">SpeakScore</div>
-    <div class="desc">Internal lab - English speaking duel: pass the phone, or live-call a rival with an invite code; both waves react, both get scored</div>
-  </a>
-  <a class="card" href="/svatba/">
-    <div class="name">Svatba · Martin &amp; Yoana</div>
-    <div class="desc">Wedding invitation experiments (Tinder / Stories / Chat / Journey)</div>
-  </a>
-  <a class="card" href="/vistarates/">
-    <div class="name">Vistarates</div>
-    <div class="desc">US personal finance comparison - staging (rates, bonuses, cards, guides). Production target: vistarates.com</div>
-  </a>
-  <a class="card" href="/biasdrop/">
-    <div class="name">BiasDrop</div>
-    <div class="desc">K-pop superfan hub - idols, hot drops, light sticks, photocards, toys &amp; gadgets (neon concept demo)</div>
-  </a>
-  <a class="card" href="/imoti-bg/">
-    <div class="name">Имоти BG</div>
-    <div class="desc">Bulgarian real-estate market intel - top 10 cities, neighborhoods, bank/mortgage rates, 30y charts. Domain later.</div>
-  </a>
-  <a class="card" href="/avto-bg/">
-    <div class="name">Avto BG</div>
-    <div class="desc">Bulgarian used-car market intel - MVR register, asking prices and typical km from offers, fairness checker, VIN. Brand and domain TBD.</div>
-  </a>
-  <a class="card" href="/applylab/">
-    <div class="name">ApplyLab</div>
-    <div class="desc">Personal remote-job co-pilot - feed, match score, AI resume/cover tailor, application tracker.</div>
-  </a>
-  <a class="card" href="/karlaglow/">
-    <div class="name">KarlaGlow</div>
-    <div class="desc">Product + checkout preview - Econt delivery via their API/form, no WooCommerce plugin</div>
-  </a>
-  <a class="card" href="/oculogica/#/book">
-    <div class="name">Oculogica</div>
-    <div class="desc">Landing-page drafts for oculogica.com. Book-a-demo LP: /oculogica/#/book. Source: private heylead-martin/oculogica-heylead-lp.</div>
-  </a>
-  <a class="card" href="/snap/lp/">
-    <div class="name">SNAP</div>
-    <div class="desc">SNAP concussion landing-page draft (homepage brand, provider FAQs, Book a demo). Source: private heylead-martin/snap-heylead-lp.</div>
-  </a>
-  <a class="card" href="/snap/lp-v2/">
-    <div class="name">SNAP LP v2</div>
-    <div class="desc">Slightly tighter SNAP landing page: proof strip, clearer booking form, same brand. Preview only.</div>
-  </a>
-  <a class="card" href="/lp-sg/">
-    <div class="name">HeyLead SG paid landers</div>
-    <div class="desc">Singapore campaign hub (private). Individual landers stay public on heylead.com/lp-sg/leads/ and the other slugs.</div>
-  </a>
-  <a class="card" href="/tickerlab/">
-    <div class="name">TickerLab</div>
-    <div class="desc">Internal lab - AI desk: what is happening in the world, what to own, paper P/L if you take the book</div>
-  </a>
-  <a class="card" href="/bandwidth/">
-    <div class="name">Bandwidth</div>
-    <div class="desc">Internal lab - measure available download/upload/latency on the network you are on; live monitor when other devices hog the line</div>
-  </a>
-  <a class="card" href="/spend/">
-    <div class="name">Spend</div>
-    <div class="desc">Live remaining/used bars from Grok, Claude Code, Codex, plus GitHub Actions minutes</div>
-  </a>
+  <section class="group">
+    <h2>Client sites</h2>
 
-  <p class="foot">previews.heylead.com &middot; static demos - production builds move to WordPress after client sign-off. Login required.</p>
+    <article class="domain">
+      <div class="domain-head">
+        <h3>Oculogica</h3>
+        <div class="host">oculogica.com</div>
+      </div>
+      <div class="links">
+        <a class="card" href="/oculogica/#/request-a-demo-v2">
+          <div class="name">Request a demo v2 <span class="pill">Review</span></div>
+          <div class="desc">Same HubSpot form, plus an open Eastern time slot. This host does not submit or book. Not on the live site yet.</div>
+          <div class="path">/oculogica/#/request-a-demo-v2</div>
+        </a>
+        <a class="card" href="/oculogica/#/book">
+          <div class="name">Book a demo</div>
+          <div class="desc">Inline Calendly draft.</div>
+          <div class="path">/oculogica/#/book</div>
+        </a>
+        <a class="card" href="/oculogica/">
+          <div class="name">Site draft</div>
+          <div class="desc">Landing-page copy of the current oculogica.com pages.</div>
+          <div class="path">/oculogica/</div>
+        </a>
+      </div>
+    </article>
+
+    <article class="domain">
+      <div class="domain-head">
+        <h3>SNAP</h3>
+        <div class="host">snapconcussion.com</div>
+      </div>
+      <div class="links">
+        <a class="card" href="/snap/lp/">
+          <div class="name">Landing page</div>
+          <div class="desc">Homepage brand, provider FAQs, book a demo.</div>
+          <div class="path">/snap/lp/</div>
+        </a>
+        <a class="card" href="/snap/lp-v2/">
+          <div class="name">Landing page v2</div>
+          <div class="desc">Tighter layout, proof strip, clearer booking form.</div>
+          <div class="path">/snap/lp-v2/</div>
+        </a>
+      </div>
+    </article>
+
+    <article class="domain solo">
+      <a class="card" href="/karlaglow/">
+        <div class="row">
+          <div class="name">KarlaGlow</div>
+          <div class="host">karlaglow.com</div>
+        </div>
+        <div class="desc">Product and checkout preview. Econt delivery, no WooCommerce plugin.</div>
+      </a>
+    </article>
+
+    <article class="domain solo">
+      <a class="card" href="/1800/">
+        <div class="row">
+          <div class="name">1800 CLEANER</div>
+          <div class="host">1800cleaner.com.au</div>
+        </div>
+        <div class="desc">Site redesign preview.</div>
+      </a>
+    </article>
+
+    <article class="domain solo">
+      <a class="card" href="/arc/">
+        <div class="row">
+          <div class="name">ARC Home Management</div>
+          <div class="host">with 1800 CLEANER</div>
+        </div>
+        <div class="desc">Umbrella brand site for Michael Sweet.</div>
+      </a>
+    </article>
+
+    <article class="domain solo">
+      <a class="card" href="/union/">
+        <div class="row">
+          <div class="name">Union Locksmiths</div>
+          <div class="host">unionlocksmiths.sg</div>
+        </div>
+        <div class="desc">24/7 locksmith, Singapore. Recovered and rebuilt site.</div>
+      </a>
+    </article>
+
+    <article class="domain solo">
+      <a class="card" href="/vistarates/">
+        <div class="row">
+          <div class="name">Vistarates</div>
+          <div class="host">vistarates.com</div>
+        </div>
+        <div class="desc">US personal finance staging. Rates, bonuses, cards, and guides.</div>
+      </a>
+    </article>
+  </section>
+
+  <section class="group">
+    <h2>HeyLead</h2>
+    <article class="domain solo">
+      <a class="card" href="/lp-sg/">
+        <div class="row">
+          <div class="name">Singapore paid landers</div>
+          <div class="host">heylead.com</div>
+        </div>
+        <div class="desc">Private campaign hub. Individual landers stay public on heylead.com/lp-sg/leads/ and the other slugs.</div>
+      </a>
+    </article>
+  </section>
+
+  <section class="group">
+    <h2>Internal tools</h2>
+    <article class="domain solo">
+      <a class="card" href="/speakscore/">
+        <div class="row"><div class="name">SpeakScore</div><div class="host">lab</div></div>
+        <div class="desc">English speaking duel. Pass the phone, or live-call a rival with an invite code.</div>
+      </a>
+    </article>
+    <article class="domain solo">
+      <a class="card" href="/applylab/">
+        <div class="row"><div class="name">ApplyLab</div><div class="host">lab</div></div>
+        <div class="desc">Remote-job co-pilot. Feed, match score, resume tailor, application tracker.</div>
+      </a>
+    </article>
+    <article class="domain solo">
+      <a class="card" href="/tickerlab/">
+        <div class="row"><div class="name">TickerLab</div><div class="host">lab</div></div>
+        <div class="desc">AI desk. What is happening, what to own, paper P/L if you take the book.</div>
+      </a>
+    </article>
+    <article class="domain solo">
+      <a class="card" href="/bandwidth/">
+        <div class="row"><div class="name">Bandwidth</div><div class="host">lab</div></div>
+        <div class="desc">Download, upload, and latency on the network you are on.</div>
+      </a>
+    </article>
+    <article class="domain solo">
+      <a class="card" href="/spend/">
+        <div class="row"><div class="name">Spend</div><div class="host">lab</div></div>
+        <div class="desc">Remaining and used bars for Grok, Claude Code, Codex, and GitHub Actions minutes.</div>
+      </a>
+    </article>
+  </section>
+
+  <section class="group">
+    <h2>Personal and experiments</h2>
+    <article class="domain solo">
+      <a class="card" href="/svatba/">
+        <div class="row"><div class="name">Svatba</div><div class="host">Martin and Yoana</div></div>
+        <div class="desc">Wedding invitation experiments. Tinder, Stories, Chat, Journey.</div>
+      </a>
+    </article>
+    <article class="domain solo">
+      <a class="card" href="/imoti-bg/">
+        <div class="row"><div class="name">Imoti BG</div><div class="host">domain later</div></div>
+        <div class="desc">Bulgarian real-estate market intel. Cities, neighborhoods, bank and mortgage rates.</div>
+      </a>
+    </article>
+    <article class="domain solo">
+      <a class="card" href="/avto-bg/">
+        <div class="row"><div class="name">Avto BG</div><div class="host">domain later</div></div>
+        <div class="desc">Bulgarian used-car market intel. Register, asking prices, typical km, VIN.</div>
+      </a>
+    </article>
+    <article class="domain solo">
+      <a class="card" href="/biasdrop/">
+        <div class="row"><div class="name">BiasDrop</div><div class="host">concept</div></div>
+        <div class="desc">K-pop superfan hub. Idols, drops, light sticks, photocards, toys.</div>
+      </a>
+    </article>
+  </section>
+
+  <p class="foot">previews.heylead.com. Static demos behind login. Not indexed.</p>
 </div>
 <script>
 (function () {
   var user = window.PREVIEWS_USER;
-  if (!user || !user.allow || user.allow.indexOf('*') !== -1) return;
+  if (!user || !user.allow || user.allow.indexOf("*") !== -1) return;
   var allow = user.allow;
-  var cards = document.querySelectorAll('a.card');
-  for (var i = 0; i < cards.length; i++) {
-    var href = cards[i].getAttribute('href') || '';
-    var ok = false;
+
+  function hrefAllowed(href) {
     for (var j = 0; j < allow.length; j++) {
       var prefix = allow[j];
-      if (href === prefix || href.indexOf(prefix + '/') === 0) ok = true;
+      if (href === prefix || href.indexOf(prefix + "/") === 0 || href.indexOf(prefix + "#") === 0) return true;
     }
-    if (!ok) cards[i].style.display = 'none';
+    return false;
   }
-  var sub = document.querySelector('.sub');
-  if (sub) sub.textContent = 'Oculogica preview links. Not indexed.';
-  var foot = document.querySelector('.foot');
-  if (foot) foot.textContent = 'previews.heylead.com · SNAP and Oculogica drafts. Login required.';
+
+  var cards = document.querySelectorAll("a.card");
+  for (var i = 0; i < cards.length; i++) {
+    if (!hrefAllowed(cards[i].getAttribute("href") || "")) cards[i].style.display = "none";
+  }
+
+  var domains = document.querySelectorAll(".domain");
+  for (var d = 0; d < domains.length; d++) {
+    var domainCards = domains[d].querySelectorAll("a.card");
+    var anyCard = false;
+    for (var k = 0; k < domainCards.length; k++) {
+      if (domainCards[k].style.display !== "none") anyCard = true;
+    }
+    if (!anyCard) domains[d].style.display = "none";
+  }
+
+  var groups = document.querySelectorAll(".group");
+  for (var g = 0; g < groups.length; g++) {
+    var domainNodes = groups[g].querySelectorAll(".domain");
+    var anyDomain = false;
+    for (var n = 0; n < domainNodes.length; n++) {
+      if (domainNodes[n].style.display !== "none") anyDomain = true;
+    }
+    if (!anyDomain) groups[g].style.display = "none";
+  }
+
+  var sub = document.querySelector(".sub");
+  if (sub) sub.textContent = "Oculogica and SNAP preview links. Not indexed.";
+  var foot = document.querySelector(".foot");
+  if (foot) foot.textContent = "previews.heylead.com. SNAP and Oculogica drafts. Login required.";
 })();
 </script>
 </body>
