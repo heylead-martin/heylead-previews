@@ -368,6 +368,22 @@ label { display: grid; gap: 6px; font-size: 0.86rem; font-weight: 600; color: #c
   color: #d5deea;
 }
 .ul-compact { margin: 0; padding-left: 1.1rem; color: var(--muted); font-size: 0.88rem; }
+.match-notes { margin: 0 0 12px; padding-left: 1.1rem; color: var(--muted); font-size: 0.86rem; }
+.match-notes li { margin-bottom: 3px; }
+.tracked {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--accent-2);
+  margin-top: 3px;
+}
+.keywords { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+.history-block { display: grid; gap: 4px; }
+.history-block div { color: var(--muted); }
+.app-detail td { background: #10161f; }
+.notes-box { width: 100%; min-height: 72px; margin-top: 6px; }
+.packet-actions { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0 12px; }
 
 .form-grid { display: grid; gap: 14px; }
 .form-row.two { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }

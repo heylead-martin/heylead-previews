@@ -51,14 +51,14 @@
       <section class="view" id="view-dashboard">
         <div class="stats" id="dash-stats">
           <div class="stat"><div class="stat-val" id="stat-jobs">-</div><div class="stat-lbl">Jobs cached</div></div>
-          <div class="stat"><div class="stat-val" id="stat-strong">-</div><div class="stat-lbl">Strong matches (70+)</div></div>
+          <div class="stat"><div class="stat-val" id="stat-strong">-</div><div class="stat-lbl">Shortlist (60+)</div></div>
           <div class="stat"><div class="stat-val" id="stat-apps">-</div><div class="stat-lbl">Applications</div></div>
           <div class="stat"><div class="stat-val" id="stat-prepared">-</div><div class="stat-lbl">Ready to submit</div></div>
         </div>
         <div class="grid-2">
           <div class="card">
             <div class="card-h">
-              <h2>Top matches</h2>
+              <h2>Shortlist</h2>
               <button type="button" class="btn sm ghost" data-goto="jobs">See all</button>
             </div>
             <div id="dash-matches" class="list"></div>
@@ -77,10 +77,11 @@
             <li><strong>Connect</strong> Worker URL + APP_TOKEN in Settings (once per browser).</li>
             <li><strong>Upload resume</strong> on Profile (PDF or TXT) + skills and target roles. Save once.</li>
             <li><strong>Browse</strong> remote jobs from Remotive, Jobicy, and RemoteOK (scored to your profile).</li>
-            <li><strong>AI tailor</strong> on a job: rewrites your resume + cover letter from that job description.</li>
-            <li><strong>Apply</strong> yourself on the listing (semi-auto), copy materials, mark status in Tracker.</li>
+            <li><strong>Prepare application</strong> on a shortlisted job. ApplyLab rewrites your resume and cover letter, adds keywords and interview prompts, and saves the packet to Tracker.</li>
+            <li><strong>Apply</strong> on the listing yourself. Download the PDF, then mark the job Applied.</li>
           </ol>
-          <p class="hint">Boards: Remotive, Jobicy (incl. SEO/marketing tags), RemoteOK, Arbeitnow. Refresh jobs after setup. Search matches title, tags, and description.</p>
+          <p class="hint" id="dash-nudge"></p>
+          <p class="hint">Boards: Remotive, Jobicy (incl. SEO/marketing tags), RemoteOK, Arbeitnow. The shortlist is 60+ against your target roles and locations. Search matches title, tags, and description.</p>
         </div>
       </section>
 
@@ -96,9 +97,10 @@
             <option value="arbeitnow">Arbeitnow</option>
           </select>
           <select id="jobs-min-score" class="input">
-            <option value="0" selected>Any score</option>
+            <option value="0">Any score</option>
             <option value="40">40+</option>
             <option value="50">50+</option>
+            <option value="60" selected>60+ shortlist</option>
             <option value="70">70+ (strong)</option>
             <option value="80">80+</option>
           </select>
@@ -158,7 +160,9 @@
             <label>Currency<input name="salaryCurrency" class="input" value="EUR"></label>
           </div>
           <label>Preferred locations <span class="soft">(comma-separated)</span><input name="preferredLocations" class="input" placeholder="Worldwide, Europe, EU, Remote"></label>
+          <label>Work authorization<input name="workAuth" class="input" placeholder="US"></label>
           <label>Exclude companies <span class="soft">(comma-separated)</span><input name="excludeCompanies" class="input"></label>
+          <div id="profile-history" class="hint"></div>
           <div class="resume-upload card-inset">
             <div class="card-h" style="margin:0 0 8px">
               <h2 style="font-size:0.95rem">Base resume</h2>

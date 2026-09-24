@@ -5,7 +5,7 @@
   const COOKIE_MAX_AGE = 60 * 60 * 24 * 400; // ~13 months
   const titles = {
     dashboard: ['Dashboard', 'Find remote roles, score matches, tailor materials, track applications.'],
-    jobs: ['Job feed', 'Remote full-time listings scored against your profile.'],
+    jobs: ['Job feed', 'Remote listings scored against your profile. 60+ is the shortlist.'],
     tracker: ['Application tracker', 'Prepared, applied, interviews - keep status in one place.'],
     profile: ['Profile', 'Your base resume and preferences. Better profile = better matches and tailoring.'],
     settings: ['Settings', 'Connect the ApplyLab Worker that holds your xAI key and data.'],
@@ -16,6 +16,7 @@
     jobs: [],
     selectedJobId: null,
     applications: [],
+    expandedAppId: null,
     profile: null,
     tailorCache: {},
     lastJobsMeta: null,
@@ -227,7 +228,16 @@
     $('#view-title').textContent = t;
     $('#view-lede').textContent = d;
     if (name === 'dashboard') refreshDashboard();
-    if (name === 'jobs' && !state.jobs.length) loadJobs();
+    if (name === 'jobs') {
+      if (!state.jobs.length) {
+        loadJobs().then(() => {
+          if (state.selectedJobId) selectJob(state.selectedJobId);
+        });
+      } else {
+        renderJobList();
+        if (state.selectedJobId) selectJob(state.selectedJobId);
+      }
+    }
     if (name === 'tracker') loadApplications();
     if (name === 'profile') fillProfileForm();
     if (name === 'settings') fillSettings();
@@ -243,14 +253,15 @@
       const q = $('#jobs-q').value.trim();
       const source = $('#jobs-source').value;
       const minScore = parseInt($('#jobs-min-score').value || '0', 10);
-      const params = new URLSearchParams({ limit: '150' });
+      const params = new URLSearchParams({ limit: '200' });
       if (q) params.set('q', q);
       if (source) params.set('source', source);
       const data = await api('/api/jobs?' + params.toString());
-      state.jobs = (data.jobs || []).filter((j) => (j.matchScore || 0) >= minScore);
+      state.jobs = data.jobs || [];
       state.lastJobsMeta = {
         totalCached: data.totalCached || 0,
         apiCount: data.count || 0,
+        shortlistCount: data.shortlistCount,
         q,
         minScore,
       };
@@ -259,37 +270,54 @@
         const still = state.jobs.find((j) => j.id === state.selectedJobId);
         if (still) selectJob(still.id);
       }
+      const shown = visibleJobs().length;
       const total = data.totalCached || (data.jobs || []).length;
-      toast(`Showing ${state.jobs.length} of ${total} jobs` + (minScore ? ` (score ≥ ${minScore})` : ''));
+      toast('Showing ' + shown + ' of ' + total + ' jobs' + (minScore ? ' (score ' + minScore + '+)' : ''));
     } catch (e) {
       list.innerHTML = `<div class="empty">${esc(e.message)}<br><br>Open <strong>Settings</strong>, paste APP_TOKEN, Save &amp; test, then try again.</div>`;
       toast(e.message, true);
     }
   }
 
+  function minScore() {
+    return parseInt(($('#jobs-min-score') && $('#jobs-min-score').value) || '0', 10) || 0;
+  }
+
+  function visibleJobs() {
+    const min = minScore();
+    return state.jobs.filter((j) => (j.matchScore || 0) >= min);
+  }
+
+  function appForJob(id) {
+    return state.applications.find((a) => a.jobId === id);
+  }
+
   function renderJobList() {
     const list = $('#job-list');
-    if (!state.jobs.length) {
+    const jobs = visibleJobs();
+    if (!jobs.length) {
       const meta = state.lastJobsMeta || {};
       const bits = [];
-      if (meta.q) bits.push(`No results for “${meta.q}”.`);
+      if (meta.q) bits.push('No results for "' + esc(meta.q) + '".');
       else bits.push('No jobs in this view.');
-      if (meta.totalCached) bits.push(`Cache has ${meta.totalCached} jobs total.`);
-      bits.push('Clear search, set score to <strong>Any score</strong>, then Search - or click <strong>Refresh jobs</strong> in the top bar.');
-      list.innerHTML = `<div class="empty">${bits.join(' ')}</div>`;
+      if (meta.totalCached) bits.push('Cache has ' + meta.totalCached + ' jobs total.');
+      bits.push('Set score to <strong>Any score</strong>, then Search - or click <strong>Refresh jobs</strong>.');
+      list.innerHTML = '<div class="empty">' + bits.join(' ') + '</div>';
       return;
     }
-    list.innerHTML = state.jobs
-      .map(
-        (j) => `
+    list.innerHTML = jobs
+      .map((j) => {
+        const tracked = appForJob(j.id);
+        return `
       <button type="button" class="list-item ${j.id === state.selectedJobId ? 'active' : ''}" data-job="${escAttr(j.id)}">
         <div>
-          <div class="list-title">${esc(j.title)}</div>
-          <div class="list-meta">${esc(j.company)} · ${esc(j.source)} · ${esc(j.location || 'Remote')}</div>
+          <div class="list-title">${esc(cleanLabel(j.title))}</div>
+          <div class="list-meta">${esc(cleanLabel(j.company))} · ${esc(j.source)} · ${esc(cleanLabel(j.location || 'Remote'))}</div>
+          ${tracked ? `<div class="tracked">${esc(tracked.status)}</div>` : ''}
         </div>
         <span class="score ${scoreClass(j.matchScore || 0)}">${j.matchScore ?? '-'}</span>
-      </button>`
-      )
+      </button>`;
+      })
       .join('');
   }
 
@@ -447,6 +475,8 @@
       return;
     }
     const cached = state.tailorCache[id];
+    const tracked = appForJob(id);
+    const hasPacket = !!(cached?.coverLetter || cached?.tailoredResume || tracked?.coverLetter || tracked?.tailoredResume);
     const title = cleanLabel(j.title);
     const company = cleanLabel(j.company);
     const tags = (j.tags || [])
@@ -478,6 +508,11 @@
       .map((c) => `<span class="chip">${esc(c)}</span>`)
       .join('');
 
+    const noteHtml = (j.matchNotes || []).length
+      ? `<ul class="match-notes">${j.matchNotes.map((n) => `<li>${esc(n)}</li>`).join('')}</ul>`
+      : '';
+    const packet = cached || (hasPacket ? packetFromApp(tracked) : null);
+
     box.innerHTML = `
       <div class="job-head">
         <div class="job-head-main">
@@ -486,26 +521,49 @@
         </div>
         <span class="score ${scoreClass(j.matchScore || 0)}">${j.matchScore ?? '-'} match</span>
       </div>
+      ${noteHtml}
       <div class="meta-row">${chipHtml}</div>
       <div class="detail-actions">
-        <button type="button" class="btn primary" id="btn-tailor" data-id="${escAttr(j.id)}">AI tailor materials</button>
+        <button type="button" class="btn primary" id="btn-tailor" data-id="${escAttr(j.id)}">${hasPacket ? 'Update application' : 'Prepare application'}</button>
         <a class="btn" href="${escAttr(j.url)}" target="_blank" rel="noopener">Open job listing</a>
+        <button type="button" class="btn" id="btn-download-pdf" data-id="${escAttr(j.id)}" ${hasPacket ? '' : 'disabled'}>Download PDF</button>
+        <button type="button" class="btn" id="btn-mark-applied" data-id="${escAttr(j.id)}" ${hasPacket && tracked?.status !== 'applied' ? '' : 'disabled'}>${tracked?.status === 'applied' ? 'Applied' : 'Mark applied'}</button>
         <button type="button" class="btn ghost" id="btn-save-prepared" data-id="${escAttr(j.id)}">Save to tracker</button>
-        <button type="button" class="btn ghost" id="btn-copy-cover" ${cached?.coverLetter ? '' : 'disabled'}>Copy cover letter</button>
       </div>
+      <div class="materials" id="materials">${packet ? renderMaterials(packet) : ''}</div>
       <div class="jd">
         <div class="jd-label">Job description</div>
         <div class="jd-body">${formatJobDescription(j.description || '')}</div>
       </div>
-      <div class="materials" id="materials">${cached ? renderMaterials(cached) : ''}</div>
     `;
+    if (window.matchMedia('(max-width: 980px)').matches) {
+      box.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+
+  function packetFromApp(a) {
+    if (!a) return null;
+    return {
+      matchScore: a.matchScore,
+      matchReasons: a.matchReasons || [],
+      gaps: a.gaps || [],
+      applyTips: a.applyTips || [],
+      interviewQuestions: a.interviewQuestions || [],
+      keywordsToUse: a.keywords || [],
+      coverLetter: a.coverLetter || '',
+      tailoredResume: a.tailoredResume || '',
+    };
   }
 
   function renderMaterials(m) {
+    const keywords = m.keywordsToUse || m.keywords || [];
+    const questions = m.interviewQuestions || [];
     return `
       ${m.matchReasons?.length ? `<div><h3>Why it matches</h3><ul class="ul-compact">${m.matchReasons.map((r) => `<li>${esc(r)}</li>`).join('')}</ul></div>` : ''}
       ${m.gaps?.length ? `<div><h3>Gaps / risks</h3><ul class="ul-compact">${m.gaps.map((r) => `<li>${esc(r)}</li>`).join('')}</ul></div>` : ''}
+      ${keywords.length ? `<div><h3>Keywords <button type="button" class="btn sm ghost" data-copy="keywords">Copy</button></h3><div class="keywords">${keywords.map((k) => `<span class="chip">${esc(k)}</span>`).join('')}</div></div>` : ''}
       ${m.applyTips?.length ? `<div><h3>Apply tips</h3><ul class="ul-compact">${m.applyTips.map((r) => `<li>${esc(r)}</li>`).join('')}</ul></div>` : ''}
+      ${questions.length ? `<div><h3>Interview prompts</h3><ul class="ul-compact">${questions.map((r) => `<li>${esc(r)}</li>`).join('')}</ul></div>` : ''}
       <div>
         <h3>Tailored resume <button type="button" class="btn sm ghost" data-copy="resume">Copy</button></h3>
         <pre id="mat-resume">${esc(m.tailoredResume || '')}</pre>
@@ -521,7 +579,7 @@
     const btn = $('#btn-tailor');
     if (btn) {
       btn.disabled = true;
-      btn.textContent = 'Tailoring…';
+      btn.textContent = 'Preparing...';
     }
     try {
       const data = await api('/api/tailor', {
@@ -529,45 +587,57 @@
         body: JSON.stringify({ jobId: id }),
       });
       state.tailorCache[id] = data;
-      if (typeof data.matchScore === 'number') {
-        const j = state.jobs.find((x) => x.id === id);
-        if (j) j.matchScore = data.matchScore;
-      }
+      await savePrepared(id, true);
       selectJob(id);
-      toast('Materials ready');
+      toast('Application packet saved');
     } catch (e) {
       toast(e.message, true);
       if (btn) {
         btn.disabled = false;
-        btn.textContent = 'AI tailor materials';
+        btn.textContent = 'Prepare application';
       }
     }
   }
 
-  async function savePrepared(id) {
+  async function savePrepared(id, silent) {
     const j = state.jobs.find((x) => x.id === id);
-    if (!j) return;
+    if (!j) return null;
     const m = state.tailorCache[id] || {};
+    const body = {
+      jobId: j.id,
+      jobTitle: j.title,
+      company: j.company,
+      jobUrl: j.url,
+      source: j.source,
+      matchScore: j.matchScore,
+      status: 'prepared',
+    };
+    if (m.coverLetter) body.coverLetter = m.coverLetter;
+    if (m.tailoredResume) body.tailoredResume = m.tailoredResume;
+    if ((m.keywordsToUse || []).length) body.keywords = m.keywordsToUse;
+    if ((m.gaps || []).length) body.gaps = m.gaps;
+    if ((m.applyTips || []).length) body.applyTips = m.applyTips;
+    if ((m.interviewQuestions || []).length) body.interviewQuestions = m.interviewQuestions;
+    if ((m.matchReasons || []).length) body.matchReasons = m.matchReasons;
     try {
-      await api('/api/applications', {
+      const data = await api('/api/applications', {
         method: 'POST',
-        body: JSON.stringify({
-          jobId: j.id,
-          jobTitle: j.title,
-          company: j.company,
-          jobUrl: j.url,
-          source: j.source,
-          matchScore: m.matchScore ?? j.matchScore,
-          coverLetter: m.coverLetter || '',
-          tailoredResume: m.tailoredResume || '',
-          status: m.coverLetter || m.tailoredResume ? 'prepared' : 'prepared',
-        }),
+        body: JSON.stringify(body),
       });
-      toast('Saved to tracker');
-      loadApplications(true);
+      if (data.application) upsertLocalApp(data.application);
+      if (!silent) toast(data.updated ? 'Tracker updated' : 'Saved to tracker');
+      if (state.view === 'tracker') renderTracker();
+      return data.application;
     } catch (e) {
       toast(e.message, true);
+      return null;
     }
+  }
+
+  function upsertLocalApp(app) {
+    const idx = state.applications.findIndex((a) => a.id === app.id || (app.jobId && a.jobId === app.jobId));
+    if (idx >= 0) state.applications.splice(idx, 1);
+    state.applications.unshift(app);
   }
 
   /* ---------- applications ---------- */
@@ -576,6 +646,7 @@
     try {
       const data = await api('/api/applications');
       state.applications = data.applications || [];
+      hydrateTailorFromApps();
       renderTracker();
       if (!silent) refreshDashAppsOnly();
     } catch (e) {
@@ -590,7 +661,7 @@
     if (statusFilter) apps = apps.filter((a) => a.status === statusFilter);
     const wrap = $('#tracker-list');
     if (!apps.length) {
-      wrap.innerHTML = '<div class="empty">No applications yet. Tailor a job and save it to the tracker.</div>';
+      wrap.innerHTML = '<div class="empty">No applications yet. Prepare a job from the shortlist and it will land here.</div>';
       return;
     }
     wrap.innerHTML = `
@@ -624,15 +695,35 @@
               </td>
               <td class="list-meta">${esc(fmtDate(a.updatedAt || a.createdAt))}</td>
               <td>
-                <button type="button" class="btn sm ghost" data-view-app="${escAttr(a.id)}">Materials</button>
+                <button type="button" class="btn sm ghost" data-view-app="${escAttr(a.id)}">${state.expandedAppId === a.id ? 'Hide' : 'Packet'}</button>
                 <button type="button" class="btn sm danger" data-del-app="${escAttr(a.id)}">Delete</button>
               </td>
-            </tr>`
+            </tr>
+            ${state.expandedAppId === a.id ? renderAppDetailRow(a) : ''}`
             )
             .join('')}
         </tbody>
       </table>
     `;
+  }
+
+  function renderAppDetailRow(a) {
+    const packet = packetFromApp(a);
+    return `
+      <tr class="app-detail">
+        <td colspan="5" data-packet="${escAttr(a.id)}">
+          <div class="packet-actions">
+            ${a.jobUrl ? `<a class="btn sm" href="${escAttr(a.jobUrl)}" target="_blank" rel="noopener">Open listing</a>` : ''}
+            <button type="button" class="btn sm" data-pdf-app="${escAttr(a.id)}" ${a.coverLetter || a.tailoredResume ? '' : 'disabled'}>Download PDF</button>
+            <button type="button" class="btn sm" data-applied-app="${escAttr(a.id)}" ${a.status === 'applied' ? 'disabled' : ''}>${a.status === 'applied' ? 'Applied' : 'Mark applied'}</button>
+          </div>
+          ${renderMaterials(packet)}
+          <label>Notes
+            <textarea class="input notes-box" data-notes-for="${escAttr(a.id)}">${esc(a.notes || '')}</textarea>
+          </label>
+          <button type="button" class="btn sm ghost" data-save-notes="${escAttr(a.id)}">Save notes</button>
+        </td>
+      </tr>`;
   }
 
   async function updateAppStatus(id, status) {
@@ -661,25 +752,72 @@
     }
   }
 
-  function viewAppMaterials(id) {
-    const a = state.applications.find((x) => x.id === id);
-    if (!a) return;
-    const box = window.open('', '_blank');
-    if (!box) {
-      toast('Popup blocked - allow popups to view materials', true);
+  function toggleAppPacket(id) {
+    state.expandedAppId = state.expandedAppId === id ? null : id;
+    renderTracker();
+  }
+
+  async function markApplied(id) {
+    const j = state.jobs.find((x) => x.id === id);
+    let app = appForJob(id);
+    if (!app && j) app = await savePrepared(id, true);
+    if (!app) {
+      toast('Save the job to the tracker first', true);
       return;
     }
-    box.document.write(`<!doctype html><title>${esc(a.jobTitle)} - materials</title>
-      <style>body{font-family:system-ui;max-width:720px;margin:40px auto;padding:0 16px;line-height:1.5;color:#111}
-      pre{white-space:pre-wrap;background:#f4f6f8;padding:14px;border-radius:8px;font-size:13px}
-      h1{font-size:1.3rem} h2{font-size:1rem;margin-top:28px}</style>
-      <h1>${esc(a.jobTitle)} @ ${esc(a.company)}</h1>
-      <p>Status: ${esc(a.status)} · Score: ${esc(String(a.matchScore ?? '-'))}</p>
-      ${a.jobUrl ? `<p><a href="${escAttr(a.jobUrl)}">Job listing</a></p>` : ''}
-      <h2>Cover letter</h2><pre>${esc(a.coverLetter || '(none)')}</pre>
-      <h2>Tailored resume</h2><pre>${esc(a.tailoredResume || '(none)')}</pre>
-      <h2>Notes</h2><pre>${esc(a.notes || '')}</pre>`);
-    box.document.close();
+    try {
+      const data = await api('/api/applications/' + encodeURIComponent(app.id), {
+        method: 'PATCH',
+        body: JSON.stringify({ status: 'applied' }),
+      });
+      if (data.application) upsertLocalApp(data.application);
+      toast('Marked applied');
+      if (state.view === 'jobs' && state.selectedJobId) selectJob(state.selectedJobId);
+      if (state.view === 'tracker') renderTracker();
+      refreshDashAppsOnly();
+    } catch (e) {
+      toast(e.message, true);
+    }
+  }
+
+  async function markAppliedByApp(appId) {
+    const app = state.applications.find((a) => a.id === appId);
+    if (!app) return;
+    try {
+      const data = await api('/api/applications/' + encodeURIComponent(appId), {
+        method: 'PATCH',
+        body: JSON.stringify({ status: 'applied' }),
+      });
+      if (data.application) upsertLocalApp(data.application);
+      toast('Marked applied');
+      renderTracker();
+      refreshDashAppsOnly();
+    } catch (e) {
+      toast(e.message, true);
+    }
+  }
+
+  async function saveAppNotes(id) {
+    const box = document.querySelector('[data-notes-for="' + CSS.escape(id) + '"]');
+    if (!box) return;
+    try {
+      const data = await api('/api/applications/' + encodeURIComponent(id), {
+        method: 'PATCH',
+        body: JSON.stringify({ notes: box.value }),
+      });
+      if (data.application) upsertLocalApp(data.application);
+      toast('Notes saved');
+    } catch (e) {
+      toast(e.message, true);
+    }
+  }
+
+  function hydrateTailorFromApps() {
+    for (const a of state.applications) {
+      if (!a.jobId || state.tailorCache[a.jobId]) continue;
+      if (!a.coverLetter && !a.tailoredResume) continue;
+      state.tailorCache[a.jobId] = packetFromApp(a);
+    }
   }
 
   /* ---------- profile ---------- */
@@ -704,8 +842,14 @@
       f.salaryMin.value = p.salaryMin ?? '';
       f.salaryCurrency.value = p.salaryCurrency || 'EUR';
       f.preferredLocations.value = (p.preferredLocations || []).join(', ');
+      f.workAuth.value = p.workAuth || '';
       f.excludeCompanies.value = (p.excludeCompanies || []).join(', ');
       f.resumeText.value = p.resumeText || '';
+      const resumeLen = (p.resumeText || '').trim().length;
+      $('#resume-file-label').textContent = resumeLen
+        ? 'Saved resume, ' + resumeLen + ' characters'
+        : 'No file yet';
+      renderProfileHistory(p);
     } catch (e) {
       $('#profile-status').textContent = e.message;
     }
@@ -729,6 +873,7 @@
       salaryMin: f.salaryMin.value === '' ? null : Number(f.salaryMin.value),
       salaryCurrency: f.salaryCurrency.value.trim() || 'EUR',
       preferredLocations: f.preferredLocations.value,
+      workAuth: f.workAuth.value.trim(),
       excludeCompanies: f.excludeCompanies.value,
       resumeText: f.resumeText.value,
     };
@@ -824,16 +969,24 @@
       state.jobs = jobsData.jobs || [];
       state.applications = appsData.applications || [];
       state.profile = profileData.profile;
+      hydrateTailorFromApps();
 
-      const strong = state.jobs.filter((j) => (j.matchScore || 0) >= 70);
+      const shortlist = state.jobs.filter((j) => (j.matchScore || 0) >= 60);
       $('#stat-jobs').textContent = String(jobsData.totalCached ?? state.jobs.length);
-      $('#stat-strong').textContent = String(strong.length);
+      $('#stat-strong').textContent = String(jobsData.shortlistCount ?? shortlist.length);
       $('#stat-apps').textContent = String(state.applications.length);
       $('#stat-prepared').textContent = String(state.applications.filter((a) => a.status === 'prepared').length);
+      const nudge = $('#dash-nudge');
+      if (nudge) {
+        const p = state.profile || {};
+        nudge.textContent = p.linkedin
+          ? ''
+          : 'LinkedIn is empty on your profile. Add it before you prepare letters so they can include the link.';
+      }
 
-      $('#dash-matches').innerHTML = strong.slice(0, 6).length
-        ? strong
-            .slice(0, 6)
+      $('#dash-matches').innerHTML = shortlist.slice(0, 8).length
+        ? shortlist
+            .slice(0, 8)
             .map(
               (j) => `
           <button type="button" class="list-item" data-open-job="${escAttr(j.id)}">
@@ -845,7 +998,7 @@
           </button>`
             )
             .join('')
-        : '<div class="empty">No strong matches yet. Add target roles + skills in Profile, then refresh jobs.</div>';
+        : '<div class="empty">No shortlist yet. Check target roles and preferred locations, then refresh jobs.</div>';
 
       refreshDashAppsOnly();
     } catch (e) {
@@ -859,13 +1012,13 @@
       ? apps
           .map(
             (a) => `
-        <div class="list-item" style="cursor:default">
+        <button type="button" class="list-item" data-open-app="${escAttr(a.id)}">
           <div>
             <div class="list-title">${esc(a.jobTitle)}</div>
             <div class="list-meta">${esc(a.company)} · ${esc(a.status)}</div>
           </div>
           <span class="score ${scoreClass(a.matchScore || 0)}">${a.matchScore ?? '-'}</span>
-        </div>`
+        </button>`
           )
           .join('')
       : '<div class="empty">No applications tracked yet.</div>';
@@ -957,6 +1110,198 @@
     }
   }
 
+  function renderProfileHistory(p) {
+    const el = $('#profile-history');
+    if (!el) return;
+    const exp = Array.isArray(p.experience) ? p.experience : [];
+    const edu = Array.isArray(p.education) ? p.education : [];
+    if (!exp.length && !edu.length) {
+      el.innerHTML = '';
+      return;
+    }
+    const roles = exp
+      .map((e) => {
+        const bits = [e.title, e.company].filter(Boolean).join(' at ');
+        if (!bits) return '';
+        return '<div>' + esc(bits) + (e.dates ? ' <span class="soft">(' + esc(e.dates) + ')</span>' : '') + '</div>';
+      })
+      .join('');
+    const schools = edu
+      .map((e) => {
+        if (e.certs) return '<div>' + esc(e.certs) + '</div>';
+        const bits = [e.degree, e.school].filter(Boolean).join(', ');
+        if (!bits) return '';
+        return '<div>' + esc(bits) + (e.year ? ' <span class="soft">(' + esc(e.year) + ')</span>' : '') + '</div>';
+      })
+      .join('');
+    el.innerHTML =
+      '<div class="history-block"><strong>On file for tailoring</strong>' +
+      roles +
+      schools +
+      '<div class="soft">Saving this form keeps these roles and this education on the worker.</div></div>';
+  }
+
+  function pdfSafe(s) {
+    const transliterated = String(s || '')
+      .replace(/\u20ac/g, 'EUR ')
+      .replace(/\u00a3/g, 'GBP ')
+      .replace(/\u00a5/g, 'JPY ')
+      .replace(/\u2026/g, '...')
+      .replace(/[\u2014\u2013]/g, '-')
+      .replace(/[\u201C\u201D]/g, '"')
+      .replace(/[\u2018\u2019]/g, "'")
+      .replace(/\u2022/g, '-')
+      .normalize('NFKD')
+      .replace(/[\u0300-\u036f]/g, '');
+    return transliterated.replace(/[^\x09\x0a\x0d\x20-\x7e]/g, '');
+  }
+
+  function wrapPdfLine(text, font, size, maxW) {
+    const words = String(text || '').split(/\s+/).filter(Boolean);
+    const lines = [];
+    let line = '';
+    for (const word of words) {
+      const trial = line ? line + ' ' + word : word;
+      if (font.widthOfTextAtSize(trial, size) <= maxW) {
+        line = trial;
+        continue;
+      }
+      if (line) lines.push(line);
+      if (font.widthOfTextAtSize(word, size) <= maxW) {
+        line = word;
+        continue;
+      }
+      let chunk = '';
+      for (const ch of word) {
+        if (font.widthOfTextAtSize(chunk + ch, size) > maxW && chunk) {
+          lines.push(chunk);
+          chunk = ch;
+        } else chunk += ch;
+      }
+      line = chunk;
+    }
+    if (line) lines.push(line);
+    return lines.length ? lines : [''];
+  }
+
+  let pdfLibLoading = null;
+  function loadPdfLib() {
+    if (window.PDFLib) return Promise.resolve(window.PDFLib);
+    if (pdfLibLoading) return pdfLibLoading;
+    pdfLibLoading = new Promise((resolve, reject) => {
+      const s = document.createElement('script');
+      s.src = 'https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js';
+      s.onload = () => resolve(window.PDFLib);
+      s.onerror = () => reject(new Error('Could not load PDF builder'));
+      document.head.appendChild(s);
+    });
+    return pdfLibLoading;
+  }
+
+  async function downloadPacket(packet) {
+    const PDFLib = await loadPdfLib();
+    const { PDFDocument, StandardFonts, rgb } = PDFLib;
+    const doc = await PDFDocument.create();
+    const font = await doc.embedFont(StandardFonts.Helvetica);
+    const fontBold = await doc.embedFont(StandardFonts.HelveticaBold);
+    const title = cleanLabel(packet.jobTitle || 'Role');
+    const company = cleanLabel(packet.company || 'Company');
+    const sections = [
+      [title + ' at ' + company, ''],
+      ['Tailored resume', packet.tailoredResume || ''],
+      ['Cover letter', packet.coverLetter || ''],
+    ];
+    const keywords = packet.keywordsToUse || packet.keywords || [];
+    if (keywords.length) sections.push(['Keywords', keywords.join(', ')]);
+    const pageW = 612;
+    const pageH = 792;
+    const margin = 54;
+    const bodySize = 11;
+    const lead = 15;
+    const maxW = pageW - margin * 2;
+    let page = doc.addPage([pageW, pageH]);
+    let y = pageH - margin;
+    function nextPage() {
+      page = doc.addPage([pageW, pageH]);
+      y = pageH - margin;
+    }
+    function write(text, face, size) {
+      if (y < margin) nextPage();
+      page.drawText(text || ' ', { x: margin, y, size, font: face, color: rgb(0.09, 0.11, 0.14) });
+      y -= size + 4;
+    }
+    for (const [heading, body] of sections) {
+      write(pdfSafe(heading).slice(0, 180) || ' ', fontBold, heading === sections[0][0] ? 16 : 13);
+      y -= 2;
+      const paras = pdfSafe(body).split(/\n+/);
+      for (const para of paras) {
+        if (!para.trim()) {
+          y -= 6;
+          continue;
+        }
+        for (const line of wrapPdfLine(para, font, bodySize, maxW)) write(line, font, bodySize);
+        y -= 4;
+      }
+      y -= lead;
+    }
+    const bytes = await doc.save();
+    const blob = new Blob([bytes], { type: 'application/pdf' });
+    const a = document.createElement('a');
+    const slug = pdfSafe(company + '-' + title)
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-|-$/g, '')
+      .slice(0, 60);
+    a.href = URL.createObjectURL(blob);
+    a.download = 'ApplyLab-' + (slug || 'packet') + '.pdf';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 1500);
+    const raw = [packet.jobTitle, packet.company, packet.tailoredResume, packet.coverLetter, (packet.keywordsToUse || []).join(' ')].join('\n');
+    const simplified = pdfSafe(raw) !== raw.replace(/\r/g, '');
+    toast(simplified ? 'PDF downloaded. Accents were written as plain letters.' : 'PDF downloaded');
+  }
+
+  async function downloadPdfForJob(id) {
+    const j = state.jobs.find((x) => x.id === id);
+    const m = state.tailorCache[id] || packetFromApp(appForJob(id)) || {};
+    if (!m.coverLetter && !m.tailoredResume) {
+      toast('Prepare the application first', true);
+      return;
+    }
+    try {
+      await downloadPacket({
+        jobTitle: j ? j.title : '',
+        company: j ? j.company : '',
+        tailoredResume: m.tailoredResume,
+        coverLetter: m.coverLetter,
+        keywordsToUse: m.keywordsToUse || [],
+      });
+    } catch (e) {
+      toast(e.message || 'PDF failed', true);
+    }
+  }
+
+  async function downloadPdfForApp(appId) {
+    const a = state.applications.find((x) => x.id === appId);
+    if (!a || (!a.coverLetter && !a.tailoredResume)) {
+      toast('No packet to download', true);
+      return;
+    }
+    try {
+      await downloadPacket({
+        jobTitle: a.jobTitle,
+        company: a.company,
+        tailoredResume: a.tailoredResume,
+        coverLetter: a.coverLetter,
+        keywordsToUse: a.keywords || [],
+      });
+    } catch (e) {
+      toast(e.message || 'PDF failed', true);
+    }
+  }
+
   /* ---------- events ---------- */
 
   function bind() {
@@ -964,8 +1309,31 @@
     $$('[data-goto]').forEach((b) => b.addEventListener('click', () => showView(b.dataset.goto)));
 
     $('#btn-open-settings-quick').addEventListener('click', () => showView('settings'));
-    $('#btn-refresh-jobs').addEventListener('click', () => loadJobs(true));
+    $('#btn-refresh-jobs').addEventListener('click', async () => {
+      const btn = $('#btn-refresh-jobs');
+      btn.disabled = true;
+      const prevLabel = btn.textContent;
+      btn.textContent = 'Refreshing...';
+      try {
+        if (state.view === 'dashboard') {
+          await api('/api/jobs/refresh', { method: 'POST' });
+          await refreshDashboard();
+          toast('Jobs refreshed');
+        } else {
+          await loadJobs(true);
+        }
+      } catch (e) {
+        toast(e.message, true);
+      } finally {
+        btn.disabled = false;
+        btn.textContent = prevLabel;
+      }
+    });
     $('#btn-load-jobs').addEventListener('click', () => loadJobs(false));
+    $('#jobs-min-score').addEventListener('change', () => {
+      if (state.lastJobsMeta) state.lastJobsMeta.minScore = minScore();
+      if (state.view === 'jobs') renderJobList();
+    });
     $('#jobs-q').addEventListener('keydown', (e) => {
       if (e.key === 'Enter') loadJobs(false);
     });
@@ -1009,14 +1377,14 @@
       }
       const openJob = e.target.closest('[data-open-job]');
       if (openJob) {
-        showView('jobs');
         state.selectedJobId = openJob.dataset.openJob;
-        // ensure job list has data
-        if (!state.jobs.length) {
-          loadJobs().then(() => selectJob(openJob.dataset.openJob));
-        } else {
-          selectJob(openJob.dataset.openJob);
-        }
+        showView('jobs');
+        return;
+      }
+      const openApp = e.target.closest('[data-open-app]');
+      if (openApp) {
+        state.expandedAppId = openApp.dataset.openApp;
+        showView('tracker');
         return;
       }
       if (e.target.id === 'btn-tailor') {
@@ -1027,15 +1395,41 @@
         savePrepared(e.target.dataset.id);
         return;
       }
-      if (e.target.id === 'btn-copy-cover') {
-        const m = state.tailorCache[state.selectedJobId];
-        if (m?.coverLetter) copyText(m.coverLetter);
+      if (e.target.id === 'btn-mark-applied') {
+        markApplied(e.target.dataset.id);
+        return;
+      }
+      if (e.target.id === 'btn-download-pdf') {
+        downloadPdfForJob(e.target.dataset.id);
+        return;
+      }
+      const pdfApp = e.target.closest('[data-pdf-app]');
+      if (pdfApp) {
+        downloadPdfForApp(pdfApp.dataset.pdfApp);
+        return;
+      }
+      const appliedApp = e.target.closest('[data-applied-app]');
+      if (appliedApp) {
+        markAppliedByApp(appliedApp.dataset.appliedApp);
+        return;
+      }
+      const saveNotes = e.target.closest('[data-save-notes]');
+      if (saveNotes) {
+        saveAppNotes(saveNotes.dataset.saveNotes);
         return;
       }
       const copy = e.target.closest('[data-copy]');
       if (copy) {
-        const m = state.tailorCache[state.selectedJobId] || {};
-        copyText(copy.dataset.copy === 'cover' ? m.coverLetter : m.tailoredResume);
+        const holder = copy.closest('[data-packet]');
+        let m = null;
+        if (holder && holder.dataset.packet) {
+          const app = state.applications.find((a) => a.id === holder.dataset.packet);
+          m = app ? packetFromApp(app) : null;
+        }
+        if (!m) m = state.tailorCache[state.selectedJobId] || packetFromApp(appForJob(state.selectedJobId)) || {};
+        if (copy.dataset.copy === 'cover') copyText(m.coverLetter);
+        else if (copy.dataset.copy === 'keywords') copyText((m.keywordsToUse || []).join(', '));
+        else copyText(m.tailoredResume);
         return;
       }
       const st = e.target.closest('[data-status-for]');
@@ -1050,7 +1444,7 @@
       }
       const view = e.target.closest('[data-view-app]');
       if (view) {
-        viewAppMaterials(view.dataset.viewApp);
+        toggleAppPacket(view.dataset.viewApp);
       }
     });
   }

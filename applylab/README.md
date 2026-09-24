@@ -28,9 +28,9 @@ Without this, jobs/match/tracker still work; only `/api/tailor` needs xAI.
 
 | Included | Not yet |
 |----------|---------|
-| Remote FT job feed (Remotive, Jobicy, RemoteOK) | True auto-submit bots |
-| Heuristic match scoring | Interview buddy |
-| AI resume + cover letter (xAI) | Multi-user public SaaS |
-| Application tracker | ATS PDF export pack |
+| Remote FT job feed (Remotive, Jobicy, RemoteOK, Arbeitnow) | True auto-submit bots |
+| Heuristic match scoring (60+ shortlist) | Multi-user public SaaS |
+| AI resume, cover letter, keywords, interview prompts (xAI) | |
+| Application tracker with PDF pack download | |
 
 Semi-auto: ApplyLab prepares materials and opens the listing; you submit on the board, then mark status in Tracker.
