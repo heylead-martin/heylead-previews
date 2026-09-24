@@ -46,6 +46,7 @@
   function writeCookie(name, value, maxAge) {
     try {
       const secure = location.protocol === 'https:' ? '; Secure' : '';
+      const expires = new Date(Date.now() + maxAge * 1000).toUTCString();
       document.cookie =
         name +
         '=' +
@@ -53,6 +54,8 @@
         '; Path=/' +
         '; Max-Age=' +
         maxAge +
+        '; Expires=' +
+        expires +
         '; SameSite=Lax' +
         secure;
     } catch (_) {}
@@ -107,7 +110,7 @@
 
   function saveCfg(cfg) {
     const payload = normalizeCfg(cfg);
-    payload.savedAt = new Date().toISOString();
+    payload.savedAt = cfg && cfg.savedAt ? cfg.savedAt : new Date().toISOString();
     const raw = JSON.stringify(payload);
     try {
       localStorage.setItem(CFG_KEY, raw);
@@ -116,6 +119,7 @@
       sessionStorage.setItem(CFG_KEY, raw);
     } catch (_) {}
     writeCookie(COOKIE_NAME, raw, COOKIE_MAX_AGE);
+    idbSetCfg(raw);
     return payload;
   }
 
@@ -127,6 +131,62 @@
       sessionStorage.removeItem(CFG_KEY);
     } catch (_) {}
     deleteCookie(COOKIE_NAME);
+    idbSetCfg('');
+  }
+
+  function idbOpen() {
+    return new Promise((resolve, reject) => {
+      const req = indexedDB.open('applylab', 1);
+      req.onupgradeneeded = () => {
+        const db = req.result;
+        if (!db.objectStoreNames.contains('kv')) db.createObjectStore('kv');
+      };
+      req.onsuccess = () => resolve(req.result);
+      req.onerror = () => reject(req.error);
+    });
+  }
+
+  function idbSetCfg(raw) {
+    idbOpen()
+      .then((db) => {
+        const tx = db.transaction('kv', 'readwrite');
+        if (raw) tx.objectStore('kv').put(raw, 'cfg');
+        else tx.objectStore('kv').delete('cfg');
+        tx.oncomplete = () => db.close();
+        tx.onerror = () => db.close();
+      })
+      .catch(() => {});
+  }
+
+  async function idbGetCfg() {
+    try {
+      const db = await idbOpen();
+      const raw = await new Promise((resolve, reject) => {
+        const tx = db.transaction('kv', 'readonly');
+        const req = tx.objectStore('kv').get('cfg');
+        req.onsuccess = () => resolve(req.result || '');
+        req.onerror = () => reject(req.error);
+      });
+      db.close();
+      return parseCfgRaw(raw);
+    } catch (_) {
+      return null;
+    }
+  }
+
+  async function hydrateDurableCfg() {
+    const local = loadCfg();
+    const saved = await idbGetCfg();
+    if (saved && saved.token && !local.token) {
+      saveCfg({
+        apiBase: saved.apiBase || local.apiBase,
+        token: saved.token,
+        savedAt: saved.savedAt,
+      });
+    } else if (local.token) {
+      idbSetCfg(JSON.stringify(local));
+    }
+    return loadCfg();
   }
 
   function getCfg() {
@@ -1026,30 +1086,50 @@
 
   /* ---------- settings ---------- */
 
+  let tokenEdit = false;
+  let tokenRevealed = false;
+
+  function maskToken(token) {
+    if (!token) return '';
+    if (token.length <= 8) return '••••';
+    return token.slice(0, 4) + '...' + token.slice(-4);
+  }
+
+  function paintSavedToken(cfg) {
+    const display = $('#cfg-token-display');
+    const label = $('#cfg-token-paste-label');
+    const toggle = $('#btn-toggle-token');
+    if (!display) return;
+    if (!cfg.token) {
+      display.textContent = 'No token saved yet';
+      if (label) label.textContent = 'then Save & test';
+      if (toggle) toggle.hidden = true;
+      return;
+    }
+    display.textContent = tokenRevealed ? cfg.token : maskToken(cfg.token) + ' (' + cfg.token.length + ' chars)';
+    if (label) label.textContent = 'only if you want to replace it';
+    if (toggle) {
+      toggle.hidden = false;
+      toggle.textContent = tokenRevealed ? 'Hide' : 'Show';
+    }
+  }
+
   function fillSettings() {
     const cfg = persistCfgEverywhere();
     const apiInput = $('#cfg-api');
     const tokenInput = $('#cfg-token');
-    if (apiInput) apiInput.value = cfg.apiBase || DEFAULT_API;
-    // Always re-hydrate token into the field from durable storage
-    if (tokenInput) tokenInput.value = cfg.token || '';
+    if (apiInput && document.activeElement !== apiInput && !apiInput.value.trim()) {
+      apiInput.value = cfg.apiBase || DEFAULT_API;
+    }
+    // Never copy the saved token into the paste box. Browsers clear that field.
+    paintSavedToken(cfg);
     const hint = $('#cfg-token-hint');
     if (!hint) return;
     if (cfg.token) {
-      const mask =
-        cfg.token.length > 8 ? cfg.token.slice(0, 4) + '…' + cfg.token.slice(-4) : '••••';
-      const when = cfg.savedAt ? ' · saved ' + fmtDate(cfg.savedAt) : '';
-      hint.textContent =
-        'Persistent on this device: ' +
-        mask +
-        ' (' +
-        cfg.token.length +
-        ' chars)' +
-        when +
-        '. Stored in localStorage + cookie (~13 months). Leave blank on Save to keep it.';
+      const when = cfg.savedAt ? ' Saved ' + fmtDate(cfg.savedAt) + '.' : '';
+      hint.textContent = 'This token stays on this device.' + when + ' An empty paste box does not remove it.';
     } else {
-      hint.textContent =
-        'No token on this device yet. Paste APP_TOKEN once, click Save & test - it will stick across reloads.';
+      hint.textContent = 'No token on this device yet. Paste APP_TOKEN once, click Save & test.';
     }
   }
 
@@ -1065,8 +1145,9 @@
       return;
     }
     saveCfg({ apiBase, token });
-    // Keep field filled so it does not "disappear" after save
-    $('#cfg-token').value = token;
+    tokenEdit = false;
+    $('#cfg-token').value = '';
+    $('#cfg-token').setAttribute('readonly', 'readonly');
     fillSettings();
     $('#cfg-status').textContent = 'Testing…';
     const ok = await testConnection();
@@ -1353,14 +1434,50 @@
     });
     $('#btn-save-cfg').addEventListener('click', saveSettings);
     $('#btn-toggle-token').addEventListener('click', () => {
-      const input = $('#cfg-token');
-      const btn = $('#btn-toggle-token');
-      // Prefer text field (survives password-manager wipes); toggle masks via CSS class
-      const hidden = input.classList.toggle('token-masked');
-      btn.textContent = hidden ? 'Show' : 'Hide';
+      tokenRevealed = !tokenRevealed;
+      paintSavedToken(loadCfg());
+    });
+    const tokenInput = $('#cfg-token');
+    const apiInput = $('#cfg-api');
+    [tokenInput, apiInput].forEach((input) => {
+      if (!input) return;
+      input.addEventListener('pointerdown', () => input.removeAttribute('readonly'));
+      input.addEventListener('focus', () => input.removeAttribute('readonly'));
+    });
+    if (tokenInput) {
+      tokenInput.addEventListener('keydown', () => {
+        tokenEdit = true;
+      });
+      tokenInput.addEventListener('paste', () => {
+        tokenEdit = true;
+      });
+      tokenInput.addEventListener('blur', () => {
+        tokenEdit = false;
+        tokenInput.setAttribute('readonly', 'readonly');
+        paintSavedToken(loadCfg());
+      });
+    }
+    if (apiInput) {
+      apiInput.addEventListener('blur', () => {
+        if (!apiInput.value.trim()) apiInput.value = loadCfg().apiBase || DEFAULT_API;
+        apiInput.setAttribute('readonly', 'readonly');
+      });
+    }
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'visible' && !tokenEdit) fillSettings();
+    });
+    window.addEventListener('pageshow', () => {
+      if (!tokenEdit) fillSettings();
+    });
+    [50, 300, 1000, 2500].forEach((ms) => {
+      setTimeout(() => {
+        if (!tokenEdit) fillSettings();
+      }, ms);
     });
     $('#btn-clear-cfg').addEventListener('click', () => {
       if (!confirm('Clear API URL and token from this device (storage + cookie)?')) return;
+      tokenRevealed = false;
+      tokenEdit = false;
       clearCfg();
       $('#cfg-token').value = '';
       $('#cfg-api').value = DEFAULT_API;
@@ -1450,11 +1567,13 @@
   }
 
   bind();
-  // Heal any partial storage and rehydrate UI from durable layers
-  persistCfgEverywhere();
-  fillSettings();
-  testConnection().then((ok) => {
+  hydrateDurableCfg().then(() => {
+    persistCfgEverywhere();
+    fillSettings();
+    return testConnection();
+  }).then((ok) => {
     if (ok) showView('dashboard');
     else showView('settings');
+    fillSettings();
   });
 })();
