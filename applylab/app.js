@@ -1566,7 +1566,21 @@
     });
   }
 
+  function takeTokenFromHash() {
+    const hash = String(location.hash || '');
+    if (!hash.startsWith('#al=')) return;
+    let token = '';
+    try {
+      token = decodeURIComponent(hash.slice(4)).trim();
+    } catch (_) {
+      token = hash.slice(4).trim();
+    }
+    history.replaceState(null, '', location.pathname + location.search);
+    if (token) saveCfg({ apiBase: DEFAULT_API, token });
+  }
+
   bind();
+  takeTokenFromHash();
   hydrateDurableCfg().then(() => {
     persistCfgEverywhere();
     fillSettings();
