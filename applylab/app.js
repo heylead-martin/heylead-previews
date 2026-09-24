@@ -1568,15 +1568,25 @@
 
   function takeTokenFromHash() {
     const hash = String(location.hash || '');
-    if (!hash.startsWith('#al=')) return;
     let token = '';
-    try {
-      token = decodeURIComponent(hash.slice(4)).trim();
-    } catch (_) {
-      token = hash.slice(4).trim();
+    if (hash.startsWith('#al=')) {
+      try {
+        token = decodeURIComponent(hash.slice(4)).trim();
+      } catch (_) {
+        token = hash.slice(4).trim();
+      }
+      history.replaceState(null, '', location.pathname + location.search);
     }
-    history.replaceState(null, '', location.pathname + location.search);
-    if (token) saveCfg({ apiBase: DEFAULT_API, token });
+    if (!token) {
+      try {
+        token = String(sessionStorage.getItem('applylab.pendingToken') || '').trim();
+      } catch (_) {}
+    }
+    if (!token) return;
+    saveCfg({ apiBase: DEFAULT_API, token });
+    try {
+      sessionStorage.removeItem('applylab.pendingToken');
+    } catch (_) {}
   }
 
   bind();

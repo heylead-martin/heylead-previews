@@ -2,6 +2,21 @@
  * Not a substitute for Cloudflare Access if you need real security.
  */
 (function () {
+  // ApplyLab one-time token must never ride along in a login redirect query.
+  try {
+    var hash = String(location.hash || '');
+    if (hash.indexOf('#al=') === 0) {
+      var pending = '';
+      try {
+        pending = decodeURIComponent(hash.slice(4)).trim();
+      } catch (e2) {
+        pending = hash.slice(4).trim();
+      }
+      if (pending) sessionStorage.setItem('applylab.pendingToken', pending);
+      history.replaceState(null, '', location.pathname + location.search);
+    }
+  } catch (e) {}
+
   var cfg = window.PREVIEWS_AUTH;
   if (!cfg || !cfg.users) return;
 
@@ -50,7 +65,7 @@
 
   var user = findUserByHash(getSessionHash());
   if (!user) {
-    var next = encodeURIComponent(location.pathname + location.search + location.hash);
+    var next = encodeURIComponent(location.pathname + location.search);
     location.replace("/login.html?next=" + next);
     return;
   }
