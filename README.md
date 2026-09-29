@@ -21,6 +21,7 @@ builds move to WordPress after the client approves.
 | `/snap/` | SNAP concussion landing-page drafts. Book-a-demo LP: `/snap/lp/`. v2: `/snap/lp-v2/`. Source: private `heylead-martin/snap-heylead-lp`. |
 | `/bandwidth/` | Internal lab - connection bandwidth meter. Full test uses the official `@cloudflare/speedtest` engine (same ramp as speed.cloudflare.com). Live monitor is a 15 second sample of download, upload, and ping, then stops. Cannot list other LAN devices from the browser; see `~/wifiwatch` for local device discovery. |
 | `/spend/` | Internal lab - Grok / Claude / Codex remaining-vs-used % (same bars as each product's Settings > Usage) plus GitHub Actions minutes. Snapshot from `python3 ~/.grok/scripts/collect-spend.py`. |
+| `/places/` | Internal lab - Google Maps listings + 5 review samples via Places API (New). Worker: `~/heylead-places-api`. |
 | `/tickerlab/` | Internal lab - AI CIO morning note. Grok reads live tape, web, and X, then says what to own (paper book). API: `~/applylab-api` `GET /desk/brief`. Not advice. |
 | `/lp-sg/` | HeyLead's own Singapore paid-lander **hub** (the folder index). Public `heylead.com/lp-sg/` 302s here. Individual landers (`/lp-sg/leads/` and the other slugs) stay public on heylead.com. Refresh the hub with `node scripts/sync-lp-sg.mjs /path/to/heylead/static-build/site/dist/lp-sg`. Source: `heylead-theme` `static-build/site/src/pages/lp-sg/`. |
 

@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+<script src="/auth-config.js"></script>
+<script src="/auth.js"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Places · HeyLead Previews</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app">
+    <header class="top">
+      <div class="top-copy">
+        <a class="back" href="/">← Previews</a>
+        <h1>Google Maps listings</h1>
+        <p class="lede">Search Places for a trade and a city. You get name, phone, website, rating, and up to five review samples per listing. Google does not sell the full review history for other people's businesses.</p>
+      </div>
+      <div class="top-actions">
+        <button type="button" class="btn ghost" id="btn-settings">Settings</button>
+        <button type="button" class="btn ghost" id="btn-export-reviews" disabled>Reviews CSV</button>
+        <button type="button" class="btn ghost" id="btn-export" disabled>Listings CSV</button>
+      </div>
+    </header>
+
+    <section class="card setup" id="setup" hidden>
+      <h2>Connect Places</h2>
+      <ol>
+        <li>Open <a href="https://console.cloud.google.com/google/maps-apis/start" target="_blank" rel="noopener">Google Maps Platform</a> and enable <strong>Places API (New)</strong>.</li>
+        <li>Create an API key. Restrict it to Places API (New). Billing has to be on.</li>
+        <li>Paste the key below. It stays in this browser. The Worker URL is already set.</li>
+      </ol>
+      <div class="setup-row">
+        <label class="field grow">
+          <span>APP_TOKEN</span>
+          <input type="password" id="setup-token" autocomplete="off" placeholder="From the connect link or ~/.config/heylead/places-app-token.txt">
+        </label>
+        <label class="field grow">
+          <span>Google Places API key</span>
+          <input type="password" id="setup-key" autocomplete="off" placeholder="AIza...">
+        </label>
+        <button type="button" class="btn primary" id="btn-save-key">Save</button>
+      </div>
+      <p class="hint" id="setup-status">Neither secret is in this public repo. The Worker also accepts GOOGLE_PLACES_API_KEY as a wrangler secret.</p>
+    </section>
+
+    <form class="card search" id="search-form">
+      <div class="grid-form">
+        <label class="field">
+          <span>Industry or query</span>
+          <input type="text" id="q-query" placeholder="plumbers" required>
+        </label>
+        <label class="field">
+          <span>City</span>
+          <input type="text" id="q-location" placeholder="Miami, FL" required>
+        </label>
+        <label class="field">
+          <span>Region</span>
+          <select id="q-region">
+            <option value="US">United States</option>
+            <option value="GB">United Kingdom</option>
+            <option value="AU">Australia</option>
+            <option value="SG">Singapore</option>
+            <option value="AE">UAE</option>
+            <option value="CA">Canada</option>
+            <option value="">Any</option>
+          </select>
+        </label>
+        <label class="field">
+          <span>Max listings</span>
+          <select id="q-max">
+            <option value="20">20 (1 page)</option>
+            <option value="40">40 (2 pages)</option>
+            <option value="60">60 (3 pages, Google max)</option>
+          </select>
+        </label>
+        <label class="field">
+          <span>Min rating</span>
+          <select id="q-rating">
+            <option value="">Any</option>
+            <option value="3.5">3.5+</option>
+            <option value="4">4.0+</option>
+            <option value="4.5">4.5+</option>
+          </select>
+        </label>
+      </div>
+      <div class="search-bar">
+        <label class="check"><input type="checkbox" id="q-reviews" checked> Include 5 review samples</label>
+        <label class="check"><input type="checkbox" id="q-service" checked> Include mobile / service-area businesses</label>
+        <label class="check"><input type="checkbox" id="q-open"> Open now</label>
+        <button type="submit" class="btn primary" id="btn-search">Search</button>
+      </div>
+      <div class="presets" id="presets">
+        <button type="button" data-q="locksmiths" data-loc="Singapore" data-region="SG">Locksmiths · Singapore</button>
+        <button type="button" data-q="house cleaning" data-loc="Sydney" data-region="AU">Cleaners · Sydney</button>
+        <button type="button" data-q="plumbers" data-loc="Miami, FL" data-region="US">Plumbers · Miami</button>
+        <button type="button" data-q="med spa" data-loc="London" data-region="GB">Med spas · London</button>
+      </div>
+    </form>
+
+    <div id="fatal" class="err" hidden></div>
+
+    <section class="hero-metrics" id="stats" hidden>
+      <div class="metric">
+        <div class="metric-label">Listings</div>
+        <div class="metric-val" id="stat-count">-</div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">With phone</div>
+        <div class="metric-val" id="stat-phone">-</div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">With website</div>
+        <div class="metric-val" id="stat-web">-</div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">Avg rating</div>
+        <div class="metric-val" id="stat-rating">-</div>
+      </div>
+    </section>
+
+    <section class="card" id="results-card">
+      <div class="card-h">
+        <h2 id="results-title">Results</h2>
+        <span class="pill" id="status-pill">Idle</span>
+      </div>
+      <p class="hint" id="status-text">Search a trade and a city. Google returns at most 60 listings and 5 reviews each.</p>
+      <div class="table-wrap" id="results"></div>
+    </section>
+
+    <section class="card note">
+      <h2>What this can and cannot do</h2>
+      <ul>
+        <li><strong>Can:</strong> pull public Google Maps listings through Places API (New), including phone, website, rating, review count, and a five-review sample.</li>
+        <li><strong>Cannot:</strong> download every review on a competitor. That cap is a Google product limit. Full review history exists only on a Business Profile you own.</li>
+        <li><strong>Storage:</strong> Place IDs may be kept. Google forbids caching names, reviews, and similar fields. CSV is a working export for this session.</li>
+        <li><strong>Attribution:</strong> listing and review data from Google. Powered by Google.</li>
+      </ul>
+    </section>
+  </div>
+
+  <dialog class="sheet" id="settings">
+    <form method="dialog" class="sheet-inner">
+      <h2>Settings</h2>
+      <label class="field">
+        <span>Worker URL</span>
+        <input type="url" id="cfg-api" autocomplete="off">
+      </label>
+      <label class="field">
+        <span>APP_TOKEN</span>
+        <input type="password" id="cfg-token" autocomplete="off">
+      </label>
+      <label class="field">
+        <span>Google Places API key</span>
+        <input type="password" id="cfg-key" autocomplete="off" placeholder="Leave blank if the Worker already has one">
+      </label>
+      <p class="hint">Token and key stay in this browser. Never commit them to heylead-previews.</p>
+      <div class="sheet-actions">
+        <button type="submit" class="btn ghost" value="cancel">Close</button>
+        <button type="button" class="btn primary" id="btn-save-cfg">Save and test</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>
