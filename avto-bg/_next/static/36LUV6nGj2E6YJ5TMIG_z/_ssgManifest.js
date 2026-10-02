@@ -1,0 +1,1 @@
+self.__SSG_MANIFEST=new Set(["\u002Fmarka\u002F[make]","\u002Fmarka\u002F[make]\u002F[model]","\u002Frakovodstva\u002F[slug]"]);self.__SSG_MANIFEST_CB&&self.__SSG_MANIFEST_CB()
