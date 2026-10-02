@@ -1,2 +1,2 @@
-:HL["/avto-bg/_next/static/chunks/0fk76ta7iihs3.css","style"]
-0:{"tree":{"name":"","param":null,"prefetchHints":4112,"slots":{"children":{"name":"/_not-found","param":null,"prefetchHints":4160,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}},"staleTime":300,"buildId":"Zin2tsBVqIihKoF25Vvrm"}
+:HL["/avto-bg/_next/static/chunks/1crjpelnjr--t.css","style"]
+0:{"tree":{"name":"","param":null,"prefetchHints":4112,"slots":{"children":{"name":"/_not-found","param":null,"prefetchHints":4160,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}},"staleTime":300,"buildId":"ExIU2enHiSyBQN4oKuEYn"}
