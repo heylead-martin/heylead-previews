@@ -3,4 +3,4 @@
 :HL["/avto-bg/_next/static/media/9c72aa0f40e4eef8-s.p.1y4-pdgsjb-pw.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
 :HL["/avto-bg/media/rankings/tesla-model-y.jpg","image"]
 :HL["/avto-bg/media/rankings/hyundai-ioniq-5.jpg","image"]
-0:{"tree":{"name":"","param":null,"prefetchHints":4112,"slots":{"children":{"name":"klasacii","param":null,"prefetchHints":4160,"slots":{"children":{"name":"nai-prodavani-elektromobili-v-bulgaria","param":null,"prefetchHints":4192,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}}}},"staleTime":300,"buildId":"CxNKdE2OcLtSTQHhN3hRr"}
+0:{"tree":{"name":"","param":null,"prefetchHints":4112,"slots":{"children":{"name":"klasacii","param":null,"prefetchHints":4160,"slots":{"children":{"name":"nai-prodavani-elektromobili-v-bulgaria","param":null,"prefetchHints":4192,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}}}},"staleTime":300,"buildId":"5PYJh9KjUqv2XhMsfypna"}

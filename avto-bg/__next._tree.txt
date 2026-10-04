@@ -4,4 +4,4 @@
 :HL["/avto-bg/media/models/volkswagen-golf-2013.jpg","image"]
 :HL["/avto-bg/media/models/volkswagen-passat-2015.jpg","image"]
 :HL["/avto-bg/media/models/mercedes-benz-c-class-2014.jpg","image"]
-0:{"tree":{"name":"","param":null,"prefetchHints":4112,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4224,"slots":null}}},"staleTime":300,"buildId":"CxNKdE2OcLtSTQHhN3hRr"}
+0:{"tree":{"name":"","param":null,"prefetchHints":4112,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4224,"slots":null}}},"staleTime":300,"buildId":"5PYJh9KjUqv2XhMsfypna"}
