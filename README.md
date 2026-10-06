@@ -19,6 +19,7 @@ builds move to WordPress after the client approves.
 | `/karlaglow/` | KarlaGlow - product page + checkout testing Econt without the WooCommerce plugin. Uses delivery.econt.com customer_info form (shop pairing id) and live offices API. Preview orders stay in the browser until a backend write is added. |
 | `/oculogica/` | Oculogica landing-page drafts (oculogica.com copy). Book-a-demo LP: `/oculogica/#/book`. Request-a-demo v2 (review, does not submit): `/oculogica/#/request-a-demo-v2`. Source: private `heylead-martin/oculogica-heylead-lp`. |
 | `/snap/` | SNAP concussion landing-page drafts. Book-a-demo LP: `/snap/lp/`. v2: `/snap/lp-v2/`. Source: private `heylead-martin/snap-heylead-lp`. |
+| `/snap-v2/` | SNAP mobile form review. Book-a-demo LP: `/snap-v2/lp/`. Same form on the tighter page: `/snap-v2/lp-v2/`. Not the live snapconcussion.com site. |
 | `/bandwidth/` | Internal lab - connection bandwidth meter. Full test uses the official `@cloudflare/speedtest` engine (same ramp as speed.cloudflare.com). Live monitor is a 15 second sample of download, upload, and ping, then stops. Cannot list other LAN devices from the browser; see `~/wifiwatch` for local device discovery. |
 | `/spend/` | Internal lab - Grok / Claude / Codex remaining-vs-used % (same bars as each product's Settings > Usage) plus GitHub Actions minutes. Snapshot from `python3 ~/.grok/scripts/collect-spend.py`. |
 | `/places/` | Internal lab - Google Maps listings + 5 review samples via Places API (New). Worker: `~/heylead-places-api`. |
@@ -55,7 +56,7 @@ GitHub Pages is **static** - there is no real server authentication.
 This repo uses a lightweight login at `/login.html` for casual privacy.
 Accounts are listed in `auth-config.js` (email + SHA-256 hash, no plain
 passwords). Martin sees every preview. `team@oculogica.com` is limited to
-`/oculogica/` and `/snap/` (including `/snap/lp/`). It is **not** strong
+`/oculogica/`, `/snap/` (including `/snap/lp/`), and `/snap-v2/` (including `/snap-v2/lp/`). It is **not** strong
 security: the repo is public, hashes are in `auth-config.js`, and anyone
 can open raw HTML if they try hard enough.
 

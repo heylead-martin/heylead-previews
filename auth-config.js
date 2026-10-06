@@ -13,7 +13,7 @@ window.PREVIEWS_AUTH = {
     {
       email: "team@oculogica.com",
       passwordHash: "9f64e6678cb99930342a71d64685dd0b13a52af66fc51877b19ce135084825e0",
-      allow: ["/oculogica", "/snap"]
+      allow: ["/oculogica", "/snap", "/snap-v2"]
     }
   ]
 };
