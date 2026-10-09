@@ -254,44 +254,159 @@ function abs(pathname) {
   return origin + pathname.replace(/^\/roster/, "");
 }
 
+
+/* ---------- Icons and illustration ----------
+   Line icons on a 24 grid. They are decorative. Every one is aria-hidden. */
+
+const iconPaths = {
+  aircon: `<rect x="2.5" y="5" width="19" height="9" rx="2"/><path d="M6.5 11h11"/><path d="M6.5 17.5c1.2-1 2.3-1 3.5 0s2.3 1 3.5 0 2.3-1 3.5 0"/><path d="M9 21c1.2-1 2.3-1 3.5 0s2.3 1 3.5 0"/>`,
+  tap: `<path d="M9 4h5M11.5 4v4.5"/><path d="M4 9h8.5a5 5 0 0 1 5 5v1.5h-4V14a1 1 0 0 0-1-1H4z"/><path d="M4 9v3M15.5 18.2l-1.1 1.7a1.3 1.3 0 0 0 2.2 0z"/>`,
+  bolt: `<path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12.5z"/>`,
+  wrench: `<path d="M14.6 4.4a4.6 4.6 0 0 0-5.3 6.4L3 17.1 6.9 21l6.3-6.3a4.6 4.6 0 0 0 6.4-5.3l-2.9 2.9-2.9-.7-.7-2.9z"/>`,
+  sparkle: `<path d="M12 3c.6 4.2 2.8 6.4 7 7-4.2.6-6.4 2.8-7 7-.6-4.2-2.8-6.4-7-7 4.2-.6 6.4-2.8 7-7z"/><path d="M5 16c.3 1.7 1.3 2.7 3 3-1.7.3-2.7 1.3-3 3-.3-1.7-1.3-2.7-3-3 1.7-.3 2.7-1.3 3-3z"/>`,
+  phone: `<path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/>`,
+  chat: `<path d="M21 12a8.5 8.5 0 0 1-12.6 7.4L4 21l1.6-4.4A8.5 8.5 0 1 1 21 12z"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01"/>`,
+  arrow: `<path d="M5 12h14M13 6l6 6-6 6"/>`,
+  shield: `<path d="M12 3l7 3v5c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6z"/><path d="M9 12l2 2 4-4"/>`,
+  link: `<path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/>`,
+  calendar: `<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>`,
+  pin: `<path d="M12 21s-6-5.3-6-10a6 6 0 0 1 12 0c0 4.7-6 10-6 10z"/><circle cx="12" cy="11" r="2"/>`,
+  list: `<path d="M8 6h13M8 12h13M8 18h13"/><path d="M3 6h.01M3 12h.01M3 18h.01"/>`,
+  check: `<path d="M5 12l4 4L19 7"/>`,
+  quote: `<path d="M7 6h4v6H7a2 2 0 0 0-2 2v2"/><path d="M15 6h4v6h-4a2 2 0 0 0-2 2v2"/>`,
+  tagIcon: `<path d="M4 4h7l9 9-7 7-9-9z"/><circle cx="8.5" cy="8.5" r="1.25"/>`,
+  dollar: `<path d="M12 3v18"/><path d="M16.5 7.5A3.5 3.5 0 0 0 13 5h-2.5a3 3 0 0 0 0 6h3a3 3 0 0 1 0 6H11a3.5 3.5 0 0 1-3.5-2.5"/>`,
+  star: `<path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/>`
+};
+
+function icon(name, cls = "ic") {
+  const d = iconPaths[name];
+  if (!d) throw new Error("Unknown icon " + name);
+  const filled = name === "star";
+  const attrs = filled
+    ? `fill="currentColor" stroke="none"`
+    : `fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"`;
+  return `<svg class="${cls}" viewBox="0 0 24 24" ${attrs} aria-hidden="true" focusable="false">${d}</svg>`;
+}
+
+const tradeIcon = {
+  aircon: "aircon",
+  plumbing: "tap",
+  electrician: "bolt",
+  handyman: "wrench",
+  cleaning: "sparkle"
+};
+
+/* The home illustration: a row of Singapore housing blocks, drawn in paper
+   strokes on the deep green panel. Windows that are lit are chosen by a fixed
+   seed so the build is reproducible. */
+function heroIllustration() {
+  let seed = 7;
+  const rnd = () => {
+    seed = (seed * 1103515245 + 12345) % 2147483648;
+    return seed / 2147483648;
+  };
+  const blocks = [
+    { x: 28, y: 132, w: 118, h: 208, cols: 5, rows: 7 },
+    { x: 170, y: 72, w: 96, h: 268, cols: 4, rows: 9 },
+    { x: 290, y: 150, w: 152, h: 190, cols: 6, rows: 6 },
+    { x: 466, y: 104, w: 70, h: 236, cols: 3, rows: 8 }
+  ];
+  const parts = [];
+  for (const b of blocks) {
+    parts.push(`<rect x="${b.x}" y="${b.y}" width="${b.w}" height="${b.h}" rx="3"/>`);
+    parts.push(`<path d="M${b.x} ${b.y + b.h - 26}h${b.w}"/>`);
+    const pad = 12;
+    const cw = (b.w - pad * 2) / b.cols;
+    const rh = (b.h - 26 - pad * 2) / b.rows;
+    for (let r = 0; r < b.rows; r++) {
+      for (let c = 0; c < b.cols; c++) {
+        const wx = (b.x + pad + c * cw + cw * 0.22).toFixed(1);
+        const wy = (b.y + pad + r * rh + rh * 0.2).toFixed(1);
+        const ww = (cw * 0.56).toFixed(1);
+        const wh = (rh * 0.5).toFixed(1);
+        const lit = rnd() < 0.3;
+        parts.push(`<rect x="${wx}" y="${wy}" width="${ww}" height="${wh}" rx="1"${lit ? ` class="lit"` : ""}/>`);
+        if (rnd() < 0.18) {
+          const ax = (Number(wx) + Number(ww) * 0.15).toFixed(1);
+          const ay = (Number(wy) + Number(wh) + 2).toFixed(1);
+          parts.push(`<rect x="${ax}" y="${ay}" width="${(Number(ww) * 0.7).toFixed(1)}" height="3.5" rx="1" class="unit"/>`);
+        }
+      }
+    }
+    const arches = Math.max(2, Math.round(b.w / 40));
+    const aw = b.w / arches;
+    for (let a = 0; a < arches; a++) {
+      const ax = b.x + a * aw + aw / 2;
+      parts.push(`<path d="M${(ax - 8).toFixed(1)} ${b.y + b.h}v-10a8 8 0 0 1 16 0v10"/>`);
+    }
+  }
+  const trees = [12, 158, 276, 452, 548];
+  for (const tx of trees) {
+    parts.push(`<path d="M${tx} 340v-22"/><path d="M${tx - 11} 318c0-8 5-13 11-13s11 5 11 13c0 6-5 9-11 9s-11-3-11-9z" class="leaf"/>`);
+  }
+  return `<svg class="hero-art" viewBox="0 0 560 360" aria-hidden="true" focusable="false"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="500" cy="48" r="22"/><path d="M60 56h44M118 56h18M372 40h60M446 40h14"/><path d="M0 340h560"/>${parts.join("")}</g></svg>`;
+}
+
+function brandMark() {
+  return `<svg class="mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="currentColor"/><path d="M11 23V9h6.2c3 0 4.8 1.7 4.8 4.2 0 2-1.2 3.4-3 3.9L23 23h-3.2l-3.6-5.4H13.8V23z M13.8 15.3h3.1c1.6 0 2.4-.8 2.4-2.1s-.8-2-2.4-2h-3.1z" fill="#f3f0e9"/></svg>`;
+}
+
+function formatCount(n) {
+  return Number(n).toLocaleString("en-SG");
+}
+
+function jobsHint(spec) {
+  return spec.jobs.filter((job) => !/^(Not sure|Other)/.test(job)).join(", ");
+}
+
+/* ---------- Shell parts ---------- */
+
 const navItems = [
-  ["/roster/aircon-servicing/", "Aircon"],
-  ["/roster/plumbing/", "Plumbing"],
-  ["/roster/electrician/", "Electrician"],
-  ["/roster/handyman/", "Handyman"],
-  ["/roster/home-cleaning/", "Cleaning"],
-  ["/roster/how-it-works/", "How it works"]
+  ["/roster/aircon-servicing/", "Aircon", "aircon"],
+  ["/roster/plumbing/", "Plumbing", "plumbing"],
+  ["/roster/electrician/", "Electrician", "electrician"],
+  ["/roster/handyman/", "Handyman", "handyman"],
+  ["/roster/home-cleaning/", "Cleaning", "cleaning"],
+  ["/roster/how-it-works/", "How it works", null]
 ];
 
 function renderNav(current) {
-  const links = navItems.map(([href, label]) => {
+  const links = navItems.map(([href, label, trade]) => {
     const currentAttr = href === current ? ' aria-current="page"' : "";
-    return `<a href="${href}"${currentAttr}>${esc(label)}</a>`;
+    const ic = trade ? icon(tradeIcon[trade], "ic nav-ic") : icon("list", "ic nav-ic");
+    return `<a href="${href}"${currentAttr}>${ic}<span>${esc(label)}</span></a>`;
   }).join("");
-  return `<header class="top"><div class="top-inner"><div class="brand"><a class="wordmark" href="/roster/">Roster</a><span class="beta">Beta</span></div><nav class="nav" aria-label="Jobs">${links}</nav></div></header>`;
+  return `<header class="top"><div class="top-inner"><a class="brand" href="/roster/">${brandMark()}<span class="wordmark">Roster</span><span class="beta">Beta</span></a><nav class="nav" aria-label="Jobs">${links}</nav></div></header>`;
 }
 
 function renderCrumbs(items) {
   const parts = [{ href: "/roster/", label: "Roster" }, ...items];
   const html = parts.map((item, index) => {
-    if (index === parts.length - 1) return `<span>${esc(item.label)}</span>`;
-    return `<a href="${item.href}">${esc(item.label)}</a>`;
-  }).join(" / ");
-  return `<p class="crumbs">${html}</p>`;
+    if (index === parts.length - 1) return `<li><span aria-current="page">${esc(item.label)}</span></li>`;
+    return `<li><a href="${item.href}">${esc(item.label)}</a></li>`;
+  }).join("");
+  return `<nav class="crumbs" aria-label="Breadcrumb"><ol>${html}</ol></nav>`;
 }
 
 function renderFooter() {
-  return `<footer class="foot wrap"><p>Figures checked ${checked}. Ratings and excerpts are from the cited page. They are not from one Google API pull.</p><p>Featured slots on this beta are empty samples. <a href="/roster/how-it-works/">How the list is made</a>.</p></footer>`;
+  const jobs = trades.map((trade) => `<li><a href="/roster/${trade.slug}/">${esc(trade.name)}</a></li>`).join("");
+  return `<footer class="foot"><div class="wrap foot-inner">
+<div class="foot-brand"><a class="brand" href="/roster/">${brandMark()}<span class="wordmark">Roster</span></a><p>A short, unpaid list of home-service companies in Singapore, with the reviews that back it.</p><p class="foot-note">Figures checked ${checked}. Ratings and excerpts are from the cited page. They are not from one Google API pull.</p></div>
+<div class="foot-col"><h2>Jobs</h2><ul>${jobs}</ul></div>
+<div class="foot-col"><h2>About</h2><ul><li><a href="/roster/how-it-works/">How the list is made</a></li><li><a href="/roster/how-it-works/">What a Featured slot would be</a></li><li><a href="/roster/aircon-servicing/chemical-wash/">Aircon chemical wash</a></li><li><a href="/roster/aircon-servicing/gas-top-up/">Aircon gas top-up</a></li></ul></div>
+<p class="foot-line">Singapore beta. Featured slots on this beta are empty samples. The quote form does not send.</p>
+</div></footer>`;
 }
 
-function renderFaq(faqs) {
-  const items = faqs.map(([q, a]) => `<details><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join("");
-  return `<section class="faq"><h2>Questions</h2>${items}</section>`;
+function renderFaq(faqs, heading = "Questions") {
+  const items = faqs.map(([q, a]) => `<details><summary><span>${esc(q)}</span><span class="faq-mark" aria-hidden="true"></span></summary><p>${esc(a)}</p></details>`).join("");
+  return `<section class="faq"><h2>${esc(heading)}</h2><div class="faq-list">${items}</div></section>`;
 }
 
 function renderFeatured() {
-  const slot = `<article class="ad"><p class="eyebrow">Featured - paid placement (sample)</p><p>Sample slot. No company is placed here. A paid slot would show a name, one line, and a WhatsApp button. It would not get a number on the list.</p></article>`;
-  return `<section class="ads" aria-label="Sample placements"><h2>Sample placements</h2><p class="note">These two slots are empty. No named company paid to appear here.</p>${slot}${slot}<p class="ads-foot">Featured is a monthly visibility ad. It does not change the shortlist.</p></section>`;
+  const slot = `<article class="ad"><p class="eyebrow">Featured, paid placement (sample)</p><p class="ad-name">Sample slot</p><p>No company is placed here. A paid slot would show a name, one line, and a WhatsApp button. It would not get a number on the list.</p></article>`;
+  return `<section class="ads" aria-label="Sample placements"><div class="ads-head"><h2>Sample placements</h2><p class="note">These two slots are empty. No named company paid to appear here.</p></div>${slot}${slot}<p class="ads-foot">Featured is a monthly visibility ad. It does not change the shortlist.</p></section>`;
 }
 
 function askHeading(count) {
@@ -307,34 +422,54 @@ function nameList(companies) {
   return `${links.slice(0, -1).join(", ")}, and ${links[links.length - 1]}`;
 }
 
-function renderForm(jobs, recipients) {
+function renderForm(jobs, recipients, uid) {
   const options = jobs.map((job) => `<option>${esc(job)}</option>`).join("");
   const who = recipients.length
     ? `<p class="recipient">A later version would send one request to ${nameList(recipients)}. This beta does not send it.</p>`
     : `<p class="recipient">No company is on this list to receive a request. This beta does not send the form.</p>`;
-  return `<section class="ask-wrap"><h2>${esc(askHeading(recipients.length))}</h2>${who}<p class="note">Beta: this form does not send. Nothing is stored.</p><div class="ask"><label>Estate<select name="estate"><option value="">Select</option><option>HDB</option><option>Condo or apartment</option><option>Landed</option><option>Commercial</option><option>Not sure</option></select></label><label>Units<input name="units" type="number" inputmode="numeric" min="1" max="20"></label><label>Job<select name="job"><option value="">Select</option>${options}</select></label><label>Phone<input name="phone" type="tel" autocomplete="tel"></label><button class="btn btn-solid" type="button" onclick="var n=this.parentElement.querySelector('[data-result]'); if(n){n.hidden=false; n.textContent='Beta: this request was not sent.';}">Submit request</button><p class="result" data-result hidden></p></div></section>`;
+  const id = (name) => `${uid}-${name}`;
+  return `<section class="ask-wrap" aria-labelledby="${id("title")}"><div class="ask-copy"><p class="kicker">Quote request</p><h2 id="${id("title")}">${esc(askHeading(recipients.length))}</h2>${who}<p class="note ask-note">${icon("shield", "ic ic-inline")}Beta: this form does not send. Nothing is stored. The homeowner pays nothing.</p></div><div class="ask"><label for="${id("estate")}">Estate</label><select id="${id("estate")}" name="estate"><option value="">Select</option><option>HDB</option><option>Condo or apartment</option><option>Landed</option><option>Commercial</option><option>Not sure</option></select><label for="${id("units")}">Units</label><input id="${id("units")}" name="units" type="number" inputmode="numeric" min="1" max="20" placeholder="1"><label for="${id("job")}">Job</label><select id="${id("job")}" name="job"><option value="">Select</option>${options}</select><label for="${id("phone")}">Phone</label><input id="${id("phone")}" name="phone" type="tel" autocomplete="tel" placeholder="+65"><button class="btn btn-solid" type="button" onclick="var n=this.parentElement.querySelector('[data-result]'); if(n){n.hidden=false; n.textContent='Beta: this request was not sent.';}">Submit request${icon("arrow", "ic ic-btn")}</button><p class="result" data-result hidden role="status"></p></div></section>`;
 }
 
 function renderReview(review) {
-  return `<blockquote><p>${esc(review.excerpt)}</p></blockquote><p class="byline">${esc(review.author)}, ${esc(review.relativeTime)}. <a href="${esc(review.sourceUrl)}">Source</a>. <a href="${esc(review.mapsUrl)}">Maps</a>. ${esc(review.sourceLabel)}</p>`;
+  return `<figure class="quote"><blockquote><p>${esc(review.excerpt)}</p></blockquote><figcaption><span class="who">${esc(review.author)}</span>, ${esc(review.relativeTime)}. <a href="${esc(review.sourceUrl)}">Source</a>. <a href="${esc(review.mapsUrl)}">Maps</a>. <span class="src">${esc(review.sourceLabel)}</span></figcaption></figure>`;
+}
+
+function ratingChip(company) {
+  if (!company.rating) {
+    return `<p class="rate rate-none"><span class="score score-none">Rating not captured</span></p>`;
+  }
+  return `<p class="rate"><span class="score">${icon("star", "ic ic-star")}${esc(company.rating.value.toFixed(1))}</span><span class="rate-label">${esc(company.rating.label)}</span></p>`;
+}
+
+function contactButtons(company, solidProfile) {
+  const buttons = [`<a class="btn" href="${telHref(company.phone.value)}">${icon("phone", "ic ic-btn-lead")}Call</a>`];
+  if (company.whatsapp?.value) {
+    buttons.push(`<a class="btn" href="${waHref(company.whatsapp.value)}">${icon("chat", "ic ic-btn-lead")}WhatsApp</a>`);
+  }
+  if (solidProfile) {
+    buttons.push(`<a class="btn btn-solid" href="/roster/company/${company.slug}/">Profile${icon("arrow", "ic ic-btn")}</a>`);
+  }
+  return buttons.join("");
 }
 
 function renderRow(company, index) {
-  const score = company.rating
-    ? `<p class="rating"><span class="score">${esc(company.rating.value.toFixed(1))}</span></p><p class="rating-note">${esc(company.rating.note)}</p>`
-    : `<p class="rating"><span class="count">Rating not captured</span></p>`;
-  const quote = company.reviews[0] ? renderReview(company.reviews[0]) : `<p class="note">No dated excerpt is stored for this beta.</p>`;
-  return `<li class="row"><div class="num">${String(index + 1).padStart(2, "0")}</div><div><h2><a href="/roster/company/${company.slug}/">${esc(company.name)}</a></h2>${score}<p class="fit"><span class="fit-label">Best for</span>${esc(company.bestFor)}</p>${quote}<p class="actions"><a class="btn" href="${telHref(company.phone.value)}">Call</a><a class="btn btn-solid" href="/roster/company/${company.slug}/">Profile</a></p></div></li>`;
+  const note = company.rating ? `<p class="rating-note">${esc(company.rating.note)}</p>` : "";
+  const quote = company.reviews[0]
+    ? renderReview(company.reviews[0])
+    : `<p class="note quote-none">No dated excerpt is stored for this beta.</p>`;
+  return `<li class="row"><div class="row-num" aria-hidden="true">${String(index + 1).padStart(2, "0")}</div><div class="row-body"><div class="row-head"><h2><a href="/roster/company/${company.slug}/">${esc(company.name)}</a></h2>${ratingChip(company)}</div>${note}<p class="fit"><span class="fit-label">Best for</span>${esc(company.bestFor)}</p>${quote}<p class="actions">${contactButtons(company, true)}</p></div></li>`;
 }
 
 function shortlist(companies) {
   if (!companies.length) {
     return `<p class="empty">No company is on this shortlist.</p>`;
   }
-  return `<h2 class="section">Unpaid shortlist</h2><ol class="shortlist">${companies.map(renderRow).join("")}</ol>`;
+  const n = companies.length;
+  return `<div class="list-head"><h2 class="section">Unpaid shortlist</h2><p class="list-meta">${n} ${n === 1 ? "company" : "companies"}, ordered by the rating on file, then the review count</p></div><ol class="shortlist">${companies.map(renderRow).join("")}</ol>`;
 }
 
-function pageShell({ title, description, canonicalPath, current, jsonLd, body }) {
+function pageShell({ title, description, canonicalPath, current, jsonLd, body, bodyClass = "" }) {
   const canonical = abs(canonicalPath);
   const graph = JSON.stringify({
     "@context": "https://schema.org",
@@ -347,19 +482,20 @@ function pageShell({ title, description, canonicalPath, current, jsonLd, body })
 <script src="/auth-config.js"></script>
 <script src="/auth.js"></script>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="theme-color" content="#f3f0e9">
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(description)}">
 <link rel="canonical" href="${canonical}">
 <link rel="icon" href="/roster/assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,560;1,9..144,460&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,560;1,9..144,460&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/roster/assets/site.css">
 <script type="application/ld+json">${graph}</script>
 </head>
-<body>
+<body${bodyClass ? ` class="${bodyClass}"` : ""}>
 <a class="skip" href="#content">Skip to content</a>
 ${renderNav(current)}
 <main id="content" class="wrap">
@@ -371,14 +507,19 @@ ${renderFooter()}
 </html>
 `;
   assertNoDashes(html, canonicalPath);
-  if (html.includes("aggregateRating") || html.includes("AggregateRating")) {
-    throw new Error("Rating schema leaked into " + canonicalPath);
+  if (/aggregateRating/i.test(html) || /"@type":"(Review|Offer|AggregateRating)"/.test(html)) {
+    throw new Error("Rating, review, or offer schema leaked into " + canonicalPath);
+  }
+  if (/<form[\s>]/i.test(html)) {
+    throw new Error("A form element leaked into " + canonicalPath);
   }
   if (/mailto:|formspree|fetch\(/i.test(html)) {
     throw new Error("Outbound form hook in " + canonicalPath);
   }
   return html;
 }
+
+/* ---------- JSON-LD ---------- */
 
 function crumbsLd(items) {
   const list = [{ href: "/roster/", label: "Roster" }, ...items];
@@ -449,11 +590,12 @@ function webPage(title, canonicalPath, description) {
 
 function forbidSchema(node) {
   const banned = new Set(["aggregateRating", "review", "reviews", "offers", "offer", "priceRange"]);
-  walkStrings(node, () => {});
+  const bannedTypes = new Set(["AggregateRating", "Review", "Offer", "AggregateOffer", "Rating"]);
   const scan = (value) => {
     if (!value || typeof value !== "object") return;
     for (const key of Object.keys(value)) {
       if (banned.has(key)) throw new Error("Banned schema key " + key);
+      if (key === "@type" && bannedTypes.has(value[key])) throw new Error("Banned schema type " + value[key]);
       scan(value[key]);
     }
   };
@@ -471,6 +613,17 @@ function firstThree(companies) {
   return companies.slice(0, 3);
 }
 
+/* ---------- Category and intent pages ---------- */
+
+function airconSubnav(active) {
+  const links = [
+    ["/roster/aircon-servicing/", "All aircon servicing"],
+    ["/roster/aircon-servicing/chemical-wash/", "Chemical wash"],
+    ["/roster/aircon-servicing/gas-top-up/", "Gas top-up"]
+  ].map(([href, label]) => `<a href="${href}"${href === active ? ' aria-current="page"' : ""}>${esc(label)}</a>`).join("");
+  return `<nav class="subs" aria-label="Aircon jobs">${links}</nav>`;
+}
+
 function renderCollection(spec, companies, crumbs) {
   const count = companies.length;
   const title = count === 0
@@ -478,27 +631,31 @@ function renderCollection(spec, companies, crumbs) {
     : `${spec.titleName || spec.name} in Singapore: shortlist of ${count} ${count === 1 ? "company" : "companies"} | Roster`;
   const description = spec.intro[0].slice(0, 155);
   const canonicalPath = `/roster/${spec.slug}/`;
+  const tradeId = spec.parent || spec.id;
+  const isAircon = tradeId === "aircon";
+  const countLabel = count === 0 ? "No companies yet" : `${count} ${count === 1 ? "company" : "companies"}`;
+  const notes = spec.intro.slice(1).map((paragraph) => `<p>${esc(paragraph)}</p>`).join("");
   const body = [
+    `<div class="page-head">`,
     renderCrumbs(crumbs),
-    `<p class="kicker">Singapore</p>`,
-    `<h1>${esc(spec.h1)}</h1>`,
-    ...spec.intro.map((paragraph) => `<p class="lede">${esc(paragraph)}</p>`),
-    `<p class="method">How this list was made. <a href="/roster/how-it-works/">Read the method</a>. Checked ${checked}.</p>`,
+    `<div class="head-row"><span class="disc">${icon(tradeIcon[tradeId], "ic ic-disc")}</span><div><p class="kicker">Singapore, ${esc(countLabel)}</p><h1>${esc(spec.h1)}</h1></div></div>`,
+    `<p class="lede">${esc(spec.intro[0])}</p>`,
+    isAircon ? airconSubnav(canonicalPath) : "",
+    `</div>`,
+    notes ? `<aside class="notes"><h2>${icon("list", "ic")}Notes on this list</h2>${notes}<p class="method">${icon("link", "ic ic-inline")}<a href="/roster/how-it-works/">How the list is made</a>. Checked ${checked}.</p></aside>` : `<p class="method">${icon("link", "ic ic-inline")}<a href="/roster/how-it-works/">How the list is made</a>. Checked ${checked}.</p>`,
     shortlist(companies),
-    renderForm(spec.jobs, firstThree(companies)),
+    renderForm(spec.jobs, firstThree(companies), "ask"),
     renderFeatured(),
-    spec.slug === "aircon-servicing" ? `<nav class="subs" aria-label="Aircon jobs"><a href="/roster/aircon-servicing/">All aircon servicing</a><a href="/roster/aircon-servicing/chemical-wash/">Chemical wash</a><a href="/roster/aircon-servicing/gas-top-up/">Gas top-up</a></nav>` : "",
     renderFaq(spec.faqs)
   ].join("\n");
   const jsonLd = [
     webPage(title, canonicalPath, description),
     { "@type": "CollectionPage", name: spec.h1, url: abs(canonicalPath) },
-    crumbsLd(crumbs.map((item, index) => index === crumbs.length - 1 ? { label: item.label } : item)),
+    crumbsLd(crumbs.map((item, index) => (
+      index === crumbs.length - 1 ? { href: canonicalPath, label: item.label } : item
+    ))),
     faqLd(spec.faqs)
   ];
-  jsonLd[2] = crumbsLd(crumbs.map((item, index) => (
-    index === crumbs.length - 1 ? { href: canonicalPath, label: item.label } : item
-  )));
   if (companies.length) jsonLd.push(listLd(spec.h1, companies));
   forbidSchema(jsonLd);
   return pageShell({
@@ -510,6 +667,8 @@ function renderCollection(spec, companies, crumbs) {
     body
   });
 }
+
+/* ---------- Profile ---------- */
 
 function factRow(label, html) {
   return `<div><dt>${esc(label)}</dt><dd>${html}</dd></div>`;
@@ -523,18 +682,19 @@ function renderProfile(company, peers) {
   const facts = [];
   facts.push(factRow("Phone", `<a href="${telHref(company.phone.value)}">${esc(company.phone.value)}</a>`));
   if (company.whatsapp?.value) {
-    const note = company.whatsapp.note ? ` ${esc(company.whatsapp.note)}` : "";
+    const note = company.whatsapp.note ? ` <span class="fact-note">${esc(company.whatsapp.note)}</span>` : "";
     facts.push(factRow("WhatsApp", `<a href="${waHref(company.whatsapp.value)}">${esc(company.whatsapp.value)}</a>${note}`));
   }
   if (company.email?.value) facts.push(factRow("Email", esc(company.email.value)));
   if (company.address?.value) facts.push(factRow("Address", esc(company.address.value)));
   if (company.website?.value) {
-    const note = company.website.note ? ` ${esc(company.website.note)}` : "";
-    facts.push(factRow("Website", `<a href="${esc(company.website.value)}">${esc(company.website.value)}</a>${note}`));
+    const note = company.website.note ? ` <span class="fact-note">${esc(company.website.note)}</span>` : "";
+    const shown = company.website.value.replace(/^https?:\/\//, "").replace(/\/$/, "");
+    facts.push(factRow("Website", `<a href="${esc(company.website.value)}">${esc(shown)}</a>${note}`));
   }
-  facts.push(factRow("Maps", `<a href="${esc(company.mapsUrl)}">Open the listing</a> ${esc(company.mapsNote || "")}`));
+  facts.push(factRow("Maps", `<a href="${esc(company.mapsUrl)}">Open the listing</a>${company.mapsNote ? ` <span class="fact-note">${esc(company.mapsNote)}</span>` : ""}`));
   if (company.rating) {
-    facts.push(factRow("Rating", `${esc(company.rating.label)}. ${esc(company.rating.note)} <a class="fact-src" href="${esc(company.rating.sourceUrl)}">Source</a>`));
+    facts.push(factRow("Rating", `<strong>${esc(company.rating.label)}.</strong> <span class="fact-note">${esc(company.rating.note)}</span> <a class="fact-src" href="${esc(company.rating.sourceUrl)}">Source</a>`));
   } else {
     facts.push(factRow("Rating", "Rating not captured."));
   }
@@ -542,33 +702,37 @@ function renderProfile(company, peers) {
     facts.push(factRow(fact.label, `${esc(fact.value)} <a class="fact-src" href="${esc(fact.sourceUrl)}">Source</a>`));
   }
   const reviews = company.reviews.length
-    ? company.reviews.map(renderReview).join("")
-    : `<p class="note">No dated excerpt is stored for this beta.</p>`;
+    ? `<div class="quotes">${company.reviews.map(renderReview).join("")}</div>`
+    : `<p class="note quote-none">No dated excerpt is stored for this beta.</p>`;
   const others = peers.filter((peer) => peer.slug !== company.slug);
   const otherHtml = others.length
-    ? `<ul class="peers">${others.map((peer) => `<li><a href="/roster/company/${peer.slug}/">${esc(peer.name)}</a></li>`).join("")}</ul>`
+    ? `<ul class="peers">${others.map((peer) => `<li><a href="/roster/company/${peer.slug}/"><span class="peer-name">${esc(peer.name)}</span>${peer.rating ? `<span class="peer-rate">${icon("star", "ic ic-star")}${esc(peer.rating.value.toFixed(1))}</span>` : `<span class="peer-rate peer-none">No rating</span>`}</a></li>`).join("")}</ul>`
     : `<p class="note">No other company is on this shortlist.</p>`;
   const matched = [company, ...others].slice(0, 3);
   const crumbs = [
     { href: `/roster/${trade.slug}/`, label: trade.name },
     { label: company.name }
   ];
+  const callbar = `<div class="callbar" aria-label="Contact ${esc(company.name)}"><a class="btn btn-solid" href="${telHref(company.phone.value)}">${icon("phone", "ic ic-btn-lead")}Call</a>${company.whatsapp?.value ? `<a class="btn" href="${waHref(company.whatsapp.value)}">${icon("chat", "ic ic-btn-lead")}WhatsApp</a>` : `<a class="btn" href="${esc(company.mapsUrl)}">${icon("pin", "ic ic-btn-lead")}Maps</a>`}</div>`;
   const body = [
+    `<div class="page-head profile-head">`,
     renderCrumbs(crumbs),
-    `<p class="kicker">Profile</p>`,
+    `<a class="tag" href="/roster/${trade.slug}/">${icon(tradeIcon[trade.id], "ic")}${esc(trade.name)} in Singapore</a>`,
     `<h1>${esc(company.name)}</h1>`,
-    `<a class="tag" href="/roster/${trade.slug}/">${esc(trade.name)} in Singapore</a>`,
+    ratingChip(company),
+    `<p class="actions actions-hero">${contactButtons(company, false)}<a class="btn btn-quiet" href="${esc(company.mapsUrl)}">${icon("pin", "ic ic-btn-lead")}Maps</a></p>`,
+    `</div>`,
     `<div class="profile">`,
-    `<aside class="profile-side"><dl class="facts">${facts.join("")}</dl></aside>`,
+    `<aside class="profile-side"><div class="facts-wrap"><h2 class="facts-title">Facts, as published</h2><dl class="facts">${facts.join("")}</dl></div></aside>`,
     `<div class="profile-main">`,
-    `<section class="section"><h2>Best for</h2><p class="fit">${esc(company.bestFor)}</p></section>`,
-    `<section class="section"><h2>Poor fit</h2><p class="fit poor">${esc(company.poorFit)}</p></section>`,
-    `<section class="section"><h2>Pricing</h2><p class="price">${esc(company.priceNote)}</p><p class="byline"><a href="${esc(company.priceSourceUrl)}">Price source</a></p></section>`,
-    `<section class="section"><h2>What reviewers wrote</h2>${reviews}</section>`,
-    renderForm(trade.jobs, matched),
+    `<div class="fit-grid"><section class="fit-card good"><h2>${icon("check", "ic")}Best for</h2><p class="fit">${esc(company.bestFor)}</p></section><section class="fit-card poor"><h2>${icon("tagIcon", "ic")}Poor fit</h2><p class="fit">${esc(company.poorFit)}</p></section></div>`,
+    `<section class="section price-section"><h2>${icon("dollar", "ic")}Pricing</h2><div class="price-card"><p class="price">${esc(company.priceNote)}</p><p class="byline"><a href="${esc(company.priceSourceUrl)}">Price source</a>. Prices are what the company publishes.</p></div></section>`,
+    `<section class="section"><h2>${icon("quote", "ic")}What reviewers wrote</h2>${reviews}</section>`,
+    renderForm(trade.jobs, matched, "ask"),
     `<section class="section"><h2>Other companies in ${esc(trade.name.toLowerCase())}</h2>${otherHtml}</section>`,
     `</div>`,
-    `</div>`
+    `</div>`,
+    callbar
   ].join("\n");
   const jsonLd = [
     webPage(title, canonicalPath, description),
@@ -582,40 +746,63 @@ function renderProfile(company, peers) {
     canonicalPath,
     current: `/roster/${trade.slug}/`,
     jsonLd,
-    body
+    body,
+    bodyClass: "has-callbar"
   });
 }
+
+/* ---------- Home ---------- */
 
 function renderHome(grouped) {
   const title = "Roster | Short unpaid lists of home services in Singapore";
   const description = "A short unpaid list of home-service companies in Singapore, with the reviews that back it.";
-  const rows = trades.map((trade, index) => {
+  const total = trades.reduce((sum, trade) => sum + grouped[trade.id].length, 0);
+  const tiles = trades.map((trade, index) => {
     const count = grouped[trade.id].length;
     const meta = count === 0 ? "No companies yet" : `${count} ${count === 1 ? "company" : "companies"}`;
     const empty = count === 0 ? ` class="is-empty"` : "";
-    return `<li${empty}><a href="/roster/${trade.slug}/"><span class="idx">${String(index + 1).padStart(2, "0")}</span><span class="job">${esc(trade.name)}</span><span class="meta">${esc(meta)}</span></a></li>`;
+    return `<li${empty}><a href="/roster/${trade.slug}/"><span class="tile-top"><span class="disc">${icon(tradeIcon[trade.id], "ic ic-disc")}</span><span class="idx">${String(index + 1).padStart(2, "0")}</span></span><span class="job">${esc(trade.name)}</span><span class="hint">${esc(jobsHint(trade))}</span><span class="meta">${esc(meta)}${icon("arrow", "ic ic-tile")}</span></a></li>`;
   }).join("");
   const body = `
-<div class="intro">
-<div class="intro-lead">
+<section class="hero">
+<div class="hero-copy">
 <p class="kicker">Singapore beta</p>
-<h1>Roster</h1>
-<p class="dek">A short, unpaid list of home-service companies in Singapore, with the reviews that back it.</p>
+<h1>Short, unpaid shortlists for home jobs in Singapore.</h1>
+<p class="dek">Aircon, plumbing, electrical, handyman, and cleaning. Every list is ordered by the rating on file, never by who paid, and every figure links to the page it came from.</p>
+<p class="hero-actions"><a class="btn btn-paper" href="#jobs">Pick a job${icon("arrow", "ic ic-btn")}</a><a class="btn btn-ghost" href="/roster/how-it-works/">How the list is made</a></p>
 </div>
-<div class="intro-body">
-<p class="lede">Companies cannot pay to move up this list. Every profile says who the company is a good fit for, and who should look elsewhere.</p>
-<p class="lede">The list is as long as the sourcing allowed. Some jobs have fewer than five companies. Home cleaning has one. Handyman has three.</p>
-</div>
-</div>
-<ol class="index section">${rows}</ol>
-<section class="section">
+<div class="hero-visual">${heroIllustration()}</div>
+</section>
+<ul class="trust" aria-label="What makes the list">
+<li>${icon("shield", "ic ic-disc")}<strong>Nobody pays for a place.</strong><span>Companies cannot buy a higher number. Paid slots sit apart, labeled, and stay empty on this beta.</span></li>
+<li>${icon("link", "ic ic-disc")}<strong>Every figure has a source.</strong><span>Phones, prices, ratings, and reviews link to the page they were copied from. Nothing is invented.</span></li>
+<li>${icon("calendar", "ic ic-disc")}<strong>Checked ${esc(checked)}.</strong><span>${total} companies so far. Each profile says who it suits and who should look elsewhere.</span></li>
+</ul>
+<section class="jobs" id="jobs">
+<div class="section-head"><p class="kicker">Jobs</p><h2>Pick the job, then read the shortlist</h2><p class="lede">The list is as long as the sourcing allowed. Some jobs have fewer than five companies. Home cleaning has one. Handyman has three.</p></div>
+<ol class="index">${tiles}</ol>
+</section>
+<section class="section how">
 <h2>How it works</h2>
+<div>
 <ol class="steps">
-<li><strong>01</strong> Pick a job.</li>
-<li><strong>02</strong> Read the shortlist. The order is unpaid.</li>
-<li><strong>03</strong> One request can go to at most three companies. In this beta the form does not send it.</li>
+<li><strong>01</strong><span class="step-title">Pick a job.</span><span>Five jobs so far. Aircon also has pages for a chemical wash and a gas top-up.</span></li>
+<li><strong>02</strong><span class="step-title">Read the shortlist.</span><span>The order is unpaid. Each card shows the rating on file, who the company suits, and one dated review.</span></li>
+<li><strong>03</strong><span class="step-title">Call, or send one request.</span><span>One request can go to at most three companies. In this beta the form does not send it.</span></li>
 </ol>
-<p class="method"><a href="/roster/how-it-works/">How the list is made, and what a Featured slot would be</a>.</p>
+<p class="method">${icon("link", "ic ic-inline")}<a href="/roster/how-it-works/">How the list is made, and what a Featured slot would be</a>.</p>
+</div>
+</section>
+<section class="section promise">
+<h2>What every profile shows</h2>
+<ul class="promise-list">
+<li>${icon("phone", "ic")}<strong>Phone and WhatsApp</strong><span>as printed on the company's own page, with that page linked.</span></li>
+<li>${icon("check", "ic")}<strong>Best for and poor fit</strong><span>in plain words, so you can rule a company out before you call.</span></li>
+<li>${icon("dollar", "ic")}<strong>Prices the company publishes</strong><span>with the page, and a note when GST is not stated.</span></li>
+<li>${icon("star", "ic ic-star")}<strong>The rating on file</strong><span>with its source and the day it was checked. Roster prints no star score of its own.</span></li>
+<li>${icon("quote", "ic")}<strong>Reviews with a name and a date</strong><span>copied as published. A quote with no name or no date is left off.</span></li>
+<li>${icon("pin", "ic")}<strong>Address, UEN, and licence claims</strong><span>only when the company prints them, with a note that the register was not opened.</span></li>
+</ul>
 </section>`;
   const jsonLd = [
     { "@type": "WebSite", name: "Roster", url: origin + "/", description },
@@ -649,27 +836,39 @@ function renderHome(grouped) {
   });
 }
 
+/* ---------- How it works ---------- */
+
 function renderHow() {
   const title = "How Roster works | Singapore beta";
   const description = "How the shortlist is ordered, what a Featured slot would be, and why the quote form does not send.";
   const canonicalPath = "/roster/how-it-works/";
+  const sections = [
+    ["What gets a company on the list", [
+      `A phone number on the company's own site, or on a Google Maps listing we opened. A rating goes on the page when we can point at one figure on one page. A company with no rating can still be listed when its own page publishes a price, and the profile says the rating is missing. Two handyman profiles were already on the beta from directories, with no rating and no price, and those profiles say the site was not opened. Checked ${checked}.`,
+      "A review line needs a name, a date or a relative time, and the page it was copied from. The words stay as published, including rough grammar. A quote with no date stays off the page."
+    ]],
+    ["How the order is chosen", [
+      "Higher rating figure first. If the rating ties, the higher review count comes first. A company with no captured rating goes last. The figures are from the company site or a public mirror. They are not one live Google pull, so a page that publishes two counts can move when we next check it."
+    ]],
+    ["What a homeowner does", [
+      "Pick the job, read the shortlist, and use the form if you want to see it. The form has the estate, the unit count, the job, and a phone. It does not send. A later version can pass one request to at most three companies that do that job and hold prepaid credits. The homeowner pays nothing."
+    ]],
+    ["What Featured would be", [
+      "A labeled slot under the shortlist and under the form. At most two on a page. The company would get a name, one line, a published price if they have one, and a button that calls or messages them directly. The slot would not include quote requests, and it would not change the number, the stars, or the reviews. A company could buy credits, or a Featured slot, or both. Credits would be charged only when a matching request is delivered.",
+      "The amber slots on this beta are empty. No named company paid for one."
+    ]],
+    ["What stays off the page", [
+      "Roster does not print its own star score. It does not say we visited, we called, or an anonymous tester booked the job. A licence number appears only when the company publishes it, with the page, and with the note that the register was not opened. A UEN is the same."
+    ]]
+  ];
+  const html = sections.map(([heading, paragraphs], index) => `<section class="section how-step"><h2><span class="step-num">${String(index + 1).padStart(2, "0")}</span>${esc(heading)}</h2><div>${paragraphs.map((p) => `<p class="lede">${esc(p)}</p>`).join("")}</div></section>`).join("\n");
   const body = `
+<div class="page-head">
 ${renderCrumbs([{ label: "How it works" }])}
-<p class="kicker">Method</p>
-<h1>How this list is made</h1>
+<div class="head-row"><span class="disc">${icon("list", "ic ic-disc")}</span><div><p class="kicker">Method</p><h1>How this list is made</h1></div></div>
 <p class="dek">One profile per company. A short list per job. The order is unpaid.</p>
-<section class="section"><h2>What gets a company on the list</h2>
-<p class="lede">A phone number on the company's own site, or on a Google Maps listing we opened. A rating goes on the page when we can point at one figure on one page. A company with no rating can still be listed when its own page publishes a price, and the profile says the rating is missing. Two handyman profiles were already on the beta from directories, with no rating and no price, and those profiles say the site was not opened. Checked ${checked}.</p>
-<p class="lede">A review line needs a name, a date or a relative time, and the page it was copied from. The words stay as published, including rough grammar. A quote with no date stays off the page.</p></section>
-<section class="section"><h2>How the order is chosen</h2>
-<p class="lede">Higher rating figure first. If the rating ties, the higher review count comes first. A company with no captured rating goes last. The figures are from the company site or a public mirror. They are not one live Google pull, so a page that publishes two counts can move when we next check it.</p></section>
-<section class="section"><h2>What a homeowner does</h2>
-<p class="lede">Pick the job, read the shortlist, and use the form if you want to see it. The form has the estate, the unit count, the job, and a phone. It does not send. A later version can pass one request to at most three companies that do that job and hold prepaid credits. The homeowner pays nothing.</p></section>
-<section class="section"><h2>What Featured would be</h2>
-<p class="lede">A labeled slot under the shortlist and under the form. At most two on a page. The company would get a name, one line, a published price if they have one, and a button that calls or messages them directly. The slot would not include quote requests, and it would not change the number, the stars, or the reviews. A company could buy credits, or a Featured slot, or both. Credits would be charged only when a matching request is delivered.</p>
-<p class="lede">The amber slots on this beta are empty. No named company paid for one.</p></section>
-<section class="section"><h2>What stays off the page</h2>
-<p class="lede">Roster does not print its own star score. It does not say we visited, we called, or an anonymous tester booked the job. A licence number appears only when the company publishes it, with the page, and with the note that the register was not opened. A UEN is the same.</p></section>
+</div>
+${html}
 ${renderFaq(howFaqs)}`;
   const jsonLd = [
     webPage(title, canonicalPath, description),
@@ -686,6 +885,8 @@ ${renderFaq(howFaqs)}`;
     body
   });
 }
+
+/* ---------- Build ---------- */
 
 const raw = JSON.parse(await readFile(path.join(root, "data", "companies.json"), "utf8"));
 assertNoDashes(raw, "companies.json");
