@@ -1,0 +1,580 @@
+{
+  "capturedAt": "2026-10-09",
+  "capturedLabel": "9 Oct 2026",
+  "companies": [
+    {
+      "slug": "lion-city-aircon",
+      "name": "Lion City Air Conditioner Services",
+      "legalName": "Lion City Air Conditioner Services Pte Ltd",
+      "category": "aircon",
+      "schemaType": "HVACBusiness",
+      "services": ["chemical-wash", "gas-top-up"],
+      "rating": {
+        "value": 5.0,
+        "count": 2280,
+        "label": "5.0 from 2,280 reviews",
+        "note": "Trustindex mirror of Google reviews, 5.0 from 2,280, dated 7 Oct 2026. The company site says 5.0 and 2,000+.",
+        "sourceUrl": "https://www.trustindex.io/reviews/lioncityaircon.sg"
+      },
+      "phone": {
+        "value": "+65 8818 5781",
+        "sourceUrl": "https://lioncityaircon.sg/privacy-policy/"
+      },
+      "whatsapp": {
+        "value": "+65 8818 5781",
+        "note": "The privacy policy lists this number as phone and WhatsApp.",
+        "sourceUrl": "https://lioncityaircon.sg/privacy-policy/"
+      },
+      "email": {
+        "value": "contact@lioncityaircon.sg",
+        "sourceUrl": "https://lioncityaircon.sg/privacy-policy/"
+      },
+      "website": {
+        "value": "https://lioncityaircon.sg/",
+        "sourceUrl": "https://lioncityaircon.sg/"
+      },
+      "address": {
+        "street": "55 Serangoon North Avenue 4, #01-03",
+        "postal": "555859",
+        "value": "55 Serangoon North Avenue 4, #01-03, Singapore 555859",
+        "sourceUrl": "https://lioncityaircon.sg/privacy-policy/"
+      },
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Lion%20City%20Air%20Conditioner%20Services%20Singapore",
+      "mapsNote": "Place search. A short Maps link was not captured.",
+      "bestFor": "A homeowner who wants the chemical-wash price in writing before anyone arrives. The price page lists S$87.20 per unit with GST, and the WhatsApp number is the same line as the phone.",
+      "poorFit": "A commercial VRV design-and-build job. Also a weak fit if you want a separate leak-test fee quoted before any gas is added. Gas top-up is named as a service, and the overhaul and the yearly contract include it. The price table does not show a standalone gas price.",
+      "priceNote": "Price page, current as of June 2026, all-in with 9% GST: general servicing S$49.05 for 1 unit, S$65.40 for 2, S$81.75 for 3, S$98.10 for 4, and S$21.80 per unit for 5 or more. Chemical wash S$87.20 per unit. Chemical overhaul S$163.50 for 1 unit, and S$109 per unit for 5 or more. Yearly contract from S$174.40.",
+      "priceSourceUrl": "https://lioncityaircon.sg/aircon-servicing-prices-singapore/",
+      "facts": [
+        {
+          "label": "UEN",
+          "value": "201633902C, as printed on the privacy policy",
+          "sourceUrl": "https://lioncityaircon.sg/privacy-policy/"
+        },
+        {
+          "label": "BizSafe",
+          "value": "The site says BizSafe Level 3. This beta did not open the BizSafe register.",
+          "sourceUrl": "https://lioncityaircon.sg/aircon-chemical-wash-singapore/"
+        }
+      ],
+      "reviews": [
+        {
+          "excerpt": "Great service, good skill and very experienced. No hard selling and took care of the wall the unit and furnitures. Shout out to Sarwer and Zaherul",
+          "author": "Chris Chen",
+          "relativeTime": "7 Oct 2026",
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Lion%20City%20Air%20Conditioner%20Services%20Singapore",
+          "sourceUrl": "https://www.trustindex.io/reviews/lioncityaircon.sg",
+          "sourceLabel": "Trustindex mirror of a Google review, dated 2026.10.07. The Maps link is a place search, not the individual review."
+        },
+        {
+          "excerpt": "First time engaged Lion City Aircon services to service my mitsubishi aircon. Zaherul and Sarwer came, they did a very good job, dismantled my blower and clean unlike other aircon company that general services does not wash the blower. This is a plus point for Lion City aircon services. They never hard sell any unnecessary stuffs. Thumbs up to Lion City aircon services and both Zaherul and Sarwer!",
+          "author": "Freddie Lim",
+          "relativeTime": "7 Oct 2026",
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Lion%20City%20Air%20Conditioner%20Services%20Singapore",
+          "sourceUrl": "https://www.trustindex.io/reviews/lioncityaircon.sg",
+          "sourceLabel": "Trustindex mirror of a Google review, dated 2026.10.07. The Maps link is a place search, not the individual review."
+        },
+        {
+          "excerpt": "Abu came and service my office aircon. Very friendly man, decided to sign a package with him. very highly recommended aircon company.",
+          "author": "Peter Wells",
+          "relativeTime": "7 Oct 2026",
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Lion%20City%20Air%20Conditioner%20Services%20Singapore",
+          "sourceUrl": "https://www.trustindex.io/reviews/lioncityaircon.sg",
+          "sourceLabel": "Trustindex mirror of a Google review, dated 2026.10.07. The Maps link is a place search, not the individual review."
+        }
+      ]
+    },
+    {
+      "slug": "338-aircon",
+      "name": "338 Aircon",
+      "legalName": "338 Aircon",
+      "category": "aircon",
+      "schemaType": "HVACBusiness",
+      "services": ["chemical-wash", "gas-top-up"],
+      "rating": {
+        "value": 4.9,
+        "count": 10338,
+        "label": "4.9, review count disagrees across their pages",
+        "note": "A Daikin installation page shows 4.9 and 10,388 reviews, and also 9,338+ Google reviews. A system-1 unit page says 10,338+ Google reviews. These are the company's own figures. They were not re-counted.",
+        "sourceUrl": "https://www.338aircon.sg/daikin-aircon-installation"
+      },
+      "phone": {
+        "value": "+65 9222 4141",
+        "sourceUrl": "https://www.338aircon.sg/book-online"
+      },
+      "email": {
+        "value": "hello@338aircon.sg",
+        "sourceUrl": "https://www.338aircon.sg/book-online"
+      },
+      "website": {
+        "value": "https://www.338aircon.sg/",
+        "sourceUrl": "https://www.338aircon.sg/book-online"
+      },
+      "address": {
+        "street": "15 Duku Road, #01-01",
+        "postal": "429165",
+        "value": "15 Duku Road #01-01, Singapore 429165",
+        "sourceUrl": "https://www.338aircon.sg/book-online"
+      },
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=338%20Aircon%20Duku%20Road%20Singapore",
+      "mapsNote": "Place search. The review below was read on property.co, which labels it a Google review.",
+      "bestFor": "Comparing a servicing price the company actually prints. The book-online page starts general servicing at S$55 for one unit.",
+      "poorFit": "Anyone who needs one review count. Their pages disagree: 10,388, 10,338+, and 9,338+. Phone numbers also disagree. The book-online page lists +65 9222 4141. A testimonials page on the same site has listed +65 9323 4141, and directories have listed other numbers. Confirm who answers.",
+      "priceNote": "Book-online lists general servicing from S$55 for 1 unit, a contract without free gas at S$200 for 1 unit, and a contract with free gas at S$250. The Bedok page says one-time servicing from S$65. A per-unit chemical-wash price was not on those pages. A testimonial on the Daikin installation page describes two chemical washes and two normal services, with no date and no price.",
+      "priceSourceUrl": "https://www.338aircon.sg/book-online",
+      "facts": [
+        {
+          "label": "Gas contract",
+          "value": "Book-online sells a contract with free gas at S$250, and a contract without free gas at S$200 for 1 unit.",
+          "sourceUrl": "https://www.338aircon.sg/book-online"
+        }
+      ],
+      "reviews": [
+        {
+          "excerpt": "Alamgir did a fantastic job in helping to service my aircon. Alamgir explained to me in detail about the service that needs to be done and necessary.",
+          "author": "Sathiya Tamilan",
+          "relativeTime": "8 Oct 2023",
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=338%20Aircon%20Duku%20Road%20Singapore",
+          "sourceUrl": "https://www.property.co/singapore/338aircon-sg",
+          "sourceLabel": "property.co, submitted 8 Oct 2023, labeled there as a Google review. The Maps link is a place search, not the individual review. Wording left as published."
+        }
+      ]
+    },
+    {
+      "slug": "socool",
+      "name": "SoCool",
+      "legalName": "SoCool Pte Ltd",
+      "category": "aircon",
+      "schemaType": "HVACBusiness",
+      "services": [],
+      "rating": {
+        "value": 4.9,
+        "count": 9113,
+        "label": "4.9, public mirrors differ",
+        "note": "Wanderlog shows 4.9 from 9,113 and says the reviews are from Google. Trustindex on 7 Oct 2026 shows 4.9 from 10,237. The company about page widget shows about 11,297. The order uses 9,113 so the conflict stays visible. A higher mirror would place SoCool above 338 Aircon.",
+        "sourceUrl": "https://wanderlog.com/place/details/13321949/socool-pte-ltd-aircon-servicing-singapore"
+      },
+      "phone": {
+        "value": "+65 6854 4956",
+        "note": "Phone, address, and hours from the Google Maps listing opened for this beta.",
+        "sourceUrl": "https://maps.app.goo.gl/bDzizUGYoLk2SoRHA"
+      },
+      "website": {
+        "value": "https://www.socool.sg/",
+        "sourceUrl": "https://www.socool.sg/about-us/"
+      },
+      "address": {
+        "street": "22 Sin Ming Lane, #06-76 Midview City",
+        "postal": "573969",
+        "value": "22 Sin Ming Lane #06-76, Midview City, Singapore 573969",
+        "sourceUrl": "https://maps.app.goo.gl/bDzizUGYoLk2SoRHA"
+      },
+      "mapsUrl": "https://maps.app.goo.gl/bDzizUGYoLk2SoRHA",
+      "mapsNote": "Google Maps short link opened for the address and phone.",
+      "bestFor": "Routine servicing where a long public review history matters. The mirrors still show 4.9. The count does not.",
+      "poorFit": "A chemical overhaul or a gas top-up quoted from this page. socool.sg returned almost no text, so there is no rate card here. Third-party prices are left off. Chemical wash and gas top-up are not on the intent pages for that reason.",
+      "priceNote": "Price not published. The company homepage returned almost no text. A third-party price list is not treated as their rate card.",
+      "priceSourceUrl": "https://www.socool.sg/",
+      "facts": [
+        {
+          "label": "Hours on the Maps listing",
+          "value": "Saturday 8am to 10pm was on the Maps listing opened for this beta. The full week was not copied.",
+          "sourceUrl": "https://maps.app.goo.gl/bDzizUGYoLk2SoRHA"
+        }
+      ],
+      "reviews": [
+        {
+          "excerpt": "Michael and Jackson provided outstanding service during our aircon maintenance. They were very thorough and professional, taking the time to show us the actual results of their work. They also explained the issues clearly, including the error coming from the compressor and the meaning of the light indicator.",
+          "author": "Miko",
+          "relativeTime": "29 Nov 2025",
+          "mapsUrl": "https://maps.app.goo.gl/bDzizUGYoLk2SoRHA",
+          "sourceUrl": "https://wanderlog.com/place/details/13321949/socool-pte-ltd-aircon-servicing-singapore",
+          "sourceLabel": "Wanderlog, citing Google, 29 Nov 2025. The Maps link is the place listing, not the individual review."
+        }
+      ]
+    },
+    {
+      "slug": "billy-aircon",
+      "name": "Billy Aircon",
+      "legalName": "Billy Aircon",
+      "category": "aircon",
+      "schemaType": "HVACBusiness",
+      "services": ["chemical-wash"],
+      "rating": {
+        "value": 4.3,
+        "count": 1095,
+        "label": "4.3 from 1,095+ reviews",
+        "note": "The company homepage states 4.3 from 1,095+ Google reviews. A direct fetch of the homepage returned 403 on 9 Oct 2026, so this figure is from the public snippet of that URL.",
+        "sourceUrl": "https://www.billyaircon.com.sg/"
+      },
+      "phone": {
+        "value": "+65 9456 0875",
+        "note": "Second number on the same homepage snippet: +65 9459 8727.",
+        "sourceUrl": "https://www.billyaircon.com.sg/"
+      },
+      "email": {
+        "value": "info@billyaircon.com.sg",
+        "sourceUrl": "https://www.billyaircon.com.sg/"
+      },
+      "website": {
+        "value": "https://www.billyaircon.com.sg/",
+        "sourceUrl": "https://www.billyaircon.com.sg/"
+      },
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Billy%20Aircon%20Singapore",
+      "mapsNote": "Place search. Address was not on the pages we could read.",
+      "bestFor": "Repair and chemical cleaning where a perfect 5.0 is not the requirement. The site publishes a chemical-wash range, and the stated Google score is 4.3.",
+      "poorFit": "Someone who will only hire a perfect public score. The homepage fetch returned 403, so the phones, the email, and the 4.3 are from the public snippet. The site says NEA refrigerant-handling approval, BCA CRS L1 PPSF/05/00007, Daikin and Mitsubishi authorisation, and a 90-day warranty. Those registers were not opened for this beta.",
+      "priceNote": "Chemical-wash page: non-dismantle chemical wash S$80 to S$100 for a wall unit and S$120 to S$150 for a ceiling cassette. Full overhaul S$130 to S$180 for a wall unit and S$180 to S$250 for a cassette. The page does not say whether GST is included.",
+      "priceSourceUrl": "https://www.billyaircon.com.sg/chemical-wash/",
+      "facts": [
+        {
+          "label": "Hours",
+          "value": "A musty-smell page says Monday to Saturday, 9am to 6pm, and no call-out fee.",
+          "sourceUrl": "https://www.billyaircon.com.sg/aircon-musty-smell/"
+        },
+        {
+          "label": "Second phone",
+          "value": "+65 9459 8727, from the same homepage snippet as the main number.",
+          "sourceUrl": "https://www.billyaircon.com.sg/"
+        }
+      ],
+      "reviews": []
+    },
+    {
+      "slug": "mr-plumber",
+      "name": "Mr Plumber Singapore",
+      "legalName": "Mr Plumber Singapore",
+      "category": "plumbing",
+      "schemaType": "Plumber",
+      "services": [],
+      "rating": {
+        "value": 4.9,
+        "count": 4122,
+        "label": "4.9 from 4,122 reviews",
+        "note": "Toilet-sink page widget: 4.9 based on 4,122 reviews. Other pages on mrplumber.sg have shown different counts, including 4,123, 4,215, and 2,903. This is their widget, not a count pulled from Google.",
+        "sourceUrl": "https://www.mrplumber.sg/plumbing-chokes-repair/toilet-sink-choke/"
+      },
+      "phone": {
+        "value": "+65 6980 0909",
+        "sourceUrl": "https://www.mrplumber.sg/contact-us/"
+      },
+      "whatsapp": {
+        "value": "+65 8241 0032",
+        "note": "Contact page says WhatsApp message only. The same number is on Daylight Electrician's contact page.",
+        "sourceUrl": "https://www.mrplumber.sg/contact-us/"
+      },
+      "email": {
+        "value": "enquiry@mrplumber.sg",
+        "sourceUrl": "https://www.mrplumber.sg/contact-us/"
+      },
+      "website": {
+        "value": "https://www.mrplumber.sg/",
+        "sourceUrl": "https://www.mrplumber.sg/contact-us/"
+      },
+      "address": {
+        "street": "1090 Lower Delta Road, #03-07A",
+        "postal": "169201",
+        "value": "1090 Lower Delta Road #03-07A, Singapore 169201",
+        "note": "No walk-ins. A second desk is at 60 Paya Lebar Road #07-54, +65 3165 0126.",
+        "sourceUrl": "https://www.mrplumber.sg/contact-us/"
+      },
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Mr%20Plumber%20Singapore%20Lower%20Delta%20Road",
+      "mapsNote": "Place search.",
+      "bestFor": "A 24-hour plumbing call where you want a licence number the company publishes. The Little India page prints PUB licence WS17962021 and says the plumbers are BCA certified.",
+      "poorFit": "A job where the review count has to be one number. The widget disagrees with itself. WhatsApp +65 8241 0032 and this Lower Delta Road building also match Daylight Electrician, whose footer says powered by Everyworks. Confirm which brand is coming. The central desk is a second office, not the main line.",
+      "priceNote": "Price not published on the contact page or the sink page we opened.",
+      "priceSourceUrl": "https://www.mrplumber.sg/contact-us/",
+      "facts": [
+        {
+          "label": "Hours",
+          "value": "Monday to Sunday, 24 hours. No showroom and no walk-ins.",
+          "sourceUrl": "https://www.mrplumber.sg/contact-us/"
+        },
+        {
+          "label": "PUB licence",
+          "value": "WS17962021, as printed on their Little India page. The PUB register was not opened.",
+          "sourceUrl": "https://www.mrplumber.sg/little-india/"
+        },
+        {
+          "label": "Second office",
+          "value": "60 Paya Lebar Road #07-54, Singapore 409051. Phone +65 3165 0126.",
+          "sourceUrl": "https://www.mrplumber.sg/contact-us/"
+        }
+      ],
+      "reviews": [
+        {
+          "excerpt": "Pandi is very efficient and capable and managed to solve our plumping problem quickly. He managed to get unstuck and replaced the sink plug and it is working perfectly again. Was a job well done. Thank you so much. Very satisfied and will highly recommend.",
+          "author": "James Yong",
+          "relativeTime": "25 Mar 2026",
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Mr%20Plumber%20Singapore%20Lower%20Delta%20Road",
+          "sourceUrl": "https://www.mrplumber.sg/plumbing-installation-replacement-repair/basin-cabinet-installation/",
+          "sourceLabel": "Review printed on the company basin-cabinet page, timestamp 25 Mar 2026. Emoji removed. The Maps link is a place search, not the individual review."
+        }
+      ]
+    },
+    {
+      "slug": "daylight-electrician",
+      "name": "Daylight Electrician Singapore",
+      "legalName": "Daylight Electrician Singapore",
+      "category": "electrician",
+      "schemaType": "Electrician",
+      "services": [],
+      "rating": {
+        "value": 5.0,
+        "count": 3105,
+        "label": "5.0, review count disagrees across their pages",
+        "note": "A page on their site showed 5.0 from 3,105 reviews on 9 Oct 2026. Other pages have shown 3,156, 3,116, 3,115, and 3,091, also at 5.0. The sort uses 3,105, the figure on the page cited here. This is their widget, not a Google API pull.",
+        "sourceUrl": "https://www.daylightelectrician.com/guide-on-selecting-a-hdb-approved-electrician-in-singapore/electricians-doing-repairs-electrical-services-everyworks-electrician-singapore/"
+      },
+      "phone": {
+        "value": "+65 6909 9921",
+        "sourceUrl": "https://www.daylightelectrician.com/contact-us/"
+      },
+      "whatsapp": {
+        "value": "+65 8241 0032",
+        "note": "Contact page says WhatsApp message only. The same number is on Mr Plumber's contact page.",
+        "sourceUrl": "https://www.daylightelectrician.com/contact-us/"
+      },
+      "email": {
+        "value": "enquiry@daylightelectrician.com",
+        "sourceUrl": "https://www.daylightelectrician.com/contact-us/"
+      },
+      "website": {
+        "value": "https://www.daylightelectrician.com/",
+        "sourceUrl": "https://www.daylightelectrician.com/contact-us/"
+      },
+      "address": {
+        "street": "1090 Lower Delta Road, #03-07J",
+        "postal": "169201",
+        "value": "1090 Lower Delta Road #03-07J, Singapore 169201",
+        "note": "No showroom and no walk-ins. A west branch is listed at 21 Bukit Batok Crescent, #09-79.",
+        "sourceUrl": "https://www.daylightelectrician.com/contact-us/"
+      },
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Daylight%20Electrician%20Singapore%20Lower%20Delta",
+      "mapsNote": "Place search.",
+      "bestFor": "An emergency electrical job where the company states that its electricians are licensed, and a dated weekend power-trip note is on their own site.",
+      "poorFit": "A walk-in, or a job where you need one review count. The widget disagrees with itself. WhatsApp +65 8241 0032 and the Lower Delta building match Mr Plumber. The footer says powered by Everyworks. The west branch address matches the unit directories give for Mr Handyman.",
+      "priceNote": "Price not published on the contact page. The company asks for a WhatsApp enquiry.",
+      "priceSourceUrl": "https://www.daylightelectrician.com/contact-us/",
+      "facts": [
+        {
+          "label": "Hours",
+          "value": "Monday to Sunday, 8am to 10pm, on the contact page.",
+          "sourceUrl": "https://www.daylightelectrician.com/contact-us/"
+        },
+        {
+          "label": "West branch",
+          "value": "21 Bukit Batok Crescent, #09-79, Singapore 658065. Phone on that listing: +65 3158 3900. Same WhatsApp.",
+          "sourceUrl": "https://www.daylightelectrician.com/contact-us/"
+        },
+        {
+          "label": "Related brand",
+          "value": "Footer: powered by Everyworks. The company says it provides licensed electrician services. The EMA register was not opened.",
+          "sourceUrl": "https://www.daylightelectrician.com/contact-us/"
+        }
+      ],
+      "reviews": [
+        {
+          "excerpt": "An extremely pleasant and professional experience dealing with Daylight Electrician over the weekend. Had a power surge/overload on Friday night and contracted Daylight for the servicing and managed to get it resolved on Sunday morning!",
+          "author": "weiqi846",
+          "relativeTime": "27 Feb 2023",
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Daylight%20Electrician%20Singapore%20Lower%20Delta",
+          "sourceUrl": "https://www.daylightelectrician.com/services/emergency-electrician-singapore-services/",
+          "sourceLabel": "Review printed on the company emergency-electrician page, timestamp 27 Feb 2023. Opening lines only. The Maps link is a place search."
+        },
+        {
+          "excerpt": "Aru arrived on time and was able to identify the issue quickly and resolve it. Appt was made through WhatsApp and reply was prompt and information given was detailed.",
+          "author": "Eugene W",
+          "relativeTime": "26 Feb 2023",
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Daylight%20Electrician%20Singapore%20Lower%20Delta",
+          "sourceUrl": "https://www.daylightelectrician.com/services/emergency-electrician-singapore-services/",
+          "sourceLabel": "Review printed on the company emergency-electrician page, timestamp 26 Feb 2023. The Maps link is a place search."
+        }
+      ]
+    },
+    {
+      "slug": "repair-sg",
+      "name": "Repair.sg",
+      "legalName": "Repair.sg",
+      "category": "electrician",
+      "schemaType": "Electrician",
+      "services": [],
+      "rating": {
+        "value": 4.9,
+        "count": 3000,
+        "label": "4.9 and more than 3,000, on the electrician page",
+        "note": "The electrician page says 4.9/5 and more than 3,000 Google reviews. An isolator-switch page on the same site says 5.0 from 2,948 reviews. A directory has listed 4.7 from 43 reviews at an address that was not on their own page. Not reconciled. The sort uses the electrician-page claim.",
+        "sourceUrl": "https://repair.sg/electrician-singapore/"
+      },
+      "phone": {
+        "value": "+65 9070 6060",
+        "sourceUrl": "https://repair.sg/electrician-singapore/"
+      },
+      "whatsapp": {
+        "value": "+65 9070 6060",
+        "note": "The electrician page lists this number as phone and as the preferred WhatsApp.",
+        "sourceUrl": "https://repair.sg/electrician-singapore/"
+      },
+      "email": {
+        "value": "help@repair.sg",
+        "sourceUrl": "https://repair.sg/electrician-singapore/"
+      },
+      "website": {
+        "value": "https://repair.sg/electrician-singapore/",
+        "sourceUrl": "https://repair.sg/electrician-singapore/"
+      },
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Repair.sg%20electrician%20Singapore",
+      "mapsNote": "Place search. Address omitted because it was not on their own page.",
+      "bestFor": "A small electrical job on the number they publish. Phone and WhatsApp are both +65 9070 6060 on the electrician page.",
+      "poorFit": "Anyone who needs the Google count to be one figure. The electrician page and the isolator page disagree, and a directory figure disagrees with both. No address is shown.",
+      "priceNote": "A full rate card was not on the electrician page. The isolator-switch page says a new double-pole isolator starts from S$120 before transport.",
+      "priceSourceUrl": "https://repair.sg/isolator-switch-repair-replacement-singapore/",
+      "facts": [
+        {
+          "label": "Hours",
+          "value": "The handyman page says Monday to Saturday, 8:00am to 7:00pm, and that they answer enquiries outside those hours when they can.",
+          "sourceUrl": "https://repair.sg/handyman-singapore/"
+        }
+      ],
+      "reviews": [
+        {
+          "excerpt": "Rahaman and Ron assisted with electrical works. They are punctual, approacheable, efficient and very neat. Even the items inside their van are so amazingly well organised.",
+          "author": "M N",
+          "relativeTime": "3 Oct 2026",
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Repair.sg%20electrician%20Singapore",
+          "sourceUrl": "https://repair.sg/handyman-singapore/",
+          "sourceLabel": "Note printed on the company handyman page, dated 3 Oct 2026, describing electrical work. The Maps link is a place search."
+        }
+      ]
+    },
+    {
+      "slug": "sk-electrical",
+      "name": "SK Electrical",
+      "legalName": "SK Electrical Pte Ltd",
+      "category": "electrician",
+      "schemaType": "Electrician",
+      "services": [],
+      "rating": {
+        "value": 4.9,
+        "count": 856,
+        "label": "4.9 from 856 reviews",
+        "note": "Google Maps listing opened 9 Oct 2026. An older Home & Decor article cited a much smaller count. This profile uses the Maps page.",
+        "sourceUrl": "https://maps.google.com/?cid=16486700627576440283"
+      },
+      "phone": {
+        "value": "+65 8622 6400",
+        "sourceUrl": "https://maps.google.com/?cid=16486700627576440283"
+      },
+      "website": {
+        "value": "https://www.skelectrical.com.sg/",
+        "sourceUrl": "https://maps.google.com/?cid=16486700627576440283"
+      },
+      "address": {
+        "street": "675C Yishun Ave 4, #03-808",
+        "value": "675C Yishun Ave 4, #03-808, Singapore",
+        "sourceUrl": "https://maps.google.com/?cid=16486700627576440283"
+      },
+      "mapsUrl": "https://maps.google.com/?cid=16486700627576440283",
+      "mapsNote": "Google Maps listing opened 9 Oct 2026.",
+      "bestFor": "An electrical call where the Maps listing itself was opened. That page showed 4.9 from 856 reviews, the phone above, and 24-hour hours.",
+      "poorFit": "A reader who wants quoted review lines. The same Maps page showed recent names, Sally Tan about two weeks earlier and Leonard Ho about two months earlier. Their wording was not stored, so it is not reprinted.",
+      "priceNote": "Price not published on the Maps page we opened.",
+      "priceSourceUrl": "https://maps.google.com/?cid=16486700627576440283",
+      "facts": [
+        {
+          "label": "Hours",
+          "value": "Open 24 hours, on the Maps listing opened 9 Oct 2026.",
+          "sourceUrl": "https://maps.google.com/?cid=16486700627576440283"
+        }
+      ],
+      "reviews": []
+    },
+    {
+      "slug": "isoteam-homecare",
+      "name": "ISOTeam Homecare",
+      "legalName": "ISOTEAM HOMECARE PTE. LTD.",
+      "category": "handyman",
+      "schemaType": "LocalBusiness",
+      "services": [],
+      "rating": null,
+      "phone": {
+        "value": "+65 6745 0150",
+        "sourceUrl": "https://recordowl.com/company/isoteam-homecare-pte-ltd"
+      },
+      "email": {
+        "value": "hello@iso-team.com",
+        "note": "Listed on ThreeBestRated. The inbox was not opened.",
+        "sourceUrl": "https://threebestrated.sg/painters/isohomecare-changi-206252323"
+      },
+      "website": {
+        "value": "https://isoteamhomecare.com/",
+        "note": "Listed on ThreeBestRated. The site was not opened for this beta.",
+        "sourceUrl": "https://threebestrated.sg/painters/isohomecare-changi-206252323"
+      },
+      "address": {
+        "street": "8 Changi North Street 1, ISOTeam Building",
+        "postal": "498829",
+        "value": "8 Changi North Street 1, ISOTeam Building, Singapore 498829",
+        "sourceUrl": "https://recordowl.com/company/isoteam-homecare-pte-ltd"
+      },
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=ISOTeam%20Homecare%20Changi%20North%20Street%201",
+      "mapsNote": "Place search. A Maps listing was not opened.",
+      "bestFor": "A handyman enquiry where a registry record exists. RecordOwl lists ISOTEAM HOMECARE PTE. LTD., UEN 201935675D, at this address, with this phone.",
+      "poorFit": "Anyone who wants a Google rating or a signed review. None was stored. ThreeBestRated shows 4.9 as its own score, so that number is not used here. The listed parent-group phone is a different line and is not shown.",
+      "priceNote": "Price not published on the registry page we opened.",
+      "priceSourceUrl": "https://recordowl.com/company/isoteam-homecare-pte-ltd",
+      "facts": [
+        {
+          "label": "UEN",
+          "value": "201935675D on RecordOwl, a registry mirror. ACRA was not opened directly.",
+          "sourceUrl": "https://recordowl.com/company/isoteam-homecare-pte-ltd"
+        }
+      ],
+      "reviews": []
+    },
+    {
+      "slug": "mr-handyman",
+      "name": "Mr Handyman Singapore",
+      "legalName": "Mr Handyman Singapore",
+      "category": "handyman",
+      "schemaType": "LocalBusiness",
+      "services": [],
+      "rating": null,
+      "phone": {
+        "value": "+65 9821 1413",
+        "note": "The same number is listed as WhatsApp on The Best Singapore profile.",
+        "sourceUrl": "https://www.thebestsingapore.com/biz-review/mr-handyman-singapore-review/"
+      },
+      "whatsapp": {
+        "value": "+65 9821 1413",
+        "note": "Third-party profile. mrhandyman.sg was not opened.",
+        "sourceUrl": "https://www.thebestsingapore.com/biz-review/mr-handyman-singapore-review/"
+      },
+      "website": {
+        "value": "https://mrhandyman.sg/",
+        "note": "Listed by directories. The site was not opened for this beta.",
+        "sourceUrl": "https://asianbusinesshub.com/singapore/mr-handyman-singapore/"
+      },
+      "address": {
+        "street": "21 Bukit Batok Crescent, #09-79 WCEGA Tower",
+        "postal": "658065",
+        "value": "21 Bukit Batok Crescent #09-79, WCEGA Tower, Singapore 658065",
+        "sourceUrl": "https://www.thebestsingapore.com/biz-review/mr-handyman-singapore-review/"
+      },
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Mr%20Handyman%20Singapore%20WCEGA%20Tower",
+      "mapsNote": "Place search. A Maps listing was not opened.",
+      "bestFor": "A small repair if you are comfortable calling a number that more than one directory prints: +65 9821 1413 at this WCEGA Tower unit.",
+      "poorFit": "This profile is thin. mrhandyman.sg was not opened. No Google rating was captured. Hours disagree across directories, from 24 hours to 8am-7pm. Emails disagree, so none is shown. Daylight Electrician's contact page lists this same unit as its west branch.",
+      "priceNote": "Price not published. The company site was not opened.",
+      "priceSourceUrl": "https://www.thebestsingapore.com/biz-review/mr-handyman-singapore-review/",
+      "facts": [
+        {
+          "label": "Same unit",
+          "value": "Daylight Electrician lists a west branch at 21 Bukit Batok Crescent, #09-79. Confirm who will come.",
+          "sourceUrl": "https://www.daylightelectrician.com/contact-us/"
+        }
+      ],
+      "reviews": []
+    }
+  ]
+}

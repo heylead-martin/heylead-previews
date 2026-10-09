@@ -25,6 +25,7 @@ builds move to WordPress after the client approves.
 | `/places/` | Internal lab - Google Maps listings + 5 review samples via Places API (New). Worker: `~/heylead-places-api`. |
 | `/tickerlab/` | Internal lab - AI CIO morning note. Grok reads live tape, web, and X, then says what to own (paper book). API: `~/applylab-api` `GET /desk/brief`. Not advice. |
 | `/lp-sg/` | HeyLead's own Singapore paid-lander **hub** (the folder index). Public `heylead.com/lp-sg/` 302s here. Individual landers (`/lp-sg/leads/` and the other slugs) stay public on heylead.com. Refresh the hub with `node scripts/sync-lp-sg.mjs /path/to/heylead/static-build/site/dist/lp-sg`. Source: `heylead-theme` `static-build/site/src/pages/lp-sg/`. |
+| `/roster/` | Roster - Singapore home-services beta. Unpaid shortlists for aircon, plumbing, electrician, handyman, and home cleaning. Sample featured slots. The quote form does not send. Rebuild with `node roster/build.mjs`. |
 
 ## Adding a new client preview
 
