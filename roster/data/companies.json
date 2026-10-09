@@ -1,6 +1,6 @@
 {
-  "capturedAt": "2026-10-09",
-  "capturedLabel": "9 Oct 2026",
+  "capturedAt": "2026-10-10",
+  "capturedLabel": "9 Oct 2026 and 10 Oct 2026",
   "companies": [
     {
       "slug": "lion-city-aircon",
@@ -575,6 +575,433 @@
         }
       ],
       "reviews": []
+    },
+    {
+      "slug": "cool-aircon",
+      "name": "Cool Aircon",
+      "legalName": "Cool Aircon",
+      "category": "aircon",
+      "schemaType": "HVACBusiness",
+      "services": [
+        "chemical-wash",
+        "gas-top-up"
+      ],
+      "rating": {
+        "value": 4.9,
+        "count": 366,
+        "label": "4.9, badge says 360+, page data says 366, and a block says 5.0",
+        "note": "Homepage badge, opened 10 Oct 2026: 4.9 and 360+ Google reviews. The aria label says Rated 4.9 from 360+ Google reviews. The same homepage structured data says ratingValue 4.9 and reviewCount 366. A separate block says Rated 5.0 on Google and 360+ five-star reviews. The pricing footer says 360+ 5-star reviews. Not re-counted.",
+        "sourceUrl": "https://coolaircon.sg/"
+      },
+      "phone": {
+        "value": "+65 9778 8986",
+        "sourceUrl": "https://coolaircon.sg/contact"
+      },
+      "whatsapp": {
+        "value": "+65 9778 8986",
+        "note": "The contact page WhatsApp button uses this number.",
+        "sourceUrl": "https://coolaircon.sg/contact"
+      },
+      "email": {
+        "value": "hello@coolaircon.sg",
+        "sourceUrl": "https://coolaircon.sg/contact"
+      },
+      "website": {
+        "value": "https://coolaircon.sg/",
+        "sourceUrl": "https://coolaircon.sg/"
+      },
+      "address": {
+        "street": "Blk 153 Bukit Batok Street 11, #03-290",
+        "postal": "650153",
+        "value": "Blk 153 Bukit Batok Street 11 #03-290, Singapore 650153",
+        "sourceUrl": "https://coolaircon.sg/contact"
+      },
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Cool%20Aircon%20Bukit%20Batok%20Street%2011%20Singapore",
+      "mapsNote": "Place search. The site's review button is a write-a-review link, not a listing we opened.",
+      "bestFor": "A homeowner who wants the chemical-wash price and the gas table in writing before anyone arrives. The pricing page says no GST is added because the company is not GST-registered.",
+      "poorFit": "Anyone who needs the review count to be one number. The badge says 360+, the page data says 366, and another block says 5.0. The quotes on the homepage have no dates, so none are stored. UEN 202634424W is a 2026 registration.",
+      "priceNote": "Pricing page, opened 10 Oct 2026. The company says it is not GST-registered, so no GST is added, and the prices apply 7 days a week. One-time general service: 1 unit S$55, 2 units S$60, 3 units S$75, 4 units S$90, 5 units S$105, 6 units S$120. Yearly packages start at 2 units. Chemical wash: 1 unit S$110, 2 units S$210, 3 units S$310, 4 units S$410, 5 units S$510, 6 units S$610, then S$95 for each unit past 6. Wall overhaul for 9,000 or 12,000 BTU: 1 unit S$150, 2 units S$280, 3 or more S$130 each. An 18,000 BTU wall unit is S$180. A 24,000 BTU wall unit is S$240. Cassette and ducted units cost extra. Gas, for single-split and multi-split, by the PSI they measure: under 40 PSI is R22 S$90, R410A S$120, R32 S$130. From 41 to 80 PSI is R22 S$110, R410A S$140, R32 S$150. Above 81 PSI is R22 S$130, R410A S$160, R32 S$170. Multi-split troubleshooting is S$50 to S$80 and waived if the repair or service goes ahead. No call-out fee. CBD parking of S$5 to S$20 may be passed on.",
+      "priceSourceUrl": "https://coolaircon.sg/pricing",
+      "facts": [
+        {
+          "label": "UEN",
+          "value": "202634424W, in the homepage structured data. A 2026 registration. ACRA was not opened.",
+          "sourceUrl": "https://coolaircon.sg/"
+        },
+        {
+          "label": "Hours",
+          "value": "Open daily, 8am to 10pm, including weekends and public holidays, as printed on the contact page.",
+          "sourceUrl": "https://coolaircon.sg/contact"
+        },
+        {
+          "label": "GST",
+          "value": "The pricing FAQ says the company is not GST-registered, so no GST is added.",
+          "sourceUrl": "https://coolaircon.sg/pricing"
+        }
+      ],
+      "reviews": []
+    },
+    {
+      "slug": "cool-earth",
+      "name": "Cool Earth Aircon",
+      "legalName": "Cool Earth Aircon",
+      "category": "aircon",
+      "schemaType": "HVACBusiness",
+      "services": [
+        "chemical-wash"
+      ],
+      "rating": {
+        "value": 4.0,
+        "count": 66,
+        "label": "4.0 from 66 reviews",
+        "note": "Chemical-wash page, opened 10 Oct 2026, prints 4.0 Google Rating (66 reviews).",
+        "sourceUrl": "https://www.coolearth.com.sg/chemical-wash/"
+      },
+      "phone": {
+        "value": "+65 9427 3833",
+        "sourceUrl": "https://www.coolearth.com.sg/chemical-wash/"
+      },
+      "whatsapp": {
+        "value": "+65 9427 3833",
+        "note": "The chemical-wash page uses this number for WhatsApp.",
+        "sourceUrl": "https://www.coolearth.com.sg/chemical-wash/"
+      },
+      "website": {
+        "value": "https://www.coolearth.com.sg/chemical-wash/",
+        "sourceUrl": "https://www.coolearth.com.sg/chemical-wash/"
+      },
+      "address": {
+        "street": "108 Simei Street 1, Block 108",
+        "postal": "520108",
+        "value": "108 Simei Street 1, Block 108, Singapore 520108",
+        "sourceUrl": "https://www.coolearth.com.sg/chemical-wash/"
+      },
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Cool%20Earth%20Aircon%20Simei%20Street%201%20Singapore",
+      "mapsNote": "Place search. A short Maps link was not on the page we opened.",
+      "bestFor": "A chemical wash where you can live with a published range rather than one number, and you want the office address on the page.",
+      "poorFit": "Anyone who needs a single chemical-wash price. The same page says from S$80 and also S$80 to S$100. Quotes from Michelle L. and Jason W. have no dates, so they are not stored. No UEN was on the page. Low gas is named as a cause of a unit that is not cold, with a troubleshooting fee from S$40. That is not a gas price, so this company is not on the gas top-up list.",
+      "priceNote": "Chemical-wash page, opened 10 Oct 2026. The page does not agree with itself. The top says chemical wash from S$80 and chemical overhaul from S$150, called 2026 pricing. The FAQ says a non-dismantle chemical wash is S$80 to S$100 per unit and a full dismantle overhaul is S$130 to S$180 per unit. A card on the same page says servicing from S$16 per unit for bulk jobs, 2 units S$55, 4 units S$85, and also From S$50. Leak repair from S$40. A not-cold troubleshooting fee from S$40. No GST line was on the page. A 90-day workmanship warranty is claimed.",
+      "priceSourceUrl": "https://www.coolearth.com.sg/chemical-wash/",
+      "facts": [
+        {
+          "label": "Office",
+          "value": "+65 6810 6706. Hours on the page: Monday to Saturday 9:00 AM to 9:00 PM, Sunday 9:00 AM to 8:00 PM. Same-day emergency service is mentioned.",
+          "sourceUrl": "https://www.coolearth.com.sg/chemical-wash/"
+        },
+        {
+          "label": "Since",
+          "value": "The page says the company has done this work since 2007, and claims 4,560+ chemical wash and servicing jobs. Those figures were not checked against a register.",
+          "sourceUrl": "https://www.coolearth.com.sg/chemical-wash/"
+        }
+      ],
+      "reviews": []
+    },
+    {
+      "slug": "direct-plumber",
+      "name": "Direct Plumber",
+      "legalName": "Reliable Home Services Pte.Ltd.",
+      "category": "plumbing",
+      "schemaType": "Plumber",
+      "services": [],
+      "rating": {
+        "value": 5.0,
+        "count": 3388,
+        "label": "5.0 from 3,388+ reviews",
+        "note": "Chokes and drains page, opened 10 Oct 2026, prints 5.0 and 3,388+ reviews. The same page prints 3,588+ homes fixed. Homes fixed is a different number.",
+        "sourceUrl": "https://directplumber.sg/chokes-drains/"
+      },
+      "phone": {
+        "value": "+65 8866 1958",
+        "sourceUrl": "https://directplumber.sg/chokes-drains/"
+      },
+      "whatsapp": {
+        "value": "+65 8866 1958",
+        "note": "The main buttons use 8866 1958. The footer prints a second WhatsApp, +65 8932 2345. One API link on the page uses the digit string 65888661958.",
+        "sourceUrl": "https://directplumber.sg/chokes-drains/"
+      },
+      "website": {
+        "value": "https://directplumber.sg/chokes-drains/",
+        "sourceUrl": "https://directplumber.sg/chokes-drains/"
+      },
+      "address": {
+        "street": "22 Ghim Moh Link, #34-200, Ghim Moh Valley",
+        "postal": "271022",
+        "value": "22 Ghim Moh Link, #34-200, Ghim Moh Valley, Singapore 271022",
+        "sourceUrl": "https://directplumber.sg/chokes-drains/"
+      },
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Direct%20Plumber%20Ghim%20Moh%20Link%20Singapore",
+      "mapsNote": "Place search. A map embed on the chokes page points at 3 Duku Lane. That pin was not used.",
+      "bestFor": "A choke where you want a printed range before you send a photo: floor trap and sink S$60 to S$150, toilet S$80 to S$180.",
+      "poorFit": "Anyone who wants one WhatsApp number. The buttons say +65 8866 1958. The footer says Reliable Home Services Pte.Ltd. and WhatsApp +65 8932 2345. One link uses a different digit string. The quotes on the page have no dates, so none are stored. The full price guide linked from the FAQ was not opened.",
+      "priceNote": "Chokes and drains page, opened 10 Oct 2026. Floor trap choke S$60 to S$150. Sink choke S$60 to S$150. Toilet choke S$80 to S$180. Drain jetting S$150 to S$400. Separate from-lines: kitchen sink and floor trap from S$60, toilet choke and toilet repair from S$80, drain jetting and grease trap from S$150. The FAQ says most common jobs start from S$60 and points at a price guide we did not open. No GST line was on this page.",
+      "priceSourceUrl": "https://directplumber.sg/chokes-drains/",
+      "facts": [
+        {
+          "label": "Legal name",
+          "value": "Footer prints Reliable Home Services Pte.Ltd. at 22 Ghim Moh Link, #34-200.",
+          "sourceUrl": "https://directplumber.sg/chokes-drains/"
+        },
+        {
+          "label": "PUB",
+          "value": "The page prints WS14652009. The PUB register was not opened.",
+          "sourceUrl": "https://directplumber.sg/chokes-drains/"
+        },
+        {
+          "label": "BCA",
+          "value": "The page prints CoreTrade CTW-PPW-297-0619E. The BCA register was not opened.",
+          "sourceUrl": "https://directplumber.sg/chokes-drains/"
+        }
+      ],
+      "reviews": []
+    },
+    {
+      "slug": "kiasu-plumber",
+      "name": "Kiasu Plumber",
+      "legalName": "Kiasu Plumber",
+      "category": "plumbing",
+      "schemaType": "Plumber",
+      "services": [],
+      "rating": null,
+      "phone": {
+        "value": "+65 8820 5579",
+        "sourceUrl": "https://kiasuplumber.com/"
+      },
+      "whatsapp": {
+        "value": "+65 8820 5579",
+        "note": "The homepage WhatsApp buttons use this number.",
+        "sourceUrl": "https://kiasuplumber.com/"
+      },
+      "website": {
+        "value": "https://kiasuplumber.com/",
+        "sourceUrl": "https://kiasuplumber.com/"
+      },
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Kiasu%20Plumber%20Singapore",
+      "mapsNote": "Place search. No address was on the homepage we opened.",
+      "bestFor": "A small choke or a tap where the homepage price is enough to start: kitchen sink choke from S$50, toilet bowl choke from S$80.",
+      "poorFit": "Anyone who wants an address, a PUB licence number, or a Google rating. The page says PUB-licensed since 1998 and does not print the licence number. No review count is tied to this page. No dated excerpt is stored.",
+      "priceNote": "Homepage, opened 10 Oct 2026. The prices say onwards. Toilet bowl choke from S$80. Kitchen sink choke from S$50. Repair and supply copper pipe from S$100. Concealed leak detection from S$250. Basin install from S$90. Bottle trap from S$80. Tap, mixer, sink, or hose from S$80. No GST line was on the page.",
+      "priceSourceUrl": "https://kiasuplumber.com/",
+      "facts": [
+        {
+          "label": "Claim",
+          "value": "The homepage says PUB-licensed plumbers, family-owned since 1998, 24/7, and a 25 to 40 minute response. No licence number and no address were on the page.",
+          "sourceUrl": "https://kiasuplumber.com/"
+        }
+      ],
+      "reviews": []
+    },
+    {
+      "slug": "1st-electrical",
+      "name": "1st Electrical Services",
+      "legalName": "1st Electrical Services",
+      "category": "electrician",
+      "schemaType": "Electrician",
+      "services": [],
+      "rating": {
+        "value": 4.7,
+        "count": 102,
+        "label": "4.7 from 102 reviews, homepage widget says 139",
+        "note": "Trustindex page for sg-electrician.com, opened 10 Oct 2026, shows 4.7 from 102 reviews. The homepage widget the same day says 139 Google reviews and does not print 4.7. The sort uses 4.7 and 102.",
+        "sourceUrl": "https://www.trustindex.io/reviews/sg-electrician.com"
+      },
+      "phone": {
+        "value": "+65 9848 0111",
+        "sourceUrl": "https://sg-electrician.com/"
+      },
+      "whatsapp": {
+        "value": "+65 9848 0111",
+        "note": "The homepage uses this number for calls and WhatsApp.",
+        "sourceUrl": "https://sg-electrician.com/"
+      },
+      "email": {
+        "value": "firstelectricalservices@gmail.com",
+        "sourceUrl": "https://sg-electrician.com/"
+      },
+      "website": {
+        "value": "https://sg-electrician.com/",
+        "sourceUrl": "https://sg-electrician.com/"
+      },
+      "address": {
+        "street": "Carros Centre, 60 Jalan Lam Huat, #03-42",
+        "value": "Carros Centre, 60 Jalan Lam Huat, #03-42",
+        "sourceUrl": "https://sg-electrician.com/"
+      },
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=1st%20Electrical%20Services%20Singapore&query_place_id=ChIJDfA_bY0Z2jERXWp4t2Vu-jw",
+      "mapsNote": "Place id from the homepage write-a-review button. The Maps listing itself was not opened.",
+      "bestFor": "A power trip where you want a named technician in a dated review, and you can ask for the price before they leave the workshop.",
+      "poorFit": "Anyone who treats 139 and 102 as the same count. No EMA licence number is printed. The hero says a 90-day service warranty. The FAQ says a 3-month warranty on parts they replace. No rate card was on the pages we opened. The S$50 and S$30 line below is one customer's quote.",
+      "priceNote": "No rate card on the pages we opened. Theresa Tan, on the Trustindex page, date 2026.03.26 and date of experience 25 March 2026, says the initial check was quoted at $50 for transport and $30 for checking. That is one job, not a price list.",
+      "priceSourceUrl": "https://www.trustindex.io/reviews/sg-electrician.com",
+      "facts": [
+        {
+          "label": "BCA",
+          "value": "The homepage says BCA registered. No registration number is printed. The BCA register was not opened.",
+          "sourceUrl": "https://sg-electrician.com/"
+        },
+        {
+          "label": "Postal code",
+          "value": "The address stops at #03-42. No postal code was on the page.",
+          "sourceUrl": "https://sg-electrician.com/"
+        }
+      ],
+      "reviews": [
+        {
+          "excerpt": "There was a power trip in my flat and even though we tried resetting the circuit breaker, it didn't work. I googled for a licensed electrician and 1st  Electrical appeared on top of the list. There was a sense of urgency for me cos I had raw meats in my fridge amongst other fresh foods. The electrician who answered my call assured me that he would be able to get to my place within 40-50 minutes, and he did! He was also transparent in quoting me the prices for the initial check: $50 for transport and $30 for checking.",
+          "author": "Theresa Tan",
+          "relativeTime": "2026.03.26",
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=1st%20Electrical%20Services%20Singapore&query_place_id=ChIJDfA_bY0Z2jERXWp4t2Vu-jw",
+          "sourceUrl": "https://www.trustindex.io/reviews/sg-electrician.com",
+          "sourceLabel": "Trustindex page opened 10 Oct 2026, dated 2026.03.26, date of experience 25 March 2026. The double space in 1st  Electrical is on the page."
+        },
+        {
+          "excerpt": "Power tripped while using the cake mixer. Ah Liang from 1st  electrical services responded to my call and arrived within half hour. He was able to quickly identify the problem and rectified it. He also helped me test all the power points in my flat. Really appreciate the good and professional services he rendered. Thank you Ah Liang",
+          "author": "Chun Hoe Lee",
+          "relativeTime": "2025.06.09",
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=1st%20Electrical%20Services%20Singapore&query_place_id=ChIJDfA_bY0Z2jERXWp4t2Vu-jw",
+          "sourceUrl": "https://www.trustindex.io/reviews/sg-electrician.com",
+          "sourceLabel": "Trustindex page opened 10 Oct 2026, dated 2025.06.09. That card does not print a separate date of experience."
+        }
+      ]
+    },
+    {
+      "slug": "sg-handyman-engineering",
+      "name": "SG Handyman Engineering",
+      "legalName": "SG Handyman Engineering Pte. Ltd.",
+      "category": "handyman",
+      "schemaType": "LocalBusiness",
+      "services": [],
+      "rating": {
+        "value": 4.9,
+        "count": 70,
+        "label": "4.9 from 70 reviews",
+        "note": "Contact page widget, opened 10 Oct 2026, prints 4.9 and 70 Google reviews. The review cards on that widget have names and empty date fields, so no excerpt is stored.",
+        "sourceUrl": "https://sghandymanengineering.com/contact/"
+      },
+      "phone": {
+        "value": "+65 8622 2244",
+        "sourceUrl": "https://sghandymanengineering.com/contact/"
+      },
+      "whatsapp": {
+        "value": "+65 8622 2244",
+        "note": "The WhatsApp link uses 8622 2244. The footer also prints +65 8013 5520.",
+        "sourceUrl": "https://sghandymanengineering.com/contact/"
+      },
+      "website": {
+        "value": "https://sghandymanengineering.com/contact/",
+        "sourceUrl": "https://sghandymanengineering.com/contact/"
+      },
+      "address": {
+        "street": "1 North Bridge Road, #30-02 High Street Centre",
+        "postal": "179094",
+        "value": "1 North Bridge Road, #30-02 High Street Centre, Singapore 179094",
+        "sourceUrl": "https://sghandymanengineering.com/contact/"
+      },
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=SG%20Handyman%20Engineering%20High%20Street%20Centre%20Singapore",
+      "mapsNote": "Place search. A Maps listing was not opened.",
+      "bestFor": "A small repair or a late-night call if you want the number the contact page and the WhatsApp button both print.",
+      "poorFit": "A job that should be a licensed electrical worker. The same page is full of power-trip stories, and no EMA number is printed. The contact block prints the street with no unit. The footer prints #30-02. Two phones are on the page. No price table was on the contact page. The widget dates are empty.",
+      "priceNote": "Price not published on the contact page we opened. One review on that page calls a late-night price reasonable. That is one customer's line, and it has no date, so it is not quoted above.",
+      "priceSourceUrl": "https://sghandymanengineering.com/contact/",
+      "facts": [
+        {
+          "label": "UEN",
+          "value": "202443335C, as printed on the contact page. A 2024 registration. ACRA was not opened.",
+          "sourceUrl": "https://sghandymanengineering.com/contact/"
+        },
+        {
+          "label": "Second phone",
+          "value": "+65 8013 5520, in the footer. Hours on the page: 24 hours, 7 days a week.",
+          "sourceUrl": "https://sghandymanengineering.com/contact/"
+        }
+      ],
+      "reviews": []
+    },
+    {
+      "slug": "sureclean",
+      "name": "Sureclean",
+      "legalName": "Sureclean Pte Ltd",
+      "category": "cleaning",
+      "schemaType": "LocalBusiness",
+      "services": [],
+      "rating": {
+        "value": 4.9,
+        "count": 1551,
+        "label": "4.9 from 1,551 reviews",
+        "note": "Google business reviews page, opened 10 Oct 2026, shows 4.9 out of 5 (1,551 reviews). Sureclean's weekly page the same day prints 5 and 1,551+, and a widget on that page rendered as 1 star and 1500+. The sort uses 4.9 and 1,551.",
+        "sourceUrl": "https://business.google.com/v/sureclean/03212780293400249956/70f1/_/rev/"
+      },
+      "phone": {
+        "value": "+65 6983 9523",
+        "sourceUrl": "https://sureclean.com.sg/contact-us/"
+      },
+      "whatsapp": {
+        "value": "+65 6983 9523",
+        "note": "The weekly cleaning page WhatsApp link uses this number. The contact page also prints 6899 8643.",
+        "sourceUrl": "https://sureclean.com.sg/general-weekly-home-cleaning-gg/"
+      },
+      "email": {
+        "value": "sales@sureclean.com.sg",
+        "sourceUrl": "https://sureclean.com.sg/contact-us/"
+      },
+      "website": {
+        "value": "https://sureclean.com.sg/contact-us/",
+        "sourceUrl": "https://sureclean.com.sg/contact-us/"
+      },
+      "address": {
+        "street": "10 Bukit Batok Crescent, #11-07 The Spire",
+        "postal": "658079",
+        "value": "10 Bukit Batok Crescent, #11-07 The Spire, Singapore 658079",
+        "sourceUrl": "https://sureclean.com.sg/contact-us/"
+      },
+      "mapsUrl": "https://business.google.com/v/sureclean/03212780293400249956/70f1/_/rev/",
+      "mapsNote": "Google business reviews page opened 10 Oct 2026. That page says Google is compensated by the merchant to create this listing.",
+      "bestFor": "A weekly or one-time home clean where you want an employed crew, a printed address, and dated Google reviews with names.",
+      "poorFit": "Anyone who wants the weekly price in hours. The weekly page says as low as $22 and does not say per hour, what the $22 covers, or whether GST is in it. Hours disagree: the contact page says Monday to Sunday 9am to 6pm, and the weekly page says Monday to Sunday 8am to 9pm. The review count on their own pages does not match the Google page.",
+      "priceNote": "Weekly home cleaning page, opened 10 Oct 2026, prints As low as $22 twice, once under the weekly heading and once under a first-session trial heading. The page does not say per hour, does not say what the $22 includes, and does not say whether GST is included. One-time deep-clean prices on other sites were not used.",
+      "priceSourceUrl": "https://sureclean.com.sg/general-weekly-home-cleaning-gg/",
+      "facts": [
+        {
+          "label": "UEN",
+          "value": "201316509C, printed on the contact page. Incorporated 2013. ACRA was not opened.",
+          "sourceUrl": "https://sureclean.com.sg/contact-us/"
+        },
+        {
+          "label": "NEA",
+          "value": "Contact page structured data prints NEA240120/6509C/C3/N01. The visible footer says NEA-licensed cleaning business (Class 3). The NEA register was not opened.",
+          "sourceUrl": "https://sureclean.com.sg/contact-us/"
+        },
+        {
+          "label": "Second phone",
+          "value": "+65 6899 8643, printed next to 6983 9523. Public liability of S$1,000,000 is claimed.",
+          "sourceUrl": "https://sureclean.com.sg/contact-us/"
+        }
+      ],
+      "reviews": [
+        {
+          "excerpt": "Booked Sureclean for a pre-move-in clean as we are doing minimal renovation and plan to stay in the unit while waiting for the works to complete. Honestly, this was one of the best decisions we made. The team arrived punctually, which was already a good start. There were four cleaners and they got straight to work. In about four to five hours, the entire unit was properly deep cleaned and genuinely spotless. This was not a surface wipe down. The previous owner left the unit as it was, so there was dust in all the usual forgotten areas where items used to sit. I did my own inspection after they left, checking the upper cabinets, racks, and hidden corners, and there was zero dust. Not almost clean and not just looking clean from a distance, but actually clean.",
+          "author": "Zul M",
+          "relativeTime": "9 months ago",
+          "mapsUrl": "https://business.google.com/v/sureclean/03212780293400249956/70f1/_/rev/",
+          "sourceUrl": "https://business.google.com/v/sureclean/03212780293400249956/70f1/_/rev/",
+          "sourceLabel": "Google business reviews page opened 10 Oct 2026. Relative time as shown that day. The page says Google is compensated by the merchant to create this listing."
+        },
+        {
+          "excerpt": "I’m extremely satisfied with the cleaning service. I had a post-renovation cleaning done today, and the team was incredibly thorough and detail-oriented. They paid attention to areas that are often overlooked, and the difference before and after the cleaning was amazing. What impressed me the most was their attention to detail and professionalism. Even after they finished, they took the time to walk around with me and repeatedly checked if there was anything else I wanted them to look at or clean. They genuinely wanted to make sure everything was done to a high standard rather than simply finishing the job and leaving. I have quite high standards when it comes to cleanliness, and honestly, this is the first cleaning service I’ve used in Singapore that has exceeded my expectations. The whole experience was smooth, professional, and reassuring. I’m very happy with the results and would definitely use their service again. Highly recommended!",
+          "author": "Claire",
+          "relativeTime": "a month ago",
+          "mapsUrl": "https://business.google.com/v/sureclean/03212780293400249956/70f1/_/rev/",
+          "sourceUrl": "https://business.google.com/v/sureclean/03212780293400249956/70f1/_/rev/",
+          "sourceLabel": "Google business reviews page opened 10 Oct 2026. Relative time as shown that day. The page says Google is compensated by the merchant to create this listing."
+        },
+        {
+          "excerpt": "Eswary, Priscilla, and Zoey did a wonderful job cleaning my whole house. They were friendly, hardworking, and very careful with everything. They cleaned every corner properly and made the house feel fresh and comfortable again. I really appreciated their effort and teamwork. I’m very happy with their work and would gladly recommend them to anyone looking for a reliable cleaning team.",
+          "author": "Fakhrur Razi",
+          "relativeTime": "9 months ago",
+          "mapsUrl": "https://business.google.com/v/sureclean/03212780293400249956/70f1/_/rev/",
+          "sourceUrl": "https://business.google.com/v/sureclean/03212780293400249956/70f1/_/rev/",
+          "sourceLabel": "Google business reviews page opened 10 Oct 2026. Relative time as shown that day. The page says Google is compensated by the merchant to create this listing."
+        }
+      ]
     }
   ]
 }

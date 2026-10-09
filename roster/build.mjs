@@ -4,7 +4,7 @@ import { fileURLToPath } from "node:url";
 
 const root = path.dirname(fileURLToPath(import.meta.url));
 const origin = "https://previews.heylead.com/roster";
-const checked = "9 Oct 2026";
+const checked = "9 Oct 2026 and 10 Oct 2026";
 
 const trades = [
   {
@@ -14,14 +14,14 @@ const trades = [
     h1: "Aircon servicing in Singapore",
     intro: [
       "Most HDB flats run two or three wall units on one compressor. Condos often add a ceiling cassette or a ducted unit in the living room. A normal service washes the filters and the fan coil. A chemical wash goes after the coil with a chemical. A gas top-up is for a unit that cools poorly, and it should come with a leak check.",
-      "Four companies have a phone we could cite. The shortlist stops there. Order is the rating figure on file, then the review count. These figures are not from one Google API pull, so the order is provisional. 338 Aircon publishes more than one count. SoCool's public mirrors disagree with each other. A higher SoCool count would swap those two.",
+      "Six companies have a phone we could cite. The shortlist stops there. Order is the rating figure on file, then the review count. These figures are not from one Google API pull, so the order is provisional. 338 Aircon publishes more than one count. SoCool's public mirrors disagree with each other. Cool Aircon's homepage shows 4.9 and also says 5.0, and its page data says 366 reviews while the badge says 360+. A higher SoCool count would swap 338 Aircon and SoCool.",
       "Prices are what the company publishes. Where a price is missing, the company page we opened did not print one."
     ],
     jobs: ["General service", "Chemical wash", "Gas top-up", "Repair", "Not sure"],
     faqs: [
       ["How often should an HDB or condo aircon be serviced?", "A common rhythm in Singapore is a general service two to four times a year, because the units run hard and the air is humid. A condo management (MCST) can also set contractor rules for the building. Ask the office before someone drills or drains off a balcony."],
-      ["What is the difference between a normal service and a chemical wash?", "A normal service cleans filters, the fan coil face, and the drainage. A chemical wash uses a chemical on the coil to break down mould and sludge a wipe does not reach. Lion City and Billy Aircon publish chemical-wash prices. 338 Aircon describes chemical wash work and does not print a per-unit chemical price on the pages we opened."],
-      ["When is a gas top-up the right job?", "When the unit is low on refrigerant and cools poorly. Adding gas without a leak check can mean paying for the same top-up again. Lion City names gas top-up as a service and includes it in the overhaul and the yearly contract. 338 Aircon sells a contract that includes gas. Neither page we opened is a standalone leak-test price."],
+      ["What is the difference between a normal service and a chemical wash?", "A normal service cleans filters, the fan coil face, and the drainage. A chemical wash uses a chemical on the coil to break down mould and sludge a wipe does not reach. Lion City, Cool Aircon, Billy Aircon, and Cool Earth publish chemical-wash prices. Cool Earth's page prints two ranges. 338 Aircon describes chemical wash work and does not print a per-unit chemical price on the pages we opened."],
+      ["When is a gas top-up the right job?", "When the unit is low on refrigerant and cools poorly. Adding gas without a leak check can mean paying for the same top-up again. Cool Aircon publishes a PSI table. Lion City names gas top-up as a service and includes it in the overhaul and the yearly contract. 338 Aircon sells a contract that includes gas. Cool Earth's not-cold line names low gas and prices a troubleshooting fee, not the gas."],
       ["What should I ask before I book?", "The price for the actual job, whether GST is included, whether the blower is washed, and what happens if they find low gas. Ask for the price in writing before they arrive."],
       ["How do I check the company myself?", "Search the company name on ACRA's BizFile, and open the Google Maps listing linked from the profile. Roster quotes a few reviews and records the page they came from. The rating line says when that page was checked."]
     ]
@@ -33,13 +33,13 @@ const trades = [
     h1: "Plumbing in Singapore",
     intro: [
       "A choked floor trap, a leaking heater, or a burst flexi hose is usually a same-day job. Singapore plumbing work that touches the water service is supposed to be done by a PUB licensed plumber. The licence number should be something the company can point to.",
-      "One company cleared the source bar for this beta. The shortlist is that one name, with the conflicts written on the profile. Padding the list with directory rows that share one review count would have made it look fuller and less honest."
+      "Three companies have a phone we could cite. Direct Plumber prints 5.0 and 3,388+ reviews, and a second WhatsApp number in the footer. Kiasu Plumber prints prices and no licence number, and no review count on the pages we opened, so it sorts last. Mr Plumber's WhatsApp is also printed by Daylight Electrician."
     ],
     jobs: ["Choke", "Leak", "Water heater", "Other", "Not sure"],
     faqs: [
       ["Does a plumber in Singapore need a PUB licence?", "PUB licenses plumbers for water-service work. Mr Plumber prints WS17962021 on its Little India page and says its plumbers are BCA certified. This beta did not open the PUB or BCA registers, so the number is what the company publishes."],
       ["What should I ask before an emergency call-out?", "A fixed price, or the rate if they cannot see the choke yet. Ask which brand is sending the technician. The WhatsApp number on this profile is also printed by Daylight Electrician."],
-      ["Why is there only one plumber?", "Other names turned up on listicles with copied review counts, or with no phone on a page we would cite. One sourced profile is the list."],
+      ["Why is Kiasu Plumber last?", "The homepage prices are published. The pages we opened do not print a PUB licence number, an address, or a Google rating. A company with no captured rating sorts last."],
       ["What is the second office?", "The contact page lists a central desk at 60 Paya Lebar Road #07-54, phone +65 3165 0126. The main line and the Lower Delta Road address are the ones in the facts table."]
     ]
   },
@@ -50,12 +50,12 @@ const trades = [
     h1: "Electrician in Singapore",
     intro: [
       "A tripped DB, a dead circuit, or a burning smell is electrical work. In Singapore that work is supposed to be done by an EMA licensed electrical worker. A company saying licensed is a claim until you see the licence.",
-      "Three companies have a phone we could cite. Order is the rating figure on file, then the review count. Daylight's own pages do not agree on the count. Repair.sg's pages do not agree on the score. The order is provisional."
+      "Four companies have a phone we could cite. Order is the rating figure on file, then the review count. Daylight's own pages do not agree on the count. Repair.sg's pages do not agree on the score. 1st Electrical Services is 4.7 from 102 on a Trustindex page, and the homepage widget says 139. The order is provisional."
     ],
     jobs: ["Power trip", "Lighting", "Distribution board", "Other", "Not sure"],
     faqs: [
       ["What does an EMA licence mean here?", "EMA licenses electrical workers in Singapore. Daylight says its electricians are licensed. This beta did not open the EMA register, so the profile keeps that as the company's statement."],
-      ["Why do the review counts disagree?", "Daylight prints several different counts on its own pages, all at 5.0. Repair.sg says 4.9 and more than 3,000 on the electrician page, and 5.0 from 2,948 on an isolator page. SK Electrical's 4.9 from 856 is the figure on the Google Maps listing opened on 9 Oct 2026."],
+      ["Why do the review counts disagree?", "Daylight prints several different counts on its own pages, all at 5.0. Repair.sg says 4.9 and more than 3,000 on the electrician page, and 5.0 from 2,948 on an isolator page. SK Electrical's 4.9 from 856 is the figure on the Google Maps listing opened on 9 Oct 2026. 1st Electrical Services is 4.7 from 102 on Trustindex, opened 10 Oct 2026, and 139 on the homepage widget."],
       ["What should I ask before a DB or rewiring job?", "Whether the person coming is the licensed worker, what the price covers, and whether the DB needs a shutdown. For a condo, ask the MCST which contractor paperwork they want."],
       ["Why does Daylight share a WhatsApp number with a plumber?", "Daylight and Mr Plumber both print +65 8241 0032, and both sit in 1090 Lower Delta Road. Daylight's footer says powered by Everyworks. The profile says so you can ask which brand is coming."]
     ]
@@ -67,13 +67,13 @@ const trades = [
     h1: "Handyman in Singapore",
     intro: [
       "A handyman job is the small one: a drill, a furniture build, a silicone joint, a door that sticks. It is a poor place to hide a plumber or an electrician who should carry a licence.",
-      "Two companies are listed, and both profiles are thinner than the aircon pages. One site was not opened. The other has a registry record and no signed Google review in this beta. No Google rating is shown for either."
+      "Three companies are listed. SG Handyman Engineering prints 4.9 from 70 Google reviews on its contact page. The widget reviews on that page have names and no dates, so no excerpt is stored. ISOTeam Homecare and Mr Handyman stay thinner. Neither company's own site was opened. Neither has a Google rating we could cite."
     ],
     jobs: ["Furniture", "Mounting", "Small repair", "Other", "Not sure"],
     faqs: [
-      ["Why are these profiles thinner?", "Mr Handyman's own site was not opened. The address and phone come from directories that agree with each other. ISOTeam Homecare has a RecordOwl registry entry and no signed review stored here."],
+      ["Why are two profiles thinner?", "Mr Handyman's own site was not opened. The address and phone come from directories that agree with each other. ISOTeam Homecare has a RecordOwl registry entry and no signed review stored here. SG Handyman Engineering is the one with a rating on its own contact page."],
       ["What should a handyman quote include?", "The job, the price, and whether drilling into a wall or a ceiling is included. In a condo, the MCST may want approval before noisy work."],
-      ["Why is there no Google rating?", "A rating goes on the page when we can point at one figure on one page. These two did not clear that. ThreeBestRated's 4.9 for ISOTeam is that site's own score, so it is left off."],
+      ["Why do two profiles still have no Google rating?", "A rating goes on the page when we can point at one figure on one page. SG Handyman Engineering's contact page prints 4.9 from 70. ISOTeam and Mr Handyman did not clear that. ThreeBestRated's 4.9 for ISOTeam is that site's own score, so it is left off."],
       ["Why does one address match an electrician?", "Daylight Electrician's contact page lists a west branch at 21 Bukit Batok Crescent #09-79, the unit directories give for Mr Handyman. Confirm who will show up."]
     ]
   },
@@ -83,14 +83,14 @@ const trades = [
     name: "Home cleaning",
     h1: "Home cleaning in Singapore",
     intro: [
-      "Home cleaning is on the beta so the empty state is visible. The names that came up quickly were marketplaces, or crews whose review counts we could not trace to a page worth citing.",
-      "Helpling publishes hourly prices and is a marketplace, so it is not listed as one crew. Sendhelper has shut. No cleaning company is on the shortlist."
+      "One company cleared the source bar. Sureclean prints a phone, an address, a UEN, and a Google reviews page we opened on 10 Oct 2026 that shows 4.9 from 1,551 reviews. Its weekly page prints 5 and 1,551+, and a widget on that page rendered as 1 star and 1500+. The sort uses 4.9 and 1,551.",
+      "Helpling publishes hourly prices and is a marketplace, so it is not listed as one crew. Sendhelper has shut. Sureclean's weekly page says as low as $22. That page does not say per hour, and it does not say whether GST is included."
     ],
     jobs: ["Regular clean", "One-time clean", "Move-out clean", "Not sure"],
     faqs: [
-      ["Why is the shortlist empty?", "A company needs a phone on its own site or on a Maps page we opened, and a rating we can tie to one page. The cleaning names in the first pass did not clear that."],
-      ["What would put a cleaner on the list?", "A working phone, a page that states a Google rating and a count, and two or three review lines with a name and a date. A marketplace that assigns a different crew each visit stays off the list."],
-      ["Can I still send a request?", "The form is on the page so you can see it. There is no company to receive it, and the beta does not send the form anyway."]
+      ["Why is there only one cleaner?", "A company needs a phone on its own site or on a page we opened, and a rating we can tie to one page. Marketplaces stayed off. Sureclean is the company that cleared it."],
+      ["What would put another cleaner on the list?", "A working phone, a page that states a Google rating and a count, and two or three review lines with a name and a date. A marketplace that assigns a different crew each visit stays off the list."],
+      ["Can I still send a request?", "The form is on the page so you can see it. It names Sureclean. The beta does not send the form."]
     ]
   }
 ];
@@ -106,7 +106,7 @@ const intents = [
     service: "chemical-wash",
     intro: [
       "A chemical wash is the deeper clean. The coil is treated so mould and sludge come off, which a filter wash leaves behind. It is the usual fix for a musty smell or a unit that drips because the drain pan is filthy.",
-      "Lion City publishes S$87.20 per unit with GST. Billy Aircon publishes a range, and the page does not say whether GST is in it. 338 Aircon's install page describes chemical wash work and does not print a per-unit chemical price. SoCool stays on the aircon hub only. The pages we could read do not describe a chemical wash."
+      "Lion City publishes S$87.20 per unit with GST. Cool Aircon publishes S$110 for one unit and says no GST is added. Cool Earth prints both from S$80 and S$80 to S$100 on the same page, with a Google line of 4.0 from 66 reviews. Billy Aircon publishes a range, and the page does not say whether GST is in it. 338 Aircon's install page describes chemical wash work and does not print a per-unit chemical price. SoCool stays on the aircon hub only. The pages we could read do not describe a chemical wash."
     ],
     jobs: ["Chemical wash", "Not sure if I need one"],
     faqs: [
@@ -126,14 +126,15 @@ const intents = [
     service: "gas-top-up",
     intro: [
       "Gas top-up means adding refrigerant. It is the right job when the unit is low and cools poorly. It is a weak job when the company adds gas and skips the leak. The gas leaves again, and the bill comes back.",
-      "Two companies are on this page because their own sites talk about gas. Lion City names gas top-up as a service, and includes it in the chemical overhaul and the yearly contract. There is no standalone gas price on the price table we opened. 338 Aircon's book-online page sells a contract with free gas at S$250, and a contract without it at S$200 for one unit. Billy Aircon and SoCool stay on the hub. A gas top-up was not on the pages we could read for them."
+      "Three companies are on this page because their own sites price gas or include it in a named package. Cool Aircon publishes a PSI table, from S$90, and says no GST is added. Lion City names gas top-up as a service, and includes it in the chemical overhaul and the yearly contract. There is no standalone gas price on the price table we opened. 338 Aircon's book-online page sells a contract with free gas at S$250, and a contract without it at S$200 for one unit. Billy Aircon, SoCool, and Cool Earth stay on the hub. Cool Earth's not-cold page names low gas as a cause and a troubleshooting fee from S$40. That is not a gas price."
     ],
     jobs: ["Gas top-up", "Unit not cold", "Not sure"],
     faqs: [
       ["Does low gas always mean a top-up?", "Low gas means the refrigerant left the system. A top-up without finding the leak is a temporary fill. Ask whether a leak check is included and what it costs if they only add gas."],
+      ["What did Cool Aircon publish?", "A table by refrigerant and PSI. Under 40 PSI: R22 S$90, R410A S$120, R32 S$130. The technician is supposed to measure the pressure and confirm the cell before any gas goes in. The company says it is not GST-registered."],
       ["What did Lion City publish?", "The privacy policy lists gas top-up among the services. The price page includes gas in the yearly contract and describes it inside the overhaul. A separate gas line was not on that table."],
       ["What did 338 Aircon publish?", "Book-online lists a contract with free gas and a contract without it. That is a package, not a one-off leak-test fee."],
-      ["Why are there only two names?", "The page lists companies whose own pages mention gas. A longer list would have used third-party writeups as if they were rate cards."]
+      ["Why are there three names?", "The page lists companies whose own pages price gas or include it in a named package. Cool Earth mentions low gas and does not price it, so it stays on the hub."]
     ]
   }
 ];
@@ -143,7 +144,7 @@ const howFaqs = [
   ["What would a Featured slot include?", "A label, the company name, one line they write, a published price if they have one, and a call or WhatsApp button that rings them directly. It would sit under the shortlist. It would not change the number, the stars, or the reviews, and it would not include the quote requests. The slots on this beta are empty. No company paid."],
   ["Does the quote form send my number?", "It does not. The button stays on this page. A later version can send one request to at most three companies that match the job and hold prepaid credits. A dead number, a job outside Singapore, or a job the company does not do would be refunded. That product is not switched on."],
   ["Where do the reviews come from?", "From the page named under the quote: a Google Maps listing, a Trustindex or Wanderlog mirror, property.co, or the company's own site. The words are copied as published. A review without a name and a date is left off. Roster does not run its own star score."],
-  ["Why are some lists shorter than five?", "Five was the aim. The list stops at companies with a cited phone and a rating story we can point at. Home cleaning has none. Plumbing has one. Inventing the rest would have been a directory, which is the thing this beta is here to avoid."]
+  ["Why are some lists shorter than five?", "Five was the aim. A company needs a cited phone, plus a rating we can point at, or a price the company publishes when the rating is missing. Two handyman profiles predate that bar and say so. Home cleaning has one. Handyman has three. Inventing the rest would have been a directory, which is the thing this beta is here to avoid."]
 ];
 
 function walkStrings(value, visit, trail = "") {
@@ -603,7 +604,7 @@ function renderHome(grouped) {
 </div>
 <div class="intro-body">
 <p class="lede">Companies cannot pay to move up this list. Every profile says who the company is a good fit for, and who should look elsewhere.</p>
-<p class="lede">The list is as long as the sourcing allowed. Some jobs have fewer than five companies. Home cleaning has none yet.</p>
+<p class="lede">The list is as long as the sourcing allowed. Some jobs have fewer than five companies. Home cleaning has one. Handyman has three.</p>
 </div>
 </div>
 <ol class="index section">${rows}</ol>
@@ -658,7 +659,7 @@ ${renderCrumbs([{ label: "How it works" }])}
 <h1>How this list is made</h1>
 <p class="dek">One profile per company. A short list per job. The order is unpaid.</p>
 <section class="section"><h2>What gets a company on the list</h2>
-<p class="lede">A phone number on the company's own site, or on a Google Maps listing we opened, plus a rating we can point at one page. The profile then says who the company is a good fit for, who should look elsewhere, and the price the company publishes. Checked ${checked}.</p>
+<p class="lede">A phone number on the company's own site, or on a Google Maps listing we opened. A rating goes on the page when we can point at one figure on one page. A company with no rating can still be listed when its own page publishes a price, and the profile says the rating is missing. Two handyman profiles were already on the beta from directories, with no rating and no price, and those profiles say the site was not opened. Checked ${checked}.</p>
 <p class="lede">A review line needs a name, a date or a relative time, and the page it was copied from. The words stay as published, including rough grammar. A quote with no date stays off the page.</p></section>
 <section class="section"><h2>How the order is chosen</h2>
 <p class="lede">Higher rating figure first. If the rating ties, the higher review count comes first. A company with no captured rating goes last. The figures are from the company site or a public mirror. They are not one live Google pull, so a page that publishes two counts can move when we next check it.</p></section>
