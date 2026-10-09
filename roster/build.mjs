@@ -557,13 +557,17 @@ function renderProfile(company, peers) {
     `<p class="kicker">Profile</p>`,
     `<h1>${esc(company.name)}</h1>`,
     `<a class="tag" href="/roster/${trade.slug}/">${esc(trade.name)} in Singapore</a>`,
-    `<dl class="facts">${facts.join("")}</dl>`,
+    `<div class="profile">`,
+    `<aside class="profile-side"><dl class="facts">${facts.join("")}</dl></aside>`,
+    `<div class="profile-main">`,
     `<section class="section"><h2>Best for</h2><p class="fit">${esc(company.bestFor)}</p></section>`,
     `<section class="section"><h2>Poor fit</h2><p class="fit poor">${esc(company.poorFit)}</p></section>`,
     `<section class="section"><h2>Pricing</h2><p class="price">${esc(company.priceNote)}</p><p class="byline"><a href="${esc(company.priceSourceUrl)}">Price source</a></p></section>`,
     `<section class="section"><h2>What reviewers wrote</h2>${reviews}</section>`,
     renderForm(trade.jobs, matched),
-    `<section class="section"><h2>Other companies in ${esc(trade.name.toLowerCase())}</h2>${otherHtml}</section>`
+    `<section class="section"><h2>Other companies in ${esc(trade.name.toLowerCase())}</h2>${otherHtml}</section>`,
+    `</div>`,
+    `</div>`
   ].join("\n");
   const jsonLd = [
     webPage(title, canonicalPath, description),
@@ -587,14 +591,21 @@ function renderHome(grouped) {
   const rows = trades.map((trade, index) => {
     const count = grouped[trade.id].length;
     const meta = count === 0 ? "No companies yet" : `${count} ${count === 1 ? "company" : "companies"}`;
-    return `<li><a href="/roster/${trade.slug}/"><span class="idx">${String(index + 1).padStart(2, "0")}</span><span class="job">${esc(trade.name)}</span><span class="meta">${esc(meta)}</span></a></li>`;
+    const empty = count === 0 ? ` class="is-empty"` : "";
+    return `<li${empty}><a href="/roster/${trade.slug}/"><span class="idx">${String(index + 1).padStart(2, "0")}</span><span class="job">${esc(trade.name)}</span><span class="meta">${esc(meta)}</span></a></li>`;
   }).join("");
   const body = `
+<div class="intro">
+<div class="intro-lead">
 <p class="kicker">Singapore beta</p>
 <h1>Roster</h1>
 <p class="dek">A short, unpaid list of home-service companies in Singapore, with the reviews that back it.</p>
+</div>
+<div class="intro-body">
 <p class="lede">Companies cannot pay to move up this list. Every profile says who the company is a good fit for, and who should look elsewhere.</p>
 <p class="lede">The list is as long as the sourcing allowed. Some jobs have fewer than five companies. Home cleaning has none yet.</p>
+</div>
+</div>
 <ol class="index section">${rows}</ol>
 <section class="section">
 <h2>How it works</h2>
