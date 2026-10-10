@@ -8,15 +8,18 @@
     "services": [
       {
         "name": "Power trips & fault finding",
-        "description": "Troubleshooting for power failures, recurring trips and other electrical faults."
+        "description": "Troubleshooting for power failures, recurring trips and other electrical faults.",
+        "guide": "electrical-fault"
       },
       {
         "name": "Lighting & fan installation",
-        "description": "Installation and replacement of lights, switches and ceiling fans."
+        "description": "Installation and replacement of lights, switches and ceiling fans.",
+        "guide": "lighting-fans"
       },
       {
         "name": "Sockets, wiring & distribution boards",
-        "description": "Power points, rewiring and distribution-board work are listed in its service range."
+        "description": "Power points, rewiring and distribution-board work are listed in its service range.",
+        "guide": "electrical-wiring"
       }
     ],
     "highlights": [
@@ -50,15 +53,18 @@
     "services": [
       {
         "name": "Chokes & blocked drains",
-        "description": "Clearing blocked sinks, toilet bowls, floor traps and drainage pipes."
+        "description": "Clearing blocked sinks, toilet bowls, floor traps and drainage pipes.",
+        "guide": "drain-chokes"
       },
       {
         "name": "Leaks & pipe repairs",
-        "description": "Finding and repairing leaks in water pipes, sinks and toilet fittings."
+        "description": "Finding and repairing leaks in water pipes, sinks and toilet fittings.",
+        "guide": "pipe-leaks"
       },
       {
         "name": "Fixtures & water heaters",
-        "description": "Installation or replacement of taps, basins, toilets, pipes and water heaters."
+        "description": "Installation or replacement of taps, basins, toilets, pipes and water heaters.",
+        "guide": "fixtures-heaters"
       }
     ],
     "highlights": [
@@ -92,15 +98,18 @@
     "services": [
       {
         "name": "General aircon servicing",
-        "description": "A published rate for one unit, plus multi-unit prices and yearly contracts."
+        "description": "A published rate for one unit, plus multi-unit prices and yearly contracts.",
+        "guide": "aircon-general"
       },
       {
         "name": "Chemical wash",
-        "description": "A per-unit chemical-wash price is listed separately from an overhaul."
+        "description": "A per-unit chemical-wash price is listed separately from an overhaul.",
+        "guide": "aircon-wash"
       },
       {
         "name": "Chemical overhaul & packages",
-        "description": "Overhaul and yearly-contract options include gas according to the published service notes."
+        "description": "Overhaul and yearly-contract options include gas according to the published service notes.",
+        "guide": "aircon-overhaul-package"
       }
     ],
     "highlights": [
@@ -135,15 +144,18 @@
     "services": [
       {
         "name": "General servicing",
-        "description": "One-unit servicing and a published starting price on the booking page."
+        "description": "One-unit servicing and a published starting price on the booking page.",
+        "guide": "aircon-general"
       },
       {
         "name": "Maintenance contracts",
-        "description": "Separate contract options are listed with and without free gas."
+        "description": "Separate contract options are listed with and without free gas.",
+        "guide": "aircon-contract"
       },
       {
         "name": "Chemical cleaning",
-        "description": "Chemical-wash work is described on the installation pages. Ask for a job-specific price."
+        "description": "Chemical-wash work is described on the installation pages. Ask for a job-specific price.",
+        "guide": "aircon-wash"
       }
     ],
     "highlights": [
@@ -175,7 +187,8 @@
     "services": [
       {
         "name": "Routine aircon servicing",
-        "description": "Discuss the number of indoor units, your service history and the work included in the visit."
+        "description": "Discuss the number of indoor units, your service history and the work included in the visit.",
+        "guide": "aircon-general"
       }
     ],
     "highlights": [
@@ -209,15 +222,18 @@
     "services": [
       {
         "name": "Wall-unit chemical wash",
-        "description": "A non-dismantle wash, with a published range for a wall-mounted unit."
+        "description": "A non-dismantle wash, with a published range for a wall-mounted unit.",
+        "guide": "wall-wash"
       },
       {
         "name": "Cassette chemical wash",
-        "description": "A separate published range for ceiling cassette units."
+        "description": "A separate published range for ceiling cassette units.",
+        "guide": "cassette-wash"
       },
       {
         "name": "Full chemical overhaul",
-        "description": "Wall-unit and cassette overhauls are priced separately from a standard chemical wash."
+        "description": "Wall-unit and cassette overhauls are priced separately from a standard chemical wash.",
+        "guide": "aircon-overhaul"
       }
     ],
     "highlights": [
@@ -250,15 +266,18 @@
     "services": [
       {
         "name": "General servicing",
-        "description": "One-time servicing rates are listed for one to six indoor units."
+        "description": "One-time servicing rates are listed for one to six indoor units.",
+        "guide": "aircon-general"
       },
       {
         "name": "Chemical wash & overhaul",
-        "description": "Separate tables cover washing, wall-unit overhauls and different aircon sizes."
+        "description": "Separate tables cover washing, wall-unit overhauls and different aircon sizes.",
+        "guide": "aircon-cleaning-options"
       },
       {
         "name": "Gas & troubleshooting",
-        "description": "Gas pricing depends on refrigerant and measured PSI. Troubleshooting has a separate fee."
+        "description": "Gas pricing depends on refrigerant and measured PSI. Troubleshooting has a separate fee.",
+        "guide": "aircon-gas-diagnosis"
       }
     ],
     "highlights": [
@@ -292,15 +311,18 @@
     "services": [
       {
         "name": "Chemical wash & overhaul",
-        "description": "Cleaning options with published starting prices and ranges that need confirmation."
+        "description": "Cleaning options with published starting prices and ranges that need confirmation.",
+        "guide": "aircon-cleaning-options"
       },
       {
         "name": "General servicing",
-        "description": "Single and multi-unit servicing offers appear on the company page."
+        "description": "Single and multi-unit servicing offers appear on the company page.",
+        "guide": "aircon-general"
       },
       {
         "name": "Leak repair & diagnosis",
-        "description": "Leak repair and not-cold troubleshooting are listed separately from a gas top-up."
+        "description": "Leak repair and not-cold troubleshooting are listed separately from a gas top-up.",
+        "guide": "aircon-leak-diagnosis"
       }
     ],
     "highlights": [
@@ -333,15 +355,18 @@
     "services": [
       {
         "name": "Sink & floor-trap chokes",
-        "description": "Both services have a published range of S$60 to S$150."
+        "description": "Both services have a published range of S$60 to S$150.",
+        "guide": "drain-chokes"
       },
       {
         "name": "Toilet chokes",
-        "description": "The company lists S$80 to S$180 for a toilet choke."
+        "description": "The company lists S$80 to S$180 for a toilet choke.",
+        "guide": "toilet-choke"
       },
       {
         "name": "Drain jetting",
-        "description": "A published S$150 to S$400 range for drain-jetting work."
+        "description": "A published S$150 to S$400 range for drain-jetting work.",
+        "guide": "drain-jetting"
       }
     ],
     "highlights": [
@@ -374,15 +399,18 @@
     "services": [
       {
         "name": "Chokes & blockages",
-        "description": "Starting prices for kitchen-sink and toilet-bowl chokes."
+        "description": "Starting prices for kitchen-sink and toilet-bowl chokes.",
+        "guide": "drain-chokes"
       },
       {
         "name": "Pipes & leak detection",
-        "description": "Copper-pipe repair and supply, plus concealed-leak detection."
+        "description": "Copper-pipe repair and supply, plus concealed-leak detection.",
+        "guide": "pipes-detection"
       },
       {
         "name": "Basins, traps & fittings",
-        "description": "Installation or replacement options for basins, bottle traps, taps and hoses."
+        "description": "Installation or replacement options for basins, bottle traps, taps and hoses.",
+        "guide": "basins-traps"
       }
     ],
     "highlights": [
@@ -413,11 +441,13 @@
     "services": [
       {
         "name": "Electrical repair enquiries",
-        "description": "Describe the fault and send photos to confirm whether the team handles your job."
+        "description": "Describe the fault and send photos to confirm whether the team handles your job.",
+        "guide": "electrical-enquiry"
       },
       {
-        "name": "Isolator installation",
-        "description": "A new double-pole isolator is listed from S$120, before transport."
+        "name": "Isolator replacement",
+        "description": "Replacement with a new double-pole isolator is listed from S$120, before transport.",
+        "guide": "isolator"
       }
     ],
     "highlights": [
@@ -450,7 +480,8 @@
     "services": [
       {
         "name": "Electrical service enquiries",
-        "description": "Call with the fault or installation you need and confirm whether the company can take the job."
+        "description": "Call with the fault or installation you need and confirm whether the company can take the job.",
+        "guide": "electrical-enquiry"
       }
     ],
     "highlights": [
@@ -482,15 +513,18 @@
     "services": [
       {
         "name": "Power trips & emergency repairs",
-        "description": "Troubleshooting for power failures and urgent electrical faults."
+        "description": "Troubleshooting for power failures and urgent electrical faults.",
+        "guide": "electrical-fault"
       },
       {
         "name": "Power points & switches",
-        "description": "Installation or replacement of sockets, light switches and heater switches."
+        "description": "Installation or replacement of sockets, light switches and heater switches.",
+        "guide": "power-points"
       },
       {
         "name": "Wiring & lighting",
-        "description": "Wiring, rewiring and lighting work are included in the published service range."
+        "description": "Wiring, rewiring and lighting work are included in the published service range.",
+        "guide": "wiring-lighting"
       }
     ],
     "highlights": [
@@ -523,15 +557,18 @@
     "services": [
       {
         "name": "Plumbing repairs",
-        "description": "Drain cleaning, tap replacement, chokes and leak repairs are listed."
+        "description": "Drain cleaning, tap replacement, chokes and leak repairs are listed.",
+        "guide": "plumbing-repairs"
       },
       {
         "name": "Carpentry & home repairs",
-        "description": "Door, hinge, cabinet and shelving work are described on the website."
+        "description": "Door, hinge, cabinet and shelving work are described on the website.",
+        "guide": "carpentry-repairs"
       },
       {
         "name": "Painting & flooring",
-        "description": "Painting, floor repairs and flooring installation appear in its service menu."
+        "description": "Painting, floor repairs and flooring installation appear in its service menu.",
+        "guide": "painting-flooring"
       }
     ],
     "highlights": [
@@ -564,7 +601,8 @@
     "services": [
       {
         "name": "Homecare & handyman enquiries",
-        "description": "Explain the repair or maintenance work you need. The specific service scope needs direct confirmation."
+        "description": "Explain the repair or maintenance work you need. The specific service scope needs direct confirmation.",
+        "guide": "handyman-enquiry"
       }
     ],
     "highlights": [
@@ -597,15 +635,18 @@
     "services": [
       {
         "name": "Weekly home cleaning",
-        "description": "Recurring cleaning enquiries with a published weekly offer that needs scope and duration confirmation."
+        "description": "Recurring cleaning enquiries with a published weekly offer that needs scope and duration confirmation.",
+        "guide": "weekly-cleaning"
       },
       {
         "name": "First-session trial",
-        "description": "The weekly page also advertises a trial heading with the same starting offer."
+        "description": "The weekly page also advertises a trial heading with the same starting offer.",
+        "guide": "cleaning-trial"
       },
       {
         "name": "One-time home cleaning",
-        "description": "Ask for a quote matched to the property size, condition and cleaning tasks."
+        "description": "Ask for a quote matched to the property size, condition and cleaning tasks.",
+        "guide": "one-time-cleaning"
       }
     ],
     "highlights": [

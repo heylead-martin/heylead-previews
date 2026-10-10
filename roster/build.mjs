@@ -801,6 +801,24 @@ function profileBusinessGraph(company, content, canonicalPath) {
   return [business, ...services];
 }
 
+function renderServiceExplanation(item) {
+  const guide = serviceGuides[item.guide];
+  if (!guide?.body || !guide?.ask) throw new Error(`Missing service explanation: ${item.name || item.service}`);
+  return `<div class="service-explanation"><p>${esc(guide.body)}</p><div class="service-booking-question"><h4>Before you book</h4><p>${esc(guide.ask)}</p></div></div>`;
+}
+
+function serviceDetailsLabel() {
+  return `<span class="service-details-label"><span class="when-closed">View details</span><span class="when-open">Hide details</span></span>`;
+}
+
+function renderServicePrice(item, index) {
+  return `<details class="service-rate" id="service-price-${index + 1}"><summary><span class="service-rate-label"><strong>${esc(item.service)}</strong><small>${esc(item.detail)}</small>${serviceDetailsLabel()}</span><strong class="service-rate-price"><span class="sr-only">Published price: </span>${esc(item.price)}</strong><span class="service-toggle-icon">${icon("chevron")}</span></summary>${renderServiceExplanation(item)}</details>`;
+}
+
+function renderServiceTile(service, index) {
+  return `<article class="service-tile"><span class="service-number">${String(index + 1).padStart(2, "0")}</span><h3>${esc(service.name)}</h3><p>${esc(service.description)}</p><details class="service-explainer"><summary>${serviceDetailsLabel()}<span class="sr-only"> for ${esc(service.name)}</span><span class="service-toggle-icon">${icon("chevron")}</span></summary>${renderServiceExplanation(service)}</details></article>`;
+}
+
 function renderProfile(company, peers) {
   const trade = tradeById(company.category);
   const content = profileContent[company.slug];
@@ -820,7 +838,7 @@ function renderProfile(company, peers) {
   if (company.email?.value) facts.push(factRow("Email", esc(company.email.value)));
   if (company.whatsapp?.note) facts.push(factRow("Before you contact", esc(company.whatsapp.note)));
   for (const fact of company.facts || []) facts.push(factRow(fact.label === "Claim" ? "Company information" : fact.label, esc(fact.value)));
-  const priceRows = (presentation.priceItems || []).map(item => `<tr><th scope="row">${esc(item.service)}<small>${esc(item.detail)}</small></th><td>${esc(item.price)}</td></tr>`).join("");
+  const priceRows = (presentation.priceItems || []).map(renderServicePrice).join("");
   const body = `
 ${renderCrumbs(crumbs)}
 <section class="company-masthead" data-company data-name="${esc(company.name)}" data-slug="${company.slug}">
@@ -844,9 +862,9 @@ ${photos.length ? `<section class="work-gallery" aria-label="Photos from the com
       ${reviewCount ? `<div class="review-entries">${company.reviews.map(profileReview).join("")}</div><p class="review-no-results" data-review-empty hidden>No excerpts match your search. <button type="button" data-clear-reviews>Clear search</button></p><p class="review-search-status sr-only" data-review-count aria-live="polite"></p>` : `<div class="review-empty"><span class="review-empty-icon">${icon("quote")}</span><h3>No dated excerpts to show yet</h3><p>${rating ? "The rating above is sourced, but we do not have a dated customer quote to display here." : "No dated customer review was captured for this profile."}</p><a class="btn" href="${esc(rating?.sourceUrl || company.mapsUrl)}">Explore the original listing${icon("arrow")}</a></div>`}
     </section>
     <section class="profile-section" id="pricing"><div class="profile-section-heading"><div><p class="kicker">KNOW THE COST</p><h2>Services & pricing</h2></div><span class="section-pill">${presentation.published ? "Published prices" : "Quote required"}</span></div>
-      <p class="service-intro">${esc(content.headline)}</p><div class="service-menu">${content.services.map((service, index) => `<article class="service-tile"><span class="service-number">${String(index + 1).padStart(2, "0")}</span><h3>${esc(service.name)}</h3><p>${esc(service.description)}</p></article>`).join("")}</div>
+      <p class="service-intro">${esc(content.headline)}</p><div class="service-menu">${content.services.map(renderServiceTile).join("")}</div>
       <div class="pricing-subheading"><h3>What does it cost?</h3><span>Prices in Singapore dollars</span></div><div class="service-price-lead"><strong>${esc(presentation.price)}</strong><p>${esc(presentation.detail)}</p></div>
-      ${priceRows ? `<table class="service-price-table"><caption class="sr-only">Prices published by ${esc(company.name)}</caption><thead><tr><th scope="col">Service</th><th scope="col">Published price</th></tr></thead><tbody>${priceRows}</tbody></table>` : `<div class="quote-checklist"><h3>Ask for a written quote that covers:</h3><ul><li>${icon("check")}The work and any replacement parts</li><li>${icon("check")}Transport, call-out charges, and GST</li><li>${icon("check")}Extra work and the workmanship warranty</li></ul></div>`}
+      ${priceRows ? `<p class="service-list-help">Open a service to see what it involves. Confirm the exact scope with the company.</p><div class="service-price-list"><div class="service-price-list-heading" aria-hidden="true"><span>Service</span><span>Published price</span><span></span></div>${priceRows}</div>` : `<div class="quote-checklist"><h3>Ask for a written quote that covers:</h3><ul><li>${icon("check")}The work and any replacement parts</li><li>${icon("check")}Transport, call-out charges, and GST</li><li>${icon("check")}Extra work and the workmanship warranty</li></ul></div>`}
       <details class="source-disclosure"><summary>Full pricing notes & conditions</summary><p>${esc(company.priceNote)}</p></details><p class="profile-source-note"><a href="${esc(company.priceSourceUrl)}">Published price source${icon("link")}</a><span>Checked 9-10 Oct 2026. Confirm the total for your job.</span></p>
     </section>
     <section class="profile-section" id="overview"><div class="profile-section-heading"><div><p class="kicker">MEET THE BUSINESS</p><h2>About ${esc(company.name)}</h2></div></div><div class="company-story"><p class="company-story-lead">${esc(content.about[0])}</p><p>${esc(content.about[1])}</p><div class="company-highlights">${content.highlights.map(item => `<div><span>${esc(item.label)}</span><strong>${esc(item.value)}</strong></div>`).join("")}</div></div><h3 class="fit-section-title">A few things to help you decide</h3><div class="company-fit"><div><span class="fit-label">${icon("check")}Worth considering for</span><p>${esc(company.bestFor)}</p></div><div><span class="fit-label">${icon("list")}Things to check first</span><p>${esc(company.poorFit)}</p></div></div></section>
@@ -1028,6 +1046,8 @@ ${renderFaq(howFaqs)}`;
 
 const presentation = JSON.parse(await readFile(path.join(root, "data", "presentation.json"), "utf8"));
 const profileContent = JSON.parse(await readFile(path.join(root, "data", "profiles.json"), "utf8"));
+const serviceGuides = JSON.parse(await readFile(path.join(root, "data", "service-guides.json"), "utf8"));
+assertNoDashes(serviceGuides, "service-guides.json");
 assertNoDashes(profileContent, "profiles.json");
 
 const raw = JSON.parse(await readFile(path.join(root, "data", "companies.json"), "utf8"));
