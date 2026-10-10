@@ -1,10 +1,18 @@
 import { readFile, writeFile, mkdir } from "node:fs/promises";
 import path from "node:path";
+import { createHash } from "node:crypto";
 import { fileURLToPath } from "node:url";
 
 const root = path.dirname(fileURLToPath(import.meta.url));
 const origin = "https://previews.heylead.com/roster";
 const checked = "9 Oct 2026 and 10 Oct 2026";
+// Content hashes keep cached assets in sync with each generated page.
+const assetVersions = Object.fromEntries(await Promise.all(
+  ["site.css", "directory.css", "form.js", "directory.js"].map(async (name) => [
+    name,
+    createHash("sha256").update(await readFile(path.join(root, "assets", name))).digest("hex").slice(0, 12)
+  ])
+));
 
 const trades = [
   {
@@ -509,8 +517,8 @@ function pageShell({ title, description, canonicalPath, current, jsonLd, body, b
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,560;1,9..144,460&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/roster/assets/site.css">
-<link rel="stylesheet" href="/roster/assets/directory.css?v=20261010">
+<link rel="stylesheet" href="/roster/assets/site.css?v=${assetVersions["site.css"]}">
+<link rel="stylesheet" href="/roster/assets/directory.css?v=${assetVersions["directory.css"]}">
 <script type="application/ld+json">${graph}</script>
 </head>
 <body${bodyClass ? ` class="${bodyClass}"` : ""}>
@@ -520,8 +528,8 @@ ${renderNav(current)}
 ${body}
 </main>
 ${renderFooter()}
-<script src="/roster/assets/form.js"></script>
-<script src="/roster/assets/directory.js?v=20261010"></script>
+<script src="/roster/assets/form.js?v=${assetVersions["form.js"]}"></script>
+<script src="/roster/assets/directory.js?v=${assetVersions["directory.js"]}"></script>
 </body>
 </html>
 `;
