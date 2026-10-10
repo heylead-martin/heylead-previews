@@ -177,15 +177,6 @@
       "curated": false
     },
     {
-      "id": "roster-billy-aircon",
-      "slug": "billy-aircon",
-      "name": "Billy Aircon",
-      "categories": [
-        "aircon"
-      ],
-      "curated": true
-    },
-    {
       "id": "200506783K",
       "slug": "ce-engineering-pte-ltd",
       "name": "CE ENGINEERING PTE. LTD.",
@@ -262,15 +253,6 @@
       "id": "52812588E",
       "slug": "coolserve-air-condition-engineering",
       "name": "COOLSERVE AIR-CONDITION ENGINEERING",
-      "categories": [
-        "aircon"
-      ],
-      "curated": false
-    },
-    {
-      "id": "lookup-ct-air-con-group",
-      "slug": "ct-air-con-group",
-      "name": "CT Air-Con Group",
       "categories": [
         "aircon"
       ],
@@ -516,15 +498,6 @@
       "id": "53136986B",
       "slug": "lemoncool-aircon",
       "name": "LEMONCOOL AIRCON",
-      "categories": [
-        "aircon"
-      ],
-      "curated": false
-    },
-    {
-      "id": "52993516C",
-      "slug": "lightning-air-conditioning-services",
-      "name": "LIGHTNING AIR-CONDITIONING SERVICES",
       "categories": [
         "aircon"
       ],
@@ -926,15 +899,6 @@
       "name": "JML ENGINEERING PTE. LTD.",
       "categories": [
         "aircon",
-        "electrician"
-      ],
-      "curated": false
-    },
-    {
-      "id": "201922885W",
-      "slug": "kat-electrical-engineering-pte-ltd",
-      "name": "KAT ELECTRICAL ENGINEERING PTE LTD",
-      "categories": [
         "electrician"
       ],
       "curated": false
@@ -1873,15 +1837,6 @@
       "curated": false
     },
     {
-      "id": "gm-10965709166641619960",
-      "slug": "airconman-aircon-servicing-repair-singapore",
-      "name": "Airconman - Aircon Servicing & Repair Singapore",
-      "categories": [
-        "aircon"
-      ],
-      "curated": false
-    },
-    {
       "id": "gm-9827412819302873730",
       "slug": "ys-a-cool-pte-ltd",
       "name": "YS A-Cool Pte Ltd",
@@ -2107,15 +2062,6 @@
       "curated": false
     },
     {
-      "id": "gm-744625222849869623",
-      "slug": "just-cool-aircon-engineering-pte-ltd",
-      "name": "Just Cool Aircon Engineering Pte Ltd",
-      "categories": [
-        "aircon"
-      ],
-      "curated": false
-    },
-    {
       "id": "gm-15845026947124313174",
       "slug": "lk-brothers-engineering-pte-ltd-aircon-servicing-singapore",
       "name": "LK Brothers Engineering Pte Ltd -Aircon Servicing Singapore",
@@ -2164,15 +2110,6 @@
       "id": "gm-15020839161791991074",
       "slug": "supercool-aircon",
       "name": "Supercool Aircon",
-      "categories": [
-        "aircon"
-      ],
-      "curated": false
-    },
-    {
-      "id": "gm-10615115009983379279",
-      "slug": "airconman-sg-pte-ltd",
-      "name": "Airconman Sg Pte Ltd",
       "categories": [
         "aircon"
       ],
@@ -3538,15 +3475,6 @@
       "curated": false
     },
     {
-      "id": "gm-5846891502760904075",
-      "slug": "affordable-electrician-services-singapore",
-      "name": "Affordable Electrician Services Singapore",
-      "categories": [
-        "electrician"
-      ],
-      "curated": false
-    },
-    {
       "id": "gm-6595761819592738104",
       "slug": "jd-waterworks",
       "name": "JD Waterworks",
@@ -3622,15 +3550,6 @@
       "id": "gm-18043501525627128501",
       "slug": "rfwaterproofing-plumbing-pte-ltd",
       "name": "RFWATERPROOFING & PLUMBING PTE.LTD.",
-      "categories": [
-        "plumbing"
-      ],
-      "curated": false
-    },
-    {
-      "id": "gm-1497039594154185288",
-      "slug": "24-hour-plumbing",
-      "name": "24 hour plumbing",
       "categories": [
         "plumbing"
       ],
@@ -4171,15 +4090,6 @@
       "id": "gm-7530160120251285339",
       "slug": "nimbus-facility",
       "name": "Nimbus Facility",
-      "categories": [
-        "cleaning"
-      ],
-      "curated": false
-    },
-    {
-      "id": "gm-12779706975485668117",
-      "slug": "jb-house-cleaning-services-perfectionist-cleaning-business",
-      "name": "JB House Cleaning Services - Perfectionist Cleaning Business",
       "categories": [
         "cleaning"
       ],
@@ -8678,6 +8588,18 @@
       ]
     },
     {
+      "id": "roster-billy-aircon",
+      "name": "Billy Aircon",
+      "categories": [
+        "aircon"
+      ],
+      "reasons": [
+        "no-sg-postal-code"
+      ],
+      "curated": true,
+      "slug": "billy-aircon"
+    },
+    {
       "id": "201906372H",
       "name": "Brocade Auto Pte. Ltd.",
       "categories": [
@@ -10056,6 +9978,16 @@
         "missing-sourced-about",
         "missing-sourced-services",
         "missing-company-website"
+      ]
+    },
+    {
+      "id": "lookup-ct-air-con-group",
+      "name": "CT Air-Con Group",
+      "categories": [
+        "aircon"
+      ],
+      "reasons": [
+        "site-spam-injection"
       ]
     },
     {
@@ -17068,6 +17000,16 @@
         "missing-sourced-about",
         "missing-sourced-services",
         "missing-company-website"
+      ]
+    },
+    {
+      "id": "52993516C",
+      "name": "LIGHTNING AIR-CONDITIONING SERVICES",
+      "categories": [
+        "aircon"
+      ],
+      "reasons": [
+        "site-spam-injection"
       ]
     },
     {
@@ -36909,6 +36851,16 @@
       ]
     },
     {
+      "id": "201922885W",
+      "name": "KAT ELECTRICAL ENGINEERING PTE LTD",
+      "categories": [
+        "electrician"
+      ],
+      "reasons": [
+        "site-spam-injection"
+      ]
+    },
+    {
       "id": "202417056E",
       "name": "KATALYST ENGINEERING PTE. LTD.",
       "categories": [
@@ -53247,6 +53199,7 @@
       ],
       "reasons": [
         "website-inactive",
+        "no-sg-postal-code",
         "missing-sourced-about",
         "missing-sourced-services",
         "missing-sourced-phone",
@@ -64620,6 +64573,16 @@
       ]
     },
     {
+      "id": "gm-10965709166641619960",
+      "name": "Airconman - Aircon Servicing & Repair Singapore",
+      "categories": [
+        "aircon"
+      ],
+      "reasons": [
+        "possible-duplicate"
+      ]
+    },
+    {
       "id": "gm-9104483790491634079",
       "name": "Coolah!",
       "categories": [
@@ -64638,6 +64601,26 @@
       ],
       "reasons": [
         "website-not-company-site"
+      ]
+    },
+    {
+      "id": "gm-744625222849869623",
+      "name": "Just Cool Aircon Engineering Pte Ltd",
+      "categories": [
+        "aircon"
+      ],
+      "reasons": [
+        "no-sg-postal-code"
+      ]
+    },
+    {
+      "id": "gm-10615115009983379279",
+      "name": "Airconman Sg Pte Ltd",
+      "categories": [
+        "aircon"
+      ],
+      "reasons": [
+        "possible-duplicate"
       ]
     },
     {
@@ -64689,7 +64672,8 @@
         "electrician"
       ],
       "reasons": [
-        "website-not-company-site"
+        "website-not-company-site",
+        "possible-duplicate"
       ]
     },
     {
@@ -64745,6 +64729,26 @@
       ]
     },
     {
+      "id": "gm-5846891502760904075",
+      "name": "Affordable Electrician Services Singapore",
+      "categories": [
+        "electrician"
+      ],
+      "reasons": [
+        "no-sg-postal-code"
+      ]
+    },
+    {
+      "id": "gm-1497039594154185288",
+      "name": "24 hour plumbing",
+      "categories": [
+        "plumbing"
+      ],
+      "reasons": [
+        "site-spam-injection"
+      ]
+    },
+    {
       "id": "gm-16276817438539997219",
       "name": "Fixlaa",
       "categories": [
@@ -64796,6 +64800,16 @@
       "reasons": [
         "not-a-trade-business",
         "profile-rolled-back"
+      ]
+    },
+    {
+      "id": "gm-12779706975485668117",
+      "name": "JB House Cleaning Services - Perfectionist Cleaning Business",
+      "categories": [
+        "cleaning"
+      ],
+      "reasons": [
+        "not-singapore"
       ]
     },
     {
@@ -65164,17 +65178,6 @@
       "issue": "Alternate address exists; primary database address retained"
     },
     {
-      "slug": "billy-aircon",
-      "issue": "Non-blocking database flags",
-      "flags": [
-        "no-sg-postal-code"
-      ]
-    },
-    {
-      "slug": "billy-aircon",
-      "issue": "Automatically extracted price text needs editorial review; source wording retained"
-    },
-    {
       "slug": "ce-engineering-pte-ltd",
       "issue": "Alternate phone omitted; primary database phone retained"
     },
@@ -65232,17 +65235,6 @@
     },
     {
       "slug": "coolserve-air-condition-engineering",
-      "issue": "Alternate address exists; primary database address retained"
-    },
-    {
-      "slug": "ct-air-con-group",
-      "issue": "Non-blocking database flags",
-      "flags": [
-        "site-spam-injection"
-      ]
-    },
-    {
-      "slug": "ct-air-con-group",
       "issue": "Alternate address exists; primary database address retained"
     },
     {
@@ -65439,17 +65431,6 @@
     {
       "slug": "lemoncool-aircon",
       "issue": "Automatically extracted price text needs editorial review; source wording retained"
-    },
-    {
-      "slug": "lightning-air-conditioning-services",
-      "issue": "Non-blocking database flags",
-      "flags": [
-        "site-spam-injection"
-      ]
-    },
-    {
-      "slug": "lightning-air-conditioning-services",
-      "issue": "Alternate address exists; primary database address retained"
     },
     {
       "slug": "lion-city-aircon",
@@ -65672,17 +65653,6 @@
     },
     {
       "slug": "ac-cool-aircon-sg-service",
-      "issue": "Alternate address exists; primary database address retained"
-    },
-    {
-      "slug": "kat-electrical-engineering-pte-ltd",
-      "issue": "Non-blocking database flags",
-      "flags": [
-        "site-spam-injection"
-      ]
-    },
-    {
-      "slug": "kat-electrical-engineering-pte-ltd",
       "issue": "Alternate address exists; primary database address retained"
     },
     {
@@ -66164,13 +66134,6 @@
       "issue": "Automatically extracted price text needs editorial review; source wording retained"
     },
     {
-      "slug": "airconman-aircon-servicing-repair-singapore",
-      "issue": "Non-blocking database flags",
-      "flags": [
-        "possible-duplicate"
-      ]
-    },
-    {
       "slug": "ys-a-cool-pte-ltd",
       "issue": "Automatically extracted price text needs editorial review; source wording retained"
     },
@@ -66199,29 +66162,11 @@
       "issue": "Automatically extracted price text needs editorial review; source wording retained"
     },
     {
-      "slug": "just-cool-aircon-engineering-pte-ltd",
-      "issue": "Non-blocking database flags",
-      "flags": [
-        "no-sg-postal-code"
-      ]
-    },
-    {
       "slug": "jetstyle-aircon-aircon-contractor-singapore",
       "issue": "Automatically extracted price text needs editorial review; source wording retained"
     },
     {
       "slug": "supercool-aircon",
-      "issue": "Automatically extracted price text needs editorial review; source wording retained"
-    },
-    {
-      "slug": "airconman-sg-pte-ltd",
-      "issue": "Non-blocking database flags",
-      "flags": [
-        "possible-duplicate"
-      ]
-    },
-    {
-      "slug": "airconman-sg-pte-ltd",
       "issue": "Automatically extracted price text needs editorial review; source wording retained"
     },
     {
@@ -66377,13 +66322,6 @@
       "issue": "Automatically extracted price text needs editorial review; source wording retained"
     },
     {
-      "slug": "affordable-electrician-services-singapore",
-      "issue": "Non-blocking database flags",
-      "flags": [
-        "no-sg-postal-code"
-      ]
-    },
-    {
       "slug": "superten-plumber",
       "issue": "Automatically extracted price text needs editorial review; source wording retained"
     },
@@ -66394,13 +66332,6 @@
     {
       "slug": "rfwaterproofing-plumbing-pte-ltd",
       "issue": "Automatically extracted price text needs editorial review; source wording retained"
-    },
-    {
-      "slug": "24-hour-plumbing",
-      "issue": "Non-blocking database flags",
-      "flags": [
-        "site-spam-injection"
-      ]
     },
     {
       "slug": "saikon-contractors",
@@ -66465,13 +66396,6 @@
     {
       "slug": "elara-home-pte-ltd",
       "issue": "Automatically extracted price text needs editorial review; source wording retained"
-    },
-    {
-      "slug": "jb-house-cleaning-services-perfectionist-cleaning-business",
-      "issue": "Non-blocking database flags",
-      "flags": [
-        "not-singapore"
-      ]
     },
     {
       "slug": "home-plumbing-services",
@@ -66588,31 +66512,36 @@
     {
       "slug": "aquahero-plumbing",
       "issue": "Automatically extracted price text needs editorial review; source wording retained"
+    },
+    {
+      "slug": "billy-aircon",
+      "issue": "Original write-up preserved in source data; page withheld because release has a blocking flag"
     }
   ],
   "byTrade": {
     "aircon": {
-      "published": 208,
-      "excluded": 1697
+      "published": 202,
+      "excluded": 1703
     },
     "plumbing": {
-      "published": 83,
-      "excluded": 425
+      "published": 82,
+      "excluded": 426
     },
     "electrician": {
-      "published": 111,
-      "excluded": 2571
+      "published": 109,
+      "excluded": 2573
     },
     "handyman": {
       "published": 86,
       "excluded": 301
     },
     "cleaning": {
-      "published": 124,
-      "excluded": 574
+      "published": 123,
+      "excluded": 575
     }
   },
-  "publishedCount": 587,
-  "excludedCount": 4857,
-  "sourceSha256": "b13c99085c67d96003e00b7688bc2ecec3a0e9f522a1723da299de01fe5f74fa"
+  "publishedCount": 577,
+  "excludedCount": 4867,
+  "sourceSha256": "b13c99085c67d96003e00b7688bc2ecec3a0e9f522a1723da299de01fe5f74fa",
+  "sourceRelease": "companies-20261010-2242.json"
 }

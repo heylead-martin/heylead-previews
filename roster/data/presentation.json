@@ -43,20 +43,7 @@
         "detail": "Wall-unit chemical wash. GST not stated.",
         "published": true
       }
-    },
-    "logo": "https://www.billyaircon.com.sg/images/logo.png",
-    "photos": [
-      {
-        "src": "https://www.billyaircon.com.sg/images/cta/billy-aircon-team-of-technicians-standing-together.webp",
-        "sourceUrl": "https://www.billyaircon.com.sg/about/",
-        "caption": "Team photo from Billy Aircon"
-      },
-      {
-        "src": "https://www.billyaircon.com.sg/images/areas/billy-aircon-team-of-professional-technicians-in-c.webp",
-        "sourceUrl": "https://www.billyaircon.com.sg/about/",
-        "caption": "Work photo from Billy Aircon"
-      }
-    ]
+    }
   },
   "mr-plumber": {
     "price": "Ask for a quote",
@@ -366,12 +353,6 @@
     "detail": "No company rate captured. Ask for a job-specific quote.",
     "photos": []
   },
-  "ct-air-con-group": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
-    "photos": []
-  },
   "cool-channels-engineering-pte-ltd": {
     "published": true,
     "price": "See published prices",
@@ -520,12 +501,6 @@
     "published": true,
     "price": "See published prices",
     "detail": "1 sourced pricing entries. Confirm the job, inclusions and total.",
-    "photos": []
-  },
-  "lightning-air-conditioning-services": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
     "photos": []
   },
   "met-services": {
@@ -751,12 +726,6 @@
     "photos": []
   },
   "ac-cool-aircon-sg-service": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
-    "photos": []
-  },
-  "kat-electrical-engineering-pte-ltd": {
     "published": false,
     "price": "Ask for a quote",
     "detail": "No company rate captured. Ask for a job-specific quote.",
@@ -1338,12 +1307,6 @@
     "detail": "No company rate captured. Ask for a job-specific quote.",
     "photos": []
   },
-  "airconman-aircon-servicing-repair-singapore": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
-    "photos": []
-  },
   "ys-a-cool-pte-ltd": {
     "published": true,
     "price": "See published prices",
@@ -1494,12 +1457,6 @@
     "detail": "No company rate captured. Ask for a job-specific quote.",
     "photos": []
   },
-  "just-cool-aircon-engineering-pte-ltd": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
-    "photos": []
-  },
   "lk-brothers-engineering-pte-ltd-aircon-servicing-singapore": {
     "published": true,
     "price": "See published prices",
@@ -1534,12 +1491,6 @@
     "published": true,
     "price": "See published prices",
     "detail": "3 sourced pricing entries. Confirm the job, inclusions and total.",
-    "photos": []
-  },
-  "airconman-sg-pte-ltd": {
-    "published": true,
-    "price": "See published prices",
-    "detail": "4 sourced pricing entries. Confirm the job, inclusions and total.",
     "photos": []
   },
   "cool-horizon-pte-ltd": {
@@ -2448,12 +2399,6 @@
     "detail": "No company rate captured. Ask for a job-specific quote.",
     "photos": []
   },
-  "affordable-electrician-services-singapore": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
-    "photos": []
-  },
   "jd-waterworks": {
     "published": false,
     "price": "Ask for a quote",
@@ -2506,12 +2451,6 @@
     "published": true,
     "price": "See published prices",
     "detail": "2 sourced pricing entries. Confirm the job, inclusions and total.",
-    "photos": []
-  },
-  "24-hour-plumbing": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
     "photos": []
   },
   "reliable-electrical-services": {
@@ -2869,12 +2808,6 @@
     "photos": []
   },
   "nimbus-facility": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
-    "photos": []
-  },
-  "jb-house-cleaning-services-perfectionist-cleaning-business": {
     "published": false,
     "price": "Ask for a quote",
     "detail": "No company rate captured. Ask for a job-specific quote.",

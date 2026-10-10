@@ -4,7 +4,7 @@ import os from 'node:os';
 import { fileURLToPath } from 'node:url';
 import { createHash } from 'node:crypto';
 
-export const BLOCKED = new Set(['not-a-trade-business','marketplace','possible-platform','google-listing-mismatch','website-not-company-site','thin-profile','site-placeholder-content','website-inactive','lookup-name-looks-unrelated','trade-unclear']);
+export const BLOCKED = new Set(['not-a-trade-business','not-singapore','site-spam-injection','possible-duplicate','no-sg-postal-code','marketplace','possible-platform','google-listing-mismatch','website-not-company-site','thin-profile','site-placeholder-content','website-inactive','lookup-name-looks-unrelated','trade-unclear']);
 const types = {aircon:'HVACBusiness',plumbing:'Plumber',electrician:'Electrician',handyman:'HomeAndConstructionBusiness',cleaning:'LocalBusiness'};
 const cat = x => x === 'home-cleaning' ? 'cleaning' : x;
 const text = x => typeof x === 'string' ? x.replace(/[\u2013\u2014]/g,'-').replace(/Â·/g,' · ').replace(/\s+/g,' ').trim() : '';
@@ -44,13 +44,34 @@ function serviceRows(row, trade) {
   }
   for(const item of row.price_lines || []) {
     if (!text(item.service)||!text(item.price_text)||!cited(item)) continue;
-    const key=serviceKey(item.service,trade);
-    if (!groups.has(key)) groups.set(key,{name:human(item.service),description:'',explanation:'',sourceUrl:http(item.sourceUrl),capturedAt:item.capturedAt,prices:[]});
-    groups.get(key).prices.push({label:text(item.service),price:text(item.price_text),detail:[text(item.unit),text(item.gst_note) ? `GST: ${text(item.gst_note)}` : ''].filter(Boolean).join('. '),sourceUrl:http(item.sourceUrl),capturedAt:item.capturedAt,indicative:indicative(item)});
+    const key=serviceKey(item.job || item.service,trade);
+    if (!groups.has(key)) groups.set(key,{name:serviceNames[key]||human(item.job||item.service),description:'',explanation:'',sourceUrl:http(item.sourceUrl),capturedAt:item.capturedAt,prices:[]});
+    groups.get(key).prices.push(priceOption(item));
   }
   for(const s of groups.values()) {if(s.prices.length && s.prices.every(p=>p.indicative)) s.priceSummary='Pricing reference';else if(s.prices.length>1) s.priceSummary=`${s.prices.length} pricing entries`;}
   return [...groups.values()];
 }
+
+export function priceOption(item) {
+  const details = [
+    item.qty != null ? `Quantity: ${item.qty}` : '',
+    text(item.unit),
+    text(item.gst_note || item.gst) ? `GST: ${text(item.gst_note || item.gst)}` : '',
+    item.promo ? 'Promotional rate; confirm availability' : '',
+    item.was_amount_sgd != null ? `Previously S$${item.was_amount_sgd}` : ''
+  ];
+  const longPrice=text(item.price_text).length>65 || !/(?:S?\$|SGD)\s*\d/i.test(text(item.price_text));
+  const label=text(item.service).length>100&&item.job ? human(item.job) : text(item.service);
+  return {label,price:longPrice?'See source details':text(item.price_text),detail:details.filter(Boolean).join('. '),excerpt:text(item.excerpt)||text(item.price_text),sourceUrl:cited(item),capturedAt:item.capturedAt,indicative:indicative(item)};
+}
+const sourcedFact = item => cited(item) && item.value != null ? {...item,sourceUrl:cited(item)} : null;
+export function verifyRelease(source, checksum) {
+  const expected = String(checksum).trim().split(/\s+/)[0].toLowerCase();
+  const actual = createHash('sha256').update(source).digest('hex');
+  if(!/^[a-f0-9]{64}$/.test(expected) || expected !== actual) throw new Error('Release checksum mismatch. Import stopped before writing any site data.');
+  return actual;
+}
+
 function reviewRows(row, mapsUrl) {
   return (row.reviews||[]).filter(r=>r.excerpt && (r.author||r.author_initials_or_handle) && (r.date||r.relativeTime) && cited(r)).slice(0,5).map(r=>({excerpt:text(r.excerpt),author:text(r.author||r.author_initials_or_handle),relativeTime:text(r.date||r.relativeTime),sourceUrl:http(r.source_url||r.sourceUrl),sourceLabel:text(r.source||r.sourceLabel),mapsUrl:http(r.maps_url)||mapsUrl,capturedAt:r.capturedAt||row.checked}));
 }
@@ -77,7 +98,7 @@ export function importDatabase(db, seeds, registry={}) {
     }
     if(!categories.length&&!original) reasons.push('missing-trade');
     if(reasons.length) {
-      report.excluded.push({id:row.id,name:row.name,categories,reasons:[...new Set(reasons)]});
+      report.excluded.push({id:row.id,name:row.name,categories,reasons:[...new Set(reasons)],...(original?{curated:true,slug:original.slug}: {})});
       for(const t of categories) report.byTrade[t].excluded++;
       continue;
     }
@@ -91,6 +112,14 @@ export function importDatabase(db, seeds, registry={}) {
     const address=contact(row.address,website);
     if(address) {address.street=address.value;address.postal=text(row.address?.postal);}
     const enrichment={checkedAt:row.checked,supportedServices:(row.services||[]).filter(cited).map(s=>({name:human(s.name),sourceUrl:s.sourceUrl,capturedAt:s.capturedAt})),about:(row.about||[]).filter(a=>text(a.text)&&cited(a)),hours:row.hours?.text&&cited(row.hours)?row.hours:row.hours_google?.text&&cited(row.hours_google)?row.hours_google:null,serviceArea:row.service_area?.value&&cited(row.service_area)?row.service_area:null,residential:row.residential?.value&&cited(row.residential)?row.residential:null,licences:(row.licences||[]).filter(l=>l.type&&http(l.claimedOn||l.sourceUrl)),management:(row.management||[]).filter(m=>m.name&&cited(m)),uen:text(row.uen),uenSource:http(row.uen_source?.sourceUrl),operatorGroup:row.operator_group,priceLines:(row.price_lines||[]).filter(p=>p.service&&p.price_text&&cited(p)),websiteCheck:row.profile?.websiteCheck||null};
+    Object.assign(enrichment, {
+      summary: row.summary?.text && row.summary?.sources?.some(http) ? {text:row.summary.text.replace(/\ba aircon\b/g,'an aircon').replace(/\ba electrician\b/g,'an electrician'),sources:row.summary.sources.map(http).filter(Boolean),capturedAt:row.summary.generatedAt} : null,
+      faqs:(row.faqs||[]).filter(f=>text(f.q)&&text(f.a)&&cited(f)).map(f=>({q:f.q,a:f.a,sourceUrl:cited(f),capturedAt:f.capturedAt||row.checked})),
+      highlights:(row.highlights||[]).filter(h=>text(h.text)&&cited(h)&&(!/publishes prices/i.test(h.text)||enrichment.priceLines.length)).map(h=>({...h,sourceUrl:cited(h)})),
+      warranty:sourcedFact(row.warranty),foundedYear:sourcedFact(row.founded_year),emergency:sourcedFact(row.emergency_24_7),responseTime:sourcedFact(row.response_time),
+      brands:(row.brands_serviced||[]).map(sourcedFact).filter(Boolean),payments:(row.payment_methods||[]).map(sourcedFact).filter(Boolean),
+      socials:Object.entries(row.social_links||{}).filter(([,s])=>http(s.url)&&cited(s)).map(([name,s])=>({name,url:http(s.url),sourceUrl:cited(s),capturedAt:s.capturedAt}))
+    });
     const base={slug,name:text(row.name),category,categories:categories.length?categories:[category],schemaType:types[category],phone:contact(row.phone,website),address,website:{value:website,sourceUrl:website},email:contact(row.contact?.email||row.email,website),whatsapp:contact(row.contact?.whatsapp,website),mapsUrl,rating:null,reviews:reviewRows(row,mapsUrl),services:(row.services||[]).map(s=>s.name).filter(s=>['chemical-wash','gas-top-up'].includes(s)),bestFor:'',poorFit:'',priceNote:'Contact the company to confirm the scope, total price and GST.',priceSourceUrl:enrichment.priceLines[0]?.sourceUrl||website,facts:[],imported:true};
     const company=original?{...structuredClone(original),imported:false}:{...base};
     if(original) {
@@ -116,15 +145,18 @@ export function importDatabase(db, seeds, registry={}) {
     companies.push(company);
     report.published.push({id:row.id,slug,name:company.name,categories:company.categories,curated:!!original});
     for(const t of company.categories) report.byTrade[t].published++;
-    if(row.flags.length) report.warnings.push({slug,issue:'Non-blocking database flags',flags:row.flags});
+    if(row.flags?.length) report.warnings.push({slug,issue:'Non-blocking database flags',flags:row.flags});
     if((row.phone?.alt||row.alt_contacts?.some(c=>c.field==='phone'))&&!original) report.warnings.push({slug,issue:'Alternate phone omitted; primary database phone retained'});
     if((row.address?.alt||row.alt_contacts?.some(c=>c.field==='address'))) report.warnings.push({slug,issue:'Alternate address exists; primary database address retained'});
     if(enrichment.priceLines.some(indicative)) report.warnings.push({slug,issue:'General pricing references labelled separately from company rates'});
     if(enrichment.priceLines.some(p=>p.service.length>120||p.price_text.length>120||/as printed/i.test(p.unit||''))) report.warnings.push({slug,issue:'Automatically extracted price text needs editorial review; source wording retained'});
   }
   const present=new Set(companies.map(c=>c.slug));
-  for(const slug of curated.keys()) if(!present.has(slug)) throw new Error(`Curated profile ${slug} would be dropped. Review the source flags before changing the baseline.`);
-  for(const key of Object.keys(profiles)) if(!present.has(key)) {delete profiles[key];delete presentation[key];}
+  for(const slug of curated.keys()) if(!present.has(slug)) {
+    if(!report.excluded.some(r=>r.slug===slug)) throw new Error(`Curated profile ${slug} is missing from the release. Import stopped.`);
+    report.warnings.push({slug,issue:'Original write-up preserved in source data; page withheld because release has a blocking flag'});
+  }
+  for(const key of Object.keys(profiles)) if(!present.has(key)&&!curated.has(key)) {delete profiles[key];delete presentation[key];}
   companies.sort((a,b)=>a.slug.localeCompare(b.slug));
   const groups={};
   for(const c of companies) if(c.enrichment.operatorGroup) {
@@ -139,12 +171,21 @@ export function importDatabase(db, seeds, registry={}) {
 const script=fileURLToPath(import.meta.url);
 if(process.argv[1]&&path.resolve(process.argv[1])===script) {
   const root=path.resolve(path.dirname(script),'..');
-  const input=process.argv[2]||process.env.ROSTER_DB_PATH||path.join(os.homedir(),'Library/CloudStorage/GoogleDrive-marinov.mvm@gmail.com/My Drive/Roster/db-expanded/companies.json');
+  const releases=path.join(os.homedir(),'Library/CloudStorage/GoogleDrive-marinov.mvm@gmail.com/My Drive/Roster/db-expanded/releases');
+  let input=process.argv[2]||process.env.ROSTER_DB_PATH;
+  if(!input) {
+    const latest=(await readFile(path.join(releases,'LATEST'),'utf8')).trim();
+    if(path.basename(latest)!==latest || !/^companies-[a-z0-9-]+\.json$/i.test(latest)) throw new Error('Invalid release filename in LATEST');
+    input=path.join(releases,latest);
+  }
+  if(path.basename(input)==='companies.json') throw new Error('Use a checksum-verified release, not the working companies.json');
   const source=await readFile(input,'utf8');
+  const checksum=verifyRelease(source,await readFile(input+'.sha256','utf8'));
   const seeds={};for(const f of ['companies','profiles','presentation']) seeds[f]=JSON.parse(await readFile(path.join(root,'data/curated',f+'.json'),'utf8'));
   let registry={};try{registry=JSON.parse(await readFile(path.join(root,'data/slug-registry.json'),'utf8'));}catch(e){if(e.code!=='ENOENT')throw e;}
   const data=importDatabase(JSON.parse(source),seeds,registry);
-  data.report.sourceSha256=createHash('sha256').update(source).digest('hex');
+  data.report.sourceSha256=checksum;
+  data.report.sourceRelease=path.basename(input);
   await mkdir(path.join(root,'data'),{recursive:true});
   for(const [name,key] of [['companies','companies'],['profiles','profiles'],['presentation','presentation'],['operator-groups','groups'],['import-report','report'],['slug-registry','registry']]) await writeFile(path.join(root,'data',name+'.json'),JSON.stringify(data[key],null,2)+'\n');
   console.log(`Imported ${data.report.publishedCount} profiles; excluded ${data.report.excludedCount} rows.`);
