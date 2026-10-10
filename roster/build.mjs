@@ -8,7 +8,7 @@ const origin = "https://previews.heylead.com/roster";
 const checked = "9 Oct 2026 and 10 Oct 2026";
 // Content hashes keep cached assets in sync with each generated page.
 const assetVersions = Object.fromEntries(await Promise.all(
-  ["site.css", "directory.css", "form.js", "directory.js"].map(async (name) => [
+  ["site.css", "directory.css", "experience.css", "form.js", "directory.js", "experience.js"].map(async (name) => [
     name,
     createHash("sha256").update(await readFile(path.join(root, "assets", name))).digest("hex").slice(0, 12)
   ])
@@ -387,7 +387,7 @@ const navItems = [
 
 function renderNav(current) {
   const links = navItems.filter(([, , trade]) => trade).map(([href, label, trade]) => `<a href="${href}"${href === current ? ' aria-current="page"' : ""}>${icon(tradeIcon[trade], "ic nav-ic")}<span>${esc(label)}</span></a>`).join("");
-  return `<header class="top"><div class="top-inner"><a class="brand" href="/roster/">${brandMark()}<span class="wordmark">Roster<span class="brand-dot">.</span></span></a><div class="global-search" role="search"><label class="sr-only" for="site-search">Find a service or company</label>${icon("search")}<input id="site-search" type="search" placeholder="Find a service or company" autocomplete="off" data-site-search><span class="search-location">${icon("pin")} Singapore</span><button class="search-submit" type="button" aria-label="Search Roster" data-search-submit>${icon("arrow")}</button></div><a class="saved-link" href="/roster/search/?saved=1">${icon("bookmark")}<span>Saved</span></a><a class="header-how" href="/roster/how-it-works/">How it works</a></div><div class="nav-shell"><nav class="nav" aria-label="Services">${links}</nav><span class="nav-note">Home services. A more considered choice.</span></div></header>`;
+  return `<header class="top"><div class="top-inner"><a class="brand" href="/roster/">${brandMark()}<span class="wordmark">Roster<span class="brand-dot">.</span></span></a><div class="global-search" role="search"><label class="sr-only" for="site-search">Find a service or company</label>${icon("search")}<input id="site-search" type="search" placeholder="Find a service or company" autocomplete="off" data-site-search><span class="search-location">${icon("pin")} Singapore</span><button class="search-submit" type="button" aria-label="Search Roster" data-search-submit>${icon("arrow")}</button></div><a class="saved-link" aria-label="Saved companies" href="/roster/search/?saved=1">${icon("bookmark")}<span>Saved</span></a><nav class="account-nav" aria-label="Account"><a href="/roster/sign-in/">Sign in</a><a class="nav-signup" href="/roster/sign-up/">Sign up</a></nav></div><div class="nav-shell"><nav class="nav" aria-label="Services">${links}</nav><span class="nav-note">Home services. A more considered choice.</span></div></header>`;
 }
 
 function renderCrumbs(items) {
@@ -519,6 +519,7 @@ function pageShell({ title, description, canonicalPath, current, jsonLd, body, b
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,560;1,9..144,460&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/roster/assets/site.css?v=${assetVersions["site.css"]}">
 <link rel="stylesheet" href="/roster/assets/directory.css?v=${assetVersions["directory.css"]}">
+<link rel="stylesheet" href="/roster/assets/experience.css?v=${assetVersions["experience.css"]}">
 <script type="application/ld+json">${graph}</script>
 </head>
 <body${bodyClass ? ` class="${bodyClass}"` : ""}>
@@ -530,6 +531,7 @@ ${body}
 ${renderFooter()}
 <script src="/roster/assets/form.js?v=${assetVersions["form.js"]}"></script>
 <script src="/roster/assets/directory.js?v=${assetVersions["directory.js"]}"></script>
+<script src="/roster/assets/experience.js?v=${assetVersions["experience.js"]}"></script>
 </body>
 </html>
 `;
@@ -537,7 +539,9 @@ ${renderFooter()}
   if (/aggregateRating/i.test(html) || /"@type":"(Review|Offer|AggregateRating)"/.test(html)) {
     throw new Error("Rating, review, or offer schema leaked into " + canonicalPath);
   }
-  if (/<form[\s>]/i.test(html)) {
+  // Account previews use dialog forms with disabled fields until the local handler loads.
+  const nonPreviewHtml = html.replace(/<form method="dialog" data-account-preview="(?:sign-in|sign-up|forgot-password|reset-password)"[^>]*>[\s\S]*?<\/form>/g, "");
+  if (/<form[\s>]/i.test(nonPreviewHtml)) {
     throw new Error("A form element leaked into " + canonicalPath);
   }
   if (/mailto:|formspree|fetch\(/i.test(html)) {
@@ -711,84 +715,107 @@ function factRow(label, html) {
   return `<div><dt>${esc(label)}</dt><dd>${html}</dd></div>`;
 }
 
+function ratingSourceName(company) {
+  if (!company.rating) return "No sourced rating";
+  if (isGoogleRating(company)) return "Google rating";
+  const own = company.website?.value && new URL(company.rating.sourceUrl).hostname.replace(/^www\./, "") === new URL(company.website.value).hostname.replace(/^www\./, "");
+  return own ? "Rating on the company website" : "Rating on a review mirror";
+}
+
+function profileStars(value) {
+  const stars = Array.from({ length: 5 }, () => icon("star")).join("");
+  return `<span class="profile-stars" aria-hidden="true"><span>${stars}</span><span class="stars-fill" style="width:${Math.max(0, Math.min(100, value * 20))}%">${stars}</span></span>`;
+}
+
+function profileReview(review) {
+  const initials = review.author.trim().split(/\s+/).slice(0, 2).map(part => part[0]).join("");
+  return `<article class="review-entry" data-review-entry><header><span class="review-avatar" aria-hidden="true">${esc(initials)}</span><div><h3>${esc(review.author)}</h3><p>${esc(review.relativeTime)}</p></div><span class="review-label">Sourced excerpt</span></header><blockquote><p>${esc(review.excerpt)}</p></blockquote><footer><a href="${esc(review.sourceUrl)}">Read at source${icon("link")}</a><details><summary>About this excerpt</summary><p>${esc(review.sourceLabel)} Relative dates were captured on ${checked}. Individual star scores were not captured.</p></details></footer></article>`;
+}
+
 function renderProfile(company, peers) {
   const trade = tradeById(company.category);
-  const title = `${company.name} - ${trade.name}, Singapore | Roster`;
+  const title = `${company.name} - Reviews, prices & contact | Roster`;
   const description = company.bestFor.slice(0, 155);
   const canonicalPath = `/roster/company/${company.slug}/`;
+  const presentation = priceSummary(company);
+  const rating = company.rating;
+  const photos = presentation.photos || [];
+  const others = peers.filter(peer => peer.slug !== company.slug);
+  const crumbs = [{ href: `/roster/${trade.slug}/`, label: trade.name }, { label: company.name }];
+  const sourceName = ratingSourceName(company);
+  const reviewCount = company.reviews.length;
   const facts = [];
-  facts.push(factRow("Phone", `<a href="${telHref(company.phone.value)}">${esc(company.phone.value)}</a>`));
-  if (company.whatsapp?.value) {
-    const note = company.whatsapp.note ? ` <span class="fact-note">${esc(company.whatsapp.note)}</span>` : "";
-    facts.push(factRow("WhatsApp", `<a href="${waHref(company.whatsapp.value)}">${esc(company.whatsapp.value)}</a>${note}`));
-  }
-  if (company.email?.value) facts.push(factRow("Email", esc(company.email.value)));
-  if (company.address?.value) facts.push(factRow("Address", esc(company.address.value)));
-  if (company.website?.value) {
-    const note = company.website.note ? ` <span class="fact-note">${esc(company.website.note)}</span>` : "";
-    const shown = company.website.value.replace(/^https?:\/\//, "").replace(/\/$/, "");
-    facts.push(factRow("Website", `<a href="${esc(company.website.value)}">${esc(shown)}</a>${note}`));
-  }
-  facts.push(factRow("Maps", `<a href="${esc(company.mapsUrl)}">Open the listing</a>${company.mapsNote ? ` <span class="fact-note">${esc(company.mapsNote)}</span>` : ""}`));
-  if (company.rating) {
-    facts.push(factRow("Rating", `<strong>${esc(company.rating.label)}.</strong> <span class="fact-note">${esc(company.rating.note)}</span> <a class="fact-src" href="${esc(company.rating.sourceUrl)}">Source</a>`));
-  } else {
-    facts.push(factRow("Rating", "Rating not captured."));
-  }
-  for (const fact of company.facts || []) {
-    facts.push(factRow(fact.label, `${esc(fact.value)} <a class="fact-src" href="${esc(fact.sourceUrl)}">Source</a>`));
-  }
-  facts.push(factRow("Last verified", esc(checked)));
-  const reviews = company.reviews.length
-    ? `<div class="quotes">${company.reviews.map(renderReview).join("")}</div>`
-    : `<p class="note quote-none">No dated excerpt is stored for this beta.</p>`;
-  const others = peers.filter((peer) => peer.slug !== company.slug);
-  const otherHtml = others.length
-    ? `<ul class="peers">${others.map((peer) => `<li><a href="/roster/company/${peer.slug}/"><span class="peer-name">${esc(peer.name)}</span>${icon("arrow")}</a></li>`).join("")}</ul>`
-    : `<p class="note">No other company is on this shortlist.</p>`;
-  const matched = [company, ...others];
-  const crumbs = [
-    { href: `/roster/${trade.slug}/`, label: trade.name },
-    { label: company.name }
-  ];
-  const callbar = `<div class="callbar" aria-label="Contact ${esc(company.name)}"><a class="btn btn-solid" href="${telHref(company.phone.value)}">${icon("phone", "ic ic-btn-lead")}Call</a>${company.whatsapp?.value ? `<a class="btn" href="${waHref(company.whatsapp.value)}">${icon("chat", "ic ic-btn-lead")}WhatsApp</a>` : `<a class="btn" href="${esc(company.mapsUrl)}">${icon("pin", "ic ic-btn-lead")}Maps</a>`}</div>`;
-  const body = [
-    `<div class="page-head profile-head">`,
-    renderCrumbs(crumbs),
-    `<a class="tag" href="/roster/${trade.slug}/">${icon(tradeIcon[trade.id], "ic")}${esc(trade.name)} in Singapore</a>`,
-    `<div class="profile-title-row"><div><h1>${esc(company.name)}</h1><p class="profile-location">${icon("pin")}${esc(company.address?.street || "Singapore")}</p></div>${priceSummary(company).logo ? `<img class="profile-logo" src="${priceSummary(company).logo}" alt="${esc(company.name)} logo" width="140" height="100">` : ""}</div>`,
-    ratingChip(company),
-    `<p class="actions actions-hero">${contactButtons(company, false)}<a class="btn btn-quiet" href="${esc(company.mapsUrl)}">${icon("pin", "ic ic-btn-lead")}Maps</a></p>`,
-    `</div>`,
-    priceSummary(company).photo ? `<figure class="company-photo"><img src="${priceSummary(company).photo}" alt="Sink stopper replacement published by Mr Plumber Singapore" width="350" height="252" loading="lazy"><figcaption><strong>A look at their work</strong><span>Sink stopper replacement in Sengkang, as published by Mr Plumber Singapore.</span><a href="${priceSummary(company).photoSourceUrl}">Photo from the company website${icon("link")}</a></figcaption></figure>` : "",
-    `<nav class="profile-tabs" aria-label="Company sections"><a href="#overview">Overview</a><a href="#pricing">Pricing</a>${company.reviews.length ? '<a href="#reviews">Reviews</a>' : ''}<a href="#contact">Contact details</a></nav>`,
-    `<div class="profile">`,
-    `<aside class="profile-side" id="contact"><div class="contact-summary"><p class="kicker">SPEAK TO THE COMPANY</p><h2>Have a job in mind?</h2><p>Ask for the total price before you book.</p><div class="actions">${contactButtons(company, false)}</div></div><div class="facts-wrap"><h2 class="facts-title">Facts, as published</h2><dl class="facts">${facts.join("")}</dl></div></aside>`,
-    `<div class="profile-main">`,
-    `<div class="fit-grid" id="overview"><section class="fit-card good"><h2>${icon("check", "ic")}Best for</h2><p class="fit">${esc(company.bestFor)}</p></section><section class="fit-card poor"><h2>${icon("tagIcon", "ic")}Poor fit</h2><p class="fit">${esc(company.poorFit)}</p></section></div>`,
-    `<section class="section price-section" id="pricing"><h2>${icon("dollar", "ic")}Published pricing</h2><div class="price-card"><div class="profile-price-lead"><strong>${esc(priceSummary(company).price)}</strong><span>${esc(priceSummary(company).detail)}</span></div><p class="price">${esc(company.priceNote)}</p><p class="byline"><a href="${esc(company.priceSourceUrl)}">Price source</a>. Prices are what the company publishes.</p></div></section>`,
-    company.reviews.length ? `<section class="section" id="reviews"><h2>${icon("quote", "ic")}What reviewers wrote</h2><p class="note">From the cited sources. Relative dates were captured on ${checked}.</p>${reviews}</section>` : "",
-    renderForm(trade.jobs, matched, "ask"),
-    `<section class="section"><h2>Other companies in ${esc(trade.name.toLowerCase())}</h2>${otherHtml}</section>`,
-    `</div>`,
-    `</div>`,
-    callbar
-  ].join("\n");
-  const jsonLd = [
-    webPage(title, canonicalPath, description),
-    crumbsLd(crumbs),
-    businessNode(company)
-  ];
+  facts.push(factRow("Phone", `<a href="${telHref(company.phone.value)}">${esc(company.phone.value)}</a> <a class="fact-src" href="${esc(company.phone.sourceUrl)}">Source</a>`));
+  if (company.whatsapp?.value) facts.push(factRow("WhatsApp", `<a href="${waHref(company.whatsapp.value)}">${esc(company.whatsapp.value)}</a> <a class="fact-src" href="${esc(company.whatsapp.sourceUrl)}">Source</a>`));
+  if (company.address?.value) facts.push(factRow("Published address", `${esc(company.address.value)} <a class="fact-src" href="${esc(company.address.sourceUrl)}">Source</a>`));
+  if (company.email?.value) facts.push(factRow("Email", `${esc(company.email.value)} <a class="fact-src" href="${esc(company.email.sourceUrl)}">Source</a>`));
+  if (company.whatsapp?.note) facts.push(factRow("Contact note", `${esc(company.whatsapp.note)} <a class="fact-src" href="${esc(company.whatsapp.sourceUrl)}">Source</a>`));
+  if (company.website?.note) facts.push(factRow("Website note", esc(company.website.note)));
+  if (company.mapsNote) facts.push(factRow("Map note", esc(company.mapsNote)));
+  for (const fact of company.facts || []) facts.push(factRow(fact.label, `${esc(fact.value)} <a class="fact-src" href="${esc(fact.sourceUrl)}">Source</a>`));
+  const priceRows = (presentation.priceItems || []).map(item => `<tr><th scope="row">${esc(item.service)}<small>${esc(item.detail)}</small></th><td>${esc(item.price)}</td></tr>`).join("");
+  const body = `
+${renderCrumbs(crumbs)}
+<section class="company-masthead" data-company data-name="${esc(company.name)}" data-slug="${company.slug}">
+  <div class="company-identity">
+    <div class="company-name-line"><span class="company-emblem">${presentation.logo ? `<img src="${presentation.logo}" alt="${esc(company.name)} logo" width="76" height="76">` : icon(tradeIcon[trade.id])}</span><div><a class="company-trade" href="/roster/${trade.slug}/">${esc(trade.name)} in Singapore</a><h1>${esc(company.name)}</h1></div></div>
+    <div class="company-rating-line">${rating ? `${profileStars(rating.value)}<strong>${rating.value.toFixed(1)}</strong><a href="#reviews">${esc(rating.label)}</a>` : `<span class="unrated-label">No sourced rating yet</span>`}</div>
+    <p class="company-rating-source">${rating ? `<a href="${esc(rating.sourceUrl)}">${esc(sourceName)}${icon("link")}</a><span>Checked 9-10 Oct 2026</span>` : "A rating will appear when we can link it to a source."}</p>
+    <p class="company-address">${icon("pin")}${esc(company.address?.street || "Singapore - street address not captured")}</p>
+    <div class="company-actions"><a class="btn btn-solid" href="#reviews">${icon("star")}Read reviews</a><button type="button" class="btn profile-save" data-save="${company.slug}" aria-pressed="false" aria-label="Save ${esc(company.name)}">${icon("bookmark")}<span data-save-label>Save</span></button><a class="btn" href="${esc(company.website?.value || company.mapsUrl)}">${icon("link")}Website${icon("arrow")}</a></div>
+  </div>
+  <a class="price-snapshot" href="#pricing"><span class="kicker">${presentation.published ? "PUBLISHED PRICING" : "PRICING"}</span><strong>${esc(presentation.price)}</strong><span>${esc(presentation.detail)}</span><span class="snapshot-link">${presentation.published ? "See services & prices" : "What to ask before booking"}${icon("arrow")}</span></a>
+</section>
+${photos.length ? `<section class="work-gallery" aria-label="Photos from the company website">${photos.map(photo => `<figure><a href="${photo.src}" aria-label="View photo: ${esc(photo.caption)}"><img src="${photo.src}" width="350" height="252" alt="${esc(photo.caption)} as published by ${esc(company.name)}" loading="lazy"></a><figcaption>${esc(photo.caption)}</figcaption></figure>`).join("")}<p>Photos published by the company. <a href="${photos[0].sourceUrl}">View source${icon("link")}</a></p></section>` : ""}
+<nav class="company-section-nav" aria-label="Company sections"><a href="#reviews">Reviews <span>${reviewCount} ${reviewCount === 1 ? "excerpt" : "excerpts"}</span></a><a href="#pricing">Services & pricing</a><a href="#overview">About the company</a><a href="#contact">Contact & details</a></nav>
+<div class="company-layout">
+  <div class="company-content">
+    <section class="profile-section" id="reviews" data-profile-reviews>
+      <div class="profile-section-heading"><div><p class="kicker">BEFORE YOU BOOK</p><h2>Reviews & reputation</h2></div>${rating ? `<a class="text-link" href="${esc(rating.sourceUrl)}">View source${icon("link")}</a>` : ""}</div>
+      ${rating ? `<div class="review-overview"><div class="review-overview-score"><span class="rating-value">${rating.value.toFixed(1)}<small>/ 5</small></span>${profileStars(rating.value)}<span>${esc(sourceName)}</span></div><div class="review-overview-context"><strong>${esc(rating.label)}</strong><p>This is the figure reported by the linked source. Roster does not calculate a separate rating.</p><details><summary>Source details & differences</summary><p>${esc(rating.note)}</p></details></div></div>` : `<div class="review-empty-rating">${icon("star")}<div><h3>No rating on file</h3><p>The pages we checked did not give us a rating we could cite. You can still compare the company's published details below.</p></div></div>`}
+      <div class="review-toolbar"><div><h3>${reviewCount ? "What customers wrote" : "Customer review excerpts"}</h3><p>${reviewCount ? `${reviewCount} dated ${reviewCount === 1 ? "excerpt" : "excerpts"} on Roster, not the full review history.` : "We only include excerpts with a name, a date, and a source."}</p></div>${reviewCount > 1 ? `<label class="review-search">${icon("search")}<span class="sr-only">Search review excerpts</span><input type="search" placeholder="Search excerpts" data-review-search></label>` : ""}</div>
+      ${reviewCount ? `<div class="review-entries">${company.reviews.map(profileReview).join("")}</div><p class="review-no-results" data-review-empty hidden>No excerpts match your search. <button type="button" data-clear-reviews>Clear search</button></p><p class="review-search-status sr-only" data-review-count aria-live="polite"></p>` : `<div class="review-empty"><span class="review-empty-icon">${icon("quote")}</span><h3>No dated excerpts to show yet</h3><p>${rating ? "The rating above is sourced, but we do not have a dated customer quote to display here." : "No dated customer review was captured for this profile."}</p><a class="btn" href="${esc(rating?.sourceUrl || company.mapsUrl)}">Explore the original listing${icon("arrow")}</a></div>`}
+    </section>
+    <section class="profile-section" id="pricing"><div class="profile-section-heading"><div><p class="kicker">KNOW THE COST</p><h2>Services & pricing</h2></div><span class="section-pill">${presentation.published ? "Published prices" : "Quote required"}</span></div>
+      <div class="service-price-lead"><strong>${esc(presentation.price)}</strong><p>${esc(presentation.detail)}</p></div>
+      ${priceRows ? `<table class="service-price-table"><caption class="sr-only">Prices published by ${esc(company.name)}</caption><thead><tr><th scope="col">Service</th><th scope="col">Published price</th></tr></thead><tbody>${priceRows}</tbody></table>` : `<div class="quote-checklist"><h3>Ask for a written quote that covers:</h3><ul><li>${icon("check")}The work and any replacement parts</li><li>${icon("check")}Transport, call-out charges, and GST</li><li>${icon("check")}Extra work and the workmanship warranty</li></ul></div>`}
+      <details class="source-disclosure"><summary>Full pricing notes & conditions</summary><p>${esc(company.priceNote)}</p></details><p class="profile-source-note"><a href="${esc(company.priceSourceUrl)}">Published price source${icon("link")}</a><span>Checked 9-10 Oct 2026. Confirm the total for your job.</span></p>
+    </section>
+    <section class="profile-section" id="overview"><div class="profile-section-heading"><div><p class="kicker">THE ROSTER TAKE</p><h2>Is this the right fit?</h2></div></div><div class="company-fit"><div><span class="fit-label">${icon("check")}Worth considering for</span><p>${esc(company.bestFor)}</p></div><div><span class="fit-label">${icon("list")}Things to check first</span><p>${esc(company.poorFit)}</p></div></div><p class="profile-source-note">Based on the published information linked on this page.</p></section>
+    <section class="profile-section" id="contact"><div class="profile-section-heading"><div><p class="kicker">THE PRACTICAL DETAILS</p><h2>Contact & company details</h2></div></div><div class="location-card">${icon("pin")}<div><h3>${esc(company.address?.value || "Singapore")}</h3><p>${company.address ? "Published address. Check before visiting." : "No street address was captured on the pages we checked."}</p><a href="${esc(company.mapsUrl)}">Open in Google Maps${icon("arrow")}</a></div></div><dl class="company-facts">${facts.join("")}</dl></section>
+    <details class="profile-quote-preview" id="quote-request"><summary><span>${icon("chat")}Want to compare a few companies?<small>Try the quote request preview. Nothing is sent.</small></span>${icon("chevron")}</summary>${renderForm(trade.jobs, [company, ...others], "ask")}</details>
+${others.length ? `<section class="profile-section related-companies"><div class="profile-section-heading"><div><p class="kicker">KEEP EXPLORING</p><h2>Also on your shortlist</h2></div><a class="text-link" href="/roster/${trade.slug}/">View all${icon("arrow")}</a></div><div class="related-grid">${others.slice(0, 3).map(peer => `<a href="/roster/company/${peer.slug}/"><span class="related-icon">${icon(tradeIcon[trade.id])}</span><h3>${esc(peer.name)}</h3><p>${esc(priceSummary(peer).price)}</p><span>View profile${icon("arrow")}</span></a>`).join("")}</div></section>` : ""}
+  </div>
+  <aside class="company-sidebar" aria-label="Contact the company"><div class="booking-card"><p class="kicker">CONTACT DIRECTLY</p><h2>Let's get it sorted.</h2><p>Discuss your job with ${esc(company.name)} and ask for a clear quote.</p><a class="btn btn-solid" href="${telHref(company.phone.value)}">${icon("phone")}Call ${esc(company.phone.value)}</a>${company.whatsapp?.value ? `<a class="btn whatsapp-button" href="${waHref(company.whatsapp.value)}">${icon("chat")}Message on WhatsApp</a>` : ""}<p class="direct-contact-note">You're contacting the company directly.</p><div class="booking-links"><a href="${esc(company.website?.value || company.mapsUrl)}">${icon("link")}Company website${icon("arrow")}</a><a href="${esc(company.mapsUrl)}">${icon("pin")}Location & directions${icon("arrow")}</a></div><a class="contact-source" href="${esc(company.phone.sourceUrl)}">Contact source</a></div><div class="shortlist-tip">${icon("bookmark")}<div><h3>A good option? Save it.</h3><p>Keep a shortlist while you compare. Saved companies stay in this browser.</p><a href="/roster/search/?saved=1">View your saved companies${icon("arrow")}</a></div></div><p class="profile-checked">${icon("calendar")}Last checked 9-10 October 2026</p></aside>
+</div>
+<div class="callbar" aria-label="Contact ${esc(company.name)}"><a class="btn btn-solid" href="${telHref(company.phone.value)}">${icon("phone")}Call company</a><a class="btn" href="${company.whatsapp?.value ? waHref(company.whatsapp.value) : esc(company.mapsUrl)}">${icon(company.whatsapp?.value ? "chat" : "pin")}${company.whatsapp?.value ? "WhatsApp" : "Maps"}</a></div>`;
+  const jsonLd = [webPage(title, canonicalPath, description), crumbsLd(crumbs), businessNode(company)];
   forbidSchema(jsonLd);
-  return pageShell({
-    title,
-    description,
-    canonicalPath,
-    current: `/roster/${trade.slug}/`,
-    jsonLd,
-    body,
-    bodyClass: "has-callbar company-page"
-  });
+  return pageShell({ title, description, canonicalPath, current: `/roster/${trade.slug}/`, jsonLd, body, bodyClass: "has-callbar company-page" });
+}
+
+/* ---------- Account interface previews ---------- */
+
+function renderAccount(mode) {
+  const config = {
+    "sign-in": { title: "Welcome back.", intro: "Sign in to your Roster account.", action: "Sign in", prompt: "New to Roster?", link: "Create an account", href: "sign-up" },
+    "sign-up": { title: "Make yourself at home.", intro: "Create your Roster account.", action: "Create account", prompt: "Already have an account?", link: "Sign in", href: "sign-in" },
+    "forgot-password": { title: "Forgot your password?", intro: "Enter your email to preview password recovery.", action: "Send reset link", prompt: "Remember your password?", link: "Back to sign in", href: "sign-in" },
+    "reset-password": { title: "A fresh start.", intro: "Preview setting a new password for your account.", action: "Reset password", prompt: "Already sorted?", link: "Back to sign in", href: "sign-in" }
+  }[mode];
+  const usesPassword = mode !== "forgot-password";
+  const google = mode === "sign-in" || mode === "sign-up";
+  const passwordField = (id, label, hint = "") => `<label class="account-label" for="${id}">${label}</label><div class="password-field"><input id="${id}" type="password" autocomplete="off" required minlength="8"${hint ? ` aria-describedby="password-hint"` : ""}><button type="button" data-toggle-password="${id}" aria-label="Show ${label.toLowerCase()}" aria-pressed="false">Show</button></div>${hint ? `<p class="field-hint" id="password-hint">${hint}</p>` : ""}`;
+  const body = `<section class="account-layout"><div class="account-story"><p class="kicker">A LITTLE HELP FEELS GOOD</p><h2>Less searching.<br>More sorted.</h2><p>Find the people who help make your house feel like home.</p><div class="account-art">${heroIllustration()}</div><ul><li>${icon("bookmark")}A place for your favourite companies</li><li>${icon("star")}Reviews and prices, easier to compare</li><li>${icon("phone")}A direct line to your next helping hand</li></ul><a href="/roster/">Explore Roster${icon("arrow")}</a></div><div class="account-panel"><div class="account-card"><span class="account-preview-badge">ACCOUNT PREVIEW</span><h1>${config.title}</h1><p class="account-intro">${config.intro}</p><p class="account-beta-note">These are beta screens. Use sample details. Nothing is sent or saved, and no account is created.</p><noscript><p class="account-beta-note">Enable JavaScript to try the account preview.</p></noscript>
+<form method="dialog" data-account-preview="${mode}" autocomplete="off"><fieldset disabled><legend class="sr-only">${config.action} preview</legend>${google ? `<button class="google-button" type="button" data-google-preview><svg aria-hidden="true" viewBox="0 0 48 48" width="20" height="20"><path fill="#4285F4" d="M43.6 24.5c0-1.4-.1-2.8-.4-4.1H24v7.8h11a9.4 9.4 0 0 1-4.1 6.2v5.2h6.7c4-3.7 6-9.1 6-15.1Z"/><path fill="#34A853" d="M24 44c5.5 0 10.1-1.8 13.5-4.9l-6.7-5.2c-1.8 1.2-4.1 1.9-6.8 1.9-5.3 0-9.8-3.6-11.4-8.4H5.7v5.3A20 20 0 0 0 24 44Z"/><path fill="#FBBC05" d="M12.6 27.4a12 12 0 0 1 0-7.7v-5.3H5.7a20 20 0 0 0 0 18.3l6.9-5.3Z"/><path fill="#EA4335" d="M24 11.7c3 0 5.6 1 7.7 3l5.8-5.7A19.4 19.4 0 0 0 24 4 20 20 0 0 0 5.7 15l6.9 5.3A12 12 0 0 1 24 11.7Z"/></svg>Continue with Google</button><div class="account-divider"><span>or continue with email</span></div>` : ""}
+${mode === "sign-up" ? '<label class="account-label" for="account-name">Your name</label><input id="account-name" type="text" placeholder="Alex Tan" required autocomplete="off" maxlength="100">' : ""}
+${mode !== "reset-password" ? '<label class="account-label" for="account-email">Email address</label><input id="account-email" type="email" placeholder="you@example.com" autocomplete="off" required maxlength="254">' : ""}
+${usesPassword ? passwordField("account-password", mode === "reset-password" ? "New password" : "Password", mode !== "sign-in" ? "Use at least 8 characters for this preview." : "") : ""}
+${mode === "reset-password" ? passwordField("account-confirm", "Confirm new password") : ""}
+${mode === "sign-in" ? '<div class="account-options"><a href="/roster/forgot-password/">Forgot password?</a></div>' : ""}
+<p class="account-error" data-account-error role="alert" hidden></p><button type="submit" class="btn btn-solid account-submit">${config.action}${icon("arrow")}</button></fieldset></form>
+<div class="account-result" data-account-result role="status" tabindex="-1" hidden></div><p class="account-switch">${config.prompt} <a href="/roster/${config.href}/">${config.link}</a></p></div><p class="account-smallprint">Singapore beta. Real accounts are not enabled yet.</p></div></section>`;
+  return pageShell({ title: `${config.action} | Roster`, description: "Preview Roster's account experience.", canonicalPath: `/roster/${mode}/`, current: "", jsonLd: [], body, bodyClass: "account-page" });
 }
 
 /* ---------- Home ---------- */
@@ -809,7 +836,7 @@ function renderHome(grouped) {
 <p class="kicker">Singapore beta</p>
 <h1>Good people for<br>the jobs at home.</h1>
 <p class="dek">Find your next helping hand. Compare local companies, explore their published prices, and get the details before you book.</p>
-<p class="hero-actions"><a class="btn btn-paper" href="#jobs">Explore home services${icon("arrow", "ic ic-btn")}</a><a class="btn btn-ghost" href="/roster/how-it-works/">How the list is made</a></p>
+<p class="hero-actions"><a class="btn btn-paper" href="#jobs">Explore home services${icon("arrow", "ic ic-btn")}</a></p>
 </div>
 <div class="hero-visual">${heroIllustration()}</div>
 </section>
@@ -945,6 +972,7 @@ for (const trade of trades) grouped[trade.id] = sortCompanies(grouped[trade.id])
 const written = [];
 written.push(await writePage("", renderHome(grouped)));
 written.push(await writePage("how-it-works", renderHow()));
+for (const mode of ["sign-in", "sign-up", "forgot-password", "reset-password"]) written.push(await writePage(mode, renderAccount(mode)));
 written.push(await writePage("search", renderCollection({ id: "all", slug: "search", name: "Home services", h1: "Home services in Singapore", intro: ["Explore the sourced companies on Roster. Use search and filters to narrow your list."], jobs: [], faqs: howFaqs.slice(0, 3) }, sortCompanies(publishedCompanies), [{ label: "Find a company" }])));
 
 for (const trade of trades) {

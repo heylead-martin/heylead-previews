@@ -21,6 +21,8 @@
       button.setAttribute('aria-pressed', String(active));
       var card = button.closest('[data-company]');
       button.setAttribute('aria-label', (active ? 'Unsave ' : 'Save ') + card.dataset.name);
+      var label = button.querySelector('[data-save-label]');
+      if (label) label.textContent = active ? 'Saved' : 'Save';
     });
     document.querySelectorAll('[data-saved-count]').forEach(function (counter) {
       counter.textContent = Array.from(document.querySelectorAll('[data-company]')).filter(function (card) { return saved.includes(card.dataset.slug); }).length;
