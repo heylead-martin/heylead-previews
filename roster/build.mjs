@@ -494,7 +494,7 @@ function shortlist(companies, service) {
   return `<div class="results-toolbar"><div><h2>Companies to consider</h2><p data-result-count aria-live="polite">${companies.length} ${companies.length === 1 ? "company" : "companies"} on this shortlist</p></div><label class="sort-control">Sort by<select data-sort aria-label="Sort companies"><option value="recommended">Source order</option><option value="name">Name A to Z</option></select></label></div><p class="results-method">Unpaid listings. Google-source ratings first, then alphabetical. <a href="/roster/how-it-works/">Our approach</a></p><ol class="shortlist">${companies.map((company, index) => renderRow(company, index, service)).join("")}</ol><div class="no-results" data-no-results hidden><span class="disc">${icon("search")}</span><h3>No companies match these filters</h3><p>Try a different search or clear your filters.</p><button type="button" class="btn" data-reset>Clear filters</button></div>`;
 }
 
-function pageShell({ title, description, canonicalPath, current, jsonLd, body, bodyClass = "" }) {
+function pageShell({ title, description, canonicalPath, current, jsonLd, body, bodyClass = "", shareImage = "" }) {
   const canonical = abs(canonicalPath);
   const graph = JSON.stringify({
     "@context": "https://schema.org",
@@ -512,6 +512,16 @@ function pageShell({ title, description, canonicalPath, current, jsonLd, body, b
 <meta name="theme-color" content="#f3f0e9">
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(description)}">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Roster">
+<meta property="og:locale" content="en_SG">
+<meta property="og:title" content="${esc(title)}">
+<meta property="og:description" content="${esc(description)}">
+<meta property="og:url" content="${canonical}">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="${esc(title)}">
+<meta name="twitter:description" content="${esc(description)}">
+${shareImage ? `<meta property="og:image" content="${esc(shareImage)}"><meta name="twitter:image" content="${esc(shareImage)}">` : ""}
 <link rel="canonical" href="${canonical}">
 <link rel="icon" href="/roster/assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -732,10 +742,71 @@ function profileReview(review) {
   return `<article class="review-entry" data-review-entry><header><span class="review-avatar" aria-hidden="true">${esc(initials)}</span><div><h3>${esc(review.author)}</h3><p>${esc(review.relativeTime)}</p></div><span class="review-label">Sourced excerpt</span></header><blockquote><p>${esc(review.excerpt)}</p></blockquote><footer><a href="${esc(review.sourceUrl)}">Read at source${icon("link")}</a><details><summary>About this excerpt</summary><p>${esc(review.sourceLabel)} Relative dates were captured on ${checked}. Individual star scores were not captured.</p></details></footer></article>`;
 }
 
+function mapAddress(company) {
+  if (!company.address?.street) return "";
+  return /singapore/i.test(company.address.value) ? company.address.value : `${company.address.value}, Singapore`;
+}
+
+function companyQuestions(company, content, display) {
+  const items = [
+    [`What services can I contact ${company.name} about?`, `${content.services.map(service => service.name).join(", ")}. Confirm the exact scope and availability with the company before booking.`],
+    [`How much does ${company.name} charge?`, display.published ? `${display.price}. ${display.detail} These are published examples, not a fixed quote for every job. Confirm the full price, parts, transport and GST before booking.` : `A company rate card was not captured for this profile. Ask ${company.name} for a written quote covering labour, parts, transport and GST.`],
+    [`Where is ${company.name} located?`, company.address ? `${company.address.value}. ${company.address.note || "This is the published address. Call first to confirm whether visits are available."}` : `No street address was captured for this profile. Contact the company to confirm its office location and whether it serves your address.`],
+    [`How do I contact ${company.name}?`, `Call ${company.phone.value}.${company.whatsapp?.value ? ` WhatsApp enquiries go to ${company.whatsapp.value}.` : ""} Roster's contact links take you directly to the company.`]
+  ];
+  return items;
+}
+
+function renderProfileSources(company, content) {
+  const sources = new Map();
+  const add = (url, label) => { if (url) sources.set(url, [...(sources.get(url) || []), label]); };
+  add(company.phone.sourceUrl, "Contact details");
+  add(company.whatsapp?.sourceUrl, "WhatsApp");
+  add(company.address?.sourceUrl, "Address");
+  add(company.email?.sourceUrl, "Email");
+  add(company.priceSourceUrl, "Pricing");
+  add(company.rating?.sourceUrl, "Rating");
+  for (const fact of company.facts || []) add(fact.sourceUrl, fact.label);
+  for (const url of content.sourceUrls) add(url, "Company information");
+  return `<details class="company-source-list"><summary>${icon("link")}Sources & verification notes</summary><p>Company information checked 9-10 October 2026. Prices and qualifications are as published; licence and registration claims have not been independently verified.</p><ul>${[...sources].map(([url, labels]) => `<li><a href="${esc(url)}">${esc(new URL(url).hostname.replace(/^www\./, ""))}${icon("link")}</a><span>${esc([...new Set(labels)].join(", "))}</span></li>`).join("")}</ul>${company.website?.note ? `<p>${esc(company.website.note)}</p>` : ""}${company.mapsNote ? `<p>Original Maps listing note: ${esc(company.mapsNote)}</p>` : ""}</details>`;
+}
+
+function renderCompanyMap(company) {
+  const address = mapAddress(company);
+  if (!address) return `<div class="map-unavailable">${icon("pin")}<div><h3>Confirm the location directly</h3><p>A street address has not been captured for this business. Contact the company before planning a visit.</p><a href="${esc(company.mapsUrl)}">Search for the company on Google Maps${icon("arrow")}</a></div></div>`;
+  const query = encodeURIComponent(address);
+  const embed = profileContent[company.slug].mapEmbedUrl;
+  if (!embed?.startsWith("https://www.google.com/maps/embed?pb=")) throw new Error(`Missing verified map embed for ${company.slug}`);
+  return `<div class="company-map"><iframe src="${esc(embed)}" title="Google Maps: published address of ${esc(company.name)}" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe><div class="map-address"><span class="map-pin">${icon("pin")}</span><div><h3>${esc(company.address.value)}</h3><p>${esc(profileContent[company.slug].mapNote || company.address.note || "Map of the published address. Contact the company before visiting.")}</p><a href="https://www.google.com/maps/dir/?api=1&amp;destination=${query}">Get directions${icon("arrow")}</a></div></div></div>`;
+}
+
+function profileBusinessGraph(company, content, canonicalPath) {
+  const business = businessNode(company);
+  const id = abs(canonicalPath) + "#business";
+  business["@id"] = id;
+  business.description = content.about[0];
+  business.mainEntityOfPage = { "@id": abs(canonicalPath) + "#page" };
+  business.sameAs = [company.website.value];
+  if (company.email?.value) business.email = company.email.value;
+  if (company.legalName) business.legalName = company.legalName;
+  if (company.address) business.hasMap = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(mapAddress(company))}`;
+  const media = priceSummary(company);
+  if (media.logo) business.logo = new URL(media.logo, origin).href;
+  if (media.photos?.length) business.image = media.photos.map(photo => new URL(photo.src, origin).href);
+  // Only confirmed service descriptions become Service entities.
+  const services = ["sk-electrical", "isoteam-homecare"].includes(company.slug) ? [] : content.services.map((service, index) => ({
+    "@type": "Service", "@id": abs(canonicalPath) + `#service-${index + 1}`, name: service.name,
+    description: service.description, provider: { "@id": id }, url: abs(canonicalPath) + "#pricing"
+  }));
+  return [business, ...services];
+}
+
 function renderProfile(company, peers) {
   const trade = tradeById(company.category);
-  const title = `${company.name} - Reviews, prices & contact | Roster`;
-  const description = company.bestFor.slice(0, 155);
+  const content = profileContent[company.slug];
+  const localName = /Singapore/i.test(company.name) ? company.name : `${company.name} Singapore`;
+  const title = `${localName} | Services & Reviews | Roster`;
+  const description = `${company.name}: ${content.services.map(service => service.name.toLowerCase()).slice(0, 2).join(" and ")}. Compare reviews, pricing and contact details in Singapore.`;
   const canonicalPath = `/roster/company/${company.slug}/`;
   const presentation = priceSummary(company);
   const rating = company.rating;
@@ -744,15 +815,11 @@ function renderProfile(company, peers) {
   const crumbs = [{ href: `/roster/${trade.slug}/`, label: trade.name }, { label: company.name }];
   const sourceName = ratingSourceName(company);
   const reviewCount = company.reviews.length;
+  const questions = companyQuestions(company, content, presentation);
   const facts = [];
-  facts.push(factRow("Phone", `<a href="${telHref(company.phone.value)}">${esc(company.phone.value)}</a> <a class="fact-src" href="${esc(company.phone.sourceUrl)}">Source</a>`));
-  if (company.whatsapp?.value) facts.push(factRow("WhatsApp", `<a href="${waHref(company.whatsapp.value)}">${esc(company.whatsapp.value)}</a> <a class="fact-src" href="${esc(company.whatsapp.sourceUrl)}">Source</a>`));
-  if (company.address?.value) facts.push(factRow("Published address", `${esc(company.address.value)} <a class="fact-src" href="${esc(company.address.sourceUrl)}">Source</a>`));
-  if (company.email?.value) facts.push(factRow("Email", `${esc(company.email.value)} <a class="fact-src" href="${esc(company.email.sourceUrl)}">Source</a>`));
-  if (company.whatsapp?.note) facts.push(factRow("Contact note", `${esc(company.whatsapp.note)} <a class="fact-src" href="${esc(company.whatsapp.sourceUrl)}">Source</a>`));
-  if (company.website?.note) facts.push(factRow("Website note", esc(company.website.note)));
-  if (company.mapsNote) facts.push(factRow("Map note", esc(company.mapsNote)));
-  for (const fact of company.facts || []) facts.push(factRow(fact.label, `${esc(fact.value)} <a class="fact-src" href="${esc(fact.sourceUrl)}">Source</a>`));
+  if (company.email?.value) facts.push(factRow("Email", esc(company.email.value)));
+  if (company.whatsapp?.note) facts.push(factRow("Before you contact", esc(company.whatsapp.note)));
+  for (const fact of company.facts || []) facts.push(factRow(fact.label === "Claim" ? "Company information" : fact.label, esc(fact.value)));
   const priceRows = (presentation.priceItems || []).map(item => `<tr><th scope="row">${esc(item.service)}<small>${esc(item.detail)}</small></th><td>${esc(item.price)}</td></tr>`).join("");
   const body = `
 ${renderCrumbs(crumbs)}
@@ -767,7 +834,7 @@ ${renderCrumbs(crumbs)}
   <a class="price-snapshot" href="#pricing"><span class="kicker">${presentation.published ? "PUBLISHED PRICING" : "PRICING"}</span><strong>${esc(presentation.price)}</strong><span>${esc(presentation.detail)}</span><span class="snapshot-link">${presentation.published ? "See services & prices" : "What to ask before booking"}${icon("arrow")}</span></a>
 </section>
 ${photos.length ? `<section class="work-gallery" aria-label="Photos from the company website">${photos.map(photo => `<figure><a href="${photo.src}" aria-label="View photo: ${esc(photo.caption)}"><img src="${photo.src}" width="350" height="252" alt="${esc(photo.caption)} as published by ${esc(company.name)}" loading="lazy"></a><figcaption>${esc(photo.caption)}</figcaption></figure>`).join("")}<p>Photos published by the company. <a href="${photos[0].sourceUrl}">View source${icon("link")}</a></p></section>` : ""}
-<nav class="company-section-nav" aria-label="Company sections"><a href="#reviews">Reviews <span>${reviewCount} ${reviewCount === 1 ? "excerpt" : "excerpts"}</span></a><a href="#pricing">Services & pricing</a><a href="#overview">About the company</a><a href="#contact">Contact & details</a></nav>
+<nav class="company-section-nav" aria-label="Company sections"><a href="#reviews">Reviews <span>${reviewCount} ${reviewCount === 1 ? "excerpt" : "excerpts"}</span></a><a href="#pricing">Services & pricing</a><a href="#overview">About the company</a><a href="#contact">Location & contact</a><a href="#company-faq">FAQs</a></nav>
 <div class="company-layout">
   <div class="company-content">
     <section class="profile-section" id="reviews" data-profile-reviews>
@@ -777,21 +844,24 @@ ${photos.length ? `<section class="work-gallery" aria-label="Photos from the com
       ${reviewCount ? `<div class="review-entries">${company.reviews.map(profileReview).join("")}</div><p class="review-no-results" data-review-empty hidden>No excerpts match your search. <button type="button" data-clear-reviews>Clear search</button></p><p class="review-search-status sr-only" data-review-count aria-live="polite"></p>` : `<div class="review-empty"><span class="review-empty-icon">${icon("quote")}</span><h3>No dated excerpts to show yet</h3><p>${rating ? "The rating above is sourced, but we do not have a dated customer quote to display here." : "No dated customer review was captured for this profile."}</p><a class="btn" href="${esc(rating?.sourceUrl || company.mapsUrl)}">Explore the original listing${icon("arrow")}</a></div>`}
     </section>
     <section class="profile-section" id="pricing"><div class="profile-section-heading"><div><p class="kicker">KNOW THE COST</p><h2>Services & pricing</h2></div><span class="section-pill">${presentation.published ? "Published prices" : "Quote required"}</span></div>
-      <div class="service-price-lead"><strong>${esc(presentation.price)}</strong><p>${esc(presentation.detail)}</p></div>
+      <p class="service-intro">${esc(content.headline)}</p><div class="service-menu">${content.services.map((service, index) => `<article class="service-tile"><span class="service-number">${String(index + 1).padStart(2, "0")}</span><h3>${esc(service.name)}</h3><p>${esc(service.description)}</p></article>`).join("")}</div>
+      <div class="pricing-subheading"><h3>What does it cost?</h3><span>Prices in Singapore dollars</span></div><div class="service-price-lead"><strong>${esc(presentation.price)}</strong><p>${esc(presentation.detail)}</p></div>
       ${priceRows ? `<table class="service-price-table"><caption class="sr-only">Prices published by ${esc(company.name)}</caption><thead><tr><th scope="col">Service</th><th scope="col">Published price</th></tr></thead><tbody>${priceRows}</tbody></table>` : `<div class="quote-checklist"><h3>Ask for a written quote that covers:</h3><ul><li>${icon("check")}The work and any replacement parts</li><li>${icon("check")}Transport, call-out charges, and GST</li><li>${icon("check")}Extra work and the workmanship warranty</li></ul></div>`}
       <details class="source-disclosure"><summary>Full pricing notes & conditions</summary><p>${esc(company.priceNote)}</p></details><p class="profile-source-note"><a href="${esc(company.priceSourceUrl)}">Published price source${icon("link")}</a><span>Checked 9-10 Oct 2026. Confirm the total for your job.</span></p>
     </section>
-    <section class="profile-section" id="overview"><div class="profile-section-heading"><div><p class="kicker">THE ROSTER TAKE</p><h2>Is this the right fit?</h2></div></div><div class="company-fit"><div><span class="fit-label">${icon("check")}Worth considering for</span><p>${esc(company.bestFor)}</p></div><div><span class="fit-label">${icon("list")}Things to check first</span><p>${esc(company.poorFit)}</p></div></div><p class="profile-source-note">Based on the published information linked on this page.</p></section>
-    <section class="profile-section" id="contact"><div class="profile-section-heading"><div><p class="kicker">THE PRACTICAL DETAILS</p><h2>Contact & company details</h2></div></div><div class="location-card">${icon("pin")}<div><h3>${esc(company.address?.value || "Singapore")}</h3><p>${company.address ? "Published address. Check before visiting." : "No street address was captured on the pages we checked."}</p><a href="${esc(company.mapsUrl)}">Open in Google Maps${icon("arrow")}</a></div></div><dl class="company-facts">${facts.join("")}</dl></section>
+    <section class="profile-section" id="overview"><div class="profile-section-heading"><div><p class="kicker">MEET THE BUSINESS</p><h2>About ${esc(company.name)}</h2></div></div><div class="company-story"><p class="company-story-lead">${esc(content.about[0])}</p><p>${esc(content.about[1])}</p><div class="company-highlights">${content.highlights.map(item => `<div><span>${esc(item.label)}</span><strong>${esc(item.value)}</strong></div>`).join("")}</div></div><h3 class="fit-section-title">A few things to help you decide</h3><div class="company-fit"><div><span class="fit-label">${icon("check")}Worth considering for</span><p>${esc(company.bestFor)}</p></div><div><span class="fit-label">${icon("list")}Things to check first</span><p>${esc(company.poorFit)}</p></div></div></section>
+    <section class="profile-section" id="contact"><div class="profile-section-heading"><div><p class="kicker">FIND THEM & GET IN TOUCH</p><h2>Location & contact</h2></div></div>${renderCompanyMap(company)}<div class="contact-options"><a href="${telHref(company.phone.value)}"><span class="contact-option-icon">${icon("phone")}</span><span><small>Call the company</small><strong>${esc(company.phone.value)}</strong></span>${icon("arrow")}</a>${company.whatsapp?.value ? `<a href="${waHref(company.whatsapp.value)}"><span class="contact-option-icon">${icon("chat")}</span><span><small>Message on WhatsApp</small><strong>${esc(company.whatsapp.value)}</strong></span>${icon("arrow")}</a>` : ""}</div><dl class="company-facts">${facts.join("")}</dl>${renderProfileSources(company, content)}</section>
+    <section class="profile-section company-faq" id="company-faq"><div class="profile-section-heading"><div><p class="kicker">HELPFUL TO KNOW</p><h2>Questions about ${esc(company.name)}</h2></div></div><div class="company-faq-items">${questions.map(([question, answer]) => `<details><summary>${esc(question)}${icon("chevron")}</summary><p>${esc(answer)}</p></details>`).join("")}</div></section>
     <details class="profile-quote-preview" id="quote-request"><summary><span>${icon("chat")}Want to compare a few companies?<small>Try the quote request preview. Nothing is sent.</small></span>${icon("chevron")}</summary>${renderForm(trade.jobs, [company, ...others], "ask")}</details>
 ${others.length ? `<section class="profile-section related-companies"><div class="profile-section-heading"><div><p class="kicker">KEEP EXPLORING</p><h2>Also on your shortlist</h2></div><a class="text-link" href="/roster/${trade.slug}/">View all${icon("arrow")}</a></div><div class="related-grid">${others.slice(0, 3).map(peer => `<a href="/roster/company/${peer.slug}/"><span class="related-icon">${icon(tradeIcon[trade.id])}</span><h3>${esc(peer.name)}</h3><p>${esc(priceSummary(peer).price)}</p><span>View profile${icon("arrow")}</span></a>`).join("")}</div></section>` : ""}
   </div>
-  <aside class="company-sidebar" aria-label="Contact the company"><div class="booking-card"><p class="kicker">CONTACT DIRECTLY</p><h2>Let's get it sorted.</h2><p>Discuss your job with ${esc(company.name)} and ask for a clear quote.</p><a class="btn btn-solid" href="${telHref(company.phone.value)}">${icon("phone")}Call ${esc(company.phone.value)}</a>${company.whatsapp?.value ? `<a class="btn whatsapp-button" href="${waHref(company.whatsapp.value)}">${icon("chat")}Message on WhatsApp</a>` : ""}<p class="direct-contact-note">You're contacting the company directly.</p><div class="booking-links"><a href="${esc(company.website?.value || company.mapsUrl)}">${icon("link")}Company website${icon("arrow")}</a><a href="${esc(company.mapsUrl)}">${icon("pin")}Location & directions${icon("arrow")}</a></div><a class="contact-source" href="${esc(company.phone.sourceUrl)}">Contact source</a></div><div class="shortlist-tip">${icon("bookmark")}<div><h3>A good option? Save it.</h3><p>Keep a shortlist while you compare. Saved companies stay in this browser.</p><a href="/roster/search/?saved=1">View your saved companies${icon("arrow")}</a></div></div><p class="profile-checked">${icon("calendar")}Last checked 9-10 October 2026</p></aside>
+  <aside class="company-sidebar" aria-label="Contact the company"><div class="booking-card"><p class="kicker">CONTACT DIRECTLY</p><h2>Let's get it sorted.</h2><p>Discuss your job with ${esc(company.name)} and ask for a clear quote.</p><a class="btn btn-solid" href="${telHref(company.phone.value)}">${icon("phone")}Call ${esc(company.phone.value)}</a>${company.whatsapp?.value ? `<a class="btn whatsapp-button" href="${waHref(company.whatsapp.value)}">${icon("chat")}Message on WhatsApp</a>` : ""}<p class="direct-contact-note">You're contacting the company directly.</p><div class="booking-links"><a href="${esc(company.website?.value || company.mapsUrl)}">${icon("link")}Company website${icon("arrow")}</a><a href="${esc(company.mapsUrl)}">${icon("pin")}Location & directions${icon("arrow")}</a></div></div><div class="shortlist-tip">${icon("bookmark")}<div><h3>A good option? Save it.</h3><p>Keep a shortlist while you compare. Saved companies stay in this browser.</p><a href="/roster/search/?saved=1">View your saved companies${icon("arrow")}</a></div></div><p class="profile-checked">${icon("calendar")}Last checked 9-10 October 2026</p></aside>
 </div>
 <div class="callbar" aria-label="Contact ${esc(company.name)}"><a class="btn btn-solid" href="${telHref(company.phone.value)}">${icon("phone")}Call company</a><a class="btn" href="${company.whatsapp?.value ? waHref(company.whatsapp.value) : esc(company.mapsUrl)}">${icon(company.whatsapp?.value ? "chat" : "pin")}${company.whatsapp?.value ? "WhatsApp" : "Maps"}</a></div>`;
-  const jsonLd = [webPage(title, canonicalPath, description), crumbsLd(crumbs), businessNode(company)];
+  const page = { ...webPage(title, canonicalPath, description), "@id": abs(canonicalPath) + "#page", mainEntity: { "@id": abs(canonicalPath) + "#business" }, inLanguage: "en-SG", dateModified: content.updatedAt };
+  const jsonLd = [page, crumbsLd([{ href: `/roster/${trade.slug}/`, label: trade.name }, { href: canonicalPath, label: company.name }]), ...profileBusinessGraph(company, content, canonicalPath), faqLd(questions)];
   forbidSchema(jsonLd);
-  return pageShell({ title, description, canonicalPath, current: `/roster/${trade.slug}/`, jsonLd, body, bodyClass: "has-callbar company-page" });
+  return pageShell({ title, description, canonicalPath, current: `/roster/${trade.slug}/`, jsonLd, body, bodyClass: "has-callbar company-page", shareImage: presentation.photos?.[0]?.src ? new URL(presentation.photos[0].src, origin).href : "" });
 }
 
 /* ---------- Account interface previews ---------- */
@@ -957,6 +1027,8 @@ ${renderFaq(howFaqs)}`;
 /* ---------- Build ---------- */
 
 const presentation = JSON.parse(await readFile(path.join(root, "data", "presentation.json"), "utf8"));
+const profileContent = JSON.parse(await readFile(path.join(root, "data", "profiles.json"), "utf8"));
+assertNoDashes(profileContent, "profiles.json");
 
 const raw = JSON.parse(await readFile(path.join(root, "data", "companies.json"), "utf8"));
 assertNoDashes(raw, "companies.json");
