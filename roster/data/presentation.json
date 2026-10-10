@@ -1,0 +1,162 @@
+{
+  "lion-city-aircon": {
+    "price": "S$49.05",
+    "detail": "General service, 1 unit. Includes GST.",
+    "published": true,
+    "sourceUrl": "https://lioncityaircon.sg/aircon-servicing-prices-singapore/",
+    "summarizedAt": "2026-10-10",
+    "services": {
+      "chemical-wash": {
+        "price": "S$87.20",
+        "detail": "Chemical wash, per unit. Includes GST.",
+        "published": true
+      }
+    }
+  },
+  "338-aircon": {
+    "price": "From S$55",
+    "detail": "General servicing, 1 unit. Other page prices differ.",
+    "published": true,
+    "sourceUrl": "https://www.338aircon.sg/book-online",
+    "summarizedAt": "2026-10-10"
+  },
+  "socool": {
+    "price": "Ask for a quote",
+    "detail": "No published rate captured",
+    "published": false,
+    "sourceUrl": "https://www.socool.sg/",
+    "summarizedAt": "2026-10-10"
+  },
+  "billy-aircon": {
+    "price": "S$80 to S$100",
+    "detail": "Wall-unit chemical wash. GST not stated.",
+    "published": true,
+    "sourceUrl": "https://www.billyaircon.com.sg/chemical-wash/",
+    "summarizedAt": "2026-10-10",
+    "services": {
+      "chemical-wash": {
+        "price": "S$80 to S$100",
+        "detail": "Wall-unit chemical wash. GST not stated.",
+        "published": true
+      }
+    }
+  },
+  "mr-plumber": {
+    "price": "Ask for a quote",
+    "detail": "No published rate captured",
+    "published": false,
+    "sourceUrl": "https://www.mrplumber.sg/contact-us/",
+    "logo": "/roster/assets/companies/mr-plumber.png",
+    "logoSourceUrl": "https://www.mrplumber.sg/",
+    "assetCapturedAt": "2026-10-10",
+    "photo": "/roster/assets/companies/mr-plumber-work.png",
+    "photoSourceUrl": "https://www.mrplumber.sg/",
+    "summarizedAt": "2026-10-10"
+  },
+  "daylight-electrician": {
+    "price": "Ask for a quote",
+    "detail": "No published rate captured",
+    "published": false,
+    "sourceUrl": "https://www.daylightelectrician.com/contact-us/",
+    "summarizedAt": "2026-10-10"
+  },
+  "repair-sg": {
+    "price": "From S$120",
+    "detail": "New double-pole isolator, before transport.",
+    "published": true,
+    "sourceUrl": "https://repair.sg/isolator-switch-repair-replacement-singapore/",
+    "summarizedAt": "2026-10-10"
+  },
+  "sk-electrical": {
+    "price": "Ask for a quote",
+    "detail": "No published rate captured",
+    "published": false,
+    "sourceUrl": "https://maps.google.com/?cid=16486700627576440283",
+    "summarizedAt": "2026-10-10"
+  },
+  "isoteam-homecare": {
+    "price": "Ask for a quote",
+    "detail": "No published rate captured",
+    "published": false,
+    "sourceUrl": "https://recordowl.com/company/isoteam-homecare-pte-ltd",
+    "summarizedAt": "2026-10-10"
+  },
+  "mr-handyman": {
+    "price": "Ask for a quote",
+    "detail": "No published rate captured",
+    "published": false,
+    "sourceUrl": "https://www.thebestsingapore.com/biz-review/mr-handyman-singapore-review/",
+    "summarizedAt": "2026-10-10"
+  },
+  "cool-aircon": {
+    "price": "S$55",
+    "detail": "General service, 1 unit. No GST added.",
+    "published": true,
+    "sourceUrl": "https://coolaircon.sg/pricing",
+    "summarizedAt": "2026-10-10",
+    "services": {
+      "chemical-wash": {
+        "price": "S$110",
+        "detail": "Chemical wash, 1 unit. No GST added.",
+        "published": true
+      },
+      "gas-top-up": {
+        "price": "S$90 to S$170",
+        "detail": "Depends on refrigerant and measured PSI. No GST added.",
+        "published": true
+      }
+    }
+  },
+  "cool-earth": {
+    "price": "From S$80",
+    "detail": "Chemical wash. Page also prints S$80 to S$100.",
+    "published": true,
+    "sourceUrl": "https://www.coolearth.com.sg/chemical-wash/",
+    "summarizedAt": "2026-10-10",
+    "services": {
+      "chemical-wash": {
+        "price": "From S$80",
+        "detail": "Chemical wash. Page also prints S$80 to S$100.",
+        "published": true
+      }
+    }
+  },
+  "direct-plumber": {
+    "price": "S$60 to S$150",
+    "detail": "Floor trap or sink choke. GST not stated.",
+    "published": true,
+    "sourceUrl": "https://directplumber.sg/chokes-drains/",
+    "logo": "/roster/assets/companies/direct-plumber.png",
+    "logoSourceUrl": "https://directplumber.sg/chokes-drains/",
+    "assetCapturedAt": "2026-10-10",
+    "summarizedAt": "2026-10-10"
+  },
+  "kiasu-plumber": {
+    "price": "From S$50",
+    "detail": "Kitchen sink choke. GST not stated.",
+    "published": true,
+    "sourceUrl": "https://kiasuplumber.com/",
+    "summarizedAt": "2026-10-10"
+  },
+  "1st-electrical": {
+    "price": "Ask for a quote",
+    "detail": "No published rate captured",
+    "published": false,
+    "sourceUrl": "https://www.trustindex.io/reviews/sg-electrician.com",
+    "summarizedAt": "2026-10-10"
+  },
+  "sg-handyman-engineering": {
+    "price": "Ask for a quote",
+    "detail": "No published rate captured",
+    "published": false,
+    "sourceUrl": "https://sghandymanengineering.com/contact/",
+    "summarizedAt": "2026-10-10"
+  },
+  "sureclean": {
+    "price": "From S$22",
+    "detail": "Weekly / trial offer. Unit and GST not stated.",
+    "published": true,
+    "sourceUrl": "https://sureclean.com.sg/general-weekly-home-cleaning-gg/",
+    "summarizedAt": "2026-10-10"
+  }
+}

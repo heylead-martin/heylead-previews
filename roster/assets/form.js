@@ -43,13 +43,17 @@
       }
     }
 
-    function showStep(number) {
+    function showStep(number, moveFocus) {
       current = number;
       steps.forEach(function (step) {
         step.hidden = Number(step.getAttribute("data-step")) !== current;
       });
       if (progress) progress.textContent = "Step " + current + " of " + total;
       clearError();
+      if (moveFocus) {
+        var heading = box.querySelector('[data-step="' + current + '"] h3');
+        if (heading) { heading.setAttribute('tabindex', '-1'); heading.focus(); }
+      }
     }
 
     function updateRecipients() {
@@ -136,13 +140,13 @@
 
     box.querySelectorAll("[data-next]").forEach(function (button) {
       button.addEventListener("click", function () {
-        if (validateStep(current)) showStep(Math.min(current + 1, total));
+        if (validateStep(current)) showStep(Math.min(current + 1, total), true);
       });
     });
 
     box.querySelectorAll("[data-back]").forEach(function (button) {
       button.addEventListener("click", function () {
-        showStep(Math.max(current - 1, 1));
+        showStep(Math.max(current - 1, 1), true);
       });
     });
 

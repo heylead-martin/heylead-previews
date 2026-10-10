@@ -14,7 +14,7 @@ const trades = [
     h1: "Aircon servicing in Singapore",
     intro: [
       "Most HDB flats run two or three wall units on one compressor. Condos often add a ceiling cassette or a ducted unit in the living room. A normal service washes the filters and the fan coil. A chemical wash goes after the coil with a chemical. A gas top-up is for a unit that cools poorly, and it should come with a leak check.",
-      "Six companies have a phone we could cite. The shortlist stops there. Order is the rating figure on file, then the review count. These figures are not from one Google API pull, so the order is provisional. 338 Aircon publishes more than one count. SoCool's public mirrors disagree with each other. Cool Aircon's homepage shows 4.9 and also says 5.0, and its page data says 366 reviews while the badge says 360+. A higher SoCool count would swap 338 Aircon and SoCool.",
+      "Six companies have a phone we could cite. The shortlist stops there. Ratings come from the cited source and are not one live Google pull. Company-site ratings do not decide the order. 338 Aircon publishes more than one count. SoCool's public mirrors disagree with each other. Cool Aircon's homepage shows 4.9 and also says 5.0, and its page data says 366 reviews while the badge says 360+. The conflicting counts remain visible on the profiles.",
       "Prices are what the company publishes. Where a price is missing, the company page we opened did not print one."
     ],
     jobs: ["General service", "Chemical wash", "Gas top-up", "Repair", "Not sure"],
@@ -33,13 +33,13 @@ const trades = [
     h1: "Plumbing in Singapore",
     intro: [
       "A choked floor trap, a leaking heater, or a burst flexi hose is usually a same-day job. Singapore plumbing work that touches the water service is supposed to be done by a PUB licensed plumber. The licence number should be something the company can point to.",
-      "Three companies have a phone we could cite. Direct Plumber prints 5.0 and 3,388+ reviews, and a second WhatsApp number in the footer. Kiasu Plumber prints prices and no licence number, and no review count on the pages we opened, so it sorts last. Mr Plumber's WhatsApp is also printed by Daylight Electrician."
+      "Three companies have a phone we could cite. Direct Plumber prints 5.0 and 3,388+ reviews, and a second WhatsApp number in the footer. Kiasu Plumber prints prices and no licence number, and no review count on the pages we opened, so the missing details are noted on its profile. Mr Plumber's WhatsApp is also printed by Daylight Electrician."
     ],
     jobs: ["Choke", "Leak", "Water heater", "Other", "Not sure"],
     faqs: [
       ["Does a plumber in Singapore need a PUB licence?", "PUB licenses plumbers for water-service work. Mr Plumber prints WS17962021 on its Little India page and says its plumbers are BCA certified. This beta did not open the PUB or BCA registers, so the number is what the company publishes."],
       ["What should I ask before an emergency call-out?", "A fixed price, or the rate if they cannot see the choke yet. Ask which brand is sending the technician. The WhatsApp number on this profile is also printed by Daylight Electrician."],
-      ["Why is Kiasu Plumber last?", "The homepage prices are published. The pages we opened do not print a PUB licence number, an address, or a Google rating. A company with no captured rating sorts last."],
+      ["Why is Kiasu Plumber missing a rating?", "The homepage prices are published. The pages we opened do not print a PUB licence number, an address, or a Google rating. No rating is added without a source."],
       ["What is the second office?", "The contact page lists a central desk at 60 Paya Lebar Road #07-54, phone +65 3165 0126. The main line and the Lower Delta Road address are the ones in the facts table."]
     ]
   },
@@ -50,7 +50,7 @@ const trades = [
     h1: "Electrician in Singapore",
     intro: [
       "A tripped DB, a dead circuit, or a burning smell is electrical work. In Singapore that work is supposed to be done by an EMA licensed electrical worker. A company saying licensed is a claim until you see the licence.",
-      "Four companies have a phone we could cite. Order is the rating figure on file, then the review count. Daylight's own pages do not agree on the count. Repair.sg's pages do not agree on the score. 1st Electrical Services is 4.7 from 102 on a Trustindex page, and the homepage widget says 139. The order is provisional."
+      "Four companies have a phone we could cite. Ratings read on Google sort first; the other companies are alphabetical. Daylight's own pages do not agree on the count. Repair.sg's pages do not agree on the score. 1st Electrical Services is 4.7 from 102 on a Trustindex page, and the homepage widget says 139. Company-site ratings do not decide the order."
     ],
     jobs: ["Power trip", "Lighting", "Distribution board", "Other", "Not sure"],
     faqs: [
@@ -83,7 +83,7 @@ const trades = [
     name: "Home cleaning",
     h1: "Home cleaning in Singapore",
     intro: [
-      "One company cleared the source bar. Sureclean prints a phone, an address, a UEN, and a Google reviews page we opened on 10 Oct 2026 that shows 4.9 from 1,551 reviews. Its weekly page prints 5 and 1,551+, and a widget on that page rendered as 1 star and 1500+. The sort uses 4.9 and 1,551.",
+      "One company cleared the source bar. Sureclean prints a phone, an address, a UEN, and a Google reviews page we opened on 10 Oct 2026 that shows 4.9 from 1,551 reviews. Its weekly page prints 5 and 1,551+, and a widget on that page rendered as 1 star and 1500+. The sourced Google figure is 4.9 from 1,551.",
       "Helpling publishes hourly prices and is a marketplace, so it is not listed as one crew. Sendhelper has shut. Sureclean's weekly page says as low as $22. That page does not say per hour, and it does not say whether GST is included."
     ],
     jobs: ["Regular clean", "One-time clean", "Move-out clean", "Not sure"],
@@ -140,8 +140,8 @@ const intents = [
 ];
 
 const howFaqs = [
-  ["Can a company pay to be number 1?", "No. The number is the rating figure on file, then the review count. A company cannot buy a higher place. Where the count is the company's own widget, or the mirrors disagree, the page says the order is provisional."],
-  ["What would a Featured slot include?", "A label, the company name, one line they write, a published price if they have one, and a call or WhatsApp button that rings them directly. It would sit under the shortlist. It would not change the number, the stars, or the reviews, and it would not include the quote requests. The slots on this beta are empty. No company paid."],
+  ["Can a company pay to be number 1?", "No. Companies cannot pay for their position. Ratings read directly on Google sort first by score and count. Other companies are alphabetical. Company-site figures do not decide the order."],
+  ["What would a Featured slot include?", "A label, the company name, one line they write, a published price if they have one, and a call or WhatsApp button that rings them directly. It would sit under the shortlist. It would not change the number, the stars, or the reviews, and it would not include the quote requests. No company has a paid placement on this beta."],
   ["Does the quote form send my number?", "It does not. The button stays on this page. A later version can send one request to at most three companies that match the job and hold prepaid credits. A dead number, a job outside Singapore, or a job the company does not do would be refunded. That product is not switched on."],
   ["Where do the reviews come from?", "From the page named under the quote: a Google Maps listing, a Trustindex or Wanderlog mirror, property.co, or the company's own site. The words are copied as published. A review without a name and a date is left off. Roster does not run its own star score."],
   ["Why are some lists shorter than five?", "Five was the aim. A company needs a cited phone, plus a rating we can point at, or a price the company publishes when the rating is missing. One handyman profile predates that bar and says so. Home cleaning has one. Handyman has two. Inventing the rest would have been a directory, which is the thing this beta is here to avoid."]
@@ -212,14 +212,16 @@ function validate(companies) {
   }
 }
 
+function isGoogleRating(company) {
+  return !!company.rating && /^(www\.)?(maps\.google\.com|google\.com|business\.google\.com)$/.test(new URL(company.rating.sourceUrl).hostname);
+}
+
 function sortCompanies(list) {
   return list.slice().sort((a, b) => {
-    const av = a.rating ? a.rating.value : -1;
-    const bv = b.rating ? b.rating.value : -1;
+    const av = isGoogleRating(a) ? a.rating.value : -1;
+    const bv = isGoogleRating(b) ? b.rating.value : -1;
     if (bv !== av) return bv - av;
-    const ac = a.rating ? a.rating.count : -1;
-    const bc = b.rating ? b.rating.count : -1;
-    if (bc !== ac) return bc - ac;
+    if (av !== -1 && a.rating.count !== b.rating.count) return b.rating.count - a.rating.count;
     return a.name.localeCompare(b.name);
   });
 }
@@ -259,6 +261,10 @@ function abs(pathname) {
    Line icons on a 24 grid. They are decorative. Every one is aria-hidden. */
 
 const iconPaths = {
+  search: `<circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/>`,
+  bookmark: `<path d="M6 4h12v17l-6-4-6 4z"/>`,
+  sliders: `<path d="M4 7h6m4 0h6M4 17h10m4 0h2"/><circle cx="12" cy="7" r="2"/><circle cx="16" cy="17" r="2"/>`,
+  chevron: `<path d="m9 5 7 7-7 7"/>`,
   aircon: `<rect x="2.5" y="5" width="19" height="9" rx="2"/><path d="M6.5 11h11"/><path d="M6.5 17.5c1.2-1 2.3-1 3.5 0s2.3 1 3.5 0 2.3-1 3.5 0"/><path d="M9 21c1.2-1 2.3-1 3.5 0s2.3 1 3.5 0"/>`,
   tap: `<path d="M9 4h5M11.5 4v4.5"/><path d="M4 9h8.5a5 5 0 0 1 5 5v1.5h-4V14a1 1 0 0 0-1-1H4z"/><path d="M4 9v3M15.5 18.2l-1.1 1.7a1.3 1.3 0 0 0 2.2 0z"/>`,
   bolt: `<path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12.5z"/>`,
@@ -372,12 +378,8 @@ const navItems = [
 ];
 
 function renderNav(current) {
-  const links = navItems.map(([href, label, trade]) => {
-    const currentAttr = href === current ? ' aria-current="page"' : "";
-    const ic = trade ? icon(tradeIcon[trade], "ic nav-ic") : icon("list", "ic nav-ic");
-    return `<a href="${href}"${currentAttr}>${ic}<span>${esc(label)}</span></a>`;
-  }).join("");
-  return `<header class="top"><div class="top-inner"><a class="brand" href="/roster/">${brandMark()}<span class="wordmark">Roster</span><span class="beta">Beta</span></a><nav class="nav" aria-label="Jobs">${links}</nav></div></header>`;
+  const links = navItems.filter(([, , trade]) => trade).map(([href, label, trade]) => `<a href="${href}"${href === current ? ' aria-current="page"' : ""}>${icon(tradeIcon[trade], "ic nav-ic")}<span>${esc(label)}</span></a>`).join("");
+  return `<header class="top"><div class="top-inner"><a class="brand" href="/roster/">${brandMark()}<span class="wordmark">Roster<span class="brand-dot">.</span></span></a><div class="global-search" role="search"><label class="sr-only" for="site-search">Find a service or company</label>${icon("search")}<input id="site-search" type="search" placeholder="Find a service or company" autocomplete="off" data-site-search><span class="search-location">${icon("pin")} Singapore</span><button class="search-submit" type="button" aria-label="Search Roster" data-search-submit>${icon("arrow")}</button></div><a class="saved-link" href="/roster/search/?saved=1">${icon("bookmark")}<span>Saved</span></a><a class="header-how" href="/roster/how-it-works/">How it works</a></div><div class="nav-shell"><nav class="nav" aria-label="Services">${links}</nav><span class="nav-note">Home services. A more considered choice.</span></div></header>`;
 }
 
 function renderCrumbs(items) {
@@ -395,7 +397,7 @@ function renderFooter() {
 <div class="foot-brand"><a class="brand" href="/roster/">${brandMark()}<span class="wordmark">Roster</span></a><p>A short, unpaid list of home-service companies in Singapore, with the reviews that back it.</p><p class="foot-note">Figures checked ${checked}. Ratings and excerpts are from the cited page. They are not from one Google API pull.</p></div>
 <div class="foot-col"><h2>Jobs</h2><ul>${jobs}</ul></div>
 <div class="foot-col"><h2>About</h2><ul><li><a href="/roster/how-it-works/">How the list is made</a></li><li><a href="/roster/how-it-works/">What a Featured slot would be</a></li><li><a href="/roster/aircon-servicing/chemical-wash/">Aircon chemical wash</a></li><li><a href="/roster/aircon-servicing/gas-top-up/">Aircon gas top-up</a></li></ul></div>
-<p class="foot-line">Singapore beta. Featured slots on this beta are empty samples. The quote form does not send.</p>
+<p class="foot-line">Singapore beta. Unpaid listings. No commission on your job. Quote requests are a preview and do not send.</p>
 </div></footer>`;
 }
 
@@ -448,10 +450,11 @@ function renderReview(review) {
 }
 
 function ratingChip(company) {
-  if (!company.rating) {
-    return `<p class="rate rate-none"><span class="score score-none">Rating not captured</span></p>`;
-  }
-  return `<p class="rate"><span class="score">${icon("star", "ic ic-star")}${esc(company.rating.value.toFixed(1))}</span><span class="rate-label">${esc(company.rating.label)}</span></p>`;
+  if (!company.rating) return `<p class="rate rate-none">No sourced rating yet</p>`;
+  const r = company.rating;
+  const own = company.website?.value && new URL(r.sourceUrl).hostname.replace(/^www\./, "") === new URL(company.website.value).hostname.replace(/^www\./, "");
+  const source = isGoogleRating(company) ? "Google" : own ? "Their site says" : "Review mirror reports";
+  return `<p class="rate">${isGoogleRating(company) ? `<span class="score">${icon("star", "ic ic-star")}${r.value.toFixed(1)}</span>` : icon("star", "ic source-star")}<span>${source} <strong>${esc(r.label)}</strong></span><a class="rating-source" href="${esc(r.sourceUrl)}" aria-label="Rating source for ${esc(company.name)}">Source${icon("link")}</a></p>`;
 }
 
 function contactButtons(company, solidProfile) {
@@ -465,20 +468,22 @@ function contactButtons(company, solidProfile) {
   return buttons.join("");
 }
 
-function renderRow(company, index) {
-  const note = company.rating ? `<p class="rating-note">${esc(company.rating.note)}</p>` : "";
-  const quote = company.reviews[0]
-    ? renderReview(company.reviews[0])
-    : `<p class="note quote-none">No dated excerpt is stored for this beta.</p>`;
-  return `<li class="row"><div class="row-num" aria-hidden="true">${String(index + 1).padStart(2, "0")}</div><div class="row-body"><div class="row-head"><h2><a href="/roster/company/${company.slug}/">${esc(company.name)}</a></h2>${ratingChip(company)}</div>${note}<p class="fit"><span class="fit-label">Best for</span>${esc(company.bestFor)}</p>${quote}<p class="actions">${contactButtons(company, true)}</p></div></li>`;
+function priceSummary(company, service) {
+  const display = presentation[company.slug] || { price: "Ask for a quote", detail: "No published rate captured", published: false };
+  return service ? { ...display, ...(display.services?.[service] || { price: "Ask for a quote", detail: "No standalone price captured for this job", published: false }) } : display;
 }
 
-function shortlist(companies) {
-  if (!companies.length) {
-    return `<p class="empty">No company is on this shortlist.</p>`;
-  }
-  const n = companies.length;
-  return `<div class="list-head"><h2 class="section">Unpaid shortlist</h2><p class="list-meta">${n} ${n === 1 ? "company" : "companies"}, ordered by the rating on file, then the review count</p></div><ol class="shortlist">${companies.map(renderRow).join("")}</ol>`;
+function renderRow(company, index, service) {
+  const display = priceSummary(company, service);
+  const trade = tradeById(company.category);
+  const media = display.logo ? `<img class="company-logo" src="${display.logo}" alt="${esc(company.name)} logo" width="88" height="64" loading="lazy">` : "";
+  const searchable = [company.name, trade.name, company.bestFor, company.priceNote, ...company.services].join(" ");
+  const tags = company.services.map(service => `<span>${esc(service.replaceAll("-", " "))}</span>`).join("");
+  return `<li class="business-card" data-company data-name="${esc(company.name)}" data-search="${esc(searchable.toLowerCase())}" data-category="${company.category}" data-price="${!!display.published}" data-reviews="${!!company.reviews.length}" data-whatsapp="${!!company.whatsapp?.value}" data-slug="${company.slug}" data-order="${index}"><article><div class="business-top"><div><p class="business-category">${icon(tradeIcon[trade.id])}${esc(trade.name)}<span class="dot-sep">/</span> Singapore</p><h2><a href="/roster/company/${company.slug}/">${esc(company.name)}</a></h2></div><button class="save-button" type="button" data-save="${company.slug}" aria-label="Save ${esc(company.name)}" aria-pressed="false">${icon("bookmark")}</button></div>${ratingChip(company)}<div class="business-overview ${media ? "has-logo" : ""}"><div><p class="business-fit">${esc(company.bestFor)}</p>${tags ? `<div class="service-tags">${tags}</div>` : ""}</div>${media}</div><div class="business-price"><div><span class="price-eyebrow">${display.published ? "Published price" : "Pricing"}</span><strong>${esc(display.price)}</strong><span class="price-context">${esc(display.detail)}</span></div><a href="${esc(company.priceSourceUrl)}" aria-label="Price source for ${esc(company.name)}">${icon("link")}<span>Source</span></a></div><details class="card-details"><summary>What to know before you book${icon("chevron")}</summary><p>${esc(company.poorFit)}</p>${company.rating ? `<p>${esc(company.rating.note)} <a href="${esc(company.rating.sourceUrl)}">Rating source</a>.</p>` : ""}<p class="note">Figures checked ${esc(checked)}.</p>${company.reviews.length ? renderReview(company.reviews[0]) : ""}</details><div class="business-bottom"><a class="profile-link" href="/roster/company/${company.slug}/">View company${icon("arrow")}</a><div class="business-contact"><a href="${telHref(company.phone.value)}">${icon("phone")}Call</a>${company.whatsapp?.value ? `<a href="${waHref(company.whatsapp.value)}">${icon("chat")}WhatsApp</a>` : ""}</div></div></article></li>`;
+}
+
+function shortlist(companies, service) {
+  return `<div class="results-toolbar"><div><h2>Companies to consider</h2><p data-result-count aria-live="polite">${companies.length} ${companies.length === 1 ? "company" : "companies"} on this shortlist</p></div><label class="sort-control">Sort by<select data-sort aria-label="Sort companies"><option value="recommended">Source order</option><option value="name">Name A to Z</option></select></label></div><p class="results-method">Unpaid listings. Google-source ratings first, then alphabetical. <a href="/roster/how-it-works/">Our approach</a></p><ol class="shortlist">${companies.map((company, index) => renderRow(company, index, service)).join("")}</ol><div class="no-results" data-no-results hidden><span class="disc">${icon("search")}</span><h3>No companies match these filters</h3><p>Try a different search or clear your filters.</p><button type="button" class="btn" data-reset>Clear filters</button></div>`;
 }
 
 function pageShell({ title, description, canonicalPath, current, jsonLd, body, bodyClass = "" }) {
@@ -505,6 +510,7 @@ function pageShell({ title, description, canonicalPath, current, jsonLd, body, b
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,560;1,9..144,460&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/roster/assets/site.css">
+<link rel="stylesheet" href="/roster/assets/directory.css?v=20261010">
 <script type="application/ld+json">${graph}</script>
 </head>
 <body${bodyClass ? ` class="${bodyClass}"` : ""}>
@@ -515,6 +521,7 @@ ${body}
 </main>
 ${renderFooter()}
 <script src="/roster/assets/form.js"></script>
+<script src="/roster/assets/directory.js?v=20261010"></script>
 </body>
 </html>
 `;
@@ -647,18 +654,27 @@ function renderCollection(spec, companies, crumbs) {
   const isAircon = tradeId === "aircon";
   const countLabel = count === 0 ? "No companies yet" : `${count} ${count === 1 ? "company" : "companies"}`;
   const notes = spec.intro.slice(1).map((paragraph) => `<p>${esc(paragraph)}</p>`).join("");
+  const categoryLabel = tradeId === "all" ? "Home services" : (spec.titleName || spec.name);
+  const summaries = {
+    plumbing: "From a stubborn choke to a leaking tap. Compare published prices, read the details, and speak to a company directly.",
+    aircon: "Find the right team for your aircon. Compare published rates, sourced review details, and what each company does.",
+    electrician: "A power trip, a new light, or a bigger repair. Get the details on each company before you make the call.",
+    handyman: "Small jobs deserve a considered choice. Compare the companies, their contact details, and the work they describe.",
+    cleaning: "Find help for your home, with the price details and review sources in one place.",
+    all: "Find a company by name or explore a service. Every listing links to the facts behind it."
+  };
+  const filter = (key, label, n) => `<label class="filter-check"><input type="checkbox" data-filter="${key}"><span>${label}</span><small>${n}</small></label>`;
   const body = [
-    `<div class="page-head">`,
     renderCrumbs(crumbs),
-    `<div class="head-row"><span class="disc">${icon(tradeIcon[tradeId], "ic ic-disc")}</span><div><p class="kicker">Singapore, ${esc(countLabel)}</p><h1>${esc(spec.h1)}</h1></div></div>`,
-    `<p class="lede">${esc(spec.intro[0])}</p>`,
+    `<section class="directory-hero"><div><p class="kicker">THE SINGAPORE HOME DIRECTORY</p><h1>${tradeId === "all" ? "Find your next helping hand." : `${esc(categoryLabel)} <em>in Singapore.</em>`}</h1><p>${esc(summaries[tradeId])}</p></div><div class="hero-stamp"><span class="stamp-icon">${icon(tradeIcon[tradeId] || "search")}</span><div><strong>${count}</strong><span>${count === 1 ? "company to explore" : "companies to explore"}</span></div></div></section>`,
+    `<div class="directory-layout" data-directory><aside class="filters" aria-label="Filter companies"><div class="filters-head"><h2>${icon("sliders")}Refine your list</h2><button type="button" class="filter-toggle" data-toggle-filters aria-controls="company-filters" aria-expanded="true">${icon("sliders")}Filters <span data-active-filters></span>${icon("chevron")}</button><button type="button" data-reset>Reset</button></div><div class="filter-content" id="company-filters"><label class="filter-search">Search this list<input type="search" placeholder="Company or keyword" data-filter-search></label><fieldset><legend>What matters to you?</legend>${filter("price", "Published pricing", companies.filter(c => priceSummary(c, spec.service).published).length)}${filter("reviews", "Dated reviews", companies.filter(c => c.reviews.length).length)}${filter("whatsapp", "WhatsApp contact", companies.filter(c => c.whatsapp?.value).length)}${filter("saved", "Saved companies", '<span data-saved-count>0</span>')}</fieldset><div class="filter-categories"><h3>Explore services</h3>${trades.map(t => `<a href="/roster/${t.slug}/"${t.id === tradeId ? ' aria-current="page"' : ""}>${icon(tradeIcon[t.id])}${esc(t.name)}${icon("chevron")}</a>`).join("")}</div><div class="filter-foot">${icon("shield")}<p>A place on Roster is unpaid.<br>Always your choice.</p></div></div></aside><div class="directory-results">`,
     isAircon ? airconSubnav(canonicalPath) : "",
-    `</div>`,
-    notes ? `<aside class="notes"><h2>${icon("list", "ic")}Notes on this list</h2>${notes}<p class="method">${icon("link", "ic ic-inline")}<a href="/roster/how-it-works/">How the list is made</a>. Checked ${checked}.</p></aside>` : `<p class="method">${icon("link", "ic ic-inline")}<a href="/roster/how-it-works/">How the list is made</a>. Checked ${checked}.</p>`,
-    shortlist(companies),
-    renderForm(spec.jobs, companies, "ask"),
-    renderFeatured(),
-    renderFaq(spec.faqs)
+    shortlist(companies, spec.service),
+    `<details class="list-explainer"><summary>About this ${esc(categoryLabel.toLowerCase())} shortlist${icon("chevron")}</summary><p>${esc(spec.intro[0])}</p>${notes}<p><a href="/roster/how-it-works/">How the list is made</a>. Checked ${checked}.</p></details>`,
+    `</div><aside class="discovery-rail"><section class="help-card"><span class="rail-symbol">${icon("list")}</span><p class="kicker">A LITTLE HOMEWORK HELPS</p><h2>A little clarity.<br>A better choice.</h2><p>Look beyond a star rating. A few details make the choice easier.</p><ol><li><span>1</span>Compare the price for your actual job.</li><li><span>2</span>Read what suits you, and what might not.</li><li><span>3</span>Call or WhatsApp the company directly.</li></ol><a href="/roster/how-it-works/">Get to know Roster${icon("arrow")}</a></section><section class="quote-teaser"><span class="beta">BETA PREVIEW</span><h2>One job.<br>A few options.</h2><p>Try a quote request for up to three companies.</p><a class="btn btn-solid" href="#quote-request">Preview a request${icon("arrow")}</a><small>Preview only. Nothing is sent or stored.</small></section><div class="rail-note">${icon("calendar")}<p>Facts last checked<br><strong>9-10 October 2026</strong><br>Each figure links to its source.</p></div></aside></div>`,
+    tradeId !== "all" ? `<div id="quote-request">${renderForm(spec.jobs, companies, "ask")}</div>` : `<div id="quote-request" class="search-end"><h2>Start with the service you need</h2><p>Choose a service above to explore its shortlist and preview a quote request.</p></div>`,
+    renderFaq(spec.faqs, "A few things worth knowing"),
+    `<section class="browse-more"><p class="kicker">WHILE YOU'RE HERE</p><h2>A little help around the home.</h2><div>${trades.filter(t => t.id !== tradeId).map(t => `<a href="/roster/${t.slug}/">${icon(tradeIcon[t.id])}<span>${esc(t.name)}</span>${icon("arrow")}</a>`).join("")}</div></section>`
   ].join("\n");
   const jsonLd = [
     webPage(title, canonicalPath, description),
@@ -676,7 +692,8 @@ function renderCollection(spec, companies, crumbs) {
     canonicalPath,
     current: spec.service ? "/roster/aircon-servicing/" : canonicalPath,
     jsonLd,
-    body
+    body,
+    bodyClass: "directory-page"
   });
 }
 
@@ -719,7 +736,7 @@ function renderProfile(company, peers) {
     : `<p class="note quote-none">No dated excerpt is stored for this beta.</p>`;
   const others = peers.filter((peer) => peer.slug !== company.slug);
   const otherHtml = others.length
-    ? `<ul class="peers">${others.map((peer) => `<li><a href="/roster/company/${peer.slug}/"><span class="peer-name">${esc(peer.name)}</span>${peer.rating ? `<span class="peer-rate">${icon("star", "ic ic-star")}${esc(peer.rating.value.toFixed(1))}</span>` : `<span class="peer-rate peer-none">No rating</span>`}</a></li>`).join("")}</ul>`
+    ? `<ul class="peers">${others.map((peer) => `<li><a href="/roster/company/${peer.slug}/"><span class="peer-name">${esc(peer.name)}</span>${icon("arrow")}</a></li>`).join("")}</ul>`
     : `<p class="note">No other company is on this shortlist.</p>`;
   const matched = [company, ...others];
   const crumbs = [
@@ -731,16 +748,18 @@ function renderProfile(company, peers) {
     `<div class="page-head profile-head">`,
     renderCrumbs(crumbs),
     `<a class="tag" href="/roster/${trade.slug}/">${icon(tradeIcon[trade.id], "ic")}${esc(trade.name)} in Singapore</a>`,
-    `<h1>${esc(company.name)}</h1>`,
+    `<div class="profile-title-row"><div><h1>${esc(company.name)}</h1><p class="profile-location">${icon("pin")}${esc(company.address?.street || "Singapore")}</p></div>${priceSummary(company).logo ? `<img class="profile-logo" src="${priceSummary(company).logo}" alt="${esc(company.name)} logo" width="140" height="100">` : ""}</div>`,
     ratingChip(company),
     `<p class="actions actions-hero">${contactButtons(company, false)}<a class="btn btn-quiet" href="${esc(company.mapsUrl)}">${icon("pin", "ic ic-btn-lead")}Maps</a></p>`,
     `</div>`,
+    priceSummary(company).photo ? `<figure class="company-photo"><img src="${priceSummary(company).photo}" alt="Sink stopper replacement published by Mr Plumber Singapore" width="350" height="252" loading="lazy"><figcaption><strong>A look at their work</strong><span>Sink stopper replacement in Sengkang, as published by Mr Plumber Singapore.</span><a href="${priceSummary(company).photoSourceUrl}">Photo from the company website${icon("link")}</a></figcaption></figure>` : "",
+    `<nav class="profile-tabs" aria-label="Company sections"><a href="#overview">Overview</a><a href="#pricing">Pricing</a>${company.reviews.length ? '<a href="#reviews">Reviews</a>' : ''}<a href="#contact">Contact details</a></nav>`,
     `<div class="profile">`,
-    `<aside class="profile-side"><div class="facts-wrap"><h2 class="facts-title">Facts, as published</h2><dl class="facts">${facts.join("")}</dl></div></aside>`,
+    `<aside class="profile-side" id="contact"><div class="contact-summary"><p class="kicker">SPEAK TO THE COMPANY</p><h2>Have a job in mind?</h2><p>Ask for the total price before you book.</p><div class="actions">${contactButtons(company, false)}</div></div><div class="facts-wrap"><h2 class="facts-title">Facts, as published</h2><dl class="facts">${facts.join("")}</dl></div></aside>`,
     `<div class="profile-main">`,
-    `<div class="fit-grid"><section class="fit-card good"><h2>${icon("check", "ic")}Best for</h2><p class="fit">${esc(company.bestFor)}</p></section><section class="fit-card poor"><h2>${icon("tagIcon", "ic")}Poor fit</h2><p class="fit">${esc(company.poorFit)}</p></section></div>`,
-    `<section class="section price-section"><h2>${icon("dollar", "ic")}Pricing</h2><div class="price-card"><p class="price">${esc(company.priceNote)}</p><p class="byline"><a href="${esc(company.priceSourceUrl)}">Price source</a>. Prices are what the company publishes.</p></div></section>`,
-    `<section class="section"><h2>${icon("quote", "ic")}What reviewers wrote</h2>${reviews}</section>`,
+    `<div class="fit-grid" id="overview"><section class="fit-card good"><h2>${icon("check", "ic")}Best for</h2><p class="fit">${esc(company.bestFor)}</p></section><section class="fit-card poor"><h2>${icon("tagIcon", "ic")}Poor fit</h2><p class="fit">${esc(company.poorFit)}</p></section></div>`,
+    `<section class="section price-section" id="pricing"><h2>${icon("dollar", "ic")}Published pricing</h2><div class="price-card"><div class="profile-price-lead"><strong>${esc(priceSummary(company).price)}</strong><span>${esc(priceSummary(company).detail)}</span></div><p class="price">${esc(company.priceNote)}</p><p class="byline"><a href="${esc(company.priceSourceUrl)}">Price source</a>. Prices are what the company publishes.</p></div></section>`,
+    company.reviews.length ? `<section class="section" id="reviews"><h2>${icon("quote", "ic")}What reviewers wrote</h2><p class="note">From the cited sources. Relative dates were captured on ${checked}.</p>${reviews}</section>` : "",
     renderForm(trade.jobs, matched, "ask"),
     `<section class="section"><h2>Other companies in ${esc(trade.name.toLowerCase())}</h2>${otherHtml}</section>`,
     `</div>`,
@@ -760,7 +779,7 @@ function renderProfile(company, peers) {
     current: `/roster/${trade.slug}/`,
     jsonLd,
     body,
-    bodyClass: "has-callbar"
+    bodyClass: "has-callbar company-page"
   });
 }
 
@@ -780,19 +799,19 @@ function renderHome(grouped) {
 <section class="hero">
 <div class="hero-copy">
 <p class="kicker">Singapore beta</p>
-<h1>Short, unpaid shortlists for home jobs in Singapore.</h1>
-<p class="dek">Aircon, plumbing, electrical, handyman, and cleaning. Every list is ordered by the rating on file, never by who paid, and every figure links to the page it came from.</p>
-<p class="hero-actions"><a class="btn btn-paper" href="#jobs">Pick a job${icon("arrow", "ic ic-btn")}</a><a class="btn btn-ghost" href="/roster/how-it-works/">How the list is made</a></p>
+<h1>Good people for<br>the jobs at home.</h1>
+<p class="dek">Find your next helping hand. Compare local companies, explore their published prices, and get the details before you book.</p>
+<p class="hero-actions"><a class="btn btn-paper" href="#jobs">Explore home services${icon("arrow", "ic ic-btn")}</a><a class="btn btn-ghost" href="/roster/how-it-works/">How the list is made</a></p>
 </div>
 <div class="hero-visual">${heroIllustration()}</div>
 </section>
 <ul class="trust" aria-label="What makes the list">
-<li>${icon("shield", "ic ic-disc")}<strong>Nobody pays for a place.</strong><span>Companies cannot buy a higher number. Paid slots sit apart, labeled, and stay empty on this beta.</span></li>
+<li>${icon("shield", "ic ic-disc")}<strong>Nobody pays for a place.</strong><span>Companies cannot buy their way up the list. No ads or paid placements in your results.</span></li>
 <li>${icon("link", "ic ic-disc")}<strong>Every figure has a source.</strong><span>Phones, prices, ratings, and reviews link to the page they were copied from. Nothing is invented.</span></li>
 <li>${icon("calendar", "ic ic-disc")}<strong>Checked ${esc(checked)}.</strong><span>${total} companies so far. Each profile says who it suits and who should look elsewhere.</span></li>
 </ul>
 <section class="jobs" id="jobs">
-<div class="section-head"><p class="kicker">Jobs</p><h2>Pick the job, then read the shortlist</h2><p class="lede">The list is as long as the sourcing allowed. Some jobs have fewer than five companies. Home cleaning has one. Handyman has two.</p></div>
+<div class="section-head"><p class="kicker">Jobs</p><h2>What needs doing?</h2><p class="lede">Five ways to make home feel like home again. Start with the service you need.</p></div>
 <ol class="index">${tiles}</ol>
 </section>
 <section class="section how">
@@ -800,8 +819,8 @@ function renderHome(grouped) {
 <div>
 <ol class="steps">
 <li><strong>01</strong><span class="step-title">Pick a job.</span><span>Five jobs so far. Aircon also has pages for a chemical wash and a gas top-up.</span></li>
-<li><strong>02</strong><span class="step-title">Read the shortlist.</span><span>The order is unpaid. Each card shows the rating on file, who the company suits, and one dated review.</span></li>
-<li><strong>03</strong><span class="step-title">Call, or send one request.</span><span>One request can go to at most three companies. In this beta the form does not send it.</span></li>
+<li><strong>02</strong><span class="step-title">Read the shortlist.</span><span>Compare sourced prices, review details, and a reason the company might or might not suit your job.</span></li>
+<li><strong>03</strong><span class="step-title">Talk to the company.</span><span>Call or WhatsApp directly. You can also preview a request for up to three companies. The beta does not send it.</span></li>
 </ol>
 <p class="method">${icon("link", "ic ic-inline")}<a href="/roster/how-it-works/">How the list is made, and what a Featured slot would be</a>.</p>
 </div>
@@ -845,6 +864,7 @@ function renderHome(grouped) {
     canonicalPath: "/roster/",
     current: "/roster/",
     jsonLd,
+    bodyClass: "home-page",
     body
   });
 }
@@ -861,14 +881,14 @@ function renderHow() {
       "A review line needs a name, a date or a relative time, and the page it was copied from. The words stay as published, including rough grammar. A quote with no date stays off the page."
     ]],
     ["How the order is chosen", [
-      "Higher rating figure first. If the rating ties, the higher review count comes first. A company with no captured rating goes last. The figures are from the company site or a public mirror. They are not one live Google pull, so a page that publishes two counts can move when we next check it."
+      "Ratings captured directly from Google sort first, by score and then review count. The remaining companies are alphabetical. Ratings printed by a company or a review mirror are labeled with their source and do not decide the order. A company cannot pay for a higher position."
     ]],
     ["What a homeowner does", [
       "Pick the job, read the shortlist, and use the form if you want to see it. The form asks about the job, property, postal code, timing, company count, and contact details. It does not send. A later version can pass one request to at most three companies that do that job and hold prepaid credits. The homeowner pays nothing."
     ]],
     ["What Featured would be", [
       "A labeled slot under the shortlist and under the form. At most two on a page. The company would get a name, one line, a published price if they have one, and a button that calls or messages them directly. The slot would not include quote requests, and it would not change the number, the stars, or the reviews. A company could buy credits, or a Featured slot, or both. Credits would be charged only when a matching request is delivered.",
-      "The amber slots on this beta are empty. No named company paid for one."
+      "There are no paid placements on these pages."
     ]],
     ["What stays off the page", [
       "Roster does not print its own star score. It does not say we visited, we called, or an anonymous tester booked the job. A licence number appears only when the company publishes it, with the page, and with the note that the register was not opened. A UEN is the same."
@@ -901,6 +921,8 @@ ${renderFaq(howFaqs)}`;
 
 /* ---------- Build ---------- */
 
+const presentation = JSON.parse(await readFile(path.join(root, "data", "presentation.json"), "utf8"));
+
 const raw = JSON.parse(await readFile(path.join(root, "data", "companies.json"), "utf8"));
 assertNoDashes(raw, "companies.json");
 assertNoDashes({ trades, intents, howFaqs }, "templates");
@@ -915,6 +937,7 @@ for (const trade of trades) grouped[trade.id] = sortCompanies(grouped[trade.id])
 const written = [];
 written.push(await writePage("", renderHome(grouped)));
 written.push(await writePage("how-it-works", renderHow()));
+written.push(await writePage("search", renderCollection({ id: "all", slug: "search", name: "Home services", h1: "Home services in Singapore", intro: ["Explore the sourced companies on Roster. Use search and filters to narrow your list."], jobs: [], faqs: howFaqs.slice(0, 3) }, sortCompanies(publishedCompanies), [{ label: "Find a company" }])));
 
 for (const trade of trades) {
   const crumbs = [{ label: trade.name }];
