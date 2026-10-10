@@ -67,14 +67,14 @@ const trades = [
     h1: "Handyman in Singapore",
     intro: [
       "A handyman job is the small one: a drill, a furniture build, a silicone joint, a door that sticks. It is a poor place to hide a plumber or an electrician who should carry a licence.",
-      "Three companies are listed. SG Handyman Engineering prints 4.9 from 70 Google reviews on its contact page. The widget reviews on that page have names and no dates, so no excerpt is stored. ISOTeam Homecare and Mr Handyman stay thinner. Neither company's own site was opened. Neither has a Google rating we could cite."
+      "Two companies are listed. SG Handyman Engineering prints 4.9 from 70 Google reviews on its contact page. The widget reviews on that page have names and no dates, so no excerpt is stored. ISOTeam Homecare has no Google rating stored here. mrhandyman.sg returned an error on 10 Oct 2026, so Mr Handyman is not listed."
     ],
     jobs: ["Furniture", "Mounting", "Small repair", "Other", "Not sure"],
     faqs: [
-      ["Why are two profiles thinner?", "Mr Handyman's own site was not opened. The address and phone come from directories that agree with each other. ISOTeam Homecare has a RecordOwl registry entry and no signed review stored here. SG Handyman Engineering is the one with a rating on its own contact page."],
+      ["Why is one profile thinner?", "ISOTeam Homecare has a RecordOwl registry entry and no signed review stored here. SG Handyman Engineering is the one with a rating on its own contact page."],
       ["What should a handyman quote include?", "The job, the price, and whether drilling into a wall or a ceiling is included. In a condo, the MCST may want approval before noisy work."],
-      ["Why do two profiles still have no Google rating?", "A rating goes on the page when we can point at one figure on one page. SG Handyman Engineering's contact page prints 4.9 from 70. ISOTeam and Mr Handyman did not clear that. ThreeBestRated's 4.9 for ISOTeam is that site's own score, so it is left off."],
-      ["Why does one address match an electrician?", "Daylight Electrician's contact page lists a west branch at 21 Bukit Batok Crescent #09-79, the unit directories give for Mr Handyman. Confirm who will show up."]
+      ["Why does one profile still have no Google rating?", "A rating goes on the page when we can point at one figure on one page. SG Handyman Engineering's contact page prints 4.9 from 70. ISOTeam did not clear that. ThreeBestRated's 4.9 for ISOTeam is that site's own score, so it is left off."],
+      ["Why did one address match an electrician?", "Daylight Electrician's contact page lists a west branch at 21 Bukit Batok Crescent #09-79, the unit directories gave for Mr Handyman. mrhandyman.sg returned an error on 10 Oct 2026, so that company is not listed."]
     ]
   },
   {
@@ -144,7 +144,7 @@ const howFaqs = [
   ["What would a Featured slot include?", "A label, the company name, one line they write, a published price if they have one, and a call or WhatsApp button that rings them directly. It would sit under the shortlist. It would not change the number, the stars, or the reviews, and it would not include the quote requests. The slots on this beta are empty. No company paid."],
   ["Does the quote form send my number?", "It does not. The button stays on this page. A later version can send one request to at most three companies that match the job and hold prepaid credits. A dead number, a job outside Singapore, or a job the company does not do would be refunded. That product is not switched on."],
   ["Where do the reviews come from?", "From the page named under the quote: a Google Maps listing, a Trustindex or Wanderlog mirror, property.co, or the company's own site. The words are copied as published. A review without a name and a date is left off. Roster does not run its own star score."],
-  ["Why are some lists shorter than five?", "Five was the aim. A company needs a cited phone, plus a rating we can point at, or a price the company publishes when the rating is missing. Two handyman profiles predate that bar and say so. Home cleaning has one. Handyman has three. Inventing the rest would have been a directory, which is the thing this beta is here to avoid."]
+  ["Why are some lists shorter than five?", "Five was the aim. A company needs a cited phone, plus a rating we can point at, or a price the company publishes when the rating is missing. One handyman profile predates that bar and says so. Home cleaning has one. Handyman has two. Inventing the rest would have been a directory, which is the thing this beta is here to avoid."]
 ];
 
 function walkStrings(value, visit, trail = "") {
@@ -423,12 +423,24 @@ function nameList(companies) {
 }
 
 function renderForm(jobs, recipients, uid) {
+  if (!recipients.length) return "";
   const options = jobs.map((job) => `<option>${esc(job)}</option>`).join("");
-  const who = recipients.length
-    ? `<p class="recipient">A later version would send one request to ${nameList(recipients)}. This beta does not send it.</p>`
-    : `<p class="recipient">No company is on this list to receive a request. This beta does not send the form.</p>`;
+  const maximum = Math.min(3, recipients.length);
   const id = (name) => `${uid}-${name}`;
-  return `<section class="ask-wrap" aria-labelledby="${id("title")}"><div class="ask-copy"><p class="kicker">Quote request</p><h2 id="${id("title")}">${esc(askHeading(recipients.length))}</h2>${who}<p class="note ask-note">${icon("shield", "ic ic-inline")}Beta: this form does not send. Nothing is stored. The homeowner pays nothing.</p></div><div class="ask"><label for="${id("estate")}">Estate</label><select id="${id("estate")}" name="estate"><option value="">Select</option><option>HDB</option><option>Condo or apartment</option><option>Landed</option><option>Commercial</option><option>Not sure</option></select><label for="${id("units")}">Units</label><input id="${id("units")}" name="units" type="number" inputmode="numeric" min="1" max="20" placeholder="1"><label for="${id("job")}">Job</label><select id="${id("job")}" name="job"><option value="">Select</option>${options}</select><label for="${id("phone")}">Phone</label><input id="${id("phone")}" name="phone" type="tel" autocomplete="tel" placeholder="+65"><button class="btn btn-solid" type="button" onclick="var n=this.parentElement.querySelector('[data-result]'); if(n){n.hidden=false; n.textContent='Beta: this request was not sent.';}">Submit request${icon("arrow", "ic ic-btn")}</button><p class="result" data-result hidden role="status"></p></div></section>`;
+  const countChoices = Array.from({ length: maximum }, (_, index) => {
+    const value = index + 1;
+    const checked = value === maximum ? " checked" : "";
+    return `<label class="ask-option"><input type="radio" name="company-count" value="${value}"${checked}> <span>${value}</span></label>`;
+  }).join("");
+  const countNote = recipients.length === 1
+    ? "Only 1 published company is on this shortlist."
+    : `Choose up to ${maximum} published companies from this shortlist.`;
+  const names = recipients.map((company, index) => `<li data-recipient-index="${index + 1}"><a href="/roster/company/${company.slug}/">${esc(company.name)}</a></li>`).join("");
+  const contactLine = maximum === 1
+    ? "1 company will contact you."
+    : `These ${maximum} companies will contact you.`;
+  const who = `<p class="recipient">The last step names who would be contacted. At most ${maximum}. This beta does not send the request.</p>`;
+  return `<section class="ask-wrap" aria-labelledby="${id("title")}"><div class="ask-copy"><p class="kicker">Quote request</p><h2 id="${id("title")}">Request a quote</h2>${who}<p class="note ask-note">${icon("shield", "ic ic-inline")}Beta: this form does not send. Nothing is stored. The homeowner pays nothing.</p></div><div class="ask" data-quote-steps><p class="ask-progress" data-progress aria-live="polite">Step 1 of 5</p><div class="ask-error" data-error role="alert" tabindex="-1" hidden></div><section class="ask-step" data-step="1" aria-labelledby="${id("job-title")}"><h3 id="${id("job-title")}">Job</h3><div class="ask-fields"><label for="${id("job")}">What do you need?<select id="${id("job")}" name="job"><option value="">Select a job</option>${options}</select></label><label for="${id("property")}">Property type<select id="${id("property")}" name="property"><option value="">Select property type</option><option>HDB</option><option>Condo or apartment</option><option>Landed</option><option>Commercial</option><option>Not sure</option></select></label><label for="${id("size")}">Number of units or rooms<input id="${id("size")}" name="size" type="number" inputmode="numeric" min="1" step="1"></label></div><div class="ask-actions"><button class="btn btn-solid" type="button" data-next>Next</button></div></section><section class="ask-step" data-step="2" aria-labelledby="${id("postal-title")}" hidden><h3 id="${id("postal-title")}">Singapore postal code</h3><div class="ask-fields"><label for="${id("postal")}">Postal code<input id="${id("postal")}" name="postal" type="text" inputmode="numeric" autocomplete="postal-code" maxlength="6" pattern="[0-9]{6}" aria-describedby="${id("postal-hint")}"><span class="field-hint" id="${id("postal-hint")}">Enter all six digits.</span></label></div><div class="ask-actions"><button class="btn" type="button" data-back>Back</button><button class="btn btn-solid" type="button" data-next>Next</button></div></section><section class="ask-step" data-step="3" aria-labelledby="${id("when-title")}" hidden><h3 id="${id("when-title")}">When</h3><div class="ask-options" role="radiogroup" aria-label="When do you need the job?"><label class="ask-option"><input type="radio" name="when" value="This week"> <span>This week</span></label><label class="ask-option"><input type="radio" name="when" value="Flexible"> <span>Flexible</span></label></div><div class="ask-actions"><button class="btn" type="button" data-back>Back</button><button class="btn btn-solid" type="button" data-next>Next</button></div></section><section class="ask-step" data-step="4" aria-labelledby="${id("count-title")}" hidden><h3 id="${id("count-title")}">How many companies should contact you?</h3><p class="field-hint">${esc(countNote)}</p><div class="ask-options" role="radiogroup" aria-label="How many companies should contact you?">${countChoices}</div><div class="ask-actions"><button class="btn" type="button" data-back>Back</button><button class="btn btn-solid" type="button" data-next>Next</button></div></section><section class="ask-step" data-step="5" aria-labelledby="${id("contact-title")}" hidden><h3 id="${id("contact-title")}">Your contact details</h3><div class="ask-fields"><label for="${id("name")}">Name<input id="${id("name")}" name="name" type="text" autocomplete="name"></label><label for="${id("mobile")}">Singapore mobile<input id="${id("mobile")}" name="mobile" type="tel" inputmode="numeric" autocomplete="tel" maxlength="8" aria-describedby="${id("mobile-hint")}"><span class="field-hint" id="${id("mobile-hint")}">8 digits, starting with 8 or 9.</span></label><label for="${id("email")}">Email<input id="${id("email")}" name="email" type="email" autocomplete="email"></label></div><div class="ask-recipients"><p data-recipient-copy>${contactLine}</p><ol data-recipients>${names}</ol></div><div class="ask-actions"><button class="btn" type="button" data-back>Back</button><button class="btn btn-solid" type="button" data-submit>Request a quote</button></div><p class="result" data-result aria-live="polite" hidden></p></section></div></section>`;
 }
 
 function renderReview(review) {
@@ -644,7 +656,7 @@ function renderCollection(spec, companies, crumbs) {
     `</div>`,
     notes ? `<aside class="notes"><h2>${icon("list", "ic")}Notes on this list</h2>${notes}<p class="method">${icon("link", "ic ic-inline")}<a href="/roster/how-it-works/">How the list is made</a>. Checked ${checked}.</p></aside>` : `<p class="method">${icon("link", "ic ic-inline")}<a href="/roster/how-it-works/">How the list is made</a>. Checked ${checked}.</p>`,
     shortlist(companies),
-    renderForm(spec.jobs, firstThree(companies), "ask"),
+    renderForm(spec.jobs, companies, "ask"),
     renderFeatured(),
     renderFaq(spec.faqs)
   ].join("\n");
@@ -701,6 +713,7 @@ function renderProfile(company, peers) {
   for (const fact of company.facts || []) {
     facts.push(factRow(fact.label, `${esc(fact.value)} <a class="fact-src" href="${esc(fact.sourceUrl)}">Source</a>`));
   }
+  facts.push(factRow("Last verified", esc(checked)));
   const reviews = company.reviews.length
     ? `<div class="quotes">${company.reviews.map(renderReview).join("")}</div>`
     : `<p class="note quote-none">No dated excerpt is stored for this beta.</p>`;
@@ -708,7 +721,7 @@ function renderProfile(company, peers) {
   const otherHtml = others.length
     ? `<ul class="peers">${others.map((peer) => `<li><a href="/roster/company/${peer.slug}/"><span class="peer-name">${esc(peer.name)}</span>${peer.rating ? `<span class="peer-rate">${icon("star", "ic ic-star")}${esc(peer.rating.value.toFixed(1))}</span>` : `<span class="peer-rate peer-none">No rating</span>`}</a></li>`).join("")}</ul>`
     : `<p class="note">No other company is on this shortlist.</p>`;
-  const matched = [company, ...others].slice(0, 3);
+  const matched = [company, ...others];
   const crumbs = [
     { href: `/roster/${trade.slug}/`, label: trade.name },
     { label: company.name }
@@ -779,7 +792,7 @@ function renderHome(grouped) {
 <li>${icon("calendar", "ic ic-disc")}<strong>Checked ${esc(checked)}.</strong><span>${total} companies so far. Each profile says who it suits and who should look elsewhere.</span></li>
 </ul>
 <section class="jobs" id="jobs">
-<div class="section-head"><p class="kicker">Jobs</p><h2>Pick the job, then read the shortlist</h2><p class="lede">The list is as long as the sourcing allowed. Some jobs have fewer than five companies. Home cleaning has one. Handyman has three.</p></div>
+<div class="section-head"><p class="kicker">Jobs</p><h2>Pick the job, then read the shortlist</h2><p class="lede">The list is as long as the sourcing allowed. Some jobs have fewer than five companies. Home cleaning has one. Handyman has two.</p></div>
 <ol class="index">${tiles}</ol>
 </section>
 <section class="section how">
@@ -844,14 +857,14 @@ function renderHow() {
   const canonicalPath = "/roster/how-it-works/";
   const sections = [
     ["What gets a company on the list", [
-      `A phone number on the company's own site, or on a Google Maps listing we opened. A rating goes on the page when we can point at one figure on one page. A company with no rating can still be listed when its own page publishes a price, and the profile says the rating is missing. Two handyman profiles were already on the beta from directories, with no rating and no price, and those profiles say the site was not opened. Checked ${checked}.`,
+      `A phone number on the company's own site, or on a Google Maps listing we opened. A rating goes on the page when we can point at one figure on one page. A company with no rating can still be listed when its own page publishes a price, and the profile says the rating is missing. ISOTeam Homecare was already on the beta from directories, with no rating and no price, and its profile says the site was not opened. Checked ${checked}.`,
       "A review line needs a name, a date or a relative time, and the page it was copied from. The words stay as published, including rough grammar. A quote with no date stays off the page."
     ]],
     ["How the order is chosen", [
       "Higher rating figure first. If the rating ties, the higher review count comes first. A company with no captured rating goes last. The figures are from the company site or a public mirror. They are not one live Google pull, so a page that publishes two counts can move when we next check it."
     ]],
     ["What a homeowner does", [
-      "Pick the job, read the shortlist, and use the form if you want to see it. The form has the estate, the unit count, the job, and a phone. It does not send. A later version can pass one request to at most three companies that do that job and hold prepaid credits. The homeowner pays nothing."
+      "Pick the job, read the shortlist, and use the form if you want to see it. The form asks about the job, property, postal code, timing, company count, and contact details. It does not send. A later version can pass one request to at most three companies that do that job and hold prepaid credits. The homeowner pays nothing."
     ]],
     ["What Featured would be", [
       "A labeled slot under the shortlist and under the form. At most two on a page. The company would get a name, one line, a published price if they have one, and a button that calls or messages them directly. The slot would not include quote requests, and it would not change the number, the stars, or the reviews. A company could buy credits, or a Featured slot, or both. Credits would be charged only when a matching request is delivered.",
@@ -893,9 +906,10 @@ assertNoDashes(raw, "companies.json");
 assertNoDashes({ trades, intents, howFaqs }, "templates");
 validate(raw.companies);
 
+const publishedCompanies = raw.companies.filter((company) => company.publish !== false);
 const grouped = {};
 for (const trade of trades) grouped[trade.id] = [];
-for (const company of raw.companies) grouped[company.category].push(company);
+for (const company of publishedCompanies) grouped[company.category].push(company);
 for (const trade of trades) grouped[trade.id] = sortCompanies(grouped[trade.id]);
 
 const written = [];
@@ -917,7 +931,7 @@ for (const intent of intents) {
   written.push(await writePage(intent.slug, renderCollection(intent, sortCompanies(companies), crumbs)));
 }
 
-for (const company of raw.companies) {
+for (const company of publishedCompanies) {
   written.push(await writePage(
     `company/${company.slug}`,
     renderProfile(company, grouped[company.category])

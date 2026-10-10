@@ -534,6 +534,7 @@
     },
     {
       "slug": "mr-handyman",
+      "publish": false,
       "name": "Mr Handyman Singapore",
       "legalName": "Mr Handyman Singapore",
       "category": "handyman",
