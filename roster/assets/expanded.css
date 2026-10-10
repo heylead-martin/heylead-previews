@@ -1,0 +1,44 @@
+/* Shared reading scale for the expanded directory. */
+:root{--text-body:1rem;--text-note:.875rem}
+body{font-size:var(--text-body)}
+.company-page .company-masthead h1{font-family:var(--serif);font-size:clamp(30px,3.3vw,44px);overflow-wrap:anywhere}
+.company-page .company-name-line{min-width:0}
+.company-page .masthead-rating{font-size:16px;line-height:1.8;margin:23px 0 0;max-width:65ch}
+.company-actions>a:not(.btn){display:inline-flex;align-items:center;min-height:48px;padding:0 12px;font-size:16px}
+.company-page .price-snapshot>strong{font-size:26px;line-height:1.45;overflow-wrap:anywhere}
+.company-page .price-snapshot>span:not(.kicker){font-size:16px}
+.company-page .record-label,.company-page .source-line,.data-source,.company-page .profile-checked,.company-page .kicker,.company-page .service-list-help,.company-page .section-pill{font-size:14px;line-height:1.8}
+.company-page .company-section-nav a{font-size:16px}
+.company-page .service-rate-label>small,.company-page .service-details-label,.company-page .company-facts dt,.company-page .review-entry header p,.company-page .review-entry footer,.company-page .review-origin{font-size:16px;line-height:1.7}
+.company-page .service-rate-price{font-size:18px;overflow-wrap:anywhere}
+.company-page .service-rate>summary{grid-template-columns:minmax(0,1fr) minmax(130px,210px) 34px}
+.company-page .rating-sentence{padding:25px;background:#f1f5eb;border:1px solid var(--rule);border-radius:12px;margin-bottom:26px}
+.rating-sentence>p{font-size:18px;line-height:1.8;margin:0 0 10px}.rating-sentence .rating-context{font-size:16px}.rating-sentence details{border:0;padding:0}.rating-sentence summary{min-height:44px;align-content:center;font-size:16px}.rating-sentence details p{font-size:16px;line-height:1.8}
+.data-source{display:flex;gap:8px 14px;flex-wrap:wrap;margin-top:8px;color:var(--muted)}.data-source a,.source-line a{display:inline-flex;align-items:center;min-height:44px;overflow-wrap:anywhere}.source-line{margin:16px 0 25px;color:var(--muted);overflow-wrap:anywhere}
+.company-facts dd>p{margin:8px 0}.claim-label{display:inline-block;font-size:14px;background:#f3efdf;color:#715e2f;padding:3px 8px;border-radius:4px}
+.operator-group,.management{margin-top:28px;padding:25px;background:#f4f7ef;border:1px solid var(--rule);border-radius:12px}.operator-group h3,.management h3{font-size:20px;line-height:1.5;margin:0 0 12px}.operator-group li a{display:inline-flex;min-height:44px;align-items:center}.operator-group ul{margin:0;padding-left:20px}
+.service-prices{width:100%;border-collapse:collapse;margin-top:20px;background:#fff;font-size:16px;line-height:1.7}.service-prices caption{text-align:left;padding:10px 12px;font-weight:600}.service-prices th,.service-prices td{text-align:left;padding:16px 12px;vertical-align:top;border-bottom:1px solid var(--rule);overflow-wrap:anywhere}.service-prices thead th{font-size:14px}.service-prices td:last-child{font-weight:600;color:var(--green);width:32%}.service-prices .price-conditions{font-weight:400;color:var(--muted);font-size:16px;margin-top:6px}.service-prices .data-source{font-weight:400;font-size:14px}.source-excerpt-label{display:block;font-size:14px;color:var(--muted);margin-bottom:6px}
+.catalogue-card .business-category,.catalogue-card .price-eyebrow,.catalogue-card .price-context{font-size:14px;line-height:1.7}.catalogue-card .business-fit,.catalogue-rating,.catalogue-card .profile-link,.catalogue-card .business-contact a{font-size:16px;line-height:1.8}.catalogue-card h2{font-size:23px;line-height:1.35;overflow-wrap:anywhere}.catalogue-card .business-price strong{font-size:18px;overflow-wrap:anywhere}.catalogue-rating{margin:12px 0;color:var(--ink-soft)}.catalogue-card .business-contact a,.catalogue-card .profile-link,.catalogue-card .save-button{min-height:44px;min-width:44px}.catalogue-card .business-bottom{gap:12px;flex-wrap:wrap}.catalogue-card .business-price{margin-top:18px}
+.directory-page .filters label,.directory-page .filters h2,.directory-page .filters legend,.directory-page .filter-categories a,.directory-page .sort-control,.directory-page .sort-control select,.directory-page .results-toolbar p,.directory-page .list-explainer p,.directory-page .faq-list p{font-size:16px;line-height:1.7}.directory-page .filters small,.directory-page .results-method{font-size:14px;line-height:1.8}.directory-page .filter-check{min-height:44px}.directory-page .filters-head button{min-height:44px;font-size:14px}.filter-select{display:block;margin:19px 0}.filter-select select{display:block;width:100%;font:inherit;border:1px solid #b5c4b1;border-radius:7px;min-height:46px;padding:7px;background:#fff;margin-top:7px}.directory-page .filter-search input{font-size:16px;min-height:46px}.directory-page .results-toolbar{gap:15px;align-items:flex-start}.directory-page .sort-control{flex-wrap:wrap}.directory-page .sort-control select{min-height:44px;max-width:190px}
+.load-more-wrap{text-align:center;margin:26px 0}.load-more-wrap .btn{min-height:48px;font-size:16px}.index-error{background:#fff4df;border:1px solid #d9c58d;padding:20px;border-radius:10px;margin-bottom:20px}.index-error p{font-size:16px}.catalogue-card .business-top>div{min-width:0}.directory-page .filter-foot p{font-size:14px;line-height:1.8}
+@media(max-width:1100px){.company-page .service-rate>summary{grid-template-columns:minmax(0,1fr) minmax(100px,160px) 30px}}
+@media(max-width:639px){.company-page .service-rate>summary{grid-template-columns:minmax(0,1fr) 32px}.company-page .service-rate-price{grid-column:1;grid-row:2;text-align:left}.company-page .service-rate>summary>.service-toggle-icon{grid-column:2;grid-row:1/3}.service-prices,.service-prices tbody,.service-prices tr,.service-prices th,.service-prices td{display:block;width:100%}.service-prices thead{display:none}.service-prices th{border-bottom:0;padding-bottom:4px}.service-prices td:last-child{width:100%;padding-top:4px}.company-page .company-masthead h1{font-size:32px}.directory-page .results-toolbar{flex-direction:column}.catalogue-card h2{font-size:21px}.company-page .company-actions{gap:8px}.company-page .company-facts dd{overflow-wrap:anywhere}.data-source{gap:0 12px}}
+
+.directory-page .directory-hero p:not(.kicker),.help-card>p:not(.kicker),.help-card li,.quote-teaser>p,.list-explainer summary,.faq-list summary,.faq-list p{font-size:16px;line-height:1.8}
+.directory-page .kicker,.quote-teaser small,.results-method,.company-page .service-price-list-heading{font-size:14px;line-height:1.7}
+.global-search input{font-size:16px}.foot-brand p,.foot-col li{font-size:14px;line-height:1.8}.foot-brand .foot-note,.foot-line,.foot-col h2{font-size:14px;line-height:1.7}
+.ask-copy p,.ask-fields label,.ask-fields input,.ask-fields select,.ask-option,.ask-step .field-hint,.ask-recipients{font-size:16px;line-height:1.7}.ask-progress{font-size:14px}.ask-actions button{min-height:44px;font-size:16px}
+@media(max-width:639px){.service-prices caption{display:block;width:100%;font-size:16px}.directory-page .sort-control{justify-content:flex-start;gap:10px}.directory-page .sort-control select{text-align:left}}
+
+.company-intro{font-size:17px;line-height:1.8;max-width:65ch;margin:20px 0;color:var(--ink-soft)}
+.company-detail-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:28px 0 12px}
+.company-detail{padding:22px;border:1px solid var(--rule);border-radius:12px;background:#f8faf5;min-width:0}
+.company-detail h3,.company-socials h3,.sourced-highlights h3{font-size:19px;line-height:1.5;margin:0 0 10px}
+.company-detail p,.sourced-highlights p{font-size:16px;line-height:1.8;margin:0;overflow-wrap:anywhere}
+.company-socials{margin:28px 0}.company-socials a{display:inline-flex;align-items:center;min-height:44px;margin-right:20px}
+.sourced-highlights{margin-top:28px}.sourced-highlights ul{padding:0;list-style:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.sourced-highlights li{border-left:3px solid var(--green);padding:4px 18px;background:#f8faf5}
+.price-original{font-size:14px;font-weight:400;line-height:1.7;margin:10px 0 0;color:var(--muted)}.price-original>span{font-weight:600}
+.company-faq-items>details>.record-label{margin-bottom:0}.company-faq-items .data-source{padding-bottom:16px}
+.foot-col a,.results-method a,.catalogue-rating a,.catalogue-card h2 a,.masthead-rating a,.company-trade{display:inline-flex;align-items:center;min-height:44px}
+@media(max-width:639px){.company-detail-grid,.sourced-highlights ul{grid-template-columns:1fr}}
+.price-original>summary{min-height:44px;cursor:pointer;align-content:center;font-size:14px}.price-original>p{font-size:16px;line-height:1.8;margin:10px 0}

@@ -1,0 +1,3 @@
+# Beta preview. Every HTML page also carries noindex.
+User-agent: *
+Disallow: /roster/

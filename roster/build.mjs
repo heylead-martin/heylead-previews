@@ -1,14 +1,17 @@
-import { readFile, writeFile, mkdir } from "node:fs/promises";
+import { readFile, writeFile, mkdir, rm } from "node:fs/promises";
 import path from "node:path";
 import { createHash } from "node:crypto";
 import { fileURLToPath } from "node:url";
 
+import { createProfileRenderer, directoryRecord, concise, ratingFact } from "./lib/expanded.mjs";
+import { renderCard } from "./assets/catalogue-card.mjs";
+
 const root = path.dirname(fileURLToPath(import.meta.url));
 const origin = "https://previews.heylead.com/roster";
-const checked = "9 Oct 2026 and 10 Oct 2026";
+let checked = "9 Oct 2026 and 10 Oct 2026";
 // Content hashes keep cached assets in sync with each generated page.
 const assetVersions = Object.fromEntries(await Promise.all(
-  ["site.css", "directory.css", "experience.css", "form.js", "directory.js", "experience.js"].map(async (name) => [
+  ["site.css", "directory.css", "experience.css", "form.js", "directory.js", "experience.js", "expanded.css", "catalogue.js", "catalogue-card.mjs"].map(async (name) => [
     name,
     createHash("sha256").update(await readFile(path.join(root, "assets", name))).digest("hex").slice(0, 12)
   ])
@@ -16,143 +19,261 @@ const assetVersions = Object.fromEntries(await Promise.all(
 
 const trades = [
   {
-    id: "aircon",
-    slug: "aircon-servicing",
-    name: "Aircon servicing",
-    h1: "Aircon servicing in Singapore",
-    intro: [
-      "Most HDB flats run two or three wall units on one compressor. Condos often add a ceiling cassette or a ducted unit in the living room. A normal service washes the filters and the fan coil. A chemical wash goes after the coil with a chemical. A gas top-up is for a unit that cools poorly, and it should come with a leak check.",
-      "Six companies have a phone we could cite. The shortlist stops there. Ratings come from the cited source and are not one live Google pull. Company-site ratings do not decide the order. 338 Aircon publishes more than one count. SoCool's public mirrors disagree with each other. Cool Aircon's homepage shows 4.9 and also says 5.0, and its page data says 366 reviews while the badge says 360+. The conflicting counts remain visible on the profiles.",
-      "Prices are what the company publishes. Where a price is missing, the company page we opened did not print one."
+    "id": "aircon",
+    "slug": "aircon-servicing",
+    "name": "Aircon servicing",
+    "h1": "Aircon servicing in Singapore",
+    "intro": [
+      "Explore sourced aircon servicing companies in Singapore. Compare the services they publish, their prices and how to contact them.",
+      "Listings come from company websites and cited records. Ratings name their source and check date. Missing prices are left as a request for a quote."
     ],
-    jobs: ["General service", "Chemical wash", "Gas top-up", "Repair", "Not sure"],
-    faqs: [
-      ["How often should an HDB or condo aircon be serviced?", "A common rhythm in Singapore is a general service two to four times a year, because the units run hard and the air is humid. A condo management (MCST) can also set contractor rules for the building. Ask the office before someone drills or drains off a balcony."],
-      ["What is the difference between a normal service and a chemical wash?", "A normal service cleans filters, the fan coil face, and the drainage. A chemical wash uses a chemical on the coil to break down mould and sludge a wipe does not reach. Lion City, Cool Aircon, Billy Aircon, and Cool Earth publish chemical-wash prices. Cool Earth's page prints two ranges. 338 Aircon describes chemical wash work and does not print a per-unit chemical price on the pages we opened."],
-      ["When is a gas top-up the right job?", "When the unit is low on refrigerant and cools poorly. Adding gas without a leak check can mean paying for the same top-up again. Cool Aircon publishes a PSI table. Lion City names gas top-up as a service and includes it in the overhaul and the yearly contract. 338 Aircon sells a contract that includes gas. Cool Earth's not-cold line names low gas and prices a troubleshooting fee, not the gas."],
-      ["What should I ask before I book?", "The price for the actual job, whether GST is included, whether the blower is washed, and what happens if they find low gas. Ask for the price in writing before they arrive."],
-      ["How do I check the company myself?", "Search the company name on ACRA's BizFile, and open the Google Maps listing linked from the profile. Roster quotes a few reviews and records the page they came from. The rating line says when that page was checked."]
+    "jobs": [
+      "General service",
+      "Chemical wash",
+      "Gas top-up",
+      "Repair",
+      "Not sure"
+    ],
+    "faqs": [
+      [
+        "How do I compare aircon servicing companies?",
+        "Start with the service you need, check the published price conditions and confirm availability directly. The location filter describes the listed business address, not its service coverage."
+      ],
+      [
+        "Are all prices fixed quotes?",
+        "No. Published figures can depend on the job, unit count or package. Check the price source and ask about parts, transport and GST."
+      ],
+      [
+        "Where do the ratings come from?",
+        "Each rating names its source and check date. Google Maps search figures are source snapshots. Company-site figures remain labelled as company-site claims."
+      ],
+      [
+        "Does the quote preview send my details?",
+        "No. The beta request panel is a preview. Nothing is sent or stored. Call or WhatsApp a company directly to discuss a job."
+      ]
     ]
   },
   {
-    id: "plumbing",
-    slug: "plumbing",
-    name: "Plumbing",
-    h1: "Plumbing in Singapore",
-    intro: [
-      "A choked floor trap, a leaking heater, or a burst flexi hose is usually a same-day job. Singapore plumbing work that touches the water service is supposed to be done by a PUB licensed plumber. The licence number should be something the company can point to.",
-      "Three companies have a phone we could cite. Direct Plumber prints 5.0 and 3,388+ reviews, and a second WhatsApp number in the footer. Kiasu Plumber prints prices and no licence number, and no review count on the pages we opened, so the missing details are noted on its profile. Mr Plumber's WhatsApp is also printed by Daylight Electrician."
+    "id": "plumbing",
+    "slug": "plumbing",
+    "name": "Plumbing",
+    "h1": "Plumbing in Singapore",
+    "intro": [
+      "Explore sourced plumbing companies in Singapore. Compare the services they publish, their prices and how to contact them.",
+      "Listings come from company websites and cited records. Ratings name their source and check date. Missing prices are left as a request for a quote."
     ],
-    jobs: ["Choke", "Leak", "Water heater", "Other", "Not sure"],
-    faqs: [
-      ["Does a plumber in Singapore need a PUB licence?", "PUB licenses plumbers for water-service work. Mr Plumber prints WS17962021 on its Little India page and says its plumbers are BCA certified. This beta did not open the PUB or BCA registers, so the number is what the company publishes."],
-      ["What should I ask before an emergency call-out?", "A fixed price, or the rate if they cannot see the choke yet. Ask which brand is sending the technician. The WhatsApp number on this profile is also printed by Daylight Electrician."],
-      ["Why is Kiasu Plumber missing a rating?", "The homepage prices are published. The pages we opened do not print a PUB licence number, an address, or a Google rating. No rating is added without a source."],
-      ["What is the second office?", "The contact page lists a central desk at 60 Paya Lebar Road #07-54, phone +65 3165 0126. The main line and the Lower Delta Road address are the ones in the facts table."]
+    "jobs": [
+      "Choke",
+      "Leak",
+      "Water heater",
+      "Other",
+      "Not sure"
+    ],
+    "faqs": [
+      [
+        "How do I compare plumbing companies?",
+        "Start with the service you need, check the published price conditions and confirm availability directly. The location filter describes the listed business address, not its service coverage."
+      ],
+      [
+        "Are all prices fixed quotes?",
+        "No. Published figures can depend on the job, unit count or package. Check the price source and ask about parts, transport and GST."
+      ],
+      [
+        "Where do the ratings come from?",
+        "Each rating names its source and check date. Google Maps search figures are source snapshots. Company-site figures remain labelled as company-site claims."
+      ],
+      [
+        "Does the quote preview send my details?",
+        "No. The beta request panel is a preview. Nothing is sent or stored. Call or WhatsApp a company directly to discuss a job."
+      ]
     ]
   },
   {
-    id: "electrician",
-    slug: "electrician",
-    name: "Electrician",
-    h1: "Electrician in Singapore",
-    intro: [
-      "A tripped DB, a dead circuit, or a burning smell is electrical work. In Singapore that work is supposed to be done by an EMA licensed electrical worker. A company saying licensed is a claim until you see the licence.",
-      "Four companies have a phone we could cite. Ratings read on Google sort first; the other companies are alphabetical. Daylight's own pages do not agree on the count. Repair.sg's pages do not agree on the score. 1st Electrical Services is 4.7 from 102 on a Trustindex page, and the homepage widget says 139. Company-site ratings do not decide the order."
+    "id": "electrician",
+    "slug": "electrician",
+    "name": "Electrician",
+    "h1": "Electrician in Singapore",
+    "intro": [
+      "Explore sourced electrician companies in Singapore. Compare the services they publish, their prices and how to contact them.",
+      "Listings come from company websites and cited records. Ratings name their source and check date. Missing prices are left as a request for a quote."
     ],
-    jobs: ["Power trip", "Lighting", "Distribution board", "Other", "Not sure"],
-    faqs: [
-      ["What does an EMA licence mean here?", "EMA licenses electrical workers in Singapore. Daylight says its electricians are licensed. This beta did not open the EMA register, so the profile keeps that as the company's statement."],
-      ["Why do the review counts disagree?", "Daylight prints several different counts on its own pages, all at 5.0. Repair.sg says 4.9 and more than 3,000 on the electrician page, and 5.0 from 2,948 on an isolator page. SK Electrical's 4.9 from 856 is the figure on the Google Maps listing opened on 9 Oct 2026. 1st Electrical Services is 4.7 from 102 on Trustindex, opened 10 Oct 2026, and 139 on the homepage widget."],
-      ["What should I ask before a DB or rewiring job?", "Whether the person coming is the licensed worker, what the price covers, and whether the DB needs a shutdown. For a condo, ask the MCST which contractor paperwork they want."],
-      ["Why does Daylight share a WhatsApp number with a plumber?", "Daylight and Mr Plumber both print +65 8241 0032, and both sit in 1090 Lower Delta Road. Daylight's footer says powered by Everyworks. The profile says so you can ask which brand is coming."]
+    "jobs": [
+      "Power trip",
+      "Lighting",
+      "Distribution board",
+      "Other",
+      "Not sure"
+    ],
+    "faqs": [
+      [
+        "How do I compare electrician companies?",
+        "Start with the service you need, check the published price conditions and confirm availability directly. The location filter describes the listed business address, not its service coverage."
+      ],
+      [
+        "Are all prices fixed quotes?",
+        "No. Published figures can depend on the job, unit count or package. Check the price source and ask about parts, transport and GST."
+      ],
+      [
+        "Where do the ratings come from?",
+        "Each rating names its source and check date. Google Maps search figures are source snapshots. Company-site figures remain labelled as company-site claims."
+      ],
+      [
+        "Does the quote preview send my details?",
+        "No. The beta request panel is a preview. Nothing is sent or stored. Call or WhatsApp a company directly to discuss a job."
+      ]
     ]
   },
   {
-    id: "handyman",
-    slug: "handyman",
-    name: "Handyman",
-    h1: "Handyman in Singapore",
-    intro: [
-      "A handyman job is the small one: a drill, a furniture build, a silicone joint, a door that sticks. It is a poor place to hide a plumber or an electrician who should carry a licence.",
-      "Two companies are listed. SG Handyman Engineering prints 4.9 from 70 Google reviews on its contact page. The widget reviews on that page have names and no dates, so no excerpt is stored. ISOTeam Homecare has no Google rating stored here. mrhandyman.sg returned an error on 10 Oct 2026, so Mr Handyman is not listed."
+    "id": "handyman",
+    "slug": "handyman",
+    "name": "Handyman",
+    "h1": "Handyman in Singapore",
+    "intro": [
+      "Explore sourced handyman companies in Singapore. Compare the services they publish, their prices and how to contact them.",
+      "Listings come from company websites and cited records. Ratings name their source and check date. Missing prices are left as a request for a quote."
     ],
-    jobs: ["Furniture", "Mounting", "Small repair", "Other", "Not sure"],
-    faqs: [
-      ["Why is one profile thinner?", "ISOTeam Homecare has a RecordOwl registry entry and no signed review stored here. SG Handyman Engineering is the one with a rating on its own contact page."],
-      ["What should a handyman quote include?", "The job, the price, and whether drilling into a wall or a ceiling is included. In a condo, the MCST may want approval before noisy work."],
-      ["Why does one profile still have no Google rating?", "A rating goes on the page when we can point at one figure on one page. SG Handyman Engineering's contact page prints 4.9 from 70. ISOTeam did not clear that. ThreeBestRated's 4.9 for ISOTeam is that site's own score, so it is left off."],
-      ["Why did one address match an electrician?", "Daylight Electrician's contact page lists a west branch at 21 Bukit Batok Crescent #09-79, the unit directories gave for Mr Handyman. mrhandyman.sg returned an error on 10 Oct 2026, so that company is not listed."]
+    "jobs": [
+      "Furniture",
+      "Mounting",
+      "Small repair",
+      "Other",
+      "Not sure"
+    ],
+    "faqs": [
+      [
+        "How do I compare handyman companies?",
+        "Start with the service you need, check the published price conditions and confirm availability directly. The location filter describes the listed business address, not its service coverage."
+      ],
+      [
+        "Are all prices fixed quotes?",
+        "No. Published figures can depend on the job, unit count or package. Check the price source and ask about parts, transport and GST."
+      ],
+      [
+        "Where do the ratings come from?",
+        "Each rating names its source and check date. Google Maps search figures are source snapshots. Company-site figures remain labelled as company-site claims."
+      ],
+      [
+        "Does the quote preview send my details?",
+        "No. The beta request panel is a preview. Nothing is sent or stored. Call or WhatsApp a company directly to discuss a job."
+      ]
     ]
   },
   {
-    id: "cleaning",
-    slug: "home-cleaning",
-    name: "Home cleaning",
-    h1: "Home cleaning in Singapore",
-    intro: [
-      "One company cleared the source bar. Sureclean prints a phone, an address, a UEN, and a Google reviews page we opened on 10 Oct 2026 that shows 4.9 from 1,551 reviews. Its weekly page prints 5 and 1,551+, and a widget on that page rendered as 1 star and 1500+. The sourced Google figure is 4.9 from 1,551.",
-      "Helpling publishes hourly prices and is a marketplace, so it is not listed as one crew. Sendhelper has shut. Sureclean's weekly page says as low as $22. That page does not say per hour, and it does not say whether GST is included."
+    "id": "cleaning",
+    "slug": "home-cleaning",
+    "name": "Home cleaning",
+    "h1": "Home cleaning in Singapore",
+    "intro": [
+      "Explore sourced home cleaning companies in Singapore. Compare the services they publish, their prices and how to contact them.",
+      "Listings come from company websites and cited records. Ratings name their source and check date. Missing prices are left as a request for a quote."
     ],
-    jobs: ["Regular clean", "One-time clean", "Move-out clean", "Not sure"],
-    faqs: [
-      ["Why is there only one cleaner?", "A company needs a phone on its own site or on a page we opened, and a rating we can tie to one page. Marketplaces stayed off. Sureclean is the company that cleared it."],
-      ["What would put another cleaner on the list?", "A working phone, a page that states a Google rating and a count, and two or three review lines with a name and a date. A marketplace that assigns a different crew each visit stays off the list."],
-      ["Can I still send a request?", "The form is on the page so you can see it. It names Sureclean. The beta does not send the form."]
+    "jobs": [
+      "Regular clean",
+      "One-time clean",
+      "Move-out clean",
+      "Not sure"
+    ],
+    "faqs": [
+      [
+        "How do I compare home cleaning companies?",
+        "Start with the service you need, check the published price conditions and confirm availability directly. The location filter describes the listed business address, not its service coverage."
+      ],
+      [
+        "Are all prices fixed quotes?",
+        "No. Published figures can depend on the job, unit count or package. Check the price source and ask about parts, transport and GST."
+      ],
+      [
+        "Where do the ratings come from?",
+        "Each rating names its source and check date. Google Maps search figures are source snapshots. Company-site figures remain labelled as company-site claims."
+      ],
+      [
+        "Does the quote preview send my details?",
+        "No. The beta request panel is a preview. Nothing is sent or stored. Call or WhatsApp a company directly to discuss a job."
+      ]
     ]
   }
 ];
 
 const intents = [
   {
-    id: "chemical-wash",
-    parent: "aircon",
-    slug: "aircon-servicing/chemical-wash",
-    name: "Chemical wash",
-    titleName: "Aircon chemical wash",
-    h1: "Aircon chemical wash in Singapore",
-    service: "chemical-wash",
-    intro: [
-      "A chemical wash is the deeper clean. The coil is treated so mould and sludge come off, which a filter wash leaves behind. It is the usual fix for a musty smell or a unit that drips because the drain pan is filthy.",
-      "Lion City publishes S$87.20 per unit with GST. Cool Aircon publishes S$110 for one unit and says no GST is added. Cool Earth prints both from S$80 and S$80 to S$100 on the same page, with a Google line of 4.0 from 66 reviews. Billy Aircon publishes a range, and the page does not say whether GST is in it. 338 Aircon's install page describes chemical wash work and does not print a per-unit chemical price. SoCool stays on the aircon hub only. The pages we could read do not describe a chemical wash."
+    "id": "chemical-wash",
+    "parent": "aircon",
+    "slug": "aircon-servicing/chemical-wash",
+    "name": "Chemical wash",
+    "titleName": "Aircon chemical wash",
+    "h1": "Aircon chemical wash in Singapore",
+    "service": "chemical-wash",
+    "intro": [
+      "Compare companies whose sourced service list includes chemical wash. Open each profile for the published details and confirm the exact work before booking."
     ],
-    jobs: ["Chemical wash", "Not sure if I need one"],
-    faqs: [
-      ["Is a chemical wash the same as a chemical overhaul?", "No. A wash treats the coil, often with the unit still on the wall. An overhaul takes the fan coil apart. Lion City prices the wash at S$87.20 and the overhaul from S$109 to S$163.50 per unit with GST. Billy prices both, as a range."],
-      ["How many units are in a typical flat?", "Many HDB homes have two or three wall units. A condo living room may add a cassette. Ask for a per-unit price and a total before they arrive."],
-      ["Should I chemical-wash every quarter?", "A general service is the quarterly job. A chemical wash is for smell, weak airflow, or a coil that a normal service did not fix. Lion City's own guide says a first-time symptom is often a wash, and a problem that comes back is an overhaul conversation."],
-      ["Why is SoCool missing here?", "SoCool is on the aircon servicing list. A chemical-wash price or description was not on the pages we could read, so it is not on this one."]
+    "jobs": [
+      "Chemical wash",
+      "Not sure"
+    ],
+    "faqs": [
+      [
+        "How do I compare chemical wash prices?",
+        "Check the unit or package covered by each published price, whether GST is stated and any additional work. Ask the company for a written total."
+      ],
+      [
+        "Does every listed company publish a rate?",
+        "No. A company can list the service without publishing a price. Those profiles say to ask for a quote."
+      ],
+      [
+        "Can I contact a company directly?",
+        "Yes. The phone and WhatsApp links go directly to the company. The Roster quote request remains an unsent preview."
+      ]
     ]
   },
   {
-    id: "gas-top-up",
-    parent: "aircon",
-    slug: "aircon-servicing/gas-top-up",
-    name: "Gas top-up",
-    titleName: "Aircon gas top-up",
-    h1: "Aircon gas top-up in Singapore",
-    service: "gas-top-up",
-    intro: [
-      "Gas top-up means adding refrigerant. It is the right job when the unit is low and cools poorly. It is a weak job when the company adds gas and skips the leak. The gas leaves again, and the bill comes back.",
-      "Three companies are on this page because their own sites price gas or include it in a named package. Cool Aircon publishes a PSI table, from S$90, and says no GST is added. Lion City names gas top-up as a service, and includes it in the chemical overhaul and the yearly contract. There is no standalone gas price on the price table we opened. 338 Aircon's book-online page sells a contract with free gas at S$250, and a contract without it at S$200 for one unit. Billy Aircon, SoCool, and Cool Earth stay on the hub. Cool Earth's not-cold page names low gas as a cause and a troubleshooting fee from S$40. That is not a gas price."
+    "id": "gas-top-up",
+    "parent": "aircon",
+    "slug": "aircon-servicing/gas-top-up",
+    "name": "Gas top-up",
+    "titleName": "Aircon gas top-up",
+    "h1": "Aircon gas top-up in Singapore",
+    "service": "gas-top-up",
+    "intro": [
+      "Compare companies whose sourced service list includes gas top-up. Open each profile for the published details and confirm the exact work before booking."
     ],
-    jobs: ["Gas top-up", "Unit not cold", "Not sure"],
-    faqs: [
-      ["Does low gas always mean a top-up?", "Low gas means the refrigerant left the system. A top-up without finding the leak is a temporary fill. Ask whether a leak check is included and what it costs if they only add gas."],
-      ["What did Cool Aircon publish?", "A table by refrigerant and PSI. Under 40 PSI: R22 S$90, R410A S$120, R32 S$130. The technician is supposed to measure the pressure and confirm the cell before any gas goes in. The company says it is not GST-registered."],
-      ["What did Lion City publish?", "The privacy policy lists gas top-up among the services. The price page includes gas in the yearly contract and describes it inside the overhaul. A separate gas line was not on that table."],
-      ["What did 338 Aircon publish?", "Book-online lists a contract with free gas and a contract without it. That is a package, not a one-off leak-test fee."],
-      ["Why are there three names?", "The page lists companies whose own pages price gas or include it in a named package. Cool Earth mentions low gas and does not price it, so it stays on the hub."]
+    "jobs": [
+      "Gas top-up",
+      "Not sure"
+    ],
+    "faqs": [
+      [
+        "How do I compare gas top-up prices?",
+        "Check the unit or package covered by each published price, whether GST is stated and any additional work. Ask the company for a written total."
+      ],
+      [
+        "Does every listed company publish a rate?",
+        "No. A company can list the service without publishing a price. Those profiles say to ask for a quote."
+      ],
+      [
+        "Can I contact a company directly?",
+        "Yes. The phone and WhatsApp links go directly to the company. The Roster quote request remains an unsent preview."
+      ]
     ]
   }
 ];
 
 const howFaqs = [
-  ["Can a company pay to be number 1?", "No. Companies cannot pay for their position. Ratings read directly on Google sort first by score and count. Other companies are alphabetical. Company-site figures do not decide the order."],
-  ["What would a Featured slot include?", "A label, the company name, one line they write, a published price if they have one, and a call or WhatsApp button that rings them directly. It would sit under the shortlist. It would not change the number, the stars, or the reviews, and it would not include the quote requests. No company has a paid placement on this beta."],
-  ["Does the quote form send my number?", "It does not. The button stays on this page. A later version can send one request to at most three companies that match the job and hold prepaid credits. A dead number, a job outside Singapore, or a job the company does not do would be refunded. That product is not switched on."],
-  ["Where do the reviews come from?", "From the page named under the quote: a Google Maps listing, a Trustindex or Wanderlog mirror, property.co, or the company's own site. The words are copied as published. A review without a name and a date is left off. Roster does not run its own star score."],
-  ["Why are some lists shorter than five?", "Five was the aim. A company needs a cited phone, plus a rating we can point at, or a price the company publishes when the rating is missing. One handyman profile predates that bar and says so. Home cleaning has one. Handyman has two. Inventing the rest would have been a directory, which is the thing this beta is here to avoid."]
+  [
+    "Can a company buy its position?",
+    "No. Directory listings are unpaid. The default order is alphabetical; you can choose a rating or review-count sort using the cited Google Maps snapshots."
+  ],
+  [
+    "Where do the ratings and reviews come from?",
+    "Each rating and review links to its source and names when it was checked. Company-site ratings are labelled separately from Google Maps data."
+  ],
+  [
+    "Does the quote form send my number?",
+    "No. The quote panel is a local preview. It does not send or store your contact details."
+  ],
+  [
+    "Which companies get a profile?",
+    "Profiles require sourced services and company information. Flagged or incomplete database rows stay out of the directory. The original hand-checked write-ups are preserved."
+  ]
 ];
 
 function walkStrings(value, visit, trail = "") {
@@ -220,18 +341,8 @@ function validate(companies) {
   }
 }
 
-function isGoogleRating(company) {
-  return !!company.rating && /^(www\.)?(maps\.google\.com|google\.com|business\.google\.com)$/.test(new URL(company.rating.sourceUrl).hostname);
-}
-
 function sortCompanies(list) {
-  return list.slice().sort((a, b) => {
-    const av = isGoogleRating(a) ? a.rating.value : -1;
-    const bv = isGoogleRating(b) ? b.rating.value : -1;
-    if (bv !== av) return bv - av;
-    if (av !== -1 && a.rating.count !== b.rating.count) return b.rating.count - a.rating.count;
-    return a.name.localeCompare(b.name);
-  });
+  return list.slice().sort((a,b) => a.name.localeCompare(b.name));
 }
 
 function esc(text) {
@@ -402,7 +513,7 @@ function renderCrumbs(items) {
 function renderFooter() {
   const jobs = trades.map((trade) => `<li><a href="/roster/${trade.slug}/">${esc(trade.name)}</a></li>`).join("");
   return `<footer class="foot"><div class="wrap foot-inner">
-<div class="foot-brand"><a class="brand" href="/roster/">${brandMark()}<span class="wordmark">Roster</span></a><p>A short, unpaid list of home-service companies in Singapore, with the reviews that back it.</p><p class="foot-note">Figures checked ${checked}. Ratings and excerpts are from the cited page. They are not from one Google API pull.</p></div>
+<div class="foot-brand"><a class="brand" href="/roster/">${brandMark()}<span class="wordmark">Roster</span></a><p>A sourced directory of home-service companies in Singapore, with the reviews that back it.</p><p class="foot-note">Figures checked ${checked}. Ratings and excerpts are from the cited page. They are not from one Google API pull.</p></div>
 <div class="foot-col"><h2>Jobs</h2><ul>${jobs}</ul></div>
 <div class="foot-col"><h2>About</h2><ul><li><a href="/roster/how-it-works/">How the list is made</a></li><li><a href="/roster/how-it-works/">What a Featured slot would be</a></li><li><a href="/roster/aircon-servicing/chemical-wash/">Aircon chemical wash</a></li><li><a href="/roster/aircon-servicing/gas-top-up/">Aircon gas top-up</a></li></ul></div>
 <p class="foot-line">Singapore beta. Unpaid listings. No commission on your job. Quote requests are a preview and do not send.</p>
@@ -453,48 +564,20 @@ function renderForm(jobs, recipients, uid) {
   return `<section class="ask-wrap" aria-labelledby="${id("title")}"><div class="ask-copy"><p class="kicker">Quote request</p><h2 id="${id("title")}">Request a quote</h2>${who}<p class="note ask-note">${icon("shield", "ic ic-inline")}Beta: this form does not send. Nothing is stored. The homeowner pays nothing.</p></div><div class="ask" data-quote-steps><p class="ask-progress" data-progress aria-live="polite">Step 1 of 5</p><div class="ask-error" data-error role="alert" tabindex="-1" hidden></div><section class="ask-step" data-step="1" aria-labelledby="${id("job-title")}"><h3 id="${id("job-title")}">Job</h3><div class="ask-fields"><label for="${id("job")}">What do you need?<select id="${id("job")}" name="job"><option value="">Select a job</option>${options}</select></label><label for="${id("property")}">Property type<select id="${id("property")}" name="property"><option value="">Select property type</option><option>HDB</option><option>Condo or apartment</option><option>Landed</option><option>Commercial</option><option>Not sure</option></select></label><label for="${id("size")}">Number of units or rooms<input id="${id("size")}" name="size" type="number" inputmode="numeric" min="1" step="1"></label></div><div class="ask-actions"><button class="btn btn-solid" type="button" data-next>Next</button></div></section><section class="ask-step" data-step="2" aria-labelledby="${id("postal-title")}" hidden><h3 id="${id("postal-title")}">Singapore postal code</h3><div class="ask-fields"><label for="${id("postal")}">Postal code<input id="${id("postal")}" name="postal" type="text" inputmode="numeric" autocomplete="postal-code" maxlength="6" pattern="[0-9]{6}" aria-describedby="${id("postal-hint")}"><span class="field-hint" id="${id("postal-hint")}">Enter all six digits.</span></label></div><div class="ask-actions"><button class="btn" type="button" data-back>Back</button><button class="btn btn-solid" type="button" data-next>Next</button></div></section><section class="ask-step" data-step="3" aria-labelledby="${id("when-title")}" hidden><h3 id="${id("when-title")}">When</h3><div class="ask-options" role="radiogroup" aria-label="When do you need the job?"><label class="ask-option"><input type="radio" name="when" value="This week"> <span>This week</span></label><label class="ask-option"><input type="radio" name="when" value="Flexible"> <span>Flexible</span></label></div><div class="ask-actions"><button class="btn" type="button" data-back>Back</button><button class="btn btn-solid" type="button" data-next>Next</button></div></section><section class="ask-step" data-step="4" aria-labelledby="${id("count-title")}" hidden><h3 id="${id("count-title")}">How many companies should contact you?</h3><p class="field-hint">${esc(countNote)}</p><div class="ask-options" role="radiogroup" aria-label="How many companies should contact you?">${countChoices}</div><div class="ask-actions"><button class="btn" type="button" data-back>Back</button><button class="btn btn-solid" type="button" data-next>Next</button></div></section><section class="ask-step" data-step="5" aria-labelledby="${id("contact-title")}" hidden><h3 id="${id("contact-title")}">Your contact details</h3><div class="ask-fields"><label for="${id("name")}">Name<input id="${id("name")}" name="name" type="text" autocomplete="name"></label><label for="${id("mobile")}">Singapore mobile<input id="${id("mobile")}" name="mobile" type="tel" inputmode="numeric" autocomplete="tel" maxlength="8" aria-describedby="${id("mobile-hint")}"><span class="field-hint" id="${id("mobile-hint")}">8 digits, starting with 8 or 9.</span></label><label for="${id("email")}">Email<input id="${id("email")}" name="email" type="email" autocomplete="email"></label></div><div class="ask-recipients"><p data-recipient-copy>${contactLine}</p><ol data-recipients>${names}</ol></div><div class="ask-actions"><button class="btn" type="button" data-back>Back</button><button class="btn btn-solid" type="button" data-submit>Request a quote</button></div><p class="result" data-result aria-live="polite" hidden></p></section></div></section>`;
 }
 
-function renderReview(review) {
-  return `<figure class="quote"><blockquote><p>${esc(review.excerpt)}</p></blockquote><figcaption><span class="who">${esc(review.author)}</span>, ${esc(review.relativeTime)}. <a href="${esc(review.sourceUrl)}">Source</a>. <a href="${esc(review.mapsUrl)}">Maps</a>. <span class="src">${esc(review.sourceLabel)}</span></figcaption></figure>`;
-}
-
-function ratingChip(company) {
-  if (!company.rating) return `<p class="rate rate-none">No sourced rating yet</p>`;
-  const r = company.rating;
-  const own = company.website?.value && new URL(r.sourceUrl).hostname.replace(/^www\./, "") === new URL(company.website.value).hostname.replace(/^www\./, "");
-  const source = isGoogleRating(company) ? "Google" : own ? "Their site says" : "Review mirror reports";
-  return `<p class="rate">${isGoogleRating(company) ? `<span class="score">${icon("star", "ic ic-star")}${r.value.toFixed(1)}</span>` : icon("star", "ic source-star")}<span>${source} <strong>${esc(r.label)}</strong></span><a class="rating-source" href="${esc(r.sourceUrl)}" aria-label="Rating source for ${esc(company.name)}">Source${icon("link")}</a></p>`;
-}
-
-function contactButtons(company, solidProfile) {
-  const buttons = [`<a class="btn" href="${telHref(company.phone.value)}">${icon("phone", "ic ic-btn-lead")}Call</a>`];
-  if (company.whatsapp?.value) {
-    buttons.push(`<a class="btn" href="${waHref(company.whatsapp.value)}">${icon("chat", "ic ic-btn-lead")}WhatsApp</a>`);
-  }
-  if (solidProfile) {
-    buttons.push(`<a class="btn btn-solid" href="/roster/company/${company.slug}/">Profile${icon("arrow", "ic ic-btn")}</a>`);
-  }
-  return buttons.join("");
-}
-
 function priceSummary(company, service) {
   const display = presentation[company.slug] || { price: "Ask for a quote", detail: "No published rate captured", published: false };
   return service ? { ...display, ...(display.services?.[service] || { price: "Ask for a quote", detail: "No standalone price captured for this job", published: false }) } : display;
 }
 
-function renderRow(company, index, service) {
-  const display = priceSummary(company, service);
-  const trade = tradeById(company.category);
-  const media = display.logo ? `<img class="company-logo" src="${display.logo}" alt="${esc(company.name)} logo" width="88" height="64" loading="lazy">` : "";
-  const searchable = [company.name, trade.name, company.bestFor, company.priceNote, ...company.services].join(" ");
-  const tags = company.services.map(service => `<span>${esc(service.replaceAll("-", " "))}</span>`).join("");
-  return `<li class="business-card" data-company data-name="${esc(company.name)}" data-search="${esc(searchable.toLowerCase())}" data-category="${company.category}" data-price="${!!display.published}" data-reviews="${!!company.reviews.length}" data-whatsapp="${!!company.whatsapp?.value}" data-slug="${company.slug}" data-order="${index}"><article><div class="business-top"><div><p class="business-category">${icon(tradeIcon[trade.id])}${esc(trade.name)}<span class="dot-sep">/</span> Singapore</p><h2><a href="/roster/company/${company.slug}/">${esc(company.name)}</a></h2></div><button class="save-button" type="button" data-save="${company.slug}" aria-label="Save ${esc(company.name)}" aria-pressed="false">${icon("bookmark")}</button></div>${ratingChip(company)}<div class="business-overview ${media ? "has-logo" : ""}"><div><p class="business-fit">${esc(company.bestFor)}</p>${tags ? `<div class="service-tags">${tags}</div>` : ""}</div>${media}</div><div class="business-price"><div><span class="price-eyebrow">${display.published ? "Published price" : "Pricing"}</span><strong>${esc(display.price)}</strong><span class="price-context">${esc(display.detail)}</span></div><a href="${esc(company.priceSourceUrl)}" aria-label="Price source for ${esc(company.name)}">${icon("link")}<span>Source</span></a></div><details class="card-details"><summary>What to know before you book${icon("chevron")}</summary><p>${esc(company.poorFit)}</p>${company.rating ? `<p>${esc(company.rating.note)} <a href="${esc(company.rating.sourceUrl)}">Rating source</a>.</p>` : ""}<p class="note">Figures checked ${esc(checked)}.</p>${company.reviews.length ? renderReview(company.reviews[0]) : ""}</details><div class="business-bottom"><a class="profile-link" href="/roster/company/${company.slug}/">View company${icon("arrow")}</a><div class="business-contact"><a href="${telHref(company.phone.value)}">${icon("phone")}Call</a>${company.whatsapp?.value ? `<a href="${waHref(company.whatsapp.value)}">${icon("chat")}WhatsApp</a>` : ""}</div></div></article></li>`;
-}
-
+function indexName(spec) { return spec.service || spec.id; }
+function indexPath(spec) { return `/roster/data/index/${indexName(spec)}.json`; }
 function shortlist(companies, service) {
-  return `<div class="results-toolbar"><div><h2>Companies to consider</h2><p data-result-count aria-live="polite">${companies.length} ${companies.length === 1 ? "company" : "companies"} on this shortlist</p></div><label class="sort-control">Sort by<select data-sort aria-label="Sort companies"><option value="recommended">Source order</option><option value="name">Name A to Z</option></select></label></div><p class="results-method">Unpaid listings. Google-source ratings first, then alphabetical. <a href="/roster/how-it-works/">Our approach</a></p><ol class="shortlist">${companies.map((company, index) => renderRow(company, index, service)).join("")}</ol><div class="no-results" data-no-results hidden><span class="disc">${icon("search")}</span><h3>No companies match these filters</h3><p>Try a different search or clear your filters.</p><button type="button" class="btn" data-reset>Clear filters</button></div>`;
+  const records = companies.map(c => directoryRecord(c, priceSummary(c, service), tradeById(c.category)));
+  return `<div class="results-toolbar"><div><h2>Companies to consider</h2><p data-result-count aria-live="polite">Showing ${Math.min(12,companies.length)} of ${companies.length} companies</p></div><label class="sort-control">Sort by<select data-sort aria-label="Sort companies"><option value="name">Name A to Z</option><option value="rating">Google Maps rating</option><option value="reviews">Google review count</option></select></label></div><p class="results-method">Unpaid listings. Ratings are dated source snapshots. <a href="/roster/how-it-works/">Our approach</a></p><div class="index-error" data-index-error hidden><p>The complete list could not load. Please try again.</p><button type="button" class="btn" data-retry>Retry loading companies</button></div><ol class="shortlist">${records.slice(0,12).map(c => renderCard(c)).join("")}</ol><div class="load-more-wrap"><button class="btn" data-load-more type="button"${companies.length<=12?' hidden':''}>Load more companies</button></div><div class="no-results" data-no-results hidden><h3>No companies match these filters</h3><p>Try a different search or clear your filters.</p><button type="button" class="btn" data-reset>Clear filters</button></div><noscript><p>Enable JavaScript to filter the list. All company profiles are available below.</p><ul>${companies.map(c => `<li><a href="/roster/company/${c.slug}/">${esc(c.name)}</a></li>`).join("")}</ul></noscript>`;
 }
 
 function pageShell({ title, description, canonicalPath, current, jsonLd, body, bodyClass = "", shareImage = "" }) {
+  description = concise(description);
   const canonical = abs(canonicalPath);
   const graph = JSON.stringify({
     "@context": "https://schema.org",
@@ -507,6 +590,7 @@ function pageShell({ title, description, canonicalPath, current, jsonLd, body, b
 <script src="/auth-config.js"></script>
 <script src="/auth.js"></script>
 <meta charset="utf-8">
+<meta name="generator" content="Roster static build">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow, noarchive">
 <meta name="theme-color" content="#f3f0e9">
@@ -530,6 +614,7 @@ ${shareImage ? `<meta property="og:image" content="${esc(shareImage)}"><meta nam
 <link rel="stylesheet" href="/roster/assets/site.css?v=${assetVersions["site.css"]}">
 <link rel="stylesheet" href="/roster/assets/directory.css?v=${assetVersions["directory.css"]}">
 <link rel="stylesheet" href="/roster/assets/experience.css?v=${assetVersions["experience.css"]}">
+<link rel="stylesheet" href="/roster/assets/expanded.css?v=${assetVersions["expanded.css"]}">
 <script type="application/ld+json">${graph}</script>
 </head>
 <body${bodyClass ? ` class="${bodyClass}"` : ""}>
@@ -542,6 +627,7 @@ ${renderFooter()}
 <script src="/roster/assets/form.js?v=${assetVersions["form.js"]}"></script>
 <script src="/roster/assets/directory.js?v=${assetVersions["directory.js"]}"></script>
 <script src="/roster/assets/experience.js?v=${assetVersions["experience.js"]}"></script>
+${bodyClass === "directory-page" ? `<script type="module" src="/roster/assets/catalogue.js?v=${assetVersions["catalogue.js"]}"></script>` : ""}
 </body>
 </html>
 `;
@@ -615,7 +701,7 @@ function listLd(name, companies) {
       position: index + 1,
       name: company.name,
       url: companyUrl(company),
-      item: businessNode(company)
+      item: { "@id": companyUrl(company) + "#business" }
     }))
   };
 }
@@ -670,7 +756,7 @@ function renderCollection(spec, companies, crumbs) {
   const title = count === 0
     ? `${spec.h1.replace(" in Singapore", "")} in Singapore: no shortlist yet | Roster`
     : `${spec.titleName || spec.name} in Singapore: shortlist of ${count} ${count === 1 ? "company" : "companies"} | Roster`;
-  const description = spec.intro[0].slice(0, 155);
+  const description = concise(`Compare ${count} ${spec.name.toLowerCase()} companies in Singapore. Explore sourced services, published prices, ratings and contact details.`);
   const canonicalPath = `/roster/${spec.slug}/`;
   const tradeId = spec.parent || spec.id;
   const isAircon = tradeId === "aircon";
@@ -689,12 +775,12 @@ function renderCollection(spec, companies, crumbs) {
   const body = [
     renderCrumbs(crumbs),
     `<section class="directory-hero"><div><p class="kicker">THE SINGAPORE HOME DIRECTORY</p><h1>${tradeId === "all" ? "Find your next helping hand." : `${esc(categoryLabel)} <em>in Singapore.</em>`}</h1><p>${esc(summaries[tradeId])}</p></div><div class="hero-stamp"><span class="stamp-icon">${icon(tradeIcon[tradeId] || "search")}</span><div><strong>${count}</strong><span>${count === 1 ? "company to explore" : "companies to explore"}</span></div></div></section>`,
-    `<div class="directory-layout" data-directory><aside class="filters" aria-label="Filter companies"><div class="filters-head"><h2>${icon("sliders")}Refine your list</h2><button type="button" class="filter-toggle" data-toggle-filters aria-controls="company-filters" aria-expanded="true">${icon("sliders")}Filters <span data-active-filters></span>${icon("chevron")}</button><button type="button" data-reset>Reset</button></div><div class="filter-content" id="company-filters"><label class="filter-search">Search this list<input type="search" placeholder="Company or keyword" data-filter-search></label><fieldset><legend>What matters to you?</legend>${filter("price", "Published pricing", companies.filter(c => priceSummary(c, spec.service).published).length)}${filter("reviews", "Dated reviews", companies.filter(c => c.reviews.length).length)}${filter("whatsapp", "WhatsApp contact", companies.filter(c => c.whatsapp?.value).length)}${filter("saved", "Saved companies", '<span data-saved-count>0</span>')}</fieldset><div class="filter-categories"><h3>Explore services</h3>${trades.map(t => `<a href="/roster/${t.slug}/"${t.id === tradeId ? ' aria-current="page"' : ""}>${icon(tradeIcon[t.id])}${esc(t.name)}${icon("chevron")}</a>`).join("")}</div><div class="filter-foot">${icon("shield")}<p>A place on Roster is unpaid.<br>Always your choice.</p></div></div></aside><div class="directory-results">`,
+    `<div class="directory-layout" data-catalogue data-index="${indexPath(spec)}"><aside class="filters" aria-label="Filter companies"><div class="filters-head"><h2>${icon("sliders")}Refine your list</h2><button type="button" class="filter-toggle" data-toggle-filters aria-controls="company-filters" aria-expanded="true">${icon("sliders")}Filters <span data-active-filters></span>${icon("chevron")}</button><button type="button" data-reset>Reset</button></div><div class="filter-content" id="company-filters"><label class="filter-search">Search this list<input type="search" placeholder="Company or keyword" data-filter-search></label><label class="filter-select">Business location<select data-area aria-label="Business location"><option value="">All locations</option>${[...new Set(companies.map(c=>c.area))].filter(Boolean).sort().map(a=>`<option>${esc(a)}</option>`).join("")}</select></label><label class="filter-select">Google Maps rating<select data-rating aria-label="Minimum Google Maps rating"><option value="">Any rating</option><option value="4">4.0 and above</option><option value="4.5">4.5 and above</option><option value="4.8">4.8 and above</option></select></label>${tradeId === "all" ? `<label class="filter-select">Service<select data-category-filter><option value="">All services</option>${trades.map(t=>`<option value="${t.id}">${esc(t.name)}</option>`).join("")}</select></label>` : ""}<fieldset><legend>What matters to you?</legend>${filter("price", "Published pricing", companies.filter(c => priceSummary(c, spec.service).published).length)}${filter("reviews", "Dated reviews", companies.filter(c => c.reviews.length).length)}${filter("whatsapp", "WhatsApp contact", companies.filter(c => c.whatsapp?.value).length)}${filter("saved", "Saved companies", '<span data-saved-count>0</span>')}</fieldset><div class="filter-categories"><h3>Explore services</h3>${trades.map(t => `<a href="/roster/${t.slug}/"${t.id === tradeId ? ' aria-current="page"' : ""}>${icon(tradeIcon[t.id])}${esc(t.name)}${icon("chevron")}</a>`).join("")}</div><div class="filter-foot">${icon("shield")}<p>A place on Roster is unpaid.<br>Always your choice.</p></div></div></aside><div class="directory-results">`,
     isAircon ? airconSubnav(canonicalPath) : "",
     shortlist(companies, spec.service),
     `<details class="list-explainer"><summary>About this ${esc(categoryLabel.toLowerCase())} shortlist${icon("chevron")}</summary><p>${esc(spec.intro[0])}</p>${notes}<p><a href="/roster/how-it-works/">How the list is made</a>. Checked ${checked}.</p></details>`,
-    `</div><aside class="discovery-rail"><section class="help-card"><span class="rail-symbol">${icon("list")}</span><p class="kicker">A LITTLE HOMEWORK HELPS</p><h2>A little clarity.<br>A better choice.</h2><p>Look beyond a star rating. A few details make the choice easier.</p><ol><li><span>1</span>Compare the price for your actual job.</li><li><span>2</span>Read what suits you, and what might not.</li><li><span>3</span>Call or WhatsApp the company directly.</li></ol><a href="/roster/how-it-works/">Get to know Roster${icon("arrow")}</a></section><section class="quote-teaser"><span class="beta">BETA PREVIEW</span><h2>One job.<br>A few options.</h2><p>Try a quote request for up to three companies.</p><a class="btn btn-solid" href="#quote-request">Preview a request${icon("arrow")}</a><small>Preview only. Nothing is sent or stored.</small></section><div class="rail-note">${icon("calendar")}<p>Facts last checked<br><strong>9-10 October 2026</strong><br>Each figure links to its source.</p></div></aside></div>`,
-    tradeId !== "all" ? `<div id="quote-request">${renderForm(spec.jobs, companies, "ask")}</div>` : `<div id="quote-request" class="search-end"><h2>Start with the service you need</h2><p>Choose a service above to explore its shortlist and preview a quote request.</p></div>`,
+    `</div><aside class="discovery-rail"><section class="help-card"><span class="rail-symbol">${icon("list")}</span><p class="kicker">A LITTLE HOMEWORK HELPS</p><h2>A little clarity.<br>A better choice.</h2><p>Look beyond a star rating. A few details make the choice easier.</p><ol><li><span>1</span>Compare the price for your actual job.</li><li><span>2</span>Read what suits you, and what might not.</li><li><span>3</span>Call or WhatsApp the company directly.</li></ol><a href="/roster/how-it-works/">Get to know Roster${icon("arrow")}</a></section><section class="quote-teaser"><span class="beta">BETA PREVIEW</span><h2>One job.<br>A few options.</h2><p>Try a quote request for up to three companies.</p><a class="btn btn-solid" href="#quote-request">Preview a request${icon("arrow")}</a><small>Preview only. Nothing is sent or stored.</small></section><div class="rail-note">${icon("calendar")}<p>Facts last checked<br><strong>${esc(checked)}</strong><br>Each figure links to its source.</p></div></aside></div>`,
+    tradeId !== "all" ? `<div id="quote-request">${renderForm(spec.jobs, companies.filter(c => !c.imported), "ask")}</div>` : `<div id="quote-request" class="search-end"><h2>Start with the service you need</h2><p>Choose a service above to explore its shortlist and preview a quote request.</p></div>`,
     renderFaq(spec.faqs, "A few things worth knowing"),
     `<section class="browse-more"><p class="kicker">WHILE YOU'RE HERE</p><h2>A little help around the home.</h2><div>${trades.filter(t => t.id !== tradeId).map(t => `<a href="/roster/${t.slug}/">${icon(tradeIcon[t.id])}<span>${esc(t.name)}</span>${icon("arrow")}</a>`).join("")}</div></section>`
   ].join("\n");
@@ -721,63 +807,9 @@ function renderCollection(spec, companies, crumbs) {
 
 /* ---------- Profile ---------- */
 
-function factRow(label, html) {
-  return `<div><dt>${esc(label)}</dt><dd>${html}</dd></div>`;
-}
-
-function ratingSourceName(company) {
-  if (!company.rating) return "No sourced rating";
-  if (isGoogleRating(company)) return "Google rating";
-  const own = company.website?.value && new URL(company.rating.sourceUrl).hostname.replace(/^www\./, "") === new URL(company.website.value).hostname.replace(/^www\./, "");
-  return own ? "Rating on the company website" : "Rating on a review mirror";
-}
-
-function profileStars(value) {
-  const stars = Array.from({ length: 5 }, () => icon("star")).join("");
-  return `<span class="profile-stars" aria-hidden="true"><span>${stars}</span><span class="stars-fill" style="width:${Math.max(0, Math.min(100, value * 20))}%">${stars}</span></span>`;
-}
-
-function profileReview(review) {
-  const initials = review.author.trim().split(/\s+/).slice(0, 2).map(part => part[0]).join("");
-  return `<article class="review-entry" data-review-entry><header><span class="review-avatar" aria-hidden="true">${esc(initials)}</span><div><h3>${esc(review.author)}</h3><p>${esc(review.relativeTime)}</p></div><span class="review-label">Sourced excerpt</span></header><blockquote><p>${esc(review.excerpt)}</p></blockquote><footer><a href="${esc(review.sourceUrl)}">Read at source${icon("link")}</a><details><summary>About this excerpt</summary><p>${esc(review.sourceLabel)} Relative dates were captured on ${checked}. Individual star scores were not captured.</p></details></footer></article>`;
-}
-
 function mapAddress(company) {
   if (!company.address?.street) return "";
   return /singapore/i.test(company.address.value) ? company.address.value : `${company.address.value}, Singapore`;
-}
-
-function companyQuestions(company, content, display) {
-  const items = [
-    [`What services can I contact ${company.name} about?`, `${content.services.map(service => service.name).join(", ")}. Confirm the exact scope and availability with the company before booking.`],
-    [`How much does ${company.name} charge?`, display.published ? `${display.price}. ${display.detail} These are published examples, not a fixed quote for every job. Confirm the full price, parts, transport and GST before booking.` : `A company rate card was not captured for this profile. Ask ${company.name} for a written quote covering labour, parts, transport and GST.`],
-    [`Where is ${company.name} located?`, company.address ? `${company.address.value}. ${company.address.note || "This is the published address. Call first to confirm whether visits are available."}` : `No street address was captured for this profile. Contact the company to confirm its office location and whether it serves your address.`],
-    [`How do I contact ${company.name}?`, `Call ${company.phone.value}.${company.whatsapp?.value ? ` WhatsApp enquiries go to ${company.whatsapp.value}.` : ""} Roster's contact links take you directly to the company.`]
-  ];
-  return items;
-}
-
-function renderProfileSources(company, content) {
-  const sources = new Map();
-  const add = (url, label) => { if (url) sources.set(url, [...(sources.get(url) || []), label]); };
-  add(company.phone.sourceUrl, "Contact details");
-  add(company.whatsapp?.sourceUrl, "WhatsApp");
-  add(company.address?.sourceUrl, "Address");
-  add(company.email?.sourceUrl, "Email");
-  add(company.priceSourceUrl, "Pricing");
-  add(company.rating?.sourceUrl, "Rating");
-  for (const fact of company.facts || []) add(fact.sourceUrl, fact.label);
-  for (const url of content.sourceUrls) add(url, "Company information");
-  return `<details class="company-source-list"><summary>${icon("link")}Sources & verification notes</summary><p>Company information checked 9-10 October 2026. Prices and qualifications are as published; licence and registration claims have not been independently verified.</p><ul>${[...sources].map(([url, labels]) => `<li><a href="${esc(url)}">${esc(new URL(url).hostname.replace(/^www\./, ""))}${icon("link")}</a><span>${esc([...new Set(labels)].join(", "))}</span></li>`).join("")}</ul>${company.website?.note ? `<p>${esc(company.website.note)}</p>` : ""}${company.mapsNote ? `<p>Original Maps listing note: ${esc(company.mapsNote)}</p>` : ""}</details>`;
-}
-
-function renderCompanyMap(company) {
-  const address = mapAddress(company);
-  if (!address) return `<div class="map-unavailable">${icon("pin")}<div><h3>Confirm the location directly</h3><p>A street address has not been captured for this business. Contact the company before planning a visit.</p><a href="${esc(company.mapsUrl)}">Search for the company on Google Maps${icon("arrow")}</a></div></div>`;
-  const query = encodeURIComponent(address);
-  const embed = profileContent[company.slug].mapEmbedUrl;
-  if (!embed?.startsWith("https://www.google.com/maps/embed?pb=")) throw new Error(`Missing verified map embed for ${company.slug}`);
-  return `<div class="company-map"><iframe src="${esc(embed)}" title="Google Maps: published address of ${esc(company.name)}" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe><div class="map-address"><span class="map-pin">${icon("pin")}</span><div><h3>${esc(company.address.value)}</h3><p>${esc(profileContent[company.slug].mapNote || company.address.note || "Map of the published address. Contact the company before visiting.")}</p><a href="https://www.google.com/maps/dir/?api=1&amp;destination=${query}">Get directions${icon("arrow")}</a></div></div></div>`;
 }
 
 function profileBusinessGraph(company, content, canonicalPath) {
@@ -794,7 +826,7 @@ function profileBusinessGraph(company, content, canonicalPath) {
   if (media.logo) business.logo = new URL(media.logo, origin).href;
   if (media.photos?.length) business.image = media.photos.map(photo => new URL(photo.src, origin).href);
   // Only confirmed service descriptions become Service entities.
-  const services = ["sk-electrical", "isoteam-homecare"].includes(company.slug) ? [] : content.services.map((service, index) => ({
+  const services = company.imported || ["sk-electrical", "isoteam-homecare"].includes(company.slug) ? [] : content.services.map((service, index) => ({
     "@type": "Service", "@id": abs(canonicalPath) + `#service-${index + 1}`, name: service.name,
     description: service.description, provider: { "@id": id }, url: abs(canonicalPath) + `#service-price-${index + 1}`
   }));
@@ -802,10 +834,11 @@ function profileBusinessGraph(company, content, canonicalPath) {
 }
 
 function renderServiceExplanation(service) {
-  const guide = serviceGuides[service.guide];
-  if (!guide?.body || !guide?.ask) throw new Error(`Missing service explanation: ${service.name}`);
-  const options = service.prices.length > 1 ? `<div class="service-price-options"><h4>Published pricing</h4><dl>${service.prices.map(option => `<div><dt>${esc(option.label || option.detail)}${option.label ? `<small>${esc(option.detail)}</small>` : ""}</dt><dd>${esc(option.price)}</dd></div>`).join("")}</dl></div>` : "";
-  return `<div class="service-explanation"><p>${esc(guide.body)}</p>${options}<div class="service-booking-question"><h4>Before you book</h4><p>${esc(guide.ask)}</p></div></div>`;
+  const guide = service.guide ? serviceGuides[service.guide] : null;
+  if (service.guide && !guide?.body) throw new Error(`Missing guide: ${service.guide}`);
+  const hasSources = service.prices.some(p => p.sourceUrl);
+  const options = service.prices.length && (hasSources || service.prices.length > 1) ? `<table class="service-prices"><caption>Pricing as printed at source</caption><thead><tr><th scope="col">Service & conditions</th><th scope="col">Price</th></tr></thead><tbody>${service.prices.map(p=>`<tr><th scope="row">${esc(p.label || service.name)}${p.indicative?'<span class="claim-label">General price reference, not a company quote</span>':''}<div class="price-conditions">${esc(p.detail)}</div>${p.excerpt?`<details class="price-original"><summary>Read the original price wording</summary><p>${esc(p.excerpt)}</p></details>`:''}${p.sourceUrl?`<span class="data-source"><a href="${esc(p.sourceUrl)}">Price source</a><span>Checked ${esc(String(p.capturedAt||'2026-10-10').slice(0,10))}</span></span>`:''}</th><td>${esc(p.price)}</td></tr>`).join('')}</tbody></table>` : '';
+  return `<div class="service-explanation">${guide?`<p>${esc(guide.body)}</p>`:service.explanation?`<p><span class="source-excerpt-label">From the service page</span>${esc(service.explanation)}</p>`:''}${options}${guide?.ask?`<div class="service-booking-question"><h4>Before you book</h4><p>${esc(guide.ask)}</p></div>`:''}${service.sourceUrl?`<span class="data-source"><a href="${esc(service.sourceUrl)}">Service source</a><span>Checked ${esc(String(service.capturedAt||'2026-10-10').slice(0,10))}</span></span>`:''}</div>`;
 }
 
 function serviceDetailsLabel() {
@@ -816,72 +849,7 @@ function renderServiceRow(service, index) {
   if (!Array.isArray(service.prices)) throw new Error(`Missing pricing state: ${service.name}`);
   if (service.prices.length > 1 && !service.priceSummary) throw new Error(`Missing price summary: ${service.name}`);
   const price = service.priceSummary || service.prices[0]?.price || "Ask for a quote";
-  return `<details class="service-rate" id="service-price-${index + 1}"><summary><span class="service-rate-label"><strong>${esc(service.name)}</strong><small>${esc(service.description)}</small>${serviceDetailsLabel()}</span><strong class="service-rate-price${service.prices.length ? "" : " service-rate-quote"}"><span class="sr-only">${service.prices.length ? "Published price: " : "Pricing: "}</span>${esc(price)}</strong><span class="service-toggle-icon">${icon("chevron")}</span></summary>${renderServiceExplanation(service)}</details>`;
-}
-
-function renderProfile(company, peers) {
-  const trade = tradeById(company.category);
-  const content = profileContent[company.slug];
-  const localName = /Singapore/i.test(company.name) ? company.name : `${company.name} Singapore`;
-  const title = `${localName} | Services & Reviews | Roster`;
-  const description = `${company.name}: ${content.services.map(service => service.name.toLowerCase()).slice(0, 2).join(" and ")}. Compare reviews, pricing and contact details in Singapore.`;
-  const canonicalPath = `/roster/company/${company.slug}/`;
-  const presentation = priceSummary(company);
-  const rating = company.rating;
-  const photos = presentation.photos || [];
-  const others = peers.filter(peer => peer.slug !== company.slug);
-  const crumbs = [{ href: `/roster/${trade.slug}/`, label: trade.name }, { label: company.name }];
-  const sourceName = ratingSourceName(company);
-  const reviewCount = company.reviews.length;
-  const questions = companyQuestions(company, content, presentation);
-  const facts = [];
-  if (company.email?.value) facts.push(factRow("Email", esc(company.email.value)));
-  if (company.whatsapp?.note) facts.push(factRow("Before you contact", esc(company.whatsapp.note)));
-  for (const fact of company.facts || []) facts.push(factRow(fact.label === "Claim" ? "Company information" : fact.label, esc(fact.value)));
-  const serviceRows = content.services.map(renderServiceRow).join("");
-  const pricedServices = content.services.filter(service => service.prices.length).length;
-  const pricingLabel = !pricedServices ? "Quote required" : pricedServices === content.services.length ? "Published prices" : "Prices & quotes";
-  const body = `
-${renderCrumbs(crumbs)}
-<section class="company-masthead" data-company data-name="${esc(company.name)}" data-slug="${company.slug}">
-  <div class="company-identity">
-    <div class="company-name-line"><span class="company-emblem">${presentation.logo ? `<img src="${presentation.logo}" alt="${esc(company.name)} logo" width="76" height="76">` : icon(tradeIcon[trade.id])}</span><div><a class="company-trade" href="/roster/${trade.slug}/">${esc(trade.name)} in Singapore</a><h1>${esc(company.name)}</h1></div></div>
-    <div class="company-rating-line">${rating ? `${profileStars(rating.value)}<strong>${rating.value.toFixed(1)}</strong><a href="#reviews">${esc(rating.label)}</a>` : `<span class="unrated-label">No sourced rating yet</span>`}</div>
-    <p class="company-rating-source">${rating ? `<a href="${esc(rating.sourceUrl)}">${esc(sourceName)}${icon("link")}</a><span>Checked 9-10 Oct 2026</span>` : "A rating will appear when we can link it to a source."}</p>
-    <p class="company-address">${icon("pin")}${esc(company.address?.street || "Singapore - street address not captured")}</p>
-    <div class="company-actions"><a class="btn btn-solid" href="#reviews">${icon("star")}Read reviews</a><button type="button" class="btn profile-save" data-save="${company.slug}" aria-pressed="false" aria-label="Save ${esc(company.name)}">${icon("bookmark")}<span data-save-label>Save</span></button><a class="btn" href="${esc(company.website?.value || company.mapsUrl)}">${icon("link")}Website${icon("arrow")}</a></div>
-  </div>
-  <a class="price-snapshot" href="#pricing"><span class="kicker">${presentation.published ? "PUBLISHED PRICING" : "PRICING"}</span><strong>${esc(presentation.price)}</strong><span>${esc(presentation.detail)}</span><span class="snapshot-link">${presentation.published ? "See services & prices" : "What to ask before booking"}${icon("arrow")}</span></a>
-</section>
-${photos.length ? `<section class="work-gallery" aria-label="Photos from the company website">${photos.map(photo => `<figure><a href="${photo.src}" aria-label="View photo: ${esc(photo.caption)}"><img src="${photo.src}" width="350" height="252" alt="${esc(photo.caption)} as published by ${esc(company.name)}" loading="lazy"></a><figcaption>${esc(photo.caption)}</figcaption></figure>`).join("")}<p>Photos published by the company. <a href="${photos[0].sourceUrl}">View source${icon("link")}</a></p></section>` : ""}
-<nav class="company-section-nav" aria-label="Company sections"><a href="#pricing">Services & pricing</a><a href="#overview">About the company</a><a href="#contact">Location & contact</a><a href="#reviews">Reviews <span>${reviewCount} ${reviewCount === 1 ? "excerpt" : "excerpts"}</span></a><a href="#company-faq">FAQs</a></nav>
-<div class="company-layout">
-  <div class="company-content">
-    <section class="profile-section" id="pricing"><div class="profile-section-heading"><div><p class="kicker">KNOW THE COST</p><h2>Services & pricing</h2></div><span class="section-pill">${pricingLabel}</span></div>
-      <p class="service-intro">${esc(content.headline)}</p>
-      <p class="service-list-help">Open a service for details and questions to ask before booking.${pricedServices ? " Prices in Singapore dollars." : ""}</p>
-      <div class="service-price-list"><div class="service-price-list-heading" aria-hidden="true"><span>Service</span><span>Price</span><span></span></div>${serviceRows}</div>
-      <details class="source-disclosure"><summary>Full pricing notes & conditions</summary><p>${esc(company.priceNote)}</p></details><p class="profile-source-note"><a href="${esc(company.priceSourceUrl)}">Published price source${icon("link")}</a><span>Checked 9-10 Oct 2026. Confirm the total for your job.</span></p>
-    </section>
-    <section class="profile-section" id="overview"><div class="profile-section-heading"><div><p class="kicker">MEET THE BUSINESS</p><h2>About ${esc(company.name)}</h2></div></div><div class="company-story"><p class="company-story-lead">${esc(content.about[0])}</p><p>${esc(content.about[1])}</p><div class="company-highlights">${content.highlights.map(item => `<div><span>${esc(item.label)}</span><strong>${esc(item.value)}</strong></div>`).join("")}</div></div><h3 class="fit-section-title">A few things to help you decide</h3><div class="company-fit"><div><span class="fit-label">${icon("check")}Worth considering for</span><p>${esc(company.bestFor)}</p></div><div><span class="fit-label">${icon("list")}Things to check first</span><p>${esc(company.poorFit)}</p></div></div></section>
-    <section class="profile-section" id="contact"><div class="profile-section-heading"><div><p class="kicker">FIND THEM & GET IN TOUCH</p><h2>Location & contact</h2></div></div>${renderCompanyMap(company)}<div class="contact-options"><a href="${telHref(company.phone.value)}"><span class="contact-option-icon">${icon("phone")}</span><span><small>Call the company</small><strong>${esc(company.phone.value)}</strong></span>${icon("arrow")}</a>${company.whatsapp?.value ? `<a href="${waHref(company.whatsapp.value)}"><span class="contact-option-icon">${icon("chat")}</span><span><small>Message on WhatsApp</small><strong>${esc(company.whatsapp.value)}</strong></span>${icon("arrow")}</a>` : ""}</div><dl class="company-facts">${facts.join("")}</dl>${renderProfileSources(company, content)}</section>
-    <section class="profile-section" id="reviews" data-profile-reviews>
-      <div class="profile-section-heading"><div><p class="kicker">BEFORE YOU BOOK</p><h2>Reviews & reputation</h2></div>${rating ? `<a class="text-link" href="${esc(rating.sourceUrl)}">View source${icon("link")}</a>` : ""}</div>
-      ${rating ? `<div class="review-overview"><div class="review-overview-score"><span class="rating-value">${rating.value.toFixed(1)}<small>/ 5</small></span>${profileStars(rating.value)}<span>${esc(sourceName)}</span></div><div class="review-overview-context"><strong>${esc(rating.label)}</strong><p>This is the figure reported by the linked source. Roster does not calculate a separate rating.</p><details><summary>Source details & differences</summary><p>${esc(rating.note)}</p></details></div></div>` : `<div class="review-empty-rating">${icon("star")}<div><h3>No rating on file</h3><p>The pages we checked did not give us a rating we could cite. You can still compare the company's published services and contact details.</p></div></div>`}
-      <div class="review-toolbar"><div><h3>${reviewCount ? "What customers wrote" : "Customer review excerpts"}</h3><p>${reviewCount ? `${reviewCount} dated ${reviewCount === 1 ? "excerpt" : "excerpts"} on Roster, not the full review history.` : "We only include excerpts with a name, a date, and a source."}</p></div>${reviewCount > 1 ? `<label class="review-search">${icon("search")}<span class="sr-only">Search review excerpts</span><input type="search" placeholder="Search excerpts" data-review-search></label>` : ""}</div>
-      ${reviewCount ? `<div class="review-entries">${company.reviews.map(profileReview).join("")}</div><p class="review-no-results" data-review-empty hidden>No excerpts match your search. <button type="button" data-clear-reviews>Clear search</button></p><p class="review-search-status sr-only" data-review-count aria-live="polite"></p>` : `<div class="review-empty"><span class="review-empty-icon">${icon("quote")}</span><h3>No dated excerpts to show yet</h3><p>${rating ? "The rating above is sourced, but we do not have a dated customer quote to display here." : "No dated customer review was captured for this profile."}</p><a class="btn" href="${esc(rating?.sourceUrl || company.mapsUrl)}">Explore the original listing${icon("arrow")}</a></div>`}
-    </section>
-    <section class="profile-section company-faq" id="company-faq"><div class="profile-section-heading"><div><p class="kicker">HELPFUL TO KNOW</p><h2>Questions about ${esc(company.name)}</h2></div></div><div class="company-faq-items">${questions.map(([question, answer]) => `<details><summary>${esc(question)}${icon("chevron")}</summary><p>${esc(answer)}</p></details>`).join("")}</div></section>
-    <details class="profile-quote-preview" id="quote-request"><summary><span>${icon("chat")}Want to compare a few companies?<small>Try the quote request preview. Nothing is sent.</small></span>${icon("chevron")}</summary>${renderForm(trade.jobs, [company, ...others], "ask")}</details>
-${others.length ? `<section class="profile-section related-companies"><div class="profile-section-heading"><div><p class="kicker">KEEP EXPLORING</p><h2>Also on your shortlist</h2></div><a class="text-link" href="/roster/${trade.slug}/">View all${icon("arrow")}</a></div><div class="related-grid">${others.slice(0, 3).map(peer => `<a href="/roster/company/${peer.slug}/"><span class="related-icon">${icon(tradeIcon[trade.id])}</span><h3>${esc(peer.name)}</h3><p>${esc(priceSummary(peer).price)}</p><span>View profile${icon("arrow")}</span></a>`).join("")}</div></section>` : ""}
-  </div>
-  <aside class="company-sidebar" aria-label="Contact the company"><div class="booking-card"><p class="kicker">CONTACT DIRECTLY</p><h2>Let's get it sorted.</h2><p>Discuss your job with ${esc(company.name)} and ask for a clear quote.</p><a class="btn btn-solid" href="${telHref(company.phone.value)}">${icon("phone")}Call ${esc(company.phone.value)}</a>${company.whatsapp?.value ? `<a class="btn whatsapp-button" href="${waHref(company.whatsapp.value)}">${icon("chat")}Message on WhatsApp</a>` : ""}<p class="direct-contact-note">You're contacting the company directly.</p><div class="booking-links"><a href="${esc(company.website?.value || company.mapsUrl)}">${icon("link")}Company website${icon("arrow")}</a><a href="${esc(company.mapsUrl)}">${icon("pin")}Location & directions${icon("arrow")}</a></div></div><div class="shortlist-tip">${icon("bookmark")}<div><h3>A good option? Save it.</h3><p>Keep a shortlist while you compare. Saved companies stay in this browser.</p><a href="/roster/search/?saved=1">View your saved companies${icon("arrow")}</a></div></div><p class="profile-checked">${icon("calendar")}Last checked 9-10 October 2026</p></aside>
-</div>
-<div class="callbar" aria-label="Contact ${esc(company.name)}"><a class="btn btn-solid" href="${telHref(company.phone.value)}">${icon("phone")}Call company</a><a class="btn" href="${company.whatsapp?.value ? waHref(company.whatsapp.value) : esc(company.mapsUrl)}">${icon(company.whatsapp?.value ? "chat" : "pin")}${company.whatsapp?.value ? "WhatsApp" : "Maps"}</a></div>`;
-  const page = { ...webPage(title, canonicalPath, description), "@id": abs(canonicalPath) + "#page", mainEntity: { "@id": abs(canonicalPath) + "#business" }, inLanguage: "en-SG", dateModified: content.updatedAt };
-  const jsonLd = [page, crumbsLd([{ href: `/roster/${trade.slug}/`, label: trade.name }, { href: canonicalPath, label: company.name }]), ...profileBusinessGraph(company, content, canonicalPath), faqLd(questions)];
-  forbidSchema(jsonLd);
-  return pageShell({ title, description, canonicalPath, current: `/roster/${trade.slug}/`, jsonLd, body, bodyClass: "has-callbar company-page", shareImage: presentation.photos?.[0]?.src ? new URL(presentation.photos[0].src, origin).href : "" });
+  return `<details class="service-rate" id="service-price-${index + 1}"><summary><span class="service-rate-label"><strong>${esc(service.name)}</strong>${service.description ? `<small>${esc(service.description)}</small>` : ""}${serviceDetailsLabel()}</span><strong class="service-rate-price${service.prices.length ? "" : " service-rate-quote"}"><span class="sr-only">${service.prices.some(p=>!p.indicative) ? "Published price: " : "Pricing: "}</span>${esc(price)}</strong><span class="service-toggle-icon">${icon("chevron")}</span></summary>${renderServiceExplanation(service)}</details>`;
 }
 
 /* ---------- Account interface previews ---------- */
@@ -905,15 +873,15 @@ ${mode === "reset-password" ? passwordField("account-confirm", "Confirm new pass
 ${mode === "sign-in" ? '<div class="account-options"><a href="/roster/forgot-password/">Forgot password?</a></div>' : ""}
 <p class="account-error" data-account-error role="alert" hidden></p><button type="submit" class="btn btn-solid account-submit">${config.action}${icon("arrow")}</button></fieldset></form>
 <div class="account-result" data-account-result role="status" tabindex="-1" hidden></div><p class="account-switch">${config.prompt} <a href="/roster/${config.href}/">${config.link}</a></p></div><p class="account-smallprint">Singapore beta. Real accounts are not enabled yet.</p></div></section>`;
-  return pageShell({ title: `${config.action} | Roster`, description: "Preview Roster's account experience.", canonicalPath: `/roster/${mode}/`, current: "", jsonLd: [], body, bodyClass: "account-page" });
+  return pageShell({ title: `${config.action} | Roster`, description: `Preview Roster ${config.action.toLowerCase()}. Try the beta account screens with sample details. No account is created and nothing is sent.`, canonicalPath: `/roster/${mode}/`, current: "", jsonLd: [], body, bodyClass: "account-page" });
 }
 
 /* ---------- Home ---------- */
 
 function renderHome(grouped) {
   const title = "Roster | Short unpaid lists of home services in Singapore";
-  const description = "A short unpaid list of home-service companies in Singapore, with the reviews that back it.";
-  const total = trades.reduce((sum, trade) => sum + grouped[trade.id].length, 0);
+  const description = "A sourced directory of home-service companies in Singapore, with the reviews that back it.";
+  const total = new Set(Object.values(grouped).flat().map(c=>c.slug)).size;
   const tiles = trades.map((trade, index) => {
     const count = grouped[trade.id].length;
     const meta = count === 0 ? "No companies yet" : `${count} ${count === 1 ? "company" : "companies"}`;
@@ -933,7 +901,7 @@ function renderHome(grouped) {
 <ul class="trust" aria-label="What makes the list">
 <li>${icon("shield", "ic ic-disc")}<strong>Nobody pays for a place.</strong><span>Companies cannot buy their way up the list. No ads or paid placements in your results.</span></li>
 <li>${icon("link", "ic ic-disc")}<strong>Every figure has a source.</strong><span>Phones, prices, ratings, and reviews link to the page they were copied from. Nothing is invented.</span></li>
-<li>${icon("calendar", "ic ic-disc")}<strong>Checked ${esc(checked)}.</strong><span>${total} companies so far. Each profile says who it suits and who should look elsewhere.</span></li>
+<li>${icon("calendar", "ic ic-disc")}<strong>Checked ${esc(checked)}.</strong><span>${total} companies so far. Profiles bring together the services, prices and contact details we could source.</span></li>
 </ul>
 <section class="jobs" id="jobs">
 <div class="section-head"><p class="kicker">Jobs</p><h2>What needs doing?</h2><p class="lede">Five ways to make home feel like home again. Start with the service you need.</p></div>
@@ -967,7 +935,7 @@ function renderHome(grouped) {
       "@type": "Organization",
       name: "Roster",
       url: origin + "/",
-      description: "A short unpaid list of home-service companies in Singapore."
+      description: "A sourced directory of home-service companies in Singapore."
     },
     webPage(title, "/roster/", description),
     {
@@ -1002,11 +970,11 @@ function renderHow() {
   const canonicalPath = "/roster/how-it-works/";
   const sections = [
     ["What gets a company on the list", [
-      `A phone number on the company's own site, or on a Google Maps listing we opened. A rating goes on the page when we can point at one figure on one page. A company with no rating can still be listed when its own page publishes a price, and the profile says the rating is missing. ISOTeam Homecare was already on the beta from directories, with no rating and no price, and its profile says the site was not opened. Checked ${checked}.`,
+      `New profiles need sourced company information, services, a phone number, an address and their own website. Flagged or rolled-back records stay off the site. The original hand-checked profiles retain their write-ups. A rating is optional and always carries its source and capture date. Checked ${checked}.`,
       "A review line needs a name, a date or a relative time, and the page it was copied from. The words stay as published, including rough grammar. A quote with no date stays off the page."
     ]],
     ["How the order is chosen", [
-      "Ratings captured directly from Google sort first, by score and then review count. The remaining companies are alphabetical. Ratings printed by a company or a review mirror are labeled with their source and do not decide the order. A company cannot pay for a higher position."
+      "Companies are alphabetical by default. You can sort by a captured Google Maps rating or review count, and filter by area, pricing and other details. Company-site and review-mirror ratings are labelled separately and do not affect the Google rating sort. A company cannot pay for a higher position."
     ]],
     ["What a homeowner does", [
       "Pick the job, read the shortlist, and use the form if you want to see it. The form asks about the job, property, postal code, timing, company count, and contact details. It does not send. A later version can pass one request to at most three companies that do that job and hold prepaid credits. The homeowner pays nothing."
@@ -1024,7 +992,7 @@ function renderHow() {
 <div class="page-head">
 ${renderCrumbs([{ label: "How it works" }])}
 <div class="head-row"><span class="disc">${icon("list", "ic ic-disc")}</span><div><p class="kicker">Method</p><h1>How this list is made</h1></div></div>
-<p class="dek">One profile per company. A short list per job. The order is unpaid.</p>
+<p class="dek">One profile per company. Browse by job and compare the details. The order is unpaid.</p>
 </div>
 ${html}
 ${renderFaq(howFaqs)}`;
@@ -1053,17 +1021,29 @@ assertNoDashes(serviceGuides, "service-guides.json");
 assertNoDashes(profileContent, "profiles.json");
 
 const raw = JSON.parse(await readFile(path.join(root, "data", "companies.json"), "utf8"));
+checked = raw.capturedLabel || checked;
 assertNoDashes(raw, "companies.json");
 assertNoDashes({ trades, intents, howFaqs }, "templates");
 validate(raw.companies);
 
+const operatorGroups = JSON.parse(await readFile(path.join(root, "data", "operator-groups.json"), "utf8"));
+const renderProfile = createProfileRenderer({esc,icon,tradeById,profileContent,priceSummary,renderCrumbs,pageShell,webPage,crumbsLd,faqLd,profileBusinessGraph,forbidSchema,renderServiceRow,renderForm,operatorGroups});
 const publishedCompanies = raw.companies.filter((company) => company.publish !== false);
 const grouped = {};
 for (const trade of trades) grouped[trade.id] = [];
-for (const company of publishedCompanies) grouped[company.category].push(company);
+for (const company of publishedCompanies) for (const category of company.categories || [company.category]) grouped[category].push(company);
 for (const trade of trades) grouped[trade.id] = sortCompanies(grouped[trade.id]);
 
 const written = [];
+await mkdir(path.join(root,'data/index'), {recursive:true});
+async function writeIndex(spec, companies) {
+  const records = companies.map(c => directoryRecord(c,priceSummary(c,spec.service),tradeById(c.category)));
+  await writeFile(path.join(root,'data/index',indexName(spec)+'.json'),JSON.stringify({companies:records})+'\n');
+}
+await writeIndex({id:'all'},sortCompanies(publishedCompanies));
+for (const trade of trades) await writeIndex(trade,grouped[trade.id]);
+for (const intent of intents) await writeIndex(intent,grouped[intent.parent].filter(c=>c.services.includes(intent.service)));
+
 written.push(await writePage("", renderHome(grouped)));
 written.push(await writePage("how-it-works", renderHow()));
 for (const mode of ["sign-in", "sign-up", "forgot-password", "reset-password"]) written.push(await writePage(mode, renderAccount(mode)));
@@ -1091,7 +1071,15 @@ for (const company of publishedCompanies) {
   ));
 }
 
+const currentPaths = written.map(f=>path.relative(root,f));
+let previous = [];
+try { previous = JSON.parse(await readFile(path.join(root,'data/build-manifest.json'),'utf8')); } catch(e) { if(e.code!=='ENOENT') throw e; }
+for (const rel of previous) if(!currentPaths.includes(rel) && /^company\/[a-z0-9-]+\/index\.html$/.test(rel)) await rm(path.join(root,rel),{force:true});
+await writeFile(path.join(root,'data/build-manifest.json'),JSON.stringify(currentPaths,null,2)+'\n');
+const sitemapPaths=currentPaths.filter(p=>! /^(sign-in|sign-up|forgot-password|reset-password)\//.test(p));
+await writeFile(path.join(root,'sitemap.xml'),`<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${sitemapPaths.map(p=>`<url><loc>${esc(origin+'/'+p.replace(/index\.html$/,''))}</loc></url>`).join('')}</urlset>\n`);
+await writeFile(path.join(root,'robots.txt'),'# Beta preview. Every HTML page also carries noindex.\nUser-agent: *\nDisallow: /roster/\n');
 console.log(written.length + " pages");
 for (const trade of trades) {
-  console.log(trade.id + ": " + grouped[trade.id].map((company) => company.slug).join(", "));
+  console.log(trade.id + ": " + grouped[trade.id].length + " profiles");
 }
