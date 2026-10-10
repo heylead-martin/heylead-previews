@@ -11,72 +11,14 @@
         "detail": "Chemical wash, per unit. Includes GST.",
         "published": true
       }
-    },
-    "priceItems": [
-      {
-        "service": "General servicing",
-        "price": "S$49.05",
-        "detail": "1 unit, includes GST",
-        "guide": "aircon-general"
-      },
-      {
-        "service": "General servicing",
-        "price": "S$65.40 / S$81.75",
-        "detail": "2 / 3 units, includes GST",
-        "guide": "aircon-general"
-      },
-      {
-        "service": "General servicing",
-        "price": "S$98.10",
-        "detail": "4 units, includes GST",
-        "guide": "aircon-general"
-      },
-      {
-        "service": "Chemical wash",
-        "price": "S$87.20",
-        "detail": "Per unit, includes GST",
-        "guide": "aircon-wash"
-      },
-      {
-        "service": "Chemical overhaul",
-        "price": "S$163.50",
-        "detail": "1 unit, includes GST",
-        "guide": "aircon-overhaul"
-      },
-      {
-        "service": "Yearly contract",
-        "price": "From S$174.40",
-        "detail": "Includes GST",
-        "guide": "aircon-contract"
-      }
-    ]
+    }
   },
   "338-aircon": {
     "price": "From S$55",
     "detail": "General servicing, 1 unit. Other page prices differ.",
     "published": true,
     "sourceUrl": "https://www.338aircon.sg/book-online",
-    "summarizedAt": "2026-10-10",
-    "priceItems": [
-      {
-        "service": "General servicing",
-        "price": "From S$55",
-        "detail": "1 unit, book-online page",
-        "guide": "aircon-general"
-      },
-      {
-        "service": "Contract without gas",
-        "price": "S$200",
-        "detail": "1 unit",
-        "guide": "aircon-contract-no-gas"
-      },
-      {
-        "service": "Contract with free gas",
-        "price": "S$250",
-        "detail": "Package price",
-        "guide": "aircon-contract-gas"
-      }
-    ]
+    "summarizedAt": "2026-10-10"
   },
   "socool": {
     "price": "Ask for a quote",
@@ -97,33 +39,7 @@
         "detail": "Wall-unit chemical wash. GST not stated.",
         "published": true
       }
-    },
-    "priceItems": [
-      {
-        "service": "Wall-unit chemical wash",
-        "price": "S$80 to S$100",
-        "detail": "Non-dismantle wash",
-        "guide": "wall-wash"
-      },
-      {
-        "service": "Cassette chemical wash",
-        "price": "S$120 to S$150",
-        "detail": "Ceiling cassette",
-        "guide": "cassette-wash"
-      },
-      {
-        "service": "Wall-unit overhaul",
-        "price": "S$130 to S$180",
-        "detail": "Full overhaul",
-        "guide": "wall-overhaul"
-      },
-      {
-        "service": "Cassette overhaul",
-        "price": "S$180 to S$250",
-        "detail": "Full overhaul",
-        "guide": "cassette-overhaul"
-      }
-    ]
+    }
   },
   "mr-plumber": {
     "price": "Ask for a quote",
@@ -166,15 +82,7 @@
     "detail": "New double-pole isolator, before transport.",
     "published": true,
     "sourceUrl": "https://repair.sg/isolator-switch-repair-replacement-singapore/",
-    "summarizedAt": "2026-10-10",
-    "priceItems": [
-      {
-        "service": "Double-pole isolator replacement",
-        "price": "From S$120",
-        "detail": "Transport is extra",
-        "guide": "isolator"
-      }
-    ]
+    "summarizedAt": "2026-10-10"
   },
   "sk-electrical": {
     "price": "Ask for a quote",
@@ -214,51 +122,7 @@
         "detail": "Depends on refrigerant and measured PSI. No GST added.",
         "published": true
       }
-    },
-    "priceItems": [
-      {
-        "service": "General servicing",
-        "price": "S$55 / S$60 / S$75",
-        "detail": "1 / 2 / 3 units, no GST added",
-        "guide": "aircon-general"
-      },
-      {
-        "service": "General servicing",
-        "price": "S$90 / S$105 / S$120",
-        "detail": "4 / 5 / 6 units, no GST added",
-        "guide": "aircon-general"
-      },
-      {
-        "service": "Chemical wash",
-        "price": "S$110",
-        "detail": "1 unit, no GST added",
-        "guide": "aircon-wash"
-      },
-      {
-        "service": "Chemical wash",
-        "price": "S$210 / S$310",
-        "detail": "2 / 3 units, no GST added",
-        "guide": "aircon-wash"
-      },
-      {
-        "service": "Wall-unit overhaul",
-        "price": "S$150",
-        "detail": "1 unit, 9,000 or 12,000 BTU",
-        "guide": "wall-overhaul"
-      },
-      {
-        "service": "Gas top-up",
-        "price": "S$90 to S$170",
-        "detail": "Depends on refrigerant and measured PSI",
-        "guide": "aircon-gas"
-      },
-      {
-        "service": "Troubleshooting",
-        "price": "S$50 to S$80",
-        "detail": "Multi-split; waived if work proceeds",
-        "guide": "aircon-diagnosis"
-      }
-    ]
+    }
   },
   "cool-earth": {
     "price": "From S$80",
@@ -272,33 +136,7 @@
         "detail": "Chemical wash. Page also prints S$80 to S$100.",
         "published": true
       }
-    },
-    "priceItems": [
-      {
-        "service": "Chemical wash",
-        "price": "From S$80",
-        "detail": "FAQ also says S$80 to S$100 per unit",
-        "guide": "aircon-wash"
-      },
-      {
-        "service": "Chemical overhaul",
-        "price": "From S$150",
-        "detail": "FAQ instead says S$130 to S$180 per unit",
-        "guide": "aircon-overhaul"
-      },
-      {
-        "service": "Leak repair",
-        "price": "From S$40",
-        "detail": "Published starting price",
-        "guide": "aircon-water-leak"
-      },
-      {
-        "service": "Not-cold troubleshooting",
-        "price": "From S$40",
-        "detail": "Diagnostic fee, not a gas top-up price",
-        "guide": "aircon-diagnosis"
-      }
-    ]
+    }
   },
   "direct-plumber": {
     "price": "S$60 to S$150",
@@ -308,84 +146,14 @@
     "logo": "/roster/assets/companies/direct-plumber.png",
     "logoSourceUrl": "https://directplumber.sg/chokes-drains/",
     "assetCapturedAt": "2026-10-10",
-    "summarizedAt": "2026-10-10",
-    "priceItems": [
-      {
-        "service": "Floor trap choke",
-        "price": "S$60 to S$150",
-        "detail": "Published range",
-        "guide": "floor-trap"
-      },
-      {
-        "service": "Sink choke",
-        "price": "S$60 to S$150",
-        "detail": "Published range",
-        "guide": "sink-choke"
-      },
-      {
-        "service": "Toilet choke",
-        "price": "S$80 to S$180",
-        "detail": "Published range",
-        "guide": "toilet-choke"
-      },
-      {
-        "service": "Drain jetting",
-        "price": "S$150 to S$400",
-        "detail": "Published range",
-        "guide": "drain-jetting"
-      }
-    ]
+    "summarizedAt": "2026-10-10"
   },
   "kiasu-plumber": {
     "price": "From S$50",
     "detail": "Kitchen sink choke. GST not stated.",
     "published": true,
     "sourceUrl": "https://kiasuplumber.com/",
-    "summarizedAt": "2026-10-10",
-    "priceItems": [
-      {
-        "service": "Kitchen sink choke",
-        "price": "From S$50",
-        "detail": "Starting price",
-        "guide": "sink-choke"
-      },
-      {
-        "service": "Toilet bowl choke",
-        "price": "From S$80",
-        "detail": "Starting price",
-        "guide": "toilet-choke"
-      },
-      {
-        "service": "Copper pipe repair and supply",
-        "price": "From S$100",
-        "detail": "Starting price",
-        "guide": "copper-pipe"
-      },
-      {
-        "service": "Concealed leak detection",
-        "price": "From S$250",
-        "detail": "Starting price",
-        "guide": "leak-detection"
-      },
-      {
-        "service": "Basin installation",
-        "price": "From S$90",
-        "detail": "Starting price",
-        "guide": "basin-installation"
-      },
-      {
-        "service": "Bottle trap",
-        "price": "From S$80",
-        "detail": "Starting price",
-        "guide": "bottle-trap"
-      },
-      {
-        "service": "Tap, mixer, sink or hose",
-        "price": "From S$80",
-        "detail": "Starting price",
-        "guide": "plumbing-fittings"
-      }
-    ]
+    "summarizedAt": "2026-10-10"
   },
   "1st-electrical": {
     "price": "Ask for a quote",
@@ -406,14 +174,6 @@
     "detail": "Weekly / trial offer. Unit and GST not stated.",
     "published": true,
     "sourceUrl": "https://sureclean.com.sg/general-weekly-home-cleaning-gg/",
-    "summarizedAt": "2026-10-10",
-    "priceItems": [
-      {
-        "service": "Weekly / first-session trial offer",
-        "price": "From S$22",
-        "detail": "Unit, inclusions and GST are not stated",
-        "guide": "cleaning-offer"
-      }
-    ]
+    "summarizedAt": "2026-10-10"
   }
 }

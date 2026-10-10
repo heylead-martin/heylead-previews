@@ -796,27 +796,27 @@ function profileBusinessGraph(company, content, canonicalPath) {
   // Only confirmed service descriptions become Service entities.
   const services = ["sk-electrical", "isoteam-homecare"].includes(company.slug) ? [] : content.services.map((service, index) => ({
     "@type": "Service", "@id": abs(canonicalPath) + `#service-${index + 1}`, name: service.name,
-    description: service.description, provider: { "@id": id }, url: abs(canonicalPath) + "#pricing"
+    description: service.description, provider: { "@id": id }, url: abs(canonicalPath) + `#service-price-${index + 1}`
   }));
   return [business, ...services];
 }
 
-function renderServiceExplanation(item) {
-  const guide = serviceGuides[item.guide];
-  if (!guide?.body || !guide?.ask) throw new Error(`Missing service explanation: ${item.name || item.service}`);
-  return `<div class="service-explanation"><p>${esc(guide.body)}</p><div class="service-booking-question"><h4>Before you book</h4><p>${esc(guide.ask)}</p></div></div>`;
+function renderServiceExplanation(service) {
+  const guide = serviceGuides[service.guide];
+  if (!guide?.body || !guide?.ask) throw new Error(`Missing service explanation: ${service.name}`);
+  const options = service.prices.length > 1 ? `<div class="service-price-options"><h4>Published pricing</h4><dl>${service.prices.map(option => `<div><dt>${esc(option.label || option.detail)}${option.label ? `<small>${esc(option.detail)}</small>` : ""}</dt><dd>${esc(option.price)}</dd></div>`).join("")}</dl></div>` : "";
+  return `<div class="service-explanation"><p>${esc(guide.body)}</p>${options}<div class="service-booking-question"><h4>Before you book</h4><p>${esc(guide.ask)}</p></div></div>`;
 }
 
 function serviceDetailsLabel() {
   return `<span class="service-details-label"><span class="when-closed">View details</span><span class="when-open">Hide details</span></span>`;
 }
 
-function renderServicePrice(item, index) {
-  return `<details class="service-rate" id="service-price-${index + 1}"><summary><span class="service-rate-label"><strong>${esc(item.service)}</strong><small>${esc(item.detail)}</small>${serviceDetailsLabel()}</span><strong class="service-rate-price"><span class="sr-only">Published price: </span>${esc(item.price)}</strong><span class="service-toggle-icon">${icon("chevron")}</span></summary>${renderServiceExplanation(item)}</details>`;
-}
-
-function renderServiceTile(service, index) {
-  return `<article class="service-tile"><span class="service-number">${String(index + 1).padStart(2, "0")}</span><h3>${esc(service.name)}</h3><p>${esc(service.description)}</p><details class="service-explainer"><summary>${serviceDetailsLabel()}<span class="sr-only"> for ${esc(service.name)}</span><span class="service-toggle-icon">${icon("chevron")}</span></summary>${renderServiceExplanation(service)}</details></article>`;
+function renderServiceRow(service, index) {
+  if (!Array.isArray(service.prices)) throw new Error(`Missing pricing state: ${service.name}`);
+  if (service.prices.length > 1 && !service.priceSummary) throw new Error(`Missing price summary: ${service.name}`);
+  const price = service.priceSummary || service.prices[0]?.price || "Ask for a quote";
+  return `<details class="service-rate" id="service-price-${index + 1}"><summary><span class="service-rate-label"><strong>${esc(service.name)}</strong><small>${esc(service.description)}</small>${serviceDetailsLabel()}</span><strong class="service-rate-price${service.prices.length ? "" : " service-rate-quote"}"><span class="sr-only">${service.prices.length ? "Published price: " : "Pricing: "}</span>${esc(price)}</strong><span class="service-toggle-icon">${icon("chevron")}</span></summary>${renderServiceExplanation(service)}</details>`;
 }
 
 function renderProfile(company, peers) {
@@ -838,7 +838,9 @@ function renderProfile(company, peers) {
   if (company.email?.value) facts.push(factRow("Email", esc(company.email.value)));
   if (company.whatsapp?.note) facts.push(factRow("Before you contact", esc(company.whatsapp.note)));
   for (const fact of company.facts || []) facts.push(factRow(fact.label === "Claim" ? "Company information" : fact.label, esc(fact.value)));
-  const priceRows = (presentation.priceItems || []).map(renderServicePrice).join("");
+  const serviceRows = content.services.map(renderServiceRow).join("");
+  const pricedServices = content.services.filter(service => service.prices.length).length;
+  const pricingLabel = !pricedServices ? "Quote required" : pricedServices === content.services.length ? "Published prices" : "Prices & quotes";
   const body = `
 ${renderCrumbs(crumbs)}
 <section class="company-masthead" data-company data-name="${esc(company.name)}" data-slug="${company.slug}">
@@ -852,23 +854,23 @@ ${renderCrumbs(crumbs)}
   <a class="price-snapshot" href="#pricing"><span class="kicker">${presentation.published ? "PUBLISHED PRICING" : "PRICING"}</span><strong>${esc(presentation.price)}</strong><span>${esc(presentation.detail)}</span><span class="snapshot-link">${presentation.published ? "See services & prices" : "What to ask before booking"}${icon("arrow")}</span></a>
 </section>
 ${photos.length ? `<section class="work-gallery" aria-label="Photos from the company website">${photos.map(photo => `<figure><a href="${photo.src}" aria-label="View photo: ${esc(photo.caption)}"><img src="${photo.src}" width="350" height="252" alt="${esc(photo.caption)} as published by ${esc(company.name)}" loading="lazy"></a><figcaption>${esc(photo.caption)}</figcaption></figure>`).join("")}<p>Photos published by the company. <a href="${photos[0].sourceUrl}">View source${icon("link")}</a></p></section>` : ""}
-<nav class="company-section-nav" aria-label="Company sections"><a href="#reviews">Reviews <span>${reviewCount} ${reviewCount === 1 ? "excerpt" : "excerpts"}</span></a><a href="#pricing">Services & pricing</a><a href="#overview">About the company</a><a href="#contact">Location & contact</a><a href="#company-faq">FAQs</a></nav>
+<nav class="company-section-nav" aria-label="Company sections"><a href="#pricing">Services & pricing</a><a href="#overview">About the company</a><a href="#contact">Location & contact</a><a href="#reviews">Reviews <span>${reviewCount} ${reviewCount === 1 ? "excerpt" : "excerpts"}</span></a><a href="#company-faq">FAQs</a></nav>
 <div class="company-layout">
   <div class="company-content">
-    <section class="profile-section" id="reviews" data-profile-reviews>
-      <div class="profile-section-heading"><div><p class="kicker">BEFORE YOU BOOK</p><h2>Reviews & reputation</h2></div>${rating ? `<a class="text-link" href="${esc(rating.sourceUrl)}">View source${icon("link")}</a>` : ""}</div>
-      ${rating ? `<div class="review-overview"><div class="review-overview-score"><span class="rating-value">${rating.value.toFixed(1)}<small>/ 5</small></span>${profileStars(rating.value)}<span>${esc(sourceName)}</span></div><div class="review-overview-context"><strong>${esc(rating.label)}</strong><p>This is the figure reported by the linked source. Roster does not calculate a separate rating.</p><details><summary>Source details & differences</summary><p>${esc(rating.note)}</p></details></div></div>` : `<div class="review-empty-rating">${icon("star")}<div><h3>No rating on file</h3><p>The pages we checked did not give us a rating we could cite. You can still compare the company's published details below.</p></div></div>`}
-      <div class="review-toolbar"><div><h3>${reviewCount ? "What customers wrote" : "Customer review excerpts"}</h3><p>${reviewCount ? `${reviewCount} dated ${reviewCount === 1 ? "excerpt" : "excerpts"} on Roster, not the full review history.` : "We only include excerpts with a name, a date, and a source."}</p></div>${reviewCount > 1 ? `<label class="review-search">${icon("search")}<span class="sr-only">Search review excerpts</span><input type="search" placeholder="Search excerpts" data-review-search></label>` : ""}</div>
-      ${reviewCount ? `<div class="review-entries">${company.reviews.map(profileReview).join("")}</div><p class="review-no-results" data-review-empty hidden>No excerpts match your search. <button type="button" data-clear-reviews>Clear search</button></p><p class="review-search-status sr-only" data-review-count aria-live="polite"></p>` : `<div class="review-empty"><span class="review-empty-icon">${icon("quote")}</span><h3>No dated excerpts to show yet</h3><p>${rating ? "The rating above is sourced, but we do not have a dated customer quote to display here." : "No dated customer review was captured for this profile."}</p><a class="btn" href="${esc(rating?.sourceUrl || company.mapsUrl)}">Explore the original listing${icon("arrow")}</a></div>`}
-    </section>
-    <section class="profile-section" id="pricing"><div class="profile-section-heading"><div><p class="kicker">KNOW THE COST</p><h2>Services & pricing</h2></div><span class="section-pill">${presentation.published ? "Published prices" : "Quote required"}</span></div>
-      <p class="service-intro">${esc(content.headline)}</p><div class="service-menu">${content.services.map(renderServiceTile).join("")}</div>
-      <div class="pricing-subheading"><h3>What does it cost?</h3><span>Prices in Singapore dollars</span></div><div class="service-price-lead"><strong>${esc(presentation.price)}</strong><p>${esc(presentation.detail)}</p></div>
-      ${priceRows ? `<p class="service-list-help">Open a service to see what it involves. Confirm the exact scope with the company.</p><div class="service-price-list"><div class="service-price-list-heading" aria-hidden="true"><span>Service</span><span>Published price</span><span></span></div>${priceRows}</div>` : `<div class="quote-checklist"><h3>Ask for a written quote that covers:</h3><ul><li>${icon("check")}The work and any replacement parts</li><li>${icon("check")}Transport, call-out charges, and GST</li><li>${icon("check")}Extra work and the workmanship warranty</li></ul></div>`}
+    <section class="profile-section" id="pricing"><div class="profile-section-heading"><div><p class="kicker">KNOW THE COST</p><h2>Services & pricing</h2></div><span class="section-pill">${pricingLabel}</span></div>
+      <p class="service-intro">${esc(content.headline)}</p>
+      <p class="service-list-help">Open a service for details and questions to ask before booking.${pricedServices ? " Prices in Singapore dollars." : ""}</p>
+      <div class="service-price-list"><div class="service-price-list-heading" aria-hidden="true"><span>Service</span><span>Price</span><span></span></div>${serviceRows}</div>
       <details class="source-disclosure"><summary>Full pricing notes & conditions</summary><p>${esc(company.priceNote)}</p></details><p class="profile-source-note"><a href="${esc(company.priceSourceUrl)}">Published price source${icon("link")}</a><span>Checked 9-10 Oct 2026. Confirm the total for your job.</span></p>
     </section>
     <section class="profile-section" id="overview"><div class="profile-section-heading"><div><p class="kicker">MEET THE BUSINESS</p><h2>About ${esc(company.name)}</h2></div></div><div class="company-story"><p class="company-story-lead">${esc(content.about[0])}</p><p>${esc(content.about[1])}</p><div class="company-highlights">${content.highlights.map(item => `<div><span>${esc(item.label)}</span><strong>${esc(item.value)}</strong></div>`).join("")}</div></div><h3 class="fit-section-title">A few things to help you decide</h3><div class="company-fit"><div><span class="fit-label">${icon("check")}Worth considering for</span><p>${esc(company.bestFor)}</p></div><div><span class="fit-label">${icon("list")}Things to check first</span><p>${esc(company.poorFit)}</p></div></div></section>
     <section class="profile-section" id="contact"><div class="profile-section-heading"><div><p class="kicker">FIND THEM & GET IN TOUCH</p><h2>Location & contact</h2></div></div>${renderCompanyMap(company)}<div class="contact-options"><a href="${telHref(company.phone.value)}"><span class="contact-option-icon">${icon("phone")}</span><span><small>Call the company</small><strong>${esc(company.phone.value)}</strong></span>${icon("arrow")}</a>${company.whatsapp?.value ? `<a href="${waHref(company.whatsapp.value)}"><span class="contact-option-icon">${icon("chat")}</span><span><small>Message on WhatsApp</small><strong>${esc(company.whatsapp.value)}</strong></span>${icon("arrow")}</a>` : ""}</div><dl class="company-facts">${facts.join("")}</dl>${renderProfileSources(company, content)}</section>
+    <section class="profile-section" id="reviews" data-profile-reviews>
+      <div class="profile-section-heading"><div><p class="kicker">BEFORE YOU BOOK</p><h2>Reviews & reputation</h2></div>${rating ? `<a class="text-link" href="${esc(rating.sourceUrl)}">View source${icon("link")}</a>` : ""}</div>
+      ${rating ? `<div class="review-overview"><div class="review-overview-score"><span class="rating-value">${rating.value.toFixed(1)}<small>/ 5</small></span>${profileStars(rating.value)}<span>${esc(sourceName)}</span></div><div class="review-overview-context"><strong>${esc(rating.label)}</strong><p>This is the figure reported by the linked source. Roster does not calculate a separate rating.</p><details><summary>Source details & differences</summary><p>${esc(rating.note)}</p></details></div></div>` : `<div class="review-empty-rating">${icon("star")}<div><h3>No rating on file</h3><p>The pages we checked did not give us a rating we could cite. You can still compare the company's published services and contact details.</p></div></div>`}
+      <div class="review-toolbar"><div><h3>${reviewCount ? "What customers wrote" : "Customer review excerpts"}</h3><p>${reviewCount ? `${reviewCount} dated ${reviewCount === 1 ? "excerpt" : "excerpts"} on Roster, not the full review history.` : "We only include excerpts with a name, a date, and a source."}</p></div>${reviewCount > 1 ? `<label class="review-search">${icon("search")}<span class="sr-only">Search review excerpts</span><input type="search" placeholder="Search excerpts" data-review-search></label>` : ""}</div>
+      ${reviewCount ? `<div class="review-entries">${company.reviews.map(profileReview).join("")}</div><p class="review-no-results" data-review-empty hidden>No excerpts match your search. <button type="button" data-clear-reviews>Clear search</button></p><p class="review-search-status sr-only" data-review-count aria-live="polite"></p>` : `<div class="review-empty"><span class="review-empty-icon">${icon("quote")}</span><h3>No dated excerpts to show yet</h3><p>${rating ? "The rating above is sourced, but we do not have a dated customer quote to display here." : "No dated customer review was captured for this profile."}</p><a class="btn" href="${esc(rating?.sourceUrl || company.mapsUrl)}">Explore the original listing${icon("arrow")}</a></div>`}
+    </section>
     <section class="profile-section company-faq" id="company-faq"><div class="profile-section-heading"><div><p class="kicker">HELPFUL TO KNOW</p><h2>Questions about ${esc(company.name)}</h2></div></div><div class="company-faq-items">${questions.map(([question, answer]) => `<details><summary>${esc(question)}${icon("chevron")}</summary><p>${esc(answer)}</p></details>`).join("")}</div></section>
     <details class="profile-quote-preview" id="quote-request"><summary><span>${icon("chat")}Want to compare a few companies?<small>Try the quote request preview. Nothing is sent.</small></span>${icon("chevron")}</summary>${renderForm(trade.jobs, [company, ...others], "ask")}</details>
 ${others.length ? `<section class="profile-section related-companies"><div class="profile-section-heading"><div><p class="kicker">KEEP EXPLORING</p><h2>Also on your shortlist</h2></div><a class="text-link" href="/roster/${trade.slug}/">View all${icon("arrow")}</a></div><div class="related-grid">${others.slice(0, 3).map(peer => `<a href="/roster/company/${peer.slug}/"><span class="related-icon">${icon(tradeIcon[trade.id])}</span><h3>${esc(peer.name)}</h3><p>${esc(priceSummary(peer).price)}</p><span>View profile${icon("arrow")}</span></a>`).join("")}</div></section>` : ""}

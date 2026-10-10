@@ -96,8 +96,8 @@
   var tabs = Array.from(document.querySelectorAll('.company-section-nav a'));
   if (tabs.length) {
     function setTab(id) { tabs.forEach(function (tab) { var active = tab.hash === '#' + id; tab.classList.toggle('is-active', active); if (active) tab.setAttribute('aria-current', 'location'); else tab.removeAttribute('aria-current'); }); }
-    setTab(location.hash.slice(1) || 'reviews');
+    setTab(location.hash.slice(1) || 'pricing');
     tabs.forEach(function (tab) { tab.addEventListener('click', function () { setTab(tab.hash.slice(1)); }); });
-    window.addEventListener('hashchange', function () { setTab(location.hash.slice(1) || 'reviews'); });
+    window.addEventListener('hashchange', function () { setTab(location.hash.slice(1) || 'pricing'); });
   }
 })();

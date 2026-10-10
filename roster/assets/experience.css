@@ -185,3 +185,42 @@
 @media(max-width:1100px){.service-price-list-heading,.service-rate>summary{grid-template-columns:minmax(0,1fr) minmax(100px,150px) 30px;gap:14px}.service-price-list-heading{padding:15px 18px}.service-rate>summary{padding:21px 18px}.service-rate>.service-explanation{padding:0 18px 22px}.service-rate-price{font-size:17px}.service-toggle-icon{width:30px;height:30px}}
 @media(max-width:639px){.service-price-list-heading{display:none}.service-rate:first-of-type{border-top:0}.service-rate>summary{grid-template-columns:minmax(0,1fr) 32px;gap:12px;padding:21px 18px;position:relative}.service-rate-label{grid-column:1;grid-row:1}.service-rate-label>strong{font-size:18px}.service-rate-label>small{font-size:14px}.service-rate-label>.service-details-label{display:none}.service-rate-price{grid-column:1;grid-row:2;text-align:left;font-size:20px}.service-rate>summary>.service-toggle-icon{grid-column:2;grid-row:1/3;width:32px;height:32px}.service-rate>.service-explanation{padding:0 18px 23px}.service-rate[open]>summary{padding-bottom:20px}.company-page .service-explanation>p,.company-page .service-booking-question>p{font-size:16px}.service-explainer>summary{min-height:48px}.service-list-help{max-width:35ch}}
 @media(prefers-reduced-motion:reduce){.service-toggle-icon>.ic{transition:none}}
+
+
+/* One service row contains its description, price and any pricing options. */
+.company-page .service-rate-quote{font-size:16px;font-weight:500}
+.service-rate{scroll-margin-top:145px}
+.service-price-options{margin-top:22px;padding:19px 20px;background:#fff;border:1px solid #dce5d6;border-radius:8px}
+.company-page .service-price-options h4{font-size:15px;line-height:1.6;font-weight:600;color:var(--ink);margin:0 0 12px}
+.service-price-options dl{margin:0}
+.service-price-options dl>div{display:grid;grid-template-columns:minmax(0,1fr) minmax(130px,210px);gap:20px;align-items:baseline;padding:13px 0;border-top:1px solid var(--rule)}
+.service-price-options dl>div:first-child{border-top:0;padding-top:0}
+.service-price-options dl>div:last-child{padding-bottom:0}
+.service-price-options dt{font-size:15px;line-height:1.7;color:var(--ink-soft)}
+.service-price-options dt>small{display:block;font-size:14px;color:var(--muted);line-height:1.7;margin-top:4px}
+.service-price-options dd{margin:0;font-size:16px;line-height:1.7;font-weight:600;text-align:right;color:var(--green)}
+@media(max-width:639px){.service-rate{scroll-margin-top:20px}.company-page .service-rate-quote{font-size:16px}.service-price-options{padding:16px}.service-price-options dl>div{grid-template-columns:1fr;gap:5px;padding:15px 0}.service-price-options dd{text-align:left;font-size:17px}}
+
+
+/* Home uses the same readable body and supporting sizes as business profiles. */
+.home-page{font-size:16px;--muted:#526258;--ink-soft:#35493e}
+.home-page .hero .dek{font-size:18px;line-height:1.8;max-width:43ch}
+.home-page .hero .btn-paper{font-size:15px;min-height:48px;padding-inline:20px}
+.home-page .kicker{font-size:12px}
+.home-page .trust strong{font-size:17px;line-height:1.5}
+.home-page .trust span{font-size:16px;line-height:1.8;margin-top:7px}
+.home-page .section-head .lede{font-size:18px;line-height:1.8;max-width:58ch}
+.home-page .index a{height:100%;min-height:260px;padding:24px 20px 20px}
+.home-page .index .job{font-size:20px;line-height:1.4}
+.home-page .index .hint{font-size:16px;line-height:1.7;margin-top:9px}
+.home-page .index .meta{font-size:14px;line-height:1.6;margin-top:auto}
+.home-page .section>h2{font-size:32px;line-height:1.3}
+.home-page .steps li{padding:25px}
+.home-page .steps .step-title{font-size:18px;line-height:1.5}
+.home-page .steps li>span:last-child{font-size:16px;line-height:1.8}
+.home-page .method{font-size:14px;line-height:1.8}
+.home-page .promise-list li{font-size:16px;line-height:1.8;padding-block:20px}
+.home-page .promise-list strong{font-size:17px;line-height:1.6;margin-bottom:4px}
+.home-page .foot-brand p,.home-page .foot-col li{font-size:14px;line-height:1.8}
+.home-page .foot-brand .foot-note,.home-page .foot-line,.home-page .foot-col h2{font-size:12px;line-height:1.7}
+@media(max-width:639px){.home-page .hero .dek{font-size:17px}.home-page .trust strong{font-size:17px}.home-page .trust span{font-size:16px}.home-page .index a{padding:20px 16px;min-height:270px}.home-page .index li:last-child a{min-height:185px}.home-page .index .job{font-size:19px}.home-page .section>h2{font-size:28px}.home-page .section-head .lede{font-size:16px}.home-page .steps li{padding:23px}}

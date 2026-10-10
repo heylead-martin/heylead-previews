@@ -9,17 +9,20 @@
       {
         "name": "Power trips & fault finding",
         "description": "Troubleshooting for power failures, recurring trips and other electrical faults.",
-        "guide": "electrical-fault"
+        "guide": "electrical-fault",
+        "prices": []
       },
       {
         "name": "Lighting & fan installation",
         "description": "Installation and replacement of lights, switches and ceiling fans.",
-        "guide": "lighting-fans"
+        "guide": "lighting-fans",
+        "prices": []
       },
       {
         "name": "Sockets, wiring & distribution boards",
         "description": "Power points, rewiring and distribution-board work are listed in its service range.",
-        "guide": "electrical-wiring"
+        "guide": "electrical-wiring",
+        "prices": []
       }
     ],
     "highlights": [
@@ -54,17 +57,20 @@
       {
         "name": "Chokes & blocked drains",
         "description": "Clearing blocked sinks, toilet bowls, floor traps and drainage pipes.",
-        "guide": "drain-chokes"
+        "guide": "drain-chokes",
+        "prices": []
       },
       {
         "name": "Leaks & pipe repairs",
         "description": "Finding and repairing leaks in water pipes, sinks and toilet fittings.",
-        "guide": "pipe-leaks"
+        "guide": "pipe-leaks",
+        "prices": []
       },
       {
         "name": "Fixtures & water heaters",
         "description": "Installation or replacement of taps, basins, toilets, pipes and water heaters.",
-        "guide": "fixtures-heaters"
+        "guide": "fixtures-heaters",
+        "prices": []
       }
     ],
     "highlights": [
@@ -97,19 +103,57 @@
     ],
     "services": [
       {
-        "name": "General aircon servicing",
-        "description": "A published rate for one unit, plus multi-unit prices and yearly contracts.",
-        "guide": "aircon-general"
+        "name": "General servicing",
+        "description": "Routine servicing, priced by number of units. Includes GST.",
+        "guide": "aircon-general",
+        "prices": [
+          {
+            "price": "S$49.05",
+            "detail": "1 unit, includes GST"
+          },
+          {
+            "price": "S$65.40 / S$81.75",
+            "detail": "2 / 3 units, includes GST"
+          },
+          {
+            "price": "S$98.10",
+            "detail": "4 units, includes GST"
+          }
+        ],
+        "priceSummary": "From S$49.05"
       },
       {
         "name": "Chemical wash",
-        "description": "A per-unit chemical-wash price is listed separately from an overhaul.",
-        "guide": "aircon-wash"
+        "description": "Per unit, includes GST",
+        "guide": "aircon-wash",
+        "prices": [
+          {
+            "price": "S$87.20",
+            "detail": "Per unit, includes GST"
+          }
+        ]
       },
       {
-        "name": "Chemical overhaul & packages",
-        "description": "Overhaul and yearly-contract options include gas according to the published service notes.",
-        "guide": "aircon-overhaul-package"
+        "name": "Chemical overhaul",
+        "description": "1 unit, includes GST",
+        "guide": "aircon-overhaul",
+        "prices": [
+          {
+            "price": "S$163.50",
+            "detail": "1 unit, includes GST"
+          }
+        ]
+      },
+      {
+        "name": "Yearly contract",
+        "description": "Includes GST",
+        "guide": "aircon-contract",
+        "prices": [
+          {
+            "price": "From S$174.40",
+            "detail": "Includes GST"
+          }
+        ]
       }
     ],
     "highlights": [
@@ -144,18 +188,38 @@
     "services": [
       {
         "name": "General servicing",
-        "description": "One-unit servicing and a published starting price on the booking page.",
-        "guide": "aircon-general"
+        "description": "1 unit, book-online page",
+        "guide": "aircon-general",
+        "prices": [
+          {
+            "price": "From S$55",
+            "detail": "1 unit, book-online page"
+          }
+        ]
       },
       {
         "name": "Maintenance contracts",
-        "description": "Separate contract options are listed with and without free gas.",
-        "guide": "aircon-contract"
+        "description": "Packages with and without gas included.",
+        "guide": "aircon-contract",
+        "prices": [
+          {
+            "price": "S$200",
+            "detail": "1 unit",
+            "label": "Contract without gas"
+          },
+          {
+            "price": "S$250",
+            "detail": "Package price",
+            "label": "Contract with free gas"
+          }
+        ],
+        "priceSummary": "From S$200"
       },
       {
         "name": "Chemical cleaning",
         "description": "Chemical-wash work is described on the installation pages. Ask for a job-specific price.",
-        "guide": "aircon-wash"
+        "guide": "aircon-wash",
+        "prices": []
       }
     ],
     "highlights": [
@@ -188,7 +252,8 @@
       {
         "name": "Routine aircon servicing",
         "description": "Discuss the number of indoor units, your service history and the work included in the visit.",
-        "guide": "aircon-general"
+        "guide": "aircon-general",
+        "prices": []
       }
     ],
     "highlights": [
@@ -222,18 +287,47 @@
     "services": [
       {
         "name": "Wall-unit chemical wash",
-        "description": "A non-dismantle wash, with a published range for a wall-mounted unit.",
-        "guide": "wall-wash"
+        "description": "Non-dismantle wash",
+        "guide": "wall-wash",
+        "prices": [
+          {
+            "price": "S$80 to S$100",
+            "detail": "Non-dismantle wash"
+          }
+        ]
       },
       {
         "name": "Cassette chemical wash",
-        "description": "A separate published range for ceiling cassette units.",
-        "guide": "cassette-wash"
+        "description": "Ceiling cassette",
+        "guide": "cassette-wash",
+        "prices": [
+          {
+            "price": "S$120 to S$150",
+            "detail": "Ceiling cassette"
+          }
+        ]
       },
       {
-        "name": "Full chemical overhaul",
-        "description": "Wall-unit and cassette overhauls are priced separately from a standard chemical wash.",
-        "guide": "aircon-overhaul"
+        "name": "Wall-unit overhaul",
+        "description": "Full overhaul",
+        "guide": "wall-overhaul",
+        "prices": [
+          {
+            "price": "S$130 to S$180",
+            "detail": "Full overhaul"
+          }
+        ]
+      },
+      {
+        "name": "Cassette overhaul",
+        "description": "Full overhaul",
+        "guide": "cassette-overhaul",
+        "prices": [
+          {
+            "price": "S$180 to S$250",
+            "detail": "Full overhaul"
+          }
+        ]
       }
     ],
     "highlights": [
@@ -266,18 +360,68 @@
     "services": [
       {
         "name": "General servicing",
-        "description": "One-time servicing rates are listed for one to six indoor units.",
-        "guide": "aircon-general"
+        "description": "One-time servicing for one to six units. No GST added.",
+        "guide": "aircon-general",
+        "prices": [
+          {
+            "price": "S$55 / S$60 / S$75",
+            "detail": "1 / 2 / 3 units, no GST added"
+          },
+          {
+            "price": "S$90 / S$105 / S$120",
+            "detail": "4 / 5 / 6 units, no GST added"
+          }
+        ],
+        "priceSummary": "From S$55"
       },
       {
-        "name": "Chemical wash & overhaul",
-        "description": "Separate tables cover washing, wall-unit overhauls and different aircon sizes.",
-        "guide": "aircon-cleaning-options"
+        "name": "Chemical wash",
+        "description": "Chemical cleaning, priced by number of units. No GST added.",
+        "guide": "aircon-wash",
+        "prices": [
+          {
+            "price": "S$110",
+            "detail": "1 unit, no GST added"
+          },
+          {
+            "price": "S$210 / S$310",
+            "detail": "2 / 3 units, no GST added"
+          }
+        ],
+        "priceSummary": "From S$110"
       },
       {
-        "name": "Gas & troubleshooting",
-        "description": "Gas pricing depends on refrigerant and measured PSI. Troubleshooting has a separate fee.",
-        "guide": "aircon-gas-diagnosis"
+        "name": "Wall-unit overhaul",
+        "description": "1 unit, 9,000 or 12,000 BTU",
+        "guide": "wall-overhaul",
+        "prices": [
+          {
+            "price": "S$150",
+            "detail": "1 unit, 9,000 or 12,000 BTU"
+          }
+        ]
+      },
+      {
+        "name": "Gas top-up",
+        "description": "Depends on refrigerant and measured PSI",
+        "guide": "aircon-gas",
+        "prices": [
+          {
+            "price": "S$90 to S$170",
+            "detail": "Depends on refrigerant and measured PSI"
+          }
+        ]
+      },
+      {
+        "name": "Troubleshooting",
+        "description": "Multi-split; waived if work proceeds",
+        "guide": "aircon-diagnosis",
+        "prices": [
+          {
+            "price": "S$50 to S$80",
+            "detail": "Multi-split; waived if work proceeds"
+          }
+        ]
       }
     ],
     "highlights": [
@@ -310,19 +454,54 @@
     ],
     "services": [
       {
-        "name": "Chemical wash & overhaul",
-        "description": "Cleaning options with published starting prices and ranges that need confirmation.",
-        "guide": "aircon-cleaning-options"
+        "name": "Chemical wash",
+        "description": "FAQ also says S$80 to S$100 per unit",
+        "guide": "aircon-wash",
+        "prices": [
+          {
+            "price": "From S$80",
+            "detail": "FAQ also says S$80 to S$100 per unit"
+          }
+        ]
+      },
+      {
+        "name": "Chemical overhaul",
+        "description": "FAQ instead says S$130 to S$180 per unit",
+        "guide": "aircon-overhaul",
+        "prices": [
+          {
+            "price": "From S$150",
+            "detail": "FAQ instead says S$130 to S$180 per unit"
+          }
+        ]
       },
       {
         "name": "General servicing",
         "description": "Single and multi-unit servicing offers appear on the company page.",
-        "guide": "aircon-general"
+        "guide": "aircon-general",
+        "prices": []
       },
       {
-        "name": "Leak repair & diagnosis",
-        "description": "Leak repair and not-cold troubleshooting are listed separately from a gas top-up.",
-        "guide": "aircon-leak-diagnosis"
+        "name": "Leak repair",
+        "description": "Published starting price",
+        "guide": "aircon-water-leak",
+        "prices": [
+          {
+            "price": "From S$40",
+            "detail": "Published starting price"
+          }
+        ]
+      },
+      {
+        "name": "Not-cold troubleshooting",
+        "description": "Diagnostic fee, not a gas top-up price",
+        "guide": "aircon-diagnosis",
+        "prices": [
+          {
+            "price": "From S$40",
+            "detail": "Diagnostic fee, not a gas top-up price"
+          }
+        ]
       }
     ],
     "highlights": [
@@ -354,19 +533,48 @@
     ],
     "services": [
       {
-        "name": "Sink & floor-trap chokes",
-        "description": "Both services have a published range of S$60 to S$150.",
-        "guide": "drain-chokes"
+        "name": "Floor trap choke",
+        "description": "Published range",
+        "guide": "floor-trap",
+        "prices": [
+          {
+            "price": "S$60 to S$150",
+            "detail": "Published range"
+          }
+        ]
       },
       {
-        "name": "Toilet chokes",
-        "description": "The company lists S$80 to S$180 for a toilet choke.",
-        "guide": "toilet-choke"
+        "name": "Sink choke",
+        "description": "Published range",
+        "guide": "sink-choke",
+        "prices": [
+          {
+            "price": "S$60 to S$150",
+            "detail": "Published range"
+          }
+        ]
+      },
+      {
+        "name": "Toilet choke",
+        "description": "Published range",
+        "guide": "toilet-choke",
+        "prices": [
+          {
+            "price": "S$80 to S$180",
+            "detail": "Published range"
+          }
+        ]
       },
       {
         "name": "Drain jetting",
-        "description": "A published S$150 to S$400 range for drain-jetting work.",
-        "guide": "drain-jetting"
+        "description": "Published range",
+        "guide": "drain-jetting",
+        "prices": [
+          {
+            "price": "S$150 to S$400",
+            "detail": "Published range"
+          }
+        ]
       }
     ],
     "highlights": [
@@ -398,19 +606,81 @@
     ],
     "services": [
       {
-        "name": "Chokes & blockages",
-        "description": "Starting prices for kitchen-sink and toilet-bowl chokes.",
-        "guide": "drain-chokes"
+        "name": "Kitchen sink choke",
+        "description": "Starting price",
+        "guide": "sink-choke",
+        "prices": [
+          {
+            "price": "From S$50",
+            "detail": "Starting price"
+          }
+        ]
       },
       {
-        "name": "Pipes & leak detection",
-        "description": "Copper-pipe repair and supply, plus concealed-leak detection.",
-        "guide": "pipes-detection"
+        "name": "Toilet bowl choke",
+        "description": "Starting price",
+        "guide": "toilet-choke",
+        "prices": [
+          {
+            "price": "From S$80",
+            "detail": "Starting price"
+          }
+        ]
       },
       {
-        "name": "Basins, traps & fittings",
-        "description": "Installation or replacement options for basins, bottle traps, taps and hoses.",
-        "guide": "basins-traps"
+        "name": "Copper pipe repair and supply",
+        "description": "Starting price",
+        "guide": "copper-pipe",
+        "prices": [
+          {
+            "price": "From S$100",
+            "detail": "Starting price"
+          }
+        ]
+      },
+      {
+        "name": "Concealed leak detection",
+        "description": "Starting price",
+        "guide": "leak-detection",
+        "prices": [
+          {
+            "price": "From S$250",
+            "detail": "Starting price"
+          }
+        ]
+      },
+      {
+        "name": "Basin installation",
+        "description": "Starting price",
+        "guide": "basin-installation",
+        "prices": [
+          {
+            "price": "From S$90",
+            "detail": "Starting price"
+          }
+        ]
+      },
+      {
+        "name": "Bottle trap",
+        "description": "Starting price",
+        "guide": "bottle-trap",
+        "prices": [
+          {
+            "price": "From S$80",
+            "detail": "Starting price"
+          }
+        ]
+      },
+      {
+        "name": "Tap, mixer, sink or hose",
+        "description": "Starting price",
+        "guide": "plumbing-fittings",
+        "prices": [
+          {
+            "price": "From S$80",
+            "detail": "Starting price"
+          }
+        ]
       }
     ],
     "highlights": [
@@ -442,12 +712,19 @@
       {
         "name": "Electrical repair enquiries",
         "description": "Describe the fault and send photos to confirm whether the team handles your job.",
-        "guide": "electrical-enquiry"
+        "guide": "electrical-enquiry",
+        "prices": []
       },
       {
-        "name": "Isolator replacement",
-        "description": "Replacement with a new double-pole isolator is listed from S$120, before transport.",
-        "guide": "isolator"
+        "name": "Double-pole isolator replacement",
+        "description": "Transport is extra",
+        "guide": "isolator",
+        "prices": [
+          {
+            "price": "From S$120",
+            "detail": "Transport is extra"
+          }
+        ]
       }
     ],
     "highlights": [
@@ -481,7 +758,8 @@
       {
         "name": "Electrical service enquiries",
         "description": "Call with the fault or installation you need and confirm whether the company can take the job.",
-        "guide": "electrical-enquiry"
+        "guide": "electrical-enquiry",
+        "prices": []
       }
     ],
     "highlights": [
@@ -514,17 +792,20 @@
       {
         "name": "Power trips & emergency repairs",
         "description": "Troubleshooting for power failures and urgent electrical faults.",
-        "guide": "electrical-fault"
+        "guide": "electrical-fault",
+        "prices": []
       },
       {
         "name": "Power points & switches",
         "description": "Installation or replacement of sockets, light switches and heater switches.",
-        "guide": "power-points"
+        "guide": "power-points",
+        "prices": []
       },
       {
         "name": "Wiring & lighting",
         "description": "Wiring, rewiring and lighting work are included in the published service range.",
-        "guide": "wiring-lighting"
+        "guide": "wiring-lighting",
+        "prices": []
       }
     ],
     "highlights": [
@@ -558,17 +839,20 @@
       {
         "name": "Plumbing repairs",
         "description": "Drain cleaning, tap replacement, chokes and leak repairs are listed.",
-        "guide": "plumbing-repairs"
+        "guide": "plumbing-repairs",
+        "prices": []
       },
       {
         "name": "Carpentry & home repairs",
         "description": "Door, hinge, cabinet and shelving work are described on the website.",
-        "guide": "carpentry-repairs"
+        "guide": "carpentry-repairs",
+        "prices": []
       },
       {
         "name": "Painting & flooring",
         "description": "Painting, floor repairs and flooring installation appear in its service menu.",
-        "guide": "painting-flooring"
+        "guide": "painting-flooring",
+        "prices": []
       }
     ],
     "highlights": [
@@ -602,7 +886,8 @@
       {
         "name": "Homecare & handyman enquiries",
         "description": "Explain the repair or maintenance work you need. The specific service scope needs direct confirmation.",
-        "guide": "handyman-enquiry"
+        "guide": "handyman-enquiry",
+        "prices": []
       }
     ],
     "highlights": [
@@ -634,19 +919,21 @@
     ],
     "services": [
       {
-        "name": "Weekly home cleaning",
-        "description": "Recurring cleaning enquiries with a published weekly offer that needs scope and duration confirmation.",
-        "guide": "weekly-cleaning"
-      },
-      {
-        "name": "First-session trial",
-        "description": "The weekly page also advertises a trial heading with the same starting offer.",
-        "guide": "cleaning-trial"
+        "name": "Weekly cleaning & first-session trial",
+        "description": "Unit, inclusions and GST are not stated",
+        "guide": "cleaning-offer",
+        "prices": [
+          {
+            "price": "From S$22",
+            "detail": "Unit, inclusions and GST are not stated"
+          }
+        ]
       },
       {
         "name": "One-time home cleaning",
         "description": "Ask for a quote matched to the property size, condition and cleaning tasks.",
-        "guide": "one-time-cleaning"
+        "guide": "one-time-cleaning",
+        "prices": []
       }
     ],
     "highlights": [
