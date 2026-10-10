@@ -1,0 +1,139 @@
+{
+  "sg-6432-84xx-local-service-network": {
+    "label": "Brand network on +65 6432 84xx landlines (Local Service Pte Ltd and sister brand sites, incl. the 7Days aircon brands)",
+    "members": [
+      {
+        "slug": "7days-aircon-servicing-pte-ltd",
+        "name": "7Days Aircon Servicing Pte Ltd"
+      },
+      {
+        "slug": "affordable-electrician-services-singapore",
+        "name": "Affordable Electrician Services Singapore"
+      },
+      {
+        "slug": "affordable-handyman-services-singapore",
+        "name": "Affordable Handyman Services Singapore"
+      },
+      {
+        "slug": "air-conditioner-servicing-cleaning-repair-singapore",
+        "name": "Air Conditioner Servicing, Cleaning & Repair Singapore"
+      },
+      {
+        "slug": "aircon-servicing-singapore-affordable-services-pte-ltd",
+        "name": "Aircon Servicing Singapore - Affordable Services Pte Ltd"
+      },
+      {
+        "slug": "cheap-aircon-servicing-singapore-by-7days",
+        "name": "Cheap Aircon Servicing Singapore by 7Days"
+      },
+      {
+        "slug": "local-service-pte-ltd",
+        "name": "Local Service Pte Ltd"
+      },
+      {
+        "slug": "ls-aircon-servicing-singapore",
+        "name": "LS Aircon Servicing Singapore"
+      },
+      {
+        "slug": "marvellous-aircon-service-cleaning-singapore",
+        "name": "Marvellous Aircon Service & Cleaning Singapore"
+      }
+    ]
+  },
+  "everyworks-1090-lower-delta": {
+    "label": "Everyworks group, 1090 Lower Delta Road",
+    "members": [
+      {
+        "slug": "a1-handyman",
+        "name": "A1 Handyman Singapore"
+      },
+      {
+        "slug": "carpenter-cube-singapore",
+        "name": "Carpenter Cube Singapore"
+      },
+      {
+        "slug": "daylight-electrician",
+        "name": "Daylight Electrician Singapore"
+      },
+      {
+        "slug": "dw-aircon-servicing-singapore-sengkang",
+        "name": "DW Aircon Servicing Singapore - Sengkang"
+      },
+      {
+        "slug": "dw-deep-cleaning-services-singapore",
+        "name": "DW Deep Cleaning Services Singapore"
+      },
+      {
+        "slug": "dw-end-of-tenancy-cleaning-singapore",
+        "name": "DW End of Tenancy Cleaning Singapore"
+      },
+      {
+        "slug": "dw-move-out-cleaning-singapore",
+        "name": "DW Move Out Cleaning Singapore"
+      },
+      {
+        "slug": "everyworks-renovation-maintenance-singapore",
+        "name": "Everyworks Renovation & Maintenance Singapore"
+      },
+      {
+        "slug": "handover-haus-singapore-post-renovation-cleaning-move-out-cl",
+        "name": "Handover Haus Singapore | Post Renovation Cleaning, Move Out Cleaning & End of Tenancy Repair Services"
+      },
+      {
+        "slug": "mr-plumber",
+        "name": "Mr Plumber Singapore"
+      }
+    ]
+  },
+  "sg-city-21-woodlands-cl": {
+    "label": "SG City Air-Con and City Cooling: shared phone +65 6362 2720 and 21 Woodlands Close #05-45",
+    "members": [
+      {
+        "slug": "city-cooling-pte-ltd-aircon-specialist-singapore",
+        "name": "City Cooling Pte Ltd - Aircon Specialist Singapore"
+      },
+      {
+        "slug": "sg-city-aircon",
+        "name": "SG CITY AIR-CON PTE. LTD."
+      }
+    ]
+  },
+  "uen-202026288C": {
+    "label": "Two brands under one UEN 202026288C (Handyman Top Services, Handyman AZ)",
+    "members": [
+      {
+        "slug": "handyman-az",
+        "name": "Handyman AZ"
+      },
+      {
+        "slug": "handyman-top-services",
+        "name": "Handyman Top Services"
+      }
+    ]
+  },
+  "sg-6854-49xx-ls-network": {
+    "label": "Brand network on +65 6854 49xx landlines (Socool, LS Handyman, PS Home Maintenance, LS Aircon & Electrician, Reliable Electrical)",
+    "members": [
+      {
+        "slug": "ls-aircon-service-electrician",
+        "name": "LS Aircon Service & Electrician"
+      },
+      {
+        "slug": "ls-handyman-service-s-pte-ltd",
+        "name": "LS Handyman Service ( S ) Pte Ltd"
+      },
+      {
+        "slug": "ps-home-maintenance",
+        "name": "PS Home Maintenance"
+      },
+      {
+        "slug": "reliable-electrical-services",
+        "name": "Reliable Electrical Services"
+      },
+      {
+        "slug": "socool",
+        "name": "SoCool"
+      }
+    ]
+  }
+}
