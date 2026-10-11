@@ -1,6 +1,10 @@
-:HL["/imoti-bg/_next/static/chunks/00d3qmbo621r3.css","style"]
-:HL["/imoti-bg/_next/static/media/256e1f7f180674ba-s.p.1x971o6gwfy6w.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
-:HL["/imoti-bg/_next/static/media/68d403cf9f2c68c5-s.p.20at88_q9f_kt.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
-:HL["/imoti-bg/_next/static/media/b4a06a523f527a0e-s.p.3psl0_mnhzy2y.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
-:HL["/imoti-bg/_next/static/media/cfdfbee4d6cf0a93-s.p.1jwcpm6w583_v.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
-0:{"tree":{"name":"","param":null,"prefetchHints":4112,"slots":{"children":{"name":"grad","param":null,"prefetchHints":4160,"slots":{"children":{"name":"city","param":{"type":"d","key":"ruse","siblings":[]},"prefetchHints":4192,"slots":{"children":{"name":"region","param":{"type":"d","key":"charodeyka","siblings":["naemi","prodazhbi"]},"prefetchHints":4192,"slots":{"children":{"name":"prodazhbi","param":null,"prefetchHints":4192,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}}}}}}}},"staleTime":300,"buildId":"P8c--4IERATs_6oa9xcsX"}
+:HL["/imoti-bg/_next/static/chunks/14l8y_zx7tya3.css","style"]
+:HL["/imoti-bg/_next/static/media/002ddd0f057a002e-s.p.267laj-7qy-0-.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/imoti-bg/_next/static/media/173b4e1ecbfe6c3b-s.p.2ofae7-v0u79z.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/imoti-bg/_next/static/media/187df20e17b435d1-s.p.1de5oe27h2kcs.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/imoti-bg/_next/static/media/21110e96b1dae9b1-s.p.43a5-rp9f3fl3.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/imoti-bg/_next/static/media/5977ec4b36520f6d-s.p.1lnoxcpdy15zq.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/imoti-bg/_next/static/media/89c2c771ed51f5b8-s.p.1d4i5iktl1egg.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/imoti-bg/_next/static/media/c8d3663ba40d1542-s.p.3t6wimnoqat92.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/imoti-bg/_next/static/media/cc75fa3e14c3cd04-s.p.2a3w-b9irc_27.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+0:{"tree":{"name":"","param":null,"prefetchHints":4112,"slots":{"children":{"name":"grad","param":null,"prefetchHints":4160,"slots":{"children":{"name":"city","param":{"type":"d","key":"ruse","siblings":[]},"prefetchHints":4192,"slots":{"children":{"name":"region","param":{"type":"d","key":"charodeyka","siblings":["naemi","prodazhbi"]},"prefetchHints":4192,"slots":{"children":{"name":"prodazhbi","param":null,"prefetchHints":4192,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}}}}}}}},"staleTime":300,"buildId":"dLNTMrW3kIRzoNpRYdR9C"}

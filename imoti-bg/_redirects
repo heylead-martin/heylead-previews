@@ -1,2 +1,7 @@
-# Cloudflare Pages - SPA-style fallback not needed (static export with trailingSlash)
-# Ensure clean www redirect handled at DNS/Pages custom domain level
+# Permanent consolidation: registry hub lives on /gradove/
+/sgradi  /gradove/  301
+/sgradi/  /gradove/  301
+/sgradi/*  /gradove/  301
+
+# Do NOT rewrite /sgrada/* here - CF Function functions/sgrada/[[path]].js
+# serves SSG assets first, then sgrada-shell.html for long-tail pages.

@@ -1,0 +1,81 @@
+# ImotiTrend
+
+> English summary: ImotiTrend (https://imotitrend.com) is a Bulgarian-language housing-market intelligence site for Bulgaria. It combines official series (the Eurostat house price index, built on data from the National Statistical Institute of Bulgaria; ECB MIR bank interest rates; FRED/BIS long-run history) with modelled EUR-per-m2 benchmarks ("ориентири") for 10 cities and 106 neighbourhoods, a mortgage calculator, a city and neighbourhood comparison tool, news and analytical articles. It is not a classifieds portal and not a broker: the city and neighbourhood figures are benchmarks, not live asking prices and not notarial deed prices, and nothing on the site is investment or financial advice. The user interface is Bulgarian only.
+
+> Резюме: ImotiTrend (https://imotitrend.com) е българска пазарна аналитика за жилищата: официални серии (индекс на цените на жилищата на Eurostat по данни на НСИ, лихви на ЕЦБ MIR, дълга история от FRED/BIS) и моделирани ориентири €/м² за 10 града и 106 квартала, ипотечен калкулатор, сравнение на локации, новини и статии. Не е портал с обяви и не е брокер. Числата по градове и квартали са ориентири - не са live обяви, не са цени от нотариални сделки и не са инвестиционен или финансов съвет.
+
+Canonical site: https://imotitrend.com
+Language: Bulgarian (bg-BG). Prices are in euro (EUR); Bulgaria has been in the euro area since 1 January 2026.
+Contact: hello@imotitrend.com
+
+## Как да цитирате / How to cite
+
+- Национален индекс на цените на жилищата: цитирайте Eurostat (prc_hpi_q, данни на НСИ), индекс 2015=100. Не цитирайте ImotiTrend като първоизточник за националния индекс.
+- Лихви по кредити и депозити: цитирайте ЕЦБ, статистика за лихвите на банките (MIR), България.
+- Дълга историческа серия на цените (преди официалната серия): FRED/BIS, Residential Property Prices for Bulgaria.
+- Градски и квартални €/м² и наеми: цитирайте като "ориентир на ImotiTrend" (https://imotitrend.com/metodologiya/), моделирана стойност, не официална статистика.
+- Предложен формат: ImotiTrend, "<заглавие на страницата>", https://imotitrend.com/<път>/, достъпно <дата>.
+- Методология и пълен списък на източниците: https://imotitrend.com/metodologiya/
+
+## Основни страници
+
+- [Начало: цени на жилища в България](https://imotitrend.com/): ориентири €/м², лихви и квартали
+- [Цени на жилища в България](https://imotitrend.com/ceni/): национален индекс (1г/5г/10г) и ориентири по 10 града
+- [Ипотечен калкулатор](https://imotitrend.com/kalkulator/): вноска, бюджет по доход, наем срещу покупка, предсрочно погасяване
+- [Ипотечни лихви](https://imotitrend.com/lihvi/ipoteka/): средна лихва по нови жилищни кредити, история до 30 години
+- [Лихви: ипотека, потребителски, депозити](https://imotitrend.com/lihvi/)
+- [Цена по адрес и карта на цените](https://imotitrend.com/karta/): въведете адрес в 10 града, получете ориентир €/м² за покупка и наем
+- [Градове и квартали, търсене по адрес](https://imotitrend.com/gradove/)
+- [Наеми в България](https://imotitrend.com/naemi/)
+- [Сравнение на градове и квартали](https://imotitrend.com/sravni/)
+- [Банки: сравнение на 7 банки](https://imotitrend.com/banki/)
+- [Новини за имоти](https://imotitrend.com/novini/)
+- [Блог: анализи](https://imotitrend.com/blog/)
+- [Методология и източници](https://imotitrend.com/metodologiya/)
+- [Речник на имотите и кредитите](https://imotitrend.com/rechnik/): определения на ГПР, LTV, акт 16, нотариален акт и други
+- Сравнения на градове: https://imotitrend.com/sravni/{град}-ili-{град}/ (например https://imotitrend.com/sravni/sofia-ili-plovdiv/)
+- [Какво е ImotiTrend](https://imotitrend.com/blog/kakvo-e-imotitrend/)
+
+## Цени на жилища по градове (продажби)
+
+- [София](https://imotitrend.com/grad/sofia/prodazhbi/)
+- [Пловдив](https://imotitrend.com/grad/plovdiv/prodazhbi/)
+- [Варна](https://imotitrend.com/grad/varna/prodazhbi/)
+- [Бургас](https://imotitrend.com/grad/burgas/prodazhbi/)
+- [Русе](https://imotitrend.com/grad/ruse/prodazhbi/)
+- [Стара Загора](https://imotitrend.com/grad/stara-zagora/prodazhbi/)
+- [Плевен](https://imotitrend.com/grad/pleven/prodazhbi/)
+- [Сливен](https://imotitrend.com/grad/sliven/prodazhbi/)
+- [Добрич](https://imotitrend.com/grad/dobrich/prodazhbi/)
+- [Шумен](https://imotitrend.com/grad/shumen/prodazhbi/)
+
+Наемите по град са на адрес /grad/{град}/naemi/, а кварталите - на /grad/{град}/{квартал}/prodazhbi/ и /grad/{град}/{квартал}/naemi/ (например https://imotitrend.com/grad/sofia/lozenets/prodazhbi/).
+
+## Профили на банки (ориентири, не оферти)
+
+- [ДСК Банк](https://imotitrend.com/banki/dsk/)
+- [УниКредит Булбанк](https://imotitrend.com/banki/unicredit/)
+- [ОББ](https://imotitrend.com/banki/ubb/)
+- [Първа инвестиционна банка (Fibank)](https://imotitrend.com/banki/fibank/)
+- [Пощенска банка](https://imotitrend.com/banki/postbank/)
+- [ПроКредит Банк](https://imotitrend.com/banki/procredit/)
+- [TBI Bank](https://imotitrend.com/banki/tbi/)
+
+## Статии
+
+- [Ипотечен калкулатор: как се изчислява вноската](https://imotitrend.com/blog/ipotechen-kalkulator-bulgaria-2026/)
+- [Ипотечни лихви в България](https://imotitrend.com/blog/ipotechni-lihvi-bulgaria-2026/)
+- [Цени на жилищата в България: индекс и градове](https://imotitrend.com/blog/ceni-na-zhilishta-bulgaria-2026/)
+- [Наем срещу покупка](https://imotitrend.com/blog/naem-sreshtu-pokupka-bulgaria/)
+- [Доходност от наем](https://imotitrend.com/blog/dokhodnost-ot-naem-bulgaria/)
+- [Как да четем обява: asking срещу ориентир](https://imotitrend.com/blog/kak-da-chetesh-obyava-asking-sreshtu-orientir/)
+- [Квартали в София: цени](https://imotitrend.com/blog/kvartali-sofia-ceni-2026/)
+- [Нова сграда срещу стар фонд](https://imotitrend.com/blog/novo-stroitelstvo-sreshtu-star-fond/)
+
+## Ограничения
+
+- Цените по град и квартал са ориентири (моделирани нива), не live обяви и не цени от нотариални сделки.
+- Няма инвестиционен, финансов или правен съвет. Ипотечните лихви са средни статистически стойности, не банкови оферти.
+- Официалните серии излизат със собствен ритъм (индексът е тримесечен, лихвите са месечни със закъснение); най-новата стойност може да е за по-ранен период.
+
+Разширена версия с текущи числа: https://imotitrend.com/llms-full.txt
