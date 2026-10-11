@@ -63,6 +63,7 @@ Contact: hello@imotitrend.com
 - [Кварталите с най-голям ръст на цените](https://imotitrend.com/klasacii/nai-golyam-rast/)
 - [Брутна доходност от наем по градове](https://imotitrend.com/klasacii/dohodnost-ot-naem/)
 - [Райони на София](https://imotitrend.com/grad/sofia/rayoni/): административните райони с ориентир €/м² и кварталите във всеки район
+- [Колко квадрата за вашия бюджет](https://imotitrend.com/byudzhet/): колко м² се купуват с 50 000, 80 000, 100 000, 150 000 и 200 000 € по ориентир във всеки град и квартал
 
 ## Профили на банки (ориентири, не оферти)
 
