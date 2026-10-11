@@ -5,6 +5,7 @@ import {sampleSources, weightedRating} from '../assets/review-model.mjs';
 import {ratingSummary} from '../lib/rating-summary.mjs';
 import {splitDirectory} from '../assets/catalogue-card.mjs';
 import {companyMatch} from '../assets/company-match.mjs';
+import {filterCatalogue} from '../assets/catalogue-filter.mjs';
 
 test('Combined scores weight the number of reviews rather than averaging sources equally', () => {
   assert.deepEqual(weightedRating([{rating:5,count:90},{rating:1,count:10}]), {rating:4.6,count:100,sources:2});
@@ -71,3 +72,58 @@ test('Claim matching preselects a slug, ignores punctuation and only autofills u
   assert.ok(splitDirectory(rows,'rating').shortlist.every(c=>c.ratingValue===5));
   assert.equal(splitDirectory(rows.filter(c=>!c.fullProfile)).shortlist.length,0);
  });
+
+const filterRows=[
+  {slug:'a',name:'A Plumbing',trade:'Plumbing',category:'plumbing',area:'Eunos',ratingValue:4.9,published:true,hasReviews:true,whatsapp:'123',services:['Leak repair']},
+  {slug:'b',name:'B Services',trade:'Handyman',category:'handyman',area:'Eunos',ratingValue:5,published:false,hasReviews:false,whatsapp:'456',offerings:['Plumbing']},
+  {slug:'c',name:'C Plumbing',category:'plumbing',area:'Eunos',ratingValue:4.5,published:true,hasReviews:false,services:[]},
+  {slug:'d',name:'D Plumbing',category:'plumbing',area:'Tampines',ratingValue:5,published:true,hasReviews:true,whatsapp:'789',services:[]},
+  {slug:'e',name:'E Cleaning',category:'cleaning',area:'Eunos',ratingValue:null,published:false,hasReviews:true,whatsapp:'012',services:[]}
+];
+
+test('Checkbox counts combine search, location and rating filters across the full matching set', () => {
+  const result=filterCatalogue(filterRows,{query:'  PLUMBING  ',area:'Eunos',rating:'4.8',savedSlugs:['b','d']});
+  assert.deepEqual(result.matches.map(c=>c.slug),['a','b']);
+  assert.deepEqual(result.counts,{price:1,reviews:1,whatsapp:2,saved:1});
+});
+
+test('Service selection and multiword search narrow the counts as well as the cards', () => {
+  const result=filterCatalogue(filterRows,{query:'plumbing Eunos',category:'plumbing'});
+  assert.deepEqual(result.matches.map(c=>c.slug),['a','c']);
+  assert.deepEqual(result.counts,{price:2,reviews:1,whatsapp:1,saved:0});
+  assert.deepEqual(filterCatalogue(filterRows,{query:'leak repair'}).matches.map(c=>c.slug),['a']);
+});
+
+test('Selected checkboxes intersect and every count reflects all active restrictions', () => {
+  const result=filterCatalogue(filterRows,{area:'Eunos',active:['price','whatsapp'],savedSlugs:['b']});
+  assert.deepEqual(result.matches.map(c=>c.slug),['a']);
+  assert.deepEqual(result.counts,{price:1,reviews:1,whatsapp:1,saved:0});
+  assert.deepEqual(filterCatalogue(filterRows,{active:['reviews']}).matches.map(c=>c.slug),['a','d','e']);
+});
+
+test('Saved counts respect the current filters and update when the saved set changes', () => {
+  const options={area:'Eunos',rating:'4.8',active:['saved']};
+  const before=filterCatalogue(filterRows,{...options,savedSlugs:['a','d','missing']});
+  assert.deepEqual(before.matches.map(c=>c.slug),['a']);
+  assert.deepEqual(before.counts,{price:1,reviews:1,whatsapp:1,saved:1});
+  const after=filterCatalogue(filterRows,{...options,savedSlugs:['b','b','d']});
+  assert.deepEqual(after.matches.map(c=>c.slug),['b']);
+  assert.deepEqual(after.counts,{price:0,reviews:0,whatsapp:1,saved:1});
+});
+
+test('Empty results zero every count and resetting restores the full directory counts', () => {
+  const result=filterCatalogue(filterRows,{query:'no matching business'});
+  assert.equal(result.matches.length,0);
+  assert.deepEqual(result.counts,{price:0,reviews:0,whatsapp:0,saved:0});
+  assert.deepEqual(filterCatalogue(filterRows).counts,{price:3,reviews:3,whatsapp:4,saved:0});
+  assert.deepEqual(filterCatalogue([]).counts,{price:0,reviews:0,whatsapp:0,saved:0});
+});
+
+test('Counts cover every match, including companies beyond the first page', () => {
+  const rows=Array.from({length:30},(_,i)=>({...filterRows[0],slug:`company-${i}`}));
+  const result=filterCatalogue(rows,{rating:'4.8'});
+  assert.equal(result.matches.length,30);
+  assert.equal(result.counts.price,30);
+  assert.equal(result.counts.reviews,30);
+  assert.equal(result.counts.whatsapp,30);
+});
