@@ -1,4 +1,4 @@
-:HL["/imoti-bg/_next/static/chunks/14l8y_zx7tya3.css","style"]
+:HL["/imoti-bg/_next/static/chunks/3_8bv6qtoy0mc.css","style"]
 :HL["/imoti-bg/_next/static/media/002ddd0f057a002e-s.p.267laj-7qy-0-.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
 :HL["/imoti-bg/_next/static/media/173b4e1ecbfe6c3b-s.p.2ofae7-v0u79z.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
 :HL["/imoti-bg/_next/static/media/187df20e17b435d1-s.p.1de5oe27h2kcs.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
@@ -7,4 +7,4 @@
 :HL["/imoti-bg/_next/static/media/89c2c771ed51f5b8-s.p.1d4i5iktl1egg.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
 :HL["/imoti-bg/_next/static/media/c8d3663ba40d1542-s.p.3t6wimnoqat92.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
 :HL["/imoti-bg/_next/static/media/cc75fa3e14c3cd04-s.p.2a3w-b9irc_27.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
-0:{"tree":{"name":"","param":null,"prefetchHints":4112,"slots":{"children":{"name":"grad","param":null,"prefetchHints":4160,"slots":{"children":{"name":"city","param":{"type":"d","key":"burgas","siblings":[]},"prefetchHints":4192,"slots":{"children":{"name":"region","param":{"type":"d","key":"izgrev","siblings":["naemi","prodazhbi"]},"prefetchHints":4192,"slots":{"children":{"name":"prodazhbi","param":null,"prefetchHints":4192,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}}}}}}}},"staleTime":300,"buildId":"dLNTMrW3kIRzoNpRYdR9C"}
+0:{"tree":{"name":"","param":null,"prefetchHints":4112,"slots":{"children":{"name":"grad","param":null,"prefetchHints":4160,"slots":{"children":{"name":"city","param":{"type":"d","key":"burgas","siblings":[]},"prefetchHints":4192,"slots":{"children":{"name":"region","param":{"type":"d","key":"izgrev","siblings":["kvartali","naemi","prodazhbi"]},"prefetchHints":4192,"slots":{"children":{"name":"prodazhbi","param":null,"prefetchHints":4192,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}}}}}}}},"staleTime":300,"buildId":"VebECDWmsMy8XpH3RXjvc"}
