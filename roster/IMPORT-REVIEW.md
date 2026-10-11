@@ -29,7 +29,13 @@ Aeon Environmental Services, Greengarden Integrated Services and SQ 1 Developmen
 
 ## Validation
 
-27 JavaScript tests and four logo-import tests pass. The site check validates every generated page, local link, fragment, logo checksum, source link, metadata rule and original write-up. The largest trade page and JSON index total 294.2 KB, within the existing 300 KB limit. Unused optional directory fields were omitted to keep the larger release within that limit. Browser checks covered ten original and imported company pages, an additional SVG logo, mobile layout, combined rating totals, directory search, average-rating filtering, sorting, save/unsave and load more. The refreshed Evergreen map was inspected at its verified Tampines building pin.
+27 JavaScript tests and eight logo-import/framing tests pass. The site check validates every generated page, local link, fragment, logo checksum, source link, metadata rule and original write-up. The largest trade page and JSON index total 294.3 KB, within the existing 300 KB limit. Unused optional directory fields were omitted to keep the larger release within that limit. Browser checks covered ten original and imported company pages, an additional SVG logo, mobile layout, combined rating totals, directory search, average-rating filtering, sorting, save/unsave and load more. The refreshed Evergreen map was inspected at its verified Tampines building pin.
+
+## Logo display update
+
+The rebuild measures 515 raster assets, including two existing images, and keeps 16 SVGs in their original viewBox. CSS adjusts the framing of 326 padded logos, gives 210 long wordmarks wider tiles, and puts 20 predominantly white transparent logos on a dark background. The SHS logo now fills its tile and its white lettering is visible. Compact and mobile tiles are slightly larger. Original images and their release checksums are unchanged. The generated stylesheet is shared and cached across pages, with no extra company data in the directory indexes.
+
+Browser checks verified SHS in dynamically filtered plumbing results and ten representative company profiles at mobile width, including an SVG, padded artwork, wide lettering and white logos. SHS and Xool also received desktop visual checks. All sampled logos loaded and no horizontal page overflow was found. This update is local and has not been published.
 
 ## Previous review: release 1337
 

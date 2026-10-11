@@ -3,6 +3,7 @@ import { readFile, writeFile, mkdir, rm } from "node:fs/promises";
 import path from "node:path";
 import { createHash } from "node:crypto";
 import { fileURLToPath } from "node:url";
+import {execFileSync} from 'node:child_process';
 
 import { createProfileRenderer, directoryRecord, concise, ratingFact } from "./lib/expanded.mjs";
 import {priceView, servicePrice, serviceGuide} from "./lib/profile-copy.mjs";
@@ -10,13 +11,14 @@ import {renderClaimPage} from "./lib/claim-page.mjs";
 import { renderCard, renderCompactCard, splitDirectory } from "./assets/catalogue-card.mjs";
 
 const root = path.dirname(fileURLToPath(import.meta.url));
+console.log('Logo framing:', execFileSync('python3', [path.join(root, 'scripts/fit-logos.py')], {encoding:'utf8'}).trim());
 const mapPins=JSON.parse(await readFile(path.join(root,"data/map-pins.json"),"utf8"));
 const indexVersions={};
 const origin = "https://previews.heylead.com/roster";
 let checked = "9 Oct 2026 and 10 Oct 2026";
 // Content hashes keep cached assets in sync with each generated page.
 const assetVersions = Object.fromEntries(await Promise.all(
-  ["site.css", "directory.css", "experience.css", "form.js", "directory.js", "experience.js", "expanded.css", "catalogue.js", "catalogue-card.mjs", "claim.js", "review-preview.mjs"].map(async (name) => [
+  ["site.css", "directory.css", "experience.css", "form.js", "directory.js", "experience.js", "expanded.css", "logo-fit.css", "catalogue.js", "catalogue-card.mjs", "claim.js", "review-preview.mjs"].map(async (name) => [
     name,
     createHash("sha256").update(await readFile(path.join(root, "assets", name))).digest("hex").slice(0, 12)
   ])
@@ -625,6 +627,7 @@ ${shareImage ? `<meta property="og:image" content="${esc(shareImage)}"><meta nam
 <link rel="stylesheet" href="/roster/assets/directory.css?v=${assetVersions["directory.css"]}">
 <link rel="stylesheet" href="/roster/assets/experience.css?v=${assetVersions["experience.css"]}">
 <link rel="stylesheet" href="/roster/assets/expanded.css?v=${assetVersions["expanded.css"]}">
+<link rel="stylesheet" href="/roster/assets/logo-fit.css?v=${assetVersions["logo-fit.css"]}">
 <script type="application/ld+json">${graph}</script>
 </head>
 <body${bodyClass ? ` class="${bodyClass}"` : ""}>

@@ -50,7 +50,7 @@ Trade pages lead with up to eight full-bar profiles, ordered by evidence and the
 
 ```sh
 node --test roster/scripts/import-db.test.mjs roster/scripts/presentation.test.mjs
-python3 -m unittest discover -s roster/scripts -p 'test_import_logos.py'
+python3 -m unittest discover -s roster/scripts -p 'test_*logos.py'
 node roster/scripts/check-site.mjs
 ```
 
@@ -64,6 +64,6 @@ The footer and each company sidebar link to `/roster/claim-listing/`. The claim 
 
 Public summaries and imported About text use customer-facing third-person copy derived from sourced services and coverage. Original source excerpts remain in an expandable reference, and the 16 protected write-ups remain intact. `lib/profile-copy.mjs` controls this presentation so future imports keep the same tone. Original price wording remains available while clear `job | price` values are split for display.
 
-Company cards and profiles reserve space for a logo. Existing artwork is used when present, otherwise the slot shows company initials. Broken artwork falls back to initials.
+Company cards and profiles reserve space for a logo. Existing artwork is used when present, otherwise the slot shows company initials. Broken artwork falls back to initials. The build runs `scripts/fit-logos.py` (Python 3 with Pillow 12 or later) to measure transparent and plain-white margins and generate `assets/logo-fit.css`. CSS centers the complete artwork with proportional scaling, wider tiles for long wordmarks, and a dark background for predominantly white transparent logos. Original image bytes and checksums stay unchanged. SVGs retain their original viewBox and use the same larger default fit. New imported raster logos are measured automatically on rebuild.
 
 The importer maps release `ratings` into sourced, dated records and recalculates the combined score. Unknown review counts are never invented. Google widgets are treated as mirrors when a direct Google rating exists. Real release ratings replace the mockup on company pages, with source-method details available in disclosures. Full profiles without release rating records retain a clearly labelled mockup with 2-5 sources. `assets/review-model.mjs` holds sample fixtures and a review-count-weighted calculation. Sample scores never replace real sourced ratings, change directory sorting or enter structured data. The combined score is the sum of each rating multiplied by its count, divided by total reviews. Identified mirrors, incompatible scales and unusable counts are excluded. `lib/rating-summary.mjs` handles real records separately from the sample fixtures, with `assets/rating-display.mjs` shared by static and dynamically loaded cards. Directory filters and sorting use the real average. Cards pair this with main services and a labelled example service price when a specific published rate can be extracted. Before connecting a real data release, each source needs its platform, profile URL, capture date, rating, scale, count and any mirror relationship. Deduplication is not automatic.
