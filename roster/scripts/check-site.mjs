@@ -5,6 +5,7 @@ import assert from 'node:assert/strict';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const load=async f=>JSON.parse(await readFile(path.join(root,f),'utf8'));
 const data=await load('data/companies.json'),manifest=await load('data/build-manifest.json'),report=await load('data/import-report.json');
+const pins=await load('data/map-pins.json');
 const old=await load('data/curated/profiles.json'),current=await load('data/profiles.json');
 for(const [slug,content] of Object.entries(old))assert.deepEqual(current[slug],content,`Hand-written content changed: ${slug}`);
 assert.equal(data.companies.length,report.publishedCount);assert.equal(report.sourceRows,report.publishedCount+report.excludedCount);
@@ -21,9 +22,11 @@ for(const rel of manifest) {
  const title=html.match(/<title>(.*?)<\/title>/)[1];assert.ok(!titles.has(title),`Duplicate title: ${rel}`);titles.add(title);
  const ld=JSON.parse(html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1]);
  assert.ok(!/"(?:aggregateRating|review|offers|priceRange)"|"@type":"(?:AggregateRating|Review|Offer|Rating)"/.test(JSON.stringify(ld)),`Forbidden schema: ${rel}`);
- if(rel.startsWith('company/')){
+ if(rel.startsWith('company/')&&!html.includes('data-retired-listing')){
   assert.ok(html.includes('class="listing-logo listing-logo-large'),`Missing logo slot: ${rel}`);
-  assert.ok(html.includes('data-review-preview')&&html.includes('These figures do not describe this company.'),`Unlabelled review mockup: ${rel}`);
+  const record=data.companies.find(c=>rel===`company/${c.slug}/index.html`);
+  if(record.listingDepth.full) assert.ok(html.includes('data-review-preview')&&html.includes('These figures do not describe this company.'),`Unlabelled review mockup: ${rel}`);
+  else assert.ok(html.includes('Limited details')&&!html.includes('data-review-preview'),`Missing compact profile: ${rel}`);
   assert.ok(html.includes('src="/roster/assets/review-preview.mjs?'),`Missing review selector script: ${rel}`);
   const intro=html.match(/<p class="company-intro">(.*?)<\/p>/)?.[1]||'';
   assert.ok(intro&&!/Its website mentions|Its site says|Roster found no/.test(intro),`Research wording remains: ${rel}`);
@@ -37,7 +40,7 @@ for(const rel of manifest) {
 const claim=pages.get('claim-listing/index.html');
 assert.match(claim, /<input id="claim-company"[^>]+list="claim-companies"/);
 assert.ok(!claim.includes('<select id="claim-company"'));
-for (const [rel,html] of pages) if(rel.startsWith('company/')) assert.ok(html.includes('average-rating-large'),`Missing prominent average: ${rel}`);
+for (const [rel,html] of pages) if(rel.startsWith('company/')&&!html.includes('data-retired-listing')) assert.ok(html.includes('average-rating-large'),`Missing prominent average: ${rel}`);
 const byRel=new Map([...pages].map(([rel,html])=>[rel,new Set([...html.matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]))]));
 for(const [rel,html] of pages)for(const match of html.matchAll(/(?:href|src)="([^"]+)"/g)){
  const raw=match[1].replaceAll('&amp;','&');if(!raw.startsWith('/roster/')&&!raw.startsWith('#'))continue;
@@ -47,17 +50,25 @@ for(const [rel,html] of pages)for(const match of html.matchAll(/(?:href|src)="([
 for(const c of data.companies){
  const rel=`company/${c.slug}/index.html`;assert.ok(pages.has(rel),`Missing page: ${c.slug}`);
  const html=pages.get(rel),e=c.enrichment;
+ const frames=[...html.matchAll(/<iframe[^>]+src="([^"]+)"/g)];
+ const pin=pins[c.slug];
+ assert.equal(frames.length,pin?.status==='verified'?1:0,`Unverified map: ${rel}`);
+ for(const frame of frames){const u=new URL(frame[1].replaceAll('&amp;','&'));assert.equal(u.searchParams.get('q'),`${pin.latitude},${pin.longitude}`);assert.equal(u.searchParams.get('z'),'17');assert.ok(pin.latitude>1.15&&pin.latitude<1.48&&pin.longitude>103.59&&pin.longitude<104.1);}
  if(c.alternatePhones?.length){assert.ok(html.includes('Also listed:'),`Missing alternate phones: ${rel}`);for(const p of c.alternatePhones)assert.ok(html.includes(p.sourceLabel.replaceAll('&','&amp;')),`Missing alternate phone source: ${rel}`);}
  if(e.faqs?.length) assert.ok(html.includes('Answer from the company website'),`Missing sourced FAQ: ${rel}`);
  if(e.summary?.text) assert.ok(html.includes('class="company-intro"'),`Missing summary: ${rel}`);
  if(c.imported) assert.equal((html.match(/<div class="service-options"/g)||[]).length,current[c.slug].services.filter(s=>s.prices.length).length,`Pricing options: ${rel}`);
 }
-for(const excluded of report.excluded.filter(c=>c.curated))assert.ok(!pages.has(`company/${excluded.slug}/index.html`),`Flagged page still published: ${excluded.slug}`);
+for(const excluded of report.excluded.filter(c=>c.curated))assert.ok(!pages.has(`company/${excluded.slug}/index.html`)||pages.get(`company/${excluded.slug}/index.html`).includes('data-retired-listing'),`Flagged full profile still published: ${excluded.slug}`);
 const categories={aircon:'aircon-servicing',plumbing:'plumbing',electrician:'electrician',handyman:'handyman',cleaning:'home-cleaning'};
 for(const [id,slug] of Object.entries(categories)){
  const index=await load(`data/index/${id}.json`);assert.equal(index.companies.length,report.byTrade[id].published);assert.ok(index.companies.every(c=>c.category===id),`Wrong primary trade in ${id}`);
  for(const c of index.companies){assert.equal(c.ratingValue,c.average?.value??null);assert.equal(c.ratingCount,c.average?.count||0);}
- assert.ok(pages.get(slug+'/index.html').includes('Minimum average rating'));
+ const directory=pages.get(slug+'/index.html');
+ assert.ok(directory.includes('Minimum average rating'));
+ const highlighted=[...directory.matchAll(/class="business-card catalogue-card"[^>]+data-slug="([^"]+)"/g)].map(m=>m[1]);
+ assert.ok(highlighted.length<=8);assert.ok(highlighted.every(s=>index.companies.find(c=>c.slug===s).fullProfile));
+ assert.ok(directory.includes('Other companies'));
  const bytes=(await stat(path.join(root,slug,'index.html'))).size+(await stat(path.join(root,'data/index',id+'.json'))).size;assert.ok(bytes<300*1024,`${id}: ${bytes} bytes exceeds budget`);console.log(`${slug}: ${(bytes/1024).toFixed(1)} KB HTML + JSON`);
 }
 assert.equal(Object.values(report.byTrade).reduce((n,t)=>n+t.published,0),report.publishedCount,'Primary-trade totals must not overlap');

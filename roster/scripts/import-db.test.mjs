@@ -59,3 +59,15 @@ test('Fit notes keep their sources and metadata cannot replace missing About con
  const e=importDatabase(db([r]),empty).companies.companies[0].enrichment;assert.equal(e.bestFor.length,1);assert.equal(e.poorFit[0].sourceUrl,'https://example.com/prices');
  r.about=[];r.self_description={text:'Marketing metadata',sourceUrl:'https://example.com'};assert.equal(importDatabase(db([r]),empty).report.excluded[0].reasons[0],'missing-sourced-about');
 });
+
+test('Full-bar evidence is preserved and undated alternate numbers remain undated',()=>{
+ const r=row();r.profile_bar={meetsFullBar:true,priceWithJob:true,summary:true,checkedAt:'2026-10-11'};
+ const c=importDatabase(db([r]),empty).companies.companies[0];assert.equal(c.listingDepth.full,true);assert.equal(c.listingDepth.checkedAt,'2026-10-11');
+ assert.equal(importDatabase(db([row()]),empty).companies.companies[0].listingDepth.full,false);
+ const dated=alternatePhones({alt:[{value:'+65 8123 4567',sourceUrl:'https://example.com',capturedAt:'2026-10-09'}]},'');assert.equal(dated[0].capturedAt,'2026-10-09');
+});
+test('Price labels drop UI noise and the build never invents a missing unit',()=>{
+ const source={job:'regular-cleaning',service:'Decrease/Increase quantity for Weekly Cleaning',price_text:'S$150',sourceUrl:'https://example.com'};
+ assert.equal(priceOption(source).label,'Regular cleaning');assert.equal(priceOption(source).detail,'');
+ for(const label of ['Login','+65 9662 2361','1. What is the standard rate?']) assert.equal(priceOption({...source,service:label}).label,'Regular cleaning');
+});

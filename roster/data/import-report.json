@@ -5482,6 +5482,7 @@
       ],
       "primaryTrade": "aircon",
       "reasons": [
+        "commercial-only",
         "missing-sourced-about",
         "missing-sourced-services",
         "missing-company-website"
@@ -5681,6 +5682,7 @@
       ],
       "primaryTrade": "aircon",
       "reasons": [
+        "commercial-only",
         "missing-sourced-about",
         "missing-sourced-services",
         "missing-company-website"
@@ -5964,6 +5966,7 @@
       ],
       "primaryTrade": "aircon",
       "reasons": [
+        "commercial-only",
         "missing-sourced-about",
         "missing-sourced-services",
         "missing-company-website"
@@ -6074,6 +6077,7 @@
       ],
       "primaryTrade": "aircon",
       "reasons": [
+        "commercial-only",
         "missing-sourced-about",
         "missing-sourced-services",
         "missing-company-website"
@@ -6856,6 +6860,7 @@
       ],
       "primaryTrade": "aircon",
       "reasons": [
+        "commercial-only",
         "missing-sourced-about",
         "missing-sourced-services",
         "missing-company-website"
@@ -6908,6 +6913,7 @@
       ],
       "primaryTrade": "aircon",
       "reasons": [
+        "commercial-only",
         "missing-sourced-about",
         "missing-sourced-services",
         "missing-company-website"
@@ -7026,6 +7032,7 @@
       ],
       "primaryTrade": "aircon",
       "reasons": [
+        "commercial-only",
         "missing-sourced-about",
         "missing-sourced-services",
         "missing-company-website"
@@ -7213,6 +7220,7 @@
       ],
       "primaryTrade": "aircon",
       "reasons": [
+        "commercial-only",
         "missing-sourced-about",
         "missing-sourced-services",
         "missing-company-website"
@@ -7240,6 +7248,7 @@
       ],
       "primaryTrade": "aircon",
       "reasons": [
+        "commercial-only",
         "missing-sourced-about",
         "missing-sourced-services",
         "missing-company-website"
@@ -7282,6 +7291,7 @@
       ],
       "primaryTrade": "aircon",
       "reasons": [
+        "commercial-only",
         "missing-sourced-about",
         "missing-sourced-services",
         "missing-company-website"
@@ -7334,6 +7344,7 @@
       ],
       "primaryTrade": "aircon",
       "reasons": [
+        "commercial-only",
         "missing-sourced-about",
         "missing-sourced-services",
         "missing-company-website"
@@ -7386,6 +7397,7 @@
       ],
       "primaryTrade": "aircon",
       "reasons": [
+        "commercial-only",
         "missing-sourced-about",
         "missing-sourced-services",
         "missing-company-website"
@@ -8001,6 +8013,7 @@
       ],
       "primaryTrade": "aircon",
       "reasons": [
+        "commercial-only",
         "missing-sourced-about",
         "missing-sourced-services",
         "missing-company-website"
@@ -8042,6 +8055,7 @@
       ],
       "primaryTrade": "aircon",
       "reasons": [
+        "commercial-only",
         "missing-sourced-about",
         "missing-sourced-services",
         "missing-company-website"
@@ -9145,6 +9159,7 @@
       ],
       "primaryTrade": "aircon",
       "reasons": [
+        "closed",
         "missing-sourced-about",
         "missing-sourced-services",
         "missing-company-website"
@@ -15919,6 +15934,7 @@
       ],
       "primaryTrade": "aircon",
       "reasons": [
+        "commercial-only",
         "missing-sourced-about",
         "missing-sourced-services",
         "missing-company-website"
@@ -19103,6 +19119,7 @@
       ],
       "primaryTrade": "aircon",
       "reasons": [
+        "commercial-only",
         "missing-sourced-about",
         "missing-sourced-services",
         "missing-company-website"
@@ -19478,6 +19495,7 @@
       ],
       "primaryTrade": "aircon",
       "reasons": [
+        "commercial-only",
         "missing-sourced-about",
         "missing-sourced-services",
         "missing-company-website"
@@ -20331,6 +20349,7 @@
       ],
       "primaryTrade": "aircon",
       "reasons": [
+        "commercial-only",
         "missing-sourced-about",
         "missing-sourced-services",
         "missing-company-website"
@@ -20694,6 +20713,7 @@
       ],
       "primaryTrade": "aircon",
       "reasons": [
+        "commercial-only",
         "missing-sourced-about",
         "missing-sourced-services",
         "missing-company-website"
@@ -24608,6 +24628,7 @@
       ],
       "primaryTrade": "aircon",
       "reasons": [
+        "commercial-only",
         "missing-sourced-about",
         "missing-sourced-services",
         "missing-company-website"
@@ -55453,6 +55474,7 @@
       "primaryTrade": "handyman",
       "reasons": [
         "lookup-name-looks-unrelated",
+        "closed",
         "missing-sourced-about",
         "missing-sourced-services",
         "missing-sourced-phone",
@@ -56645,6 +56667,7 @@
       "primaryTrade": "handyman",
       "reasons": [
         "lookup-name-looks-unrelated",
+        "closed",
         "missing-sourced-about",
         "missing-sourced-services",
         "missing-sourced-phone",
@@ -58752,6 +58775,7 @@
       ],
       "primaryTrade": "cleaning",
       "reasons": [
+        "closed",
         "missing-sourced-about",
         "missing-sourced-services",
         "missing-company-website"
@@ -58934,6 +58958,7 @@
       ],
       "primaryTrade": "cleaning",
       "reasons": [
+        "commercial-only",
         "missing-sourced-about",
         "missing-sourced-services",
         "missing-company-website"
@@ -59130,6 +59155,7 @@
       ],
       "primaryTrade": "cleaning",
       "reasons": [
+        "commercial-only",
         "missing-sourced-about",
         "missing-sourced-services",
         "missing-company-website"
@@ -59929,6 +59955,7 @@
       ],
       "primaryTrade": "cleaning",
       "reasons": [
+        "commercial-only",
         "missing-sourced-about",
         "missing-sourced-services",
         "missing-company-website"
@@ -60244,6 +60271,7 @@
       ],
       "primaryTrade": "cleaning",
       "reasons": [
+        "commercial-only",
         "missing-sourced-about",
         "missing-sourced-services",
         "missing-company-website"
@@ -60771,6 +60799,7 @@
       ],
       "primaryTrade": "cleaning",
       "reasons": [
+        "commercial-only",
         "missing-sourced-about",
         "missing-sourced-services",
         "missing-company-website"
@@ -61978,6 +62007,7 @@
       ],
       "primaryTrade": "cleaning",
       "reasons": [
+        "commercial-only",
         "missing-sourced-about",
         "missing-sourced-services",
         "missing-company-website"
@@ -63139,6 +63169,7 @@
       ],
       "primaryTrade": "cleaning",
       "reasons": [
+        "commercial-only",
         "missing-sourced-about",
         "missing-sourced-services",
         "missing-company-website"
@@ -64793,6 +64824,7 @@
       ],
       "primaryTrade": "cleaning",
       "reasons": [
+        "commercial-only",
         "missing-sourced-about",
         "missing-sourced-services",
         "missing-company-website"

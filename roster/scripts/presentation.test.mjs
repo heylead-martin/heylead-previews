@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import {profileIntro, priceView, servicePrice} from '../lib/profile-copy.mjs';
 import {sampleSources, weightedRating} from '../assets/review-model.mjs';
 import {ratingSummary} from '../lib/rating-summary.mjs';
+import {splitDirectory} from '../assets/catalogue-card.mjs';
 import {companyMatch} from '../assets/company-match.mjs';
 
 test('Combined scores weight the number of reviews rather than averaging sources equally', () => {
@@ -60,3 +61,13 @@ test('Claim matching preselects a slug, ignores punctuation and only autofills u
   assert.equal(companyMatch('New company',companies),null);
   assert.equal(companyMatch('',companies),null);
 });
+
+ test('Shortlists contain at most eight full profiles, with every remaining company in the compact list', () => {
+  const rows=Array.from({length:12},(_,i)=>({slug:`company-${i}`,name:`Company ${i}`,fullProfile:i<10,evidenceScore:i===0?7:5,ratingValue:i===0?3:5,ratingCount:20}));
+  const groups=splitDirectory(rows);
+  assert.equal(groups.shortlist.length,8);assert.equal(groups.shortlist[0].slug,'company-0');
+  assert.ok(groups.shortlist.every(c=>c.fullProfile));
+  assert.equal(new Set([...groups.shortlist,...groups.others].map(c=>c.slug)).size,12);
+  assert.ok(splitDirectory(rows,'rating').shortlist.every(c=>c.ratingValue===5));
+  assert.equal(splitDirectory(rows.filter(c=>!c.fullProfile)).shortlist.length,0);
+ });

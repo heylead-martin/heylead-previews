@@ -7,9 +7,11 @@ import { fileURLToPath } from "node:url";
 import { createProfileRenderer, directoryRecord, concise, ratingFact } from "./lib/expanded.mjs";
 import {priceView, servicePrice, serviceGuide} from "./lib/profile-copy.mjs";
 import {renderClaimPage} from "./lib/claim-page.mjs";
-import { renderCard } from "./assets/catalogue-card.mjs";
+import { renderCard, renderCompactCard, splitDirectory } from "./assets/catalogue-card.mjs";
 
 const root = path.dirname(fileURLToPath(import.meta.url));
+const mapPins=JSON.parse(await readFile(path.join(root,"data/map-pins.json"),"utf8"));
+const indexVersions={};
 const origin = "https://previews.heylead.com/roster";
 let checked = "9 Oct 2026 and 10 Oct 2026";
 // Content hashes keep cached assets in sync with each generated page.
@@ -569,16 +571,19 @@ function renderForm(jobs, recipients, uid) {
 
 function priceSummary(company, service) {
   const display = presentation[company.slug] || { price: "Ask for a quote", detail: "No published rate captured", published: false };
-  const example = company.imported ? (company.enrichment?.priceLines||[]).map(priceOption).map(priceView).find(p=>!p.indicative && /^(?:from\s+)?S?\$\s*\d/i.test(p.price) && p.price.length<=40 && p.label) : null;
+  const sourcePrices=(company.enrichment?.priceLines||[]).filter(p=>!service||p.job===service);
+  const example = company.imported ? sourcePrices.map(priceOption).map(priceView).find(p=>!p.indicative && /^(?:from\s+)?S?\$\s*\d/i.test(p.price) && p.price.length<=40 && p.label) : null;
   const cleanDisplay = example ? {...display,price:example.price,detail:`${example.label}. See service details for inclusions.`,examplePrice:true} : company.imported ? {...display, detail:display.published ? "Explore service prices and confirm your final quote with the team." : "Contact the team for a quote tailored to your job."} : display;
-  return service ? { ...cleanDisplay, examplePrice:false, ...(display.services?.[service] || { price: "Ask for a quote", detail: "No standalone price captured for this job", published: false }) } : cleanDisplay;
+  if(service&&company.imported&&example)return {...cleanDisplay,published:true};
+  return service ? { ...cleanDisplay, examplePrice:false, ...(display.services?.[service] || { price: "Ask for a quote", detail: "Ask the company for a quote for this service.", published: false }) } : cleanDisplay;
 }
 
 function indexName(spec) { return spec.service || spec.id; }
-function indexPath(spec) { return `/roster/data/index/${indexName(spec)}.json`; }
+function indexPath(spec) { return `/roster/data/index/${indexName(spec)}.json?v=${indexVersions[indexName(spec)]}`; }
 function shortlist(companies, service) {
   const records = companies.map(c => directoryRecord(c, priceSummary(c, service), tradeById(c.category)));
-  return `<div class="results-toolbar"><div><h2>Companies to consider</h2><p data-result-count aria-live="polite">Showing ${Math.min(12,companies.length)} of ${companies.length} companies</p></div><label class="sort-control">Sort by<select data-sort aria-label="Sort companies"><option value="name">Name A to Z</option><option value="rating">Average rating</option><option value="reviews">Review count</option></select></label></div><p class="results-method">Unpaid listings. Average ratings use available review sources, weighted by review count. <a href="/roster/how-it-works/">Our approach</a></p><div class="index-error" data-index-error hidden><p>The complete list could not load. Please try again.</p><button type="button" class="btn" data-retry>Retry loading companies</button></div><ol class="shortlist">${records.slice(0,12).map(c => renderCard(c)).join("")}</ol><div class="load-more-wrap"><button class="btn" data-load-more type="button"${companies.length<=12?' hidden':''}>Load more companies</button></div><div class="no-results" data-no-results hidden><h3>No companies match these filters</h3><p>Try a different search or clear your filters.</p><button type="button" class="btn" data-reset>Clear filters</button></div><noscript><p>Enable JavaScript to filter the list. All company profiles are available below.</p><ul>${companies.map(c => `<li><a href="/roster/company/${c.slug}/">${esc(c.name)}</a></li>`).join("")}</ul></noscript>`;
+  const groups=splitDirectory(records);
+  return `<div class="results-toolbar"><div><h2>Companies to consider</h2><p data-result-count aria-live="polite">${groups.shortlist.length} on the shortlist · ${groups.others.length} other companies</p></div><label class="sort-control">Sort by<select data-sort aria-label="Sort companies"><option value="evidence">Most complete details</option><option value="rating">Average rating</option><option value="reviews">Review count</option><option value="name">Name A to Z</option></select></label></div><p class="results-method">Unpaid listings. The shortlist leads with companies that have prices for named jobs, coverage and residential service details. Average ratings are weighted by review count. <a href="/roster/how-it-works/">Our approach</a></p><div class="index-error" data-index-error hidden><p>The complete list could not load. Please try again.</p><button type="button" class="btn" data-retry>Retry loading companies</button></div><div data-shortlist-section${groups.shortlist.length?'':' hidden'}><p class="shortlist-caption">A shortlist with fuller details</p><ol class="shortlist">${groups.shortlist.map(c=>renderCard(c)).join('')}</ol></div><section class="other-companies" data-other-section${groups.others.length?'':' hidden'}><div class="other-companies-heading"><h2>Other companies</h2><p>More options to explore. Some listings have limited details.</p></div><ol class="compact-list" data-other-list>${groups.others.slice(0,12).map(c=>renderCompactCard(c)).join('')}</ol><div class="load-more-wrap"><button class="btn" data-load-more type="button"${groups.others.length<=12?' hidden':''}>Show more companies</button></div></section><div class="no-results" data-no-results hidden><h3>No companies match these filters</h3><p>Try a different search or clear your filters.</p><button type="button" class="btn" data-reset>Clear filters</button></div><noscript><p>Enable JavaScript to filter the list. All company listings are available below.</p><ul>${companies.map(c => `<li><a href="/roster/company/${c.slug}/">${esc(c.name)}</a></li>`).join('')}</ul></noscript>`;
 }
 
 function pageShell({ title, description, canonicalPath, current, jsonLd, body, bodyClass = "", shareImage = "" }) {
@@ -1036,7 +1041,7 @@ assertNoDashes({ trades, intents, howFaqs }, "templates");
 validate(raw.companies);
 
 const operatorGroups = JSON.parse(await readFile(path.join(root, "data", "operator-groups.json"), "utf8"));
-const renderProfile = createProfileRenderer({esc,icon,tradeById,profileContent,priceSummary,renderCrumbs,pageShell,webPage,crumbsLd,faqLd,profileBusinessGraph,forbidSchema,renderServiceRow,renderForm,operatorGroups});
+const renderProfile = createProfileRenderer({esc,icon,tradeById,profileContent,priceSummary,renderCrumbs,pageShell,webPage,crumbsLd,faqLd,profileBusinessGraph,forbidSchema,renderServiceRow,renderForm,operatorGroups,mapPins});
 const publishedCompanies = raw.companies.filter((company) => company.publish !== false);
 const grouped = {};
 for (const trade of trades) grouped[trade.id] = [];
@@ -1047,7 +1052,9 @@ const written = [];
 await mkdir(path.join(root,'data/index'), {recursive:true});
 async function writeIndex(spec, companies) {
   const records = companies.map(c => directoryRecord(c,priceSummary(c,spec.service),tradeById(c.category)));
-  await writeFile(path.join(root,'data/index',indexName(spec)+'.json'),JSON.stringify({companies:records})+'\n');
+  const output=JSON.stringify({companies:records})+'\n';
+  indexVersions[indexName(spec)]=createHash('sha256').update(output).digest('hex').slice(0,12);
+  await writeFile(path.join(root,'data/index',indexName(spec)+'.json'),output);
 }
 await writeIndex({id:'all'},sortCompanies(publishedCompanies));
 for (const trade of trades) await writeIndex(trade,grouped[trade.id]);
@@ -1081,12 +1088,20 @@ for (const company of publishedCompanies) {
   ));
 }
 
+// Preserve the one withdrawn URL present in the last pre-import public release.
+const retired=[{slug:'billy-aircon',name:'Billy Aircon',target:'/roster/aircon-servicing/'}];
+for(const old of retired) if(!publishedCompanies.some(c=>c.slug===old.slug)) {
+  const canonicalPath=`/roster/company/${old.slug}/`;
+  const redirect=pageShell({title:`${old.name}: listing unavailable | Roster`,description:`The ${old.name} listing is currently unavailable. Browse other aircon servicing companies in Singapore on Roster.`,canonicalPath,current:old.target,jsonLd:[webPage(`${old.name}: listing unavailable`,canonicalPath,'This listing is currently unavailable.')],body:`<section class="claim-hero" data-retired-listing><div><h1>This listing is currently unavailable.</h1><p>Explore other aircon servicing companies, compare prices and get in touch directly.</p><a class="btn btn-solid" href="${old.target}">Browse aircon companies</a></div></section>`}).replace('<meta charset="utf-8">',`<meta charset="utf-8"><meta http-equiv="refresh" content="0;url=${old.target}">`);
+  written.push(await writePage(`company/${old.slug}`,redirect));
+}
+
 const currentPaths = written.map(f=>path.relative(root,f));
 let previous = [];
 try { previous = JSON.parse(await readFile(path.join(root,'data/build-manifest.json'),'utf8')); } catch(e) { if(e.code!=='ENOENT') throw e; }
 for (const rel of previous) if(!currentPaths.includes(rel) && /^company\/[a-z0-9-]+\/index\.html$/.test(rel)) await rm(path.join(root,rel),{force:true});
 await writeFile(path.join(root,'data/build-manifest.json'),JSON.stringify(currentPaths,null,2)+'\n');
-const sitemapPaths=currentPaths.filter(p=>! /^(sign-in|sign-up|forgot-password|reset-password)\//.test(p));
+const sitemapPaths=currentPaths.filter(p=>! /^(sign-in|sign-up|forgot-password|reset-password)\//.test(p)&&!retired.some(r=>p===`company/${r.slug}/index.html`));
 await writeFile(path.join(root,'sitemap.xml'),`<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${sitemapPaths.map(p=>`<url><loc>${esc(origin+'/'+p.replace(/index\.html$/,''))}</loc></url>`).join('')}</urlset>\n`);
 await writeFile(path.join(root,'robots.txt'),'# Beta preview. Every HTML page also carries noindex.\nUser-agent: *\nDisallow: /roster/\n');
 console.log(written.length + " pages");

@@ -4,7 +4,7 @@ import os from 'node:os';
 import { fileURLToPath } from 'node:url';
 import { createHash } from 'node:crypto';
 
-export const BLOCKED = new Set(['not-a-trade-business','not-singapore','site-spam-injection','possible-duplicate','no-sg-postal-code','marketplace','possible-platform','google-listing-mismatch','website-not-company-site','thin-profile','site-placeholder-content','website-inactive','lookup-name-looks-unrelated','trade-unclear']);
+export const BLOCKED = new Set(['not-a-trade-business','not-singapore','site-spam-injection','possible-duplicate','no-sg-postal-code','marketplace','possible-platform','google-listing-mismatch','website-not-company-site','thin-profile','site-placeholder-content','website-inactive','lookup-name-looks-unrelated','trade-unclear','closed','commercial-only']);
 const types = {aircon:'HVACBusiness',plumbing:'Plumber',electrician:'Electrician',handyman:'HomeAndConstructionBusiness',cleaning:'LocalBusiness'};
 const cat = x => x === 'home-cleaning' ? 'cleaning' : x;
 const text = x => typeof x === 'string' ? x.replace(/[\u2013\u2014]/g,'-').replace(/Â·/g,' · ').replace(/\s+/g,' ').trim() : '';
@@ -63,7 +63,9 @@ export function priceOption(item) {
     item.was_amount_sgd != null ? `Previously S$${item.was_amount_sgd}` : ''
   ];
   const longPrice=text(item.price_text).length>65 || !/(?:S?\$|SGD)\s*\d/i.test(text(item.price_text));
-  const label=text(item.service).length>100&&item.job ? human(item.job) : text(item.service);
+  const rawLabel=text(item.service);
+  const noisyLabel=/^(?:login|sign in|add to cart|quantity)$/i.test(rawLabel)||/decrease\/?increase quantity|(?:increase|decrease) quantity|^\+?65[\s\d]{8,}$|^(?:\d+[.)]\s*)?(?:what|how|when|where)\b.*\?/i.test(rawLabel);
+  const label=(noisyLabel||rawLabel.length>100)&&item.job ? human(item.job) : rawLabel;
   return {label,price:longPrice?'See source details':text(item.price_text),detail:details.filter(Boolean).join('. '),excerpt:text(item.excerpt)||text(item.price_text),sourceUrl:cited(item),capturedAt:item.capturedAt,indicative:indicative(item)};
 }
 const sourcedFact = item => cited(item) && item.value != null ? {...item,sourceUrl:cited(item)} : null;
@@ -147,6 +149,7 @@ export function importDatabase(db, seeds, registry={}) {
       if(deadReviews.length) {company.reviews=company.reviews.filter(r=>!deadReviews.includes(r.sourceUrl));report.warnings.push({slug,issue:'Invalidated review source removed',urls:deadReviews});}
     }
     company.databaseId=row.id;company.enrichment=enrichment;
+    company.listingDepth={full:row.profile_bar?.meetsFullBar===true,evidenceScore:['priceWithJob','serviceAreaCited','residentialSentence','summary','unflagged'].filter(key=>row.profile_bar?.[key]===true).length+Number(!!enrichment.hours)+Number(!!company.reviews?.length),checkedAt:row.profile_bar?.checkedAt||null};
     company.primaryTrade=category;company.category=category;company.schemaType=types[category];
     company.alternatePhones=alternatePhones(row.phone,company.phone?.value);
     company.categories=[...new Set([category,...categories])];

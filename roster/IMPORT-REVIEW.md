@@ -1,70 +1,141 @@
-# Roster import review
+# Roster import and site review
 
-Updated 11 October 2026 on `roster-db-import`. Local review only. Nothing pushed or published. Publishing remains a separate step after Martin reviews the preview.
+Updated 11 October 2026 on `roster-db-import`, following `REVIEW-2026-10-11-1340-roster-review.md` and Martin's map-pin request.
 
-## Pinned release
+## Release and publication status
 
-- File: `companies-20261011-1337.json`
-- SHA256: `388f7b4803c2bc2ed186ed9074a3870c2b6ecf7d41e6218482acfa04f4723de7`
-- Source rows: 5,444
-- Rows marked as profiles: 624
-- Included company pages: 534
-- Excluded source rows: 4,910
-- Generated site pages: 548
+The site uses checksum-verified `companies-20261011-1337.json`, SHA256 `388f7b4803c2bc2ed186ed9074a3870c2b6ecf7d41e6218482acfa04f4723de7`. The review's warning about release 1204 was already resolved. The database has 5,444 rows and 624 profiled records. Publication safeguards admit 534 companies and exclude 4,910 records with reasons in `data/import-report.json`.
 
-The initial 1204 release had 597 profile records. During the final default-import check, LATEST advanced to the 1337 release with 624 profile records. This review is pinned to the checksum above so later Drive updates do not silently change these results.
+The previous import and design work was committed and published with Martin's approval. The average-rating and claim-autocomplete update was deployed as `25f534197`. This follow-up addresses the remaining review items and accurate maps.
 
-Of the 624 profile records, 67 lack sourced About content and another 29 fail other publication rules. Another six records outside the profiled segment have all required sourced fields. The resulting site includes 534 company pages. Metadata in `self_description` is never substituted for missing About text. All exclusions are logged in `data/import-report.json`.
+## Fuller profiles and compact listings
 
-| Primary trade | Included | Excluded |
+108 published records meet `profile_bar.meetsFullBar`; 426 are limited listings. The source has 117 full-bar records overall, but nine fail the site's independent publication checks. The source flag does not override publication safeguards.
+
+Trade and job pages lead with up to eight eligible full-bar companies, ordered by evidence completeness, then average rating and review count. Other companies appear in compact rows with prominent averages, a price or quote prompt, services and direct contact. Search, filtering and alternate sorting apply to both groups. Additional compact rows load in batches of 12. Existing company URLs remain stable.
+
+| Primary trade | Published companies | Full-bar profiles |
 | --- | ---: | ---: |
-| Aircon | 185 | 1714 |
-| Plumbing | 68 | 371 |
-| Electrician | 84 | 2026 |
-| Handyman | 76 | 308 |
-| Home cleaning | 121 | 491 |
+| aircon | 185 | 48 |
+| plumbing | 68 | 19 |
+| electrician | 84 | 15 |
+| handyman | 76 | 11 |
+| cleaning | 121 | 15 |
 
-Each record is counted under its primary trade, so totals do not overlap.
+Non-full-bar company pages use a smaller layout and a visible "Limited details" note. Available sourced services, prices, contact details and reviews remain accessible. All 16 original hand-written source objects remain unchanged; they are not replaced by generated summaries. Fifteen have available listings. Billy's withdrawn public URL redirects to the aircon directory without republishing its withheld profile.
 
-## Changes
+## Maps
 
-- Imported the checksum-verified release with stable company URLs.
-- Trade pages, homepage counts and search category filters use `primary_trade`.
-- Sourced alternate numbers appear as "Also listed" with a source label, such as BCA register. The primary phone remains the main call action. There are 50 included profiles with alternate numbers.
-- Price details retain monthly session counts, hours per session, quantity, GST and promotions. Inferred units are explicitly labelled. 124 included profiles have an inferred unit.
-- Sourced best-for and poor-fit notes fill empty sections while original curated copy takes precedence. Service-area excerpts are displayed with their sources.
-- Current coverage: 528 summaries, 190 sourced FAQ sets, 341 best-for records, 32 poor-fit records and 316 service-area records.
-- Noindex, existing preview authentication and unsent account/quote previews remain in place.
+479 cited place markers matched the published postal code and Singapore coordinates. 48 place/postal conflicts and seven records without the necessary identifiers show an address card with no map. Raw address searches are no longer embedded. Verified maps display a building-level coordinate pin at zoom 17, and directions use the same coordinates. Unit details are omitted from public captions and map requests. A changed address invalidates its cached pin.
 
-## Original profiles
+`data/map-pins.json` records source URL, capture date, postal match and address hash. `scripts/verify-map-pins.py` refreshes this cache independently of database import. It does not update review scores or other business data. Browser verification confirmed Evergreen's actual Tampines building pin without a unit popup.
 
-All 16 hand-written profile objects match the protected baseline. Fifteen currently have pages. Billy Aircon remains withheld under `no-sg-postal-code`; its write-up is retained. The invalidated property.co review excerpt for 338 Aircon remains omitted.
+See `ADDRESS-MAP-COLLECTION.md` for the collection instructions prepared for Grok and other bots.
 
-## Remaining source-data limits
+## Prices and contact evidence
 
-- 79 included profiles trigger the pricing review rule for long extracted text or "as printed" units. This is a review queue, not a finding that all 79 are incorrect. Source wording is available in disclosures, and long fields display "See source details" rather than invented short prices.
-- Specific earlier concerns remain: MCAAS has a carpet-cleaning excerpt assigned to the mattress job. City Cooling retains repeated page-title pricing references and a quantity label not established by its excerpt. These should be corrected in the database before calling the release fully clean.
-- 8 profiles have general or indicative pricing, labelled separately from company rates.
-- 153 profiles have alternate-address records. Only primary addresses are displayed. Map embeds and directions omit unit numbers.
-- The four Google snapshots the supplied 10 October spot-check could not re-find remain dated 10 October: IJ Handyman, Commercial Engineering, DW Deep Cleaning and Doctor Cool. This build has not independently verified them.
-- The available 1204 release notes state that units and coverage use text extraction and were not hand-verified row by row. Inferred-unit labels retain that distinction. No separate 1337 release-notes file was present during review.
-- The separate Drive summary and the filename quoted in the Claude prompt lag LATEST. The verified release JSON is the build's source of truth.
+- Units, quantities, monthly sessions, GST and other conditions come from the pinned release. The website does not infer a missing unit. Database-inferred units retain their explicit qualifier.
+- UI noise such as Login, cart quantity buttons, phone-only labels and FAQ questions uses the named job as the public price label. Original excerpts remain accessible.
+- Sin & Goh's power-trip range is already S$50 to S$200 in release 1337, including `amount_max_sgd`. It is not truncated by this build. The 6 Days Cleaning record is excluded for missing sourced About content; its raw cart-label problems stay in the bot collection guide.
+- Alternate numbers retain their own source label and show "Checked <date>" only when that source record has a date. An absent date is not replaced with the company's date.
+- Full-bar depth and missing electrician/handyman job prices remain data-collection work. No prices, service coverage or review sources were invented to promote a listing.
 
-## Validation
+## Removed or withheld URL audit
 
-- 16 importer/data-rule tests passed, covering primary trades, alternate contact sources, package scope and exclusion of metadata-only About content.
-- All 548 pages passed local links/fragments, unique metadata, noindex, schema restrictions, section order and map privacy checks.
-- All 16 original write-ups match their baseline.
-- A repeated import and build from the pinned 1337 release produced byte-identical generated data and pages.
-- Ten deterministic random profiles and ten newly eligible profiles rendered without empty sections, invalid placeholders or horizontal overflow.
-- Browser checks passed for alternate phone labels, sourced fit notes, monthly package details, primary-trade filtering and empty results. Body text was 16px at a measured 325px mobile viewport. Desktop checks passed at 1280px. Temporary viewport overrides were reset.
-- HTML plus JSON: Aircon 229.5 KB, Plumbing 108.5 KB, Electrician 123.4 KB, Handyman 114.0 KB, Home cleaning 159.4 KB. All below 300 KB.
+The 13:40 review counted 64 deletions in a temporary uncommitted build. That exact intermediate manifest was not retained, so this audit covers all 83 currently reserved but unpublished slugs instead of asserting a reconstructed list of 64. The table gives the current exclusion reasons from the pinned release.
 
-## Local review links
+The last public release before the database import (`407aaa6f1`) had 16 company pages. Billy Aircon is the only one absent from the current published-company set. Its URL now redirects to the aircon directory. The other withdrawn slugs were not present in that public release. They stay reserved so later imports cannot reuse their URLs for unrelated companies.
 
-- Homepage: http://127.0.0.1:8880/roster/
-- AFRA, alternate phone labels: http://127.0.0.1:8880/roster/company/afra-engineering/
-- Superb Cleaning, monthly package scope: http://127.0.0.1:8880/roster/company/superb-cleaning-pte-ltd/
-- Cool Aircon, preserved original write-up: http://127.0.0.1:8880/roster/company/cool-aircon/
+| Slug | Exclusion reasons |
+| --- | --- |
+| `24-hour-plumbing` | site-spam-injection |
+| `24-hours-electrician-lotus` | missing-sourced-about |
+| `2cool-air-conditioning-pte-ltd` | website-not-company-site |
+| `3322coolair-pte-ltd` | missing-sourced-about |
+| `6-days-cleaning` | missing-sourced-about |
+| `7days-aircon-service-singapore` | site-placeholder-content, site-placeholder-content-detected |
+| `a-class-aircon-management` | missing-sourced-about |
+| `a-stop-solution` | missing-sourced-about |
+| `ac-aircon-services` | missing-sourced-about |
+| `affordable-electrician-services-singapore` | no-sg-postal-code |
+| `aircon-guru-engineering-pte-ltd` | missing-sourced-about |
+| `aircon-servicing` | missing-sourced-about |
+| `aircond-service-centre-pte-ltd` | missing-sourced-about |
+| `airconman-aircon-servicing-repair-singapore` | possible-duplicate |
+| `airconman-sg-pte-ltd` | possible-duplicate |
+| `airemax-aircon-pte-ltd` | missing-sourced-about |
+| `airloft-by-poh-meng-engineering` | missing-sourced-about |
+| `all-best-air-conditioning-electric-pte-ltd` | missing-sourced-about |
+| `alpha-omega-trinity-pte-ltd` | missing-sourced-about |
+| `alphakleen-services` | missing-sourced-about |
+| `apple-cleaners-singapore-professional-cleaning-services` | missing-sourced-about |
+| `arkin-pte-ltd` | missing-sourced-about |
+| `bencool-services-professional-aircon-services-airconditioner` | missing-sourced-about |
+| `billy-aircon` | no-sg-postal-code |
+| `bsh-engineering-ptd-ltd` | missing-sourced-about |
+| `chillman-aircon` | website-not-company-site |
+| `cleanaxisco-pte-ltd` | missing-sourced-about |
+| `cleanhub-facility-pte-ltd` | missing-sourced-about |
+| `competent-electrician-hougang` | website-not-company-site, possible-duplicate |
+| `ct-air-con-group` | site-spam-injection |
+| `d-k-construction-engineering-pte-ltd-handyman-renovation-ser` | missing-sourced-about |
+| `divine-cleanse-llp` | website-not-company-site |
+| `east-tan-aircon-engineering-service` | missing-sourced-about |
+| `easy-cool-engineering-pte-ltd` | missing-sourced-about |
+| `eco-electricians-contractor-pte-ltd` | missing-sourced-about |
+| `effie-cool-service-singapore-aircon-servicing` | missing-sourced-about |
+| `elan-electrical-services-pte-ltd` | missing-sourced-about |
+| `electric-repair-sg` | missing-sourced-about |
+| `empire-cleaning-home-services` | missing-sourced-about |
+| `express-plumbing-elect` | missing-sourced-about |
+| `finest-services-pte-ltd` | missing-sourced-about |
+| `gj-plumbing-jetting-pte-ltd` | missing-sourced-about |
+| `handyman-german-maintenance-workshop-services` | missing-sourced-about |
+| `handyman-home-fiz` | missing-sourced-about |
+| `handyman-services-24` | missing-sourced-about |
+| `handyman-services-singapore` | missing-sourced-about |
+| `huat-plumbing` | missing-sourced-about |
+| `hydrotec-services` | missing-sourced-about |
+| `integer-building-services` | missing-sourced-about |
+| `ironing-maids-home-ironing-cleaning-service-singapore` | missing-sourced-about |
+| `jb-house-cleaning-services-perfectionist-cleaning-business` | not-singapore |
+| `jd-waterworks` | missing-sourced-about |
+| `just-cool-aircon-engineering-pte-ltd` | no-sg-postal-code |
+| `k2l-aircon` | missing-sourced-about |
+| `kat-electrical-engineering-pte-ltd` | site-spam-injection |
+| `kc-plumbing-electrical-renovation` | missing-sourced-about |
+| `kleeno-cleaning-services` | missing-sourced-about |
+| `lightning-air-conditioning-services` | site-spam-injection |
+| `luxury-air-con-engineering-services` | missing-sourced-about |
+| `metrocleaners` | missing-sourced-about |
+| `one-stop-handyman-pte-ltd` | missing-sourced-about |
+| `part-time-maid` | missing-sourced-about |
+| `pc-handyman-services` | website-not-company-site |
+| `plumbermeng-98530163-singapore-s-premier-plumbing-specialist` | missing-sourced-about |
+| `plumbing-hub-express` | website-not-company-site |
+| `primeasia-plumbing-sanitary-pte-ltd` | missing-sourced-about |
+| `reliable-plumbing-services-u-home-plumbing-engineering` | missing-sourced-about |
+| `saikon-contractors` | missing-sourced-about |
+| `sembawang-lighting-house-pte-ltd` | missing-sourced-about |
+| `sin-hong-yong-pte-ltd` | missing-sourced-about |
+| `sk-plumber` | missing-sourced-about |
+| `sky-blue-aircon-engineering-pte-ltd` | missing-sourced-about |
+| `skyteam-electrical-pte-ltd` | missing-sourced-about |
+| `south-air-conditioning-refrigeration-services` | missing-sourced-about |
+| `supercool-aircon` | missing-sourced-about |
+| `superten-plumber` | missing-sourced-about |
+| `tech-lai-integrated-pte-ltd` | missing-sourced-about |
+| `thetop-aircon-service` | missing-sourced-about |
+| `tth-handyman-engineering-construction-warehouse` | missing-sourced-about |
+| `vim-engineering-pte-ltd-24-7-plumbing-services-singapore-lic` | Not included in pinned release |
+| `wefix4u` | missing-sourced-about |
+| `west-cloud-air-con` | website-not-company-site |
+| `wi-electrical-pte-ltd-lew-singapore-electrical-license-renew` | missing-sourced-about |
 
-The local server uses a local authentication stub without modifying deployed authentication files. See `README.md` for future import commands and `data/import-report.json` for complete exclusions and warnings.
+## Validation and safeguards
+
+Importer and presentation tests cover blocking flags, checksum integrity, original copy, stable slugs, full-bar metadata, shortlist membership, real weighted averages, phone dates, price labels, package units and company-name matching. Site checks cover all generated pages, local links, metadata, noindex, source pin coordinates, compact/full profile separation and the 300 KB HTML plus JSON budget per trade.
+
+No rating, review or offer structured data is emitted. Preview authentication is unchanged. Account, quote and listing-claim forms remain local previews that send and store nothing. Pages remain noindex. Sample multi-source review figures remain labelled and separate from real averages.
+
+Remaining source-data issues include price extraction and unmatched map addresses. Consult `data/import-report.json`, the map-pin cache and the collection guide for the queues. This update does not claim that all source records have been manually verified.
