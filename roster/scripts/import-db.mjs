@@ -78,6 +78,7 @@ export function verifyRelease(source, checksum) {
 }
 
 export function bundledLogo(logo) {
+  if (logo?.logo_unsure === true) return null;
   if (!logo?.local_path) return null;
   if (!/^logos\/[a-z0-9_-]+\.(?:png|jpe?g|webp|avif|svg)$/i.test(logo.local_path) || !/^[a-f0-9]{64}$/i.test(logo.sha256 || '') || !http(logo.source_url) || !http(logo.url)) throw new Error('Invalid sourced logo asset metadata');
   const parsed=path.posix.parse(logo.local_path), sha256=logo.sha256.toLowerCase();
@@ -177,9 +178,16 @@ export function importDatabase(db, seeds, registry={}) {
     }
     if(original && !presentation[slug].published) {const fresh=enrichment.priceLines.filter(p=>!indicative(p));if(fresh.length) presentation[slug]={...presentation[slug],published:true,price:'See published prices',detail:`${fresh.length} newly sourced pricing entries. Confirm the job, inclusions and total.`};}
     const photos=(row.photos||[]).filter(p=>http(p.fileUrl)&&http(p.pageUrl));
+    const uncertainLogo=row.logo?.logo_unsure===true;
     const logoAsset=bundledLogo(row.logo);
     if(logoAsset) {presentation[slug].logo=logoAsset.src;presentation[slug].logoAsset=logoAsset;}
-    if(!presentation[slug].logo) {const logo=photos.find(p=>p.kind==='logo');if(logo) presentation[slug].logo=logo.fileUrl;}
+    if(uncertainLogo) {
+      delete presentation[slug].logo;
+      delete presentation[slug].logoAsset;
+      presentation[slug].logoReview={status:'needs-review',reason:text(row.logo.logo_unsure_reason),sourceUrl:http(row.logo.source_url),checkedAt:text(row.logo.audit?.checkedAt)};
+      report.warnings.push({slug,issue:'Uncertain logo withheld; initials shown',reason:text(row.logo.logo_unsure_reason)});
+    }
+    if(!uncertainLogo&&!presentation[slug].logo) {const logo=photos.find(p=>p.kind==='logo');if(logo) presentation[slug].logo=logo.fileUrl;}
     if(!presentation[slug].photos?.length) presentation[slug].photos=photos.filter(p=>p.kind!=='logo').slice(0,3).map(p=>({src:p.fileUrl,sourceUrl:p.pageUrl,caption:`${human(p.kind)} photo from ${company.name}`}));
     companies.push(company);
     report.published.push({id:row.id,slug,name:company.name,categories:company.categories,primaryTrade:category,curated:!!original});

@@ -1,4 +1,31 @@
-# Roster import review: release 1509
+# Roster import review: release 2227
+
+Updated 11 October 2026. Imported the exact requested release `companies-20261011-2227.json`, also named by Drive's `db-expanded/releases/LATEST`.
+
+SHA256 verified before import: `aa9c2a9bd84ca484b66310a6615cee9614b33cdeb758303f2569eaabb8148914`.
+
+## Current build
+
+- 5,444 source records, 594 published companies and 4,850 excluded records.
+- Seven newly eligible listings and no withdrawals from the previous published release.
+- Trade totals: 205 aircon, 83 plumbing, 94 electrician, 82 handyman and 130 cleaning companies.
+- Imported the matching `logos-20261011-2227.tar.gz` bundle. All 410 installed release images match their per-image checksums. Two existing curated images remain available.
+- The release removes 102 previous logo references and flags other images as uncertain. Twenty published companies have an uncertain logo, so the importer shows initials while preserving each audit reason. Four additional uncertain logos belong to excluded records. Photo fallback cannot reinstate an uncertain image.
+- Map check rerun: 539 verified building pins and 55 address-only fallbacks. All previously verified pins retain verified status. Fallbacks comprise 48 place/postal conflicts and seven missing usable CID/postal pairs. There were no network failures. Unit numbers stay out of map captions and directions.
+- 614 generated pages pass site checks. All 16 original write-ups remain protected. Billy Aircon remains withheld under its existing flag.
+- All pages remain noindex. Rating schema, preview authentication, account forms, quote forms and claim forms are unchanged.
+
+## Validation
+
+All 34 JavaScript tests and eight logo-import/framing tests pass. The complete site check validates pages, internal links, fragments, metadata, schema restrictions, publication counts and the original write-ups. The largest trade page plus JSON index is 296.3 KB, within the 300 KB limit.
+
+Browser review covered the seven newly published companies plus 338 Aircon, Lion City Aircon and Daylight Electrician. Reviewed page headings, section order, logo or initials rendering, map or address fallback and noindex metadata. Desktop directory layout was checked at 1440px and mobile cards at 390px. The new U-Home logo loads correctly and the long business name wraps without horizontal overflow. Mobile search for Reliable shows two matching companies and updates the price and WhatsApp counts to one and two respectively.
+
+The existing compact laptop layout and dynamic filter-count fixes remain in place.
+
+## Previous review: release 1509
+
+The following historical review is retained for the audit trail.
 
 Updated 11 October 2026. Imported the exact release named in Drive's `db-expanded/releases/LATEST`: `companies-20261011-1509.json`.
 

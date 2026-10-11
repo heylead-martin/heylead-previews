@@ -24,6 +24,8 @@ node roster/build.mjs
 
 The optional second argument, or `ROSTER_LOGO_BUNDLE`, supplies the matching logo bundle. `scripts/import-logos.py` checks each published logo against its release SHA256 before installing the batch under `assets/logos/`. Paths include the content hash for caching. Only published companies' assets are installed, archive links and unsafe paths are rejected, and static image content is validated. Subsequent imports can omit the bundle when every required local image already matches its hash. A missing or changed image stops the import before site data is written. Logo source URLs, original URLs and capture dates remain in `presentation.json`.
 
+A release logo marked `logo_unsure: true` is withheld from cards and profiles, which show company initials instead. Its reason and audit date remain in `presentation.json` and the import report. A photo fallback cannot restore the uncertain logo. The business itself remains eligible when its company data passes the publication checks.
+
 ## Data ownership
 
 - `data/curated/` is the protected baseline for the original 16 hand-written profiles. Edit those files when deliberately revising the original copy. Generated `companies.json`, `profiles.json` and `presentation.json` are overwritten by import.

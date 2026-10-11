@@ -105,6 +105,18 @@
       "curated": false
     },
     {
+      "id": "201215586K",
+      "slug": "alpha-omega-trinity-pte-ltd",
+      "name": "ALPHA & OMEGA TRINITY PTE LTD",
+      "categories": [
+        "electrician",
+        "aircon",
+        "plumbing"
+      ],
+      "primaryTrade": "electrician",
+      "curated": false
+    },
+    {
       "id": "200721505D",
       "slug": "alpine-aire-services",
       "name": "ALPINE AIRE SERVICES PTE. LTD.",
@@ -1004,6 +1016,16 @@
       "id": "202341055G",
       "slug": "avv-electricals-pte-ltd",
       "name": "AVV ENGINEERING PTE LTD",
+      "categories": [
+        "electrician"
+      ],
+      "primaryTrade": "electrician",
+      "curated": false
+    },
+    {
+      "id": "199302272G",
+      "slug": "bsh-engineering-ptd-ltd",
+      "name": "BAN SOON HENG ENGINEERING PTE LTD",
       "categories": [
         "electrician"
       ],
@@ -2260,6 +2282,16 @@
       "curated": false
     },
     {
+      "id": "gm-10965709166641619960",
+      "slug": "airconman-aircon-servicing-repair-singapore",
+      "name": "Airconman - Aircon Servicing & Repair Singapore",
+      "categories": [
+        "aircon"
+      ],
+      "primaryTrade": "aircon",
+      "curated": false
+    },
+    {
       "id": "gm-9827412819302873730",
       "slug": "ys-a-cool-pte-ltd",
       "name": "YS A-Cool Pte Ltd",
@@ -2553,6 +2585,16 @@
       "id": "gm-15020839161791991074",
       "slug": "supercool-aircon",
       "name": "Supercool Aircon",
+      "categories": [
+        "aircon"
+      ],
+      "primaryTrade": "aircon",
+      "curated": false
+    },
+    {
+      "id": "gm-10615115009983379279",
+      "slug": "airconman-sg-pte-ltd",
+      "name": "Airconman Sg Pte Ltd",
       "categories": [
         "aircon"
       ],
@@ -3950,6 +3992,16 @@
       "curated": false
     },
     {
+      "id": "gm-16488606213255178642",
+      "slug": "ac-aircon-services",
+      "name": "AC Aircon Services",
+      "categories": [
+        "aircon"
+      ],
+      "primaryTrade": "aircon",
+      "curated": false
+    },
+    {
       "id": "gm-15305861624805995322",
       "slug": "jk-aircon-specialist",
       "name": "Jk Aircon Specialist",
@@ -4340,6 +4392,16 @@
       "curated": false
     },
     {
+      "id": "gm-10123879885047332967",
+      "slug": "6-days-cleaning",
+      "name": "6 Days Cleaning",
+      "categories": [
+        "cleaning"
+      ],
+      "primaryTrade": "cleaning",
+      "curated": false
+    },
+    {
       "id": "gm-2864108435581152114",
       "slug": "cooling-guard-pte-ltd",
       "name": "Cooling Guard Pte Ltd",
@@ -4373,6 +4435,16 @@
       "id": "gm-7899942987557210169",
       "slug": "thong-nian-engineering-pte-ltd",
       "name": "Thong Nian Engineering Pte Ltd",
+      "categories": [
+        "plumbing"
+      ],
+      "primaryTrade": "plumbing",
+      "curated": false
+    },
+    {
+      "id": "gm-3116192933622399066",
+      "slug": "reliable-plumbing-services-u-home-plumbing-engineering",
+      "name": "Reliable Plumbing Services - U-Home Plumbing & Engineering",
       "categories": [
         "plumbing"
       ],
@@ -7674,19 +7746,6 @@
         "missing-sourced-about",
         "missing-sourced-services",
         "missing-company-website"
-      ]
-    },
-    {
-      "id": "201215586K",
-      "name": "ALPHA & OMEGA TRINITY PTE LTD",
-      "categories": [
-        "aircon",
-        "plumbing",
-        "electrician"
-      ],
-      "primaryTrade": "electrician",
-      "reasons": [
-        "missing-sourced-about"
       ]
     },
     {
@@ -31294,17 +31353,6 @@
       ]
     },
     {
-      "id": "199302272G",
-      "name": "BAN SOON HENG ENGINEERING PTE LTD",
-      "categories": [
-        "electrician"
-      ],
-      "primaryTrade": "electrician",
-      "reasons": [
-        "missing-sourced-about"
-      ]
-    },
-    {
       "id": "202028586R",
       "name": "BAO SERVICE PTE. LTD.",
       "categories": [
@@ -44849,7 +44897,6 @@
       "primaryTrade": "electrician",
       "reasons": [
         "thin-profile",
-        "missing-sourced-about",
         "missing-sourced-services",
         "missing-company-website"
       ]
@@ -57685,7 +57732,6 @@
       "reasons": [
         "website-inactive",
         "no-sg-postal-code",
-        "missing-sourced-about",
         "missing-sourced-services",
         "missing-sourced-phone",
         "missing-sourced-address"
@@ -69790,17 +69836,6 @@
       ]
     },
     {
-      "id": "gm-10965709166641619960",
-      "name": "Airconman - Aircon Servicing & Repair Singapore",
-      "categories": [
-        "aircon"
-      ],
-      "primaryTrade": "aircon",
-      "reasons": [
-        "possible-duplicate"
-      ]
-    },
-    {
       "id": "gm-9104483790491634079",
       "name": "Coolah!",
       "categories": [
@@ -69843,17 +69878,6 @@
       "primaryTrade": "aircon",
       "reasons": [
         "no-sg-postal-code"
-      ]
-    },
-    {
-      "id": "gm-10615115009983379279",
-      "name": "Airconman Sg Pte Ltd",
-      "categories": [
-        "aircon"
-      ],
-      "primaryTrade": "aircon",
-      "reasons": [
-        "possible-duplicate"
       ]
     },
     {
@@ -70004,17 +70028,6 @@
       ]
     },
     {
-      "id": "gm-16488606213255178642",
-      "name": "AC Aircon Services",
-      "categories": [
-        "aircon"
-      ],
-      "primaryTrade": "aircon",
-      "reasons": [
-        "missing-sourced-about"
-      ]
-    },
-    {
       "id": "gm-15847782430754128416",
       "name": "Reliable - 24 Hrs Plumbing and Electrical Services - Licensed Plumber",
       "categories": [
@@ -70022,7 +70035,6 @@
       ],
       "primaryTrade": "plumbing",
       "reasons": [
-        "website-not-company-site",
         "profile-rolled-back"
       ]
     },
@@ -70069,28 +70081,6 @@
       "reasons": [
         "marketplace",
         "profile-rolled-back"
-      ]
-    },
-    {
-      "id": "gm-10123879885047332967",
-      "name": "6 Days Cleaning",
-      "categories": [
-        "cleaning"
-      ],
-      "primaryTrade": "cleaning",
-      "reasons": [
-        "missing-sourced-about"
-      ]
-    },
-    {
-      "id": "gm-3116192933622399066",
-      "name": "Reliable Plumbing Services - U-Home Plumbing & Engineering",
-      "categories": [
-        "plumbing"
-      ],
-      "primaryTrade": "plumbing",
-      "reasons": [
-        "missing-sourced-about"
       ]
     },
     {
@@ -70488,6 +70478,11 @@
     },
     {
       "slug": "afra-engineering",
+      "issue": "Uncertain logo withheld; initials shown",
+      "reason": "Icon of four hands with no company name; may be a generic graphic."
+    },
+    {
+      "slug": "afra-engineering",
       "issue": "Alternate phone shown with source label; primary phone remains the main contact"
     },
     {
@@ -70529,6 +70524,22 @@
     {
       "slug": "airwin-aircon-fridge-services",
       "issue": "Alternate address exists; primary database address retained"
+    },
+    {
+      "slug": "alpha-omega-trinity-pte-ltd",
+      "issue": "Alternate phone shown with source label; primary phone remains the main contact"
+    },
+    {
+      "slug": "alpha-omega-trinity-pte-ltd",
+      "issue": "Alternate address exists; primary database address retained"
+    },
+    {
+      "slug": "alpha-omega-trinity-pte-ltd",
+      "issue": "Inferred price units labelled for confirmation"
+    },
+    {
+      "slug": "alpha-omega-trinity-pte-ltd",
+      "issue": "Automatically extracted price text needs editorial review; source wording retained"
     },
     {
       "slug": "alpine-aire-services",
@@ -70585,6 +70596,10 @@
     {
       "slug": "citicool-engineering-pte-ltd",
       "issue": "Alternate address exists; primary database address retained"
+    },
+    {
+      "slug": "citicool-engineering-pte-ltd",
+      "issue": "Automatically extracted price text needs editorial review; source wording retained"
     },
     {
       "slug": "commercestar-engineering",
@@ -70701,10 +70716,6 @@
     {
       "slug": "eurohub-aircon-pte-ltd-best-aircon-servicing-aircon-repair-a",
       "issue": "Alternate address exists; primary database address retained"
-    },
-    {
-      "slug": "eurohub-aircon-pte-ltd-best-aircon-servicing-aircon-repair-a",
-      "issue": "Inferred price units labelled for confirmation"
     },
     {
       "slug": "eurohub-aircon-pte-ltd-best-aircon-servicing-aircon-repair-a",
@@ -70871,6 +70882,11 @@
     },
     {
       "slug": "lion-city-aircon",
+      "issue": "Uncertain logo withheld; initials shown",
+      "reason": "Leaf-and-house mark with no company name; may be a generic template graphic."
+    },
+    {
+      "slug": "lion-city-aircon",
       "issue": "Inferred price units labelled for confirmation"
     },
     {
@@ -70896,6 +70912,10 @@
     {
       "slug": "newway-air-conditioning",
       "issue": "Alternate address exists; primary database address retained"
+    },
+    {
+      "slug": "newway-air-conditioning",
+      "issue": "Automatically extracted price text needs editorial review; source wording retained"
     },
     {
       "slug": "ninja-cool",
@@ -70956,6 +70976,11 @@
     {
       "slug": "sh-integrated-services-pte-ltd",
       "issue": "Alternate address exists; primary database address retained"
+    },
+    {
+      "slug": "flash-aircon",
+      "issue": "Uncertain logo withheld; initials shown",
+      "reason": "Logo shows 'Flash' (the site's brand, flashaircon.com), not the row name Signature Engineering Services."
     },
     {
       "slug": "flash-aircon",
@@ -71070,6 +71095,10 @@
       "issue": "Alternate address exists; primary database address retained"
     },
     {
+      "slug": "1st-electrical",
+      "issue": "Automatically extracted price text needs editorial review; source wording retained"
+    },
+    {
       "slug": "a-a-reno-paint-pte-ltd",
       "issue": "Alternate phone shown with source label; primary phone remains the main contact"
     },
@@ -71088,6 +71117,10 @@
     {
       "slug": "avv-electricals-pte-ltd",
       "issue": "Inferred price units labelled for confirmation"
+    },
+    {
+      "slug": "bsh-engineering-ptd-ltd",
+      "issue": "Alternate address exists; primary database address retained"
     },
     {
       "slug": "blossom-aircon-installation-replacement-and-servicing-work-s",
@@ -71135,6 +71168,11 @@
     {
       "slug": "i2r-m-e-pte-ltd-yishun-electrician",
       "issue": "Alternate address exists; primary database address retained"
+    },
+    {
+      "slug": "ac-cool-aircon-sg-service",
+      "issue": "Uncertain logo withheld; initials shown",
+      "reason": "Logo shows the letters 'AC' (the site's brand, AC Cool Aircon), not the row name JML Engineering."
     },
     {
       "slug": "ac-cool-aircon-sg-service",
@@ -71314,14 +71352,6 @@
       "issue": "Alternate address exists; primary database address retained"
     },
     {
-      "slug": "sg-handyman-engineering",
-      "issue": "General pricing references labelled separately from company rates"
-    },
-    {
-      "slug": "sg-handyman-engineering",
-      "issue": "Automatically extracted price text needs editorial review; source wording retained"
-    },
-    {
       "slug": "whissh-singapore-luxury-home-office-services",
       "issue": "Alternate address exists; primary database address retained"
     },
@@ -71447,10 +71477,6 @@
     },
     {
       "slug": "just-clean-lah",
-      "issue": "General pricing references labelled separately from company rates"
-    },
-    {
-      "slug": "just-clean-lah",
       "issue": "Automatically extracted price text needs editorial review; source wording retained"
     },
     {
@@ -71527,6 +71553,11 @@
     {
       "slug": "adm-plumbing",
       "issue": "Alternate address exists; primary database address retained"
+    },
+    {
+      "slug": "bs-integrated-engineering",
+      "issue": "Uncertain logo withheld; initials shown",
+      "reason": "Generic '24/7' icon with no company name."
     },
     {
       "slug": "bs-integrated-engineering",
@@ -71651,10 +71682,6 @@
       "issue": "Inferred price units labelled for confirmation"
     },
     {
-      "slug": "summer-plumbing-service",
-      "issue": "Automatically extracted price text needs editorial review; source wording retained"
-    },
-    {
       "slug": "swiss-tech-plumbing",
       "issue": "Alternate phone shown with source label; primary phone remains the main contact"
     },
@@ -71719,6 +71746,20 @@
       "issue": "Automatically extracted price text needs editorial review; source wording retained"
     },
     {
+      "slug": "auntie-cleaner-pte-ltd",
+      "issue": "Automatically extracted price text needs editorial review; source wording retained"
+    },
+    {
+      "slug": "coldway-aircon-service-singapore",
+      "issue": "Uncertain logo withheld; initials shown",
+      "reason": "House/snowflake/thermometer site icon with no company name; may be a generic graphic."
+    },
+    {
+      "slug": "part-time-home-maid-service-singapore",
+      "issue": "Uncertain logo withheld; initials shown",
+      "reason": "House-and-broom icon with no company name; may be a generic graphic."
+    },
+    {
       "slug": "part-time-home-maid-service-singapore",
       "issue": "Automatically extracted price text needs editorial review; source wording retained"
     },
@@ -71755,12 +71796,21 @@
       "issue": "Inferred price units labelled for confirmation"
     },
     {
+      "slug": "airconman-aircon-servicing-repair-singapore",
+      "issue": "Alternate address exists; primary database address retained"
+    },
+    {
       "slug": "ys-a-cool-pte-ltd",
       "issue": "Inferred price units labelled for confirmation"
     },
     {
       "slug": "sjr-aircon-1-best-aircon-servicing-in-singapore",
       "issue": "Automatically extracted price text needs editorial review; source wording retained"
+    },
+    {
+      "slug": "coldair-aircon-pte-ltd",
+      "issue": "Uncertain logo withheld; initials shown",
+      "reason": "Snowflake mark with no company name; may be a generic graphic."
     },
     {
       "slug": "coldair-aircon-pte-ltd",
@@ -71787,6 +71837,11 @@
       "issue": "Automatically extracted price text needs editorial review; source wording retained"
     },
     {
+      "slug": "your-handyman-sg-aircon-gas-top-up-aircon-chemical-wash-hvac",
+      "issue": "Uncertain logo withheld; initials shown",
+      "reason": "Logo text reads 'IET Smart Solution', not the row name Your handyman sg."
+    },
+    {
       "slug": "tidy-homes-cleaning",
       "issue": "Inferred price units labelled for confirmation"
     },
@@ -71799,6 +71854,10 @@
       "issue": "Inferred price units labelled for confirmation"
     },
     {
+      "slug": "dr-penguin-aircon-engineering-pte-ltd",
+      "issue": "Automatically extracted price text needs editorial review; source wording retained"
+    },
+    {
       "slug": "afix-sg",
       "issue": "Inferred price units labelled for confirmation"
     },
@@ -71821,10 +71880,31 @@
     {
       "slug": "jetstyle-aircon-aircon-contractor-singapore",
       "issue": "Automatically extracted price text needs editorial review; source wording retained"
+    },
+    {
+      "slug": "airconman-sg-pte-ltd",
+      "issue": "Alternate address exists; primary database address retained"
+    },
+    {
+      "slug": "airconman-sg-pte-ltd",
+      "issue": "Automatically extracted price text needs editorial review; source wording retained"
+    },
+    {
+      "slug": "handyman-zone-sg",
+      "issue": "Uncertain logo withheld; initials shown",
+      "reason": "House-and-tools graphic cut from a browser screenshot, no company name."
     },
     {
       "slug": "pw-plumbing-services",
       "issue": "Inferred price units labelled for confirmation"
+    },
+    {
+      "slug": "singapore-cleaning-service",
+      "issue": "Automatically extracted price text needs editorial review; source wording retained"
+    },
+    {
+      "slug": "alldone-services-pte-ltd",
+      "issue": "Automatically extracted price text needs editorial review; source wording retained"
     },
     {
       "slug": "anytime-plumber-sg",
@@ -71841,6 +71921,11 @@
     {
       "slug": "allhouseworks-renovation-maintenance-pte-ltd",
       "issue": "Inferred price units labelled for confirmation"
+    },
+    {
+      "slug": "emergency-electrician-24-hours-active",
+      "issue": "Uncertain logo withheld; initials shown",
+      "reason": "Generic '24/7' lightning icon with no company name."
     },
     {
       "slug": "prima-technologies-pte-ltd-prima-services",
@@ -71869,6 +71954,11 @@
     {
       "slug": "sin-goh-electrical-engineering",
       "issue": "Inferred price units labelled for confirmation"
+    },
+    {
+      "slug": "vf-contractors-pte-ltd",
+      "issue": "Uncertain logo withheld; initials shown",
+      "reason": "Logo shows 'VF' (the site's domain, vfcontractors.com.sg), not the row name Bestvolt Contractors."
     },
     {
       "slug": "vf-contractors-pte-ltd",
@@ -71907,8 +71997,17 @@
       "issue": "Automatically extracted price text needs editorial review; source wording retained"
     },
     {
+      "slug": "easyclean-sg-professional-cleaning-and-disinfecting-services",
+      "issue": "Automatically extracted price text needs editorial review; source wording retained"
+    },
+    {
       "slug": "local-handyman-sg",
       "issue": "Inferred price units labelled for confirmation"
+    },
+    {
+      "slug": "sgcleanxpert",
+      "issue": "Uncertain logo withheld; initials shown",
+      "reason": "Leaf/water site icon with no company name; may be a generic graphic."
     },
     {
       "slug": "sr-power-plumber-pte-ltd",
@@ -71935,12 +72034,12 @@
       "issue": "Automatically extracted price text needs editorial review; source wording retained"
     },
     {
-      "slug": "mycleanhome",
+      "slug": "handyman-service-hero",
       "issue": "Inferred price units labelled for confirmation"
     },
     {
-      "slug": "handyman-service-hero",
-      "issue": "Inferred price units labelled for confirmation"
+      "slug": "clean-off",
+      "issue": "Automatically extracted price text needs editorial review; source wording retained"
     },
     {
       "slug": "hmn-handyman-singapore",
@@ -71957,10 +72056,6 @@
     {
       "slug": "hdbplumber-service-sg",
       "issue": "Inferred price units labelled for confirmation"
-    },
-    {
-      "slug": "hdbplumber-service-sg",
-      "issue": "General pricing references labelled separately from company rates"
     },
     {
       "slug": "vfix-aircon-pte-ltd",
@@ -71983,12 +72078,13 @@
       "issue": "Inferred price units labelled for confirmation"
     },
     {
-      "slug": "mattress-cleaning-singapore-company-official",
-      "issue": "General pricing references labelled separately from company rates"
-    },
-    {
       "slug": "sk-plumber",
       "issue": "Inferred price units labelled for confirmation"
+    },
+    {
+      "slug": "ara-electrical-services",
+      "issue": "Uncertain logo withheld; initials shown",
+      "reason": "Building-and-plug site icon with no company name; may be a generic graphic."
     },
     {
       "slug": "lito-electrical-service",
@@ -72003,8 +72099,9 @@
       "issue": "Inferred price units labelled for confirmation"
     },
     {
-      "slug": "zencool-pte-ltd",
-      "issue": "Automatically extracted price text needs editorial review; source wording retained"
+      "slug": "effie-cool-service-singapore-aircon-servicing",
+      "issue": "Uncertain logo withheld; initials shown",
+      "reason": "Site favicon with no company name; may be a generic graphic."
     },
     {
       "slug": "effie-cool-service-singapore-aircon-servicing",
@@ -72013,6 +72110,11 @@
     {
       "slug": "effie-cool-service-singapore-aircon-servicing",
       "issue": "Automatically extracted price text needs editorial review; source wording retained"
+    },
+    {
+      "slug": "cooltrust-aircon-pte-ltd",
+      "issue": "Uncertain logo withheld; initials shown",
+      "reason": "Snowflake-shield mark from a WhatsApp image, no company name; may be a generic graphic."
     },
     {
       "slug": "wishcool-aircon-engineering-pte-ltd",
@@ -72025,6 +72127,10 @@
     {
       "slug": "wan-sheng-aircon-and-services",
       "issue": "Automatically extracted price text needs editorial review; source wording retained"
+    },
+    {
+      "slug": "ac-aircon-services",
+      "issue": "Inferred price units labelled for confirmation"
     },
     {
       "slug": "electrician24-singapore",
@@ -72047,11 +72153,12 @@
       "issue": "Inferred price units labelled for confirmation"
     },
     {
-      "slug": "rfwaterproofing-plumbing-pte-ltd",
-      "issue": "Inferred price units labelled for confirmation"
+      "slug": "reliable-electrical-services",
+      "issue": "Uncertain logo withheld; initials shown",
+      "reason": "Site icon shows the letters 'AS', not the row name Reliable Electrical Services."
     },
     {
-      "slug": "rfwaterproofing-plumbing-pte-ltd",
+      "slug": "mr-electrician-pte-ltd",
       "issue": "Automatically extracted price text needs editorial review; source wording retained"
     },
     {
@@ -72079,12 +72186,17 @@
       "issue": "Automatically extracted price text needs editorial review; source wording retained"
     },
     {
-      "slug": "homeunited-repair",
-      "issue": "Automatically extracted price text needs editorial review; source wording retained"
-    },
-    {
       "slug": "sg1-plumber-singapore-plumbing-service",
       "issue": "Inferred price units labelled for confirmation"
+    },
+    {
+      "slug": "anjecont-handyman",
+      "issue": "Uncertain logo withheld; initials shown",
+      "reason": "Logo text reads 'Handyman Singapore', not the company name Anjecont."
+    },
+    {
+      "slug": "6-days-cleaning",
+      "issue": "Automatically extracted price text needs editorial review; source wording retained"
     },
     {
       "slug": "cooling-guard-pte-ltd",
@@ -72099,6 +72211,10 @@
       "issue": "Automatically extracted price text needs editorial review; source wording retained"
     },
     {
+      "slug": "reliable-plumbing-services-u-home-plumbing-engineering",
+      "issue": "Inferred price units labelled for confirmation"
+    },
+    {
       "slug": "upton-aircons",
       "issue": "Automatically extracted price text needs editorial review; source wording retained"
     },
@@ -72109,6 +72225,11 @@
     {
       "slug": "sg-quickfix",
       "issue": "Automatically extracted price text needs editorial review; source wording retained"
+    },
+    {
+      "slug": "extreme-cool-aircon-service-pte-ltd",
+      "issue": "Uncertain logo withheld; initials shown",
+      "reason": "Company site is itself hosted on a builder subdomain (lovable.app); the logo comes from that site, so own-domain origin cannot be confirmed."
     },
     {
       "slug": "bioaire-air-conditioning-solutions",
@@ -72151,8 +72272,25 @@
       "issue": "Automatically extracted price text needs editorial review; source wording retained"
     },
     {
+      "slug": "hybee-singapore",
+      "issue": "Automatically extracted price text needs editorial review; source wording retained"
+    },
+    {
       "slug": "home-plumbing-services",
       "issue": "Inferred price units labelled for confirmation"
+    },
+    {
+      "slug": "kimbert-services-pte-ltd",
+      "issue": "Automatically extracted price text needs editorial review; source wording retained"
+    },
+    {
+      "slug": "simple-cleaner",
+      "issue": "Uncertain logo withheld; initials shown",
+      "reason": "Leaf mark with no company name; may be a generic graphic."
+    },
+    {
+      "slug": "eunike-living-cleaning-services-singapore",
+      "issue": "Automatically extracted price text needs editorial review; source wording retained"
     },
     {
       "slug": "aircon-boon",
@@ -72164,6 +72302,10 @@
     },
     {
       "slug": "k2l-aircon",
+      "issue": "Automatically extracted price text needs editorial review; source wording retained"
+    },
+    {
+      "slug": "home-carely-cleaning-services",
       "issue": "Automatically extracted price text needs editorial review; source wording retained"
     },
     {
@@ -72199,16 +72341,20 @@
       "issue": "Automatically extracted price text needs editorial review; source wording retained"
     },
     {
+      "slug": "abba-maintenance-services-commercial-office-cleaning-in-sing",
+      "issue": "Automatically extracted price text needs editorial review; source wording retained"
+    },
+    {
       "slug": "luminous-engineering-pte-ltd",
       "issue": "Inferred price units labelled for confirmation"
     },
     {
-      "slug": "repair-handyman-service-sg",
+      "slug": "arctic-breeze-engineering",
       "issue": "Automatically extracted price text needs editorial review; source wording retained"
     },
     {
-      "slug": "above-all-aircon-pte-ltd",
-      "issue": "General pricing references labelled separately from company rates"
+      "slug": "repair-handyman-service-sg",
+      "issue": "Automatically extracted price text needs editorial review; source wording retained"
     },
     {
       "slug": "huat-plumbing",
@@ -72235,12 +72381,8 @@
       "issue": "Inferred price units labelled for confirmation"
     },
     {
-      "slug": "ai-smart-engineering-pte-ltd",
-      "issue": "Inferred price units labelled for confirmation"
-    },
-    {
-      "slug": "ai-smart-engineering-pte-ltd",
-      "issue": "General pricing references labelled separately from company rates"
+      "slug": "tuba-engineering-renovation-pte-ltd",
+      "issue": "Automatically extracted price text needs editorial review; source wording retained"
     },
     {
       "slug": "cleanandfix",
@@ -72267,10 +72409,6 @@
       "issue": "Inferred price units labelled for confirmation"
     },
     {
-      "slug": "surecool-aircon-repair-service",
-      "issue": "Inferred price units labelled for confirmation"
-    },
-    {
       "slug": "spower-electrician-services",
       "issue": "Inferred price units labelled for confirmation"
     },
@@ -72289,10 +72427,6 @@
     {
       "slug": "fix-my-heater",
       "issue": "Inferred price units labelled for confirmation"
-    },
-    {
-      "slug": "fix-my-heater",
-      "issue": "Automatically extracted price text needs editorial review; source wording retained"
     },
     {
       "slug": "best-plumbing",
@@ -72335,10 +72469,6 @@
       "issue": "Automatically extracted price text needs editorial review; source wording retained"
     },
     {
-      "slug": "jiaxing-holdings-pte-ltd",
-      "issue": "Automatically extracted price text needs editorial review; source wording retained"
-    },
-    {
       "slug": "siam-engineering-pte-ltd",
       "issue": "Inferred price units labelled for confirmation"
     },
@@ -72353,34 +72483,34 @@
   ],
   "byTrade": {
     "aircon": {
-      "published": 202,
-      "excluded": 1697
+      "published": 205,
+      "excluded": 1694
     },
     "plumbing": {
-      "published": 82,
-      "excluded": 357
+      "published": 83,
+      "excluded": 356
     },
     "electrician": {
-      "published": 92,
-      "excluded": 2018
+      "published": 94,
+      "excluded": 2016
     },
     "handyman": {
       "published": 82,
       "excluded": 302
     },
     "cleaning": {
-      "published": 129,
-      "excluded": 483
+      "published": 130,
+      "excluded": 482
     }
   },
-  "publishedCount": 587,
-  "excludedCount": 4857,
-  "sourceSha256": "d8c61fe128810b6e1161f9cc3366baccf7cd258fcb5769b2013884e4c840ce45",
-  "sourceRelease": "companies-20261011-1509.json",
+  "publishedCount": 594,
+  "excludedCount": 4850,
+  "sourceSha256": "aa9c2a9bd84ca484b66310a6615cee9614b33cdeb758303f2569eaabb8148914",
+  "sourceRelease": "companies-20261011-2227.json",
   "logos": {
-    "verifiedFiles": 529,
-    "publishedCompanies": 529,
-    "bytes": 42343129,
-    "bundle": "logos-20261011-1458.tar.gz"
+    "verifiedFiles": 410,
+    "publishedCompanies": 410,
+    "bytes": 35085026,
+    "bundle": "logos-20261011-2227.tar.gz"
   }
 }
