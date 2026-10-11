@@ -2,6 +2,8 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {profileIntro, priceView, servicePrice} from '../lib/profile-copy.mjs';
 import {sampleSources, weightedRating} from '../assets/review-model.mjs';
+import {ratingSummary} from '../lib/rating-summary.mjs';
+import {companyMatch} from '../assets/company-match.mjs';
 
 test('Combined scores weight the number of reviews rather than averaging sources equally', () => {
   assert.deepEqual(weightedRating([{rating:5,count:90},{rating:1,count:10}]), {rating:4.6,count:100,sources:2});
@@ -32,4 +34,29 @@ test('Price formatting removes duplicated job names without losing qualifiers, s
   assert.equal(priceView({...price,price:'S$80 labour, parts extra'}).price,'S$80 labour, parts extra');
   assert.equal(servicePrice({prices:[{price:'S$80',detail:'per month, two visits'},{price:'S$120',detail:'per month, four visits'}]}),'S$80 - S$120');
   assert.equal(servicePrice({prices:[{price:'S$80',indicative:true}]}),'Price guide');
+});
+
+test('Real averages use one source as-is and weight independent sources while excluding sample fixtures and mirrors', () => {
+  const c={googleRating:{value:3.4,count:34,sourceUrl:'https://maps.google.com/?cid=1',checkedAt:'2026-10-10'}};
+  assert.equal(ratingSummary(c).value,3.4);
+  assert.equal(ratingSummary(c).count,34);
+  assert.equal(ratingSummary(c).sourceCount,1);
+  c.reviewSources=[{name:'Trustpilot',rating:4.5,count:10,scale:5,sourceUrl:'https://trustpilot.com/review/example',checkedAt:'2026-10-11'}, {name:'Mirror',rating:5,count:100,scale:5,sourceUrl:'https://example.com/reviews',checkedAt:'2026-10-11',mirrorsSource:'Google Maps'}];
+  assert.equal(ratingSummary(c).value,(3.4*34+4.5*10)/44);
+  assert.equal(ratingSummary(c).count,44);
+  assert.equal(ratingSummary(c).sourceCount,2);
+  assert.equal(ratingSummary({}),null);
+});
+
+test('Claim matching preselects a slug, ignores punctuation and only autofills unambiguous names', () => {
+  const companies=[{slug:'sg1-plumber',name:'💧SG1 Plumber Singapore'},{slug:'acme-one',name:'Acme One Pte. Ltd.'},{slug:'acme-two',name:'Acme Two'}];
+  assert.equal(companyMatch('sg1-plumber',companies).slug,'sg1-plumber');
+  assert.equal(companyMatch('sg1',companies).name,'💧SG1 Plumber Singapore');
+  assert.equal(companyMatch('ACME ONE PTE LTD',companies).slug,'acme-one');
+  assert.equal(companyMatch('Acme',companies),null);
+  companies.push({slug:'sg1-electrician',name:'SG1 Electrician'});
+  assert.equal(companyMatch('sg1',companies),null);
+  assert.equal(companyMatch('sg1 plumber',companies).slug,'sg1-plumber');
+  assert.equal(companyMatch('New company',companies),null);
+  assert.equal(companyMatch('',companies),null);
 });

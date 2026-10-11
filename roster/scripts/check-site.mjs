@@ -34,6 +34,10 @@ for(const rel of manifest) {
   for(const m of html.matchAll(/<iframe[^>]+src="([^"]+)"/g)){const src=m[1].replaceAll('&amp;','&');const u=new URL(src);if(u.searchParams.has('q'))assert.ok(!/#\s*\d|\bUnit\s+\d/i.test(u.searchParams.get('q')),`Unit in map: ${rel}`);}
  }
 }
+const claim=pages.get('claim-listing/index.html');
+assert.match(claim, /<input id="claim-company"[^>]+list="claim-companies"/);
+assert.ok(!claim.includes('<select id="claim-company"'));
+for (const [rel,html] of pages) if(rel.startsWith('company/')) assert.ok(html.includes('average-rating-large'),`Missing prominent average: ${rel}`);
 const byRel=new Map([...pages].map(([rel,html])=>[rel,new Set([...html.matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]))]));
 for(const [rel,html] of pages)for(const match of html.matchAll(/(?:href|src)="([^"]+)"/g)){
  const raw=match[1].replaceAll('&amp;','&');if(!raw.startsWith('/roster/')&&!raw.startsWith('#'))continue;
@@ -52,6 +56,8 @@ for(const excluded of report.excluded.filter(c=>c.curated))assert.ok(!pages.has(
 const categories={aircon:'aircon-servicing',plumbing:'plumbing',electrician:'electrician',handyman:'handyman',cleaning:'home-cleaning'};
 for(const [id,slug] of Object.entries(categories)){
  const index=await load(`data/index/${id}.json`);assert.equal(index.companies.length,report.byTrade[id].published);assert.ok(index.companies.every(c=>c.category===id),`Wrong primary trade in ${id}`);
+ for(const c of index.companies){assert.equal(c.ratingValue,c.average?.value??null);assert.equal(c.ratingCount,c.average?.count||0);}
+ assert.ok(pages.get(slug+'/index.html').includes('Minimum average rating'));
  const bytes=(await stat(path.join(root,slug,'index.html'))).size+(await stat(path.join(root,'data/index',id+'.json'))).size;assert.ok(bytes<300*1024,`${id}: ${bytes} bytes exceeds budget`);console.log(`${slug}: ${(bytes/1024).toFixed(1)} KB HTML + JSON`);
 }
 assert.equal(Object.values(report.byTrade).reduce((n,t)=>n+t.published,0),report.publishedCount,'Primary-trade totals must not overlap');
