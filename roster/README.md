@@ -15,7 +15,7 @@ The importer reads `db-expanded/releases/LATEST` in the Roster Drive folder, the
 To reproduce a specific release:
 
 ```sh
-node roster/scripts/import-db.mjs "/absolute/path/to/companies-20261011-1204.json" && node roster/build.mjs
+node roster/scripts/import-db.mjs "/absolute/path/to/companies-20261011-1337.json" && node roster/build.mjs
 ```
 
 `ROSTER_DB_PATH` also accepts a release path. The checksum file must sit beside it as `<release>.sha256`. A missing checksum, mismatch or invalid LATEST filename stops the import.
