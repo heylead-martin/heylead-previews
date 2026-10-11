@@ -12,6 +12,20 @@ test('Bundled logos retain provenance, use hashed local paths and reject unsafe 
  for(const bad of [{local_path:'logos/../../test.png'},{sha256:'bad'},{source_url:'javascript:alert(1)'}])assert.throws(()=>bundledLogo({...logo,...bad}),/Invalid/);
  assert.equal(bundledLogo(null),null);
 });
+test('Uncertain logos use initials without removing the business or reviving a photo fallback',()=>{
+ const logo={local_path:'logos/example.png',sha256:'a'.repeat(64),source_url:'https://example.com',url:'https://example.com/logo.png',logo_unsure:true,logo_unsure_reason:'Unconfirmed brand mark',audit:{checkedAt:'2026-10-11'}};
+ const candidate={...row(),logo,photos:[{kind:'logo',fileUrl:logo.url,pageUrl:logo.source_url}]};
+ const result=importDatabase(db([candidate]),empty);
+ assert.equal(bundledLogo(logo),null);
+ assert.equal(result.report.publishedCount,1);
+ assert.equal(result.presentation['example-aircon'].logo,undefined);
+ assert.equal(result.presentation['example-aircon'].logoAsset,undefined);
+ assert.equal(result.presentation['example-aircon'].logoReview.reason,logo.logo_unsure_reason);
+ assert.ok(result.report.warnings.some(w=>w.issue==='Uncertain logo withheld; initials shown'));
+ const verified=importDatabase(db([{...candidate,logo:{...logo,logo_unsure:false}}]),empty);
+ assert.match(verified.presentation['example-aircon'].logo,/example-aaaaaaaaaaaa\.png$/);
+ assert.equal(verified.presentation['example-aircon'].logoReview,undefined);
+});
 test('Release ratings preserve source methods and unknown counts, and identify mirrored Google widgets',()=>{
  const google={source:'Google Maps',rating:4.8,count:null,scale:5,url:'https://maps.google.com/?cid=1',capturedAt:'2026-10-11'};
  const seller={source:'Carousell',rating:5,count:7,scale:5,url:'https://www.carousell.sg/u/example/',capturedAt:'2026-10-11',method:'page',method_detail:'Seller rating includes all sales.'};

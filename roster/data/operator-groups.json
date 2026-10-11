@@ -81,6 +81,19 @@
       }
     ]
   },
+  "airconman-aircondman-email": {
+    "label": "Airconman brands sharing the contact email aircondman.sg@gmail.com",
+    "members": [
+      {
+        "slug": "airconman-aircon-servicing-repair-singapore",
+        "name": "Airconman - Aircon Servicing & Repair Singapore"
+      },
+      {
+        "slug": "airconman-sg-pte-ltd",
+        "name": "Airconman Sg Pte Ltd"
+      }
+    ]
+  },
   "sg-city-21-woodlands-cl": {
     "label": "SG City Air-Con and City Cooling: shared phone +65 6362 2720 and 21 Woodlands Close #05-45",
     "members": [

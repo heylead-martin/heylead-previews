@@ -1555,7 +1555,17 @@
         "explanation": "General service",
         "sourceUrl": "https://aircool.com.sg/",
         "capturedAt": "2026-10-10",
-        "prices": []
+        "prices": [
+          {
+            "label": "General service",
+            "price": "See source details",
+            "detail": "per unit. GST: not stated",
+            "excerpt": "General service 30$ per/unit",
+            "sourceUrl": "https://aircool.com.sg/",
+            "capturedAt": "2026-10-10",
+            "indicative": false
+          }
+        ]
       },
       {
         "name": "Chemical wash",
@@ -1603,7 +1613,17 @@
         "explanation": "Aircon Steam Cleaning",
         "sourceUrl": "https://aircool.com.sg/",
         "capturedAt": "2026-10-10",
-        "prices": []
+        "prices": [
+          {
+            "label": "Steam wash",
+            "price": "See source details",
+            "detail": "per unit. GST: not stated",
+            "excerpt": "Steam wash 40$ per/unit",
+            "sourceUrl": "https://aircool.com.sg/",
+            "capturedAt": "2026-10-10",
+            "indicative": false
+          }
+        ]
       },
       {
         "name": "Troubleshooting",
@@ -1701,6 +1721,98 @@
     "highlights": [],
     "sourceUrls": [
       "https://www.airwin-aircon.com/"
+    ],
+    "updatedAt": "2026-10-10"
+  },
+  "alpha-omega-trinity-pte-ltd": {
+    "headline": "Services published by ALPHA & OMEGA TRINITY PTE LTD.",
+    "about": [
+      "Alpha & Omega Trinity Pte Ltd provides water tank cleaning, PUB-licensed plumbing, aircon servicing, water-heater installation and repair, water-pump and ejector-pump services, EMA-licensed electrical work, grease-trap cleaning, HVAC/M&E support and integrated facilities management across Singapore. We serve HDB, condominiums, BTO, commercial and industrial properties."
+    ],
+    "services": [
+      {
+        "name": "Ceiling fan",
+        "description": "",
+        "explanation": "Ceiling fan installation",
+        "sourceUrl": "https://www.aotrinitysg.com/",
+        "capturedAt": "2026-10-10",
+        "prices": []
+      },
+      {
+        "name": "Power point",
+        "description": "",
+        "explanation": "Power point installation",
+        "sourceUrl": "https://www.aotrinitysg.com/",
+        "capturedAt": "2026-10-10",
+        "prices": []
+      },
+      {
+        "name": "Distribution board",
+        "description": "",
+        "explanation": "DB box / circuit breaker repair",
+        "sourceUrl": "https://www.aotrinitysg.com/",
+        "capturedAt": "2026-10-10",
+        "prices": []
+      },
+      {
+        "name": "Water heater point",
+        "description": "",
+        "explanation": "Aircon, Plumbing, Water Heater & Electrical Services Singapore | AOT Trinity",
+        "sourceUrl": "https://www.aotrinitysg.com/",
+        "capturedAt": "2026-10-10",
+        "prices": [
+          {
+            "label": "Water Heater",
+            "price": "From $180",
+            "detail": "per job (inferred from the job type; confirm with the company). GST: not stated",
+            "excerpt": "Water Heater | From $180",
+            "sourceUrl": "https://www.aotrinitysg.com/",
+            "capturedAt": "2026-10-10",
+            "indicative": false
+          }
+        ]
+      },
+      {
+        "name": "Electrical repair",
+        "description": "",
+        "explanation": "",
+        "sourceUrl": "https://www.aotrinitysg.com/",
+        "capturedAt": "2026-10-10",
+        "prices": [
+          {
+            "label": "Installation labour only (heater not included).",
+            "price": "$180",
+            "detail": "per job (inferred from the job type; confirm with the company). GST: not stated",
+            "excerpt": "Installation labour only (heater not included). | $180",
+            "sourceUrl": "https://www.aotrinitysg.com/",
+            "capturedAt": "2026-10-10",
+            "indicative": false
+          },
+          {
+            "label": "Flush system, cistern & bowl repairs.",
+            "price": "$60",
+            "detail": "per job (inferred from the job type; confirm with the company). GST: not stated",
+            "excerpt": "Flush system, cistern & bowl repairs. | $60",
+            "sourceUrl": "https://www.aotrinitysg.com/",
+            "capturedAt": "2026-10-10",
+            "indicative": false
+          },
+          {
+            "label": "Electrical repair",
+            "price": "See source details",
+            "detail": "per job (inferred from the job type; confirm with the company). GST: not stated",
+            "excerpt": "​ | \"Installed new Ariston storage heater for my BTO. Quoted $380 all-in, no hidden charges. Technician very neat - even wore shoe covers inside my house. A+ service!\"",
+            "sourceUrl": "https://www.aotrinitysg.com/",
+            "capturedAt": "2026-10-10",
+            "indicative": false
+          }
+        ],
+        "priceSummary": "3 pricing entries"
+      }
+    ],
+    "highlights": [],
+    "sourceUrls": [
+      "https://maps.google.com/?cid=4012655893770812106"
     ],
     "updatedAt": "2026-10-10"
   },
@@ -1901,7 +2013,17 @@
         "explanation": "Basic Maintenance (General Servicing)",
         "sourceUrl": "https://www.airconnection.com.sg/",
         "capturedAt": "2026-10-10",
-        "prices": []
+        "prices": [
+          {
+            "label": "Basic Maintenance (General Servicing), first unit",
+            "price": "Package prices (before GST): First unit: $50",
+            "detail": "Quantity: 1. per unit. GST: before GST",
+            "excerpt": "Package prices (before GST): First unit: $50",
+            "sourceUrl": "https://www.airconnection.com.sg/",
+            "capturedAt": "2026-10-10",
+            "indicative": false
+          }
+        ]
       },
       {
         "name": "Chemical wash",
@@ -2273,7 +2395,27 @@
         "explanation": "What You Need To Know About Aircon Gas Top Up",
         "sourceUrl": "https://citicoolaircon.com/",
         "capturedAt": "2026-10-10",
-        "prices": []
+        "prices": [
+          {
+            "label": "Aircon gas (refrigerant) top up, R22",
+            "price": "Aircon Gas (Refrigerant) Top Up Pricing R22 @ S$50",
+            "detail": "as printed. GST: not stated",
+            "excerpt": "Aircon Gas (Refrigerant) Top Up Pricing R22 @ S$50",
+            "sourceUrl": "https://citicoolaircon.com/prices/",
+            "capturedAt": "2026-10-10",
+            "indicative": false
+          },
+          {
+            "label": "Aircon gas (refrigerant) top up, R410",
+            "price": "R410 @ S$80",
+            "detail": "as printed. GST: not stated",
+            "excerpt": "R410 @ S$80",
+            "sourceUrl": "https://citicoolaircon.com/prices/",
+            "capturedAt": "2026-10-10",
+            "indicative": false
+          }
+        ],
+        "priceSummary": "2 pricing entries"
       },
       {
         "name": "Installation",
@@ -3466,7 +3608,17 @@
         "explanation": "All general aircon services",
         "sourceUrl": "https://eurohub.com.sg/about-us/",
         "capturedAt": "2026-10-10",
-        "prices": []
+        "prices": [
+          {
+            "label": "General servicing, 3 units (from)",
+            "price": "See source details",
+            "detail": "Quantity: 3. per job, 3 units (from). GST: not stated",
+            "excerpt": "Here's a quick look at our aircon service Singapore price list: | Type of Servicing | Units | Price (From) | Recommended Frequency | Premium Steam Wash | 1 unit | $80 | Every 6 months | General Servicing | 3 units | $75 | Quarterly | Chemical Wash | 1 unit | $90 | Once a year",
+            "sourceUrl": "https://eurohub.com.sg/premium-aircon-service/",
+            "capturedAt": "2026-10-11",
+            "indicative": false
+          }
+        ]
       },
       {
         "name": "Chemical wash",
@@ -3474,7 +3626,17 @@
         "explanation": "Aircon Chemical Wash",
         "sourceUrl": "https://eurohub.com.sg/",
         "capturedAt": "2026-10-10",
-        "prices": []
+        "prices": [
+          {
+            "label": "Chemical wash, 1 unit (from)",
+            "price": "See source details",
+            "detail": "Quantity: 1. per unit (from). GST: not stated",
+            "excerpt": "Here's a quick look at our aircon service Singapore price list: | Type of Servicing | Units | Price (From) | Recommended Frequency | Premium Steam Wash | 1 unit | $80 | Every 6 months | General Servicing | 3 units | $75 | Quarterly | Chemical Wash | 1 unit | $90 | Once a year",
+            "sourceUrl": "https://eurohub.com.sg/premium-aircon-service/",
+            "capturedAt": "2026-10-11",
+            "indicative": false
+          }
+        ]
       },
       {
         "name": "Chemical overhaul",
@@ -3498,17 +3660,7 @@
         "explanation": "Best Aircon Servicing Singapore | Aircon Repair Singapore | Aircon Service Singapore",
         "sourceUrl": "https://eurohub.com.sg/",
         "capturedAt": "2026-10-10",
-        "prices": [
-          {
-            "label": "Repair",
-            "price": "See source details",
-            "detail": "per job (inferred from the job type; confirm with the company). GST: not stated",
-            "excerpt": "Importance of Aircon Servicing | The demand for aircon repair and maintenance has skyrocketed in recent years. About $85 billion is the size of its market today. A/C units, like any other piece of machinery, need regular",
-            "sourceUrl": "https://eurohub.com.sg/",
-            "capturedAt": "2026-10-10",
-            "indicative": false
-          }
-        ]
+        "prices": []
       },
       {
         "name": "Troubleshooting",
@@ -3664,7 +3816,17 @@
         "explanation": "General aircon servicing",
         "sourceUrl": "https://greataircon.com/frequently-asked-questions-faqs/",
         "capturedAt": "2026-10-10",
-        "prices": []
+        "prices": [
+          {
+            "label": "Promotion one-time service, 1 fancoil (c/w condenser)",
+            "price": "Promotion One-Time Service 1 Fancoils (c/w Condenser) $45 Nett",
+            "detail": "Quantity: 1. per unit. GST: nett (as printed). Promotional rate; confirm availability",
+            "excerpt": "Promotion One-Time Service 1 Fancoils (c/w Condenser) $45 Nett",
+            "sourceUrl": "https://greataircon.com/services-price-list/",
+            "capturedAt": "2026-10-10",
+            "indicative": false
+          }
+        ]
       },
       {
         "name": "Chemical wash",
@@ -3762,7 +3924,17 @@
         "explanation": "General Aircon Servicing",
         "sourceUrl": "https://www.greencoolaircon.com/",
         "capturedAt": "2026-10-10",
-        "prices": []
+        "prices": [
+          {
+            "label": "General servicing, 1 fan coil unit",
+            "price": "1 Fan Coil Unit $40",
+            "detail": "Quantity: 1. per unit. GST: not stated",
+            "excerpt": "1 Fan Coil Unit $40",
+            "sourceUrl": "https://www.greencoolaircon.com/general-servicing/",
+            "capturedAt": "2026-10-11",
+            "indicative": false
+          }
+        ]
       },
       {
         "name": "Chemical overhaul",
@@ -3803,6 +3975,24 @@
         "sourceUrl": "https://www.greencoolaircon.com/",
         "capturedAt": "2026-10-10",
         "prices": []
+      },
+      {
+        "name": "Chemical wash",
+        "description": "",
+        "explanation": "",
+        "sourceUrl": "https://www.greencoolaircon.com/",
+        "capturedAt": "2026-10-10",
+        "prices": [
+          {
+            "label": "Chemical cleaning, 1-1.5HP",
+            "price": "Chemical cleaning is $150 for 1-1.5HP",
+            "detail": "per unit. GST: not stated",
+            "excerpt": "Chemical cleaning is $150 for 1-1.5HP",
+            "sourceUrl": "https://www.greencoolaircon.com/",
+            "capturedAt": "2026-10-10",
+            "indicative": false
+          }
+        ]
       }
     ],
     "highlights": [],
@@ -4450,6 +4640,24 @@
         "sourceUrl": "https://jsaircon.biz/",
         "capturedAt": "2026-10-10",
         "prices": []
+      },
+      {
+        "name": "General servicing",
+        "description": "",
+        "explanation": "",
+        "sourceUrl": "https://jsaircon.biz/projects",
+        "capturedAt": "2026-10-11",
+        "prices": [
+          {
+            "label": "General Servicing, 1 unit",
+            "price": "1 unit → $50",
+            "detail": "Quantity: 1. per unit. GST: not stated",
+            "excerpt": "1 unit → $50",
+            "sourceUrl": "https://jsaircon.biz/projects",
+            "capturedAt": "2026-10-11",
+            "indicative": false
+          }
+        ]
       }
     ],
     "highlights": [],
@@ -5261,7 +5469,17 @@
         "explanation": "Aircon General Servicing",
         "sourceUrl": "https://newway.sg/",
         "capturedAt": "2026-10-10",
-        "prices": []
+        "prices": [
+          {
+            "label": "Aircon General Servicing (starting price)",
+            "price": "Starting price: From $35 to $50 per unit",
+            "detail": "per unit. GST: not stated",
+            "excerpt": "Starting price: From $35 to $50 per unit",
+            "sourceUrl": "https://newway.sg/aircon-cleaning-services/",
+            "capturedAt": "2026-10-11",
+            "indicative": false
+          }
+        ]
       },
       {
         "name": "Chemical wash",
@@ -5269,7 +5487,17 @@
         "explanation": "Aircon Chemical Wash",
         "sourceUrl": "https://newway.sg/",
         "capturedAt": "2026-10-10",
-        "prices": []
+        "prices": [
+          {
+            "label": "Aircon Chemical Wash (starting price)",
+            "price": "See source details",
+            "detail": "from (starting price, as printed). GST: not stated",
+            "excerpt": "Aircon Chemical Wash Designed for units with weak airflow, odours, water leaks, or internal dirt buildup. Starting price: $140",
+            "sourceUrl": "https://newway.sg/aircon-cleaning-services/",
+            "capturedAt": "2026-10-11",
+            "indicative": false
+          }
+        ]
       },
       {
         "name": "Gas top-up",
@@ -6131,7 +6359,7 @@
             "indicative": false
           },
           {
-            "label": "Aircon Servicing Price Estimates - General Aircon Servicing: starts",
+            "label": "General aircon servicing (per unit, from)",
             "price": "General Aircon Servicing: starts from $19.50/unit",
             "detail": "per unit. GST: not stated",
             "excerpt": "Aircon Servicing Price Estimates | General Aircon Servicing: starts from $19.50/unit",
@@ -6140,25 +6368,16 @@
             "indicative": false
           },
           {
-            "label": "Aircon Servicing Price Estimates - General Aircon Servicing (3 Units): starts",
+            "label": "General aircon servicing, 3 units (from)",
             "price": "See source details",
             "detail": "Quantity: 3. per job. GST: not stated",
             "excerpt": "General Aircon Servicing: starts from $19.50/unit | General Aircon Servicing (3 Units): starts from $90 ($30 per unit)",
             "sourceUrl": "https://skyblueaircon.com/pricing",
             "capturedAt": "2026-10-10",
             "indicative": false
-          },
-          {
-            "label": "Aircon Servicing Price Estimates - Eco-Chemical Wash (Single Unit): starts",
-            "price": "Eco-Chemical Wash (Single Unit): starts from $80",
-            "detail": "Quantity: 3. per unit. GST: not stated",
-            "excerpt": "General Aircon Servicing (3 Units): starts from $90 ($30 per unit) | Eco-Chemical Wash (Single Unit): starts from $80",
-            "sourceUrl": "https://skyblueaircon.com/pricing",
-            "capturedAt": "2026-10-10",
-            "indicative": false
           }
         ],
-        "priceSummary": "6 pricing entries"
+        "priceSummary": "5 pricing entries"
       },
       {
         "name": "Chemical wash",
@@ -6168,10 +6387,10 @@
         "capturedAt": "2026-10-10",
         "prices": [
           {
-            "label": "Aircon Servicing Price Estimates - Chemical Overhaul (Single Unit): starts",
-            "price": "Chemical Overhaul (Single Unit): starts from $130",
-            "detail": "per unit. GST: not stated",
-            "excerpt": "Eco-Chemical Wash (Single Unit): starts from $80 | Chemical Overhaul (Single Unit): starts from $130",
+            "label": "Eco-chemical wash, single unit (from)",
+            "price": "Eco-Chemical Wash (Single Unit): starts from $80",
+            "detail": "Quantity: 3. per unit. GST: not stated",
+            "excerpt": "General Aircon Servicing (3 Units): starts from $90 ($30 per unit) | Eco-Chemical Wash (Single Unit): starts from $80",
             "sourceUrl": "https://skyblueaircon.com/pricing",
             "capturedAt": "2026-10-10",
             "indicative": false
@@ -6186,10 +6405,10 @@
         "capturedAt": "2026-10-10",
         "prices": [
           {
-            "label": "Aircon Servicing Price Estimates - Troubleshooting & Diagnostics Visit: starts (waived upon repair)",
-            "price": "See source details",
-            "detail": "per visit. GST: not stated",
-            "excerpt": "Chemical Overhaul (Single Unit): starts from $130 | Troubleshooting & Diagnostics Visit: starts from $50 (waived upon repair)",
+            "label": "Chemical overhaul, single unit (from)",
+            "price": "Chemical Overhaul (Single Unit): starts from $130",
+            "detail": "per unit. GST: not stated",
+            "excerpt": "Eco-Chemical Wash (Single Unit): starts from $80 | Chemical Overhaul (Single Unit): starts from $130",
             "sourceUrl": "https://skyblueaircon.com/pricing",
             "capturedAt": "2026-10-10",
             "indicative": false
@@ -6226,7 +6445,17 @@
         "explanation": "Aircon Repair & Troubleshooting Diagnostics",
         "sourceUrl": "https://skyblueaircon.com/",
         "capturedAt": "2026-10-10",
-        "prices": []
+        "prices": [
+          {
+            "label": "Troubleshooting & diagnostics visit (from; waived upon repair)",
+            "price": "See source details",
+            "detail": "per visit. GST: not stated",
+            "excerpt": "Chemical Overhaul (Single Unit): starts from $130 | Troubleshooting & Diagnostics Visit: starts from $50 (waived upon repair)",
+            "sourceUrl": "https://skyblueaircon.com/pricing",
+            "capturedAt": "2026-10-10",
+            "indicative": false
+          }
+        ]
       }
     ],
     "highlights": [],
@@ -7350,6 +7579,67 @@
     "highlights": [],
     "sourceUrls": [
       "https://avvelectrical.com/?utm_source=google&utm_medium=organic&utm_campaign=gmb"
+    ],
+    "updatedAt": "2026-10-10"
+  },
+  "bsh-engineering-ptd-ltd": {
+    "headline": "Services published by BAN SOON HENG ENGINEERING PTE LTD.",
+    "about": [
+      "Ban Soon Heng Pte Ltd is a licensed electrical contractor in Singapore with LEW Grade L1 certification, authorized to undertake electrical works in major projects in Singapore. We provide reliable electrical installation, maintenance, and upgrading services across the residential, commercial, and industrial sectors. Our capabilities include power distribution, rewiring, lighting systems, and DB board upgrades."
+    ],
+    "services": [
+      {
+        "name": "Rewiring",
+        "description": "",
+        "explanation": "New builds, rewiring and three-phase upgrades.",
+        "sourceUrl": "https://bshsg.com/services",
+        "capturedAt": "2026-10-10",
+        "prices": []
+      },
+      {
+        "name": "Light installation",
+        "description": "",
+        "explanation": "Power & lighting installation",
+        "sourceUrl": "https://bshsg.com/",
+        "capturedAt": "2026-10-10",
+        "prices": []
+      },
+      {
+        "name": "Power point",
+        "description": "",
+        "explanation": "Lighting & power points",
+        "sourceUrl": "https://bshsg.com/",
+        "capturedAt": "2026-10-10",
+        "prices": []
+      },
+      {
+        "name": "Water heater point",
+        "description": "",
+        "explanation": "Water heater & appliance points",
+        "sourceUrl": "https://bshsg.com/",
+        "capturedAt": "2026-10-10",
+        "prices": []
+      },
+      {
+        "name": "LEW endorsement",
+        "description": "",
+        "explanation": "LEW & EMA Licensing",
+        "sourceUrl": "https://bshsg.com/",
+        "capturedAt": "2026-10-10",
+        "prices": []
+      },
+      {
+        "name": "Ev charger",
+        "description": "",
+        "explanation": "EV Charger Installation",
+        "sourceUrl": "https://bshsg.com/",
+        "capturedAt": "2026-10-10",
+        "prices": []
+      }
+    ],
+    "highlights": [],
+    "sourceUrls": [
+      "https://maps.google.com/?cid=5713552636272401815"
     ],
     "updatedAt": "2026-10-10"
   },
@@ -10665,27 +10955,7 @@
         "explanation": "Mattress cleaning",
         "sourceUrl": "https://justcleanlah.com/",
         "capturedAt": "2026-10-10",
-        "prices": [
-          {
-            "label": ". A 3-bedroom, 1900 square foot home costs - to clean",
-            "price": "$140 to $240 to clean",
-            "detail": "as printed. GST: not stated",
-            "excerpt": ". A 3-bedroom, 1900 square foot home costs | $140 to $240 to clean",
-            "sourceUrl": "https://justcleanlah.com/",
-            "capturedAt": "2026-10-10",
-            "indicative": false
-          },
-          {
-            "label": ". A 3-bedroom, 1900 square foot home costs - , while a 1 -bedroom apartment starts .",
-            "price": ", while a 1 -bedroom apartment starts at $80 to $110.",
-            "detail": "as printed. GST: not stated",
-            "excerpt": "on average | , while a 1 -bedroom apartment starts at $80 to $110.",
-            "sourceUrl": "https://justcleanlah.com/",
-            "capturedAt": "2026-10-10",
-            "indicative": true
-          }
-        ],
-        "priceSummary": "2 pricing entries"
+        "prices": []
       },
       {
         "name": "Carpet",
@@ -10720,19 +10990,19 @@
         "prices": []
       },
       {
-        "name": "Regular cleaning",
+        "name": "Ad hoc",
         "description": "",
         "explanation": "",
-        "sourceUrl": "https://justcleanlah.com/",
-        "capturedAt": "2026-10-10",
+        "sourceUrl": "https://justcleanlah.com/house-cleaning-singapore/",
+        "capturedAt": "2026-10-11",
         "prices": [
           {
-            "label": "of an average house cleaning - is per cleaner. The total price",
-            "price": "is $20-50 per hour per cleaner. The total price",
-            "detail": "per hour. GST: not stated",
-            "excerpt": "of an average house cleaning | is $20-50 per hour per cleaner. The total price",
-            "sourceUrl": "https://justcleanlah.com/",
-            "capturedAt": "2026-10-10",
+            "label": "House cleaning, standard one-bedroom HDB flat",
+            "price": "from SGD $288",
+            "detail": "as printed. GST: not stated",
+            "excerpt": "Our house cleaning services start from SGD $288 for a standard one-bedroom HDB flat, with pricing adjusted based on your home’s size, condition, and specific requirements.",
+            "sourceUrl": "https://justcleanlah.com/house-cleaning-singapore/",
+            "capturedAt": "2026-10-11",
             "indicative": false
           }
         ]
@@ -11859,7 +12129,17 @@
         "explanation": "Champion Republic Pte Ltd, Water Heater Specialist | PUB licensed plumber to fix water heater leaking",
         "sourceUrl": "https://www.championrepublic.com/",
         "capturedAt": "2026-10-10",
-        "prices": []
+        "prices": [
+          {
+            "label": "30-litre electric storage water heater replacement, labour included (offer)",
+            "price": "See source details",
+            "detail": "per job. GST: not stated. Promotional rate; confirm availability",
+            "excerpt": "Pick One of the 30 litres Electric Storage Water Heater, replacement labour included. Only S$480.70",
+            "sourceUrl": "https://www.championrepublic.com/hdb-heater-replacement-offer",
+            "capturedAt": "2026-10-11",
+            "indicative": false
+          }
+        ]
       },
       {
         "name": "Plumbing repair",
@@ -12425,7 +12705,7 @@
         "capturedAt": "2026-10-10",
         "prices": [
           {
-            "label": "1. Clogged toilet bowl / Clearing toilet bowl choke",
+            "label": "Clogged toilet bowl / Clearing toilet bowl choke",
             "price": "From $120",
             "detail": "per job (inferred from the job type; confirm with the company). GST: not stated",
             "excerpt": "1. Clogged toilet bowl / Clearing toilet bowl choke | From $120",
@@ -12443,7 +12723,7 @@
         "capturedAt": "2026-10-10",
         "prices": [
           {
-            "label": "Leak repair",
+            "label": "Labor & material to repair leak at exposed copper pipe or Upvc pipe",
             "price": "From $250",
             "detail": "per job (inferred from the job type; confirm with the company). GST: not stated",
             "excerpt": "4. Labor & material to repair leak at exposed copper pipe or Upvc pipe | From $250",
@@ -12461,7 +12741,7 @@
         "capturedAt": "2026-10-10",
         "prices": [
           {
-            "label": "3. Rectify water discharge into toilet bowl by replacing new siphon",
+            "label": "Rectify water discharge into toilet bowl by replacing new siphon",
             "price": "From $150",
             "detail": "per job (inferred from the job type; confirm with the company). GST: not stated",
             "excerpt": "3. Rectify water discharge into toilet bowl by replacing new siphon | From $150",
@@ -12470,7 +12750,7 @@
             "indicative": false
           },
           {
-            "label": "11. Replace Sink/ Basin/ Cistern flexible hose",
+            "label": "Replace Sink/ Basin/ Cistern flexible hose",
             "price": "From $110",
             "detail": "per job (inferred from the job type; confirm with the company). GST: not stated",
             "excerpt": "11. Replace Sink/ Basin/ Cistern flexible hose | From $110",
@@ -12479,7 +12759,7 @@
             "indicative": false
           },
           {
-            "label": "12. Supply & install toilet bowl set",
+            "label": "Supply & install toilet bowl set",
             "price": "From $400",
             "detail": "per job (inferred from the job type; confirm with the company). GST: not stated",
             "excerpt": "12. Supply & install toilet bowl set | From $400",
@@ -12506,7 +12786,7 @@
         "capturedAt": "2026-10-10",
         "prices": [
           {
-            "label": "7. Replace kitchen sink/ Bathroom tap / faucet (basic type)",
+            "label": "Replace kitchen sink/ Bathroom tap / faucet (basic type)",
             "price": "From $130",
             "detail": "per job (inferred from the job type; confirm with the company). GST: not stated",
             "excerpt": "7. Replace kitchen sink/ Bathroom tap / faucet (basic type) | From $130",
@@ -12532,7 +12812,7 @@
         "capturedAt": "2026-10-10",
         "prices": [
           {
-            "label": "10. Supply & replace bottle trap for kitchen sink",
+            "label": "Supply & replace bottle trap for kitchen sink",
             "price": "From $100",
             "detail": "per job (inferred from the job type; confirm with the company). GST: not stated",
             "excerpt": "10. Supply & replace bottle trap for kitchen sink | From $100",
@@ -12541,7 +12821,7 @@
             "indicative": false
           },
           {
-            "label": "13. Supply & install basin",
+            "label": "Supply & install basin",
             "price": "From $190",
             "detail": "per job (inferred from the job type; confirm with the company). GST: not stated",
             "excerpt": "13. Supply & install basin | From $190",
@@ -13549,7 +13829,17 @@
         "explanation": "Regular cleaning assistance on a part-time basis. Services include dusting, sweeping, mopping",
         "sourceUrl": "https://www.auntiecleaner.com.sg/",
         "capturedAt": "2026-10-10",
-        "prices": []
+        "prices": [
+          {
+            "label": "Weekly part-time maid cleaning, 4 hrs/session, 1 cleaner",
+            "price": "See source details",
+            "detail": "per month. GST: not stated",
+            "excerpt": "Weekly Cleaning - Duration: 4 hrs/session - Cleaners: 1 - Price: $474/month",
+            "sourceUrl": "https://www.auntiecleaner.com.sg/part-time-maid-services-singapore.html",
+            "capturedAt": "2026-10-11",
+            "indicative": false
+          }
+        ]
       },
       {
         "name": "Deep cleaning",
@@ -13581,7 +13871,17 @@
         "explanation": "Spring Cleaning Services",
         "sourceUrl": "https://www.auntiecleaner.com.sg/",
         "capturedAt": "2026-10-10",
-        "prices": []
+        "prices": [
+          {
+            "label": "Spring cleaning, home under 600 sqft (1 cleaner, 4 hrs)",
+            "price": "See source details",
+            "detail": "as printed. GST: not stated",
+            "excerpt": "Spring Cleaning Services pricing (2026) ... <600 sqft | 1 | 4 hrs | $198",
+            "sourceUrl": "https://www.auntiecleaner.com.sg/part-time-maid-services-singapore.html",
+            "capturedAt": "2026-10-11",
+            "indicative": false
+          }
+        ]
       },
       {
         "name": "Office cleaning",
@@ -14901,6 +15201,24 @@
         "sourceUrl": "https://www.sghelpers.com.sg/",
         "capturedAt": "2026-10-10",
         "prices": []
+      },
+      {
+        "name": "Regular cleaning",
+        "description": "",
+        "explanation": "",
+        "sourceUrl": "https://www.sghelpers.com.sg/services/cid/7430/sid/37282/",
+        "capturedAt": "2026-10-11",
+        "prices": [
+          {
+            "label": "General tidying, package of 5 sessions + 1 free session",
+            "price": "See source details",
+            "detail": "per package. GST: not stated. Promotional rate; confirm availability",
+            "excerpt": "Pricing: 1st Trial: $58 ... Packages: $428 for 5 sessions + 1 free session",
+            "sourceUrl": "https://www.sghelpers.com.sg/services/cid/7430/sid/37282/",
+            "capturedAt": "2026-10-11",
+            "indicative": false
+          }
+        ]
       }
     ],
     "highlights": [],
@@ -14921,7 +15239,17 @@
         "explanation": "Air Con General Service",
         "sourceUrl": "https://openairengineering.com/",
         "capturedAt": "2026-10-10",
-        "prices": []
+        "prices": [
+          {
+            "label": "General service, 1 unit",
+            "price": "1 Unit General SVC = $ 40/-",
+            "detail": "Quantity: 1. per unit. GST: not stated",
+            "excerpt": "1 Unit General SVC = $ 40/-",
+            "sourceUrl": "https://openairengineering.com/air-con-general-service/",
+            "capturedAt": "2026-10-11",
+            "indicative": false
+          }
+        ]
       },
       {
         "name": "Chemical wash",
@@ -14937,7 +15265,17 @@
         "explanation": "Air Con Chemical Overhaul",
         "sourceUrl": "https://openairengineering.com/",
         "capturedAt": "2026-10-10",
-        "prices": []
+        "prices": [
+          {
+            "label": "Chemical overhaul, 1 unit",
+            "price": "1 Unit Chemical Overhaul = $80/-",
+            "detail": "Quantity: 1. per unit. GST: not stated",
+            "excerpt": "1 Unit Chemical Overhaul = $80/-",
+            "sourceUrl": "https://openairengineering.com/air-con-chemical-overhaul/",
+            "capturedAt": "2026-10-11",
+            "indicative": false
+          }
+        ]
       },
       {
         "name": "Gas top-up",
@@ -15429,6 +15767,75 @@
     ],
     "updatedAt": "2026-10-10"
   },
+  "airconman-aircon-servicing-repair-singapore": {
+    "headline": "Services published by Airconman - Aircon Servicing & Repair Singapore.",
+    "about": [
+      "From general aircon services, new aircon installation, aircon normal chemical and overhaul, we provide all types of aircon services including repair to both residential and commercial users."
+    ],
+    "services": [
+      {
+        "name": "General servicing",
+        "description": "",
+        "explanation": "Aircon General Service",
+        "sourceUrl": "https://www.singaporeairconservicing.com/",
+        "capturedAt": "2026-10-10",
+        "prices": []
+      },
+      {
+        "name": "Chemical wash",
+        "description": "",
+        "explanation": "quality lifestyle toward a affordable charges. Ranging from aircon overhaul to chemical wash, we know that the needs of customers are different so we cater them",
+        "sourceUrl": "https://www.singaporeairconservicing.com/about-us",
+        "capturedAt": "2026-10-10",
+        "prices": []
+      },
+      {
+        "name": "Chemical overhaul",
+        "description": "",
+        "explanation": "Aircon Chemical Overhaul",
+        "sourceUrl": "https://www.singaporeairconservicing.com/",
+        "capturedAt": "2026-10-10",
+        "prices": []
+      },
+      {
+        "name": "Gas top-up",
+        "description": "",
+        "explanation": "Aircon Gas Top Up",
+        "sourceUrl": "https://www.singaporeairconservicing.com/",
+        "capturedAt": "2026-10-10",
+        "prices": []
+      },
+      {
+        "name": "Installation",
+        "description": "",
+        "explanation": "From general aircon services, new aircon installation, aircon normal chemical and overhaul, we provide all types of aircon services i",
+        "sourceUrl": "https://www.singaporeairconservicing.com/",
+        "capturedAt": "2026-10-10",
+        "prices": []
+      },
+      {
+        "name": "Repair",
+        "description": "",
+        "explanation": "perience in Singapore, we know how to keep your equipment running smoothly. Our aircon repair , servicing , installation and other services are widely trusted b",
+        "sourceUrl": "https://www.singaporeairconservicing.com/",
+        "capturedAt": "2026-10-10",
+        "prices": []
+      },
+      {
+        "name": "Troubleshooting",
+        "description": "",
+        "explanation": "Troubleshooting",
+        "sourceUrl": "https://www.singaporeairconservicing.com/our-services",
+        "capturedAt": "2026-10-10",
+        "prices": []
+      }
+    ],
+    "highlights": [],
+    "sourceUrls": [
+      "https://www.singaporeairconservicing.com/"
+    ],
+    "updatedAt": "2026-10-10"
+  },
   "ys-a-cool-pte-ltd": {
     "headline": "Services published by YS A-Cool Pte Ltd.",
     "about": [
@@ -15504,7 +15911,17 @@
         "explanation": "General Servicing",
         "sourceUrl": "https://www.andyairconservicing.com/services-4",
         "capturedAt": "2026-10-10",
-        "prices": []
+        "prices": [
+          {
+            "label": "General Servicing, 1 fan coil unit",
+            "price": "1 Fan Coil Unit (FCU) $45",
+            "detail": "Quantity: 1. per unit. GST: not stated",
+            "excerpt": "1 Fan Coil Unit (FCU) $45",
+            "sourceUrl": "https://www.andyairconservicing.com/services-4",
+            "capturedAt": "2026-10-10",
+            "indicative": false
+          }
+        ]
       },
       {
         "name": "Chemical wash",
@@ -15704,7 +16121,7 @@
         "capturedAt": "2026-10-10",
         "prices": [
           {
-            "label": "#1 Aircon Servicing Singapore - SJR Air-Conditioned",
+            "label": "Aircon servicing",
             "price": "#1 Aircon Servicing Singapore | From $30 | SJR Air-Conditioned",
             "detail": "as printed. GST: not stated",
             "excerpt": "| #1 Aircon Servicing Singapore | From $30 | SJR Air-Conditioned",
@@ -16297,12 +16714,12 @@
         "capturedAt": "2026-10-10",
         "prices": [
           {
-            "label": "Troubleshooting",
+            "label": "Repair troubleshooting (fix quoted separately)",
             "price": "See source details",
-            "detail": "Quantity: 2. per unit. GST: not stated",
-            "excerpt": "How much does aircon servicing cost in Singapore? | $25 per unit for 4+ units, $60 for a single unit, $80 for 2 units, $90 for 3. Repair troubleshooting starts from $60-$80, with the fix quoted separately once we know th",
+            "detail": "as printed (range). GST: not stated",
+            "excerpt": "Repair troubleshooting starts from $60-$80, with the fix quoted separately once we know th",
             "sourceUrl": "https://urgentairconservicing.sg/",
-            "capturedAt": "2026-10-10",
+            "capturedAt": "2026-10-11",
             "indicative": false
           }
         ]
@@ -17340,6 +17757,24 @@
         "sourceUrl": "https://drpenguinaircon.sg/",
         "capturedAt": "2026-10-10",
         "prices": []
+      },
+      {
+        "name": "General servicing",
+        "description": "",
+        "explanation": "",
+        "sourceUrl": "https://drpenguinaircon.sg/st-aircon-servicing/",
+        "capturedAt": "2026-10-11",
+        "prices": [
+          {
+            "label": "Standard Aircon Cleaning Service, 1 unit",
+            "price": "See source details",
+            "detail": "Quantity: 1. from (starting price, as printed). GST: not stated",
+            "excerpt": "Starting at just $75 for 1 unit, $100 for 2 units, $145 for 3 units, and $190 for 4 units",
+            "sourceUrl": "https://drpenguinaircon.sg/st-aircon-servicing/",
+            "capturedAt": "2026-10-11",
+            "indicative": false
+          }
+        ]
       }
     ],
     "highlights": [],
@@ -18079,6 +18514,123 @@
     "highlights": [],
     "sourceUrls": [
       "https://www.cheapairconservice.com/"
+    ],
+    "updatedAt": "2026-10-10"
+  },
+  "airconman-sg-pte-ltd": {
+    "headline": "Services published by Airconman Sg Pte Ltd.",
+    "about": [
+      "Our team has the expertise to accomplish all the aircon related tasks and we guarantee that your experience with our professionals is pleasant and satisfying."
+    ],
+    "services": [
+      {
+        "name": "Chemical wash",
+        "description": "",
+        "explanation": "Aircon Chemical Wash",
+        "sourceUrl": "https://airconman.sg/",
+        "capturedAt": "2026-10-10",
+        "prices": [
+          {
+            "label": "Chemical wash, 1 fan-coil unit",
+            "price": "Chemical Wash | Fancoil Unit | Price | 1 | $ 85.00 | 2 | $ 160.00",
+            "detail": "Quantity: 1. per job, 1 fan-coil unit. GST: not stated",
+            "excerpt": "Chemical Wash | Fancoil Unit | Price | 1 | $ 85.00 | 2 | $ 160.00",
+            "sourceUrl": "https://airconman.sg/pricing",
+            "capturedAt": "2026-10-11",
+            "indicative": false
+          }
+        ]
+      },
+      {
+        "name": "Chemical overhaul",
+        "description": "",
+        "explanation": "Aircon Chemical Overhaul",
+        "sourceUrl": "https://airconman.sg/",
+        "capturedAt": "2026-10-10",
+        "prices": [
+          {
+            "label": "Chemical overhaul, 1 fan-coil unit (9000 & 12000 BTU)",
+            "price": "See source details",
+            "detail": "Quantity: 1. per job, 1 fan-coil unit. GST: not stated",
+            "excerpt": "Chemical Overhaul (For 9000 & 12000 BTU) | Fancoil Unit | Price | 1 | $ 150.00 | 2 | $ 280.00",
+            "sourceUrl": "https://airconman.sg/pricing",
+            "capturedAt": "2026-10-11",
+            "indicative": false
+          }
+        ]
+      },
+      {
+        "name": "Gas top-up",
+        "description": "",
+        "explanation": "Likewise, our experts can efficiently and safely help you out with your aircon gas top-ups. Aircon gas top-up is usually quite common after your air conditioner",
+        "sourceUrl": "https://airconman.sg/",
+        "capturedAt": "2026-10-10",
+        "prices": [
+          {
+            "label": "Gas topping, R22",
+            "price": "Gas Topping | R22 | 410A | $40.00 - $120.00 | $60.00 - $150.00",
+            "detail": "as printed (range). GST: not stated",
+            "excerpt": "Gas Topping | R22 | 410A | $40.00 - $120.00 | $60.00 - $150.00",
+            "sourceUrl": "https://airconman.sg/pricing",
+            "capturedAt": "2026-10-11",
+            "indicative": false
+          }
+        ]
+      },
+      {
+        "name": "Installation",
+        "description": "",
+        "explanation": "Aircon Installation",
+        "sourceUrl": "https://airconman.sg/",
+        "capturedAt": "2026-10-10",
+        "prices": []
+      },
+      {
+        "name": "Repair",
+        "description": "",
+        "explanation": "Aircon Repair Price Singapore",
+        "sourceUrl": "https://airconman.sg/",
+        "capturedAt": "2026-10-10",
+        "prices": []
+      },
+      {
+        "name": "Troubleshooting",
+        "description": "",
+        "explanation": "Aircon Troubleshooting",
+        "sourceUrl": "https://airconman.sg/",
+        "capturedAt": "2026-10-10",
+        "prices": []
+      },
+      {
+        "name": "Dismantle replacement",
+        "description": "",
+        "explanation": "Complete dismantling of the unit",
+        "sourceUrl": "https://airconman.sg/Aircon_Cleaning_Services_Singapore",
+        "capturedAt": "2026-10-10",
+        "prices": []
+      },
+      {
+        "name": "General servicing",
+        "description": "",
+        "explanation": "",
+        "sourceUrl": "https://airconman.sg/pricing",
+        "capturedAt": "2026-10-11",
+        "prices": [
+          {
+            "label": "Normal servicing, 1 fan-coil unit (one-time)",
+            "price": "See source details",
+            "detail": "Quantity: 1. per job, 1 fan-coil unit. GST: not stated",
+            "excerpt": "Normal Servicing/Yearly Maintenance | Fancoil Unit | One-Time | Tri-Yearly (3x) | Quarterly (4x) | 1 | $ 40.00 | 2 | $ 55.00",
+            "sourceUrl": "https://airconman.sg/pricing",
+            "capturedAt": "2026-10-11",
+            "indicative": false
+          }
+        ]
+      }
+    ],
+    "highlights": [],
+    "sourceUrls": [
+      "https://airconman.sg/"
     ],
     "updatedAt": "2026-10-10"
   },
@@ -19595,7 +20147,27 @@
         "explanation": "Move In Cleaning Service Singapore",
         "sourceUrl": "https://www.singaporecleaningservice.com/",
         "capturedAt": "2026-10-10",
-        "prices": []
+        "prices": [
+          {
+            "label": "End-of-tenancy cleaning, studio apartment (1 cleaner, 3-4 hours, floor area < 590 sq ft)",
+            "price": "See source details",
+            "detail": "as printed. GST: not stated",
+            "excerpt": "Studio Apartment Number of part-time maids required: 1 cleaner for 3~4 hours $110 1 bedroom 1 bedroom with toilet Floor area < 590 sq-ft",
+            "sourceUrl": "https://www.singaporecleaningservice.com/cleaning-services/end-of-tenancy-cleaning-service/",
+            "capturedAt": "2026-10-11",
+            "indicative": false
+          },
+          {
+            "label": "End-of-tenancy cleaning, HDB 5-room flat (2 cleaners, 4-5 hours)",
+            "price": "See source details",
+            "detail": "as printed. GST: not stated",
+            "excerpt": "HDB 5 Room Flat 2 cleaners for 4~5 hours $230 3 bedrooms 2 bathrooms with toilets 1 living room 1 kitchen",
+            "sourceUrl": "https://www.singaporecleaningservice.com/cleaning-services/end-of-tenancy-cleaning-service/",
+            "capturedAt": "2026-10-11",
+            "indicative": false
+          }
+        ],
+        "priceSummary": "2 pricing entries"
       },
       {
         "name": "Post renovation",
@@ -19718,6 +20290,24 @@
         "sourceUrl": "https://ironingmaids.sg/",
         "capturedAt": "2026-10-10",
         "prices": []
+      },
+      {
+        "name": "Ad hoc",
+        "description": "",
+        "explanation": "",
+        "sourceUrl": "https://ironingmaids.sg/pricing/",
+        "capturedAt": "2026-10-10",
+        "prices": [
+          {
+            "label": "One Time House Cleaning, 2 hours",
+            "price": "See source details",
+            "detail": "per visit. GST: not stated",
+            "excerpt": "One Time House Cleaning Flexible Arrangements with No Lock-in 2 HOURS $ 52 /session",
+            "sourceUrl": "https://ironingmaids.sg/pricing/",
+            "capturedAt": "2026-10-10",
+            "indicative": false
+          }
+        ]
       }
     ],
     "highlights": [],
@@ -19833,7 +20423,17 @@
         "explanation": "Professional cleaning for homes and businesses - post-renovation, deep cleaning, upholstery and more.",
         "sourceUrl": "https://www.alldoneservicessg.com/?utm_source=google&utm_medium=organic&utm_campaign=google_business_profile",
         "capturedAt": "2026-10-10",
-        "prices": []
+        "prices": [
+          {
+            "label": "Toilet deep cleaning",
+            "price": "from $79",
+            "detail": "as printed. GST: not stated",
+            "excerpt": "Toilet Deep Cleaning | from $79",
+            "sourceUrl": "https://www.alldoneservicessg.com/services/toilet-deep-cleaning",
+            "capturedAt": "2026-10-11",
+            "indicative": false
+          }
+        ]
       },
       {
         "name": "Move-in & move-out cleaning",
@@ -22414,17 +23014,7 @@
         "explanation": "DB Box Upgrade & Replacement",
         "sourceUrl": "https://bestvoltcontractors.com/",
         "capturedAt": "2026-10-10",
-        "prices": [
-          {
-            "label": "DB Box Replacement and - Typical Singapore market reference for a straightforward residential DB",
-            "price": "S$350 to S$800",
-            "detail": "per job (inferred from the job type; confirm with the company). GST: not stated",
-            "excerpt": "Typical Singapore market reference for a straightforward residential DB | S$350 to S$800",
-            "sourceUrl": "https://bestvoltcontractors.com/prices/",
-            "capturedAt": "2026-10-10",
-            "indicative": false
-          }
-        ]
+        "prices": []
       },
       {
         "name": "Isolator",
@@ -23422,9 +24012,17 @@
         "explanation": "Mattress Cleaning",
         "sourceUrl": "https://mcaassolutions.com/",
         "capturedAt": "2026-10-10",
+        "prices": []
+      },
+      {
+        "name": "Carpet",
+        "description": "",
+        "explanation": "Carpet Cleaning",
+        "sourceUrl": "https://mcaassolutions.com/",
+        "capturedAt": "2026-10-10",
         "prices": [
           {
-            "label": "Mattress",
+            "label": "Carpet",
             "price": "See source details",
             "detail": "as printed. GST: not stated",
             "excerpt": "Carpet Cleaning in Singapore | Carpet and rug extraction from $80. Shampoo or dry/steam by fibre. Add sofa or mattress on the same visit.",
@@ -23433,14 +24031,6 @@
             "indicative": false
           }
         ]
-      },
-      {
-        "name": "Carpet",
-        "description": "",
-        "explanation": "Carpet Cleaning",
-        "sourceUrl": "https://mcaassolutions.com/",
-        "capturedAt": "2026-10-10",
-        "prices": []
       },
       {
         "name": "Curtain",
@@ -23655,7 +24245,35 @@
         "explanation": "Disinfection Services",
         "sourceUrl": "https://www.easycleansg.com/",
         "capturedAt": "2026-10-10",
-        "prices": []
+        "prices": [
+          {
+            "label": "Disinfection, non-confirmed case, 500 sqft and below",
+            "price": "Non-Confirmed Case 500 sqft and below $120.00 (base price)",
+            "detail": "as printed. GST: not stated",
+            "excerpt": "Non-Confirmed Case 500 sqft and below $120.00 (base price)",
+            "sourceUrl": "https://www.easycleansg.com/pages/disinfection-services-singapore",
+            "capturedAt": "2026-10-11",
+            "indicative": false
+          }
+        ]
+      },
+      {
+        "name": "Regular cleaning",
+        "description": "",
+        "explanation": "",
+        "sourceUrl": "https://www.easycleansg.com/pages/hourly-cleaning-services",
+        "capturedAt": "2026-10-11",
+        "prices": [
+          {
+            "label": "Hourly cleaning service",
+            "price": "from $22/hour",
+            "detail": "per hour. GST: not stated",
+            "excerpt": "Hourly Cleaning Service from $22/hour",
+            "sourceUrl": "https://www.easycleansg.com/pages/hourly-cleaning-services",
+            "capturedAt": "2026-10-11",
+            "indicative": false
+          }
+        ]
       }
     ],
     "highlights": [],
@@ -25730,17 +26348,7 @@
         "explanation": "Move in/out",
         "sourceUrl": "https://mycleanhomesg.com/",
         "capturedAt": "2026-10-10",
-        "prices": [
-          {
-            "label": "Move in out",
-            "price": "See source details",
-            "detail": "per job (inferred from the job type; confirm with the company). GST: not stated",
-            "excerpt": "How Much Does Move-In Cleaning Cost in Singapore for a 4-Room HDB? | A typical move-in cleaning cost in Singapore for a 4-room HDB is around SGD $280 to $550, depending on the unit’s size, and any add-on services. Move-I",
-            "sourceUrl": "https://mycleanhomesg.com/",
-            "capturedAt": "2026-10-10",
-            "indicative": false
-          }
-        ]
+        "prices": []
       },
       {
         "name": "Post renovation",
@@ -26195,7 +26803,7 @@
         "capturedAt": "2026-10-10",
         "prices": [
           {
-            "label": "LetsCool Aircon offers one of the most affordable chemical wash services in Singapore, starting from",
+            "label": "Chemical wash",
             "price": "See source details",
             "detail": "per unit. GST: not stated. Promotional rate; confirm availability",
             "excerpt": "LetsCool Aircon offers one of the most affordable chemical wash services in Singapore, starting from just $60 per unit",
@@ -26213,7 +26821,7 @@
         "capturedAt": "2026-10-10",
         "prices": [
           {
-            "label": "LetsCool Aircon provides chemical overhaul service",
+            "label": "Chemical overhaul",
             "price": "See source details",
             "detail": "per unit. GST: not stated",
             "excerpt": "LetsCool Aircon provides chemical overhaul service starting from $90 per unit",
@@ -26322,7 +26930,17 @@
         "explanation": "Spring Cleaning",
         "sourceUrl": "https://www.cleanoff.com.sg/",
         "capturedAt": "2026-10-10",
-        "prices": []
+        "prices": [
+          {
+            "label": "Spring cleaning, less than 501 sqft",
+            "price": "See source details",
+            "detail": "as printed. GST: not stated",
+            "excerpt": "our basic pricelist Spring Cleaning in Singapore Less than 501 sqft $350 501 - 800 sqft $350 - $420",
+            "sourceUrl": "https://www.cleanoff.com.sg/services/spring-cleaning-services/",
+            "capturedAt": "2026-10-11",
+            "indicative": false
+          }
+        ]
       },
       {
         "name": "Office cleaning",
@@ -26363,6 +26981,42 @@
         "sourceUrl": "https://www.cleanoff.com.sg/",
         "capturedAt": "2026-10-10",
         "prices": []
+      },
+      {
+        "name": "Regular cleaning",
+        "description": "",
+        "explanation": "",
+        "sourceUrl": "https://www.cleanoff.com.sg/services/home-cleaning/",
+        "capturedAt": "2026-10-11",
+        "prices": [
+          {
+            "label": "Weekly home cleaning, day slot (min 3 hrs/session, 4 sessions)",
+            "price": "See source details",
+            "detail": "per hour. GST: not stated",
+            "excerpt": "Weekly Home Cleaning Fee for Day Rates are based on recurring slots with a minimum of 3 hours per session. $24/hour",
+            "sourceUrl": "https://www.cleanoff.com.sg/services/home-cleaning/",
+            "capturedAt": "2026-10-11",
+            "indicative": false
+          }
+        ]
+      },
+      {
+        "name": "Ad hoc",
+        "description": "",
+        "explanation": "",
+        "sourceUrl": "https://www.cleanoff.com.sg/services/home-cleaning/",
+        "capturedAt": "2026-10-11",
+        "prices": [
+          {
+            "label": "One-time home cleaning",
+            "price": "See source details",
+            "detail": "per hour. GST: not stated",
+            "excerpt": "One-Time Home Cleaning Fee A single-session deep clean with no recurring commitment. ... $30/hour",
+            "sourceUrl": "https://www.cleanoff.com.sg/services/home-cleaning/",
+            "capturedAt": "2026-10-11",
+            "indicative": false
+          }
+        ]
       }
     ],
     "highlights": [],
@@ -26814,25 +27468,6 @@
         "sourceUrl": "https://hdbplumberservice.com.sg/?utm_source=GBP&utm_medium=organic&utm_campaign=office",
         "capturedAt": "2026-10-10",
         "prices": []
-      },
-      {
-        "name": "Plumbing repair",
-        "description": "",
-        "explanation": "",
-        "sourceUrl": "https://hdbplumberservice.com.sg/?utm_source=GBP&utm_medium=organic&utm_campaign=office",
-        "capturedAt": "2026-10-10",
-        "prices": [
-          {
-            "label": "Plumbing repair",
-            "price": "See source details",
-            "detail": "per job (inferred from the job type; confirm with the company). GST: not stated",
-            "excerpt": "How much does a plumber cost in Singapore? | Plumbing services typically start from $40 for minor repairs. For a full price list, visit our Rates page.",
-            "sourceUrl": "https://hdbplumberservice.com.sg/?utm_source=GBP&utm_medium=organic&utm_campaign=office",
-            "capturedAt": "2026-10-10",
-            "indicative": true
-          }
-        ],
-        "priceSummary": "Pricing reference"
       }
     ],
     "highlights": [],
@@ -27428,18 +28063,7 @@
         "explanation": "So whether you need regular cleaning services or a one-time deep clean, you can trust us to deliver the highest l",
         "sourceUrl": "https://www.mattresscleaningsingaporecompany.com/",
         "capturedAt": "2026-10-10",
-        "prices": [
-          {
-            "label": "Regular cleaning",
-            "price": "See source details",
-            "detail": "per hour. GST: not stated",
-            "excerpt": "What Will A Reasonable Price For House Cleaning Be? | House cleaners are typically charged $30-50 per hour for an average house clean. This is dependent on the size and type of job you need to be done, so it’s important",
-            "sourceUrl": "https://www.mattresscleaningsingaporecompany.com/",
-            "capturedAt": "2026-10-10",
-            "indicative": true
-          }
-        ],
-        "priceSummary": "Pricing reference"
+        "prices": []
       },
       {
         "name": "Deep cleaning",
@@ -28879,7 +29503,7 @@
         "capturedAt": "2026-10-10",
         "prices": [
           {
-            "label": "General service",
+            "label": "Aircon servicing, per unit (with minimum units)",
             "price": "See source details",
             "detail": "per unit. GST: not stated. Promotional rate; confirm availability",
             "excerpt": "3. How much does aircon servicing cost in Singapore? | Our prices start from $25 per unit (with minimum units). We offer transparent pricing with no hidden fees. You can view our full price list on our",
@@ -29541,6 +30165,141 @@
     "highlights": [],
     "sourceUrls": [
       "https://newcool.sg/en/about-us/"
+    ],
+    "updatedAt": "2026-10-10"
+  },
+  "ac-aircon-services": {
+    "headline": "Services published by AC Aircon Services.",
+    "about": [
+      "With two decades of experience, AC Aircon Services has established itself as a trusted leader in air conditioning maintenance and servicing in Singapore."
+    ],
+    "services": [
+      {
+        "name": "Chemical wash",
+        "description": "",
+        "explanation": "Chemical Wash",
+        "sourceUrl": "https://www.acairconservices.com/blog",
+        "capturedAt": "2026-10-10",
+        "prices": []
+      },
+      {
+        "name": "Chemical overhaul",
+        "description": "",
+        "explanation": "Aircon Chemical Overhaul Vs Chemical Wash",
+        "sourceUrl": "https://www.acairconservices.com/blog",
+        "capturedAt": "2026-10-10",
+        "prices": []
+      },
+      {
+        "name": "Gas top-up",
+        "description": "",
+        "explanation": "Outdoor Cleaning and Gas Top-up",
+        "sourceUrl": "https://www.acairconservices.com/rates",
+        "capturedAt": "2026-10-10",
+        "prices": [
+          {
+            "label": "Replenish of Aircon Refrigerant Gas",
+            "price": "$80-250",
+            "detail": "per unit (inferred from the job type; confirm with the company). GST: not stated",
+            "excerpt": "Replenish of Aircon Refrigerant Gas | $80-250",
+            "sourceUrl": "https://www.acairconservices.com/rates",
+            "capturedAt": "2026-10-10",
+            "indicative": false
+          }
+        ]
+      },
+      {
+        "name": "Installation",
+        "description": "",
+        "explanation": "New Aircon Installation",
+        "sourceUrl": "https://www.acairconservices.com/blog",
+        "capturedAt": "2026-10-10",
+        "prices": []
+      },
+      {
+        "name": "Troubleshooting",
+        "description": "",
+        "explanation": "Troubleshooting",
+        "sourceUrl": "https://www.acairconservices.com/rates",
+        "capturedAt": "2026-10-10",
+        "prices": []
+      },
+      {
+        "name": "Dismantle replacement",
+        "description": "",
+        "explanation": "Dismantle down & clean the evaporator coil with chemical",
+        "sourceUrl": "https://www.acairconservices.com/rates",
+        "capturedAt": "2026-10-10",
+        "prices": []
+      },
+      {
+        "name": "General servicing",
+        "description": "",
+        "explanation": "",
+        "sourceUrl": "https://www.acairconservices.com/rates",
+        "capturedAt": "2026-10-10",
+        "prices": [
+          {
+            "label": "2 Units Servicing Package",
+            "price": "$250",
+            "detail": "Quantity: 2. per unit. GST: not stated",
+            "excerpt": "2 Units Servicing Package | $250",
+            "sourceUrl": "https://www.acairconservices.com/rates",
+            "capturedAt": "2026-10-10",
+            "indicative": false
+          },
+          {
+            "label": "3 Units Servicing Package",
+            "price": "$330",
+            "detail": "Quantity: 3. per unit. GST: not stated",
+            "excerpt": "3 Units Servicing Package | $330",
+            "sourceUrl": "https://www.acairconservices.com/rates",
+            "capturedAt": "2026-10-10",
+            "indicative": false
+          },
+          {
+            "label": "4 Units Servicing Package",
+            "price": "$380",
+            "detail": "Quantity: 4. per unit. GST: not stated",
+            "excerpt": "4 Units Servicing Package | $380",
+            "sourceUrl": "https://www.acairconservices.com/rates",
+            "capturedAt": "2026-10-10",
+            "indicative": false
+          },
+          {
+            "label": "5 Units Servicing Package",
+            "price": "$480",
+            "detail": "Quantity: 5. per unit. GST: not stated",
+            "excerpt": "5 Units Servicing Package | $480",
+            "sourceUrl": "https://www.acairconservices.com/rates",
+            "capturedAt": "2026-10-10",
+            "indicative": false
+          },
+          {
+            "label": "6 Units Servicing Package",
+            "price": "$580",
+            "detail": "Quantity: 6. per unit. GST: not stated",
+            "excerpt": "6 Units Servicing Package | $580",
+            "sourceUrl": "https://www.acairconservices.com/rates",
+            "capturedAt": "2026-10-10",
+            "indicative": false
+          },
+          {
+            "label": "7 Units Servicing Package",
+            "price": "$680",
+            "detail": "Quantity: 7. per unit. GST: not stated",
+            "excerpt": "7 Units Servicing Package | $680",
+            "sourceUrl": "https://www.acairconservices.com/rates",
+            "capturedAt": "2026-10-10",
+            "indicative": false
+          }
+        ],
+        "priceSummary": "6 pricing entries"
+      }
+    ],
+    "highlights": [],
+    "sourceUrls": [
+      "https://www.acairconservices.com/"
     ],
     "updatedAt": "2026-10-10"
   },
@@ -30579,34 +31338,6 @@
         "sourceUrl": "https://rfwaterproofing.com.sg/",
         "capturedAt": "2026-10-10",
         "prices": []
-      },
-      {
-        "name": "Plumbing repair",
-        "description": "",
-        "explanation": "",
-        "sourceUrl": "https://rfwaterproofing.com.sg/",
-        "capturedAt": "2026-10-10",
-        "prices": [
-          {
-            "label": "Plumbing repair",
-            "price": "See source details",
-            "detail": "per job (inferred from the job type; confirm with the company). GST: not stated",
-            "excerpt": "How much does waterproofing cost in Singapore? | Waterproofing costs in Singapore generally range from $300 for targeted repair jobs to $5,000+ for complete structural overhauls, depending on the size of the space, prope",
-            "sourceUrl": "https://rfwaterproofing.com.sg/",
-            "capturedAt": "2026-10-10",
-            "indicative": false
-          },
-          {
-            "label": "Minor crack sealing / Spot repair: .",
-            "price": "Minor crack sealing / Spot repair: $300 - $800.",
-            "detail": "per job (inferred from the job type; confirm with the company). GST: not stated",
-            "excerpt": "Roof & balcony waterproofing (Membrane system): $15 - $35 per square foot. | Minor crack sealing / Spot repair: $300 - $800.",
-            "sourceUrl": "https://rfwaterproofing.com.sg/",
-            "capturedAt": "2026-10-10",
-            "indicative": false
-          }
-        ],
-        "priceSummary": "2 pricing entries"
       }
     ],
     "highlights": [],
@@ -30775,7 +31506,17 @@
         "explanation": "E27 Light Fittings & Fan Light Instal...",
         "sourceUrl": "https://mrelectrician.sg/",
         "capturedAt": "2026-10-10",
-        "prices": []
+        "prices": [
+          {
+            "label": "Installation of Ceiling Light",
+            "price": "See source details",
+            "detail": "as printed. GST: not stated",
+            "excerpt": "Installation of Ceiling Light S$ 30 Installation of a ceiling light.",
+            "sourceUrl": "https://mrelectrician.sg/pricing/",
+            "capturedAt": "2026-10-11",
+            "indicative": false
+          }
+        ]
       },
       {
         "name": "Ceiling fan",
@@ -30783,7 +31524,17 @@
         "explanation": "trical installations. Our electricians are experienced with water heater, CCTV, ceiling fan, electrical wiring, lighting, doorbell, and DB box installations. Fe",
         "sourceUrl": "https://mrelectrician.sg/",
         "capturedAt": "2026-10-10",
-        "prices": []
+        "prices": [
+          {
+            "label": "Installation of Ceiling Fan",
+            "price": "Installation of Ceiling Fan S$ 65 Installation of a ceiling fan.",
+            "detail": "as printed. GST: not stated",
+            "excerpt": "Installation of Ceiling Fan S$ 65 Installation of a ceiling fan.",
+            "sourceUrl": "https://mrelectrician.sg/pricing/",
+            "capturedAt": "2026-10-11",
+            "indicative": false
+          }
+        ]
       },
       {
         "name": "Power point",
@@ -30791,7 +31542,17 @@
         "explanation": "Expert installation of electrical outlets, switches, and power points to meet your residential and commercial needs safely.",
         "sourceUrl": "https://mrelectrician.sg/",
         "capturedAt": "2026-10-10",
-        "prices": []
+        "prices": [
+          {
+            "label": "Single Power Point",
+            "price": "Single Power Point S$ 65 Installation of a single power point.",
+            "detail": "as printed. GST: not stated",
+            "excerpt": "Single Power Point S$ 65 Installation of a single power point.",
+            "sourceUrl": "https://mrelectrician.sg/pricing/",
+            "capturedAt": "2026-10-11",
+            "indicative": false
+          }
+        ]
       },
       {
         "name": "Distribution board",
@@ -30799,7 +31560,17 @@
         "explanation": "ith water heater, CCTV, ceiling fan, electrical wiring, lighting, doorbell, and DB box installations. Feel free to reach out and enquire about any other type of",
         "sourceUrl": "https://mrelectrician.sg/",
         "capturedAt": "2026-10-10",
-        "prices": []
+        "prices": [
+          {
+            "label": "MCB & DB Box SP 40A 18P",
+            "price": "See source details",
+            "detail": "as printed. GST: not stated",
+            "excerpt": "MCB & DB Box SP 40A 18P S$ 450 Installation of an MCB & DB box (40A, 18P).",
+            "sourceUrl": "https://mrelectrician.sg/pricing/",
+            "capturedAt": "2026-10-11",
+            "indicative": false
+          }
+        ]
       },
       {
         "name": "Isolator",
@@ -30815,7 +31586,17 @@
         "explanation": "le all sorts of electrical installations. Our electricians are experienced with water heater, CCTV, ceiling fan, electrical wiring, lighting, doorbell, and DB b",
         "sourceUrl": "https://mrelectrician.sg/",
         "capturedAt": "2026-10-10",
-        "prices": []
+        "prices": [
+          {
+            "label": "Connect Water Heater",
+            "price": "Connect Water Heater S$ 50 Connection of a water heater.",
+            "detail": "as printed. GST: not stated",
+            "excerpt": "Connect Water Heater S$ 50 Connection of a water heater.",
+            "sourceUrl": "https://mrelectrician.sg/pricing/",
+            "capturedAt": "2026-10-11",
+            "indicative": false
+          }
+        ]
       },
       {
         "name": "LEW endorsement",
@@ -31686,17 +32467,7 @@
         "explanation": "Plumbing",
         "sourceUrl": "https://www.homeunited-repair.com/",
         "capturedAt": "2026-10-10",
-        "prices": [
-          {
-            "label": "Plumbing",
-            "price": "See source details",
-            "detail": "as printed. GST: not stated",
-            "excerpt": "Q: How much do plumbing repairs cost in Singapore? | A: Most minor plumbing jobs range from $80-$180 depending on the issue. We’ll provide a clear, upfront quote before starting any work.",
-            "sourceUrl": "https://www.homeunited-repair.com/",
-            "capturedAt": "2026-10-10",
-            "indicative": false
-          }
-        ]
+        "prices": []
       },
       {
         "name": "Electrical",
@@ -31704,17 +32475,7 @@
         "explanation": "Electrical",
         "sourceUrl": "https://www.homeunited-repair.com/",
         "capturedAt": "2026-10-10",
-        "prices": [
-          {
-            "label": "Electrical",
-            "price": "See source details",
-            "detail": "as printed. GST: not stated",
-            "excerpt": "Q: How much do minor electrical repairs cost in Singapore? | A: Most small electrical repairs range from $80-$150 depending on the issue. We’ll always provide a clear, upfront quote before starting any work.",
-            "sourceUrl": "https://www.homeunited-repair.com/",
-            "capturedAt": "2026-10-10",
-            "indicative": false
-          }
-        ]
+        "prices": []
       },
       {
         "name": "Carpentry",
@@ -32362,7 +33123,17 @@
         "explanation": "Chemical Wash",
         "sourceUrl": "https://airconexpress.sg/",
         "capturedAt": "2026-10-10",
-        "prices": []
+        "prices": [
+          {
+            "label": "Chemical wash, below 18k BTU",
+            "price": "$60 per unit, for aircon below 18k BTU.",
+            "detail": "per unit. GST: not stated",
+            "excerpt": "$60 per unit, for aircon below 18k BTU.",
+            "sourceUrl": "https://airconexpress.sg/chemical-wash/",
+            "capturedAt": "2026-10-11",
+            "indicative": false
+          }
+        ]
       },
       {
         "name": "Chemical overhaul",
@@ -32370,7 +33141,17 @@
         "explanation": "Chemical Overhaul",
         "sourceUrl": "https://airconexpress.sg/",
         "capturedAt": "2026-10-10",
-        "prices": []
+        "prices": [
+          {
+            "label": "Chemical overhaul, below 18k BTU",
+            "price": "$80 per unit, for aircon below 18k BTU",
+            "detail": "per unit. GST: not stated",
+            "excerpt": "$80 per unit, for aircon below 18k BTU",
+            "sourceUrl": "https://airconexpress.sg/chemical-overhaul/",
+            "capturedAt": "2026-10-11",
+            "indicative": false
+          }
+        ]
       },
       {
         "name": "Gas top-up",
@@ -32506,6 +33287,121 @@
     "highlights": [],
     "sourceUrls": [
       "https://aireverairconsg.com/about-us/"
+    ],
+    "updatedAt": "2026-10-10"
+  },
+  "6-days-cleaning": {
+    "headline": "Services published by 6 Days Cleaning.",
+    "about": [
+      "6 Days Services provides professional cleaning services across Singapore, including post-renovation cleaning, handover cleaning, move-in cleaning, sofa cleaning, mattress cleaning, carpet cleaning and pram cleaning."
+    ],
+    "services": [
+      {
+        "name": "Regular cleaning",
+        "description": "",
+        "explanation": "🎁 Enjoy free aircon servicing when you subscribe to our part time cleaning",
+        "sourceUrl": "https://6days.sg/",
+        "capturedAt": "2026-10-10",
+        "prices": [
+          {
+            "label": "Weekly/ Fortnightly Part Time Cleaning",
+            "price": "Weekly/ Fortnightly Part Time Cleaning from $20/hr",
+            "detail": "per hour. GST: not stated",
+            "excerpt": "Engage our popular services | Weekly/ Fortnightly Part Time Cleaning from $20/hr",
+            "sourceUrl": "https://6days.sg/",
+            "capturedAt": "2026-10-10",
+            "indicative": false
+          },
+          {
+            "label": "2 Helpers x 2 Hours = (Best for HDB 2 rooms and below ~650sqft)",
+            "price": "See source details",
+            "detail": "Quantity: 2. as printed. GST: not stated. Promotional rate; confirm availability",
+            "excerpt": "Promotional Package: | ✅ 2 Helpers x 2 Hours = $188 (Best for HDB 2 rooms and below ~650sqft)",
+            "sourceUrl": "https://6days.sg/products/hari-raya-spring-cleaning-package",
+            "capturedAt": "2026-10-10",
+            "indicative": false
+          },
+          {
+            "label": "2 Helpers x 3 Hours = (Best for HDB 3 rooms and 4 rooms ~1009 sqft)",
+            "price": "See source details",
+            "detail": "Quantity: 3. as printed. GST: not stated",
+            "excerpt": "✅ 2 Helpers x 2 Hours = $188 (Best for HDB 2 rooms and below ~650sqft) | ✅ 2 Helpers x 3 Hours = $288 (Best for HDB 3 rooms and 4 rooms ~1009 sqft)",
+            "sourceUrl": "https://6days.sg/products/hari-raya-spring-cleaning-package",
+            "capturedAt": "2026-10-10",
+            "indicative": false
+          },
+          {
+            "label": "3 Helpers x 3 Hours = (Best for HDB 5 room ~ 1299 sqft)",
+            "price": "✅ 3 Helpers x 3 Hours = $368 (Best for HDB 5 room ~ 1299 sqft)",
+            "detail": "Quantity: 3. as printed. GST: not stated",
+            "excerpt": "✅ 2 Helpers x 3 Hours = $288 (Best for HDB 3 rooms and 4 rooms ~1009 sqft) | ✅ 3 Helpers x 3 Hours = $368 (Best for HDB 5 room ~ 1299 sqft)",
+            "sourceUrl": "https://6days.sg/products/hari-raya-spring-cleaning-package",
+            "capturedAt": "2026-10-10",
+            "indicative": false
+          }
+        ],
+        "priceSummary": "4 pricing entries"
+      },
+      {
+        "name": "Deep cleaning",
+        "description": "",
+        "explanation": "Specialised deep cleaning",
+        "sourceUrl": "https://6days.sg/",
+        "capturedAt": "2026-10-10",
+        "prices": []
+      },
+      {
+        "name": "Post renovation",
+        "description": "",
+        "explanation": "Post Renovation / Moving Out Cleaning",
+        "sourceUrl": "https://6days.sg/",
+        "capturedAt": "2026-10-10",
+        "prices": []
+      },
+      {
+        "name": "Spring cleaning",
+        "description": "",
+        "explanation": "Raya Spring Cleaning Package",
+        "sourceUrl": "https://6days.sg/",
+        "capturedAt": "2026-10-10",
+        "prices": []
+      },
+      {
+        "name": "Sofa & upholstery cleaning",
+        "description": "",
+        "explanation": "Sofa Cleaning",
+        "sourceUrl": "https://6days.sg/",
+        "capturedAt": "2026-10-10",
+        "prices": []
+      },
+      {
+        "name": "Mattress",
+        "description": "",
+        "explanation": "Mattress Cleaning",
+        "sourceUrl": "https://6days.sg/",
+        "capturedAt": "2026-10-10",
+        "prices": []
+      },
+      {
+        "name": "Carpet",
+        "description": "",
+        "explanation": "Carpet Cleaning",
+        "sourceUrl": "https://6days.sg/",
+        "capturedAt": "2026-10-10",
+        "prices": []
+      },
+      {
+        "name": "Curtain",
+        "description": "",
+        "explanation": "Curtain deep cleaning",
+        "sourceUrl": "https://6days.sg/",
+        "capturedAt": "2026-10-10",
+        "prices": []
+      }
+    ],
+    "highlights": [],
+    "sourceUrls": [
+      "https://maps.google.com/?cid=10123879885047332967"
     ],
     "updatedAt": "2026-10-10"
   },
@@ -32873,6 +33769,93 @@
     "highlights": [],
     "sourceUrls": [
       "https://tneplumbing.com/"
+    ],
+    "updatedAt": "2026-10-10"
+  },
+  "reliable-plumbing-services-u-home-plumbing-engineering": {
+    "headline": "Services published by Reliable Plumbing Services - U-Home Plumbing & Engineering.",
+    "about": [
+      "We provide expert plumbing and installation solutions for Landed Properties, Condos, BTOs, and HDB flats across Singapore. Our team delivers high-quality workmanship directly to your doorstep, ensuring your home systems run perfectly."
+    ],
+    "services": [
+      {
+        "name": "Choke clearing",
+        "description": "",
+        "explanation": "Clearance of kitchen/toilet drain choke",
+        "sourceUrl": "https://u-homehardware.com/pages/reliable-plumbing-services",
+        "capturedAt": "2026-10-10",
+        "prices": []
+      },
+      {
+        "name": "Leak repair",
+        "description": "",
+        "explanation": "Water Leak Detection",
+        "sourceUrl": "https://u-homehardware.com/pages/reliable-plumbing-services",
+        "capturedAt": "2026-10-10",
+        "prices": []
+      },
+      {
+        "name": "Toilet bowl",
+        "description": "",
+        "explanation": "Water Closet/Toilet Bowls",
+        "sourceUrl": "https://u-homehardware.com/",
+        "capturedAt": "2026-10-10",
+        "prices": []
+      },
+      {
+        "name": "Water heater",
+        "description": "",
+        "explanation": "Water Heaters",
+        "sourceUrl": "https://u-homehardware.com/",
+        "capturedAt": "2026-10-10",
+        "prices": [
+          {
+            "label": "707 Protek Instant Water Heater with Hand Shower Set | SGD",
+            "price": "See source details",
+            "detail": "per job (inferred from the job type; confirm with the company). GST: not stated",
+            "excerpt": "707 Protek Instant Water Heater with Hand Shower Set | $288.00 SGD",
+            "sourceUrl": "https://u-homehardware.com/",
+            "capturedAt": "2026-10-10",
+            "indicative": false
+          }
+        ]
+      },
+      {
+        "name": "Taps & mixers",
+        "description": "",
+        "explanation": "Faucets",
+        "sourceUrl": "https://u-homehardware.com/",
+        "capturedAt": "2026-10-10",
+        "prices": []
+      },
+      {
+        "name": "Pipe replacement",
+        "description": "",
+        "explanation": "Modification/installation of water pipes. Re-piping. Replacement. New installation.",
+        "sourceUrl": "https://u-homehardware.com/pages/reliable-plumbing-services",
+        "capturedAt": "2026-10-10",
+        "prices": []
+      },
+      {
+        "name": "Sink",
+        "description": "",
+        "explanation": "Basins",
+        "sourceUrl": "https://u-homehardware.com/",
+        "capturedAt": "2026-10-10",
+        "prices": []
+      },
+      {
+        "name": "Bidet",
+        "description": "",
+        "explanation": "Bidet Set",
+        "sourceUrl": "https://u-homehardware.com/",
+        "capturedAt": "2026-10-10",
+        "prices": []
+      }
+    ],
+    "highlights": [],
+    "sourceUrls": [
+      "https://maps.google.com/?cid=3116192933622399066"
     ],
     "updatedAt": "2026-10-10"
   },
@@ -34861,7 +35844,27 @@
         "explanation": "One-Time General Deep Cleaning Service",
         "sourceUrl": "https://hybee.sg/",
         "capturedAt": "2026-10-10",
-        "prices": []
+        "prices": [
+          {
+            "label": "Deep cleaning, property less than 500 sqft",
+            "price": "See source details",
+            "detail": "as printed. GST: not stated",
+            "excerpt": "Hybee Deep Cleaning Services Singapore Price Guide ... Less than 500 sqft | $350",
+            "sourceUrl": "https://hybee.sg/best-deep-cleaning-services-singapore/",
+            "capturedAt": "2026-10-11",
+            "indicative": false
+          },
+          {
+            "label": "Deep cleaning, property 751-1000 sqft",
+            "price": "See source details",
+            "detail": "as printed. GST: not stated",
+            "excerpt": "Hybee Deep Cleaning Services Singapore Price Guide ... 751 - 1000 sqft | $472",
+            "sourceUrl": "https://hybee.sg/best-deep-cleaning-services-singapore/",
+            "capturedAt": "2026-10-11",
+            "indicative": false
+          }
+        ],
+        "priceSummary": "2 pricing entries"
       },
       {
         "name": "Move-in & move-out cleaning",
@@ -35023,7 +36026,27 @@
         "explanation": "Weekly Cleaning",
         "sourceUrl": "https://homecares.sg/",
         "capturedAt": "2026-10-10",
-        "prices": []
+        "prices": [
+          {
+            "label": "Weekly cleaning, once a week, 3 hours per session (4 sessions)",
+            "price": "$336 / month Once a week 3 hours per session 4 sessions per month",
+            "detail": "per month. GST: not stated",
+            "excerpt": "$336 / month Once a week 3 hours per session 4 sessions per month",
+            "sourceUrl": "https://homecares.sg/weekly-cleaning.html",
+            "capturedAt": "2026-10-11",
+            "indicative": false
+          },
+          {
+            "label": "Weekly cleaning, once a week, 4 hours per session (4 sessions)",
+            "price": "$416 / month Once a week 4 hours per session 4 sessions per month",
+            "detail": "per month. GST: not stated",
+            "excerpt": "$416 / month Once a week 4 hours per session 4 sessions per month",
+            "sourceUrl": "https://homecares.sg/weekly-cleaning.html",
+            "capturedAt": "2026-10-11",
+            "indicative": false
+          }
+        ],
+        "priceSummary": "2 pricing entries"
       },
       {
         "name": "Deep cleaning",
@@ -35448,7 +36471,27 @@
         "explanation": "Curtain Cleaning Service in Singapore",
         "sourceUrl": "https://cleancare.com.sg/",
         "capturedAt": "2026-10-10",
-        "prices": []
+        "prices": [
+          {
+            "label": "Day curtains cleaning",
+            "price": "Day Curtains | $13 /piece",
+            "detail": "per piece. GST: not stated",
+            "excerpt": "Day Curtains | $13 /piece",
+            "sourceUrl": "https://cleancare.com.sg/cleancare-service/curtain-cleaning/",
+            "capturedAt": "2026-10-11",
+            "indicative": false
+          },
+          {
+            "label": "Night curtains cleaning",
+            "price": "Night Curtains | $14.50 /kg",
+            "detail": "per kg. GST: not stated",
+            "excerpt": "Night Curtains | $14.50 /kg",
+            "sourceUrl": "https://cleancare.com.sg/cleancare-service/curtain-cleaning/",
+            "capturedAt": "2026-10-11",
+            "indicative": false
+          }
+        ],
+        "priceSummary": "2 pricing entries"
       }
     ],
     "highlights": [],
@@ -35540,7 +36583,17 @@
         "explanation": "Reliable home cleaning tailored to your routine thorough upkeep or deep cleans for a spotless, healthy, welcoming living environment in Singapore.",
         "sourceUrl": "https://kimbert.sg/",
         "capturedAt": "2026-10-10",
-        "prices": []
+        "prices": [
+          {
+            "label": "Deep cleaning",
+            "price": "Starting from $550",
+            "detail": "as printed. GST: not stated",
+            "excerpt": "Deep cleaning | Starting from $550",
+            "sourceUrl": "https://kimbert.sg/home-cleaning/",
+            "capturedAt": "2026-10-11",
+            "indicative": false
+          }
+        ]
       },
       {
         "name": "Move-in & move-out cleaning",
@@ -35556,7 +36609,27 @@
         "explanation": "Post Renovation and Tenancy Cleaning",
         "sourceUrl": "https://kimbert.sg/",
         "capturedAt": "2026-10-10",
-        "prices": []
+        "prices": [
+          {
+            "label": "Post-renovation / tenancy cleaning, 3 rooms",
+            "price": "See source details",
+            "detail": "as printed. GST: not stated",
+            "excerpt": "Price Guide - $320 for Studio - $360 for 3 rooms - $420 for 4 rooms - $480 for 5 rooms - $600 onwards for Landed Homes",
+            "sourceUrl": "https://kimbert.sg/post-renovation-tenancy-cleaning/",
+            "capturedAt": "2026-10-11",
+            "indicative": false
+          },
+          {
+            "label": "Post-renovation / tenancy cleaning, 4 rooms",
+            "price": "Price Guide ... $420 for 4 rooms",
+            "detail": "as printed. GST: not stated",
+            "excerpt": "Price Guide ... $420 for 4 rooms",
+            "sourceUrl": "https://kimbert.sg/post-renovation-tenancy-cleaning/",
+            "capturedAt": "2026-10-11",
+            "indicative": false
+          }
+        ],
+        "priceSummary": "2 pricing entries"
       },
       {
         "name": "Office cleaning",
@@ -35572,7 +36645,17 @@
         "explanation": "Sofa Cleaning",
         "sourceUrl": "https://kimbert.sg/",
         "capturedAt": "2026-10-10",
-        "prices": []
+        "prices": [
+          {
+            "label": "Sofa cleaning",
+            "price": "Starting from $200",
+            "detail": "as printed. GST: not stated",
+            "excerpt": "Sofa cleaning | Starting from $200",
+            "sourceUrl": "https://kimbert.sg/home-cleaning/",
+            "capturedAt": "2026-10-11",
+            "indicative": false
+          }
+        ]
       }
     ],
     "highlights": [],
@@ -35630,7 +36713,17 @@
         "explanation": "Chemical Wash",
         "sourceUrl": "https://www.tjaircon.com.sg/",
         "capturedAt": "2026-10-10",
-        "prices": []
+        "prices": [
+          {
+            "label": "Chemical Wash, 1 unit (9,000-18,000 btu)",
+            "price": "See source details",
+            "detail": "Quantity: 1. per unit. GST: not stated",
+            "excerpt": "Chemical Wash $ 80 per unit Fast & Clean 1 unit Aircon (Between 9,000 - 18,000 btu)",
+            "sourceUrl": "https://www.tjaircon.com.sg/",
+            "capturedAt": "2026-10-10",
+            "indicative": false
+          }
+        ]
       },
       {
         "name": "Chemical overhaul",
@@ -35638,7 +36731,17 @@
         "explanation": "Chemical Overhaul",
         "sourceUrl": "https://www.tjaircon.com.sg/",
         "capturedAt": "2026-10-10",
-        "prices": []
+        "prices": [
+          {
+            "label": "Chemical Overhaul, 1 unit (9,000-12,000 btu)",
+            "price": "See source details",
+            "detail": "Quantity: 1. per unit. GST: not stated",
+            "excerpt": "Chemical Overhaul $ 150 per unit Fast , Clean & Kill Bacteria! 1 unit (Between 9,000 - 12,000 btu)",
+            "sourceUrl": "https://www.tjaircon.com.sg/",
+            "capturedAt": "2026-10-10",
+            "indicative": false
+          }
+        ]
       },
       {
         "name": "Installation",
@@ -35663,6 +36766,24 @@
         "sourceUrl": "https://www.tjaircon.com.sg/",
         "capturedAt": "2026-10-10",
         "prices": []
+      },
+      {
+        "name": "General servicing",
+        "description": "",
+        "explanation": "",
+        "sourceUrl": "https://www.tjaircon.com.sg/",
+        "capturedAt": "2026-10-10",
+        "prices": [
+          {
+            "label": "Normal Servicing, 2 fan coils",
+            "price": "See source details",
+            "detail": "Quantity: 2. per unit. GST: not stated",
+            "excerpt": "Normal Servicing $ 30 per unit Wash & Clean 2 unit Fan Coil (Between 9,000 - 18,000 btu)",
+            "sourceUrl": "https://www.tjaircon.com.sg/",
+            "capturedAt": "2026-10-10",
+            "indicative": false
+          }
+        ]
       }
     ],
     "highlights": [],
@@ -35791,7 +36912,17 @@
         "explanation": "Best Pre Move In Cleaning Services in Singapore",
         "sourceUrl": "https://www.eunikeliving.com/",
         "capturedAt": "2026-10-10",
-        "prices": []
+        "prices": [
+          {
+            "label": "One-time move-out cleaning, apartment below 600 sqft",
+            "price": "See source details",
+            "detail": "as printed. GST: not stated",
+            "excerpt": "One Time Professional Cleaning Service Charges ... Below 600 | 250 - 300",
+            "sourceUrl": "https://www.eunikeliving.com/move-out-cleaning-services/",
+            "capturedAt": "2026-10-11",
+            "indicative": false
+          }
+        ]
       },
       {
         "name": "Post renovation",
@@ -36088,7 +37219,17 @@
         "explanation": "weekly house cleaning",
         "sourceUrl": "https://www.homecarelycontract.sg/",
         "capturedAt": "2026-10-10",
-        "prices": []
+        "prices": [
+          {
+            "label": "Weekly cleaning, 4-room HDB or condo (1,001-1,200 sq ft)",
+            "price": "See source details",
+            "detail": "per month. GST: not stated",
+            "excerpt": "Weekly Cleaning Packages ... 4-Room HDB or Condo (1,001-1,200 sq ft): $380-$400/month",
+            "sourceUrl": "https://homecarelycontract.sg/services/professional-cleaning/",
+            "capturedAt": "2026-10-11",
+            "indicative": false
+          }
+        ]
       },
       {
         "name": "Deep cleaning",
@@ -36121,6 +37262,42 @@
         "sourceUrl": "https://www.homecarelycontract.sg/",
         "capturedAt": "2026-10-10",
         "prices": []
+      },
+      {
+        "name": "Ad hoc",
+        "description": "",
+        "explanation": "",
+        "sourceUrl": "https://homecarelycontract.sg/services/professional-cleaning/",
+        "capturedAt": "2026-10-11",
+        "prices": [
+          {
+            "label": "General ad-hoc cleaning without window, 3-room HDB / 800-1,000 sq ft condo",
+            "price": "3-Room HDB 800-1,000 sq ft Condo | $360 - $380 | $150 | $250",
+            "detail": "as printed. GST: not stated",
+            "excerpt": "3-Room HDB 800-1,000 sq ft Condo | $360 - $380 | $150 | $250",
+            "sourceUrl": "https://homecarelycontract.sg/services/professional-cleaning/",
+            "capturedAt": "2026-10-11",
+            "indicative": false
+          }
+        ]
+      },
+      {
+        "name": "Move-in & move-out cleaning",
+        "description": "",
+        "explanation": "",
+        "sourceUrl": "https://homecarelycontract.sg/services/professional-cleaning/",
+        "capturedAt": "2026-10-11",
+        "prices": [
+          {
+            "label": "Handover cleaning, 2-bedroom, furnished",
+            "price": "Handover & Spring Cleaning 1. 2-Bedroom (Furnished): $420",
+            "detail": "as printed. GST: not stated",
+            "excerpt": "Handover & Spring Cleaning 1. 2-Bedroom (Furnished): $420",
+            "sourceUrl": "https://homecarelycontract.sg/services/professional-cleaning/",
+            "capturedAt": "2026-10-11",
+            "indicative": false
+          }
+        ]
       }
     ],
     "highlights": [],
@@ -37129,7 +38306,17 @@
         "explanation": "Carpet Cleaning",
         "sourceUrl": "https://officecleanings.com.sg/",
         "capturedAt": "2026-10-10",
-        "prices": []
+        "prices": [
+          {
+            "label": "Carpet cleaning, 1,501-2,000 sqft (stain pre-treatment included)",
+            "price": "See source details",
+            "detail": "as printed. GST: not stated",
+            "excerpt": "Priced by carpet area, with stain pre-treatment always included. For example, 1,501-2,000 sqft costs $345-$450.",
+            "sourceUrl": "https://officecleanings.com.sg/services/carpet-cleaning/",
+            "capturedAt": "2026-10-11",
+            "indicative": false
+          }
+        ]
       },
       {
         "name": "Disinfection",
@@ -37423,7 +38610,27 @@
         "explanation": "Furniture Assembly Service in Singapore",
         "sourceUrl": "https://handyman.sg/",
         "capturedAt": "2026-10-10",
-        "prices": []
+        "prices": [
+          {
+            "label": "Furniture assembly, small items (chairs, side tables, simple shelving)",
+            "price": "from $40",
+            "detail": "as printed. GST: not stated",
+            "excerpt": "Pricing depends on furniture size and complexity: - Small items (chairs, side tables, simple shelving): from $40 - Medium items (wardrobes, bed frames, desks): from $70",
+            "sourceUrl": "https://handyman.sg/professional-furniture-assembly-in-singapore",
+            "capturedAt": "2026-10-11",
+            "indicative": false
+          },
+          {
+            "label": "Furniture assembly, medium items (wardrobes, bed frames, desks)",
+            "price": "from $70",
+            "detail": "as printed. GST: not stated",
+            "excerpt": "Medium items (wardrobes, bed frames, desks): from $70",
+            "sourceUrl": "https://handyman.sg/professional-furniture-assembly-in-singapore",
+            "capturedAt": "2026-10-11",
+            "indicative": false
+          }
+        ],
+        "priceSummary": "2 pricing entries"
       },
       {
         "name": "Door lock",
@@ -37576,27 +38783,7 @@
         "explanation": "General Servicing",
         "sourceUrl": "https://aboveallaircon.com.sg/",
         "capturedAt": "2026-10-10",
-        "prices": [
-          {
-            "label": "Aircon servicing in Singapore typically ranges from",
-            "price": "$30 to $50 per unit",
-            "detail": "per unit. GST: not stated",
-            "excerpt": "Aircon servicing in Singapore typically ranges from | $30 to $50 per unit",
-            "sourceUrl": "https://aboveallaircon.com.sg/",
-            "capturedAt": "2026-10-10",
-            "indicative": true
-          },
-          {
-            "label": "for general servicing. Chemical wash services may cost between",
-            "price": "$80 to $150 per unit",
-            "detail": "per unit. GST: not stated",
-            "excerpt": "for general servicing. Chemical wash services may cost between | $80 to $150 per unit",
-            "sourceUrl": "https://aboveallaircon.com.sg/",
-            "capturedAt": "2026-10-10",
-            "indicative": false
-          }
-        ],
-        "priceSummary": "2 pricing entries"
+        "prices": []
       },
       {
         "name": "Chemical wash",
@@ -37604,7 +38791,17 @@
         "explanation": "Chemical Wash",
         "sourceUrl": "https://aboveallaircon.com.sg/",
         "capturedAt": "2026-10-10",
-        "prices": []
+        "prices": [
+          {
+            "label": "Aircon chemical wash",
+            "price": "See source details",
+            "detail": "per unit. GST: not stated",
+            "excerpt": "At Above All Aircon, we offer professional aircon chemical wash services in Singapore for just $60 per unit",
+            "sourceUrl": "https://aboveallaircon.com.sg/chemical-wash/",
+            "capturedAt": "2026-10-11",
+            "indicative": false
+          }
+        ]
       },
       {
         "name": "Chemical overhaul",
@@ -37718,7 +38915,17 @@
         "explanation": "rtake all kind of tasks - generalized job scope, specialized cleaning projects, part-time cleaning, weekly cleaning, commercial cleaning, and house cleaning ser",
         "sourceUrl": "https://www.avalon-services.com.sg/",
         "capturedAt": "2026-10-10",
-        "prices": []
+        "prices": [
+          {
+            "label": "Part-time helper, weekly / fortnightly (min. 3 bookings)",
+            "price": "From S$21 /hr",
+            "detail": "per hour. GST: not stated",
+            "excerpt": "MOST POPULAR Weekly / Fortnightly Best for regular upkeep From S$21 /hr Min. 3 bookings Dedicated cleaner every session",
+            "sourceUrl": "https://www.avalon-services.com.sg/service/part-time-helper/",
+            "capturedAt": "2026-10-11",
+            "indicative": false
+          }
+        ]
       },
       {
         "name": "Deep cleaning",
@@ -38757,18 +39964,7 @@
         "explanation": "Digital lock installation, emergency locksmith, door repair, carpentry, custom furniture & vinyl flooring - for HDB, condo & commerc",
         "sourceUrl": "https://kingcarpentry.sg/",
         "capturedAt": "2026-10-10",
-        "prices": [
-          {
-            "label": "Door lock",
-            "price": "See source details",
-            "detail": "per job (inferred from the job type; confirm with the company). GST: not stated. Promotional rate; confirm availability",
-            "excerpt": "What if my key breaks inside the lock in Singapore? | Our locksmiths use specialized key extraction tools to remove broken keys without damaging the lock mechanism. The cost typically ranges from $100-$200 depending on t",
-            "sourceUrl": "https://kingcarpentry.sg/faq",
-            "capturedAt": "2026-10-10",
-            "indicative": true
-          }
-        ],
-        "priceSummary": "Pricing reference"
+        "prices": []
       },
       {
         "name": "Tiling flooring",
@@ -39051,7 +40247,27 @@
         "explanation": "Painting Services",
         "sourceUrl": "https://tuba-eng.net/",
         "capturedAt": "2026-10-10",
-        "prices": []
+        "prices": [
+          {
+            "label": "Painting package, 2-room",
+            "price": "See source details",
+            "detail": "per package. GST: not stated",
+            "excerpt": "Painting Services Price Packages Transparent pricing with no hidden fees. ... 2-room $500 - $900 Starting Ideal for small spaces.",
+            "sourceUrl": "https://tuba-eng.net/painting-services/",
+            "capturedAt": "2026-10-11",
+            "indicative": false
+          },
+          {
+            "label": "Painting package, 4-room",
+            "price": "4-room $900 - $1,500 Starting Designed for medium homes.",
+            "detail": "per package. GST: not stated",
+            "excerpt": "4-room $900 - $1,500 Starting Designed for medium homes.",
+            "sourceUrl": "https://tuba-eng.net/painting-services/",
+            "capturedAt": "2026-10-11",
+            "indicative": false
+          }
+        ],
+        "priceSummary": "2 pricing entries"
       },
       {
         "name": "Drilling & mounting",
@@ -40663,7 +41879,17 @@
         "explanation": "aircon general service",
         "sourceUrl": "https://surecool.com.sg/",
         "capturedAt": "2026-10-10",
-        "prices": []
+        "prices": [
+          {
+            "label": "General service",
+            "price": "See source details",
+            "detail": "per unit. GST: not stated",
+            "excerpt": "Aircon Service Price General service $ 25 / per unit 2 unit -$50 3 unit -$75 4unit - $100",
+            "sourceUrl": "https://surecool.com.sg/",
+            "capturedAt": "2026-10-11",
+            "indicative": false
+          }
+        ]
       },
       {
         "name": "Chemical wash",
@@ -40671,7 +41897,17 @@
         "explanation": "aircon chemical wash",
         "sourceUrl": "https://surecool.com.sg/",
         "capturedAt": "2026-10-10",
-        "prices": []
+        "prices": [
+          {
+            "label": "Chemical wash",
+            "price": "See source details",
+            "detail": "per unit. GST: not stated",
+            "excerpt": "Chemical wash $ 60 / per unit 2 unit -$120 3 unit -$180 4unit - $240",
+            "sourceUrl": "https://surecool.com.sg/",
+            "capturedAt": "2026-10-11",
+            "indicative": false
+          }
+        ]
       },
       {
         "name": "Chemical overhaul",
@@ -40703,17 +41939,7 @@
         "explanation": "aircon repair",
         "sourceUrl": "https://surecool.com.sg/",
         "capturedAt": "2026-10-10",
-        "prices": [
-          {
-            "label": "Repair",
-            "price": "See source details",
-            "detail": "per job (inferred from the job type; confirm with the company). GST: not stated",
-            "excerpt": "How Much Does Aircon Service Cost? | The cost of aircon service varies depending on the type of service and the complexity of the job. Regular maintenance costs $50-$150, repairs range from $50-$500+, and new unit instal",
-            "sourceUrl": "https://surecool.com.sg/aircon-service-price/",
-            "capturedAt": "2026-10-10",
-            "indicative": false
-          }
-        ]
+        "prices": []
       },
       {
         "name": "Steam cleaning",
@@ -41424,16 +42650,7 @@
             "indicative": false
           },
           {
-            "label": "Electrical repair",
-            "price": "See source details",
-            "detail": "per visit. GST: not stated",
-            "excerpt": "From $180 | *Prices are estimates. $40 Transport & Inspection fee is waived if repair proceeds.",
-            "sourceUrl": "https://fixmyheater.sg/",
-            "capturedAt": "2026-10-10",
-            "indicative": false
-          },
-          {
-            "label": "Electrical repair",
+            "label": "Transport & inspection fee (waived when repair proceeds)",
             "price": "See source details",
             "detail": "per visit. GST: not stated",
             "excerpt": "Call +65 8888 1111 | ★ Inspection fee ($40) waived when repair proceeds · 0 night surcharge · Free old unit disposal with replacement",
@@ -41460,7 +42677,7 @@
             "indicative": false
           }
         ],
-        "priceSummary": "5 pricing entries"
+        "priceSummary": "4 pricing entries"
       }
     ],
     "highlights": [],
@@ -43895,7 +45112,35 @@
         "explanation": "Speed Engineering services - Aircon Servicing, Aircon Repair, Commercial Aircon Maintenance",
         "sourceUrl": "https://speedengineeringservices.com/",
         "capturedAt": "2026-10-10",
-        "prices": []
+        "prices": [
+          {
+            "label": "General servicing, wall mounted, one unit",
+            "price": "See source details",
+            "detail": "Quantity: 1. per unit. GST: not stated",
+            "excerpt": "GENERAL SERVICING $20 PER UNIT / THREE UNIT OR MORE $25 PER UNIT / TWO UNIT $40 PER UNIT / ONE UNIT",
+            "sourceUrl": "https://speedengineeringservices.com/servicing",
+            "capturedAt": "2026-10-11",
+            "indicative": false
+          }
+        ]
+      },
+      {
+        "name": "Steam cleaning",
+        "description": "",
+        "explanation": "",
+        "sourceUrl": "https://speedengineeringservices.com/servicing",
+        "capturedAt": "2026-10-11",
+        "prices": [
+          {
+            "label": "High pressure steam wash, one unit",
+            "price": "See source details",
+            "detail": "Quantity: 1. per unit. GST: not stated",
+            "excerpt": "HIGH PRESSURE STEAM WASH $35 PER UNIT / THREE UNIT OR MORE $40 PER UNIT / TWO UNIT $60 PER UNIT / ONE UNIT",
+            "sourceUrl": "https://speedengineeringservices.com/servicing",
+            "capturedAt": "2026-10-11",
+            "indicative": false
+          }
+        ]
       }
     ],
     "highlights": [],
@@ -43942,7 +45187,7 @@
         "capturedAt": "2026-10-10",
         "prices": [
           {
-            "label": "Repair",
+            "label": "Onsite inspection checking fee (waived if the repair proceeds within 1 month)",
             "price": "See source details",
             "detail": "per visit. GST: not stated",
             "excerpt": "7. How much does an onsite inspection cost? | The checking fee for an onsite inspection is $54.50 islandwide. However, this fee will be waived if you proceed with the repair work through us within 1 month.",
@@ -44227,7 +45472,17 @@
         "explanation": "General service",
         "sourceUrl": "https://www.bookfreezso.com/pricing",
         "capturedAt": "2026-10-10",
-        "prices": []
+        "prices": [
+          {
+            "label": "Wall-mounted aircon general servicing",
+            "price": "See source details",
+            "detail": "per unit. GST: not stated",
+            "excerpt": "Freezso lists wall-mounted aircon general servicing at $25 per unit",
+            "sourceUrl": "https://www.bookfreezso.com/faq",
+            "capturedAt": "2026-10-10",
+            "indicative": false
+          }
+        ]
       },
       {
         "name": "Chemical wash",
