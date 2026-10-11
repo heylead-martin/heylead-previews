@@ -1,7 +1,13 @@
-import {renderCard,renderCompactCard,splitDirectory} from './catalogue-card.mjs?v=20261011-shortlist';
+import {renderCard,renderCompactCard,splitDirectory} from './catalogue-card.mjs?v=20261011-density';
 import {filterCatalogue} from './catalogue-filter.mjs?v=20261011-counts';
 const root=document.querySelector('[data-catalogue]');
 if(root) {
+  const header=document.querySelector('.top');
+  if(header) {
+    const positionFilters=()=>root.style.setProperty('--filter-top',`${Math.ceil(header.getBoundingClientRect().height)+12}px`);
+    positionFilters();
+    new ResizeObserver(positionFilters).observe(header);
+  }
   const list=root.querySelector('.shortlist'),status=root.querySelector('[data-result-count]'),more=root.querySelector('[data-load-more]'),error=root.querySelector('[data-index-error]');
   const otherList=root.querySelector('[data-other-list]');
   const search=root.querySelector('[data-filter-search]'),area=root.querySelector('[data-area]'),rating=root.querySelector('[data-rating]'),sort=root.querySelector('[data-sort]'),category=root.querySelector('[data-category-filter]');
