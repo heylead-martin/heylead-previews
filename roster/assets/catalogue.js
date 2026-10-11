@@ -1,4 +1,5 @@
 import {renderCard,renderCompactCard,splitDirectory} from './catalogue-card.mjs?v=20261011-shortlist';
+import {filterCatalogue} from './catalogue-filter.mjs?v=20261011-counts';
 const root=document.querySelector('[data-catalogue]');
 if(root) {
   const list=root.querySelector('.shortlist'),status=root.querySelector('[data-result-count]'),more=root.querySelector('[data-load-more]'),error=root.querySelector('[data-index-error]');
@@ -10,9 +11,9 @@ if(root) {
   if(params.get('saved')==='1')root.querySelector('[data-filter="saved"]').checked=true;
   function apply(reset=true) {
     if(!loaded)return;if(reset)limit=12;
-    const savedSlugs=saved(),words=search.value.trim().toLowerCase().split(/\s+/).filter(Boolean);
+    const savedSlugs=saved();
     const active=[...root.querySelectorAll('[data-filter]:checked')].map(x=>x.dataset.filter);
-    let matches=rows.filter(c=>words.every(w=>[c.name,c.trade,c.area,c.description,...c.services,...(c.offerings||[])].join(' ').toLowerCase().includes(w))&&(!area.value||c.area===area.value)&&(!category?.value||c.category===category.value)&&(!rating.value||(c.ratingValue!==null&&c.ratingValue>=Number(rating.value)))&&active.every(f=>f==='saved'?savedSlugs.includes(c.slug):f==='price'?c.published:f==='reviews'?c.hasReviews:f==='whatsapp'?!!c.whatsapp:true));
+    const {matches,counts}=filterCatalogue(rows,{query:search.value,area:area.value,category:category?.value,rating:rating.value,active,savedSlugs});
     const groups=splitDirectory(matches,sort.value);
     list.innerHTML=groups.shortlist.map(c=>renderCard(c,savedSlugs.includes(c.slug))).join('');
     otherList.innerHTML=groups.others.slice(0,limit).map(c=>renderCompactCard(c,savedSlugs.includes(c.slug))).join('');
@@ -20,8 +21,8 @@ if(root) {
     root.querySelector('[data-other-section]').hidden=!groups.others.length;
     status.textContent=`${groups.shortlist.length} on the shortlist · ${groups.others.length} other ${groups.others.length===1?'company':'companies'}`;
     root.querySelector('[data-no-results]').hidden=matches.length>0;more.hidden=groups.others.length<=limit;
-    root.querySelector('[data-saved-count]').textContent=rows.filter(c=>savedSlugs.includes(c.slug)).length;
-    root.querySelector('[data-active-filters]').textContent=active.length||area.value||rating.value||category?.value?'(active)':'';
+    root.querySelectorAll('[data-filter-count]').forEach(el=>{el.textContent=counts[el.dataset.filterCount];});
+    root.querySelector('[data-active-filters]').textContent=active.length||area.value||rating.value||category?.value||search.value.trim()?'(active)':'';
   }
   async function load() {
     more.disabled=true;error.hidden=true;
