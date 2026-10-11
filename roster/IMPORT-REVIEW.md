@@ -1,71 +1,71 @@
 # Roster import review
 
-Prepared 10 October 2026 on `roster-db-import`. Local review only. Nothing pushed or published. Publishing requires Martin's approval.
+Updated 11 October 2026 on `roster-db-import`. Local review only. Nothing pushed or published. Publishing remains a separate step after Martin reviews the preview.
 
-## Release
+## Verified release
 
-- File: `companies-20261010-2242.json`
-- SHA256 verified against the release sidecar: `b13c99085c67d96003e00b7688bc2ecec3a0e9f522a1723da299de01fe5f74fa`
+- File: `companies-20261011-1204.json`
+- SHA256: `cd2dbdcbafdc27f85c47a2ca5f4f80afd3e3e966dcb0f43ef8e744531ffebca2`
 - Source rows: 5,444
-- Company pages included: 577
-- Source rows excluded: 4,867
-- Generated pages: 591
+- Rows marked as profiles in the release: 597
+- Company pages included: 513
+- Source rows excluded: 4,931
+- Total generated pages: 527
 
-| Trade | Included | Excluded |
+The 597 source profiles do not all meet the website's full-profile rules. Of those records, 64 lack sourced About content and 26 are excluded by other publication rules. Another six records outside the release's profiled segment have the required sourced fields, producing 513 eligible company pages. The old preview had 577; the 64-page reduction follows removal of metadata from About content. `self_description` is never substituted for missing About text.
+
+| Primary trade | Included | Excluded |
 | --- | ---: | ---: |
-| Aircon | 202 | 1703 |
-| Plumbing | 82 | 426 |
-| Electrician | 109 | 2573 |
-| Handyman | 86 | 301 |
-| Home cleaning | 123 | 575 |
+| Aircon | 176 | 1723 |
+| Plumbing | 68 | 371 |
+| Electrician | 84 | 2026 |
+| Handyman | 76 | 308 |
+| Home cleaning | 109 | 503 |
 
-Trade totals overlap because a company may serve several trades.
+Each record is counted under its `primary_trade`. Totals no longer overlap.
 
-## What changed
+## Changes in this update
 
-The reusable importer reads the verified release selected by LATEST, preserves stable slugs, logs exclusions, and keeps the original profile baseline. Pages combine services, prices and expandable explanations, with sourced company summaries and additional details. Reviews remain directly above FAQs.
+- Re-imported the new checksum-verified release. The same reusable command remains available in `README.md`.
+- Trade pages, homepage counts and search category filters now use the primary trade.
+- Sourced alternate numbers appear as "Also listed" with a short source label, such as BCA register. The primary phone remains the main call action. 47 included profiles have these alternate contact numbers.
+- Prices retain monthly session counts, hours per session, quantity, GST and promotional details. Inferred units are explicitly identified. 123 included profiles have at least one inferred unit.
+- Sourced best-for and poor-fit notes fill empty sections while original curated copy takes precedence. Service-area excerpts are displayed with their sources.
+- The update includes 507 summaries, 186 sourced FAQ sets, 334 best-for records, 30 poor-fit records and 312 service-area records.
+- All pages remain noindex. The existing preview authentication and unsent account/quote previews are unchanged.
 
-There are 571 sourced summaries, 210 company-specific FAQ sets, 204 warranty records, 145 founding-year records, 159 advertised emergency-availability records, 95 brand lists, 63 response-time records, 61 payment-method lists and 313 social-link sets. Fields are displayed only where supplied and sourced. Ratings remain dated source sentences.
+## Preserved originals
 
-Trade directories support location, price, Google rating, review, WhatsApp and saved-company filters, sorting and load more. Search covers all included profiles. Account and quote screens remain unsent previews. Noindex and the existing preview authentication remain in place.
+All 16 hand-written profile objects still match the protected baseline exactly. Fifteen have generated pages. Billy Aircon remains withheld under the release's `no-sg-postal-code` flag; its write-up is retained for restoration once the source record is verified. The invalidated property.co review excerpt for 338 Aircon remains omitted.
 
-## Original profiles
+## Remaining data limits
 
-All 16 hand-written profile objects are unchanged in `data/profiles.json` and preserved in `data/curated/`. Fifteen currently have generated pages.
-
-Billy Aircon is withheld because the new release flags `no-sg-postal-code`. The explicit exclusion rule has been applied without deleting its write-up. Martin was asked whether to retain its original page pending verification. Fix or clear the release flag before a later import to restore the page.
-
-338 Aircon's invalidated property.co review link returned 404 in the supplied spot-check. That excerpt was removed. Its original company write-up remains unchanged.
-
-## Data issues requiring review
-
-- 138 profiles contain automatically extracted pricing text that needs editorial review. The importer retains original wording behind disclosures and uses "See source details" when a field is a paragraph rather than a short price. It does not turn extracted amounts into an invented rate card.
-- Examples: City Cooling includes repeated page-title pricing references and an eight-unit label beside a chemical-wash excerpt that does not establish that quantity. MCAAS has a carpet-cleaning excerpt assigned to the mattress job. Correct these in the next database release before public launch.
-- 8 profiles have general or indicative pricing, shown separately from company rates.
-- 55 profiles have alternate phone records. Only the supplied primary phone is shown.
-- 149 profiles have alternate address records. Primary addresses are retained; map embeds and directions omit unit numbers.
-- The supplied spot-check could not re-find Google listings for IJ Handyman, Commercial Engineering, DW Deep Cleaning and Doctor Cool. Their dated source snapshots are not newly verified ratings.
-- The spot-check specifically recommends human review of AFRA's conflicting contact numbers and Doctor Clean's business model. These are non-blocking source caveats, not resolved findings from this build.
-- New blocking flags also withhold spam-affected sites, duplicate candidates and the non-Singapore cleaning record. Complete reasons are in `data/import-report.json`.
+- 77 included profiles trigger the pricing review rule because they retain long extracted text or "as printed" units. This is a review queue, not a finding that all 77 are wrong. Original wording is available in disclosures and long fields are shown as "See source details" rather than invented short prices.
+- Specific earlier concerns remain in the release: MCAAS has a carpet-cleaning excerpt assigned to the mattress job, and City Cooling retains repeated page-title pricing references plus a quantity label that is not established by its excerpt. These need correction in the database before calling the release fully clean.
+- 8 profiles have general or indicative pricing, which stays labelled separately from company rates.
+- 135 profiles retain alternate-address records. Only the primary address is displayed; map embeds and directions omit unit numbers.
+- The four Google snapshots that the supplied 10 October spot-check could not re-find are still dated 10 October in this release: IJ Handyman, Commercial Engineering, DW Deep Cleaning and Doctor Cool. This build has not independently verified those ratings.
+- The release notes say units and coverage were extracted using text rules and were not hand-verified row by row. Displayed sources and inferred-unit labels preserve that distinction.
+- The separate Drive `summary.json` still reports an older generation time. This build uses the verified JSON release and its release notes.
 
 ## Validation
 
-- 12 importer and data-rule tests passed.
-- 591 generated pages passed local link and fragment checks, unique titles and descriptions, noindex, schema restrictions, section order, map privacy and source-count checks.
-- All 16 original write-ups match their baseline exactly.
-- Repeating the verified release import and build produced byte-identical generated data and pages.
-- Ten deterministic random company pages rendered with populated sections, no invalid data placeholders and no horizontal overflow at 1440px.
-- At 390px, service disclosures, source conditions and company FAQs worked, with 16px body text and no horizontal overflow. Google Maps loaded at block level.
-- Browser checks covered search, empty results, filters, sorting, load more, saved-company toggling and dynamic results.
-- HTML plus JSON per trade: Aircon 245.0 KB, Plumbing 121.3 KB, Electrician 147.5 KB, Handyman 123.8 KB, Home cleaning 161.0 KB. All below 300 KB.
+- 16 importer and data-rule tests passed, including primary-trade totals, source-labelled alternate numbers, monthly package scope and the rule against using metadata as About text.
+- All 527 generated pages passed local links/fragments, unique metadata, noindex, schema restrictions, section order and map privacy checks.
+- Original content matches all 16 protected baseline objects.
+- Ten deterministic random profiles rendered with populated sections, no invalid data placeholders and no horizontal overflow.
+- Browser checks covered alternate phone labels, sourced fit notes, monthly pricing details, primary-trade filtering and empty results. Mobile body text is 16px, with no overflow at a measured 325px viewport. The desktop profile and search checks passed at 1280px.
+- HTML plus JSON: Aircon 220.4 KB, Plumbing 108.5 KB, Electrician 123.4 KB, Handyman 114.0 KB, Home cleaning 148.2 KB. All below 300 KB.
 
-## Local review links
+Sampled profiles: Hygieneman Services, ESP Cleaning Services, IFC Air-Cond Engineering, EMSS Engineering, Decom Air Con, AFRA Engineering, ACNCSG, EverShine Cleaning, HomeUnited Repair and Ace Plumbing.
 
-The temporary local review server is on port 8880. It bypasses preview authentication only in its local responses, without changing deployed authentication files.
+## Local review
 
-- Directory: http://127.0.0.1:8880/roster/aircon-servicing/
-- AC Hub, including sourced FAQs: http://127.0.0.1:8880/roster/company/ac-hub-pte-ltd-city-ice-air-conditioning/
-- MCAAS, including pricing extraction issues: http://127.0.0.1:8880/roster/company/mcaas-solutions-pte-ltd/
-- Cool Aircon, original write-up and unified service pricing: http://127.0.0.1:8880/roster/company/cool-aircon/
+The local server remains on port 8880. It serves a local authentication stub without modifying deployed authentication files.
 
-Use `README.md` for future import and validation commands. Do not merge or push until Martin reviews the preview and approves publication.
+- Homepage: http://127.0.0.1:8880/roster/
+- AFRA, alternate phone and source label: http://127.0.0.1:8880/roster/company/afra-engineering/
+- Superb Cleaning, monthly package scope: http://127.0.0.1:8880/roster/company/superb-cleaning-pte-ltd/
+- Cool Aircon, original write-up: http://127.0.0.1:8880/roster/company/cool-aircon/
+
+The complete exclusion list and warning queue are in `data/import-report.json`. Keep publication separate from this local import and review.

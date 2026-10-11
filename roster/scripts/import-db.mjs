@@ -55,7 +55,9 @@ function serviceRows(row, trade) {
 export function priceOption(item) {
   const details = [
     item.qty != null ? `Quantity: ${item.qty}` : '',
-    text(item.unit),
+    text(item.unit)+(item.unitInferred?' (inferred from the job type; confirm with the company)':''),
+    item.sessions_per_month != null ? `${item.sessions_per_month} sessions per month` : '',
+    item.hours_per_session != null ? `${item.hours_per_session} hours per session` : '',
     text(item.gst_note || item.gst) ? `GST: ${text(item.gst_note || item.gst)}` : '',
     item.promo ? 'Promotional rate; confirm availability' : '',
     item.was_amount_sgd != null ? `Previously S$${item.was_amount_sgd}` : ''
@@ -72,11 +74,24 @@ export function verifyRelease(source, checksum) {
   return actual;
 }
 
+export function alternatePhones(phone, primary) {
+  const primaryDigits=String(primary||'').replace(/\D/g,'');
+  const seen=new Set([primaryDigits]);
+  return (Array.isArray(phone?.alt)?phone.alt:[]).flatMap(item=>{
+    const number=value(item),digits=number.replace(/\D/g,''),url=cited(item);
+    if(!url||!digits||seen.has(digits))return [];
+    seen.add(digits);
+    const host=new URL(url).hostname;
+    const label=/BCA/i.test(item.sourceLabel||'')||host==='data.gov.sg'?'BCA register':/Google/i.test(item.sourceLabel||'')?'Google Maps':text(item.sourceLabel)||host.replace(/^www\./,'');
+    return [{value:number,sourceUrl:url,sourceLabel:label,capturedAt:item.capturedAt||null}];
+  });
+}
+
 function reviewRows(row, mapsUrl) {
   return (row.reviews||[]).filter(r=>r.excerpt && (r.author||r.author_initials_or_handle) && (r.date||r.relativeTime) && cited(r)).slice(0,5).map(r=>({excerpt:text(r.excerpt),author:text(r.author||r.author_initials_or_handle),relativeTime:text(r.date||r.relativeTime),sourceUrl:http(r.source_url||r.sourceUrl),sourceLabel:text(r.source||r.sourceLabel),mapsUrl:http(r.maps_url)||mapsUrl,capturedAt:r.capturedAt||row.checked}));
 }
 export function importDatabase(db, seeds, registry={}) {
-  const report={sourceChecked:db.checked,sourceRows:db.companies.length,published:[],excluded:[],warnings:[],byTrade:{}};
+  const report={sourceChecked:db.checked,sourceRows:db.companies.length,sourceProfiles:db.companies.filter(c=>c.segment==='profiled').length,published:[],excluded:[],warnings:[],byTrade:{}};
   for(const t of Object.keys(types)) report.byTrade[t]={published:0,excluded:0};
   const curated=new Map(seeds.companies.companies.filter(c=>c.publish!==false).map(c=>[c.slug,c]));
   const profiles=structuredClone(seeds.profiles), presentation=structuredClone(seeds.presentation);
@@ -84,6 +99,8 @@ export function importDatabase(db, seeds, registry={}) {
   for(const raw of db.companies) {
     const row=clean(raw); if(row.flags?.includes('price-indicative-only')) for(const p of row.price_lines||[]) p.indicative=true; const original=curated.get(row.rosterProfile?.slug);
     const categories=[...new Set((row.categories||[]).map(cat).filter(t=>types[t]))];
+    const category=cat(row.primary_trade)||original?.category||cat(row.profile?.trade)||categories[0];
+    if(row.primary_trade&&!types[category])throw new Error(`Invalid primary trade for ${row.id}`);
     const reasons=(row.flags||[]).filter(f=>BLOCKED.has(f));
     if(row.profile_rolled_back) reasons.push('profile-rolled-back');
     const website=http(value(row.website)||original?.website?.value);
@@ -96,13 +113,12 @@ export function importDatabase(db, seeds, registry={}) {
       if(!website) reasons.push('missing-company-website');
       if(website && /(^|\.)(lookup\.sg|facebook\.com|instagram\.com|google\.com|maps\.google\.com)$/.test(new URL(website).hostname)) reasons.push('website-not-company-site');
     }
-    if(!categories.length&&!original) reasons.push('missing-trade');
+    if(!types[category]) reasons.push('missing-trade');
     if(reasons.length) {
-      report.excluded.push({id:row.id,name:row.name,categories,reasons:[...new Set(reasons)],...(original?{curated:true,slug:original.slug}: {})});
-      for(const t of categories) report.byTrade[t].excluded++;
+      report.excluded.push({id:row.id,name:row.name,categories,primaryTrade:category,reasons:[...new Set(reasons)],...(original?{curated:true,slug:original.slug}: {})});
+      if(types[category]) report.byTrade[category].excluded++;
       continue;
     }
-    const category=original?.category || cat(row.profile?.trade) || categories[0];
     if(!types[category]) throw new Error(`Invalid trade for ${row.id}`);
     let slug=original?.slug||registry[row.id]||slugify(row.profile?.slug||row.name)||slugify(row.id);
     if(!original && used.has(slug) && registry[row.id]!==slug) slug+=`-${slugify(row.id)}`;
@@ -113,6 +129,8 @@ export function importDatabase(db, seeds, registry={}) {
     if(address) {address.street=address.value;address.postal=text(row.address?.postal);}
     const enrichment={checkedAt:row.checked,supportedServices:(row.services||[]).filter(cited).map(s=>({name:human(s.name),sourceUrl:s.sourceUrl,capturedAt:s.capturedAt})),about:(row.about||[]).filter(a=>text(a.text)&&cited(a)),hours:row.hours?.text&&cited(row.hours)?row.hours:row.hours_google?.text&&cited(row.hours_google)?row.hours_google:null,serviceArea:row.service_area?.value&&cited(row.service_area)?row.service_area:null,residential:row.residential?.value&&cited(row.residential)?row.residential:null,licences:(row.licences||[]).filter(l=>l.type&&http(l.claimedOn||l.sourceUrl)),management:(row.management||[]).filter(m=>m.name&&cited(m)),uen:text(row.uen),uenSource:http(row.uen_source?.sourceUrl),operatorGroup:row.operator_group,priceLines:(row.price_lines||[]).filter(p=>p.service&&p.price_text&&cited(p)),websiteCheck:row.profile?.websiteCheck||null};
     Object.assign(enrichment, {
+      bestFor:(row.bestFor||[]).filter(f=>text(f.text)&&cited(f)).map(f=>({...f,sourceUrl:cited(f)})),
+      poorFit:(row.poorFit||[]).filter(f=>text(f.text)&&cited(f)).map(f=>({...f,sourceUrl:cited(f)})),
       summary: row.summary?.text && row.summary?.sources?.some(http) ? {text:row.summary.text.replace(/\ba aircon\b/g,'an aircon').replace(/\ba electrician\b/g,'an electrician'),sources:row.summary.sources.map(http).filter(Boolean),capturedAt:row.summary.generatedAt} : null,
       faqs:(row.faqs||[]).filter(f=>text(f.q)&&text(f.a)&&cited(f)).map(f=>({q:f.q,a:f.a,sourceUrl:cited(f),capturedAt:f.capturedAt||row.checked})),
       highlights:(row.highlights||[]).filter(h=>text(h.text)&&cited(h)&&(!/publishes prices/i.test(h.text)||enrichment.priceLines.length)).map(h=>({...h,sourceUrl:cited(h)})),
@@ -129,6 +147,8 @@ export function importDatabase(db, seeds, registry={}) {
       if(deadReviews.length) {company.reviews=company.reviews.filter(r=>!deadReviews.includes(r.sourceUrl));report.warnings.push({slug,issue:'Invalidated review source removed',urls:deadReviews});}
     }
     company.databaseId=row.id;company.enrichment=enrichment;
+    company.primaryTrade=category;company.category=category;company.schemaType=types[category];
+    company.alternatePhones=alternatePhones(row.phone,company.phone?.value);
     company.categories=[...new Set([category,...categories])];
     company.area=district(company.address?.value||'');
     company.googleRating=Number.isFinite(row.google_rating)&&row.google_rating>0&&row.google_rating<=5&&http(row.google_maps_url)&&row.google_read_at?{value:row.google_rating,count:Number.isInteger(row.google_review_count)&&row.google_review_count>0?row.google_review_count:null,sourceUrl:http(row.google_maps_url),checkedAt:row.google_read_at,sourceType:'google-maps-search'}:null;
@@ -143,11 +163,12 @@ export function importDatabase(db, seeds, registry={}) {
     if(!presentation[slug].logo) {const logo=photos.find(p=>p.kind==='logo');if(logo) presentation[slug].logo=logo.fileUrl;}
     if(!presentation[slug].photos?.length) presentation[slug].photos=photos.filter(p=>p.kind!=='logo').slice(0,3).map(p=>({src:p.fileUrl,sourceUrl:p.pageUrl,caption:`${human(p.kind)} photo from ${company.name}`}));
     companies.push(company);
-    report.published.push({id:row.id,slug,name:company.name,categories:company.categories,curated:!!original});
-    for(const t of company.categories) report.byTrade[t].published++;
+    report.published.push({id:row.id,slug,name:company.name,categories:company.categories,primaryTrade:category,curated:!!original});
+    report.byTrade[category].published++;
     if(row.flags?.length) report.warnings.push({slug,issue:'Non-blocking database flags',flags:row.flags});
-    if((row.phone?.alt||row.alt_contacts?.some(c=>c.field==='phone'))&&!original) report.warnings.push({slug,issue:'Alternate phone omitted; primary database phone retained'});
+    if(company.alternatePhones.length) report.warnings.push({slug,issue:'Alternate phone shown with source label; primary phone remains the main contact'});
     if((row.address?.alt||row.alt_contacts?.some(c=>c.field==='address'))) report.warnings.push({slug,issue:'Alternate address exists; primary database address retained'});
+    if(enrichment.priceLines.some(p=>p.unitInferred)) report.warnings.push({slug,issue:'Inferred price units labelled for confirmation'});
     if(enrichment.priceLines.some(indicative)) report.warnings.push({slug,issue:'General pricing references labelled separately from company rates'});
     if(enrichment.priceLines.some(p=>p.service.length>120||p.price_text.length>120||/as printed/i.test(p.unit||''))) report.warnings.push({slug,issue:'Automatically extracted price text needs editorial review; source wording retained'});
   }

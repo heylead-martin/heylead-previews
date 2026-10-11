@@ -1,13 +1,13 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { importDatabase, BLOCKED, blockAddress, verifyRelease } from './import-db.mjs';
+import { importDatabase, BLOCKED, blockAddress, verifyRelease, priceOption, alternatePhones } from './import-db.mjs';
 import { structuredHours, concise, ratingFact } from '../lib/expanded.mjs';
 const empty={companies:{companies:[]},profiles:{},presentation:{}};
 const row=(id='test')=>({id,name:'Example Aircon',categories:['aircon'],checked:'2026-10-10',flags:[],website:'https://example.com',about:[{text:'Aircon services.',sourceUrl:'https://example.com',capturedAt:'2026-10-10'}],services:[{name:'general-service',excerpt:'General service',sourceUrl:'https://example.com/services',capturedAt:'2026-10-10'}],phone:{value:'+65 6123 4567',sourceUrl:'https://example.com/contact',alt:[{value:'+65 8000 0000'}]},address:{value:'123 Bedok Road #03-12, Singapore 123456',sourceUrl:'https://example.com/contact'},price_lines:[],reviews:[],profile:{websiteCheck:{result:'active'}}});
 const db=companies=>({checked:'2026-10-10',companies,operatorGroups:{}});
 test('Every publication-blocking flag and rollback excludes a full profile',()=>{for(const flag of BLOCKED){const result=importDatabase(db([{...row(),flags:[flag]}]),empty);assert.equal(result.companies.companies.length,0,flag);assert.ok(result.report.excluded[0].reasons.includes(flag));}assert.equal(importDatabase(db([{...row(),profile_rolled_back:{reason:'review'}}]),empty).report.excludedCount,1);});
 test('Missing sourced required fields prevents publication',()=>{for(const key of ['about','services','phone','address','website'])assert.equal(importDatabase(db([{...row(),[key]:null}]),empty).report.excludedCount,1,key);});
-test('Import retains only the primary phone and maintains stable slugs across reruns',()=>{const first=importDatabase(db([row('one'),row('two')]),empty);assert.equal(first.companies.companies.length,2);assert.equal(new Set(first.companies.companies.map(x=>x.slug)).size,2);assert.equal(first.companies.companies[0].phone.alt,undefined);const second=importDatabase(db([row('two'),row('one')]),empty,first.registry);assert.deepEqual(second.registry,first.registry);assert.deepEqual(second.companies,first.companies);});
+test('Main contact remains primary and slugs stay stable across reruns',()=>{const first=importDatabase(db([row('one'),row('two')]),empty);assert.equal(first.companies.companies.length,2);assert.equal(new Set(first.companies.companies.map(x=>x.slug)).size,2);assert.equal(first.companies.companies[0].phone.alt,undefined);const second=importDatabase(db([row('two'),row('one')]),empty,first.registry);assert.deepEqual(second.registry,first.registry);assert.deepEqual(second.companies,first.companies);});
 test('Original content and contacts win; flagged review source is removed',()=>{const c={slug:'original',name:'Original',category:'aircon',phone:{value:'+65 6111 1111',sourceUrl:'https://original.example'},website:{value:'https://original.example'},reviews:[{sourceUrl:'https://old.example/review'}],facts:[],mapsUrl:'https://maps.google.com/?cid=1'};const p={about:['Hand-written text.'],services:[]};const seed={companies:{companies:[c]},profiles:{original:p},presentation:{original:{price:'Ask for a quote',published:false}}};const r={...row(),rosterProfile:{slug:'original'},flag_details:[{flag:'review-source-404',url:'https://old.example/review'}]};const result=importDatabase(db([r]),seed);assert.deepEqual(result.profiles.original,p);assert.equal(result.companies.companies[0].phone.value,c.phone.value);assert.equal(result.companies.companies[0].reviews.length,0);const withheld=importDatabase(db([{...r,flags:['website-inactive']}]),seed);assert.equal(withheld.report.excluded[0].curated,true);assert.deepEqual(withheld.profiles.original,p);assert.equal(withheld.companies.companies.length,0);assert.throws(()=>importDatabase(db([]),seed),/missing from the release/);});
 test('Block-level map query omits unit numbers',()=>{assert.equal(blockAddress('123 Bedok Rd #03-12, Singapore 123456'),'123 Bedok Rd, Singapore 123456');assert.equal(blockAddress('88 Street Unit 02-01, Singapore 123456'),'88 Street, Singapore 123456');});
 test('Google sentence has a source date and omits an absent count',()=>{const result=ratingFact({googleRating:{value:4.8,count:null,sourceUrl:'https://maps.google.com/?cid=1',checkedAt:'2026-10-10T12:00+03:00'}});assert.equal(result.text,'Google Maps: 4.8 (checked 10 Oct 2026)');assert.equal(ratingFact({rating:{value:4.8,count:10,sourceUrl:'https://example.com',label:'x'},website:{value:'https://example.com'}}).google,false);});
@@ -35,4 +35,27 @@ test('Expanded sourced fields and offer conditions survive import',()=>{
   const result=importDatabase(db([r]),empty),e=result.companies.companies[0].enrichment,s=result.profiles['example-aircon'].services;
   assert.equal(e.summary.text,r.summary.text);assert.equal(e.faqs[0].sourceUrl,r.faqs[0].source_url);assert.equal(e.foundedYear.value,2009);assert.equal(e.socials.length,1);
   assert.equal(s.length,1);assert.equal(s[0].prices.length,1);assert.match(s[0].prices[0].detail,/Quantity: 2/);assert.match(s[0].prices[0].detail,/GST: included/);assert.match(s[0].prices[0].detail,/Promotional rate/);
+});
+
+test('Primary trade determines one directory and matching report totals',()=>{
+  const one={...row('one'),categories:['aircon','electrician'],primary_trade:'electrician'};
+  const two={...row('two'),categories:['aircon','plumbing'],primary_trade:'plumbing',flags:['website-inactive']};
+  const result=importDatabase(db([one,two]),empty);
+  assert.equal(result.companies.companies[0].category,'electrician');assert.equal(result.report.byTrade.electrician.published,1);assert.equal(result.report.byTrade.aircon.published,0);
+  assert.equal(result.report.byTrade.plumbing.excluded,1);assert.equal(result.report.byTrade.aircon.excluded,0);
+});
+test('Alternate phones require a source, carry its label and never replace the main number',()=>{
+  const r=row();r.phone.alt=[{value:'+65 6123 4567',sourceUrl:'https://example.com'},{value:'+65 8765 4321',sourceUrl:'https://data.gov.sg/example',sourceLabel:'BCA register (old file)'},{value:'+65 8000 0000'},{value:'+65 8765 4321',sourceUrl:'https://example.com'}];
+  const c=importDatabase(db([r]),empty).companies.companies[0];assert.equal(c.phone.value,'+65 6123 4567');assert.deepEqual(c.alternatePhones.map(p=>[p.value,p.sourceLabel]),[['+65 8765 4321','BCA register']]);
+  assert.deepEqual(alternatePhones({alt:[{value:'+65 8123 4567',sourceUrl:'javascript:alert(1)'}]},''),[]);
+});
+test('Monthly package scope and inferred units are explicit',()=>{
+ const monthly=priceOption({service:'Regular cleaning',price_text:'S$150',unit:'per month',sessions_per_month:2,hours_per_session:3,sourceUrl:'https://example.com'});
+ assert.match(monthly.detail,/per month/);assert.match(monthly.detail,/2 sessions per month/);assert.match(monthly.detail,/3 hours per session/);
+ assert.match(priceOption({service:'Chemical wash',price_text:'S$80',unit:'per unit',unitInferred:true,sourceUrl:'https://example.com'}).detail,/inferred from the job type/);
+});
+test('Fit notes keep their sources and metadata cannot replace missing About content',()=>{
+ const r=row();r.bestFor=[{text:'Offers cleaning',source_url:'https://example.com/services'},{text:'Uncited claim'}];r.poorFit=[{text:'Minimum booking applies',source_url:'https://example.com/prices'}];
+ const e=importDatabase(db([r]),empty).companies.companies[0].enrichment;assert.equal(e.bestFor.length,1);assert.equal(e.poorFit[0].sourceUrl,'https://example.com/prices');
+ r.about=[];r.self_description={text:'Marketing metadata',sourceUrl:'https://example.com'};assert.equal(importDatabase(db([r]),empty).report.excluded[0].reasons[0],'missing-sourced-about');
 });

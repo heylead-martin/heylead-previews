@@ -191,12 +191,6 @@
     "summarizedAt": "2026-10-10",
     "photos": []
   },
-  "a-class-aircon-management": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
-    "photos": []
-  },
   "a-max-aircon": {
     "published": true,
     "price": "See published prices",
@@ -207,6 +201,12 @@
     "published": false,
     "price": "Ask for a quote",
     "detail": "No company rate captured. Ask for a job-specific quote.",
+    "photos": []
+  },
+  "aera-pte-ltd": {
+    "published": true,
+    "price": "See published prices",
+    "detail": "4 sourced pricing entries. Confirm the job, inclusions and total.",
     "photos": []
   },
   "afra-engineering": {
@@ -239,12 +239,6 @@
     "detail": "No company rate captured. Ask for a job-specific quote.",
     "photos": []
   },
-  "alpha-omega-trinity-pte-ltd": {
-    "published": true,
-    "price": "See published prices",
-    "detail": "4 sourced pricing entries. Confirm the job, inclusions and total.",
-    "photos": []
-  },
   "alpine-aire-services": {
     "published": false,
     "price": "Ask for a quote",
@@ -252,9 +246,9 @@
     "photos": []
   },
   "amazing-aircon-engineering-pte-ltd": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "published": true,
+    "price": "See published prices",
+    "detail": "1 sourced pricing entries. Confirm the job, inclusions and total.",
     "photos": []
   },
   "amyth-aircon-services": {
@@ -269,22 +263,10 @@
     "detail": "No company rate captured. Ask for a job-specific quote.",
     "photos": []
   },
-  "aircon-servicing": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
-    "photos": []
-  },
   "aircon-uncle": {
     "published": false,
     "price": "Ask for a quote",
     "detail": "No company rate captured. Ask for a job-specific quote.",
-    "photos": []
-  },
-  "airemax-aircon-pte-ltd": {
-    "published": true,
-    "price": "See published prices",
-    "detail": "1 sourced pricing entries. Confirm the job, inclusions and total.",
     "photos": []
   },
   "airtech-sg": {
@@ -341,6 +323,12 @@
     "detail": "No company rate captured. Ask for a job-specific quote.",
     "photos": []
   },
+  "cooling-point-aircon-services": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "photos": []
+  },
   "coolman-aircon-servicing-pte-ltd": {
     "published": true,
     "price": "See published prices",
@@ -366,21 +354,21 @@
     "photos": []
   },
   "decom-air-con-engineering-service-pte-ltd": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
-    "photos": []
-  },
-  "easy-cool-engineering-pte-ltd": {
     "published": true,
     "price": "See published prices",
-    "detail": "7 sourced pricing entries. Confirm the job, inclusions and total.",
+    "detail": "4 sourced pricing entries. Confirm the job, inclusions and total.",
     "photos": []
   },
   "ec-aircon-services-pte-ltd": {
     "published": true,
     "price": "See published prices",
     "detail": "12 sourced pricing entries. Confirm the job, inclusions and total.",
+    "photos": []
+  },
+  "euconair-services-pte-ltd": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
     "photos": []
   },
   "eurohub-aircon-pte-ltd-best-aircon-servicing-aircon-repair-a": {
@@ -390,6 +378,12 @@
     "photos": []
   },
   "everest-aircon-pte-ltd": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "photos": []
+  },
+  "fortuna-air-conditioning-electrical-pte-ltd": {
     "published": false,
     "price": "Ask for a quote",
     "detail": "No company rate captured. Ask for a job-specific quote.",
@@ -432,6 +426,12 @@
     "photos": []
   },
   "hai-khim-ev": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "photos": []
+  },
+  "heng-tung-pte-ltd": {
     "published": false,
     "price": "Ask for a quote",
     "detail": "No company rate captured. Ask for a job-specific quote.",
@@ -492,15 +492,21 @@
     "photos": []
   },
   "l-tech-aircon": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "published": true,
+    "price": "See published prices",
+    "detail": "2 sourced pricing entries. Confirm the job, inclusions and total.",
     "photos": []
   },
   "lemoncool-aircon": {
     "published": true,
     "price": "See published prices",
     "detail": "1 sourced pricing entries. Confirm the job, inclusions and total.",
+    "photos": []
+  },
+  "mega-cool-air-conditioning-electrical-engineering": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
     "photos": []
   },
   "met-services": {
@@ -510,6 +516,12 @@
     "photos": []
   },
   "mubest-pte-ltd": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "photos": []
+  },
+  "nam-sun-electrical-air-conditioning-pte-ltd": {
     "published": false,
     "price": "Ask for a quote",
     "detail": "No company rate captured. Ask for a job-specific quote.",
@@ -533,6 +545,12 @@
     "detail": "No company rate captured. Ask for a job-specific quote.",
     "photos": []
   },
+  "pacific-cool-air-con-services-pte-ltd": {
+    "published": true,
+    "price": "See published prices",
+    "detail": "3 sourced pricing entries. Confirm the job, inclusions and total.",
+    "photos": []
+  },
   "passionair-m-e-pte-ltd": {
     "published": false,
     "price": "Ask for a quote",
@@ -540,12 +558,6 @@
     "photos": []
   },
   "perita-electrical-engineering-pte-ltd": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
-    "photos": []
-  },
-  "airloft-by-poh-meng-engineering": {
     "published": false,
     "price": "Ask for a quote",
     "detail": "No company rate captured. Ask for a job-specific quote.",
@@ -581,10 +593,10 @@
     "detail": "1 sourced pricing entries. Confirm the job, inclusions and total.",
     "photos": []
   },
-  "sky-blue-aircon-engineering-pte-ltd": {
-    "published": true,
-    "price": "See published prices",
-    "detail": "8 sourced pricing entries. Confirm the job, inclusions and total.",
+  "sky-mac-aircon-engineering-pte-ltd": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
     "photos": []
   },
   "skyzone-aircon-pte-ltd": {
@@ -594,12 +606,6 @@
     "photos": []
   },
   "solution-aircon-engrg-pte-ltd": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
-    "photos": []
-  },
-  "south-air-conditioning-refrigeration-services": {
     "published": false,
     "price": "Ask for a quote",
     "detail": "No company rate captured. Ask for a job-specific quote.",
@@ -642,9 +648,9 @@
     "photos": []
   },
   "twin-city-air-conditioning-engineering": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "published": true,
+    "price": "See published prices",
+    "detail": "1 sourced pricing entries. Confirm the job, inclusions and total.",
     "photos": []
   },
   "vision-air-pte-ltd": {
@@ -654,9 +660,9 @@
     "photos": []
   },
   "xool-aircon-experts-no-1-rated-service-provider": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "published": true,
+    "price": "See published prices",
+    "detail": "5 sourced pricing entries. Confirm the job, inclusions and total.",
     "photos": []
   },
   "yl-integrated-pte-ltd": {
@@ -677,16 +683,10 @@
     "detail": "10 sourced pricing entries. Confirm the job, inclusions and total.",
     "photos": []
   },
-  "bsh-engineering-ptd-ltd": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
-    "photos": []
-  },
   "blossom-aircon-installation-replacement-and-servicing-work-s": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "published": true,
+    "price": "See published prices",
+    "detail": "1 sourced pricing entries. Confirm the job, inclusions and total.",
     "photos": []
   },
   "cje-engineering-pte-ltd": {
@@ -696,12 +696,6 @@
     "photos": []
   },
   "city-cleaning": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
-    "photos": []
-  },
-  "elan-electrical-services-pte-ltd": {
     "published": false,
     "price": "Ask for a quote",
     "detail": "No company rate captured. Ask for a job-specific quote.",
@@ -803,12 +797,6 @@
     "detail": "No company rate captured. Ask for a job-specific quote.",
     "photos": []
   },
-  "skyteam-electrical-pte-ltd": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
-    "photos": []
-  },
   "skywave-solutions-pte-ltd": {
     "published": false,
     "price": "Ask for a quote",
@@ -852,9 +840,9 @@
     "photos": []
   },
   "trizone-electrical-aircon-pte-ltd": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "published": true,
+    "price": "See published prices",
+    "detail": "6 sourced pricing entries. Confirm the job, inclusions and total.",
     "photos": []
   },
   "u-sheng-pte-ltd": {
@@ -864,9 +852,9 @@
     "photos": []
   },
   "yong-jin-solutions-engineering-pte-ltd": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "published": true,
+    "price": "See published prices",
+    "detail": "6 sourced pricing entries. Confirm the job, inclusions and total.",
     "photos": []
   },
   "a1-handyman": {
@@ -888,6 +876,24 @@
     "photos": []
   },
   "whissh-singapore-luxury-home-office-services": {
+    "published": true,
+    "price": "See published prices",
+    "detail": "1 sourced pricing entries. Confirm the job, inclusions and total.",
+    "photos": []
+  },
+  "a4-facility-maintenance-pte-ltd": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "photos": []
+  },
+  "acms-facilities-management-sin-pte-ltd": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "photos": []
+  },
+  "aeon-environmental-services": {
     "published": false,
     "price": "Ask for a quote",
     "detail": "No company rate captured. Ask for a job-specific quote.",
@@ -899,10 +905,22 @@
     "detail": "No company rate captured. Ask for a job-specific quote.",
     "photos": []
   },
+  "aodac-cleaning-services": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "photos": []
+  },
   "aplus-clean-solutions": {
     "published": false,
     "price": "Ask for a quote",
     "detail": "No company rate captured. Ask for a job-specific quote.",
+    "photos": []
+  },
+  "art-of-cleaning-pte-ltd": {
+    "published": true,
+    "price": "See published prices",
+    "detail": "9 sourced pricing entries. Confirm the job, inclusions and total.",
     "photos": []
   },
   "apac-clean": {
@@ -911,10 +929,16 @@
     "detail": "No company rate captured. Ask for a job-specific quote.",
     "photos": []
   },
-  "cleanhub-facility-pte-ltd": {
-    "published": true,
-    "price": "See published prices",
-    "detail": "1 sourced pricing entries. Confirm the job, inclusions and total.",
+  "avantec-international-pte-ltd": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "photos": []
+  },
+  "clean-circle-pte-ltd": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
     "photos": []
   },
   "cleanmage-pte-ltd": {
@@ -924,6 +948,12 @@
     "photos": []
   },
   "cleanq": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "photos": []
+  },
+  "continentz-singapore-pte-ltd": {
     "published": false,
     "price": "Ask for a quote",
     "detail": "No company rate captured. Ask for a job-specific quote.",
@@ -942,6 +972,18 @@
     "photos": []
   },
   "fresh-cleaning-pte-ltd": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "photos": []
+  },
+  "govico-pte-ltd": {
+    "published": true,
+    "price": "See published prices",
+    "detail": "5 sourced pricing entries. Confirm the job, inclusions and total.",
+    "photos": []
+  },
+  "greengarden-integrated-services-pte-ltd": {
     "published": false,
     "price": "Ask for a quote",
     "detail": "No company rate captured. Ask for a job-specific quote.",
@@ -971,6 +1013,12 @@
     "detail": "No company rate captured. Ask for a job-specific quote.",
     "photos": []
   },
+  "lumiair-pte-ltd": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "photos": []
+  },
   "ministry-of-clean": {
     "published": false,
     "price": "Ask for a quote",
@@ -980,7 +1028,7 @@
   "nimbus-homes": {
     "published": true,
     "price": "See published prices",
-    "detail": "4 sourced pricing entries. Confirm the job, inclusions and total.",
+    "detail": "2 sourced pricing entries. Confirm the job, inclusions and total.",
     "photos": []
   },
   "peniel-cleaning": {
@@ -996,6 +1044,12 @@
     "photos": []
   },
   "shiners-facilities-pte-ltd": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "photos": []
+  },
+  "sq-1-development-pte-ltd": {
     "published": false,
     "price": "Ask for a quote",
     "detail": "No company rate captured. Ask for a job-specific quote.",
@@ -1032,9 +1086,9 @@
     "photos": []
   },
   "bs-integrated-engineering": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "published": true,
+    "price": "See published prices",
+    "detail": "4 sourced pricing entries. Confirm the job, inclusions and total.",
     "photos": []
   },
   "champion-republic-pte-ltd": {
@@ -1044,9 +1098,9 @@
     "photos": []
   },
   "crizto-singapore-pte-ltd": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "published": true,
+    "price": "See published prices",
+    "detail": "6 sourced pricing entries. Confirm the job, inclusions and total.",
     "photos": []
   },
   "evergloss-pte-ltd": {
@@ -1067,12 +1121,6 @@
     "detail": "No company rate captured. Ask for a job-specific quote.",
     "photos": []
   },
-  "primeasia-plumbing-sanitary-pte-ltd": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
-    "photos": []
-  },
   "rki-maintenance-services": {
     "published": false,
     "price": "Ask for a quote",
@@ -1080,12 +1128,6 @@
     "photos": []
   },
   "sh-plumbing-jetting-pte-ltd": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
-    "photos": []
-  },
-  "sin-hong-yong-pte-ltd": {
     "published": false,
     "price": "Ask for a quote",
     "detail": "No company rate captured. Ask for a job-specific quote.",
@@ -1122,9 +1164,9 @@
     "photos": []
   },
   "best-aircon-servicing-and-installation-by-goodcool": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "published": true,
+    "price": "See published prices",
+    "detail": "6 sourced pricing entries. Confirm the job, inclusions and total.",
     "photos": []
   },
   "dw-aircon-servicing-singapore-sengkang": {
@@ -1241,22 +1283,10 @@
     "detail": "2 sourced pricing entries. Confirm the job, inclusions and total.",
     "photos": []
   },
-  "part-time-maid": {
-    "published": true,
-    "price": "See published prices",
-    "detail": "1 sourced pricing entries. Confirm the job, inclusions and total.",
-    "photos": []
-  },
   "alv-aircon-servicing": {
     "published": false,
     "price": "Ask for a quote",
     "detail": "No company rate captured. Ask for a job-specific quote.",
-    "photos": []
-  },
-  "luxury-air-con-engineering-services": {
-    "published": true,
-    "price": "See published prices",
-    "detail": "3 sourced pricing entries. Confirm the job, inclusions and total.",
     "photos": []
   },
   "three-butlers": {
@@ -1320,9 +1350,9 @@
     "photos": []
   },
   "fast-aircon-service-singapore": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "published": true,
+    "price": "See published prices",
+    "detail": "1 sourced pricing entries. Confirm the job, inclusions and total.",
     "photos": []
   },
   "sjr-aircon-1-best-aircon-servicing-in-singapore": {
@@ -1344,9 +1374,9 @@
     "photos": []
   },
   "coldair-aircon-pte-ltd": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "published": true,
+    "price": "See published prices",
+    "detail": "1 sourced pricing entries. Confirm the job, inclusions and total.",
     "photos": []
   },
   "5-star-aircon-pte-ltd-aircon-specialist-singapore": {
@@ -1428,21 +1458,15 @@
     "photos": []
   },
   "socleansg": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
-    "photos": []
-  },
-  "aircond-service-centre-pte-ltd": {
     "published": true,
     "price": "See published prices",
-    "detail": "3 sourced pricing entries. Confirm the job, inclusions and total.",
+    "detail": "6 sourced pricing entries. Confirm the job, inclusions and total.",
     "photos": []
   },
   "cool-aire-aircon-servicing": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "published": true,
+    "price": "See published prices",
+    "detail": "1 sourced pricing entries. Confirm the job, inclusions and total.",
     "photos": []
   },
   "dr-penguin-aircon-engineering-pte-ltd": {
@@ -1452,9 +1476,9 @@
     "photos": []
   },
   "afix-sg": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "published": true,
+    "price": "See published prices",
+    "detail": "3 sourced pricing entries. Confirm the job, inclusions and total.",
     "photos": []
   },
   "lk-brothers-engineering-pte-ltd-aircon-servicing-singapore": {
@@ -1464,9 +1488,9 @@
     "photos": []
   },
   "airple": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "published": true,
+    "price": "See published prices",
+    "detail": "6 sourced pricing entries. Confirm the job, inclusions and total.",
     "photos": []
   },
   "aircon-service-repair-singapore-by-sc": {
@@ -1475,22 +1499,10 @@
     "detail": "No company rate captured. Ask for a job-specific quote.",
     "photos": []
   },
-  "thetop-aircon-service": {
-    "published": true,
-    "price": "See published prices",
-    "detail": "11 sourced pricing entries. Confirm the job, inclusions and total.",
-    "photos": []
-  },
   "jetstyle-aircon-aircon-contractor-singapore": {
     "published": true,
     "price": "See published prices",
     "detail": "4 sourced pricing entries. Confirm the job, inclusions and total.",
-    "photos": []
-  },
-  "supercool-aircon": {
-    "published": true,
-    "price": "See published prices",
-    "detail": "3 sourced pricing entries. Confirm the job, inclusions and total.",
     "photos": []
   },
   "cool-horizon-pte-ltd": {
@@ -1559,12 +1571,6 @@
     "detail": "No company rate captured. Ask for a job-specific quote.",
     "photos": []
   },
-  "handyman-home-fiz": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
-    "photos": []
-  },
   "cheap-handyman-service-singapore": {
     "published": false,
     "price": "Ask for a quote",
@@ -1625,12 +1631,6 @@
     "detail": "No company rate captured. Ask for a job-specific quote.",
     "photos": []
   },
-  "ironing-maids-home-ironing-cleaning-service-singapore": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
-    "photos": []
-  },
   "ps-home-maintenance": {
     "published": false,
     "price": "Ask for a quote",
@@ -1643,16 +1643,10 @@
     "detail": "No company rate captured. Ask for a job-specific quote.",
     "photos": []
   },
-  "apple-cleaners-singapore-professional-cleaning-services": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
-    "photos": []
-  },
   "anytime-plumber-sg": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "published": true,
+    "price": "See published prices",
+    "detail": "2 sourced pricing entries. Confirm the job, inclusions and total.",
     "photos": []
   },
   "greenwood-electrical-plumbing-services": {
@@ -1668,15 +1662,9 @@
     "photos": []
   },
   "butler-housekeeping-singapore-s-finest-housekeeping-and-home": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
-    "photos": []
-  },
-  "one-stop-handyman-pte-ltd": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "published": true,
+    "price": "See published prices",
+    "detail": "2 sourced pricing entries. Confirm the job, inclusions and total.",
     "photos": []
   },
   "nile-plumbing": {
@@ -1715,12 +1703,6 @@
     "detail": "No company rate captured. Ask for a job-specific quote.",
     "photos": []
   },
-  "plumbermeng-98530163-singapore-s-premier-plumbing-specialist": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
-    "photos": []
-  },
   "prima-technologies-pte-ltd-prima-services": {
     "published": true,
     "price": "See published prices",
@@ -1745,16 +1727,10 @@
     "detail": "No company rate captured. Ask for a job-specific quote.",
     "photos": []
   },
-  "express-plumbing-elect": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
-    "photos": []
-  },
   "handyman-az": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "published": true,
+    "price": "See published prices",
+    "detail": "6 sourced pricing entries. Confirm the job, inclusions and total.",
     "photos": []
   },
   "best-handyman-service-net": {
@@ -1794,15 +1770,9 @@
     "photos": []
   },
   "sin-goh-electrical-engineering": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
-    "photos": []
-  },
-  "electric-repair-sg": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "published": true,
+    "price": "See published prices",
+    "detail": "5 sourced pricing entries. Confirm the job, inclusions and total.",
     "photos": []
   },
   "vf-contractors-pte-ltd": {
@@ -1860,15 +1830,9 @@
     "photos": []
   },
   "active-power-electrical-engineering-pte-ltd": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
-    "photos": []
-  },
-  "wi-electrical-pte-ltd-lew-singapore-electrical-license-renew": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "published": true,
+    "price": "See published prices",
+    "detail": "1 sourced pricing entries. Confirm the job, inclusions and total.",
     "photos": []
   },
   "doctor-clean": {
@@ -1955,12 +1919,6 @@
     "detail": "7 sourced pricing entries. Confirm the job, inclusions and total.",
     "photos": []
   },
-  "kc-plumbing-electrical-renovation": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
-    "photos": []
-  },
   "airecontrol": {
     "published": false,
     "price": "Ask for a quote",
@@ -1979,19 +1937,7 @@
     "detail": "No company rate captured. Ask for a job-specific quote.",
     "photos": []
   },
-  "gj-plumbing-jetting-pte-ltd": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
-    "photos": []
-  },
   "wong-plumber": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
-    "photos": []
-  },
-  "24-hours-electrician-lotus": {
     "published": false,
     "price": "Ask for a quote",
     "detail": "No company rate captured. Ask for a job-specific quote.",
@@ -2004,12 +1950,6 @@
     "photos": []
   },
   "ebel-electrical-plumbing-and-general-maintenance": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
-    "photos": []
-  },
-  "wefix4u": {
     "published": false,
     "price": "Ask for a quote",
     "detail": "No company rate captured. Ask for a job-specific quote.",
@@ -2033,28 +1973,16 @@
     "detail": "No company rate captured. Ask for a job-specific quote.",
     "photos": []
   },
-  "d-k-construction-engineering-pte-ltd-handyman-renovation-ser": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
-    "photos": []
-  },
   "4zoom-engineering-pte-ltd": {
     "published": true,
     "price": "See published prices",
     "detail": "1 sourced pricing entries. Confirm the job, inclusions and total.",
     "photos": []
   },
-  "alphakleen-services": {
+  "cleancut-solutions-sg": {
     "published": true,
     "price": "See published prices",
-    "detail": "6 sourced pricing entries. Confirm the job, inclusions and total.",
-    "photos": []
-  },
-  "cleancut-solutions-sg": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "detail": "1 sourced pricing entries. Confirm the job, inclusions and total.",
     "photos": []
   },
   "mycleanhome": {
@@ -2100,9 +2028,9 @@
     "photos": []
   },
   "letscool-aircon-and-services": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "published": true,
+    "price": "See published prices",
+    "detail": "2 sourced pricing entries. Confirm the job, inclusions and total.",
     "photos": []
   },
   "clean-off": {
@@ -2129,12 +2057,6 @@
     "detail": "2 sourced pricing entries. Confirm the job, inclusions and total.",
     "photos": []
   },
-  "all-best-air-conditioning-electric-pte-ltd": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
-    "photos": []
-  },
   "home-fix-sg": {
     "published": true,
     "price": "See published prices",
@@ -2159,12 +2081,6 @@
     "detail": "No company rate captured. Ask for a job-specific quote.",
     "photos": []
   },
-  "kleeno-cleaning-services": {
-    "published": true,
-    "price": "See published prices",
-    "detail": "13 sourced pricing entries. Confirm the job, inclusions and total.",
-    "photos": []
-  },
   "dw-deep-cleaning-services-singapore": {
     "published": true,
     "price": "See published prices",
@@ -2187,12 +2103,6 @@
     "published": false,
     "price": "Ask for a quote",
     "detail": "No company rate captured. Ask for a job-specific quote.",
-    "photos": []
-  },
-  "sk-plumber": {
-    "published": true,
-    "price": "See published prices",
-    "detail": "5 sourced pricing entries. Confirm the job, inclusions and total.",
     "photos": []
   },
   "gk-engineering-pte-ltd-painting-tiling-demolition-plumbing-r": {
@@ -2243,19 +2153,7 @@
     "detail": "No company rate captured. Ask for a job-specific quote.",
     "photos": []
   },
-  "eco-electricians-contractor-pte-ltd": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
-    "photos": []
-  },
   "22-power-electric-pte-ltd": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
-    "photos": []
-  },
-  "handyman-german-maintenance-workshop-services": {
     "published": false,
     "price": "Ask for a quote",
     "detail": "No company rate captured. Ask for a job-specific quote.",
@@ -2274,9 +2172,9 @@
     "photos": []
   },
   "settlerabbit-handyman-cleaning-services": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "published": true,
+    "price": "See published prices",
+    "detail": "1 sourced pricing entries. Confirm the job, inclusions and total.",
     "photos": []
   },
   "l-cool-engineering-pte-ltd": {
@@ -2301,12 +2199,6 @@
     "published": true,
     "price": "See published prices",
     "detail": "1 sourced pricing entries. Confirm the job, inclusions and total.",
-    "photos": []
-  },
-  "effie-cool-service-singapore-aircon-servicing": {
-    "published": true,
-    "price": "See published prices",
-    "detail": "3 sourced pricing entries. Confirm the job, inclusions and total.",
     "photos": []
   },
   "cooltrust-aircon-pte-ltd": {
@@ -2351,12 +2243,6 @@
     "detail": "4 sourced pricing entries. Confirm the job, inclusions and total.",
     "photos": []
   },
-  "ac-aircon-services": {
-    "published": true,
-    "price": "See published prices",
-    "detail": "7 sourced pricing entries. Confirm the job, inclusions and total.",
-    "photos": []
-  },
   "jk-aircon-specialist": {
     "published": false,
     "price": "Ask for a quote",
@@ -2388,18 +2274,12 @@
     "photos": []
   },
   "yeobuild-homerepair": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "published": true,
+    "price": "See published prices",
+    "detail": "1 sourced pricing entries. Confirm the job, inclusions and total.",
     "photos": []
   },
   "np-engineering-pte-ltd": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
-    "photos": []
-  },
-  "jd-waterworks": {
     "published": false,
     "price": "Ask for a quote",
     "detail": "No company rate captured. Ask for a job-specific quote.",
@@ -2427,12 +2307,6 @@
     "published": false,
     "price": "Ask for a quote",
     "detail": "No company rate captured. Ask for a job-specific quote.",
-    "photos": []
-  },
-  "superten-plumber": {
-    "published": true,
-    "price": "See published prices",
-    "detail": "4 sourced pricing entries. Confirm the job, inclusions and total.",
     "photos": []
   },
   "sg-star-plumbing-services": {
@@ -2483,22 +2357,10 @@
     "detail": "No company rate captured. Ask for a job-specific quote.",
     "photos": []
   },
-  "sembawang-lighting-house-pte-ltd": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
-    "photos": []
-  },
   "glenhill-property-consultant-pte-ltd": {
     "published": false,
     "price": "Ask for a quote",
     "detail": "No company rate captured. Ask for a job-specific quote.",
-    "photos": []
-  },
-  "saikon-contractors": {
-    "published": true,
-    "price": "See published prices",
-    "detail": "5 sourced pricing entries. Confirm the job, inclusions and total.",
     "photos": []
   },
   "plumber-singapore-plumbing-24hrs": {
@@ -2520,9 +2382,9 @@
     "photos": []
   },
   "handyman-king-singapore-private-limited": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "published": true,
+    "price": "See published prices",
+    "detail": "1 sourced pricing entries. Confirm the job, inclusions and total.",
     "photos": []
   },
   "handyman-home-services": {
@@ -2538,15 +2400,9 @@
     "photos": []
   },
   "sg1-plumber-singapore-plumbing-service": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
-    "photos": []
-  },
-  "handyman-services-singapore": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "published": true,
+    "price": "See published prices",
+    "detail": "6 sourced pricing entries. Confirm the job, inclusions and total.",
     "photos": []
   },
   "anjecont-handyman": {
@@ -2585,22 +2441,10 @@
     "detail": "No company rate captured. Ask for a job-specific quote.",
     "photos": []
   },
-  "handyman-services-24": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
-    "photos": []
-  },
   "airever-aircon-engineering": {
     "published": false,
     "price": "Ask for a quote",
     "detail": "No company rate captured. Ask for a job-specific quote.",
-    "photos": []
-  },
-  "6-days-cleaning": {
-    "published": true,
-    "price": "See published prices",
-    "detail": "6 sourced pricing entries. Confirm the job, inclusions and total.",
     "photos": []
   },
   "cooling-guard-pte-ltd": {
@@ -2622,12 +2466,6 @@
     "photos": []
   },
   "thong-nian-engineering-pte-ltd": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
-    "photos": []
-  },
-  "reliable-plumbing-services-u-home-plumbing-engineering": {
     "published": false,
     "price": "Ask for a quote",
     "detail": "No company rate captured. Ask for a job-specific quote.",
@@ -2658,9 +2496,9 @@
     "photos": []
   },
   "bioaire-air-conditioning-solutions": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "published": true,
+    "price": "See published prices",
+    "detail": "3 sourced pricing entries. Confirm the job, inclusions and total.",
     "photos": []
   },
   "yks-airconfix": {
@@ -2685,12 +2523,6 @@
     "published": true,
     "price": "See published prices",
     "detail": "2 sourced pricing entries. Confirm the job, inclusions and total.",
-    "photos": []
-  },
-  "metrocleaners": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
     "photos": []
   },
   "brisc-services-pte-ltd": {
@@ -2765,12 +2597,6 @@
     "detail": "No company rate captured. Ask for a job-specific quote.",
     "photos": []
   },
-  "bencool-services-professional-aircon-services-airconditioner": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
-    "photos": []
-  },
   "dustaway-services": {
     "published": false,
     "price": "Ask for a quote",
@@ -2784,12 +2610,6 @@
     "photos": []
   },
   "hybee-singapore": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
-    "photos": []
-  },
-  "empire-cleaning-home-services": {
     "published": false,
     "price": "Ask for a quote",
     "detail": "No company rate captured. Ask for a job-specific quote.",
@@ -2817,12 +2637,6 @@
     "published": false,
     "price": "Ask for a quote",
     "detail": "No company rate captured. Ask for a job-specific quote.",
-    "photos": []
-  },
-  "finest-services-pte-ltd": {
-    "published": true,
-    "price": "See published prices",
-    "detail": "1 sourced pricing entries. Confirm the job, inclusions and total.",
     "photos": []
   },
   "dr-stain-llp": {
@@ -2880,15 +2694,9 @@
     "photos": []
   },
   "aircon-boon": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
-    "photos": []
-  },
-  "k2l-aircon": {
     "published": true,
     "price": "See published prices",
-    "detail": "7 sourced pricing entries. Confirm the job, inclusions and total.",
+    "detail": "3 sourced pricing entries. Confirm the job, inclusions and total.",
     "photos": []
   },
   "home-carely-cleaning-services": {
@@ -2910,9 +2718,9 @@
     "photos": []
   },
   "non-stop-cooling-aircon-service-singapore": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "published": true,
+    "price": "See published prices",
+    "detail": "2 sourced pricing entries. Confirm the job, inclusions and total.",
     "photos": []
   },
   "chua-hup-kiat-electrical-aircon-engr-sve": {
@@ -2925,12 +2733,6 @@
     "published": false,
     "price": "Ask for a quote",
     "detail": "No company rate captured. Ask for a job-specific quote.",
-    "photos": []
-  },
-  "cleanaxisco-pte-ltd": {
-    "published": true,
-    "price": "See published prices",
-    "detail": "10 sourced pricing entries. Confirm the job, inclusions and total.",
     "photos": []
   },
   "lighthouse-cleaning-services-pte-ltd": {
@@ -2949,12 +2751,6 @@
     "published": false,
     "price": "Ask for a quote",
     "detail": "No company rate captured. Ask for a job-specific quote.",
-    "photos": []
-  },
-  "arkin-pte-ltd": {
-    "published": true,
-    "price": "See published prices",
-    "detail": "4 sourced pricing entries. Confirm the job, inclusions and total.",
     "photos": []
   },
   "standbybed-sg": {
@@ -2976,9 +2772,9 @@
     "photos": []
   },
   "luminous-engineering-pte-ltd": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "published": true,
+    "price": "See published prices",
+    "detail": "1 sourced pricing entries. Confirm the job, inclusions and total.",
     "photos": []
   },
   "quick-handyman-sg": {
@@ -3006,9 +2802,9 @@
     "photos": []
   },
   "repair-handyman-service-sg": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "published": true,
+    "price": "See published prices",
+    "detail": "1 sourced pricing entries. Confirm the job, inclusions and total.",
     "photos": []
   },
   "above-all-aircon-pte-ltd": {
@@ -3053,16 +2849,10 @@
     "detail": "No company rate captured. Ask for a job-specific quote.",
     "photos": []
   },
-  "huat-plumbing": {
+  "shs-engineering-pte-ltd": {
     "published": true,
     "price": "See published prices",
-    "detail": "5 sourced pricing entries. Confirm the job, inclusions and total.",
-    "photos": []
-  },
-  "shs-engineering-pte-ltd": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "detail": "1 sourced pricing entries. Confirm the job, inclusions and total.",
     "photos": []
   },
   "clean-lab-pte-ltd": {
@@ -3078,9 +2868,9 @@
     "photos": []
   },
   "sky-breeze-aircon-experts": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "published": true,
+    "price": "See published prices",
+    "detail": "3 sourced pricing entries. Confirm the job, inclusions and total.",
     "photos": []
   },
   "cool-air-control-aircon-servicing": {
@@ -3155,12 +2945,6 @@
     "detail": "No company rate captured. Ask for a job-specific quote.",
     "photos": []
   },
-  "aircon-guru-engineering-pte-ltd": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
-    "photos": []
-  },
   "ar-tech-renovation-pte-ltd": {
     "published": false,
     "price": "Ask for a quote",
@@ -3168,15 +2952,9 @@
     "photos": []
   },
   "doctor-cool": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
-    "photos": []
-  },
-  "tech-lai-integrated-pte-ltd": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "published": true,
+    "price": "See published prices",
+    "detail": "2 sourced pricing entries. Confirm the job, inclusions and total.",
     "photos": []
   },
   "hm-handyman-sg": {
@@ -3227,16 +3005,10 @@
     "detail": "No company rate captured. Ask for a job-specific quote.",
     "photos": []
   },
-  "tth-handyman-engineering-construction-warehouse": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
-    "photos": []
-  },
   "h1-projects-pte-ltd": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "published": true,
+    "price": "See published prices",
+    "detail": "2 sourced pricing entries. Confirm the job, inclusions and total.",
     "photos": []
   },
   "81-electrical": {
@@ -3258,9 +3030,9 @@
     "photos": []
   },
   "sc-electrician": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "published": true,
+    "price": "See published prices",
+    "detail": "6 sourced pricing entries. Confirm the job, inclusions and total.",
     "photos": []
   },
   "am-handyman-service-sg": {
@@ -3285,12 +3057,6 @@
     "published": true,
     "price": "See published prices",
     "detail": "3 sourced pricing entries. Confirm the job, inclusions and total.",
-    "photos": []
-  },
-  "hydrotec-services": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
     "photos": []
   },
   "ohms-electric-construction": {
@@ -3341,12 +3107,6 @@
     "detail": "No company rate captured. Ask for a job-specific quote.",
     "photos": []
   },
-  "integer-building-services": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
-    "photos": []
-  },
   "naz-air-con-engineering": {
     "published": false,
     "price": "Ask for a quote",
@@ -3363,12 +3123,6 @@
     "published": true,
     "price": "See published prices",
     "detail": "6 sourced pricing entries. Confirm the job, inclusions and total.",
-    "photos": []
-  },
-  "3322coolair-pte-ltd": {
-    "published": true,
-    "price": "See published prices",
-    "detail": "2 sourced pricing entries. Confirm the job, inclusions and total.",
     "photos": []
   },
   "wong-s-engineering": {
@@ -3408,9 +3162,9 @@
     "photos": []
   },
   "all-plumbing": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "published": true,
+    "price": "See published prices",
+    "detail": "6 sourced pricing entries. Confirm the job, inclusions and total.",
     "photos": []
   },
   "uncle-heng-plumber": {
@@ -3420,9 +3174,9 @@
     "photos": []
   },
   "mirza-m-e-engineering-pte-ltd": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "published": true,
+    "price": "See published prices",
+    "detail": "1 sourced pricing entries. Confirm the job, inclusions and total.",
     "photos": []
   },
   "konnect-aircon-servicing": {
@@ -3450,12 +3204,6 @@
     "photos": []
   },
   "nature-cool-pte-ltd": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
-    "photos": []
-  },
-  "east-tan-aircon-engineering-service": {
     "published": false,
     "price": "Ask for a quote",
     "detail": "No company rate captured. Ask for a job-specific quote.",
@@ -3521,12 +3269,6 @@
     "detail": "No company rate captured. Ask for a job-specific quote.",
     "photos": []
   },
-  "a-stop-solution": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
-    "photos": []
-  },
   "city-cooling-pte-ltd-aircon-specialist-singapore": {
     "published": true,
     "price": "See published prices",
@@ -3546,9 +3288,9 @@
     "photos": []
   },
   "siam-engineering-pte-ltd": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "published": true,
+    "price": "See published prices",
+    "detail": "2 sourced pricing entries. Confirm the job, inclusions and total.",
     "photos": []
   },
   "aquahero-plumbing": {

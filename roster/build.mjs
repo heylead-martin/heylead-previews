@@ -919,14 +919,14 @@ function renderHome(grouped) {
 </div>
 </section>
 <section class="section promise">
-<h2>What every profile shows</h2>
+<h2>Details to help you choose</h2>
 <ul class="promise-list">
-<li>${icon("phone", "ic")}<strong>Phone and WhatsApp</strong><span>as printed on the company's own page, with that page linked.</span></li>
+<li>${icon("phone", "ic")}<strong>Phone and WhatsApp</strong><span>from cited company pages, Google Maps or public registers. Alternate numbers carry source labels.</span></li>
 <li>${icon("check", "ic")}<strong>Best for and poor fit</strong><span>in plain words, so you can rule a company out before you call.</span></li>
 <li>${icon("dollar", "ic")}<strong>Prices the company publishes</strong><span>with the page, and a note when GST is not stated.</span></li>
 <li>${icon("star", "ic ic-star")}<strong>The rating on file</strong><span>with its source and the day it was checked. Roster prints no star score of its own.</span></li>
 <li>${icon("quote", "ic")}<strong>Reviews with a name and a date</strong><span>copied as published. A quote with no name or no date is left off.</span></li>
-<li>${icon("pin", "ic")}<strong>Address, UEN, and licence claims</strong><span>only when the company prints them, with a note that the register was not opened.</span></li>
+<li>${icon("pin", "ic")}<strong>Address, UEN, and licence claims</strong><span>with sources and verification notes where available.</span></li>
 </ul>
 </section>`;
   const jsonLd = [
@@ -1031,7 +1031,7 @@ const renderProfile = createProfileRenderer({esc,icon,tradeById,profileContent,p
 const publishedCompanies = raw.companies.filter((company) => company.publish !== false);
 const grouped = {};
 for (const trade of trades) grouped[trade.id] = [];
-for (const company of publishedCompanies) for (const category of company.categories || [company.category]) grouped[category].push(company);
+for (const company of publishedCompanies) grouped[company.primaryTrade || company.category].push(company);
 for (const trade of trades) grouped[trade.id] = sortCompanies(grouped[trade.id]);
 
 const written = [];

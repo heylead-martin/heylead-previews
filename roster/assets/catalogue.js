@@ -11,7 +11,7 @@ if(root) {
     if(!loaded)return;if(reset)limit=12;
     const savedSlugs=saved(),words=search.value.trim().toLowerCase().split(/\s+/).filter(Boolean);
     const active=[...root.querySelectorAll('[data-filter]:checked')].map(x=>x.dataset.filter);
-    let matches=rows.filter(c=>words.every(w=>[c.name,c.trade,c.area,c.description,...c.services].join(' ').toLowerCase().includes(w))&&(!area.value||c.area===area.value)&&(!category?.value||c.categories.includes(category.value))&&(!rating.value||(c.ratingValue!==null&&c.ratingValue>=Number(rating.value)))&&active.every(f=>f==='saved'?savedSlugs.includes(c.slug):f==='price'?c.published:f==='reviews'?c.hasReviews:f==='whatsapp'?!!c.whatsapp:true));
+    let matches=rows.filter(c=>words.every(w=>[c.name,c.trade,c.area,c.description,...c.services].join(' ').toLowerCase().includes(w))&&(!area.value||c.area===area.value)&&(!category?.value||c.category===category.value)&&(!rating.value||(c.ratingValue!==null&&c.ratingValue>=Number(rating.value)))&&active.every(f=>f==='saved'?savedSlugs.includes(c.slug):f==='price'?c.published:f==='reviews'?c.hasReviews:f==='whatsapp'?!!c.whatsapp:true));
     matches.sort((a,b)=>sort.value==='rating'?(b.ratingValue??-1)-(a.ratingValue??-1)||b.ratingCount-a.ratingCount||a.name.localeCompare(b.name):sort.value==='reviews'?b.ratingCount-a.ratingCount||a.name.localeCompare(b.name):a.name.localeCompare(b.name));
     list.innerHTML=matches.slice(0,limit).map(c=>renderCard(c,savedSlugs.includes(c.slug))).join('');
     status.textContent=`Showing ${Math.min(limit,matches.length)} of ${matches.length} matching companies`;

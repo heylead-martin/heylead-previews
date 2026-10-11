@@ -42,3 +42,5 @@ body{font-size:var(--text-body)}
 .foot-col a,.results-method a,.catalogue-rating a,.catalogue-card h2 a,.masthead-rating a,.company-trade{display:inline-flex;align-items:center;min-height:44px}
 @media(max-width:639px){.company-detail-grid,.sourced-highlights ul{grid-template-columns:1fr}}
 .price-original>summary{min-height:44px;cursor:pointer;align-content:center;font-size:14px}.price-original>p{font-size:16px;line-height:1.8;margin:10px 0}
+
+.alternate-phones{padding:16px 20px;background:#f8faf5;border:1px solid var(--rule);border-radius:10px;margin-top:16px}.alternate-phones p{font-size:16px;line-height:1.8;margin:0}.alternate-phones a{display:inline-flex;align-items:center;min-height:44px}.company-fit ul{padding-left:20px;margin:0}.company-fit li{margin-bottom:14px}.company-fit li:last-child{margin-bottom:0}

@@ -15,7 +15,7 @@ The importer reads `db-expanded/releases/LATEST` in the Roster Drive folder, the
 To reproduce a specific release:
 
 ```sh
-node roster/scripts/import-db.mjs "/absolute/path/to/companies-20261010-2242.json" && node roster/build.mjs
+node roster/scripts/import-db.mjs "/absolute/path/to/companies-20261011-1204.json" && node roster/build.mjs
 ```
 
 `ROSTER_DB_PATH` also accepts a release path. The checksum file must sit beside it as `<release>.sha256`. A missing checksum, mismatch or invalid LATEST filename stops the import.
@@ -32,15 +32,15 @@ node roster/scripts/import-db.mjs "/absolute/path/to/companies-20261010-2242.jso
 
 ## Presentation rules
 
-Services and prices share expandable rows. Imported prices retain source wording, quantity, unit, promotion and GST details. General cost guides are marked as references rather than company rates. Original curated service copy and prices stay intact.
+Services and prices share expandable rows. Imported prices retain source wording, quantity, unit, promotion and GST details, including monthly session counts and hours per session. Inferred units are explicitly labelled. General cost guides are marked as references rather than company rates. Original curated service copy and prices stay intact.
 
 Company pages start with Services & pricing, About the company and Location & contact. Reviews sit directly above FAQs. Extra sourced information appears only when present. Company-site answers and claims are attributed.
 
-Google Maps ratings are linked, dated sentences based on stored snapshots. Other rating sources retain their own labels. No rating, review or offer structured data is emitted. Unit numbers are removed from map embeds and directions. Alternate phone numbers are omitted.
+Google Maps ratings are linked, dated sentences based on stored snapshots. Other rating sources retain their own labels. No rating, review or offer structured data is emitted. Unit numbers are removed from map embeds and directions. Sourced alternate phone numbers appear as "Also listed" with their source label. The primary number remains the main call action.
 
 All pages remain noindex. Account screens and quote requests are previews with no backend. The quote panel still sends and stores nothing. Shared preview authentication is unchanged.
 
-Trade pages render 12 cards initially and load a separate per-trade JSON index for search, filters, sorting and load more. Area filters refer to the published business address, not promised service coverage. The all-company search covers every published profile.
+Trade pages render 12 cards initially and load a separate per-trade JSON index for search, filters, sorting and load more. Area filters refer to the published business address, not promised service coverage. The all-company search covers every published profile. Each company appears under its release `primary_trade`; trade counts do not overlap. Sourced fit notes and service-area excerpts are retained, while `self_description` metadata is never used as About text.
 
 ## Validation
 
