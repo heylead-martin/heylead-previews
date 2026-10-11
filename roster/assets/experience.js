@@ -1,6 +1,9 @@
 /* Account previews never send, persist, or log personal details. */
 (function () {
   'use strict';
+  function logoFallback(image) { if (!image.matches('[data-company-logo]')) return; image.hidden = true; image.parentElement.classList.remove('has-logo'); image.parentElement.setAttribute('aria-label', 'Company initials placeholder'); }
+  document.addEventListener('error', function (event) { if (event.target instanceof HTMLImageElement) logoFallback(event.target); }, true);
+  document.querySelectorAll('[data-company-logo]').forEach(function (image) { if (image.complete && !image.naturalWidth) logoFallback(image); });
   var form = document.querySelector('[data-account-preview]');
   if (form) {
     var result = document.querySelector('[data-account-result]');

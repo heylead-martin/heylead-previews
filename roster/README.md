@@ -45,10 +45,20 @@ Trade pages render 12 cards initially and load a separate per-trade JSON index f
 ## Validation
 
 ```sh
-node --test roster/scripts/import-db.test.mjs
+node --test roster/scripts/import-db.test.mjs roster/scripts/presentation.test.mjs
 node roster/scripts/check-site.mjs
 ```
 
 The checks cover publication safeguards, checksum integrity, stable slugs, original content, offer conditions, map privacy, metadata, noindex, schema restrictions, every internal link and fragment, and the 300 KB HTML plus JSON budget per trade.
 
 Also review desktop and mobile previews after template changes. Test filters, sorting, save controls, load more, and service/FAQ disclosures. Inspect 10 sampled company pages, including new and original profiles. See `IMPORT-REVIEW.md` for the current review results and caveats.
+
+## Owner and review layout previews
+
+The footer and each company sidebar link to `/roster/claim-listing/`. The claim page describes the proposed ownership checks and includes a local demo form. It does not send requests, save contact details or mark a listing as claimed. It uses a disabled fieldset until its local submit handler loads, then clears sample contact details after the preview.
+
+Public summaries and imported About text use customer-facing third-person copy derived from sourced services and coverage. Original source excerpts remain in an expandable reference, and the 16 protected write-ups remain intact. `lib/profile-copy.mjs` controls this presentation so future imports keep the same tone. Original price wording remains available while clear `job | price` values are split for display.
+
+Company cards and profiles reserve space for a logo. Existing artwork is used when present, otherwise the slot shows company initials. Broken artwork falls back to initials.
+
+The reviews section includes a clearly labelled mockup with 2-5 sources. `assets/review-model.mjs` holds sample fixtures and a review-count-weighted calculation. Sample scores never replace real sourced ratings, change directory sorting or enter structured data. The combined score is the sum of each rating multiplied by its count, divided by total reviews. Identified mirrors, incompatible scales and unusable counts are excluded. Before connecting a real data release, each source needs its platform, profile URL, capture date, rating, scale, count and any mirror relationship. Deduplication is not automatic.

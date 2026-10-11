@@ -4,6 +4,8 @@ import { createHash } from "node:crypto";
 import { fileURLToPath } from "node:url";
 
 import { createProfileRenderer, directoryRecord, concise, ratingFact } from "./lib/expanded.mjs";
+import {priceView, servicePrice, serviceGuide} from "./lib/profile-copy.mjs";
+import {renderClaimPage} from "./lib/claim-page.mjs";
 import { renderCard } from "./assets/catalogue-card.mjs";
 
 const root = path.dirname(fileURLToPath(import.meta.url));
@@ -11,7 +13,7 @@ const origin = "https://previews.heylead.com/roster";
 let checked = "9 Oct 2026 and 10 Oct 2026";
 // Content hashes keep cached assets in sync with each generated page.
 const assetVersions = Object.fromEntries(await Promise.all(
-  ["site.css", "directory.css", "experience.css", "form.js", "directory.js", "experience.js", "expanded.css", "catalogue.js", "catalogue-card.mjs"].map(async (name) => [
+  ["site.css", "directory.css", "experience.css", "form.js", "directory.js", "experience.js", "expanded.css", "catalogue.js", "catalogue-card.mjs", "claim.js", "review-preview.mjs"].map(async (name) => [
     name,
     createHash("sha256").update(await readFile(path.join(root, "assets", name))).digest("hex").slice(0, 12)
   ])
@@ -513,9 +515,9 @@ function renderCrumbs(items) {
 function renderFooter() {
   const jobs = trades.map((trade) => `<li><a href="/roster/${trade.slug}/">${esc(trade.name)}</a></li>`).join("");
   return `<footer class="foot"><div class="wrap foot-inner">
-<div class="foot-brand"><a class="brand" href="/roster/">${brandMark()}<span class="wordmark">Roster</span></a><p>A sourced directory of home-service companies in Singapore, with the reviews that back it.</p><p class="foot-note">Figures checked ${checked}. Ratings and excerpts are from the cited page. They are not from one Google API pull.</p></div>
+<div class="foot-brand"><a class="brand" href="/roster/">${brandMark()}<span class="wordmark">Roster</span></a><p>Find the right help for your home. Compare services, prices and reviews from companies across Singapore.</p><p class="foot-note">Business details and reviews link to their original sources. Last checked ${checked}.</p></div>
 <div class="foot-col"><h2>Jobs</h2><ul>${jobs}</ul></div>
-<div class="foot-col"><h2>About</h2><ul><li><a href="/roster/how-it-works/">How the list is made</a></li><li><a href="/roster/how-it-works/">What a Featured slot would be</a></li><li><a href="/roster/aircon-servicing/chemical-wash/">Aircon chemical wash</a></li><li><a href="/roster/aircon-servicing/gas-top-up/">Aircon gas top-up</a></li></ul></div>
+<div class="foot-col"><h2>About</h2><ul><li><a href="/roster/how-it-works/">How the list is made</a></li><li><a href="/roster/claim-listing/">Claim your listing</a></li><li><a href="/roster/aircon-servicing/chemical-wash/">Aircon chemical wash</a></li><li><a href="/roster/aircon-servicing/gas-top-up/">Aircon gas top-up</a></li></ul></div>
 <p class="foot-line">Singapore beta. Unpaid listings. No commission on your job. Quote requests are a preview and do not send.</p>
 </div></footer>`;
 }
@@ -566,7 +568,8 @@ function renderForm(jobs, recipients, uid) {
 
 function priceSummary(company, service) {
   const display = presentation[company.slug] || { price: "Ask for a quote", detail: "No published rate captured", published: false };
-  return service ? { ...display, ...(display.services?.[service] || { price: "Ask for a quote", detail: "No standalone price captured for this job", published: false }) } : display;
+  const cleanDisplay = company.imported ? {...display, detail:display.published ? "Explore service prices and confirm your final quote with the team." : "Contact the team for a quote tailored to your job."} : display;
+  return service ? { ...cleanDisplay, ...(display.services?.[service] || { price: "Ask for a quote", detail: "No standalone price captured for this job", published: false }) } : cleanDisplay;
 }
 
 function indexName(spec) { return spec.service || spec.id; }
@@ -627,6 +630,8 @@ ${renderFooter()}
 <script src="/roster/assets/form.js?v=${assetVersions["form.js"]}"></script>
 <script src="/roster/assets/directory.js?v=${assetVersions["directory.js"]}"></script>
 <script src="/roster/assets/experience.js?v=${assetVersions["experience.js"]}"></script>
+${bodyClass === "claim-page" ? `<script src="/roster/assets/claim.js?v=${assetVersions["claim.js"]}"></script>` : ""}
+${bodyClass.split(" ").includes("company-page") ? `<script type="module" src="/roster/assets/review-preview.mjs?v=${assetVersions["review-preview.mjs"]}"></script>` : ""}
 ${bodyClass === "directory-page" ? `<script type="module" src="/roster/assets/catalogue.js?v=${assetVersions["catalogue.js"]}"></script>` : ""}
 </body>
 </html>
@@ -636,7 +641,7 @@ ${bodyClass === "directory-page" ? `<script type="module" src="/roster/assets/ca
     throw new Error("Rating, review, or offer schema leaked into " + canonicalPath);
   }
   // Account previews use dialog forms with disabled fields until the local handler loads.
-  const nonPreviewHtml = html.replace(/<form method="dialog" data-account-preview="(?:sign-in|sign-up|forgot-password|reset-password)"[^>]*>[\s\S]*?<\/form>/g, "");
+  const nonPreviewHtml = html.replace(/<form method="dialog" data-claim-preview[^>]*>[\s\S]*?<\/form>/g, "").replace(/<form method="dialog" data-account-preview="(?:sign-in|sign-up|forgot-password|reset-password)"[^>]*>[\s\S]*?<\/form>/g, "");
   if (/<form[\s>]/i.test(nonPreviewHtml)) {
     throw new Error("A form element leaked into " + canonicalPath);
   }
@@ -836,9 +841,11 @@ function profileBusinessGraph(company, content, canonicalPath) {
 function renderServiceExplanation(service) {
   const guide = service.guide ? serviceGuides[service.guide] : null;
   if (service.guide && !guide?.body) throw new Error(`Missing guide: ${service.guide}`);
-  const hasSources = service.prices.some(p => p.sourceUrl);
-  const options = service.prices.length && (hasSources || service.prices.length > 1) ? `<table class="service-prices"><caption>Pricing as printed at source</caption><thead><tr><th scope="col">Service & conditions</th><th scope="col">Price</th></tr></thead><tbody>${service.prices.map(p=>`<tr><th scope="row">${esc(p.label || service.name)}${p.indicative?'<span class="claim-label">General price reference, not a company quote</span>':''}<div class="price-conditions">${esc(p.detail)}</div>${p.excerpt?`<details class="price-original"><summary>Read the original price wording</summary><p>${esc(p.excerpt)}</p></details>`:''}${p.sourceUrl?`<span class="data-source"><a href="${esc(p.sourceUrl)}">Price source</a><span>Checked ${esc(String(p.capturedAt||'2026-10-10').slice(0,10))}</span></span>`:''}</th><td>${esc(p.price)}</td></tr>`).join('')}</tbody></table>` : '';
-  return `<div class="service-explanation">${guide?`<p>${esc(guide.body)}</p>`:service.explanation?`<p><span class="source-excerpt-label">From the service page</span>${esc(service.explanation)}</p>`:''}${options}${guide?.ask?`<div class="service-booking-question"><h4>Before you book</h4><p>${esc(guide.ask)}</p></div>`:''}${service.sourceUrl?`<span class="data-source"><a href="${esc(service.sourceUrl)}">Service source</a><span>Checked ${esc(String(service.capturedAt||'2026-10-10').slice(0,10))}</span></span>`:''}</div>`;
+  const prices = service.prices.map(priceView);
+  const reference = (p) => `<details class="price-original"><summary>Price reference & conditions</summary>${p.excerpt?`<p>${esc(p.excerpt)}</p>`:''}${p.sourceUrl?`<span class="data-source"><a href="${esc(p.sourceUrl)}">View price on company website</a><span>Checked ${esc(String(p.capturedAt||'2026-10-10').slice(0,10))}</span></span>`:''}</details>`;
+  const options = prices.length ? `<div class="service-options" aria-label="Service price options">${prices.map(p=>`<div class="service-option"><div class="service-option-heading"><h4>${esc(p.label || service.name)}</h4>${prices.length>1?`<strong>${esc(p.price)}</strong>`:''}</div>${p.indicative?'<span class="claim-label">General price guide, not a company quote</span>':''}${p.detail?`<p class="price-conditions">${esc(p.detail)}</p>`:''}${p.excerpt||p.sourceUrl?reference(p):''}</div>`).join('')}</div>` : '';
+  const explanation = guide?.body || (service.imported ? serviceGuide(service.name,service.trade) : service.explanation);
+  return `<div class="service-explanation">${explanation?`<p>${esc(explanation)}</p>`:''}${options}${guide?.ask?`<div class="service-booking-question"><h4>Before you book</h4><p>${esc(guide.ask)}</p></div>`:''}${service.sourceUrl?`<details class="service-reference"><summary>Service reference</summary>${service.explanation?`<p>${esc(service.explanation)}</p>`:''}<span class="data-source"><a href="${esc(service.sourceUrl)}">View service on company website</a><span>Checked ${esc(String(service.capturedAt||'2026-10-10').slice(0,10))}</span></span></details>`:''}</div>`;
 }
 
 function serviceDetailsLabel() {
@@ -848,7 +855,7 @@ function serviceDetailsLabel() {
 function renderServiceRow(service, index) {
   if (!Array.isArray(service.prices)) throw new Error(`Missing pricing state: ${service.name}`);
   if (service.prices.length > 1 && !service.priceSummary) throw new Error(`Missing price summary: ${service.name}`);
-  const price = service.priceSummary || service.prices[0]?.price || "Ask for a quote";
+  const price = service.imported ? servicePrice(service) : service.priceSummary || service.prices[0]?.price || "Ask for a quote";
   return `<details class="service-rate" id="service-price-${index + 1}"><summary><span class="service-rate-label"><strong>${esc(service.name)}</strong>${service.description ? `<small>${esc(service.description)}</small>` : ""}${serviceDetailsLabel()}</span><strong class="service-rate-price${service.prices.length ? "" : " service-rate-quote"}"><span class="sr-only">${service.prices.some(p=>!p.indicative) ? "Published price: " : "Pricing: "}</span>${esc(price)}</strong><span class="service-toggle-icon">${icon("chevron")}</span></summary>${renderServiceExplanation(service)}</details>`;
 }
 
@@ -880,7 +887,7 @@ ${mode === "sign-in" ? '<div class="account-options"><a href="/roster/forgot-pas
 
 function renderHome(grouped) {
   const title = "Roster | Short unpaid lists of home services in Singapore";
-  const description = "A sourced directory of home-service companies in Singapore, with the reviews that back it.";
+  const description = "Find the right help for your home. Compare services, prices and reviews from companies across Singapore.";
   const total = new Set(Object.values(grouped).flat().map(c=>c.slug)).size;
   const tiles = trades.map((trade, index) => {
     const count = grouped[trade.id].length;
@@ -1046,6 +1053,7 @@ for (const intent of intents) await writeIndex(intent,grouped[intent.parent].fil
 
 written.push(await writePage("", renderHome(grouped)));
 written.push(await writePage("how-it-works", renderHow()));
+written.push(await writePage("claim-listing", renderClaimPage({esc,icon,pageShell,renderCrumbs},sortCompanies(publishedCompanies))));
 for (const mode of ["sign-in", "sign-up", "forgot-password", "reset-password"]) written.push(await writePage(mode, renderAccount(mode)));
 written.push(await writePage("search", renderCollection({ id: "all", slug: "search", name: "Home services", h1: "Home services in Singapore", intro: ["Explore the sourced companies on Roster. Use search and filters to narrow your list."], jobs: [], faqs: howFaqs.slice(0, 3) }, sortCompanies(publishedCompanies), [{ label: "Find a company" }])));
 

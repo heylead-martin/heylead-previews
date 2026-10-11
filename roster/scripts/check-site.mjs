@@ -12,6 +12,7 @@ const pages=new Map();const descriptions=new Set();const titles=new Set();
 for(const rel of manifest) {
  const html=await readFile(path.join(root,rel),'utf8');pages.set(rel,html);
  assert.ok(html.includes('content="noindex, nofollow, noarchive"'),rel);
+ assert.ok(html.includes('href="/roster/claim-listing/"'),`Missing footer claim link: ${rel}`);
  assert.ok(!/[\u2013\u2014]/.test(html),`Long dash: ${rel}`);
  assert.ok(!/>\s*(?:undefined|null|NaN|N\/A)\s*</.test(html),`Empty data text: ${rel}`);
  const desc=html.match(/<meta name="description" content="([^"]+)"/)[1].replace(/&amp;/g,'&').replace(/&quot;/g,'"').replace(/&lt;/g,'<').replace(/&gt;/g,'>');
@@ -21,6 +22,12 @@ for(const rel of manifest) {
  const ld=JSON.parse(html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1]);
  assert.ok(!/"(?:aggregateRating|review|offers|priceRange)"|"@type":"(?:AggregateRating|Review|Offer|Rating)"/.test(JSON.stringify(ld)),`Forbidden schema: ${rel}`);
  if(rel.startsWith('company/')){
+  assert.ok(html.includes('class="listing-logo listing-logo-large'),`Missing logo slot: ${rel}`);
+  assert.ok(html.includes('data-review-preview')&&html.includes('These figures do not describe this company.'),`Unlabelled review mockup: ${rel}`);
+  assert.ok(html.includes('src="/roster/assets/review-preview.mjs?'),`Missing review selector script: ${rel}`);
+  const intro=html.match(/<p class="company-intro">(.*?)<\/p>/)?.[1]||'';
+  assert.ok(intro&&!/Its website mentions|Its site says|Roster found no/.test(intro),`Research wording remains: ${rel}`);
+  assert.ok(!JSON.stringify(ld).includes('sample reviews'),`Sample reviews leaked into schema: ${rel}`);
   const business=ld['@graph'].find(x=>String(x['@id']).endsWith('#business'));assert.ok(business?.telephone&&business.sameAs?.length,`Missing business schema: ${rel}`);
   assert.ok(!html.includes('No dated excerpts')&&!html.includes('rating-value'),`Empty review block or bare score: ${rel}`);
   const ids=[...html.matchAll(/<section class="profile-section" id="([^"]+)"/g)].map(m=>m[1]);assert.equal(ids[0],'pricing');assert.equal(ids[1],'overview');assert.equal(ids[2],'contact');if(ids.includes('reviews'))assert.equal(ids.at(-2),'reviews');
@@ -39,7 +46,7 @@ for(const c of data.companies){
  if(c.alternatePhones?.length){assert.ok(html.includes('Also listed:'),`Missing alternate phones: ${rel}`);for(const p of c.alternatePhones)assert.ok(html.includes(p.sourceLabel.replaceAll('&','&amp;')),`Missing alternate phone source: ${rel}`);}
  if(e.faqs?.length) assert.ok(html.includes('Answer from the company website'),`Missing sourced FAQ: ${rel}`);
  if(e.summary?.text) assert.ok(html.includes('class="company-intro"'),`Missing summary: ${rel}`);
- if(c.imported) assert.equal((html.match(/<table class="service-prices">/g)||[]).length,current[c.slug].services.filter(s=>s.prices.length).length,`Pricing tables: ${rel}`);
+ if(c.imported) assert.equal((html.match(/<div class="service-options"/g)||[]).length,current[c.slug].services.filter(s=>s.prices.length).length,`Pricing options: ${rel}`);
 }
 for(const excluded of report.excluded.filter(c=>c.curated))assert.ok(!pages.has(`company/${excluded.slug}/index.html`),`Flagged page still published: ${excluded.slug}`);
 const categories={aircon:'aircon-servicing',plumbing:'plumbing',electrician:'electrician',handyman:'handyman',cleaning:'home-cleaning'};

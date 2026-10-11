@@ -1,4 +1,4 @@
-import { renderCard } from './catalogue-card.mjs';
+import { renderCard } from './catalogue-card.mjs?v=20261011-logos';
 const root=document.querySelector('[data-catalogue]');
 if(root) {
   const list=root.querySelector('.shortlist'),status=root.querySelector('[data-result-count]'),more=root.querySelector('[data-load-more]'),error=root.querySelector('[data-index-error]');
