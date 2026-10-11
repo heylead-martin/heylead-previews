@@ -51,6 +51,19 @@ Contact: hello@imotitrend.com
 
 Наемите по град са на адрес /grad/{град}/naemi/, а кварталите - на /grad/{град}/{квартал}/prodazhbi/ и /grad/{град}/{квартал}/naemi/ (например https://imotitrend.com/grad/sofia/lozenets/prodazhbi/).
 
+Класация на кварталите в един град е на /grad/{град}/kvartali/ (например https://imotitrend.com/grad/plovdiv/kvartali/), а примерна цена, самоучастие и вноска за жилище по ориентир - на /grad/{град}/byudzhet/ (например https://imotitrend.com/grad/varna/byudzhet/).
+
+## Класации (ориентири, не цени от обяви)
+
+- [Класации на кварталите в България](https://imotitrend.com/klasacii/): квартали по цена, наем и ръст, градове по доходност от наем
+- [Най-евтините квартали в България](https://imotitrend.com/klasacii/nai-evtini-kvartali/)
+- [Най-скъпите квартали в България](https://imotitrend.com/klasacii/nai-skapi-kvartali/)
+- [Кварталите с най-евтини наеми](https://imotitrend.com/klasacii/nai-evtini-naemi/)
+- [Кварталите с най-скъпи наеми](https://imotitrend.com/klasacii/nai-skapi-naemi/)
+- [Кварталите с най-голям ръст на цените](https://imotitrend.com/klasacii/nai-golyam-rast/)
+- [Брутна доходност от наем по градове](https://imotitrend.com/klasacii/dohodnost-ot-naem/)
+- [Райони на София](https://imotitrend.com/grad/sofia/rayoni/): административните райони с ориентир €/м² и кварталите във всеки район
+
 ## Профили на банки (ориентири, не оферти)
 
 - [ДСК Банк](https://imotitrend.com/banki/dsk/)
