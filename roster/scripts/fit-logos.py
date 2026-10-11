@@ -32,7 +32,7 @@ def measure(image):
     left, top = max(0, left - guard), max(0, top - guard)
     right, bottom = min(width, right + guard), min(height, bottom + guard)
     # Wide wordmarks get a wider tile so their lettering is not squeezed into a square.
-    ratio = 1.5 if (right - left) / (bottom - top) > 2.2 else 1
+    ratio = 1.5 if (right - left) / (bottom - top) > 2 else 1
     scale = 88 / max((right - left) / ratio, bottom - top)
     return {
         'ratio': ratio,
