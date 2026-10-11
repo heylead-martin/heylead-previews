@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="Kool Aircon logo">
+  <rect width="512" height="512" fill="#ffffff"/>
+  <g transform="translate(256,180) scale(7.5) translate(-14,-19)">
+    <path d="M5 22 Q4 15 9 10 Q11 8 15 9 Q10 14 10 19 Q10 23 12 24 Q8 25 5 22Z" fill="#5bad92" opacity="0.9"/>
+    <path d="M9 26 Q7 18 13 12 Q15 10 19 11 Q14 17 14 22 Q14 26 17 27 Q12 28 9 26Z" fill="#5bad92" opacity="0.65"/>
+    <path d="M14 28 Q12 20 18 14 Q20 12 24 13 Q19 19 19 24 Q19 28 22 29 Q17 30 14 28Z" fill="#5bad92" opacity="0.4"/>
+  </g>
+  <text x="256" y="370" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-weight="800" font-size="130" letter-spacing="-3" fill="#4a90e2">KooL</text>
+  <text x="256" y="418" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-weight="500" font-size="26" letter-spacing="1" fill="#5bad92">Cool Air, Cool Life</text>
+</svg>

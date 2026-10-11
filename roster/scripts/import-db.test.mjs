@@ -1,10 +1,26 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { importDatabase, BLOCKED, blockAddress, verifyRelease, priceOption, alternatePhones } from './import-db.mjs';
+import { importDatabase, BLOCKED, blockAddress, verifyRelease, priceOption, alternatePhones, bundledLogo, reviewSources } from './import-db.mjs';
 import { structuredHours, concise, ratingFact } from '../lib/expanded.mjs';
 const empty={companies:{companies:[]},profiles:{},presentation:{}};
 const row=(id='test')=>({id,name:'Example Aircon',categories:['aircon'],checked:'2026-10-10',flags:[],website:'https://example.com',about:[{text:'Aircon services.',sourceUrl:'https://example.com',capturedAt:'2026-10-10'}],services:[{name:'general-service',excerpt:'General service',sourceUrl:'https://example.com/services',capturedAt:'2026-10-10'}],phone:{value:'+65 6123 4567',sourceUrl:'https://example.com/contact',alt:[{value:'+65 8000 0000'}]},address:{value:'123 Bedok Road #03-12, Singapore 123456',sourceUrl:'https://example.com/contact'},price_lines:[],reviews:[],profile:{websiteCheck:{result:'active'}}});
 const db=companies=>({checked:'2026-10-10',companies,operatorGroups:{}});
+test('Bundled logos retain provenance, use hashed local paths and reject unsafe metadata',()=>{
+ const logo={local_path:'logos/example.png',sha256:'a'.repeat(64),source_url:'https://example.com',url:'https://example.com/logo.png',capturedAt:'2026-10-11'};
+ const asset=bundledLogo(logo);assert.equal(asset.src,'/roster/assets/logos/example-aaaaaaaaaaaa.png');assert.equal(asset.sourceUrl,'https://example.com/');
+ const data=importDatabase(db([{...row(),logo}]),empty);assert.equal(data.presentation['example-aircon'].logo,asset.src);
+ for(const bad of [{local_path:'logos/../../test.png'},{sha256:'bad'},{source_url:'javascript:alert(1)'}])assert.throws(()=>bundledLogo({...logo,...bad}),/Invalid/);
+ assert.equal(bundledLogo(null),null);
+});
+test('Release ratings preserve source methods and unknown counts, and identify mirrored Google widgets',()=>{
+ const google={source:'Google Maps',rating:4.8,count:null,scale:5,url:'https://maps.google.com/?cid=1',capturedAt:'2026-10-11'};
+ const seller={source:'Carousell',rating:5,count:7,scale:5,url:'https://www.carousell.sg/u/example/',capturedAt:'2026-10-11',method:'page',method_detail:'Seller rating includes all sales.'};
+ const widget={...google,source:'Google via widget',count:10,url:'https://example.com'};
+ const imported=reviewSources({ratings:[google,seller,widget,{...seller,url:'javascript:bad()'}]});
+ assert.equal(imported.length,3);assert.equal(imported[0].count,null);assert.equal(imported[1].note,seller.method_detail);assert.equal(imported[2].mirrorsSource,'Google Maps');
+ assert.equal(reviewSources({ratings:[widget]})[0].mirrorsSource,'');
+ assert.equal(importDatabase(db([{...row(),ratings:[seller]}]),empty).companies.companies[0].reviewSources[0].name,'Carousell');
+});
 test('Every publication-blocking flag and rollback excludes a full profile',()=>{for(const flag of BLOCKED){const result=importDatabase(db([{...row(),flags:[flag]}]),empty);assert.equal(result.companies.companies.length,0,flag);assert.ok(result.report.excluded[0].reasons.includes(flag));}assert.equal(importDatabase(db([{...row(),profile_rolled_back:{reason:'review'}}]),empty).report.excludedCount,1);});
 test('Missing sourced required fields prevents publication',()=>{for(const key of ['about','services','phone','address','website'])assert.equal(importDatabase(db([{...row(),[key]:null}]),empty).report.excludedCount,1,key);});
 test('Main contact remains primary and slugs stay stable across reruns',()=>{const first=importDatabase(db([row('one'),row('two')]),empty);assert.equal(first.companies.companies.length,2);assert.equal(new Set(first.companies.companies.map(x=>x.slug)).size,2);assert.equal(first.companies.companies[0].phone.alt,undefined);const second=importDatabase(db([row('two'),row('one')]),empty,first.registry);assert.deepEqual(second.registry,first.registry);assert.deepEqual(second.companies,first.companies);});
