@@ -112,3 +112,7 @@ body{font-size:var(--text-body)}
   .company-page .company-facts>div{gap:6px}
   .company-page .compact-profile-details{padding:8px 14px}
 }
+
+/* Keep the profile title within the space beside its logo. */
+.company-name-line>div:last-child{min-width:0;flex:1}.company-name-line h1{overflow-wrap:anywhere}
+@media(max-width:359px){.company-page .company-name-line{display:block}.company-name-line>.listing-logo{margin-bottom:16px}}
