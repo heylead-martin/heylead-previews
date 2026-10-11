@@ -2,10 +2,18 @@ import { readFile, stat, access } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import assert from 'node:assert/strict';
+import {createHash} from 'node:crypto';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const load=async f=>JSON.parse(await readFile(path.join(root,f),'utf8'));
 const data=await load('data/companies.json'),manifest=await load('data/build-manifest.json'),report=await load('data/import-report.json');
 const pins=await load('data/map-pins.json');
+const presentation=await load('data/presentation.json');
+for(const c of data.companies) {
+ const logo=presentation[c.slug]?.logoAsset;
+ if(!logo)continue;
+ const image=await readFile(path.join(root,logo.src.replace(/^\/roster\//,'')));
+ assert.equal(createHash('sha256').update(image).digest('hex'),logo.sha256,`Logo checksum: ${c.slug}`);
+}
 const old=await load('data/curated/profiles.json'),current=await load('data/profiles.json');
 for(const [slug,content] of Object.entries(old))assert.deepEqual(current[slug],content,`Hand-written content changed: ${slug}`);
 assert.equal(data.companies.length,report.publishedCount);assert.equal(report.sourceRows,report.publishedCount+report.excludedCount);
@@ -25,13 +33,15 @@ for(const rel of manifest) {
  if(rel.startsWith('company/')&&!html.includes('data-retired-listing')){
   assert.ok(html.includes('class="listing-logo listing-logo-large'),`Missing logo slot: ${rel}`);
   const record=data.companies.find(c=>rel===`company/${c.slug}/index.html`);
-  if(record.listingDepth.full) assert.ok(html.includes('data-review-preview')&&html.includes('These figures do not describe this company.'),`Unlabelled review mockup: ${rel}`);
-  else assert.ok(html.includes('Limited details')&&!html.includes('data-review-preview'),`Missing compact profile: ${rel}`);
+  if(record.listingDepth.full&&!record.reviewSources?.length) assert.ok(html.includes('data-review-preview')&&html.includes('These figures do not describe this company.'),`Unlabelled review mockup: ${rel}`);
+  if(record.reviewSources?.length) assert.ok(!html.includes('data-review-preview'),`Sample ratings shown despite real source records: ${rel}`);
+  if(!record.listingDepth.full) assert.ok(html.includes('Limited details')&&!html.includes('data-review-preview'),`Missing compact profile: ${rel}`);
   assert.ok(html.includes('src="/roster/assets/review-preview.mjs?'),`Missing review selector script: ${rel}`);
   const intro=html.match(/<p class="company-intro">(.*?)<\/p>/)?.[1]||'';
   assert.ok(intro&&!/Its website mentions|Its site says|Roster found no/.test(intro),`Research wording remains: ${rel}`);
   assert.ok(!JSON.stringify(ld).includes('sample reviews'),`Sample reviews leaked into schema: ${rel}`);
   const business=ld['@graph'].find(x=>String(x['@id']).endsWith('#business'));assert.ok(business?.telephone&&business.sameAs?.length,`Missing business schema: ${rel}`);
+  if(presentation[record.slug]?.logoAsset)assert.ok(html.includes(`src="${presentation[record.slug].logoAsset.src}"`),`Missing bundled logo: ${rel}`);
   assert.ok(!html.includes('No dated excerpts')&&!html.includes('rating-value'),`Empty review block or bare score: ${rel}`);
   const ids=[...html.matchAll(/<section class="profile-section" id="([^"]+)"/g)].map(m=>m[1]);assert.equal(ids[0],'pricing');assert.equal(ids[1],'overview');assert.equal(ids[2],'contact');if(ids.includes('reviews'))assert.equal(ids.at(-2),'reviews');
   for(const m of html.matchAll(/<iframe[^>]+src="([^"]+)"/g)){const src=m[1].replaceAll('&amp;','&');const u=new URL(src);if(u.searchParams.has('q'))assert.ok(!/#\s*\d|\bUnit\s+\d/i.test(u.searchParams.get('q')),`Unit in map: ${rel}`);}
@@ -50,6 +60,7 @@ for(const [rel,html] of pages)for(const match of html.matchAll(/(?:href|src)="([
 for(const c of data.companies){
  const rel=`company/${c.slug}/index.html`;assert.ok(pages.has(rel),`Missing page: ${c.slug}`);
  const html=pages.get(rel),e=c.enrichment;
+ for(const rating of c.reviewSources||[])if(!/^google maps$/i.test(rating.name)&&!rating.mirrorsSource)assert.ok(html.includes(rating.sourceUrl.replaceAll('&','&amp;')),`Missing rating source: ${rel}`);
  const frames=[...html.matchAll(/<iframe[^>]+src="([^"]+)"/g)];
  const pin=pins[c.slug];
  assert.equal(frames.length,pin?.status==='verified'?1:0,`Unverified map: ${rel}`);

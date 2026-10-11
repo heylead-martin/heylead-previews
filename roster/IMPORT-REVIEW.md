@@ -1,4 +1,40 @@
-# Roster import and site review
+# Roster import review: release 1509
+
+Updated 11 October 2026. Imported the exact release named in Drive's `db-expanded/releases/LATEST`: `companies-20261011-1509.json`.
+
+SHA256 verified before import: `d8c61fe128810b6e1161f9cc3366baccf7cd258fcb5769b2013884e4c840ce45`.
+
+## Current build
+
+- 5,444 source records, 587 published companies, 4,857 excluded records.
+- 57 newly eligible listings and four withdrawn listings relative to release 1337.
+- 119 full profiles and 468 compact listings. All 16 original write-ups remain unchanged in the protected source data.
+- 529 company logos installed from `logos-20261011-1458.tar.gz`. Every installed image matches its own checksum in release 1509. Images without usable source records retain initials placeholders.
+- Additional rating platforms are imported into the existing weighted average. The source date, source link and collection notes remain available. Unknown counts are not treated as one review, and mirrored Google widgets do not inflate totals.
+- Actual rating records replace the sample review panel where available. No rating or review structured data was added.
+- Map check rerun: 534 verified building pins and 53 address-only fallbacks. The fallbacks comprise 46 postal-code conflicts and seven records without a usable CID/postal pair. There were no network failures. Unit numbers remain excluded from map captions and directions.
+- 607 generated pages, including five unavailable-listing redirects. Every page remains noindex. Auth, quote and claim previews are unchanged.
+
+| Primary trade | Published | Full profiles | Excluded |
+| --- | ---: | ---: | ---: |
+| Aircon | 202 | 51 | 1,697 |
+| Plumbing | 82 | 22 | 357 |
+| Electrician | 92 | 16 | 2,018 |
+| Handyman | 82 | 13 | 302 |
+| Cleaning | 129 | 17 | 483 |
+
+## Withdrawn listings
+
+Aeon Environmental Services, Greengarden Integrated Services and SQ 1 Development are now marked commercial-only. City Cleaning lacks sourced About content, services and an owned company website. These four previously published URLs redirect to the home-cleaning directory, without republishing excluded business details. Billy Aircon remains withheld under the existing release flag and redirects to the aircon directory. All slugs remain reserved.
+
+## Validation
+
+27 JavaScript tests and four logo-import tests pass. The site check validates every generated page, local link, fragment, logo checksum, source link, metadata rule and original write-up. The largest trade page and JSON index total 294.2 KB, within the existing 300 KB limit. Unused optional directory fields were omitted to keep the larger release within that limit. Browser checks covered ten original and imported company pages, an additional SVG logo, mobile layout, combined rating totals, directory search, average-rating filtering, sorting, save/unsave and load more. The refreshed Evergreen map was inspected at its verified Tampines building pin.
+
+## Previous review: release 1337
+
+The following historical notes describe the earlier release and are retained for its audit trail.
+
 
 Updated 11 October 2026 on `roster-db-import`, following `REVIEW-2026-10-11-1340-roster-review.md` and Martin's map-pin request.
 

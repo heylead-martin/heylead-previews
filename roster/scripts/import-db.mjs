@@ -3,6 +3,7 @@ import path from 'node:path';
 import os from 'node:os';
 import { fileURLToPath } from 'node:url';
 import { createHash } from 'node:crypto';
+import { execFileSync } from 'node:child_process';
 
 export const BLOCKED = new Set(['not-a-trade-business','not-singapore','site-spam-injection','possible-duplicate','no-sg-postal-code','marketplace','possible-platform','google-listing-mismatch','website-not-company-site','thin-profile','site-placeholder-content','website-inactive','lookup-name-looks-unrelated','trade-unclear','closed','commercial-only']);
 const types = {aircon:'HVACBusiness',plumbing:'Plumber',electrician:'Electrician',handyman:'HomeAndConstructionBusiness',cleaning:'LocalBusiness'};
@@ -74,6 +75,18 @@ export function verifyRelease(source, checksum) {
   const actual = createHash('sha256').update(source).digest('hex');
   if(!/^[a-f0-9]{64}$/.test(expected) || expected !== actual) throw new Error('Release checksum mismatch. Import stopped before writing any site data.');
   return actual;
+}
+
+export function bundledLogo(logo) {
+  if (!logo?.local_path) return null;
+  if (!/^logos\/[a-z0-9_-]+\.(?:png|jpe?g|webp|avif|svg)$/i.test(logo.local_path) || !/^[a-f0-9]{64}$/i.test(logo.sha256 || '') || !http(logo.source_url) || !http(logo.url)) throw new Error('Invalid sourced logo asset metadata');
+  const parsed=path.posix.parse(logo.local_path), sha256=logo.sha256.toLowerCase();
+  return {localPath:logo.local_path,sha256,src:`/roster/assets/logos/${parsed.name}-${sha256.slice(0,12)}${parsed.ext}`,sourceUrl:http(logo.source_url),originalUrl:http(logo.url),capturedAt:text(logo.capturedAt)};
+}
+
+export function reviewSources(row) {
+  const hasGoogle=!!row.google_rating || (row.ratings||[]).some(r=>/^google maps$/i.test(r.source||''));
+  return (row.ratings||[]).filter(r=>text(r.source)&&Number.isFinite(r.rating)&&r.rating>=0&&r.rating<=5&&r.scale===5&&http(r.url)&&/^\d{4}-\d{2}-\d{2}/.test(r.capturedAt||'')).map(r=>({name:text(r.source),rating:r.rating,count:Number.isInteger(r.count)&&r.count>0?r.count:null,scale:r.scale,sourceUrl:http(r.url),checkedAt:text(r.capturedAt),method:text(r.method),note:text(r.method_detail),mirrorsSource:text(r.mirrorsSource||r.mirrors_source)||(/google.*widget/i.test(r.source)&&hasGoogle?'Google Maps':'')}));
 }
 
 export function alternatePhones(phone, primary) {
@@ -149,6 +162,7 @@ export function importDatabase(db, seeds, registry={}) {
       if(deadReviews.length) {company.reviews=company.reviews.filter(r=>!deadReviews.includes(r.sourceUrl));report.warnings.push({slug,issue:'Invalidated review source removed',urls:deadReviews});}
     }
     company.databaseId=row.id;company.enrichment=enrichment;
+    company.reviewSources=reviewSources(row);
     company.listingDepth={full:row.profile_bar?.meetsFullBar===true,evidenceScore:['priceWithJob','serviceAreaCited','residentialSentence','summary','unflagged'].filter(key=>row.profile_bar?.[key]===true).length+Number(!!enrichment.hours)+Number(!!company.reviews?.length),checkedAt:row.profile_bar?.checkedAt||null};
     company.primaryTrade=category;company.category=category;company.schemaType=types[category];
     company.alternatePhones=alternatePhones(row.phone,company.phone?.value);
@@ -163,6 +177,8 @@ export function importDatabase(db, seeds, registry={}) {
     }
     if(original && !presentation[slug].published) {const fresh=enrichment.priceLines.filter(p=>!indicative(p));if(fresh.length) presentation[slug]={...presentation[slug],published:true,price:'See published prices',detail:`${fresh.length} newly sourced pricing entries. Confirm the job, inclusions and total.`};}
     const photos=(row.photos||[]).filter(p=>http(p.fileUrl)&&http(p.pageUrl));
+    const logoAsset=bundledLogo(row.logo);
+    if(logoAsset) {presentation[slug].logo=logoAsset.src;presentation[slug].logoAsset=logoAsset;}
     if(!presentation[slug].logo) {const logo=photos.find(p=>p.kind==='logo');if(logo) presentation[slug].logo=logo.fileUrl;}
     if(!presentation[slug].photos?.length) presentation[slug].photos=photos.filter(p=>p.kind!=='logo').slice(0,3).map(p=>({src:p.fileUrl,sourceUrl:p.pageUrl,caption:`${human(p.kind)} photo from ${company.name}`}));
     companies.push(company);
@@ -210,6 +226,13 @@ if(process.argv[1]&&path.resolve(process.argv[1])===script) {
   const data=importDatabase(JSON.parse(source),seeds,registry);
   data.report.sourceSha256=checksum;
   data.report.sourceRelease=path.basename(input);
+  const logos=data.report.published.map(c=>data.presentation[c.slug]?.logoAsset).filter(Boolean);
+  if(logos.length) {
+    const bundle=process.argv[3]||process.env.ROSTER_LOGO_BUNDLE||'';
+    const result=execFileSync('python3',[path.join(root,'scripts/import-logos.py')],{input:JSON.stringify({root,bundle,logos}),encoding:'utf8'});
+    data.report.logos=JSON.parse(result);
+    if(bundle)data.report.logos.bundle=path.basename(bundle);
+  }
   await mkdir(path.join(root,'data'),{recursive:true});
   for(const [name,key] of [['companies','companies'],['profiles','profiles'],['presentation','presentation'],['operator-groups','groups'],['import-report','report'],['slug-registry','registry']]) await writeFile(path.join(root,'data',name+'.json'),JSON.stringify(data[key],null,2)+'\n');
   console.log(`Imported ${data.report.publishedCount} profiles; excluded ${data.report.excludedCount} rows.`);

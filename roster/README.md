@@ -15,10 +15,14 @@ The importer reads `db-expanded/releases/LATEST` in the Roster Drive folder, the
 To reproduce a specific release:
 
 ```sh
-node roster/scripts/import-db.mjs "/absolute/path/to/companies-20261011-1337.json" && node roster/build.mjs
+node roster/scripts/import-db.mjs "/absolute/path/to/companies-20261011-1509.json" "/absolute/path/to/logos-20261011-1458.tar.gz"
+python3 roster/scripts/verify-map-pins.py
+node roster/build.mjs
 ```
 
 `ROSTER_DB_PATH` also accepts a release path. The checksum file must sit beside it as `<release>.sha256`. A missing checksum, mismatch or invalid LATEST filename stops the import.
+
+The optional second argument, or `ROSTER_LOGO_BUNDLE`, supplies the matching logo bundle. `scripts/import-logos.py` checks each published logo against its release SHA256 before installing the batch under `assets/logos/`. Paths include the content hash for caching. Only published companies' assets are installed, archive links and unsafe paths are rejected, and static image content is validated. Subsequent imports can omit the bundle when every required local image already matches its hash. A missing or changed image stops the import before site data is written. Logo source URLs, original URLs and capture dates remain in `presentation.json`.
 
 ## Data ownership
 
@@ -46,6 +50,7 @@ Trade pages lead with up to eight full-bar profiles, ordered by evidence and the
 
 ```sh
 node --test roster/scripts/import-db.test.mjs roster/scripts/presentation.test.mjs
+python3 -m unittest discover -s roster/scripts -p 'test_import_logos.py'
 node roster/scripts/check-site.mjs
 ```
 
@@ -61,4 +66,4 @@ Public summaries and imported About text use customer-facing third-person copy d
 
 Company cards and profiles reserve space for a logo. Existing artwork is used when present, otherwise the slot shows company initials. Broken artwork falls back to initials.
 
-The reviews section includes a clearly labelled mockup with 2-5 sources. `assets/review-model.mjs` holds sample fixtures and a review-count-weighted calculation. Sample scores never replace real sourced ratings, change directory sorting or enter structured data. The combined score is the sum of each rating multiplied by its count, divided by total reviews. Identified mirrors, incompatible scales and unusable counts are excluded. `lib/rating-summary.mjs` handles real records separately from the sample fixtures, with `assets/rating-display.mjs` shared by static and dynamically loaded cards. Directory filters and sorting use the real average. Cards pair this with main services and a labelled example service price when a specific published rate can be extracted. Before connecting a real data release, each source needs its platform, profile URL, capture date, rating, scale, count and any mirror relationship. Deduplication is not automatic.
+The importer maps release `ratings` into sourced, dated records and recalculates the combined score. Unknown review counts are never invented. Google widgets are treated as mirrors when a direct Google rating exists. Real release ratings replace the mockup on company pages, with source-method details available in disclosures. Full profiles without release rating records retain a clearly labelled mockup with 2-5 sources. `assets/review-model.mjs` holds sample fixtures and a review-count-weighted calculation. Sample scores never replace real sourced ratings, change directory sorting or enter structured data. The combined score is the sum of each rating multiplied by its count, divided by total reviews. Identified mirrors, incompatible scales and unusable counts are excluded. `lib/rating-summary.mjs` handles real records separately from the sample fixtures, with `assets/rating-display.mjs` shared by static and dynamically loaded cards. Directory filters and sorting use the real average. Cards pair this with main services and a labelled example service price when a specific published rate can be extracted. Before connecting a real data release, each source needs its platform, profile URL, capture date, rating, scale, count and any mirror relationship. Deduplication is not automatic.

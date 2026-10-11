@@ -1047,7 +1047,14 @@ for (const trade of trades) grouped[trade.id] = sortCompanies(grouped[trade.id])
 const written = [];
 await mkdir(path.join(root,'data/index'), {recursive:true});
 async function writeIndex(spec, companies) {
-  const records = companies.map(c => directoryRecord(c,priceSummary(c,spec.service),tradeById(c.category)));
+  const records = companies.map(c => {
+    const record=directoryRecord(c,priceSummary(c,spec.service),tradeById(c.category));
+    // Keep the search index lean as the directory grows; omit unused card fields.
+    delete record.categories;
+    if(!record.fullProfile&&!record.examplePrice) delete record.priceDetail;
+    for(const field of ['logo','description','whatsapp']) if(!record[field]) delete record[field];
+    return record;
+  });
   const output=JSON.stringify({companies:records})+'\n';
   indexVersions[indexName(spec)]=createHash('sha256').update(output).digest('hex').slice(0,12);
   await writeFile(path.join(root,'data/index',indexName(spec)+'.json'),output);
@@ -1084,11 +1091,17 @@ for (const company of publishedCompanies) {
   ));
 }
 
-// Preserve the one withdrawn URL present in the last pre-import public release.
-const retired=[{slug:'billy-aircon',name:'Billy Aircon',target:'/roster/aircon-servicing/'}];
+// Keep previously published, withdrawn URLs useful without restoring excluded profiles.
+const retired=[
+  {slug:'billy-aircon',name:'Billy Aircon',target:'/roster/aircon-servicing/',trade:'aircon servicing'},
+  {slug:'aeon-environmental-services',name:'Aeon Environmental Services',target:'/roster/home-cleaning/',trade:'home cleaning'},
+  {slug:'city-cleaning',name:'City Cleaning',target:'/roster/home-cleaning/',trade:'home cleaning'},
+  {slug:'greengarden-integrated-services-pte-ltd',name:'Greengarden Integrated Services Pte Ltd',target:'/roster/home-cleaning/',trade:'home cleaning'},
+  {slug:'sq-1-development-pte-ltd',name:'SQ 1 Development Pte Ltd',target:'/roster/home-cleaning/',trade:'home cleaning'}
+];
 for(const old of retired) if(!publishedCompanies.some(c=>c.slug===old.slug)) {
   const canonicalPath=`/roster/company/${old.slug}/`;
-  const redirect=pageShell({title:`${old.name}: listing unavailable | Roster`,description:`The ${old.name} listing is currently unavailable. Browse other aircon servicing companies in Singapore on Roster.`,canonicalPath,current:old.target,jsonLd:[webPage(`${old.name}: listing unavailable`,canonicalPath,'This listing is currently unavailable.')],body:`<section class="claim-hero" data-retired-listing><div><h1>This listing is currently unavailable.</h1><p>Explore other aircon servicing companies, compare prices and get in touch directly.</p><a class="btn btn-solid" href="${old.target}">Browse aircon companies</a></div></section>`}).replace('<meta charset="utf-8">',`<meta charset="utf-8"><meta http-equiv="refresh" content="0;url=${old.target}">`);
+  const redirect=pageShell({title:`${old.name}: listing unavailable | Roster`,description:concise(`The ${old.name} listing is currently unavailable. Browse other ${old.trade} companies in Singapore on Roster.`),canonicalPath,current:old.target,jsonLd:[webPage(`${old.name}: listing unavailable`,canonicalPath,'This listing is currently unavailable.')],body:`<section class="claim-hero" data-retired-listing><div><h1>This listing is currently unavailable.</h1><p>Explore other ${old.trade} companies, compare prices and get in touch directly.</p><a class="btn btn-solid" href="${old.target}">Browse ${old.trade} companies</a></div></section>`}).replace('<meta charset="utf-8">',`<meta charset="utf-8"><meta http-equiv="refresh" content="0;url=${old.target}">`);
   written.push(await writePage(`company/${old.slug}`,redirect));
 }
 
