@@ -51,7 +51,7 @@ Trade pages lead with up to eight full-bar profiles, ordered by evidence and the
 ## Validation
 
 ```sh
-node --test roster/scripts/import-db.test.mjs roster/scripts/presentation.test.mjs roster/scripts/home-snapshot.test.mjs roster/scripts/service-areas.test.mjs
+node --test roster/scripts/import-db.test.mjs roster/scripts/presentation.test.mjs roster/scripts/home-snapshot.test.mjs roster/scripts/service-areas.test.mjs roster/scripts/job-match.test.mjs
 python3 -m unittest discover -s roster/scripts -p 'test_*.py'
 node roster/scripts/check-site.mjs
 ```
@@ -89,3 +89,15 @@ python3 roster/scripts/prepare-home-map.py /path/to/NationalMapPolygon.geojson
 `lib/service-areas.mjs` accepts supported, dated company-site coverage statements with their excerpts and source URLs. Missing evidence produces no Areas served section or navigation link. Town tags are alphabetized within their regions when there are more than eight towns; lists longer than twelve expand on demand. Source URLs are deduplicated.
 
 `assets/service-areas.mjs` maps all 55 planning areas to their official URA 2019 regions. Its source and Singapore Open Data Licence links are recorded in that file. `assets/area-picker.mjs` provides typed filtering, grouped options, keyboard selection and clearing. Coverage matching and facet counts run before pagination. When an area is selected, a single compact results list preserves town-first ordering across full and limited profiles and across all sort choices.
+
+## Hero search and job shortlist beta
+
+The homepage moves search from the header into a hero with Quick search and AI search tabs. Quick search opens the existing directory. AI search is clearly labelled as an unconnected beta: full sentences are interpreted by local service and town keyword rules, using only published company records. It makes no AI, availability, timing, suitability or budget claims.
+
+`lib/job-search.mjs` renders the hero and `/roster/matches/`. `assets/job-match.mjs` supplies the pure parser, matcher and selection validation. `assets/job-search.js` handles the hero tabs and `assets/job-results.js` handles the dedicated shortlist, loading the existing versioned all-company index. The additional CSS loads only on these two pages.
+
+A shortlist starts with five companies and can expand to ten. Named jobs must match listed offerings. A chosen town uses stated service coverage, with town before region before islandwide, never office addresses. Unstated coverage is excluded for a chosen area. An ambiguous trade or area asks the visitor to refine the brief. Real average ratings and published prices retain their details and sources. Prices are examples or named service rates, not quotes for the visitor's entire job.
+
+Nothing is preselected. Visitors can select all visible companies or specific ones. Reducing the shortlist removes hidden recipients, and editing the brief clears the stale results and selection. The dialog shows the exact brief and selected companies. Finish preview sends nothing and does not collect personal contact details. Preview forms stay disabled until their local handler loads. Descriptions are carried in URL fragments rather than HTTP query parameters; selections stay in memory. There is no AI service, quote API, new database or change to the existing quote panel.
+
+See `AI-SEARCH-PREVIEW.md` for validation and local review links. Publication still requires Martin's approval.

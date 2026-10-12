@@ -1,3 +1,4 @@
+import {renderMatchPage} from './lib/job-search.mjs';
 import {renderAreaFilter} from './lib/service-areas.mjs';
 import {priceOption} from './scripts/import-db.mjs';
 import { readFile, writeFile, mkdir, rm } from "node:fs/promises";
@@ -22,7 +23,7 @@ const origin = "https://previews.heylead.com/roster";
 let checked = "9 Oct 2026 and 10 Oct 2026";
 // Content hashes keep cached assets in sync with each generated page.
 const assetVersions = Object.fromEntries(await Promise.all(
-  ["service-areas.css", "home.css", "home.js", "site.css", "directory.css", "experience.css", "form.js", "directory.js", "experience.js", "expanded.css", "logo-fit.css", "catalogue.js", "catalogue-card.mjs", "claim.js", "review-preview.mjs"].map(async (name) => [
+  ["job-search.css", "job-search.js", "job-results.js", "service-areas.css", "home.css", "home.js", "site.css", "directory.css", "experience.css", "form.js", "directory.js", "experience.js", "expanded.css", "logo-fit.css", "catalogue.js", "catalogue-card.mjs", "claim.js", "review-preview.mjs"].map(async (name) => [
     name,
     createHash("sha256").update(await readFile(path.join(root, "assets", name))).digest("hex").slice(0, 12)
   ])
@@ -507,9 +508,9 @@ const navItems = [
   ["/roster/how-it-works/", "How it works", null]
 ];
 
-function renderNav(current) {
+function renderNav(current, home = false) {
   const links = navItems.filter(([, , trade]) => trade).map(([href, label, trade]) => `<a href="${href}"${href === current ? ' aria-current="page"' : ""}>${icon(tradeIcon[trade], "ic nav-ic")}<span>${esc(label)}</span></a>`).join("");
-  return `<header class="top"><div class="top-inner"><a class="brand" href="/roster/">${brandMark()}<span class="wordmark">Roster<span class="brand-dot">.</span></span></a><div class="global-search" role="search"><label class="sr-only" for="site-search">Find a service or company</label>${icon("search")}<input id="site-search" type="search" placeholder="Find a service or company" autocomplete="off" data-site-search><span class="search-location">${icon("pin")} Singapore</span><button class="search-submit" type="button" aria-label="Search Roster" data-search-submit>${icon("arrow")}</button></div><a class="saved-link" aria-label="Saved companies" href="/roster/search/?saved=1">${icon("bookmark")}<span>Saved</span></a><nav class="account-nav" aria-label="Account"><a href="/roster/sign-in/">Sign in</a><a class="nav-signup" href="/roster/sign-up/">Sign up</a></nav></div><div class="nav-shell"><nav class="nav" aria-label="Services">${links}</nav><span class="nav-note">Home services. A more considered choice.</span></div></header>`;
+  return `<header class="top"><div class="top-inner"><a class="brand" href="/roster/">${brandMark()}<span class="wordmark">Roster<span class="brand-dot">.</span></span></a>${home ? "" : `<div class="global-search" role="search"><label class="sr-only" for="site-search">Find a service or company</label>${icon("search")}<input id="site-search" type="search" placeholder="Find a service or company" autocomplete="off" data-site-search><span class="search-location">${icon("pin")} Singapore</span><button class="search-submit" type="button" aria-label="Search Roster" data-search-submit>${icon("arrow")}</button></div>`}<a class="saved-link" aria-label="Saved companies" href="/roster/search/?saved=1">${icon("bookmark")}<span>Saved</span></a><nav class="account-nav" aria-label="Account"><a href="/roster/sign-in/">Sign in</a><a class="nav-signup" href="/roster/sign-up/">Sign up</a></nav></div><div class="nav-shell"><nav class="nav" aria-label="Services">${links}</nav><span class="nav-note">Home services. A more considered choice.</span></div></header>`;
 }
 
 function renderCrumbs(items) {
@@ -632,19 +633,19 @@ ${shareImage ? `<meta property="og:image" content="${esc(shareImage)}"><meta nam
 <link rel="stylesheet" href="/roster/assets/experience.css?v=${assetVersions["experience.css"]}">
 <link rel="stylesheet" href="/roster/assets/expanded.css?v=${assetVersions["expanded.css"]}">
 <link rel="stylesheet" href="/roster/assets/service-areas.css?v=${assetVersions["service-areas.css"]}">
-<link rel="stylesheet" href="/roster/assets/logo-fit.css?v=${assetVersions["logo-fit.css"]}">${bodyClass === "home-page" ? `\n<link rel="stylesheet" href="/roster/assets/home.css?v=${assetVersions["home.css"]}">` : ""}
+<link rel="stylesheet" href="/roster/assets/logo-fit.css?v=${assetVersions["logo-fit.css"]}">${bodyClass === "home-page" ? `\n<link rel="stylesheet" href="/roster/assets/home.css?v=${assetVersions["home.css"]}">` : ""}${["home-page","match-page"].includes(bodyClass) ? `\n<link rel="stylesheet" href="/roster/assets/job-search.css?v=${assetVersions["job-search.css"]}">` : ""}
 <script type="application/ld+json">${graph}</script>
 </head>
 <body${bodyClass ? ` class="${bodyClass}"` : ""}>
 <a class="skip" href="#content">Skip to content</a>
-${renderNav(current)}
+${renderNav(current, bodyClass === "home-page")}
 <main id="content" class="wrap">
 ${body}
 </main>
 ${renderFooter()}
 <script src="/roster/assets/form.js?v=${assetVersions["form.js"]}"></script>
 <script src="/roster/assets/directory.js?v=${assetVersions["directory.js"]}"></script>
-<script src="/roster/assets/experience.js?v=${assetVersions["experience.js"]}"></script>${bodyClass === "home-page" ? `\n<script type="module" src="/roster/assets/home.js?v=${assetVersions["home.js"]}"></script>` : ""}
+<script src="/roster/assets/experience.js?v=${assetVersions["experience.js"]}"></script>${bodyClass === "home-page" ? `\n<script type="module" src="/roster/assets/home.js?v=${assetVersions["home.js"]}"></script>` : ""}${bodyClass === "home-page" ? `\n<script type="module" src="/roster/assets/job-search.js?v=${assetVersions["job-search.js"]}"></script>` : ""}${bodyClass === "match-page" ? `\n<script type="module" src="/roster/assets/job-results.js?v=${assetVersions["job-results.js"]}"></script>` : ""}
 ${bodyClass === "claim-page" ? `<script type="module" src="/roster/assets/claim.js?v=${assetVersions["claim.js"]}"></script>` : ""}
 ${bodyClass.split(" ").includes("company-page") ? `<script type="module" src="/roster/assets/review-preview.mjs?v=${assetVersions["review-preview.mjs"]}"></script>` : ""}
 ${bodyClass === "directory-page" ? `<script type="module" src="/roster/assets/catalogue.js?v=${assetVersions["catalogue.js"]}"></script>` : ""}
@@ -655,9 +656,13 @@ ${bodyClass === "directory-page" ? `<script type="module" src="/roster/assets/ca
   if (/aggregateRating/i.test(html) || /"@type":"(Review|Offer|AggregateRating)"/.test(html)) {
     throw new Error("Rating, review, or offer schema leaked into " + canonicalPath);
   }
-  // Account previews use dialog forms with disabled fields until the local handler loads.
+  // Allow only the local directory search and inert preview forms.
   const nonPreviewHtml = html.replace(/<form method="dialog" data-claim-preview[^>]*>[\s\S]*?<\/form>/g, "").replace(/<form method="dialog" data-account-preview="(?:sign-in|sign-up|forgot-password|reset-password)"[^>]*>[\s\S]*?<\/form>/g, "");
-  if (/<form[\s>]/i.test(nonPreviewHtml)) {
+  const withoutSearchForms = nonPreviewHtml
+    .replace(/<form action="\/roster\/search\/" method="get" class="hero-quick-form">[\s\S]*?<\/form>/g, "")
+    .replace(/<form class="hero-guided-form" data-job-start method="dialog"><fieldset disabled>[\s\S]*?<\/form>/g, "")
+    .replace(/<form data-job-edit method="dialog"><fieldset disabled>[\s\S]*?<\/form>/g, "");
+  if (/<form[\s>]/i.test(withoutSearchForms)) {
     throw new Error("A form element leaked into " + canonicalPath);
   }
   if (/mailto:|formspree|fetch\(/i.test(html)) {
@@ -1026,6 +1031,7 @@ for (const intent of intents) await writeIndex(intent,grouped[intent.parent].fil
 
 written.push(await writePage("", renderHome(grouped)));
 written.push(await writePage("how-it-works", renderHow()));
+written.push(await writePage("matches", renderMatchPage({esc,icon,pageShell,indexPath:indexPath({id:"all"})})));
 written.push(await writePage("claim-listing", renderClaimPage({esc,icon,pageShell,renderCrumbs},sortCompanies(publishedCompanies))));
 for (const mode of ["sign-in", "sign-up", "forgot-password", "reset-password"]) written.push(await writePage(mode, renderAccount(mode)));
 written.push(await writePage("search", renderCollection({ id: "all", slug: "search", name: "Home services", h1: "Home services in Singapore", intro: ["Explore the sourced companies on Roster. Use search and filters to narrow your list."], jobs: [], faqs: howFaqs.slice(0, 3) }, sortCompanies(publishedCompanies), [{ label: "Find a company" }])));
