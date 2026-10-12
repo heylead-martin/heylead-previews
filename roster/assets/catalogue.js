@@ -14,7 +14,7 @@ if(root) {
   const search=root.querySelector('[data-filter-search]'),rating=root.querySelector('[data-rating]'),sort=root.querySelector('[data-sort]'),category=root.querySelector('[data-category-filter]'),unstated=root.querySelector('[data-include-unstated]');
   let rows=[],limit=12,loaded=false;
   const area=setupAreaPicker(root,()=>apply());
-  const saved=()=>{try{const x=JSON.parse(localStorage.getItem('roster-saved')||'[]');return Array.isArray(x)?x.filter(s=>typeof s==='string'):[];}catch{return [];}};
+  const saved=()=>window.RosterAccount?.snapshot().saved||[];
   function readParams(){
     const params=new URLSearchParams(location.search);
     search.value=params.get('q')||'';area.set(params.get('area'));rating.value=params.get('rating')||'';sort.value=params.get('sort')||'evidence';if(!sort.value)sort.value='evidence';if(category)category.value=params.get('trade')||'';
@@ -46,6 +46,7 @@ if(root) {
     root.querySelectorAll('[data-filter-count]').forEach(el=>{el.textContent=counts[el.dataset.filterCount];});
     root.querySelector('[data-active-filters]').textContent=active.length||area.value||rating.value||category?.value||search.value.trim()?'(active)':'';
     if(syncUrl)updateUrl();
+    window.dispatchEvent(new Event('roster-cards-rendered'));
   }
   async function load() {
     more.disabled=true;error.hidden=true;

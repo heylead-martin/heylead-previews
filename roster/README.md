@@ -7,8 +7,11 @@ Work on `service-areas-1253` for this review. Do not push or publish until Marti
 From the repository root:
 
 ```sh
+npm --prefix roster ci --ignore-scripts
 node roster/scripts/import-db.mjs && node roster/build.mjs
 ```
+
+Install dependencies once per checkout and after lockfile changes. The site build also bundles the official Supabase client with the current public account configuration.
 
 The importer reads `db-expanded/releases/LATEST` in the Roster Drive folder, then verifies the selected release against its adjacent `.sha256` file before writing site data. It never reads the mutable working `companies.json`.
 
@@ -44,14 +47,14 @@ Company pages start with Services & pricing, Areas served when stated, About the
 
 Company headers and directory cards feature the real average rating, total review count and number of sources. A single source supplies the average as-is; multiple independent sources are weighted by their review counts. Source links and dates remain visible. The reviews section also preserves the original Google Maps snapshot sentence and other source labels. No rating, review or offer structured data is emitted. Map iframes use verified building coordinates from `data/map-pins.json`; unresolved or stale addresses show no iframe. Unit numbers are removed from public map captions and directions. Read `ADDRESS-MAP-COLLECTION.md` before collecting or updating location evidence. Sourced alternate phone numbers appear as "Also listed" with their source label. The primary number remains the main call action.
 
-All pages remain noindex. Account screens and quote requests are previews with no backend. The quote panel still sends and stores nothing. Shared preview authentication is unchanged.
+All pages remain noindex. Account screens now use a Supabase integration for email/password, Google login, recovery and private saved companies. The provider is not configured yet, so forms remain disabled and browser-only saves continue working. Follow [ACCOUNTS-SETUP.md](ACCOUNTS-SETUP.md) to activate and verify real accounts. The quote and claim previews still send and store nothing. Shared preview authentication is unchanged.
 
 Trade pages lead with up to eight full-bar profiles, ordered by evidence and then rating. Other companies use compact rows in batches of 12. A versioned per-trade JSON index supports search, filters, sorting and more compact results. `assets/catalogue-data.mjs` losslessly encodes repeated field names as column indexes and repeated service-area names in a shared dictionary and decodes them in the browser, keeping larger directories within the payload budget. Non-full-bar company pages carry a limited-details note and a smaller layout. Area filters use sourced `service_locations`, never office addresses. A selected town ranks explicit town matches first, followed by region matches and islandwide coverage. Companies without stated areas are excluded unless the user enables the optional toggle. The selected area and other filters persist in URL query parameters. The all-company search covers every published profile. Each company appears under its release `primary_trade`; trade counts do not overlap. Sourced fit notes and service-area excerpts are retained, while `self_description` metadata is never used as About text.
 
 ## Validation
 
 ```sh
-node --test roster/scripts/import-db.test.mjs roster/scripts/presentation.test.mjs roster/scripts/home-snapshot.test.mjs roster/scripts/service-areas.test.mjs roster/scripts/job-match.test.mjs roster/scripts/quote-contact.test.mjs
+node --test roster/scripts/*.test.mjs
 python3 -m unittest discover -s roster/scripts -p 'test_*.py'
 node roster/scripts/check-site.mjs
 ```

@@ -1,3 +1,4 @@
+import {accountContent,accountHome,savedContent,callbackContent} from './lib/account-pages.mjs';
 import {renderMatchPage} from './lib/job-search.mjs';
 import {renderQuoteComposer} from './lib/quote-flow.mjs';
 import {renderAreaFilter} from './lib/service-areas.mjs';
@@ -16,6 +17,7 @@ import {renderClaimPage} from "./lib/claim-page.mjs";
 import { renderCard, renderCompactCard, splitDirectory } from "./assets/catalogue-card.mjs";
 
 const root = path.dirname(fileURLToPath(import.meta.url));
+await import('./scripts/build-accounts.mjs');
 console.log('Logo framing:', execFileSync('python3', [path.join(root, 'scripts/fit-logos.py')], {encoding:'utf8'}).trim());
 const mapPins=JSON.parse(await readFile(path.join(root,"data/map-pins.json"),"utf8"));
 const homeOutline=JSON.parse(await readFile(path.join(root,"data/singapore-outline.json"),"utf8"));
@@ -24,7 +26,7 @@ const origin = "https://previews.heylead.com/roster";
 let checked = "9 Oct 2026 and 10 Oct 2026";
 // Content hashes keep cached assets in sync with each generated page.
 const assetVersions = Object.fromEntries(await Promise.all(
-  ["hero-rotation.css", "hero-rotation.js", "quote-flow.css", "quote-start.js", "job-search.css", "job-search.js", "job-results.js", "service-areas.css", "home.css", "home.js", "site.css", "directory.css", "experience.css", "form.js", "directory.js", "experience.js", "expanded.css", "logo-fit.css", "catalogue.js", "catalogue-card.mjs", "claim.js", "review-preview.mjs"].map(async (name) => [
+  ["accounts.css", "accounts.js", "hero-rotation.css", "hero-rotation.js", "quote-flow.css", "quote-start.js", "job-search.css", "job-search.js", "job-results.js", "service-areas.css", "home.css", "home.js", "site.css", "directory.css", "experience.css", "form.js", "directory.js", "experience.js", "expanded.css", "logo-fit.css", "catalogue.js", "catalogue-card.mjs", "claim.js", "review-preview.mjs"].map(async (name) => [
     name,
     createHash("sha256").update(await readFile(path.join(root, "assets", name))).digest("hex").slice(0, 12)
   ])
@@ -512,7 +514,7 @@ const navItems = [
 
 function renderNav(current, home = false) {
   const links = navItems.filter(([, , trade]) => trade).map(([href, label, trade]) => `<a href="${href}"${href === current ? ' aria-current="page"' : ""}>${icon(tradeIcon[trade], "ic nav-ic")}<span>${esc(label)}</span></a>`).join("");
-  return `<header class="top"><div class="top-inner"><a class="brand" href="/roster/">${brandMark()}<span class="wordmark">Roster<span class="brand-dot">.</span></span></a>${home ? "" : `<div class="global-search" role="search"><label class="sr-only" for="site-search">Find a service or company</label>${icon("search")}<input id="site-search" type="search" placeholder="Find a service or company" autocomplete="off" data-site-search><span class="search-location">${icon("pin")} Singapore</span><button class="search-submit" type="button" aria-label="Search Roster" data-search-submit>${icon("arrow")}</button></div>`}<a class="saved-link" aria-label="Saved companies" href="/roster/search/?saved=1">${icon("bookmark")}<span>Saved</span></a><nav class="account-nav" aria-label="Account"><a href="/roster/sign-in/">Sign in</a><a class="nav-signup" href="/roster/sign-up/">Sign up</a></nav></div><div class="nav-shell"><nav class="nav" aria-label="Services">${links}</nav><span class="nav-note">Home services. A more considered choice.</span></div></header>`;
+  return `<header class="top"><div class="top-inner"><a class="brand" href="/roster/">${brandMark()}<span class="wordmark">Roster<span class="brand-dot">.</span></span></a>${home ? "" : `<div class="global-search" role="search"><label class="sr-only" for="site-search">Find a service or company</label>${icon("search")}<input id="site-search" type="search" placeholder="Find a service or company" autocomplete="off" data-site-search><span class="search-location">${icon("pin")} Singapore</span><button class="search-submit" type="button" aria-label="Search Roster" data-search-submit>${icon("arrow")}</button></div>`}<a class="saved-link" aria-label="Saved companies" href="/roster/saved/">${icon("bookmark")}<span>Saved</span><b data-saved-count hidden></b></a><nav class="account-nav" aria-label="Account"><a data-account-guest href="/roster/sign-in/">Sign in</a><a data-account-guest class="nav-signup" href="/roster/sign-up/">Sign up</a><a data-account-member href="/roster/account/" hidden>Account</a><button data-account-member data-sign-out type="button" hidden>Sign out</button></nav></div><div class="nav-shell"><nav class="nav" aria-label="Services">${links}</nav><span class="nav-note">Home services. A more considered choice.</span></div></header>`;
 }
 
 function renderCrumbs(items) {
@@ -606,6 +608,7 @@ function pageShell({ title, description, canonicalPath, current, jsonLd, body, b
   const html = `<!doctype html>
 <html lang="en">
 <head>
+${bodyClass === "account-page" ? '<meta name="referrer" content="no-referrer">' : ""}
 <script src="/auth-config.js"></script>
 <script src="/auth.js"></script>
 <meta charset="utf-8">
@@ -635,6 +638,7 @@ ${shareImage ? `<meta property="og:image" content="${esc(shareImage)}"><meta nam
 <link rel="stylesheet" href="/roster/assets/experience.css?v=${assetVersions["experience.css"]}">
 <link rel="stylesheet" href="/roster/assets/expanded.css?v=${assetVersions["expanded.css"]}">
 <link rel="stylesheet" href="/roster/assets/service-areas.css?v=${assetVersions["service-areas.css"]}">
+<link rel="stylesheet" href="/roster/assets/accounts.css?v=${assetVersions["accounts.css"]}">
 <link rel="stylesheet" href="/roster/assets/logo-fit.css?v=${assetVersions["logo-fit.css"]}">${bodyClass === "home-page" ? `\n<link rel="stylesheet" href="/roster/assets/home.css?v=${assetVersions["home.css"]}">` : ""}${["home-page","match-page"].includes(bodyClass) ? `\n<link rel="stylesheet" href="/roster/assets/job-search.css?v=${assetVersions["job-search.css"]}">` : ""}${bodyClass === "home-page" ? `\n<link rel="stylesheet" href="/roster/assets/hero-rotation.css?v=${assetVersions["hero-rotation.css"]}">` : ""}${["directory-page","match-page"].includes(bodyClass) ? `\n<link rel="stylesheet" href="/roster/assets/quote-flow.css?v=${assetVersions["quote-flow.css"]}">` : ""}
 <script type="application/ld+json">${graph}</script>
 </head>
@@ -646,6 +650,7 @@ ${body}
 </main>
 ${renderFooter()}
 <script src="/roster/assets/form.js?v=${assetVersions["form.js"]}"></script>
+<script type="module" src="/roster/assets/accounts.js?v=${assetVersions["accounts.js"]}"></script>
 <script src="/roster/assets/directory.js?v=${assetVersions["directory.js"]}"></script>
 <script src="/roster/assets/experience.js?v=${assetVersions["experience.js"]}"></script>${bodyClass === "home-page" ? `\n<script type="module" src="/roster/assets/home.js?v=${assetVersions["home.js"]}"></script>` : ""}${bodyClass === "home-page" ? `\n<script type="module" src="/roster/assets/job-search.js?v=${assetVersions["job-search.js"]}"></script><script type="module" src="/roster/assets/hero-rotation.js?v=${assetVersions["hero-rotation.js"]}"></script>` : ""}${bodyClass === "match-page" ? `\n<script type="module" src="/roster/assets/job-results.js?v=${assetVersions["job-results.js"]}"></script>` : ""}
 ${bodyClass === "claim-page" ? `<script type="module" src="/roster/assets/claim.js?v=${assetVersions["claim.js"]}"></script>` : ""}
@@ -658,8 +663,8 @@ ${bodyClass === "directory-page" ? `<script type="module" src="/roster/assets/ca
   if (/aggregateRating/i.test(html) || /"@type":"(Review|Offer|AggregateRating)"/.test(html)) {
     throw new Error("Rating, review, or offer schema leaked into " + canonicalPath);
   }
-  // Allow only the local directory search and inert preview forms.
-  const nonPreviewHtml = html.replace(/<form method="dialog" data-claim-preview[^>]*>[\s\S]*?<\/form>/g, "").replace(/<form method="dialog" data-account-preview="(?:sign-in|sign-up|forgot-password|reset-password)"[^>]*>[\s\S]*?<\/form>/g, "");
+  // Account forms submit only through the bundled auth handler; quote and claim forms stay inert.
+  const nonPreviewHtml = html.replace(/<form method="dialog" data-claim-preview[^>]*>[\s\S]*?<\/form>/g, "").replace(/<form method="dialog" data-account-form="(?:sign-in|sign-up|forgot-password|reset-password)"[^>]*>[\s\S]*?<\/form>/g, "");
   const withoutSearchForms = nonPreviewHtml
     .replace(/<form action="\/roster\/search\/" method="get" class="hero-quick-form">[\s\S]*?<\/form>/g, "")
     .replace(/<form class="hero-guided-form" data-job-start method="dialog"><fieldset disabled>[\s\S]*?<\/form>/g, "")
@@ -877,28 +882,11 @@ function renderServiceRow(service, index) {
   return `<details class="service-rate" id="service-price-${index + 1}"><summary><span class="service-rate-label"><strong>${esc(service.name)}</strong></span><strong class="service-rate-price${service.prices.length ? "" : " service-rate-quote"}"><span class="sr-only">${service.prices.some(p=>!p.indicative) ? "Published price: " : "Pricing: "}</span>${esc(price)}</strong><span class="service-toggle-icon">${icon("chevron")}</span></summary>${renderServiceExplanation(service)}</details>`;
 }
 
-/* ---------- Account interface previews ---------- */
+/* ---------- Accounts ---------- */
 
 function renderAccount(mode) {
-  const config = {
-    "sign-in": { title: "Welcome back.", intro: "Sign in to your Roster account.", action: "Sign in", prompt: "New to Roster?", link: "Create an account", href: "sign-up" },
-    "sign-up": { title: "Make yourself at home.", intro: "Create your Roster account.", action: "Create account", prompt: "Already have an account?", link: "Sign in", href: "sign-in" },
-    "forgot-password": { title: "Forgot your password?", intro: "Enter your email to preview password recovery.", action: "Send reset link", prompt: "Remember your password?", link: "Back to sign in", href: "sign-in" },
-    "reset-password": { title: "A fresh start.", intro: "Preview setting a new password for your account.", action: "Reset password", prompt: "Already sorted?", link: "Back to sign in", href: "sign-in" }
-  }[mode];
-  const usesPassword = mode !== "forgot-password";
-  const google = mode === "sign-in" || mode === "sign-up";
-  const passwordField = (id, label, hint = "") => `<label class="account-label" for="${id}">${label}</label><div class="password-field"><input id="${id}" type="password" autocomplete="off" required minlength="8"${hint ? ` aria-describedby="password-hint"` : ""}><button type="button" data-toggle-password="${id}" aria-label="Show ${label.toLowerCase()}" aria-pressed="false">Show</button></div>${hint ? `<p class="field-hint" id="password-hint">${hint}</p>` : ""}`;
-  const body = `<section class="account-layout"><div class="account-story"><p class="kicker">A LITTLE HELP FEELS GOOD</p><h2>Less searching.<br>More sorted.</h2><p>Find the people who help make your house feel like home.</p><div class="account-art">${heroIllustration()}</div><ul><li>${icon("bookmark")}A place for your favourite companies</li><li>${icon("star")}Reviews and prices, easier to compare</li><li>${icon("phone")}A direct line to your next helping hand</li></ul><a href="/roster/">Explore Roster${icon("arrow")}</a></div><div class="account-panel"><div class="account-card"><span class="account-preview-badge">ACCOUNT PREVIEW</span><h1>${config.title}</h1><p class="account-intro">${config.intro}</p><p class="account-beta-note">These are beta screens. Use sample details. Nothing is sent or saved, and no account is created.</p><noscript><p class="account-beta-note">Enable JavaScript to try the account preview.</p></noscript>
-<form method="dialog" data-account-preview="${mode}" autocomplete="off"><fieldset disabled><legend class="sr-only">${config.action} preview</legend>${google ? `<button class="google-button" type="button" data-google-preview><svg aria-hidden="true" viewBox="0 0 48 48" width="20" height="20"><path fill="#4285F4" d="M43.6 24.5c0-1.4-.1-2.8-.4-4.1H24v7.8h11a9.4 9.4 0 0 1-4.1 6.2v5.2h6.7c4-3.7 6-9.1 6-15.1Z"/><path fill="#34A853" d="M24 44c5.5 0 10.1-1.8 13.5-4.9l-6.7-5.2c-1.8 1.2-4.1 1.9-6.8 1.9-5.3 0-9.8-3.6-11.4-8.4H5.7v5.3A20 20 0 0 0 24 44Z"/><path fill="#FBBC05" d="M12.6 27.4a12 12 0 0 1 0-7.7v-5.3H5.7a20 20 0 0 0 0 18.3l6.9-5.3Z"/><path fill="#EA4335" d="M24 11.7c3 0 5.6 1 7.7 3l5.8-5.7A19.4 19.4 0 0 0 24 4 20 20 0 0 0 5.7 15l6.9 5.3A12 12 0 0 1 24 11.7Z"/></svg>Continue with Google</button><div class="account-divider"><span>or continue with email</span></div>` : ""}
-${mode === "sign-up" ? '<label class="account-label" for="account-name">Your name</label><input id="account-name" type="text" placeholder="Alex Tan" required autocomplete="off" maxlength="100">' : ""}
-${mode !== "reset-password" ? '<label class="account-label" for="account-email">Email address</label><input id="account-email" type="email" placeholder="you@example.com" autocomplete="off" required maxlength="254">' : ""}
-${usesPassword ? passwordField("account-password", mode === "reset-password" ? "New password" : "Password", mode !== "sign-in" ? "Use at least 8 characters for this preview." : "") : ""}
-${mode === "reset-password" ? passwordField("account-confirm", "Confirm new password") : ""}
-${mode === "sign-in" ? '<div class="account-options"><a href="/roster/forgot-password/">Forgot password?</a></div>' : ""}
-<p class="account-error" data-account-error role="alert" hidden></p><button type="submit" class="btn btn-solid account-submit">${config.action}${icon("arrow")}</button></fieldset></form>
-<div class="account-result" data-account-result role="status" tabindex="-1" hidden></div><p class="account-switch">${config.prompt} <a href="/roster/${config.href}/">${config.link}</a></p></div><p class="account-smallprint">Singapore beta. Real accounts are not enabled yet.</p></div></section>`;
-  return pageShell({ title: `${config.action} | Roster`, description: `Preview Roster ${config.action.toLowerCase()}. Try the beta account screens with sample details. No account is created and nothing is sent.`, canonicalPath: `/roster/${mode}/`, current: "", jsonLd: [], body, bodyClass: "account-page" });
+  const content = accountContent(mode,{icon,heroIllustration});
+  return pageShell({...content,canonicalPath:`/roster/${mode}/`,current:"",jsonLd:[],bodyClass:"account-page"});
 }
 
 /* ---------- Home ---------- */
@@ -1036,6 +1024,10 @@ written.push(await writePage("how-it-works", renderHow()));
 written.push(await writePage("matches", renderMatchPage({esc,icon,pageShell,indexPath:indexPath({id:"all"})})));
 written.push(await writePage("claim-listing", renderClaimPage({esc,icon,pageShell,renderCrumbs},sortCompanies(publishedCompanies))));
 for (const mode of ["sign-in", "sign-up", "forgot-password", "reset-password"]) written.push(await writePage(mode, renderAccount(mode)));
+written.push(await writePage('account',pageShell({title:'Your account | Roster',description:'Manage your Roster account and keep your saved Singapore home-service companies together across devices.',canonicalPath:'/roster/account/',current:'',jsonLd:[],bodyClass:'account-page',body:accountHome({icon})})));
+written.push(await writePage('auth/callback',pageShell({title:'Complete sign in | Roster',description:'Complete your secure Roster sign-in or verify your email, then return to your saved Singapore home-service companies.',canonicalPath:'/roster/auth/callback/',current:'',jsonLd:[],bodyClass:'account-page',body:callbackContent})));
+written.push(await writePage('saved',pageShell({title:'Your saved companies | Roster',description:'Your personal shortlist of Singapore home-service companies. Compare saved businesses, prices and reviews in one place.',canonicalPath:'/roster/saved/',current:'',jsonLd:[],bodyClass:'saved-page-body',body:savedContent({icon,indexPath:indexPath({id:'all'}),esc})})));
+
 written.push(await writePage("search", renderCollection({ id: "all", slug: "search", name: "Home services", h1: "Home services in Singapore", intro: ["Explore the sourced companies on Roster. Use search and filters to narrow your list."], jobs: [], faqs: howFaqs.slice(0, 3) }, sortCompanies(publishedCompanies), [{ label: "Find a company" }])));
 
 for (const trade of trades) {
@@ -1080,7 +1072,7 @@ let previous = [];
 try { previous = JSON.parse(await readFile(path.join(root,'data/build-manifest.json'),'utf8')); } catch(e) { if(e.code!=='ENOENT') throw e; }
 for (const rel of previous) if(!currentPaths.includes(rel) && /^company\/[a-z0-9-]+\/index\.html$/.test(rel)) await rm(path.join(root,rel),{force:true});
 await writeFile(path.join(root,'data/build-manifest.json'),JSON.stringify(currentPaths,null,2)+'\n');
-const sitemapPaths=currentPaths.filter(p=>! /^(sign-in|sign-up|forgot-password|reset-password)\//.test(p)&&!retired.some(r=>p===`company/${r.slug}/index.html`));
+const sitemapPaths=currentPaths.filter(p=>! /^(sign-in|sign-up|forgot-password|reset-password|account|auth|saved)\//.test(p)&&!retired.some(r=>p===`company/${r.slug}/index.html`));
 await writeFile(path.join(root,'sitemap.xml'),`<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${sitemapPaths.map(p=>`<url><loc>${esc(origin+'/'+p.replace(/index\.html$/,''))}</loc></url>`).join('')}</urlset>\n`);
 await writeFile(path.join(root,'robots.txt'),'# Beta preview. Every HTML page also carries noindex.\nUser-agent: *\nDisallow: /roster/\n');
 console.log(written.length + " pages");
