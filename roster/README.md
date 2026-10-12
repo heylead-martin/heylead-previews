@@ -51,7 +51,7 @@ Trade pages lead with up to eight full-bar profiles, ordered by evidence and the
 ## Validation
 
 ```sh
-node --test roster/scripts/import-db.test.mjs roster/scripts/presentation.test.mjs
+node --test roster/scripts/import-db.test.mjs roster/scripts/presentation.test.mjs roster/scripts/home-snapshot.test.mjs
 python3 -m unittest discover -s roster/scripts -p 'test_*.py'
 node roster/scripts/check-site.mjs
 ```
@@ -71,3 +71,15 @@ Company cards and profiles reserve space for a logo. Existing artwork is used wh
 The importer maps release `ratings` into sourced, dated records and recalculates the combined score. Unknown review counts are never invented. Company-site widgets and self-reported scores are excluded, including a legacy curated score explicitly moved to `self_reported_rating` by a release. Trustpilot TrustScores are displayed separately and do not enter the average. Profiles without an eligible rating say "No rating yet". Sample score fixtures remain for development but are not rendered on company pages.
 
 The combined score is the sum of each eligible rating multiplied by its count, divided by total reviews. A single eligible source supplies its score directly. Identified mirrors, incompatible scales and unusable counts are excluded. `lib/rating-summary.mjs` handles real records, with `assets/rating-display.mjs` shared by static and dynamically loaded cards. Directory filters and sorting use the real average. Cards pair this with main services and a labelled example service price when a specific published rate can be extracted. Each source needs its platform, profile URL, capture date, rating, scale, count and any mirror relationship. Deduplication is not automatic.
+
+## Homepage map and comparisons
+
+The homepage is built from the current published company data. Trade filters update the map, counts, average company rating and browse link without network requests. Only verified building pins with matching address hashes appear. Dots show business locations, not service coverage; they contain no unit numbers or personal location data.
+
+`data/singapore-outline.json` is a simplified derivative of the Singapore Land Authority National Map Polygon dataset, under the Singapore Open Data Licence. The source and licence links are recorded in the file, and attribution is visible below the map. To refresh the outline from a downloaded source GeoJSON:
+
+```sh
+python3 roster/scripts/prepare-home-map.py /path/to/NationalMapPolygon.geojson
+```
+
+`lib/home-snapshot.mjs` calculates one equal-weight company average from eligible combined ratings. Common-job prices average the lowest eligible advertised starting rate per company, with at least three companies required. It compares a named job and unit, excluding identifiable promotions, annual packages and indicative cost guides. Minimum bookings and price conditions remain visible; expandable source lists show every included company. These are directory samples, not market-wide prices or quotes. Future imports update the counts, map dots and price samples on rebuild. `assets/home.css` and `assets/home.js` load only on the homepage.
