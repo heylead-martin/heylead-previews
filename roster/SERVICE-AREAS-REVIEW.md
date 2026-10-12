@@ -16,7 +16,7 @@ All 16 original write-ups remain unchanged. Logos retain their release checksums
 
 ## Coverage presentation
 
-Areas served appears immediately after Services & pricing and has a matching profile navigation link. Islandwide coverage has a badge. Town chips wrap, group by official region above eight towns and expand beyond twelve. Region statements remain region chips. Source URLs are deduplicated and retain capture dates. No section or navigation item appears without sourced coverage.
+Areas served appears immediately after Services & pricing and has a matching profile navigation link. Islandwide coverage has a badge. Town chips wrap, group by official region above eight towns and expand beyond twelve. Region statements remain region chips. Source URLs and capture dates are retained in the data. The source rows are hidden from the Areas served card at Martin's request. No section or navigation item appears without sourced coverage.
 
 The single Area picker replaces the former office-address filter on search and trade pages. It supports typing, keyboard selection, grouped planning areas, Any area, clearing and reset. Area matching uses company statements only. A town match ranks before region coverage, then islandwide coverage, regardless of secondary sort. Unknown coverage is an explicit opt-in and ranks last. All active filters affect counts before pagination. URL parameters preserve selections on reload.
 
@@ -31,7 +31,7 @@ Official town-to-region mapping: [URA Master Plan 2019 Planning Area Boundary](h
 - Full map-pin check completed, with transient failures retried: 691 verified building pins, 28 address-only fallbacks, including 39 verified OneMap pins. Unresolved addresses never render an unverified map iframe.
 - Browser checks at desktop 1366 x 900 and mobile 390 x 844. No horizontal page overflow was found. Area search, keyboard selection, reset, combined filters, URL reload and loading 12 more results work.
 - Woodlands plus Plumbing gives 63 matches; 28 companies have unstated areas. With those included and a minimum 4.8 rating, there are 56 matches, 16 with published prices and 40 with WhatsApp. Reload restores the selection and counts.
-- 338 Aircon shows an islandwide badge, eight towns and one source. Alldone Services shows region chips plus its islandwide statement. The current release has no published profile with regions alone and no islandwide statement; a pure region-only case is covered by a unit test.
+- 338 Aircon shows an islandwide badge, eight towns. Source rows are no longer displayed. Alldone Services shows region chips plus its islandwide statement. The current release has no published profile with regions alone and no islandwide statement; a pure region-only case is covered by a unit test.
 - 24 Hours Plumbing Services has no Areas served section or navigation link. Ace Plumbing Specialist shows grouped towns and its 17-area expansion works.
 - Additional mobile checks covered NILE Plumbing, Daylight Electrician, Lion City Aircon, SG1 Plumber, Evergreen Cleaning and Active Plumbing. No browser console errors appeared in those checks.
 

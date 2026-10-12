@@ -50,10 +50,10 @@ test('Area badges identify exact matches and islandwide coverage without inventi
  assert.match(coverageBadges({serviceAreas:['Islandwide']}),/Islandwide/);
  assert.equal(coverageBadges({area:'Woodlands'}),'');
 });
-test('No coverage hides the section; islandwide and region-only entries render with deduplicated sources',()=>{
+test('No coverage hides the section; coverage displays without source and capture-date rows',()=>{
  assert.equal(renderServiceAreas([],ctx),'');
  const island=renderServiceAreas(normaliseServiceLocations([entry('Islandwide'),entry('North')],'https://example.com'),ctx);
- assert.match(island,/Serves all of Singapore/);assert.match(island,/North region/);assert.equal((island.match(/Source:/g)||[]).length,1);
+ assert.match(island,/Serves all of Singapore/);assert.match(island,/North region/);assert.doesNotMatch(island,/area-sources|Source:|captured|company website/);
  const region=renderServiceAreas(normaliseServiceLocations([entry('East')],'https://example.com'),ctx);assert.match(region,/East region/);assert.doesNotMatch(region,/Serves all of Singapore/);
 });
 test('Long town lists group by region and disclose towns beyond the first twelve',()=>{

@@ -86,7 +86,7 @@ python3 roster/scripts/prepare-home-map.py /path/to/NationalMapPolygon.geojson
 
 ## Service coverage
 
-`lib/service-areas.mjs` accepts supported, dated company-site coverage statements with their excerpts and source URLs. Missing evidence produces no Areas served section or navigation link. Town tags are alphabetized within their regions when there are more than eight towns; lists longer than twelve expand on demand. Source URLs are deduplicated.
+`lib/service-areas.mjs` accepts supported, dated company-site coverage statements with their excerpts and source URLs. Missing evidence produces no Areas served section or navigation link. Town tags are alphabetized within their regions when there are more than eight towns; lists longer than twelve expand on demand. Source URLs, excerpts and capture dates remain in the data, but the source rows are not displayed in the Areas served card.
 
 `assets/service-areas.mjs` maps all 55 planning areas to their official URA 2019 regions. Its source and Singapore Open Data Licence links are recorded in that file. `assets/area-picker.mjs` provides typed filtering, grouped options, keyboard selection and clearing. Coverage matching and facet counts run before pagination. When an area is selected, a single compact results list preserves town-first ordering across full and limited profiles and across all sort choices.
 
