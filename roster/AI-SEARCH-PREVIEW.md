@@ -6,9 +6,9 @@ Branch: `service-areas-1253`. Local review only. Nothing has been pushed or depl
 
 The homepage now puts search in the hero. Quick search opens the existing company directory. AI search accepts a sentence and is explicitly labelled as a beta with no connected AI service. The current matcher runs locally in the browser against 719 published profiles.
 
-The dedicated shortlist starts with five companies. Visitors can expand to ten, select all visible companies or choose specific recipients. Five is the recommended default because it gives a useful comparison without making the first decision feel too large. Every card shows the real average rating, review count, published price details, services and a short explanation of the match.
+The dedicated shortlist starts with five selected companies. Switching to ten selects all ten, and switching back selects the five shown. Visitors can untick individual companies, clear the selection or select all again. Clicking the already-active shortlist size preserves those manual choices. Five is the recommended default because it gives a useful comparison without making the first decision feel too large. Every card shows the real average rating, review count, published price details, services and a short explanation of the match.
 
-The quote preview displays the user's brief and the exact selected companies. Nothing is sent. There is no account requirement, contact-data collection, quote endpoint or backend added in this update. The original quote panel is unchanged.
+Request a quote now appears at the top of the desktop sidebar and above the mobile results, with a clear beta notice. The quote preview displays the user's brief and the exact selected companies. Logo tiles are larger and retain their artwork proportions; initials are centered without a LOGO label. Selection checkboxes are 32 pixels with at least a 44-pixel touch target. Nothing is sent. There is no account requirement, contact-data collection, quote endpoint or backend added in this update. The original quote panel is unchanged.
 
 ## Matching and boundaries
 
@@ -18,7 +18,7 @@ The quote preview displays the user's brief and the exact selected companies. No
 - Completeness of listing details, real average rating and review count order companies within each coverage group. Listings remain unpaid.
 - Timing, budget, availability and suitability must be confirmed directly. An example published price can describe another service; its name and conditions remain visible and it is never presented as a quote for the whole request.
 - Search descriptions use URL fragments, so the static server does not receive them as HTTP query parameters. They can still appear in browser history or any link the visitor shares. Recipient selections remain in memory.
-- Editing the brief or filters clears old results and selections. Going from ten to five removes hidden recipients. Pages remain noindex and do not include rating schema.
+- Editing the brief or filters clears old results and selections. Each new search and each change of shortlist size selects the visible companies only. Pages remain noindex and do not include rating schema.
 
 ## Verification
 
@@ -26,6 +26,7 @@ The quote preview displays the user's brief and the exact selected companies. No
 - Rebuilt 741 pages. Site checks pass for internal links, fragments, metadata, noindex, schema restrictions, logos, publication totals and the 16 protected write-ups.
 - Checked responsive widths of 375, 390, 768, 1024 and 1440 pixels. No horizontal page overflow was found.
 - Browser checks cover normal search, keyboard-operated hero tabs, example jobs, automatic service and town detection, manual overrides, ambiguous requests, URL reload, individual selection, select all, switching five and ten, and the quote preview.
+- Browser checks also verify five auto-selected companies, ten auto-selected companies, manual deselection, preserving deselection on an already-active size, and exactly ten recipients in the mobile dialog.
 - Editing a brief removes stale selected recipients. Completing a preview explicitly says no quote requests were sent.
 - A leaking kitchen sink in Bedok yields 39 matching companies. Aircon servicing in Tampines yields 112. Counts depend on the imported release.
 - Browser console checks show no errors or warnings. Existing fitted logo proportions are retained in the new cards and dialog.
