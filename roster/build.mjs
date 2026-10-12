@@ -6,6 +6,7 @@ import { fileURLToPath } from "node:url";
 import {execFileSync} from 'node:child_process';
 
 import { createProfileRenderer, directoryRecord, concise, ratingFact } from "./lib/expanded.mjs";
+import {encodeCatalogue} from './assets/catalogue-data.mjs';
 import {priceView, servicePrice, serviceGuide} from "./lib/profile-copy.mjs";
 import {renderClaimPage} from "./lib/claim-page.mjs";
 import { renderCard, renderCompactCard, splitDirectory } from "./assets/catalogue-card.mjs";
@@ -1058,7 +1059,7 @@ async function writeIndex(spec, companies) {
     for(const field of ['logo','description','whatsapp']) if(!record[field]) delete record[field];
     return record;
   });
-  const output=JSON.stringify({companies:records})+'\n';
+  const output=JSON.stringify(encodeCatalogue(records))+'\n';
   indexVersions[indexName(spec)]=createHash('sha256').update(output).digest('hex').slice(0,12);
   await writeFile(path.join(root,'data/index',indexName(spec)+'.json'),output);
 }
@@ -1096,6 +1097,7 @@ for (const company of publishedCompanies) {
 
 // Keep previously published, withdrawn URLs useful without restoring excluded profiles.
 const retired=[
+  {slug:'skywave-solutions-pte-ltd',name:'Skywave Solutions Pte. Ltd.',target:'/roster/electrician/',trade:'electrical'},
   {slug:'billy-aircon',name:'Billy Aircon',target:'/roster/aircon-servicing/',trade:'aircon servicing'},
   {slug:'aeon-environmental-services',name:'Aeon Environmental Services',target:'/roster/home-cleaning/',trade:'home cleaning'},
   {slug:'city-cleaning',name:'City Cleaning',target:'/roster/home-cleaning/',trade:'home cleaning'},

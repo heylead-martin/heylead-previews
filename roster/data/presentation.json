@@ -277,6 +277,21 @@
     },
     "photos": []
   },
+  "bsolute-solutions": {
+    "published": true,
+    "price": "See published prices",
+    "detail": "1 sourced pricing entries. Confirm the job, inclusions and total.",
+    "logo": "/roster/assets/logos/201326611Z-f6ad4f361ed4.png",
+    "logoAsset": {
+      "localPath": "logos/201326611Z.png",
+      "sha256": "f6ad4f361ed4e9196bd7984ce0bd6b3e01a8ae111e47991341b74d15e45c6819",
+      "src": "/roster/assets/logos/201326611Z-f6ad4f361ed4.png",
+      "sourceUrl": "https://www.absolutesolutions.com.sg/",
+      "originalUrl": "https://www.absolutesolutions.com.sg/wp-content/uploads/2018/12/logo.png",
+      "capturedAt": "2026-10-12"
+    },
+    "photos": []
+  },
   "a-class-aircon-management": {
     "published": false,
     "price": "Ask for a quote",
@@ -319,6 +334,21 @@
       "sourceUrl": "https://achubpteltd.com.sg/",
       "originalUrl": "https://achubpteltd.com.sg/wp-content/uploads/2026/01/logo.png",
       "capturedAt": "2026-10-11"
+    },
+    "photos": []
+  },
+  "acro-harvest-engineering-pte-ltd": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "logo": "/roster/assets/logos/199803089C-f704a4d65ade.svg",
+    "logoAsset": {
+      "localPath": "logos/199803089C.svg",
+      "sha256": "f704a4d65adef5c40f730b6fb0d212c34d2cf36eb5bc21db2a134b36604b95ab",
+      "src": "/roster/assets/logos/199803089C-f704a4d65ade.svg",
+      "sourceUrl": "https://acroharvest.com/",
+      "originalUrl": "https://acroharvest.com/wp-content/uploads/2021/11/logo.svg",
+      "capturedAt": "2026-10-12"
     },
     "photos": []
   },
@@ -467,9 +497,9 @@
     "photos": []
   },
   "aircon-uncle": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "published": true,
+    "price": "See published prices",
+    "detail": "1 sourced pricing entries. Confirm the job, inclusions and total.",
     "photos": []
   },
   "airemax-aircon-pte-ltd": {
@@ -493,6 +523,12 @@
     "detail": "5 sourced pricing entries. Confirm the job, inclusions and total.",
     "photos": []
   },
+  "bcd-engineering-pte-ltd": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "photos": []
+  },
   "daikin-proshop-by-best-tech-air-con-engineering-hq-hill-view": {
     "published": false,
     "price": "Ask for a quote",
@@ -505,6 +541,21 @@
       "sourceUrl": "https://www.besttechonline.com.sg/",
       "originalUrl": "https://www.besttechonline.com.sg/cdn/shop/files/bt-logo-tm.png?v=1715907712&width=500",
       "capturedAt": "2026-10-11"
+    },
+    "photos": []
+  },
+  "bnl-engineering-private-limited": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "logo": "/roster/assets/logos/201227204N-a37877648a4c.svg",
+    "logoAsset": {
+      "localPath": "logos/201227204N.svg",
+      "sha256": "a37877648a4c8ea0b8e1af311b92af1315f08b4faf7a46ed100be3e57c2f3ed6",
+      "src": "/roster/assets/logos/201227204N-a37877648a4c.svg",
+      "sourceUrl": "https://bnlengrg.com/",
+      "originalUrl": "https://bnlengrg.com/wp-content/uploads/2025/04/logo-new.svg",
+      "capturedAt": "2026-10-12"
     },
     "photos": []
   },
@@ -739,7 +790,19 @@
     },
     "photos": []
   },
+  "fujita-m-e-pte-ltd": {
+    "published": true,
+    "price": "See published prices",
+    "detail": "1 sourced pricing entries. Confirm the job, inclusions and total.",
+    "photos": []
+  },
   "feng-sheng-air-conditioning": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "photos": []
+  },
+  "goh-general-engineering-pte-ltd": {
     "published": false,
     "price": "Ask for a quote",
     "detail": "No company rate captured. Ask for a job-specific quote.",
@@ -863,9 +926,9 @@
     "photos": []
   },
   "ifc-air-cond-engineering": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "published": true,
+    "price": "See published prices",
+    "detail": "1 sourced pricing entries. Confirm the job, inclusions and total.",
     "logo": "/roster/assets/logos/44751100M-6a28b82a2d04.png",
     "logoAsset": {
       "localPath": "logos/44751100M.png",
@@ -920,9 +983,9 @@
     "photos": []
   },
   "kim-huat-refrigeration-electrical-pte-ltd": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "published": true,
+    "price": "See published prices",
+    "detail": "1 sourced pricing entries. Confirm the job, inclusions and total.",
     "logo": "/roster/assets/logos/199303510H-6962939d25af.png",
     "logoAsset": {
       "localPath": "logos/199303510H.png",
@@ -935,9 +998,9 @@
     "photos": []
   },
   "kim-s-aircon-pte-ltd": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "published": true,
+    "price": "See published prices",
+    "detail": "1 sourced pricing entries. Confirm the job, inclusions and total.",
     "logo": "/roster/assets/logos/202138889N-b278fb1d6311.png",
     "logoAsset": {
       "localPath": "logos/202138889N.png",
@@ -994,6 +1057,21 @@
     },
     "photos": []
   },
+  "media-aire-con-engineering-pte-ltd": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "logo": "/roster/assets/logos/200501991H-c129aeb0551c.png",
+    "logoAsset": {
+      "localPath": "logos/200501991H.png",
+      "sha256": "c129aeb0551c2e1abed64b51b9a2bb1cbaff011aa3cfdd47dbc3d83d85a2b213",
+      "src": "/roster/assets/logos/200501991H-c129aeb0551c.png",
+      "sourceUrl": "https://mediaaire.com/",
+      "originalUrl": "https://mediaaire.com/wp-content/uploads/2026/03/cropped-cropped-mascot_logo_vehicle_12000px_300ppi-scaled-1.png",
+      "capturedAt": "2026-10-12"
+    },
+    "photos": []
+  },
   "mega-cool-air-conditioning-electrical-engineering": {
     "published": false,
     "price": "Ask for a quote",
@@ -1022,9 +1100,9 @@
     "photos": []
   },
   "nam-sun-electrical-air-conditioning-pte-ltd": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "published": true,
+    "price": "See published prices",
+    "detail": "1 sourced pricing entries. Confirm the job, inclusions and total.",
     "logo": "/roster/assets/logos/199301338Z-e1a6b17070a6.png",
     "logoAsset": {
       "localPath": "logos/199301338Z.png",
@@ -1052,9 +1130,9 @@
     "photos": []
   },
   "ninja-cool": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "published": true,
+    "price": "See published prices",
+    "detail": "1 sourced pricing entries. Confirm the job, inclusions and total.",
     "logo": "/roster/assets/logos/201836317W-3152e202125a.png",
     "logoAsset": {
       "localPath": "logos/201836317W.png",
@@ -1147,7 +1225,7 @@
   "sg-city-aircon": {
     "published": true,
     "price": "See published prices",
-    "detail": "8 sourced pricing entries. Confirm the job, inclusions and total.",
+    "detail": "1 sourced pricing entries. Confirm the job, inclusions and total.",
     "photos": []
   },
   "sg-pro-aircon-pte-ltd": {
@@ -1205,9 +1283,9 @@
     "photos": []
   },
   "skyzone-aircon-pte-ltd": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "published": true,
+    "price": "See published prices",
+    "detail": "1 sourced pricing entries. Confirm the job, inclusions and total.",
     "logo": "/roster/assets/logos/201502588R-aefaf92226a0.png",
     "logoAsset": {
       "localPath": "logos/201502588R.png",
@@ -1216,6 +1294,21 @@
       "sourceUrl": "https://skyzone.com.sg/",
       "originalUrl": "https://skyzone.com.sg/wp-content/uploads/elementor/thumbs/logo-ogk1lytj2354gach5m5wabg9g960ltjkcs9qzht9zm.png",
       "capturedAt": "2026-10-11"
+    },
+    "photos": []
+  },
+  "snowflake-aircon-services": {
+    "published": true,
+    "price": "See published prices",
+    "detail": "9 sourced pricing entries. Confirm the job, inclusions and total.",
+    "logo": "/roster/assets/logos/T21LL0568D-e765244cb254.png",
+    "logoAsset": {
+      "localPath": "logos/T21LL0568D.png",
+      "sha256": "e765244cb254304570ae6c99ac0009caa5e24445188b6b3ff3303a447f5699e6",
+      "src": "/roster/assets/logos/T21LL0568D-e765244cb254.png",
+      "sourceUrl": "https://snowflakeaircon.sg/",
+      "originalUrl": "https://snowflakeaircon.sg/apple-touch-icon-brand.png",
+      "capturedAt": "2026-10-12"
     },
     "photos": []
   },
@@ -1246,6 +1339,21 @@
     "detail": "No company rate captured. Ask for a job-specific quote.",
     "photos": []
   },
+  "sweet-home-building-services-pte-ltd": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "logo": "/roster/assets/logos/201306723M-f10f6724a88b.webp",
+    "logoAsset": {
+      "localPath": "logos/201306723M.webp",
+      "sha256": "f10f6724a88bb162f8f6e5aab29810cd42d99bc931b3dd5cb5fe7386f8f6d505",
+      "src": "/roster/assets/logos/201306723M-f10f6724a88b.webp",
+      "sourceUrl": "https://sweethomesg.com/",
+      "originalUrl": "https://sweethomesg.com/Sweethome%20logo-03.png",
+      "capturedAt": "2026-10-12"
+    },
+    "photos": []
+  },
   "snow-world-aircon": {
     "published": true,
     "price": "See published prices",
@@ -1262,9 +1370,9 @@
     "photos": []
   },
   "tech-v-air-conditioning": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "published": true,
+    "price": "See published prices",
+    "detail": "1 sourced pricing entries. Confirm the job, inclusions and total.",
     "logo": "/roster/assets/logos/201730698M-9b8bd0023bc1.jpg",
     "logoAsset": {
       "localPath": "logos/201730698M.jpg",
@@ -1283,9 +1391,9 @@
     "photos": []
   },
   "peakcool-aircon-services": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "published": true,
+    "price": "See published prices",
+    "detail": "1 sourced pricing entries. Confirm the job, inclusions and total.",
     "logo": "/roster/assets/logos/202347905M-0a88f0022418.png",
     "logoAsset": {
       "localPath": "logos/202347905M.png",
@@ -1411,6 +1519,21 @@
     },
     "photos": []
   },
+  "best-m-e-engineering-pte-ltd": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "logo": "/roster/assets/logos/201206095W-e044f007b1e5.png",
+    "logoAsset": {
+      "localPath": "logos/201206095W.png",
+      "sha256": "e044f007b1e5f8cfdfcbed5e10113cbba0063d48be26efdf47c167a2ecec24b8",
+      "src": "/roster/assets/logos/201206095W-e044f007b1e5.png",
+      "sourceUrl": "https://bestmeengr.com/",
+      "originalUrl": "https://bestmeengr.com/img/logo.png",
+      "capturedAt": "2026-10-12"
+    },
+    "photos": []
+  },
   "blossom-aircon-installation-replacement-and-servicing-work-s": {
     "published": true,
     "price": "See published prices",
@@ -1477,6 +1600,21 @@
     },
     "photos": []
   },
+  "i2r-consulting-engineering-services-pte-ltd": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "logo": "/roster/assets/logos/200717022D-8e8df0c0d66f.png",
+    "logoAsset": {
+      "localPath": "logos/200717022D.png",
+      "sha256": "8e8df0c0d66f577f00b722b9807ec99045caf832dbaab2621a2f606d551ed1ff",
+      "src": "/roster/assets/logos/200717022D-8e8df0c0d66f.png",
+      "sourceUrl": "https://www.i2r.com.sg/",
+      "originalUrl": "https://www.i2r.com.sg/wp-content/uploads/2024/10/i2rLogo.png",
+      "capturedAt": "2026-10-12"
+    },
+    "photos": []
+  },
   "i2r-m-e-pte-ltd-yishun-electrician": {
     "published": false,
     "price": "Ask for a quote",
@@ -1501,6 +1639,27 @@
       "reason": "Logo shows the letters 'AC' (the site's brand, AC Cool Aircon), not the row name JML Engineering.",
       "sourceUrl": "https://accoolairconsg.com/",
       "checkedAt": "2026-10-11T22:24+03:00"
+    },
+    "photos": []
+  },
+  "keydence-systems-pte-ltd": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "photos": []
+  },
+  "landspect-sg-pte-ltd": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "logo": "/roster/assets/logos/202137136Z-6de23ab3b454.webp",
+    "logoAsset": {
+      "localPath": "logos/202137136Z.webp",
+      "sha256": "6de23ab3b454779533e6a0625d24c010caf901b5e4af5370bae701f442f6540f",
+      "src": "/roster/assets/logos/202137136Z-6de23ab3b454.webp",
+      "sourceUrl": "https://landspectsg.com/",
+      "originalUrl": "https://landspectsg.com/images/Home/Landspectsg.png",
+      "capturedAt": "2026-10-12"
     },
     "photos": []
   },
@@ -1561,6 +1720,21 @@
     },
     "photos": []
   },
+  "lsl-electrical-pte-ltd": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "logo": "/roster/assets/logos/201414221G-ae9e6ad3cc12.jpg",
+    "logoAsset": {
+      "localPath": "logos/201414221G.jpg",
+      "sha256": "ae9e6ad3cc12f01cb7d89db00bd961e94a2d31a60dfddfd46add8059e0d2105b",
+      "src": "/roster/assets/logos/201414221G-ae9e6ad3cc12.jpg",
+      "sourceUrl": "https://lslelectrical.com/",
+      "originalUrl": "https://lslelectrical.com/wp-content/uploads/2019/10/header-logo.jpg",
+      "capturedAt": "2026-10-12"
+    },
+    "photos": []
+  },
   "merdeka-contractor-pte-ltd": {
     "published": false,
     "price": "Ask for a quote",
@@ -1573,6 +1747,51 @@
       "sourceUrl": "https://merdekacontractor.sg/",
       "originalUrl": "https://merdekacontractor.sg/wp-content/uploads/2024/01/Merdeka-Contractor.png",
       "capturedAt": "2026-10-11"
+    },
+    "photos": []
+  },
+  "mjd-venture-pte-ltd": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "logo": "/roster/assets/logos/201717394D-f483aa5aac61.png",
+    "logoAsset": {
+      "localPath": "logos/201717394D.png",
+      "sha256": "f483aa5aac6193e60ec43772dbb6d24e81bf696a9310c5414b656597cd0799e2",
+      "src": "/roster/assets/logos/201717394D-f483aa5aac61.png",
+      "sourceUrl": "https://www.mjdventure.com.sg/",
+      "originalUrl": "https://mjdventure.com.sg/img/logo.png",
+      "capturedAt": "2026-10-12"
+    },
+    "photos": []
+  },
+  "onbest-repairs-and-renovations": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "logo": "/roster/assets/logos/201542083C-8257d93891cc.png",
+    "logoAsset": {
+      "localPath": "logos/201542083C.png",
+      "sha256": "8257d93891cce124214277884fe47bbfc006d45f53a9ea7568e54012324d9c8e",
+      "src": "/roster/assets/logos/201542083C-8257d93891cc.png",
+      "sourceUrl": "https://onbest.sg/",
+      "originalUrl": "https://onbest.sg/wp-content/uploads/2024/09/cropped-ON-BEST-2-1.png",
+      "capturedAt": "2026-10-12"
+    },
+    "photos": []
+  },
+  "one-hub-integrated-pte-ltd": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "logo": "/roster/assets/logos/202300076N-4cf741a305c4.webp",
+    "logoAsset": {
+      "localPath": "logos/202300076N.webp",
+      "sha256": "4cf741a305c4d820bdfcaf28adb728049cabf2e887c98ee625031c538527557d",
+      "src": "/roster/assets/logos/202300076N-4cf741a305c4.webp",
+      "sourceUrl": "https://onehubintegrate.com.sg/",
+      "originalUrl": "https://onehubintegrate.com.sg/wp-content/uploads/2026/09/one-hub-website-logo.png",
+      "capturedAt": "2026-10-12"
     },
     "photos": []
   },
@@ -1681,12 +1900,6 @@
     },
     "photos": []
   },
-  "skywave-solutions-pte-ltd": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
-    "photos": []
-  },
   "sparkflow": {
     "published": true,
     "price": "See published prices",
@@ -1742,6 +1955,21 @@
     "published": false,
     "price": "Ask for a quote",
     "detail": "No company rate captured. Ask for a job-specific quote.",
+    "photos": []
+  },
+  "techelm-technologies-pte-ltd": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "logo": "/roster/assets/logos/200501147N-03dbb6ef5cc4.png",
+    "logoAsset": {
+      "localPath": "logos/200501147N.png",
+      "sha256": "03dbb6ef5cc458c5f649db3d2d79aaae3109541b19adf32204961435f8461292",
+      "src": "/roster/assets/logos/200501147N-03dbb6ef5cc4.png",
+      "sourceUrl": "https://www.techelm.com/",
+      "originalUrl": "https://www.techelm.com/images/logo.png",
+      "capturedAt": "2026-10-12"
+    },
     "photos": []
   },
   "tr-handy-service": {
@@ -1843,6 +2071,21 @@
     },
     "photos": []
   },
+  "ace-environ-maintenance-pte-ltd": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "logo": "/roster/assets/logos/201204031E-283d266e67e1.png",
+    "logoAsset": {
+      "localPath": "logos/201204031E.png",
+      "sha256": "283d266e67e1939c0779b5305b27663c7d3047f23326b4cd1f09f9c8644a2fed",
+      "src": "/roster/assets/logos/201204031E-283d266e67e1.png",
+      "sourceUrl": "https://aceenviron.com.sg/",
+      "originalUrl": "https://aceenviron.com.sg/wp-content/uploads/2024/02/PPT-logo-1.png",
+      "capturedAt": "2026-10-12"
+    },
+    "photos": []
+  },
   "acms-facilities-management-sin-pte-ltd": {
     "published": false,
     "price": "Ask for a quote",
@@ -1873,6 +2116,21 @@
       "sourceUrl": "https://www.apluscleansolutions.com/",
       "originalUrl": "https://www.apluscleansolutions.com/wp-content/uploads/2025/01/aplus-logo.png",
       "capturedAt": "2026-10-11"
+    },
+    "photos": []
+  },
+  "aras-development-pte-ltd": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "logo": "/roster/assets/logos/200904375D-b3130826c693.png",
+    "logoAsset": {
+      "localPath": "logos/200904375D.png",
+      "sha256": "b3130826c693e796f4aac4510e54813642b31e8a4b0e78fdfd5161e763bde919",
+      "src": "/roster/assets/logos/200904375D-b3130826c693.png",
+      "sourceUrl": "https://www.arasgrp.com/",
+      "originalUrl": "https://www.arasgrp.com/_nuxt/img/aras_logo.9d54296.png",
+      "capturedAt": "2026-10-12"
     },
     "photos": []
   },
@@ -1964,9 +2222,9 @@
     "photos": []
   },
   "css-integrated-pte-ltd": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "published": true,
+    "price": "See published prices",
+    "detail": "1 sourced pricing entries. Confirm the job, inclusions and total.",
     "logo": "/roster/assets/logos/202172727R-e16424429187.png",
     "logoAsset": {
       "localPath": "logos/202172727R.png",
@@ -1995,6 +2253,21 @@
       "src": "/roster/assets/logos/201213262E-79369565a171.png",
       "sourceUrl": "https://continentz.com/",
       "originalUrl": "https://continentz.com/wp-content/uploads/elementor/thumbs/White-logo-pmtvjpj0en7t3fkr93ar1hdcmjxb3pcd6s8oesru20.png",
+      "capturedAt": "2026-10-11"
+    },
+    "photos": []
+  },
+  "day-night-services": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "logo": "/roster/assets/logos/201108011C-02c28eea638d.png",
+    "logoAsset": {
+      "localPath": "logos/201108011C.png",
+      "sha256": "02c28eea638dd7a9fc1c563a25b50503d29ad090a8f66c13259dd284d458559c",
+      "src": "/roster/assets/logos/201108011C-02c28eea638d.png",
+      "sourceUrl": "https://www.dnsgroup.com.sg/",
+      "originalUrl": "https://www.dnsgroup.com.sg/wp-content/uploads/2025/07/logo-1.png",
       "capturedAt": "2026-10-11"
     },
     "photos": []
@@ -2029,6 +2302,21 @@
     },
     "photos": []
   },
+  "evergreen-integrated-solutions-pte-ltd": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "logo": "/roster/assets/logos/199804541M-ae5e6233487c.png",
+    "logoAsset": {
+      "localPath": "logos/199804541M.png",
+      "sha256": "ae5e6233487cc44ec056201866a225448619123f2223594a3269fe10a4fee445",
+      "src": "/roster/assets/logos/199804541M-ae5e6233487c.png",
+      "sourceUrl": "https://evergreencleaning.com.sg/",
+      "originalUrl": "https://evergreencleaning.com.sg/wp-content/uploads/2025/04/20250424-113342.png",
+      "capturedAt": "2026-10-11"
+    },
+    "photos": []
+  },
   "fresh-cleaning-pte-ltd": {
     "published": false,
     "price": "Ask for a quote",
@@ -2044,10 +2332,22 @@
     },
     "photos": []
   },
+  "getz-cleanz": {
+    "published": true,
+    "price": "See published prices",
+    "detail": "1 sourced pricing entries. Confirm the job, inclusions and total.",
+    "photos": []
+  },
   "govico-pte-ltd": {
     "published": true,
     "price": "See published prices",
     "detail": "5 sourced pricing entries. Confirm the job, inclusions and total.",
+    "photos": []
+  },
+  "greatsolutions-pte-ltd": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
     "photos": []
   },
   "genie-cleaning": {
@@ -2062,6 +2362,21 @@
       "sourceUrl": "https://geniecleaning.com.sg/",
       "originalUrl": "https://geniecleaning.com.sg/wp-content/uploads/2018/11/2018-10-30-Office-Logo-final.png",
       "capturedAt": "2026-10-11"
+    },
+    "photos": []
+  },
+  "hong-ye-group": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "logo": "/roster/assets/logos/201027359Z-093c3bff1f81.webp",
+    "logoAsset": {
+      "localPath": "logos/201027359Z.webp",
+      "sha256": "093c3bff1f819ed424369c85f161b476f443deca572a8942d7a5c11434739230",
+      "src": "/roster/assets/logos/201027359Z-093c3bff1f81.webp",
+      "sourceUrl": "https://www.hongyegroup.com.sg/",
+      "originalUrl": "https://www.hongyegroup.com.sg/wp-content/uploads/2024/10/hong-ye.jpg",
+      "capturedAt": "2026-10-12"
     },
     "photos": []
   },
@@ -2101,6 +2416,36 @@
     },
     "photos": []
   },
+  "laohero-services-pte-ltd": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "logo": "/roster/assets/logos/201902035C-090de77b48d7.png",
+    "logoAsset": {
+      "localPath": "logos/201902035C.png",
+      "sha256": "090de77b48d76514501cd4e3bcade38d95f428bdb661a69bc3ac657cc361fd5b",
+      "src": "/roster/assets/logos/201902035C-090de77b48d7.png",
+      "sourceUrl": "https://laohero.com.sg/",
+      "originalUrl": "https://laohero.com.sg/wp-content/uploads/2021/07/LaoHero-Logo_FINAL-2.png",
+      "capturedAt": "2026-10-11"
+    },
+    "photos": []
+  },
+  "luminary-service-pte-ltd": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "logo": "/roster/assets/logos/202409660N-5673accad1c1.svg",
+    "logoAsset": {
+      "localPath": "logos/202409660N.svg",
+      "sha256": "5673accad1c1cfdb8a86466b546364dee01ba85857e694f625f3fe9b2dc5bf3d",
+      "src": "/roster/assets/logos/202409660N-5673accad1c1.svg",
+      "sourceUrl": "https://luminary.com.sg/",
+      "originalUrl": "https://luminary.com.sg/wp-content/uploads/2024/05/logo-colour.svg",
+      "capturedAt": "2026-10-11"
+    },
+    "photos": []
+  },
   "lumiair-pte-ltd": {
     "published": false,
     "price": "Ask for a quote",
@@ -2114,6 +2459,12 @@
       "originalUrl": "https://lumiair.com.sg/wp-content/uploads/logo.png",
       "capturedAt": "2026-10-11"
     },
+    "photos": []
+  },
+  "marvel-clean-pte-ltd": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
     "photos": []
   },
   "ministry-of-clean": {
@@ -2204,9 +2555,9 @@
     "photos": []
   },
   "total-cleanz-pte-ltd": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "published": true,
+    "price": "See published prices",
+    "detail": "1 sourced pricing entries. Confirm the job, inclusions and total.",
     "logo": "/roster/assets/logos/201130544H-02d73fcf9b8c.webp",
     "logoAsset": {
       "localPath": "logos/201130544H.webp",
@@ -2215,6 +2566,21 @@
       "sourceUrl": "https://totalcleanz.com/",
       "originalUrl": "https://totalcleanz.com/wp-content/uploads/total-cleanz-logo-full-color-horizontal-version-1-e1685586047605.png",
       "capturedAt": "2026-10-11"
+    },
+    "photos": []
+  },
+  "tsm-group-pte-ltd": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "logo": "/roster/assets/logos/201505463K-dc0347e160e4.png",
+    "logoAsset": {
+      "localPath": "logos/201505463K.png",
+      "sha256": "dc0347e160e4044d5665211910c715712fbd4db3cc6b09da5f3c94aa56eeab64",
+      "src": "/roster/assets/logos/201505463K-dc0347e160e4.png",
+      "sourceUrl": "https://tsmgpl.com/",
+      "originalUrl": "https://tsmgpl.com/wp-content/uploads/2024/02/logo-removebg-preview-1.png",
+      "capturedAt": "2026-10-12"
     },
     "photos": []
   },
@@ -2387,9 +2753,9 @@
     "photos": []
   },
   "singapore-plumbers-affordable-and-emergency-plumbing-service": {
-    "published": true,
-    "price": "See published prices",
-    "detail": "1 sourced pricing entries. Confirm the job, inclusions and total.",
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
     "logo": "/roster/assets/logos/201223797H-51791a7eb1f8.png",
     "logoAsset": {
       "localPath": "logos/201223797H.png",
@@ -2531,9 +2897,9 @@
     "photos": []
   },
   "comfy-homes-singapore": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "published": true,
+    "price": "See published prices",
+    "detail": "1 sourced pricing entries. Confirm the job, inclusions and total.",
     "logo": "/roster/assets/logos/gm-5593072290101311295-3f51cb7f6aaf.png",
     "logoAsset": {
       "localPath": "logos/gm-5593072290101311295.png",
@@ -2591,11 +2957,14 @@
     "published": true,
     "price": "See published prices",
     "detail": "9 sourced pricing entries. Confirm the job, inclusions and total.",
-    "logoReview": {
-      "status": "needs-review",
-      "reason": "House-and-broom icon with no company name; may be a generic graphic.",
+    "logo": "/roster/assets/logos/gm-5783643814243051538-98677aab6bba.png",
+    "logoAsset": {
+      "localPath": "logos/gm-5783643814243051538.png",
+      "sha256": "98677aab6bba1aff0ba8ec0ccf71a24c9492a00ac1443f7c190fa50b4c9c23dd",
+      "src": "/roster/assets/logos/gm-5783643814243051538-98677aab6bba.png",
       "sourceUrl": "https://parttimehomemaid.com/",
-      "checkedAt": "2026-10-11T22:24+03:00"
+      "originalUrl": "https://parttimehomemaid.com/wp-content/uploads/2026/01/logo-part-time-home-maid-service-singapore-landscape-3.png",
+      "capturedAt": "2026-10-10"
     },
     "photos": []
   },
@@ -2780,9 +3149,9 @@
     "photos": []
   },
   "airconman-aircon-servicing-repair-singapore": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "published": true,
+    "price": "See published prices",
+    "detail": "1 sourced pricing entries. Confirm the job, inclusions and total.",
     "photos": []
   },
   "ys-a-cool-pte-ltd": {
@@ -2861,11 +3230,14 @@
     "published": true,
     "price": "See published prices",
     "detail": "1 sourced pricing entries. Confirm the job, inclusions and total.",
-    "logoReview": {
-      "status": "needs-review",
-      "reason": "Snowflake mark with no company name; may be a generic graphic.",
+    "logo": "/roster/assets/logos/gm-14932972389076559472-6104a3d55af9.png",
+    "logoAsset": {
+      "localPath": "logos/gm-14932972389076559472.png",
+      "sha256": "6104a3d55af92eb5100ac591c02b1b2843cfb4f3eb94108050a792415c59563e",
+      "src": "/roster/assets/logos/gm-14932972389076559472-6104a3d55af9.png",
       "sourceUrl": "https://coldairaircon.sg/",
-      "checkedAt": "2026-10-11T22:24+03:00"
+      "originalUrl": "https://coldairaircon.sg/wp-content/uploads/2023/06/coldair-logo.png",
+      "capturedAt": "2026-10-10"
     },
     "photos": []
   },
@@ -3094,6 +3466,12 @@
     "detail": "3 sourced pricing entries. Confirm the job, inclusions and total.",
     "photos": []
   },
+  "just-cool-aircon-engineering-pte-ltd": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "photos": []
+  },
   "lk-brothers-engineering-pte-ltd-aircon-servicing-singapore": {
     "published": true,
     "price": "See published prices",
@@ -3116,9 +3494,9 @@
     "photos": []
   },
   "aircon-service-repair-singapore-by-sc": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "published": true,
+    "price": "See published prices",
+    "detail": "1 sourced pricing entries. Confirm the job, inclusions and total.",
     "photos": []
   },
   "thetop-aircon-service": {
@@ -3182,9 +3560,9 @@
     "photos": []
   },
   "cool-horizon-pte-ltd": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "published": true,
+    "price": "See published prices",
+    "detail": "1 sourced pricing entries. Confirm the job, inclusions and total.",
     "logo": "/roster/assets/logos/gm-17668663508611469698-fc4c653867a7.png",
     "logoAsset": {
       "localPath": "logos/gm-17668663508611469698.png",
@@ -3401,9 +3779,9 @@
     "photos": []
   },
   "affordable-aircon-services-pte-ltd": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "published": true,
+    "price": "See published prices",
+    "detail": "1 sourced pricing entries. Confirm the job, inclusions and total.",
     "logo": "/roster/assets/logos/gm-8396057087532919251-b34a80d6ca33.jpg",
     "logoAsset": {
       "localPath": "logos/gm-8396057087532919251.jpg",
@@ -3638,11 +4016,14 @@
     "published": false,
     "price": "Ask for a quote",
     "detail": "No company rate captured. Ask for a job-specific quote.",
-    "logoReview": {
-      "status": "needs-review",
-      "reason": "Generic '24/7' lightning icon with no company name.",
+    "logo": "/roster/assets/logos/gm-7723790498696974369-647e8ae6a5e8.png",
+    "logoAsset": {
+      "localPath": "logos/gm-7723790498696974369.png",
+      "sha256": "647e8ae6a5e800b7f38aa6b2fdb891a28edda2f506fe97a21b252399b001f90a",
+      "src": "/roster/assets/logos/gm-7723790498696974369-647e8ae6a5e8.png",
       "sourceUrl": "https://24hours-electrician.com/",
-      "checkedAt": "2026-10-11T22:24+03:00"
+      "originalUrl": "https://24hours-electrician.com/assets/images/white-logo.png",
+      "capturedAt": "2026-10-10"
     },
     "photos": []
   },
@@ -3845,11 +4226,14 @@
     "published": true,
     "price": "See published prices",
     "detail": "1 sourced pricing entries. Confirm the job, inclusions and total.",
-    "logoReview": {
-      "status": "needs-review",
-      "reason": "Logo shows 'VF' (the site's domain, vfcontractors.com.sg), not the row name Bestvolt Contractors.",
-      "sourceUrl": "https://vfcontractors.com.sg/",
-      "checkedAt": "2026-10-11T22:24+03:00"
+    "logo": "/roster/assets/logos/gm-6323273274541771412-260729fb7f44.png",
+    "logoAsset": {
+      "localPath": "logos/gm-6323273274541771412.png",
+      "sha256": "260729fb7f449233cb5b7e4ac7f90d60bc061412b9ac0299d5238e35400e7770",
+      "src": "/roster/assets/logos/gm-6323273274541771412-260729fb7f44.png",
+      "sourceUrl": "https://bestvoltcontractors.com/",
+      "originalUrl": "https://bestvoltcontractors.com/wp-content/uploads/bv-chrome/logo-hdr.png",
+      "capturedAt": "2026-10-10"
     },
     "photos": []
   },
@@ -4100,9 +4484,9 @@
     "photos": []
   },
   "hygieneman-services": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "published": true,
+    "price": "See published prices",
+    "detail": "1 sourced pricing entries. Confirm the job, inclusions and total.",
     "logo": "/roster/assets/logos/gm-15596118683993459703-0a7ce079f96c.webp",
     "logoAsset": {
       "localPath": "logos/gm-15596118683993459703.webp",
@@ -4115,9 +4499,9 @@
     "photos": []
   },
   "local-handyman-sg": {
-    "published": true,
-    "price": "See published prices",
-    "detail": "6 sourced pricing entries. Confirm the job, inclusions and total.",
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
     "logo": "/roster/assets/logos/gm-9162851339490575796-ca2821acd952.png",
     "logoAsset": {
       "localPath": "logos/gm-9162851339490575796.png",
@@ -4148,11 +4532,14 @@
     "published": true,
     "price": "See published prices",
     "detail": "7 sourced pricing entries. Confirm the job, inclusions and total.",
-    "logoReview": {
-      "status": "needs-review",
-      "reason": "Leaf/water site icon with no company name; may be a generic graphic.",
+    "logo": "/roster/assets/logos/gm-12991069506010233866-41de4c5ca943.webp",
+    "logoAsset": {
+      "localPath": "logos/gm-12991069506010233866.webp",
+      "sha256": "41de4c5ca9431dbf69f8d9a46111193b15d28b1e2beb6469e7e4aa32b71a7fd6",
+      "src": "/roster/assets/logos/gm-12991069506010233866-41de4c5ca943.webp",
       "sourceUrl": "https://www.sgcleanxpert.com/",
-      "checkedAt": "2026-10-11T22:24+03:00"
+      "originalUrl": "https://www.sgcleanxpert.com/wp-content/uploads/Logo-Transparent-Small.png",
+      "capturedAt": "2026-10-10"
     },
     "photos": []
   },
@@ -4276,10 +4663,25 @@
     },
     "photos": []
   },
+  "wefix4u": {
+    "published": true,
+    "price": "See published prices",
+    "detail": "6 sourced pricing entries. Confirm the job, inclusions and total.",
+    "logo": "/roster/assets/logos/gm-17226586840433495699-95d3edddf0b1.png",
+    "logoAsset": {
+      "localPath": "logos/gm-17226586840433495699.png",
+      "sha256": "95d3edddf0b1b6f0d981e4665817c0976fffc98d13468fdc63edaa1ff986242b",
+      "src": "/roster/assets/logos/gm-17226586840433495699-95d3edddf0b1.png",
+      "sourceUrl": "https://wefix4u.sg/",
+      "originalUrl": "https://wefix4u.sg/wefix4u-brand-assets/Orange%20Logo%20(Landscape).png",
+      "capturedAt": "2026-10-11"
+    },
+    "photos": []
+  },
   "airconpros-aircon-installation-and-service-singapore": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "published": true,
+    "price": "See published prices",
+    "detail": "1 sourced pricing entries. Confirm the job, inclusions and total.",
     "logo": "/roster/assets/logos/gm-12773458252670997603-ff20d07bc0c9.jpg",
     "logoAsset": {
       "localPath": "logos/gm-12773458252670997603.jpg",
@@ -4364,9 +4766,9 @@
     "photos": []
   },
   "mycleanhome": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "published": true,
+    "price": "See published prices",
+    "detail": "1 sourced pricing entries. Confirm the job, inclusions and total.",
     "logo": "/roster/assets/logos/gm-14927657347589348580-4f52e30e0cb8.png",
     "logoAsset": {
       "localPath": "logos/gm-14927657347589348580.png",
@@ -4853,9 +5255,9 @@
     "photos": []
   },
   "ls-aircon-service-electrician": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "published": true,
+    "price": "See published prices",
+    "detail": "1 sourced pricing entries. Confirm the job, inclusions and total.",
     "logo": "/roster/assets/logos/gm-17055839383906496935-f7082b522cc3.png",
     "logoAsset": {
       "localPath": "logos/gm-17055839383906496935.png",
@@ -4901,11 +5303,14 @@
     "published": true,
     "price": "See published prices",
     "detail": "3 sourced pricing entries. Confirm the job, inclusions and total.",
-    "logoReview": {
-      "status": "needs-review",
-      "reason": "Site favicon with no company name; may be a generic graphic.",
+    "logo": "/roster/assets/logos/gm-455134382466546526-c8910e636f83.png",
+    "logoAsset": {
+      "localPath": "logos/gm-455134382466546526.png",
+      "sha256": "c8910e636f833714b3f60a80d518812cf2fdb4d7613b0de4e81b04ed2d341a39",
+      "src": "/roster/assets/logos/gm-455134382466546526-c8910e636f83.png",
       "sourceUrl": "https://effiecoolservice.com/",
-      "checkedAt": "2026-10-11T22:24+03:00"
+      "originalUrl": "https://effiecoolservice.com/wp-content/uploads/2025/11/color.png",
+      "capturedAt": "2026-10-10"
     },
     "photos": []
   },
@@ -4913,11 +5318,14 @@
     "published": false,
     "price": "Ask for a quote",
     "detail": "No company rate captured. Ask for a job-specific quote.",
-    "logoReview": {
-      "status": "needs-review",
-      "reason": "Snowflake-shield mark from a WhatsApp image, no company name; may be a generic graphic.",
+    "logo": "/roster/assets/logos/gm-16235035864232602551-382bde5e8906.png",
+    "logoAsset": {
+      "localPath": "logos/gm-16235035864232602551.png",
+      "sha256": "382bde5e890656cf1e5007c87c15a3f9131f7014b571783c708735e218ba3e7e",
+      "src": "/roster/assets/logos/gm-16235035864232602551-382bde5e8906.png",
       "sourceUrl": "https://cooltrust.net/",
-      "checkedAt": "2026-10-11T22:24+03:00"
+      "originalUrl": "https://cooltrust.net/wp-content/uploads/2026/07/f134f1d2-b72d-43b9-8d75-29003e999606_removalai_preview-130x98.png",
+      "capturedAt": "2026-10-10"
     },
     "photos": []
   },
@@ -4949,9 +5357,9 @@
     "photos": []
   },
   "48-cold-pte-ltd": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "published": true,
+    "price": "See published prices",
+    "detail": "1 sourced pricing entries. Confirm the job, inclusions and total.",
     "logo": "/roster/assets/logos/gm-4252216532754374841-918e5e37c592.jpg",
     "logoAsset": {
       "localPath": "logos/gm-4252216532754374841.jpg",
@@ -5000,9 +5408,9 @@
     "photos": []
   },
   "jk-aircon-specialist": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "published": true,
+    "price": "See published prices",
+    "detail": "3 sourced pricing entries. Confirm the job, inclusions and total.",
     "logo": "/roster/assets/logos/gm-15305861624805995322-bb68c4233e04.png",
     "logoAsset": {
       "localPath": "logos/gm-15305861624805995322.png",
@@ -5243,9 +5651,9 @@
     "photos": []
   },
   "sembawang-lighting-house-pte-ltd": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "published": true,
+    "price": "See published prices",
+    "detail": "1 sourced pricing entries. Confirm the job, inclusions and total.",
     "photos": []
   },
   "glenhill-property-consultant-pte-ltd": {
@@ -5609,11 +6017,14 @@
     "published": false,
     "price": "Ask for a quote",
     "detail": "No company rate captured. Ask for a job-specific quote.",
-    "logoReview": {
-      "status": "needs-review",
-      "reason": "Company site is itself hosted on a builder subdomain (lovable.app); the logo comes from that site, so own-domain origin cannot be confirmed.",
+    "logo": "/roster/assets/logos/gm-18116157933838586002-a2be87c5e251.jpg",
+    "logoAsset": {
+      "localPath": "logos/gm-18116157933838586002.jpg",
+      "sha256": "a2be87c5e2510fa8eb92da0281b9347bcd76d78f74147a3c846c0820bf2d5f80",
+      "src": "/roster/assets/logos/gm-18116157933838586002-a2be87c5e251.jpg",
       "sourceUrl": "https://extremecool.lovable.app/",
-      "checkedAt": "2026-10-11T22:24+03:00"
+      "originalUrl": "https://extremecool.lovable.app/__l5e/assets-v1/d289ca02-4dae-43a9-a428-ee98a8f3f390/extreme-cool-logo-v2.jpg",
+      "capturedAt": "2026-10-11"
     },
     "photos": []
   },
@@ -5768,9 +6179,9 @@
     "photos": []
   },
   "quick-repair-sg": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "published": true,
+    "price": "See published prices",
+    "detail": "1 sourced pricing entries. Confirm the job, inclusions and total.",
     "logo": "/roster/assets/logos/gm-7495138204246753165-0caac1ec6b05.png",
     "logoAsset": {
       "localPath": "logos/gm-7495138204246753165.png",
@@ -5813,9 +6224,9 @@
     "photos": []
   },
   "esp-cleaning-services-commercial-residential-cleaning-servic": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "published": true,
+    "price": "See published prices",
+    "detail": "1 sourced pricing entries. Confirm the job, inclusions and total.",
     "logo": "/roster/assets/logos/gm-16191838735849144199-22150529728c.jpg",
     "logoAsset": {
       "localPath": "logos/gm-16191838735849144199.jpg",
@@ -5828,15 +6239,15 @@
     "photos": []
   },
   "krystal-solutions-pte-ltd": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "published": true,
+    "price": "See published prices",
+    "detail": "1 sourced pricing entries. Confirm the job, inclusions and total.",
     "photos": []
   },
   "bencool-services-professional-aircon-services-airconditioner": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "published": true,
+    "price": "See published prices",
+    "detail": "1 sourced pricing entries. Confirm the job, inclusions and total.",
     "logo": "/roster/assets/logos/gm-326070483997536642-adab07af4f27.png",
     "logoAsset": {
       "localPath": "logos/gm-326070483997536642.png",
@@ -6038,14 +6449,17 @@
     "photos": []
   },
   "simple-cleaner": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
-    "logoReview": {
-      "status": "needs-review",
-      "reason": "Leaf mark with no company name; may be a generic graphic.",
+    "published": true,
+    "price": "See published prices",
+    "detail": "1 sourced pricing entries. Confirm the job, inclusions and total.",
+    "logo": "/roster/assets/logos/gm-3367067595362686238-f91aa4207baa.png",
+    "logoAsset": {
+      "localPath": "logos/gm-3367067595362686238.png",
+      "sha256": "f91aa4207baaa36039a0569a3d3b5c4fa73fbdf935402ebf28020d98f91a951a",
+      "src": "/roster/assets/logos/gm-3367067595362686238-f91aa4207baa.png",
       "sourceUrl": "https://simplecleaner.com.sg/",
-      "checkedAt": "2026-10-11T22:24+03:00"
+      "originalUrl": "https://simplecleaner.com.sg/wp-content/uploads/2019/08/Simple-Cleaner-Logo-1.png",
+      "capturedAt": "2026-10-10"
     },
     "photos": []
   },
@@ -6395,9 +6809,9 @@
     "photos": []
   },
   "lifeline-cleaning-pte-ltd": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "published": true,
+    "price": "See published prices",
+    "detail": "1 sourced pricing entries. Confirm the job, inclusions and total.",
     "logo": "/roster/assets/logos/gm-1484769404003685151-4ed026d655fa.webp",
     "logoAsset": {
       "localPath": "logos/gm-1484769404003685151.webp",
@@ -6485,9 +6899,9 @@
     "photos": []
   },
   "cool-air-control-aircon-servicing": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "published": true,
+    "price": "See published prices",
+    "detail": "1 sourced pricing entries. Confirm the job, inclusions and total.",
     "logo": "/roster/assets/logos/gm-15181532023648478784-eaf9afcb85e7.png",
     "logoAsset": {
       "localPath": "logos/gm-15181532023648478784.png",
@@ -6662,9 +7076,9 @@
     "photos": []
   },
   "ar-tech-renovation-pte-ltd": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "published": true,
+    "price": "See published prices",
+    "detail": "1 sourced pricing entries. Confirm the job, inclusions and total.",
     "logo": "/roster/assets/logos/gm-13533939093059243654-de97ea8eb54f.webp",
     "logoAsset": {
       "localPath": "logos/gm-13533939093059243654.webp",
@@ -7235,9 +7649,9 @@
     "photos": []
   },
   "infinity-air-pte-ltd-aircon-specialist": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "published": true,
+    "price": "See published prices",
+    "detail": "1 sourced pricing entries. Confirm the job, inclusions and total.",
     "logo": "/roster/assets/logos/gm-14399378949296337527-36232ece021a.webp",
     "logoAsset": {
       "localPath": "logos/gm-14399378949296337527.webp",
@@ -7379,9 +7793,9 @@
     "photos": []
   },
   "thl-hq-aircon": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "published": true,
+    "price": "See published prices",
+    "detail": "1 sourced pricing entries. Confirm the job, inclusions and total.",
     "logo": "/roster/assets/logos/gm-12449852807075890557-4c12de03c4e0.webp",
     "logoAsset": {
       "localPath": "logos/gm-12449852807075890557.webp",
@@ -7471,6 +7885,1149 @@
       "sourceUrl": "https://www.bookfreezso.com/",
       "originalUrl": "https://www.bookfreezso.com/images/freezso-logo.png",
       "capturedAt": "2026-10-11"
+    },
+    "photos": []
+  },
+  "si-empowers-pte-ltd": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "logo": "/roster/assets/logos/gm-17183347079062095897-11f3b68701fa.png",
+    "logoAsset": {
+      "localPath": "logos/gm-17183347079062095897.png",
+      "sha256": "11f3b68701fa76ecc77599afe349e66fe8bab5f45143f3005b7a644d5c5332d4",
+      "src": "/roster/assets/logos/gm-17183347079062095897-11f3b68701fa.png",
+      "sourceUrl": "https://www.siem.com.sg/",
+      "originalUrl": "https://www.siem.com.sg/images/SiLogoForEachPageHead.png",
+      "capturedAt": "2026-10-11"
+    },
+    "photos": []
+  },
+  "sg-maintenance-group": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "logo": "/roster/assets/logos/gm-11961169512498720557-697b59d33ad1.png",
+    "logoAsset": {
+      "localPath": "logos/gm-11961169512498720557.png",
+      "sha256": "697b59d33ad12f0c8a5521d952000db7363460c459ce88d095df13ef9ebb320f",
+      "src": "/roster/assets/logos/gm-11961169512498720557-697b59d33ad1.png",
+      "sourceUrl": "https://maintenance.com.sg/",
+      "originalUrl": "https://maintenance.com.sg/wp-content/uploads/2024/12/cropped-new-logo-150x150.png",
+      "capturedAt": "2026-10-11"
+    },
+    "photos": []
+  },
+  "vallimei-concepts": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "photos": []
+  },
+  "ls-plumber-services": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "logoReview": {
+      "status": "needs-review",
+      "reason": "r10: selected automatically (touch-icon icon); not visually checked",
+      "sourceUrl": "https://www.cheapplumbersingapore.com/",
+      "checkedAt": "2026-10-11T22:59+03:00"
+    },
+    "photos": []
+  },
+  "my-plumber-singapore": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "photos": []
+  },
+  "call-sg-building-services-pte-ltd": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "logo": "/roster/assets/logos/gm-2790167341524828418-a832a43c64c9.jpg",
+    "logoAsset": {
+      "localPath": "logos/gm-2790167341524828418.jpg",
+      "sha256": "a832a43c64c9d40f4305ab0d183bff908d8c245e82e89f6c6217e65261b9ec3b",
+      "src": "/roster/assets/logos/gm-2790167341524828418-a832a43c64c9.jpg",
+      "sourceUrl": "https://callsgbuildingservices.com/",
+      "originalUrl": "https://callsgbuildingservices.com/img/logo.jpeg",
+      "capturedAt": "2026-10-11"
+    },
+    "photos": []
+  },
+  "renoexpert-pte-ltd": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "logoReview": {
+      "status": "needs-review",
+      "reason": "r10: selected automatically (touch-icon icon); not visually checked",
+      "sourceUrl": "https://renoexpertsg.com/",
+      "checkedAt": "2026-10-11T23:23+03:00"
+    },
+    "photos": []
+  },
+  "fix-fast-pte-ltd": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "logoReview": {
+      "status": "needs-review",
+      "reason": "r10: selected automatically (favicon icon); not visually checked",
+      "sourceUrl": "https://fixfastpteltd.com/",
+      "checkedAt": "2026-10-11T23:23+03:00"
+    },
+    "photos": []
+  },
+  "gd-plumbing": {
+    "published": true,
+    "price": "See published prices",
+    "detail": "6 sourced pricing entries. Confirm the job, inclusions and total.",
+    "logo": "/roster/assets/logos/gm-13282453458306859733-e5c51c6f7865.png",
+    "logoAsset": {
+      "localPath": "logos/gm-13282453458306859733.png",
+      "sha256": "e5c51c6f786587ba29d71bfa10c94228d89c9f87a25958fe03682874fba01303",
+      "src": "/roster/assets/logos/gm-13282453458306859733-e5c51c6f7865.png",
+      "sourceUrl": "https://gdplumbing.com.sg/",
+      "originalUrl": "https://gdplumbing.com.sg/wp-content/uploads/2024/09/new-logo.png",
+      "capturedAt": "2026-10-11"
+    },
+    "photos": []
+  },
+  "thandy-singapore-handyman-services": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "photos": []
+  },
+  "herofix-sg": {
+    "published": true,
+    "price": "See published prices",
+    "detail": "5 sourced pricing entries. Confirm the job, inclusions and total.",
+    "logoReview": {
+      "status": "needs-review",
+      "reason": "r10: selected automatically (touch-icon icon); not visually checked",
+      "sourceUrl": "https://herofix.sg/",
+      "checkedAt": "2026-10-11T23:23+03:00"
+    },
+    "photos": []
+  },
+  "fixmove": {
+    "published": true,
+    "price": "See published prices",
+    "detail": "7 sourced pricing entries. Confirm the job, inclusions and total.",
+    "photos": []
+  },
+  "flexi-home-services": {
+    "published": true,
+    "price": "See published prices",
+    "detail": "2 sourced pricing entries. Confirm the job, inclusions and total.",
+    "photos": []
+  },
+  "fnf-handyman": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "logo": "/roster/assets/logos/gm-11931464375941141917-ef4f859e3295.webp",
+    "logoAsset": {
+      "localPath": "logos/gm-11931464375941141917.webp",
+      "sha256": "ef4f859e329528ae68679c7d13a79be808a3b266488c34e81837105a7bedea0e",
+      "src": "/roster/assets/logos/gm-11931464375941141917-ef4f859e3295.webp",
+      "sourceUrl": "https://www.fnfhandymansg.com/",
+      "originalUrl": "https://www.fnfhandymansg.com/_next/image?url=%2Flogo%2Flogo.png&w=256&q=75",
+      "capturedAt": "2026-10-11"
+    },
+    "photos": []
+  },
+  "swyftfix": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "logo": "/roster/assets/logos/gm-5489445268091313880-f973e048bd48.png",
+    "logoAsset": {
+      "localPath": "logos/gm-5489445268091313880.png",
+      "sha256": "f973e048bd4873064158701d955b08d8f05d0b5374c8b5d6f3acce9f8e905d7f",
+      "src": "/roster/assets/logos/gm-5489445268091313880-f973e048bd48.png",
+      "sourceUrl": "https://swyftfix.sg/",
+      "originalUrl": "https://swyftfix.sg/wp-content/uploads/2025/11/Generated_Image_November_19__2025_-_12_07PM-removebg-preview-150x150.png",
+      "capturedAt": "2026-10-11"
+    },
+    "photos": []
+  },
+  "happy-homes-handyman-services": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "photos": []
+  },
+  "ezycontractors-co": {
+    "published": true,
+    "price": "See published prices",
+    "detail": "1 sourced pricing entries. Confirm the job, inclusions and total.",
+    "logo": "/roster/assets/logos/gm-13318036757131928759-fcbf6f5c2cde.png",
+    "logoAsset": {
+      "localPath": "logos/gm-13318036757131928759.png",
+      "sha256": "fcbf6f5c2cdec9715e79181a1994beaa8e2b47bbd15617751653c6de463fa528",
+      "src": "/roster/assets/logos/gm-13318036757131928759-fcbf6f5c2cde.png",
+      "sourceUrl": "https://ezycontractors.co/",
+      "originalUrl": "https://ezycontractors.co/wp-content/uploads/2024/07/cropped-Ezycontractors-logo.-3.png",
+      "capturedAt": "2026-10-11"
+    },
+    "photos": []
+  },
+  "handyman-fix-pro": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "logoReview": {
+      "status": "needs-review",
+      "reason": "r10: selected automatically (touch-icon icon); not visually checked",
+      "sourceUrl": "https://handymanfixpro.com/",
+      "checkedAt": "2026-10-11T23:23+03:00"
+    },
+    "photos": []
+  },
+  "cleano-services": {
+    "published": true,
+    "price": "See published prices",
+    "detail": "1 sourced pricing entries. Confirm the job, inclusions and total.",
+    "photos": []
+  },
+  "ddq-services-pte-ltd": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "photos": []
+  },
+  "sb-cleaning-services-carpet-cleaning-upholstery-cleaning-spe": {
+    "published": true,
+    "price": "See published prices",
+    "detail": "1 sourced pricing entries. Confirm the job, inclusions and total.",
+    "logo": "/roster/assets/logos/gm-12350332273993341054-c54ce95ec87d.png",
+    "logoAsset": {
+      "localPath": "logos/gm-12350332273993341054.png",
+      "sha256": "c54ce95ec87df78f990b877f044b9baacb9063d57f1fadfd1b2d1f1fe5e45886",
+      "src": "/roster/assets/logos/gm-12350332273993341054-c54ce95ec87d.png",
+      "sourceUrl": "https://carpetcleaning.sg/",
+      "originalUrl": "https://carpetcleaning.sg/wp-content/uploads/2017/07/logo-1.png",
+      "capturedAt": "2026-10-11"
+    },
+    "photos": []
+  },
+  "hiremop-pte-ltd": {
+    "published": true,
+    "price": "See published prices",
+    "detail": "1 sourced pricing entries. Confirm the job, inclusions and total.",
+    "photos": []
+  },
+  "the-good-husband-laundromats-drycleaners-serangoon": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "photos": []
+  },
+  "kleansg": {
+    "published": true,
+    "price": "See published prices",
+    "detail": "1 sourced pricing entries. Confirm the job, inclusions and total.",
+    "logo": "/roster/assets/logos/gm-14493146242864308938-6c572ad12f5d.png",
+    "logoAsset": {
+      "localPath": "logos/gm-14493146242864308938.png",
+      "sha256": "6c572ad12f5de8de7fe3f640146f9cd1fa08ebbeae0ccc5dedd5e2ce23621130",
+      "src": "/roster/assets/logos/gm-14493146242864308938-6c572ad12f5d.png",
+      "sourceUrl": "https://kleansg.com/",
+      "originalUrl": "https://kleansg.com/wp-content/uploads/2025/10/KleanSG_Logo.png",
+      "capturedAt": "2026-10-12"
+    },
+    "photos": []
+  },
+  "avalon-home-services": {
+    "published": true,
+    "price": "See published prices",
+    "detail": "1 sourced pricing entries. Confirm the job, inclusions and total.",
+    "logo": "/roster/assets/logos/gm-4308370705747917593-47fab9a0247a.jpg",
+    "logoAsset": {
+      "localPath": "logos/gm-4308370705747917593.jpg",
+      "sha256": "47fab9a0247a715e796bbadc3b34687a4d8482829ac94cd9884e08c22237ea0d",
+      "src": "/roster/assets/logos/gm-4308370705747917593-47fab9a0247a.jpg",
+      "sourceUrl": "https://avalonhome.sg/",
+      "originalUrl": "https://avalonhome.sg/avalon-logo.jpg",
+      "capturedAt": "2026-10-12"
+    },
+    "photos": []
+  },
+  "singapore-carpet-cleaning-pte-ltd": {
+    "published": true,
+    "price": "See published prices",
+    "detail": "3 sourced pricing entries. Confirm the job, inclusions and total.",
+    "logo": "/roster/assets/logos/gm-2496747766179303008-9e652c6ce18d.png",
+    "logoAsset": {
+      "localPath": "logos/gm-2496747766179303008.png",
+      "sha256": "9e652c6ce18dbadfa649ca517b68927801d9abfdb4cf5c5fd3b790f4de241b53",
+      "src": "/roster/assets/logos/gm-2496747766179303008-9e652c6ce18d.png",
+      "sourceUrl": "https://www.carpet-cleaning.com.sg/",
+      "originalUrl": "https://www.carpet-cleaning.com.sg/wp-content/uploads/2019/04/carpet-cleaning-logo-1.png",
+      "capturedAt": "2026-10-12"
+    },
+    "photos": []
+  },
+  "go-cleaners-pte-ltd": {
+    "published": true,
+    "price": "See published prices",
+    "detail": "10 sourced pricing entries. Confirm the job, inclusions and total.",
+    "logo": "/roster/assets/logos/gm-10856405664311345551-5401eff1352b.png",
+    "logoAsset": {
+      "localPath": "logos/gm-10856405664311345551.png",
+      "sha256": "5401eff1352b875fcf1eededc32428d417e92361e858c7883586860f6bec93b5",
+      "src": "/roster/assets/logos/gm-10856405664311345551-5401eff1352b.png",
+      "sourceUrl": "https://www.gocleaners.sg/",
+      "originalUrl": "https://www.gocleaners.sg/assets/images/logo.png",
+      "capturedAt": "2026-10-12"
+    },
+    "photos": []
+  },
+  "papacleans-best-professional-cleaning-service-in-singapore": {
+    "published": true,
+    "price": "See published prices",
+    "detail": "1 sourced pricing entries. Confirm the job, inclusions and total.",
+    "logoReview": {
+      "status": "needs-review",
+      "reason": "r10: selected automatically (favicon icon); not visually checked",
+      "sourceUrl": "https://papacleans.com/",
+      "checkedAt": "2026-10-12T00:16+03:00"
+    },
+    "photos": []
+  },
+  "ecocleanoffice": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "logo": "/roster/assets/logos/gm-9274580361695375448-520226012fbf.png",
+    "logoAsset": {
+      "localPath": "logos/gm-9274580361695375448.png",
+      "sha256": "520226012fbf594516ffc8fc08a1b777b83402c5254861463419733cfba49ad6",
+      "src": "/roster/assets/logos/gm-9274580361695375448-520226012fbf.png",
+      "sourceUrl": "https://ecocleanoffice.com/",
+      "originalUrl": "https://ecocleanoffice.com/wp-content/uploads/2022/01/FBLogo-removebg-preview-1.png",
+      "capturedAt": "2026-10-12"
+    },
+    "photos": []
+  },
+  "cbm-home": {
+    "published": true,
+    "price": "See published prices",
+    "detail": "1 sourced pricing entries. Confirm the job, inclusions and total.",
+    "photos": []
+  },
+  "luminous-cleaning-pte-ltd": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "photos": []
+  },
+  "office-cleaning-services-carpet-cleaning-services-and-house": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "logo": "/roster/assets/logos/gm-3852067673219328343-26daf90b7b69.png",
+    "logoAsset": {
+      "localPath": "logos/gm-3852067673219328343.png",
+      "sha256": "26daf90b7b690808a5e3c53cfdd4b95dbae0dd1db40d00e08e4fb98f95881189",
+      "src": "/roster/assets/logos/gm-3852067673219328343-26daf90b7b69.png",
+      "sourceUrl": "https://www.a-cubemicrosystems.com/",
+      "originalUrl": "https://www.a-cubemicrosystems.com/wp-content/uploads/2021/09/logo-final.png",
+      "capturedAt": "2026-10-12"
+    },
+    "photos": []
+  },
+  "yuki-white-up-services": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "logo": "/roster/assets/logos/gm-8272368542592808470-9e72a87dedfa.svg",
+    "logoAsset": {
+      "localPath": "logos/gm-8272368542592808470.svg",
+      "sha256": "9e72a87dedfaa5a73da2085bb46f4272505a48d5e66bf450503f5defe45504ff",
+      "src": "/roster/assets/logos/gm-8272368542592808470-9e72a87dedfa.svg",
+      "sourceUrl": "https://yuki.com.sg/",
+      "originalUrl": "https://yuki.com.sg/assets/img/logo.svg",
+      "capturedAt": "2026-10-12"
+    },
+    "photos": []
+  },
+  "helpergo": {
+    "published": true,
+    "price": "See published prices",
+    "detail": "3 sourced pricing entries. Confirm the job, inclusions and total.",
+    "logoReview": {
+      "status": "needs-review",
+      "reason": "r10: selected automatically (header-img, no \"logo\" in the file name or alt text); not visually checked",
+      "sourceUrl": "https://sg.helpergo.co/",
+      "checkedAt": "2026-10-12T00:16+03:00"
+    },
+    "photos": []
+  },
+  "epiclean": {
+    "published": true,
+    "price": "See published prices",
+    "detail": "1 sourced pricing entries. Confirm the job, inclusions and total.",
+    "logo": "/roster/assets/logos/gm-6773089727823361216-f0d9a401b098.png",
+    "logoAsset": {
+      "localPath": "logos/gm-6773089727823361216.png",
+      "sha256": "f0d9a401b0980728d08878fced57ce0bb4b178a876fa96108b1413af11b54d15",
+      "src": "/roster/assets/logos/gm-6773089727823361216-f0d9a401b098.png",
+      "sourceUrl": "https://epiclean.co/",
+      "originalUrl": "https://epiclean.co/wp-content/uploads/2022/10/Epiclean-Logo.png",
+      "capturedAt": "2026-10-12"
+    },
+    "photos": []
+  },
+  "urban-shine-cleaning-services-pte-ltd": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "logo": "/roster/assets/logos/gm-13236706652517648755-2838674c19d1.svg",
+    "logoAsset": {
+      "localPath": "logos/gm-13236706652517648755.svg",
+      "sha256": "2838674c19d1817494fbfe6d72f16082f4f2eeecce8315887f001fff9d78cf61",
+      "src": "/roster/assets/logos/gm-13236706652517648755-2838674c19d1.svg",
+      "sourceUrl": "https://urbanshine.com.sg/",
+      "originalUrl": "https://urbanshine.com.sg/wp-content/uploads/2025/09/logo-urban.svg",
+      "capturedAt": "2026-10-12"
+    },
+    "photos": []
+  },
+  "scrubbys": {
+    "published": true,
+    "price": "See published prices",
+    "detail": "11 sourced pricing entries. Confirm the job, inclusions and total.",
+    "logo": "/roster/assets/logos/gm-16652908101653598409-623e82eeedbd.png",
+    "logoAsset": {
+      "localPath": "logos/gm-16652908101653598409.png",
+      "sha256": "623e82eeedbd116d3b5df93fdbffbb72aeb32721edbde55ceaa996f2abb57c05",
+      "src": "/roster/assets/logos/gm-16652908101653598409-623e82eeedbd.png",
+      "sourceUrl": "https://www.scrubbys.sg/",
+      "originalUrl": "https://www.scrubbys.sg/assets/img/logo-coloured.png",
+      "capturedAt": "2026-10-12"
+    },
+    "photos": []
+  },
+  "clean-and-care-solutions": {
+    "published": true,
+    "price": "See published prices",
+    "detail": "1 sourced pricing entries. Confirm the job, inclusions and total.",
+    "logoReview": {
+      "status": "needs-review",
+      "reason": "r10: selected automatically (touch-icon icon); not visually checked",
+      "sourceUrl": "https://cleanandcare.com.sg/",
+      "checkedAt": "2026-10-12T00:16+03:00"
+    },
+    "photos": []
+  },
+  "cleanmatic": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "photos": []
+  },
+  "cotton-care": {
+    "published": true,
+    "price": "See published prices",
+    "detail": "6 sourced pricing entries. Confirm the job, inclusions and total.",
+    "logo": "/roster/assets/logos/gm-7129853593739390961-767092c718fe.png",
+    "logoAsset": {
+      "localPath": "logos/gm-7129853593739390961.png",
+      "sha256": "767092c718fe43de4747122e88446e2be01aceec97e78f5c093eb96fb9881092",
+      "src": "/roster/assets/logos/gm-7129853593739390961-767092c718fe.png",
+      "sourceUrl": "https://www.cottoncare.com.sg/",
+      "originalUrl": "https://www.cottoncare.com.sg/wp-content/uploads/2023/02/cropped-cropped-Cotton-Care-Logo-w-Outline-scaled.png",
+      "capturedAt": "2026-10-12"
+    },
+    "photos": []
+  },
+  "hvac": {
+    "published": true,
+    "price": "See published prices",
+    "detail": "1 sourced pricing entries. Confirm the job, inclusions and total.",
+    "logo": "/roster/assets/logos/gm-3997265546334033718-e284262341ca.jpg",
+    "logoAsset": {
+      "localPath": "logos/gm-3997265546334033718.jpg",
+      "sha256": "e284262341ca97128c49680182ad6d2aa09a8555b764bda11dd7a1bc4a1272d4",
+      "src": "/roster/assets/logos/gm-3997265546334033718-e284262341ca.jpg",
+      "sourceUrl": "https://hvacengineering.com.sg/",
+      "originalUrl": "https://hvacengineering.com.sg/wp-content/uploads/2022/07/hvac-logo.jpg",
+      "capturedAt": "2026-10-12"
+    },
+    "photos": []
+  },
+  "cleanworks-sg": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "photos": []
+  },
+  "genie-muscle-pte-ltd": {
+    "published": true,
+    "price": "See published prices",
+    "detail": "6 sourced pricing entries. Confirm the job, inclusions and total.",
+    "logo": "/roster/assets/logos/gm-10928374058699639637-ba3d642320c7.png",
+    "logoAsset": {
+      "localPath": "logos/gm-10928374058699639637.png",
+      "sha256": "ba3d642320c7a85ec67f8bdd0e88cd7d99ecf7c88172fd76024a1b687d24799a",
+      "src": "/roster/assets/logos/gm-10928374058699639637-ba3d642320c7.png",
+      "sourceUrl": "https://www.geniemuscle.sg/",
+      "originalUrl": "https://www.geniemuscle.sg/images/logo-3rd-anniversary.png",
+      "capturedAt": "2026-10-12"
+    },
+    "photos": []
+  },
+  "perry-maintenance": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "logo": "/roster/assets/logos/gm-14529886988414072570-12364aa7e655.jpg",
+    "logoAsset": {
+      "localPath": "logos/gm-14529886988414072570.jpg",
+      "sha256": "12364aa7e655006e2634b6aa8c18add3f970d42ba705745d1e1f4f170c9b8a15",
+      "src": "/roster/assets/logos/gm-14529886988414072570-12364aa7e655.jpg",
+      "sourceUrl": "https://perrymaintenance.com/",
+      "originalUrl": "https://perrymaintenance.com/img/logo_perry-maintenance.jpg",
+      "capturedAt": "2026-10-12"
+    },
+    "photos": []
+  },
+  "ultron-cleaning-trading-pte-ltd": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "logo": "/roster/assets/logos/gm-16505881590943701152-ad6f39e076af.png",
+    "logoAsset": {
+      "localPath": "logos/gm-16505881590943701152.png",
+      "sha256": "ad6f39e076af7400766230362b840540c6aa5c6df577b6bcfb5f61fb108d07d5",
+      "src": "/roster/assets/logos/gm-16505881590943701152-ad6f39e076af.png",
+      "sourceUrl": "https://ultron.sg/",
+      "originalUrl": "https://ultron.sg/wp-content/uploads/2025/11/cropped-logo-1.png",
+      "capturedAt": "2026-10-12"
+    },
+    "photos": []
+  },
+  "wecare-carpet-cleaning-services": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "logo": "/roster/assets/logos/gm-11444850905272942508-95a336001da4.png",
+    "logoAsset": {
+      "localPath": "logos/gm-11444850905272942508.png",
+      "sha256": "95a336001da4b419421408cf79f77a49228f6d73e31a53854f085e4cf585e944",
+      "src": "/roster/assets/logos/gm-11444850905272942508-95a336001da4.png",
+      "sourceUrl": "https://www.wecare-carpet.com/",
+      "originalUrl": "https://www.wecare-carpet.com/wp-content/uploads/2021/07/3-Company-Short-Background-Section-WeCare-Logo-300x108.png",
+      "capturedAt": "2026-10-12"
+    },
+    "photos": []
+  },
+  "happy-nest-services-pte-ltd": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "photos": []
+  },
+  "clean-central-pte-ltd": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "logo": "/roster/assets/logos/gm-16602943279316170381-93963f6cf44e.jpg",
+    "logoAsset": {
+      "localPath": "logos/gm-16602943279316170381.jpg",
+      "sha256": "93963f6cf44e29c89a7310dd2ef4a42876ded11e611ce0255853989bbd4eea1e",
+      "src": "/roster/assets/logos/gm-16602943279316170381-93963f6cf44e.jpg",
+      "sourceUrl": "https://www.cleancentral.com.sg/",
+      "originalUrl": "https://www.cleancentral.com.sg/web/image/website/1/logo",
+      "capturedAt": "2026-10-12"
+    },
+    "photos": []
+  },
+  "sg-reno-cleaning-co": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "photos": []
+  },
+  "j-and-chan-cleaning-pte-ltd": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "photos": []
+  },
+  "clean-up-crew-solutions-cleaning-services": {
+    "published": true,
+    "price": "See published prices",
+    "detail": "1 sourced pricing entries. Confirm the job, inclusions and total.",
+    "logo": "/roster/assets/logos/gm-5341885205106804791-ad1f6b1de40a.jpg",
+    "logoAsset": {
+      "localPath": "logos/gm-5341885205106804791.jpg",
+      "sha256": "ad1f6b1de40a59b1225f574b9a15ec64e2fa2746300f2a6ec55c69e13480be97",
+      "src": "/roster/assets/logos/gm-5341885205106804791-ad1f6b1de40a.jpg",
+      "sourceUrl": "https://cleanupcrewsolutions.com/",
+      "originalUrl": "https://cleanupcrewsolutions.com/wp-content/uploads/2024/10/Profile-DP-scaled-1.jpg",
+      "capturedAt": "2026-10-12"
+    },
+    "photos": []
+  },
+  "goodview-cleaning-services": {
+    "published": true,
+    "price": "See published prices",
+    "detail": "5 sourced pricing entries. Confirm the job, inclusions and total.",
+    "logo": "/roster/assets/logos/gm-8749241827658334532-5d2b45e8afe8.png",
+    "logoAsset": {
+      "localPath": "logos/gm-8749241827658334532.png",
+      "sha256": "5d2b45e8afe89fc191db5d34618b69a02ff9e5ac5f0abbcc989bd0bcb695b3c6",
+      "src": "/roster/assets/logos/gm-8749241827658334532-5d2b45e8afe8.png",
+      "sourceUrl": "https://goodviewcleaning.sg/",
+      "originalUrl": "https://goodviewcleaning.sg/wp-content/uploads/2024/07/LOGO_M-22187371-1.png",
+      "capturedAt": "2026-10-12"
+    },
+    "photos": []
+  },
+  "cleanlad-mattress-cleaning-singapore": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "logoReview": {
+      "status": "needs-review",
+      "reason": "r10: selected automatically (header-img, no \"logo\" in the file name or alt text); not visually checked",
+      "sourceUrl": "https://cleanlad.com/",
+      "checkedAt": "2026-10-12T00:16+03:00"
+    },
+    "photos": []
+  },
+  "kin-klean-pte-ltd": {
+    "published": true,
+    "price": "See published prices",
+    "detail": "5 sourced pricing entries. Confirm the job, inclusions and total.",
+    "logo": "/roster/assets/logos/gm-15099271639948631972-d7ff4e9ce24a.png",
+    "logoAsset": {
+      "localPath": "logos/gm-15099271639948631972.png",
+      "sha256": "d7ff4e9ce24a5ebd7bccb480d46c80f083ac121974abd92ba42afd9425c17e77",
+      "src": "/roster/assets/logos/gm-15099271639948631972-d7ff4e9ce24a.png",
+      "sourceUrl": "https://kinandklean.com/",
+      "originalUrl": "https://kinandklean.com/assets/img/logo-white.png",
+      "capturedAt": "2026-10-12"
+    },
+    "photos": []
+  },
+  "sauber-cleaning-services": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "logo": "/roster/assets/logos/gm-5849913829625394776-e4f62817cc48.gif",
+    "logoAsset": {
+      "localPath": "logos/gm-5849913829625394776.gif",
+      "sha256": "e4f62817cc48f429756977f4e8b159c8c55abec61442bd9716289afcde0c7808",
+      "src": "/roster/assets/logos/gm-5849913829625394776-e4f62817cc48.gif",
+      "sourceUrl": "https://www.sauber.com.sg/",
+      "originalUrl": "https://www.sauber.com.sg/images/sauber-logo.gif",
+      "capturedAt": "2026-10-12"
+    },
+    "photos": []
+  },
+  "cozy-the-best-cleaning-services": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "photos": []
+  },
+  "sunny-koo-facilities-management-pte-ltd": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "logo": "/roster/assets/logos/gm-8042735709290215135-0ccbeee72b77.webp",
+    "logoAsset": {
+      "localPath": "logos/gm-8042735709290215135.webp",
+      "sha256": "0ccbeee72b77c5ac1945e30a5cf7c1aedadf48faf463aae83aafeadf98100729",
+      "src": "/roster/assets/logos/gm-8042735709290215135-0ccbeee72b77.webp",
+      "sourceUrl": "https://www.cleaninghelper.com/",
+      "originalUrl": "https://www.cleaninghelper.com/web/image/website/1/logo",
+      "capturedAt": "2026-10-12"
+    },
+    "photos": []
+  },
+  "hyperclean-islandwide-services-co-pte-ltd": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "logo": "/roster/assets/logos/gm-11957764498187446032-c99cfb413b60.png",
+    "logoAsset": {
+      "localPath": "logos/gm-11957764498187446032.png",
+      "sha256": "c99cfb413b60bb67d259a32510b3f7412b1809e52e07b7d4585fbda2c1d59152",
+      "src": "/roster/assets/logos/gm-11957764498187446032-c99cfb413b60.png",
+      "sourceUrl": "https://www.hyperclean.sg/",
+      "originalUrl": "https://www.hyperclean.sg/wp-content/uploads/2019/09/eco-logo.png",
+      "capturedAt": "2026-10-12"
+    },
+    "photos": []
+  },
+  "hygieneprof": {
+    "published": true,
+    "price": "See published prices",
+    "detail": "10 sourced pricing entries. Confirm the job, inclusions and total.",
+    "logo": "/roster/assets/logos/gm-4156277910467161437-99fc7f437d40.png",
+    "logoAsset": {
+      "localPath": "logos/gm-4156277910467161437.png",
+      "sha256": "99fc7f437d4051cf2ed0d080a39783716481175da6cb51e510c35676ae868681",
+      "src": "/roster/assets/logos/gm-4156277910467161437-99fc7f437d40.png",
+      "sourceUrl": "https://hygiene-prof.com.sg/",
+      "originalUrl": "https://hygiene-prof.com.sg/wp-content/uploads/2015/10/hygiene-logo.png",
+      "capturedAt": "2026-10-12"
+    },
+    "photos": []
+  },
+  "bsolute-services": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "logo": "/roster/assets/logos/gm-15500715278237476140-6e78a99f07d7.png",
+    "logoAsset": {
+      "localPath": "logos/gm-15500715278237476140.png",
+      "sha256": "6e78a99f07d72b8ff20cf37e39c4065a696235eeaa874754ff2a5f5795253289",
+      "src": "/roster/assets/logos/gm-15500715278237476140-6e78a99f07d7.png",
+      "sourceUrl": "https://www.absoluteservices.com.sg/",
+      "originalUrl": "https://www.absoluteservices.com.sg/wp-content/uploads/2019/09/logo.png",
+      "capturedAt": "2026-10-12"
+    },
+    "photos": []
+  },
+  "janitorial-services-singapore": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "logo": "/roster/assets/logos/gm-4285476626478303602-96c3dda91794.webp",
+    "logoAsset": {
+      "localPath": "logos/gm-4285476626478303602.webp",
+      "sha256": "96c3dda91794bedea2115dcc821a2717e294cebb493330c5bdcd463ed2659af4",
+      "src": "/roster/assets/logos/gm-4285476626478303602-96c3dda91794.webp",
+      "sourceUrl": "https://www.janitor.com.sg/",
+      "originalUrl": "https://www.janitor.com.sg/wp-content/uploads/2019/04/side_logo.png",
+      "capturedAt": "2026-10-12"
+    },
+    "photos": []
+  },
+  "coolfix-by-natural-cool": {
+    "published": true,
+    "price": "See published prices",
+    "detail": "4 sourced pricing entries. Confirm the job, inclusions and total.",
+    "logo": "/roster/assets/logos/gm-17643730321458878230-cc910f4c37bd.png",
+    "logoAsset": {
+      "localPath": "logos/gm-17643730321458878230.png",
+      "sha256": "cc910f4c37bd760147e28b1b7fcce8994211b0fc2ebbdd4c54187cc5ff0c1471",
+      "src": "/roster/assets/logos/gm-17643730321458878230-cc910f4c37bd.png",
+      "sourceUrl": "https://coolfix.com.sg/",
+      "originalUrl": "https://coolfix.com.sg/wp-content/uploads/2023/08/logo_FA-02.png",
+      "capturedAt": "2026-10-12"
+    },
+    "photos": []
+  },
+  "smartcool-aircon-servicing-singapore": {
+    "published": true,
+    "price": "See published prices",
+    "detail": "3 sourced pricing entries. Confirm the job, inclusions and total.",
+    "logo": "/roster/assets/logos/gm-12594718217296756408-c65290801a54.jpg",
+    "logoAsset": {
+      "localPath": "logos/gm-12594718217296756408.jpg",
+      "sha256": "c65290801a54244340613886fc6b39c5d254dfb30f01519bb3a4199f741880c0",
+      "src": "/roster/assets/logos/gm-12594718217296756408-c65290801a54.jpg",
+      "sourceUrl": "https://smartcool.sg/",
+      "originalUrl": "https://smartcool.sg/wp-content/uploads/2023/07/logo-smart-cool-02.jpg",
+      "capturedAt": "2026-10-12"
+    },
+    "photos": []
+  },
+  "ihome-solution-pte-ltd": {
+    "published": true,
+    "price": "See published prices",
+    "detail": "1 sourced pricing entries. Confirm the job, inclusions and total.",
+    "logo": "/roster/assets/logos/gm-14103544956176500420-95d100519ceb.jpg",
+    "logoAsset": {
+      "localPath": "logos/gm-14103544956176500420.jpg",
+      "sha256": "95d100519cebe6b5df06a34413c9519058237714e5ee81bd01979eca9d90c1a2",
+      "src": "/roster/assets/logos/gm-14103544956176500420-95d100519ceb.jpg",
+      "sourceUrl": "https://ihome-solution.com.sg/",
+      "originalUrl": "https://ihome-solution.com.sg/wp-content/uploads/2017/05/ihome-logo.jpg",
+      "capturedAt": "2026-10-12"
+    },
+    "photos": []
+  },
+  "kaili-air-con-pte-ltd": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "photos": []
+  },
+  "rm-acelect-engineering-pte-ltd": {
+    "published": true,
+    "price": "See published prices",
+    "detail": "6 sourced pricing entries. Confirm the job, inclusions and total.",
+    "logo": "/roster/assets/logos/gm-12551274807315640534-49630191bd23.webp",
+    "logoAsset": {
+      "localPath": "logos/gm-12551274807315640534.webp",
+      "sha256": "49630191bd23f17cd359392129a00a079fb3af16f68f8e299026f2eeeafc66c0",
+      "src": "/roster/assets/logos/gm-12551274807315640534-49630191bd23.webp",
+      "sourceUrl": "https://rmacelect.sg/",
+      "originalUrl": "https://rmacelect.sg/images/optimized/logo.webp",
+      "capturedAt": "2026-10-12"
+    },
+    "photos": []
+  },
+  "solar-air-conditioning-electrical-services-p-l-eubiq-sg": {
+    "published": true,
+    "price": "See published prices",
+    "detail": "5 sourced pricing entries. Confirm the job, inclusions and total.",
+    "logo": "/roster/assets/logos/gm-17959113334005583154-8fd4f6a0df0f.png",
+    "logoAsset": {
+      "localPath": "logos/gm-17959113334005583154.png",
+      "sha256": "8fd4f6a0df0f970d615aa67d86b319384cba966d4b765f9a9799fe19eade4cc3",
+      "src": "/roster/assets/logos/gm-17959113334005583154-8fd4f6a0df0f.png",
+      "sourceUrl": "https://saces.sg/",
+      "originalUrl": "https://saces.sg/wp-content/uploads/2025/11/solar_logo-white-transparent.png",
+      "capturedAt": "2026-10-12"
+    },
+    "photos": []
+  },
+  "bon-aircon-engineering-pte-ltd": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "logo": "/roster/assets/logos/gm-7155473028040496478-81434e5dfc43.png",
+    "logoAsset": {
+      "localPath": "logos/gm-7155473028040496478.png",
+      "sha256": "81434e5dfc43c1d954ae5340a5587db3f151b8d826726495f4f09deb49a1ad80",
+      "src": "/roster/assets/logos/gm-7155473028040496478-81434e5dfc43.png",
+      "sourceUrl": "https://bonaircon.com.sg/",
+      "originalUrl": "https://bonaircon.com.sg/wp-content/uploads/2025/10/AB-Logo.png",
+      "capturedAt": "2026-10-12"
+    },
+    "photos": []
+  },
+  "ping-project-pte-ltd": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "photos": []
+  },
+  "fengsheng-electric-co-pte-ltd": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "photos": []
+  },
+  "i-electrical-pte-ltd": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "photos": []
+  },
+  "rezeca-renewables-pte-ltd": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "photos": []
+  },
+  "starcloud-electrical-pte-ltd": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "logo": "/roster/assets/logos/gm-7227741492602081199-edfdcae442e1.webp",
+    "logoAsset": {
+      "localPath": "logos/gm-7227741492602081199.webp",
+      "sha256": "edfdcae442e1cde21806ee53d699e17783167908299c02eb1623c505f493e395",
+      "src": "/roster/assets/logos/gm-7227741492602081199-edfdcae442e1.webp",
+      "sourceUrl": "https://wireman.sg/",
+      "originalUrl": "https://wireman.sg/wp-content/uploads/2025/09/cropped-StarCloud_LOGO.webp",
+      "capturedAt": "2026-10-12"
+    },
+    "photos": []
+  },
+  "green-star-aircon-pte-ltd": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "logo": "/roster/assets/logos/gm-15785867691258950474-6d87cbd455e3.webp",
+    "logoAsset": {
+      "localPath": "logos/gm-15785867691258950474.webp",
+      "sha256": "6d87cbd455e342e2fc2d3ffceb535c5e4cbf70fe9ca0f25f1ba136c71852d580",
+      "src": "/roster/assets/logos/gm-15785867691258950474-6d87cbd455e3.webp",
+      "sourceUrl": "https://greenstaraircon.com.sg/",
+      "originalUrl": "https://greenstaraircon.com.sg/wp-content/uploads/2026/02/GREEN-STAR.webp",
+      "capturedAt": "2026-10-12"
+    },
+    "photos": []
+  },
+  "light-de-bath-pte-ltd-ldb-reno-pte-ltd": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "logo": "/roster/assets/logos/gm-9329891897946081569-ae8663f6b83a.webp",
+    "logoAsset": {
+      "localPath": "logos/gm-9329891897946081569.webp",
+      "sha256": "ae8663f6b83a0821977efd9a7929d44f6f11878b729b5276b8dfe76c740607ad",
+      "src": "/roster/assets/logos/gm-9329891897946081569-ae8663f6b83a.webp",
+      "sourceUrl": "https://www.lightdebath.com/",
+      "originalUrl": "https://www.lightdebath.com/wp-content/uploads/2023/12/cropped-LDB-RENO-logo-transparent-2.png",
+      "capturedAt": "2026-10-12"
+    },
+    "photos": []
+  },
+  "seven-seas-electrical-rig-services": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "logoReview": {
+      "status": "needs-review",
+      "reason": "r10: selected automatically (touch-icon icon); not visually checked",
+      "sourceUrl": "https://sevenseaselectrical.com/",
+      "checkedAt": "2026-10-12T00:57+03:00"
+    },
+    "photos": []
+  },
+  "toimor-engineering": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "logo": "/roster/assets/logos/gm-15039767558021654473-35c5d3aee47e.jpg",
+    "logoAsset": {
+      "localPath": "logos/gm-15039767558021654473.jpg",
+      "sha256": "35c5d3aee47e24db47818400ad61e4162352d93ab400fd1e8396155c7233ab17",
+      "src": "/roster/assets/logos/gm-15039767558021654473-35c5d3aee47e.jpg",
+      "sourceUrl": "https://toimorengineering.com/",
+      "originalUrl": "https://toimorengineering.com/Image/Logo.jpg",
+      "capturedAt": "2026-10-12"
+    },
+    "photos": []
+  },
+  "wei-sheng-electrical-and-engineering-pte-ltd": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "logo": "/roster/assets/logos/gm-11811641799146382554-4094e7581237.png",
+    "logoAsset": {
+      "localPath": "logos/gm-11811641799146382554.png",
+      "sha256": "4094e758123743fbec11f85631f8a3d3379bbcd6279223a9f39f438d856a8012",
+      "src": "/roster/assets/logos/gm-11811641799146382554-4094e7581237.png",
+      "sourceUrl": "https://weiengineeringsg.com/",
+      "originalUrl": "https://weiengineeringsg.com/wp-content/uploads/2026/03/cropped-wei-2.png",
+      "capturedAt": "2026-10-12"
+    },
+    "photos": []
+  },
+  "ta-solutions-pte-ltd": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "logo": "/roster/assets/logos/gm-16265301873133033924-39595177e41d.avif",
+    "logoAsset": {
+      "localPath": "logos/gm-16265301873133033924.avif",
+      "sha256": "39595177e41dd0a3536da4b429446f8a0c46d608d624c007bebce21f367c04ec",
+      "src": "/roster/assets/logos/gm-16265301873133033924-39595177e41d.avif",
+      "sourceUrl": "https://www.tasolutionsg.com/",
+      "originalUrl": "https://www.tasolutionsg.com/_next/image?url=%2Flogo%2Flogo.png&w=3840&q=75",
+      "capturedAt": "2026-10-12"
+    },
+    "photos": []
+  },
+  "sg-disinfection-service-nea-approved": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "logo": "/roster/assets/logos/gm-3706350096217711186-0cc6d2299d8b.png",
+    "logoAsset": {
+      "localPath": "logos/gm-3706350096217711186.png",
+      "sha256": "0cc6d2299d8b371f4850d5e8460a161fbfab9f4727c63817db845ef1a3a28f54",
+      "src": "/roster/assets/logos/gm-3706350096217711186-0cc6d2299d8b.png",
+      "sourceUrl": "https://www.sgdisinfectionservices.com/",
+      "originalUrl": "https://www.sgdisinfectionservices.com/wp-content/uploads/2020/05/logo.png",
+      "capturedAt": "2026-10-12"
+    },
+    "photos": []
+  },
+  "duo-nini-pte-ltd": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "logo": "/roster/assets/logos/gm-8350260291069965289-8ebd6ddf8b04.avif",
+    "logoAsset": {
+      "localPath": "logos/gm-8350260291069965289.avif",
+      "sha256": "8ebd6ddf8b0410bdb8ed1a4b50cd1ca4ba5425f27af2803813aa594a200d88f5",
+      "src": "/roster/assets/logos/gm-8350260291069965289-8ebd6ddf8b04.avif",
+      "sourceUrl": "https://duoninilaundry.com.sg/",
+      "originalUrl": "https://duoninilaundry.com.sg/cdn/shop/files/Duonini-Logo-website-1000x308_270x.png?v=1631088301",
+      "capturedAt": "2026-10-12"
+    },
+    "photos": []
+  },
+  "arshinogor-pte-ltd": {
+    "published": true,
+    "price": "See published prices",
+    "detail": "3 sourced pricing entries. Confirm the job, inclusions and total.",
+    "logo": "/roster/assets/logos/gm-10833784417300358222-e9cefaff0a8d.png",
+    "logoAsset": {
+      "localPath": "logos/gm-10833784417300358222.png",
+      "sha256": "e9cefaff0a8df2318b2ce96e7f8f0501dfd0b884891f92e358043218d9c1bbfe",
+      "src": "/roster/assets/logos/gm-10833784417300358222-e9cefaff0a8d.png",
+      "sourceUrl": "https://arshinogor.com/",
+      "originalUrl": "https://arshinogor.com/logo.png",
+      "capturedAt": "2026-10-12"
+    },
+    "photos": []
+  },
+  "sg-handyman-pro": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "logo": "/roster/assets/logos/gm-17691740223260901465-a7a53b2fe58e.png",
+    "logoAsset": {
+      "localPath": "logos/gm-17691740223260901465.png",
+      "sha256": "a7a53b2fe58ea3f267230483c09da747893880515db1ce019e168e057c0b3f6e",
+      "src": "/roster/assets/logos/gm-17691740223260901465-a7a53b2fe58e.png",
+      "sourceUrl": "https://www.sghandymanpro.com/",
+      "originalUrl": "https://www.sghandymanpro.com/wp-content/uploads/2025/04/sghandymanproFcon.png",
+      "capturedAt": "2026-10-12"
+    },
+    "photos": []
+  },
+  "ecocool-aircon-pte-ltd": {
+    "published": true,
+    "price": "See published prices",
+    "detail": "1 sourced pricing entries. Confirm the job, inclusions and total.",
+    "photos": []
+  },
+  "kiebler-air-pte-ltd": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "photos": []
+  },
+  "ar-contractor-pte-ltd-best-painting-aircon-service-provider": {
+    "published": true,
+    "price": "See published prices",
+    "detail": "1 sourced pricing entries. Confirm the job, inclusions and total.",
+    "logo": "/roster/assets/logos/gm-10792872888487782471-5602a9af555c.webp",
+    "logoAsset": {
+      "localPath": "logos/gm-10792872888487782471.webp",
+      "sha256": "5602a9af555cd320bb23327f68f3b358bbffd914e14eb3b88ec02d759e0ad737",
+      "src": "/roster/assets/logos/gm-10792872888487782471-5602a9af555c.webp",
+      "sourceUrl": "https://arcontractor.com.sg/",
+      "originalUrl": "https://arcontractor.com.sg/logo/logo-402ec.webp",
+      "capturedAt": "2026-10-12"
+    },
+    "photos": []
+  },
+  "fortifyx-engineering-pte-ltd": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "logo": "/roster/assets/logos/gm-15332701917847138320-26dc37484050.png",
+    "logoAsset": {
+      "localPath": "logos/gm-15332701917847138320.png",
+      "sha256": "26dc374840507edb8830e66ad8c49c6c4dbaf725d4f6bbfe0956d26854b1d4a4",
+      "src": "/roster/assets/logos/gm-15332701917847138320-26dc37484050.png",
+      "sourceUrl": "https://fortifyx.com.sg/",
+      "originalUrl": "https://fortifyx.com.sg/wp-content/uploads/2024/11/cropped-cropped-fortifyx-official-logo-PNG.png",
+      "capturedAt": "2026-10-12"
+    },
+    "photos": []
+  },
+  "contactme-cleaning-services-pte-ltd": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "logo": "/roster/assets/logos/gm-8903969957562303393-1abe9a623af2.svg",
+    "logoAsset": {
+      "localPath": "logos/gm-8903969957562303393.svg",
+      "sha256": "1abe9a623af230f788462f83b8eb357b38533df1b095d3bf633dbabcd286d7d2",
+      "src": "/roster/assets/logos/gm-8903969957562303393-1abe9a623af2.svg",
+      "sourceUrl": "https://www.contactme.com.sg/",
+      "originalUrl": "https://www.contactme.com.sg/wp-content/uploads/2021/12/CM-Logo-.svg",
+      "capturedAt": "2026-10-12"
+    },
+    "photos": []
+  },
+  "onix-solar-electrical-pte-ltd-top-solar-system-electrical-si": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "photos": []
+  },
+  "aircare": {
+    "published": true,
+    "price": "See published prices",
+    "detail": "1 sourced pricing entries. Confirm the job, inclusions and total.",
+    "photos": []
+  },
+  "cleanox": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "logo": "/roster/assets/logos/gm-17935950562600910126-18b7e3c671a5.png",
+    "logoAsset": {
+      "localPath": "logos/gm-17935950562600910126.png",
+      "sha256": "18b7e3c671a5a6f835297b07a4100cc864c7a7596c740115c106b85c0d8d8eb1",
+      "src": "/roster/assets/logos/gm-17935950562600910126-18b7e3c671a5.png",
+      "sourceUrl": "https://cleanox.sg/",
+      "originalUrl": "https://cleanox.sg/wp-content/uploads/2024/09/General_logo_white.png",
+      "capturedAt": "2026-10-12"
+    },
+    "photos": []
+  },
+  "four-solutions-pte-ltd": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "logo": "/roster/assets/logos/gm-3100997874690982880-77abf56c1928.png",
+    "logoAsset": {
+      "localPath": "logos/gm-3100997874690982880.png",
+      "sha256": "77abf56c192854c2209683dd9596564677eef2f6dedf8014ada753523df2bd66",
+      "src": "/roster/assets/logos/gm-3100997874690982880-77abf56c1928.png",
+      "sourceUrl": "https://foursolutions.sg/",
+      "originalUrl": "https://foursolutions.sg/wp-content/themes/foursolutions/assets/logo.png?v=wm3",
+      "capturedAt": "2026-10-12"
+    },
+    "photos": []
+  },
+  "j-u-envirolution-pte-ltd": {
+    "published": true,
+    "price": "See published prices",
+    "detail": "2 sourced pricing entries. Confirm the job, inclusions and total.",
+    "photos": []
+  },
+  "crusade-mould-upholstery-carpet-cleaning-specialist": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "logo": "/roster/assets/logos/gm-2972841082901341566-d5a5ee1e8b48.png",
+    "logoAsset": {
+      "localPath": "logos/gm-2972841082901341566.png",
+      "sha256": "d5a5ee1e8b48e133e5d2c71e89a9f2035f19a2b360439737c5ccbedc1055faf9",
+      "src": "/roster/assets/logos/gm-2972841082901341566-d5a5ee1e8b48.png",
+      "sourceUrl": "https://www.crusade.com.sg/",
+      "originalUrl": "https://crusade.com.sg/crusade-logo.png",
+      "capturedAt": "2026-10-12"
+    },
+    "photos": []
+  },
+  "painting-services-in-singapore-best-painting-sg": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "logo": "/roster/assets/logos/gm-11768813158650308031-be62a279e877.webp",
+    "logoAsset": {
+      "localPath": "logos/gm-11768813158650308031.webp",
+      "sha256": "be62a279e877198fb75be8c878a50e9511ae3653b693447d1d81314e9d3ff632",
+      "src": "/roster/assets/logos/gm-11768813158650308031-be62a279e877.webp",
+      "sourceUrl": "https://bestpaintingsg.com/",
+      "originalUrl": "https://bestpaintingsg.com/wp-content/uploads/2024/08/best-paint-sg-.jpg",
+      "capturedAt": "2026-10-12"
     },
     "photos": []
   }

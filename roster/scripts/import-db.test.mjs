@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { importDatabase, BLOCKED, blockAddress, verifyRelease, priceOption, alternatePhones, bundledLogo, reviewSources } from './import-db.mjs';
+import { importDatabase, BLOCKED, blockAddress, verifyRelease, priceOption, alternatePhones, bundledLogo, reviewSources, supplementPostalAddress } from './import-db.mjs';
 import { structuredHours, concise, ratingFact } from '../lib/expanded.mjs';
 const empty={companies:{companies:[]},profiles:{},presentation:{}};
 const row=(id='test')=>({id,name:'Example Aircon',categories:['aircon'],checked:'2026-10-10',flags:[],website:'https://example.com',about:[{text:'Aircon services.',sourceUrl:'https://example.com',capturedAt:'2026-10-10'}],services:[{name:'general-service',excerpt:'General service',sourceUrl:'https://example.com/services',capturedAt:'2026-10-10'}],phone:{value:'+65 6123 4567',sourceUrl:'https://example.com/contact',alt:[{value:'+65 8000 0000'}]},address:{value:'123 Bedok Road #03-12, Singapore 123456',sourceUrl:'https://example.com/contact'},price_lines:[],reviews:[],profile:{websiteCheck:{result:'active'}}});
@@ -26,14 +26,40 @@ test('Uncertain logos use initials without removing the business or reviving a p
  assert.match(verified.presentation['example-aircon'].logo,/example-aaaaaaaaaaaa\.png$/);
  assert.equal(verified.presentation['example-aircon'].logoReview,undefined);
 });
-test('Release ratings preserve source methods and unknown counts, and identify mirrored Google widgets',()=>{
+test('Release ratings preserve external sources and unknown counts but omit company widgets',()=>{
  const google={source:'Google Maps',rating:4.8,count:null,scale:5,url:'https://maps.google.com/?cid=1',capturedAt:'2026-10-11'};
  const seller={source:'Carousell',rating:5,count:7,scale:5,url:'https://www.carousell.sg/u/example/',capturedAt:'2026-10-11',method:'page',method_detail:'Seller rating includes all sales.'};
  const widget={...google,source:'Google via widget',count:10,url:'https://example.com'};
  const imported=reviewSources({ratings:[google,seller,widget,{...seller,url:'javascript:bad()'}]});
- assert.equal(imported.length,3);assert.equal(imported[0].count,null);assert.equal(imported[1].note,seller.method_detail);assert.equal(imported[2].mirrorsSource,'Google Maps');
- assert.equal(reviewSources({ratings:[widget]})[0].mirrorsSource,'');
+ assert.equal(imported.length,2);assert.equal(imported[0].count,null);assert.equal(imported[1].note,seller.method_detail);
+ assert.deepEqual(reviewSources({ratings:[widget]}),[]);
  assert.equal(importDatabase(db([{...row(),ratings:[seller]}]),empty).companies.companies[0].reviewSources[0].name,'Carousell');
+});
+test('New release evidence fills only matching missing postal codes and keeps original copy',()=>{
+ const current={value:'Carros Centre, 60 Jalan Lam Huat, #03-42',sourceUrl:'https://example.com/contact'};
+ const incoming={value:'60 JALAN LAM HUAT #03-42, CARROS CENTRE, Singapore 737869',postal:'737869',sourceUrl:'https://example.com/address'};
+ assert.equal(supplementPostalAddress(current,incoming).postal,'737869');
+ assert.equal(supplementPostalAddress(current,incoming).value,current.value);
+ assert.deepEqual(supplementPostalAddress(current,{...incoming,value:'60 Another Road, Singapore 737869'}),current);
+ assert.deepEqual(supplementPostalAddress(current,{...incoming,sourceUrl:''}),current);
+ assert.deepEqual(supplementPostalAddress({...current,postal:'111111'},incoming),{...current,postal:'111111'});
+ const r={...row(),rosterProfile:{slug:'original',rating:null,rating_moved_to:'self_reported_rating'},self_reported_rating:{rating:5,count:3000,source_url:'https://example.com'},map:{status:'verified',place:{cid:'123',postal:'737869'}}};
+ const seed={companies:{companies:[{...row(),slug:'original',category:'aircon',rating:{value:5,count:3000,sourceUrl:'https://example.com'}}]},profiles:{original:{about:['Original words.'],services:[]}},presentation:{original:{published:false}}};
+ const result=importDatabase(db([r]),seed);
+ assert.equal(result.companies.companies[0].rating,null);
+ assert.equal(result.companies.companies[0].selfReportedRating.count,3000);
+ assert.equal(result.companies.companies[0].mapEvidence.place.cid,'123');
+ assert.deepEqual(result.profiles.original,seed.profiles.original);
+});
+test('Trustpilot stays a separate source and supported legacy image formats keep checksums',()=>{
+ const source={source:'Trustpilot',rating:4.7,count:42,scale:'trustscore',url:'https://trustpilot.com/review/example.com',capturedAt:'2026-10-12'};
+ assert.equal(reviewSources({ratings:[source]})[0].scale,'trustscore');
+ assert.equal(reviewSources({website:'https://example.com',ratings:[{...source,source:'Badge',scale:5,url:'https://example.com/reviews'}]}).length,0);
+ for(const ext of ['ico','gif'])assert.match(bundledLogo({local_path:`logos/example.${ext}`,sha256:'a'.repeat(64),url:`https://example.com/logo.${ext}`,source_url:'https://example.com'}).src,new RegExp(`\\.${ext}$`));
+});
+test('Normalised unit prices retain total quantity and minimum-booking conditions',()=>{
+ const price=priceOption({service:'Three units',price_text:'S$90',unit:'total for 3 units',qty:3,unit_price_sgd:30,units_in_price:3,min_units:3,sourceUrl:'https://example.com'});
+ assert.equal(price.price,'S$90');assert.match(price.detail,/Calculated per-unit price: S\$30/);assert.match(price.detail,/total for 3 units/);assert.match(price.detail,/Minimum 3 units/);
 });
 test('Every publication-blocking flag and rollback excludes a full profile',()=>{for(const flag of BLOCKED){const result=importDatabase(db([{...row(),flags:[flag]}]),empty);assert.equal(result.companies.companies.length,0,flag);assert.ok(result.report.excluded[0].reasons.includes(flag));}assert.equal(importDatabase(db([{...row(),profile_rolled_back:{reason:'review'}}]),empty).report.excludedCount,1);});
 test('Missing sourced required fields prevents publication',()=>{for(const key of ['about','services','phone','address','website'])assert.equal(importDatabase(db([{...row(),[key]:null}]),empty).report.excludedCount,1,key);});

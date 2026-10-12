@@ -3,6 +3,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
+import {decodeCatalogue} from '../assets/catalogue-data.mjs';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const load=async f=>JSON.parse(await readFile(path.join(root,f),'utf8'));
 const data=await load('data/companies.json'),manifest=await load('data/build-manifest.json'),report=await load('data/import-report.json');
@@ -33,8 +34,7 @@ for(const rel of manifest) {
  if(rel.startsWith('company/')&&!html.includes('data-retired-listing')){
   assert.ok(html.includes('class="listing-logo listing-logo-large'),`Missing logo slot: ${rel}`);
   const record=data.companies.find(c=>rel===`company/${c.slug}/index.html`);
-  if(record.listingDepth.full&&!record.reviewSources?.length) assert.ok(html.includes('data-review-preview')&&html.includes('These figures do not describe this company.'),`Unlabelled review mockup: ${rel}`);
-  if(record.reviewSources?.length) assert.ok(!html.includes('data-review-preview'),`Sample ratings shown despite real source records: ${rel}`);
+  assert.ok(!html.includes('data-review-preview'),`Sample ratings on live profile: ${rel}`);
   if(!record.listingDepth.full) assert.ok(html.includes('Limited details')&&!html.includes('data-review-preview'),`Missing compact profile: ${rel}`);
   assert.ok(html.includes('src="/roster/assets/review-preview.mjs?'),`Missing review selector script: ${rel}`);
   const intro=html.match(/<p class="company-intro">(.*?)<\/p>/)?.[1]||'';
@@ -73,7 +73,7 @@ for(const c of data.companies){
 for(const excluded of report.excluded.filter(c=>c.curated))assert.ok(!pages.has(`company/${excluded.slug}/index.html`)||pages.get(`company/${excluded.slug}/index.html`).includes('data-retired-listing'),`Flagged full profile still published: ${excluded.slug}`);
 const categories={aircon:'aircon-servicing',plumbing:'plumbing',electrician:'electrician',handyman:'handyman',cleaning:'home-cleaning'};
 for(const [id,slug] of Object.entries(categories)){
- const index=await load(`data/index/${id}.json`);assert.equal(index.companies.length,report.byTrade[id].published);assert.ok(index.companies.every(c=>c.category===id),`Wrong primary trade in ${id}`);
+ const index={companies:decodeCatalogue(await load(`data/index/${id}.json`))};assert.equal(index.companies.length,report.byTrade[id].published);assert.ok(index.companies.every(c=>c.category===id),`Wrong primary trade in ${id}`);
  for(const c of index.companies){assert.equal(c.ratingValue,c.average?.value??null);assert.equal(c.ratingCount,c.average?.count||0);}
  const directory=pages.get(slug+'/index.html');
  assert.ok(directory.includes('Minimum average rating'));
