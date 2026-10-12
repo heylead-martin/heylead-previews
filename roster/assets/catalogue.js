@@ -2,6 +2,7 @@ import {renderCard,renderCompactCard,splitDirectory} from './catalogue-card.mjs?
 import {filterCatalogue} from './catalogue-filter.mjs?v=20261012-areas';
 import {decodeCatalogue} from './catalogue-data.mjs?v=20261012-areas';
 import {setupAreaPicker} from './area-picker.mjs?v=20261012-areas';
+import {setupSortControl} from './sort-control.mjs?v=20261012-menu';
 const root=document.querySelector('[data-catalogue]');
 if(root) {
   const header=document.querySelector('.top');
@@ -14,6 +15,7 @@ if(root) {
   const search=root.querySelector('[data-filter-search]'),rating=root.querySelector('[data-rating]'),sort=root.querySelector('[data-sort]'),category=root.querySelector('[data-category-filter]'),unstated=root.querySelector('[data-include-unstated]');
   let rows=[],limit=12,loaded=false;
   const area=setupAreaPicker(root,()=>apply());
+  const sortControl=setupSortControl(sort);
   const saved=()=>window.RosterAccount?.snapshot().saved||[];
   function readParams(){
     const params=new URLSearchParams(location.search);
@@ -28,6 +30,7 @@ if(root) {
     const query=params.toString();history.replaceState(null,'',location.pathname+(query?'?'+query:'')+location.hash);
   }
   function apply(reset=true,syncUrl=true) {
+    sortControl.sync();
     if(!loaded)return;if(reset)limit=12;
     const savedSlugs=saved(),active=[...root.querySelectorAll('[data-filter]:checked')].map(x=>x.dataset.filter);
     const {matches,counts,unknownCount}=filterCatalogue(rows,{query:search.value,area:area.value,category:category?.value,rating:rating.value,active,savedSlugs,includeUnstated:unstated.checked});
