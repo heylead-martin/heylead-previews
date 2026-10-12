@@ -6,6 +6,7 @@ import { fileURLToPath } from "node:url";
 import {execFileSync} from 'node:child_process';
 
 import { createProfileRenderer, directoryRecord, concise, ratingFact } from "./lib/expanded.mjs";
+import {renderHomeSnapshot} from './lib/home-snapshot.mjs';
 import {encodeCatalogue} from './assets/catalogue-data.mjs';
 import {priceView, servicePrice, serviceGuide} from "./lib/profile-copy.mjs";
 import {renderClaimPage} from "./lib/claim-page.mjs";
@@ -14,12 +15,13 @@ import { renderCard, renderCompactCard, splitDirectory } from "./assets/catalogu
 const root = path.dirname(fileURLToPath(import.meta.url));
 console.log('Logo framing:', execFileSync('python3', [path.join(root, 'scripts/fit-logos.py')], {encoding:'utf8'}).trim());
 const mapPins=JSON.parse(await readFile(path.join(root,"data/map-pins.json"),"utf8"));
+const homeOutline=JSON.parse(await readFile(path.join(root,"data/singapore-outline.json"),"utf8"));
 const indexVersions={};
 const origin = "https://previews.heylead.com/roster";
 let checked = "9 Oct 2026 and 10 Oct 2026";
 // Content hashes keep cached assets in sync with each generated page.
 const assetVersions = Object.fromEntries(await Promise.all(
-  ["site.css", "directory.css", "experience.css", "form.js", "directory.js", "experience.js", "expanded.css", "logo-fit.css", "catalogue.js", "catalogue-card.mjs", "claim.js", "review-preview.mjs"].map(async (name) => [
+  ["home.css", "home.js", "site.css", "directory.css", "experience.css", "form.js", "directory.js", "experience.js", "expanded.css", "logo-fit.css", "catalogue.js", "catalogue-card.mjs", "claim.js", "review-preview.mjs"].map(async (name) => [
     name,
     createHash("sha256").update(await readFile(path.join(root, "assets", name))).digest("hex").slice(0, 12)
   ])
@@ -628,7 +630,7 @@ ${shareImage ? `<meta property="og:image" content="${esc(shareImage)}"><meta nam
 <link rel="stylesheet" href="/roster/assets/directory.css?v=${assetVersions["directory.css"]}">
 <link rel="stylesheet" href="/roster/assets/experience.css?v=${assetVersions["experience.css"]}">
 <link rel="stylesheet" href="/roster/assets/expanded.css?v=${assetVersions["expanded.css"]}">
-<link rel="stylesheet" href="/roster/assets/logo-fit.css?v=${assetVersions["logo-fit.css"]}">
+<link rel="stylesheet" href="/roster/assets/logo-fit.css?v=${assetVersions["logo-fit.css"]}">${bodyClass === "home-page" ? `\n<link rel="stylesheet" href="/roster/assets/home.css?v=${assetVersions["home.css"]}">` : ""}
 <script type="application/ld+json">${graph}</script>
 </head>
 <body${bodyClass ? ` class="${bodyClass}"` : ""}>
@@ -640,7 +642,7 @@ ${body}
 ${renderFooter()}
 <script src="/roster/assets/form.js?v=${assetVersions["form.js"]}"></script>
 <script src="/roster/assets/directory.js?v=${assetVersions["directory.js"]}"></script>
-<script src="/roster/assets/experience.js?v=${assetVersions["experience.js"]}"></script>
+<script src="/roster/assets/experience.js?v=${assetVersions["experience.js"]}"></script>${bodyClass === "home-page" ? `\n<script type="module" src="/roster/assets/home.js?v=${assetVersions["home.js"]}"></script>` : ""}
 ${bodyClass === "claim-page" ? `<script type="module" src="/roster/assets/claim.js?v=${assetVersions["claim.js"]}"></script>` : ""}
 ${bodyClass.split(" ").includes("company-page") ? `<script type="module" src="/roster/assets/review-preview.mjs?v=${assetVersions["review-preview.mjs"]}"></script>` : ""}
 ${bodyClass === "directory-page" ? `<script type="module" src="/roster/assets/catalogue.js?v=${assetVersions["catalogue.js"]}"></script>` : ""}
@@ -895,54 +897,7 @@ ${mode === "sign-in" ? '<div class="account-options"><a href="/roster/forgot-pas
 function renderHome(grouped) {
   const title = "Roster | Short unpaid lists of home services in Singapore";
   const description = "Find the right help for your home. Compare services, prices and reviews from companies across Singapore.";
-  const total = new Set(Object.values(grouped).flat().map(c=>c.slug)).size;
-  const tiles = trades.map((trade, index) => {
-    const count = grouped[trade.id].length;
-    const meta = count === 0 ? "No companies yet" : `${count} ${count === 1 ? "company" : "companies"}`;
-    const empty = count === 0 ? ` class="is-empty"` : "";
-    return `<li${empty}><a href="/roster/${trade.slug}/"><span class="tile-top"><span class="disc">${icon(tradeIcon[trade.id], "ic ic-disc")}</span><span class="idx">${String(index + 1).padStart(2, "0")}</span></span><span class="job">${esc(trade.name)}</span><span class="hint">${esc(jobsHint(trade))}</span><span class="meta">${esc(meta)}${icon("arrow", "ic ic-tile")}</span></a></li>`;
-  }).join("");
-  const body = `
-<section class="hero">
-<div class="hero-copy">
-<p class="kicker">Singapore beta</p>
-<h1>Good people for<br>the jobs at home.</h1>
-<p class="dek">Find your next helping hand. Compare local companies, explore their published prices, and get the details before you book.</p>
-<p class="hero-actions"><a class="btn btn-paper" href="#jobs">Explore home services${icon("arrow", "ic ic-btn")}</a></p>
-</div>
-<div class="hero-visual">${heroIllustration()}</div>
-</section>
-<ul class="trust" aria-label="What makes the list">
-<li>${icon("shield", "ic ic-disc")}<strong>Nobody pays for a place.</strong><span>Companies cannot buy their way up the list. No ads or paid placements in your results.</span></li>
-<li>${icon("link", "ic ic-disc")}<strong>Every figure has a source.</strong><span>Phones, prices, ratings, and reviews link to the page they were copied from. Nothing is invented.</span></li>
-<li>${icon("calendar", "ic ic-disc")}<strong>Checked ${esc(checked)}.</strong><span>${total} companies so far. Profiles bring together the services, prices and contact details we could source.</span></li>
-</ul>
-<section class="jobs" id="jobs">
-<div class="section-head"><p class="kicker">Jobs</p><h2>What needs doing?</h2><p class="lede">Five ways to make home feel like home again. Start with the service you need.</p></div>
-<ol class="index">${tiles}</ol>
-</section>
-<section class="section how">
-<h2>How it works</h2>
-<div>
-<ol class="steps">
-<li><strong>01</strong><span class="step-title">Pick a job.</span><span>Five jobs so far. Aircon also has pages for a chemical wash and a gas top-up.</span></li>
-<li><strong>02</strong><span class="step-title">Read the shortlist.</span><span>Compare sourced prices, review details, and a reason the company might or might not suit your job.</span></li>
-<li><strong>03</strong><span class="step-title">Talk to the company.</span><span>Call or WhatsApp directly. You can also preview a request for up to three companies. The beta does not send it.</span></li>
-</ol>
-<p class="method">${icon("link", "ic ic-inline")}<a href="/roster/how-it-works/">How the list is made, and what a Featured slot would be</a>.</p>
-</div>
-</section>
-<section class="section promise">
-<h2>Details to help you choose</h2>
-<ul class="promise-list">
-<li>${icon("phone", "ic")}<strong>Phone and WhatsApp</strong><span>from cited company pages, Google Maps or public registers. Alternate numbers carry source labels.</span></li>
-<li>${icon("check", "ic")}<strong>Best for and poor fit</strong><span>in plain words, so you can rule a company out before you call.</span></li>
-<li>${icon("dollar", "ic")}<strong>Prices the company publishes</strong><span>with the page, and a note when GST is not stated.</span></li>
-<li>${icon("star", "ic ic-star")}<strong>The rating on file</strong><span>with its source and the day it was checked. Roster prints no star score of its own.</span></li>
-<li>${icon("quote", "ic")}<strong>Reviews with a name and a date</strong><span>copied as published. A quote with no name or no date is left off.</span></li>
-<li>${icon("pin", "ic")}<strong>Address, UEN, and licence claims</strong><span>with sources and verification notes where available.</span></li>
-</ul>
-</section>`;
+  const body = renderHomeSnapshot({companies:publishedCompanies,pins:mapPins,presentation,outline:homeOutline,checked,esc,icon});
   const jsonLd = [
     { "@type": "WebSite", name: "Roster", url: origin + "/", description },
     {
