@@ -1,0 +1,135 @@
+{
+  "status": "preview-noindex",
+  "canonicalOrigin": "https://previews.heylead.com/roster",
+  "updated": "2026-10-12",
+  "pages": [
+    {
+      "path": "/roster/",
+      "kind": "home"
+    },
+    {
+      "path": "/roster/how-it-works/",
+      "kind": "method"
+    },
+    {
+      "id": "AC-01",
+      "path": "/roster/aircon/",
+      "words": 1271,
+      "kind": "guide"
+    },
+    {
+      "id": "AC-02",
+      "path": "/roster/aircon-servicing/",
+      "words": 1258,
+      "kind": "directory-guide"
+    },
+    {
+      "id": "AC-03",
+      "path": "/roster/aircon/servicing-price/",
+      "words": 1259,
+      "kind": "guide"
+    },
+    {
+      "id": "AC-04",
+      "path": "/roster/aircon/installation/",
+      "words": 1238,
+      "kind": "guide"
+    },
+    {
+      "id": "AC-05",
+      "path": "/roster/aircon/types/",
+      "words": 1221,
+      "kind": "guide"
+    },
+    {
+      "id": "CL-01",
+      "path": "/roster/home-cleaning/",
+      "words": 1276,
+      "kind": "directory-guide"
+    },
+    {
+      "id": "CL-02",
+      "path": "/roster/home-cleaning/deep-cleaning/",
+      "words": 1249,
+      "kind": "guide"
+    },
+    {
+      "id": "CL-03",
+      "path": "/roster/home-cleaning/sofa-carpet-cleaning/",
+      "words": 1259,
+      "kind": "guide"
+    },
+    {
+      "id": "CL-04",
+      "path": "/roster/home-cleaning/move-out-cleaning/",
+      "words": 1254,
+      "kind": "guide"
+    },
+    {
+      "id": "PL-01",
+      "path": "/roster/plumbing/",
+      "words": 1246,
+      "kind": "directory-guide"
+    },
+    {
+      "id": "PL-02",
+      "path": "/roster/plumbing/choked-drain/",
+      "words": 1276,
+      "kind": "guide"
+    },
+    {
+      "id": "PL-03",
+      "path": "/roster/plumbing/toilet-repair/",
+      "words": 1222,
+      "kind": "guide"
+    },
+    {
+      "id": "PL-04",
+      "path": "/roster/plumbing/leak-repair/",
+      "words": 1216,
+      "kind": "guide"
+    },
+    {
+      "id": "PL-05",
+      "path": "/roster/plumbing/water-heater/",
+      "words": 1214,
+      "kind": "guide"
+    },
+    {
+      "id": "EL-01",
+      "path": "/roster/electrician/",
+      "words": 1253,
+      "kind": "directory-guide"
+    },
+    {
+      "id": "EL-02",
+      "path": "/roster/electrician/24-hour/",
+      "words": 1272,
+      "kind": "guide"
+    },
+    {
+      "id": "EL-03",
+      "path": "/roster/electrician/hdb/",
+      "words": 1220,
+      "kind": "guide"
+    },
+    {
+      "id": "EL-04",
+      "path": "/roster/electrician/wiring/",
+      "words": 1229,
+      "kind": "guide"
+    },
+    {
+      "id": "HM-01",
+      "path": "/roster/handyman/",
+      "words": 1258,
+      "kind": "directory-guide"
+    },
+    {
+      "id": "HM-02",
+      "path": "/roster/handyman/door-window-repair/",
+      "words": 1216,
+      "kind": "guide"
+    }
+  ]
+}

@@ -126,3 +126,14 @@ See `AI-SEARCH-PREVIEW.md` for validation and local review links. Publication st
 
 
 The quote sidebar beta now accepts a job description and region, then shows a WhatsApp/email contact preview with explicit recipient permission. Nothing is sent or persisted. Contact details are cleared when the dialog closes. See [AI-SEARCH-PREVIEW.md](AI-SEARCH-PREVIEW.md) for matching, delivery boundaries and verification. Publishing still requires Martin's approval.
+
+
+## SEO and AEO content
+
+The 20 core editorial pages are defined in `content/guides/catalogue.mjs`, with Markdown copy in `content/guides/`. Five enrich existing directories and 15 are standalone guides. `content/how-it-works.md` supplies the methodology page. Edit these source files and rebuild instead of editing generated HTML.
+
+`lib/editorial.mjs` renders the supported Markdown subset into readable sections, comparison tables, a contents panel, related links and matching FAQ data. `assets/editorial.css` controls the responsive reading layout. The homepage and shared footer link to the guides.
+
+Run `npm run check:editorial` from `roster/` after building. It verifies the 1,000-word minimum, generated content, metadata, FAQs, contents anchors and preview indexing safeguards, then writes `data/editorial-audit.json`. The current 20 core pages contain over 1,200 editorial words each. Shared navigation and company cards do not count toward this minimum.
+
+All pages remain noindex. `sitemap.xml` is empty during preview, and `data/seo-launch-pages.json` records candidate public pages for an approved future launch. Confirm the production domain and indexing scope before generating a public sitemap. Read [SEO-AEO-REVIEW.md](SEO-AEO-REVIEW.md) for the page inventory, word counts, evidence decisions and validation.

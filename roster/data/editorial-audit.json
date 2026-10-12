@@ -1,0 +1,168 @@
+{
+  "checked": "2026-10-12",
+  "corePages": 20,
+  "totalWords": 24907,
+  "methodPageWords": 1398,
+  "pages": [
+    {
+      "id": "AC-01",
+      "path": "/roster/aircon/",
+      "words": 1271,
+      "faqs": 4,
+      "sourceReferences": 2,
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "AC-02",
+      "path": "/roster/aircon-servicing/",
+      "words": 1258,
+      "faqs": 4,
+      "sourceReferences": 2,
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "AC-03",
+      "path": "/roster/aircon/servicing-price/",
+      "words": 1259,
+      "faqs": 4,
+      "sourceReferences": 0,
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "AC-04",
+      "path": "/roster/aircon/installation/",
+      "words": 1238,
+      "faqs": 4,
+      "sourceReferences": 3,
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "AC-05",
+      "path": "/roster/aircon/types/",
+      "words": 1221,
+      "faqs": 4,
+      "sourceReferences": 2,
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "CL-01",
+      "path": "/roster/home-cleaning/",
+      "words": 1276,
+      "faqs": 4,
+      "sourceReferences": 1,
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "CL-02",
+      "path": "/roster/home-cleaning/deep-cleaning/",
+      "words": 1249,
+      "faqs": 4,
+      "sourceReferences": 0,
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "CL-03",
+      "path": "/roster/home-cleaning/sofa-carpet-cleaning/",
+      "words": 1259,
+      "faqs": 4,
+      "sourceReferences": 0,
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "CL-04",
+      "path": "/roster/home-cleaning/move-out-cleaning/",
+      "words": 1254,
+      "faqs": 4,
+      "sourceReferences": 0,
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "PL-01",
+      "path": "/roster/plumbing/",
+      "words": 1246,
+      "faqs": 4,
+      "sourceReferences": 2,
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "PL-02",
+      "path": "/roster/plumbing/choked-drain/",
+      "words": 1276,
+      "faqs": 4,
+      "sourceReferences": 1,
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "PL-03",
+      "path": "/roster/plumbing/toilet-repair/",
+      "words": 1222,
+      "faqs": 4,
+      "sourceReferences": 1,
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "PL-04",
+      "path": "/roster/plumbing/leak-repair/",
+      "words": 1216,
+      "faqs": 4,
+      "sourceReferences": 3,
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "PL-05",
+      "path": "/roster/plumbing/water-heater/",
+      "words": 1214,
+      "faqs": 4,
+      "sourceReferences": 4,
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "EL-01",
+      "path": "/roster/electrician/",
+      "words": 1253,
+      "faqs": 4,
+      "sourceReferences": 3,
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "EL-02",
+      "path": "/roster/electrician/24-hour/",
+      "words": 1272,
+      "faqs": 4,
+      "sourceReferences": 3,
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "EL-03",
+      "path": "/roster/electrician/hdb/",
+      "words": 1220,
+      "faqs": 4,
+      "sourceReferences": 2,
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "EL-04",
+      "path": "/roster/electrician/wiring/",
+      "words": 1229,
+      "faqs": 4,
+      "sourceReferences": 2,
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "HM-01",
+      "path": "/roster/handyman/",
+      "words": 1258,
+      "faqs": 4,
+      "sourceReferences": 4,
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "HM-02",
+      "path": "/roster/handyman/door-window-repair/",
+      "words": 1216,
+      "faqs": 4,
+      "sourceReferences": 3,
+      "updated": "2026-10-12"
+    }
+  ]
+}
