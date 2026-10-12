@@ -1,3 +1,4 @@
+import {normaliseServiceLocations} from '../lib/service-areas.mjs';
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import path from 'node:path';
 import os from 'node:os';
@@ -152,6 +153,7 @@ export function importDatabase(db, seeds, registry={}) {
     if(address) {address.street=address.value;address.postal=text(row.address?.postal);}
     const enrichment={checkedAt:row.checked,supportedServices:(row.services||[]).filter(cited).map(s=>({name:human(s.name),sourceUrl:s.sourceUrl,capturedAt:s.capturedAt})),about:(row.about||[]).filter(a=>text(a.text)&&cited(a)),hours:row.hours?.text&&cited(row.hours)?row.hours:row.hours_google?.text&&cited(row.hours_google)?row.hours_google:null,serviceArea:row.service_area?.value&&cited(row.service_area)?row.service_area:null,residential:row.residential?.value&&cited(row.residential)?row.residential:null,licences:(row.licences||[]).filter(l=>l.type&&http(l.claimedOn||l.sourceUrl)),management:(row.management||[]).filter(m=>m.name&&cited(m)),uen:text(row.uen),uenSource:http(row.uen_source?.sourceUrl),operatorGroup:row.operator_group,priceLines:(row.price_lines||[]).filter(p=>p.service&&p.price_text&&cited(p)),websiteCheck:row.profile?.websiteCheck||null};
     Object.assign(enrichment, {
+      serviceLocations:normaliseServiceLocations(row.service_locations,website),
       bestFor:(row.bestFor||[]).filter(f=>text(f.text)&&cited(f)).map(f=>({...f,sourceUrl:cited(f)})),
       poorFit:(row.poorFit||[]).filter(f=>text(f.text)&&cited(f)).map(f=>({...f,sourceUrl:cited(f)})),
       summary: row.summary?.text && row.summary?.sources?.some(http) ? {text:row.summary.text.replace(/\ba aircon\b/g,'an aircon').replace(/\ba electrician\b/g,'an electrician'),sources:row.summary.sources.map(http).filter(Boolean),capturedAt:row.summary.generatedAt} : null,

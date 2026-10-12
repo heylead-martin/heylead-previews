@@ -1,6 +1,6 @@
 # Roster static site
 
-Work on `roster-db-import` for this review. Do not push or publish until Martin approves. A push to `main` deploys the previews site.
+Work on `service-areas-1253` for this review. Do not push or publish until Martin approves. A push to `main` deploys the previews site.
 
 ## Import and build
 
@@ -15,7 +15,7 @@ The importer reads `db-expanded/releases/LATEST` in the Roster Drive folder, the
 To reproduce a specific release:
 
 ```sh
-node roster/scripts/import-db.mjs "/absolute/path/to/companies-20261012-1044.json" "/absolute/path/to/logos-20261012-1044.tar.gz"
+node roster/scripts/import-db.mjs "/absolute/path/to/companies-20261012-1253.json" "/absolute/path/to/logos-20261012-1253.tar.gz"
 python3 roster/scripts/verify-map-pins.py
 node roster/build.mjs
 ```
@@ -40,25 +40,25 @@ A release logo marked `logo_unsure: true` or `display: initials` is withheld fro
 
 Services and prices share expandable rows. Imported prices retain source wording, quantity, unit, promotion and GST details, including monthly session counts and hours per session. Where the release supplies a calculated per-unit amount and minimum quantity, both are labelled alongside the original total. Inferred units are explicitly labelled. General cost guides are marked as references rather than company rates. Original curated service copy and prices stay intact.
 
-Company pages start with Services & pricing, About the company and Location & contact. Reviews sit directly above FAQs. Extra sourced information appears only when present. Company-site answers and claims are attributed.
+Company pages start with Services & pricing, Areas served when stated, About the company and Location & contact. Reviews sit directly above FAQs. Extra sourced information appears only when present. Company-site answers and claims are attributed.
 
 Company headers and directory cards feature the real average rating, total review count and number of sources. A single source supplies the average as-is; multiple independent sources are weighted by their review counts. Source links and dates remain visible. The reviews section also preserves the original Google Maps snapshot sentence and other source labels. No rating, review or offer structured data is emitted. Map iframes use verified building coordinates from `data/map-pins.json`; unresolved or stale addresses show no iframe. Unit numbers are removed from public map captions and directions. Read `ADDRESS-MAP-COLLECTION.md` before collecting or updating location evidence. Sourced alternate phone numbers appear as "Also listed" with their source label. The primary number remains the main call action.
 
 All pages remain noindex. Account screens and quote requests are previews with no backend. The quote panel still sends and stores nothing. Shared preview authentication is unchanged.
 
-Trade pages lead with up to eight full-bar profiles, ordered by evidence and then rating. Other companies use compact rows in batches of 12. A versioned per-trade JSON index supports search, filters, sorting and more compact results. `assets/catalogue-data.mjs` losslessly encodes repeated field names as column indexes and decodes them in the browser, keeping larger directories within the payload budget. Non-full-bar company pages carry a limited-details note and a smaller layout. Area filters refer to the published business address, not promised service coverage. The all-company search covers every published profile. Each company appears under its release `primary_trade`; trade counts do not overlap. Sourced fit notes and service-area excerpts are retained, while `self_description` metadata is never used as About text.
+Trade pages lead with up to eight full-bar profiles, ordered by evidence and then rating. Other companies use compact rows in batches of 12. A versioned per-trade JSON index supports search, filters, sorting and more compact results. `assets/catalogue-data.mjs` losslessly encodes repeated field names as column indexes and repeated service-area names in a shared dictionary and decodes them in the browser, keeping larger directories within the payload budget. Non-full-bar company pages carry a limited-details note and a smaller layout. Area filters use sourced `service_locations`, never office addresses. A selected town ranks explicit town matches first, followed by region matches and islandwide coverage. Companies without stated areas are excluded unless the user enables the optional toggle. The selected area and other filters persist in URL query parameters. The all-company search covers every published profile. Each company appears under its release `primary_trade`; trade counts do not overlap. Sourced fit notes and service-area excerpts are retained, while `self_description` metadata is never used as About text.
 
 ## Validation
 
 ```sh
-node --test roster/scripts/import-db.test.mjs roster/scripts/presentation.test.mjs roster/scripts/home-snapshot.test.mjs
+node --test roster/scripts/import-db.test.mjs roster/scripts/presentation.test.mjs roster/scripts/home-snapshot.test.mjs roster/scripts/service-areas.test.mjs
 python3 -m unittest discover -s roster/scripts -p 'test_*.py'
 node roster/scripts/check-site.mjs
 ```
 
 The checks cover publication safeguards, checksum integrity, stable slugs, original content, offer conditions, map privacy, metadata, noindex, schema restrictions, every internal link and fragment, and the 300 KB HTML plus JSON budget per trade.
 
-Also review desktop and mobile previews after template changes. Test filters, sorting, save controls, load more, and service/FAQ disclosures. Inspect 10 sampled company pages, including new and original profiles. See `IMPORT-REVIEW.md` for the current review results and caveats.
+Also review desktop and mobile previews after template changes. Test filters, sorting, save controls, load more, and service/FAQ disclosures. Inspect 10 sampled company pages, including new and original profiles. See `SERVICE-AREAS-REVIEW.md` for this update and `IMPORT-REVIEW.md` for earlier import review results.
 
 ## Owner and review layout previews
 
@@ -83,3 +83,9 @@ python3 roster/scripts/prepare-home-map.py /path/to/NationalMapPolygon.geojson
 ```
 
 `lib/home-snapshot.mjs` calculates one equal-weight company average from eligible combined ratings. Common-job prices average the lowest eligible advertised starting rate per company, with at least three companies required. It compares a named job and unit, excluding identifiable promotions, annual packages and indicative cost guides. Minimum bookings and price conditions remain visible; expandable source lists show every included company. These are directory samples, not market-wide prices or quotes. Future imports update the counts, map dots and price samples on rebuild. `assets/home.css` and `assets/home.js` load only on the homepage.
+
+## Service coverage
+
+`lib/service-areas.mjs` accepts supported, dated company-site coverage statements with their excerpts and source URLs. Missing evidence produces no Areas served section or navigation link. Town tags are alphabetized within their regions when there are more than eight towns; lists longer than twelve expand on demand. Source URLs are deduplicated.
+
+`assets/service-areas.mjs` maps all 55 planning areas to their official URA 2019 regions. Its source and Singapore Open Data Licence links are recorded in that file. `assets/area-picker.mjs` provides typed filtering, grouped options, keyboard selection and clearing. Coverage matching and facet counts run before pagination. When an area is selected, a single compact results list preserves town-first ordering across full and limited profiles and across all sort choices.

@@ -87023,12 +87023,12 @@
   },
   "publishedCount": 719,
   "excludedCount": 5759,
-  "sourceSha256": "84e57a61cc9acdfe68b87a2b6d5b9399d456177b5fa915b38cf0ea88934aaac2",
-  "sourceRelease": "companies-20261012-1044.json",
+  "sourceSha256": "3850fc0b4891afd5a2940f5efaaa9a958d88014af24b7fd454e70d5190cff352",
+  "sourceRelease": "companies-20261012-1253.json",
   "logos": {
     "verifiedFiles": 499,
     "publishedCompanies": 499,
     "bytes": 39724609,
-    "bundle": "logos-20261012-1044.tar.gz"
+    "bundle": "logos-20261012-1253.tar.gz"
   }
 }
