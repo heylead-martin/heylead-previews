@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+<script src="/auth-config.js"></script>
+<script src="/auth.js"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Keywords · HeyLead Previews</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app">
+    <header class="top">
+      <div class="top-copy">
+        <a class="back" href="/">← Previews</a>
+        <h1>Roster keyword planner</h1>
+        <p class="lede">Singapore search volume for the five Roster trades. Average monthly searches, competition, top-of-page bids, and the last 12 months. Read only. This page cannot change a Google Ads campaign.</p>
+      </div>
+      <div class="top-actions">
+        <span class="pill" id="status-pill">Checking</span>
+        <button type="button" class="btn ghost" id="btn-csv" disabled>CSV</button>
+      </div>
+    </header>
+
+    <section class="card setup" id="setup" hidden>
+      <h2>Connect</h2>
+      <p class="hint">Open the connect link once. It saves access in this browser and removes the token from the address bar.</p>
+      <div class="setup-row">
+        <label class="field grow">
+          <span>Tool token</span>
+          <input type="password" id="setup-token" autocomplete="off">
+        </label>
+        <button type="button" class="btn primary" id="btn-save">Save</button>
+      </div>
+    </section>
+
+    <form class="card search" id="search-form">
+      <div class="modes" id="modes">
+        <button type="button" class="on" data-mode="ideas">Ideas</button>
+        <button type="button" data-mode="historical">Exact keywords</button>
+        <button type="button" data-mode="forecast">Forecast</button>
+      </div>
+      <div class="grid-form">
+        <label class="field span-2">
+          <span>Keywords</span>
+          <textarea id="q-keywords" rows="4" placeholder="One keyword per line"></textarea>
+        </label>
+        <div class="stack">
+          <label class="field">
+            <span>Language</span>
+            <select id="q-language">
+              <option value="1000">English</option>
+              <option value="1017">Chinese (simplified)</option>
+              <option value="1018">Chinese (traditional)</option>
+              <option value="1102">Malay</option>
+            </select>
+          </label>
+          <label class="field ideas-only">
+            <span>Page or domain</span>
+            <input type="text" id="q-url" placeholder="Optional, for ideas">
+          </label>
+          <label class="field ideas-only">
+            <span>How many ideas</span>
+            <select id="q-size">
+              <option value="50">50</option>
+              <option value="100" selected>100</option>
+              <option value="200">200</option>
+            </select>
+          </label>
+          <label class="field forecast-only">
+            <span>Max CPC</span>
+            <input type="number" id="q-cpc" min="0.01" max="100" step="0.01" value="1.50">
+          </label>
+          <label class="field forecast-only">
+            <span>Daily budget</span>
+            <input type="number" id="q-budget" min="1" max="10000" step="1" value="20">
+          </label>
+          <label class="field forecast-only">
+            <span>Match</span>
+            <select id="q-match">
+              <option value="PHRASE" selected>Phrase</option>
+              <option value="EXACT">Exact</option>
+              <option value="BROAD">Broad</option>
+            </select>
+          </label>
+          <label class="field forecast-only">
+            <span>Forecast currency</span>
+            <select id="q-currency">
+              <option value="SGD" selected>SGD</option>
+              <option value="USD">USD</option>
+            </select>
+          </label>
+        </div>
+      </div>
+      <div class="search-bar">
+        <label class="check"><input type="checkbox" id="q-refresh"> Skip cache</label>
+        <button type="submit" class="btn primary" id="btn-search">Get volumes</button>
+      </div>
+      <div class="presets" id="presets"></div>
+      <p class="hint" id="bid-note">Location is Singapore. Bids on ideas and exact keywords are in USD, the HeyLead Ads account currency. Forecast cost is in the currency you pick. A forecast does not include impressions.</p>
+    </form>
+
+    <div id="fatal" class="err" hidden></div>
+
+    <section class="hero-metrics" id="stats" hidden>
+      <div class="metric">
+        <div class="metric-label">Keywords</div>
+        <div class="metric-val" id="stat-count">-</div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">Top volume</div>
+        <div class="metric-val" id="stat-top">-</div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">Language</div>
+        <div class="metric-val" id="stat-lang">-</div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">Source</div>
+        <div class="metric-val" id="stat-cache">-</div>
+      </div>
+    </section>
+
+    <section class="card" id="forecast-card" hidden>
+      <div class="card-h">
+        <h2>Forecast</h2>
+        <span class="pill" id="forecast-pill"></span>
+      </div>
+      <div class="hero-metrics flat" id="forecast-metrics"></div>
+      <p class="hint" id="forecast-note"></p>
+    </section>
+
+    <section class="card" id="results-card" hidden>
+      <div class="card-h">
+        <h2>Keywords</h2>
+        <span class="pill" id="results-pill"></span>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Keyword</th>
+              <th class="num">Avg / mo</th>
+              <th>Competition</th>
+              <th class="num">Index</th>
+              <th class="num">Low bid</th>
+              <th class="num">High bid</th>
+              <th class="num">Last month</th>
+            </tr>
+          </thead>
+          <tbody id="rows"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="card" id="json-card" hidden>
+      <div class="card-h">
+        <h2>JSON</h2>
+        <button type="button" class="btn ghost" id="btn-copy">Copy</button>
+      </div>
+      <pre id="json-out"></pre>
+    </section>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
