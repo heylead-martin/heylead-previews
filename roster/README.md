@@ -15,21 +15,21 @@ The importer reads `db-expanded/releases/LATEST` in the Roster Drive folder, the
 To reproduce a specific release:
 
 ```sh
-node roster/scripts/import-db.mjs "/absolute/path/to/companies-20261011-1509.json" "/absolute/path/to/logos-20261011-1458.tar.gz"
+node roster/scripts/import-db.mjs "/absolute/path/to/companies-20261012-1044.json" "/absolute/path/to/logos-20261012-1044.tar.gz"
 python3 roster/scripts/verify-map-pins.py
 node roster/build.mjs
 ```
 
 `ROSTER_DB_PATH` also accepts a release path. The checksum file must sit beside it as `<release>.sha256`. A missing checksum, mismatch or invalid LATEST filename stops the import.
 
-The optional second argument, or `ROSTER_LOGO_BUNDLE`, supplies the matching logo bundle. `scripts/import-logos.py` checks each published logo against its release SHA256 before installing the batch under `assets/logos/`. Paths include the content hash for caching. Only published companies' assets are installed, archive links and unsafe paths are rejected, and static image content is validated. Subsequent imports can omit the bundle when every required local image already matches its hash. A missing or changed image stops the import before site data is written. Logo source URLs, original URLs and capture dates remain in `presentation.json`.
+The optional second argument, or `ROSTER_LOGO_BUNDLE`, supplies the matching logo bundle. `scripts/import-logos.py` checks each published logo against its release SHA256 before installing the batch under `assets/logos/`. Paths include the content hash for caching. Only published companies' assets are installed, archive links and unsafe paths are rejected, and static image content is validated, including GIF and ICO logos. Animated GIFs are rejected. Subsequent imports can omit the bundle when every required local image already matches its hash. A missing or changed image stops the import before site data is written. Logo source URLs, original URLs and capture dates remain in `presentation.json`.
 
-A release logo marked `logo_unsure: true` is withheld from cards and profiles, which show company initials instead. Its reason and audit date remain in `presentation.json` and the import report. A photo fallback cannot restore the uncertain logo. The business itself remains eligible when its company data passes the publication checks.
+A release logo marked `logo_unsure: true` or `display: initials` is withheld from cards and profiles, which show company initials instead. Its reason and audit date remain in `presentation.json` and the import report. A photo fallback cannot restore the uncertain logo. The business itself remains eligible when its company data passes the publication checks.
 
 ## Data ownership
 
 - `data/curated/` is the protected baseline for the original 16 hand-written profiles. Edit those files when deliberately revising the original copy. Generated `companies.json`, `profiles.json` and `presentation.json` are overwritten by import.
-- Original content takes precedence. Sourced release details fill missing values and add separate enrichment fields. Invalidated review sources are removed explicitly.
+- Original content takes precedence. Sourced release details fill missing values and add separate enrichment fields. Invalidated review sources are removed explicitly. A sourced postal code may fill a missing original postal only when the building address matches; the original write-up and address wording remain intact.
 - Publication requires sourced company information, services, primary phone, address and an owned website. Blocking flags and rollbacks exclude a record. Original text is retained even if a flagged original page is withheld.
 - `data/slug-registry.json` keeps URLs stable and reserves previous slugs. Keep it in version control across releases.
 - `data/import-report.json` records release filename and checksum, publication counts, exclusion reasons and data caveats.
@@ -38,7 +38,7 @@ A release logo marked `logo_unsure: true` is withheld from cards and profiles, w
 
 ## Presentation rules
 
-Services and prices share expandable rows. Imported prices retain source wording, quantity, unit, promotion and GST details, including monthly session counts and hours per session. Inferred units are explicitly labelled. General cost guides are marked as references rather than company rates. Original curated service copy and prices stay intact.
+Services and prices share expandable rows. Imported prices retain source wording, quantity, unit, promotion and GST details, including monthly session counts and hours per session. Where the release supplies a calculated per-unit amount and minimum quantity, both are labelled alongside the original total. Inferred units are explicitly labelled. General cost guides are marked as references rather than company rates. Original curated service copy and prices stay intact.
 
 Company pages start with Services & pricing, About the company and Location & contact. Reviews sit directly above FAQs. Extra sourced information appears only when present. Company-site answers and claims are attributed.
 
@@ -46,13 +46,13 @@ Company headers and directory cards feature the real average rating, total revie
 
 All pages remain noindex. Account screens and quote requests are previews with no backend. The quote panel still sends and stores nothing. Shared preview authentication is unchanged.
 
-Trade pages lead with up to eight full-bar profiles, ordered by evidence and then rating. Other companies use compact rows in batches of 12. A versioned per-trade JSON index supports search, filters, sorting and more compact results. Non-full-bar company pages carry a limited-details note and a smaller layout. Area filters refer to the published business address, not promised service coverage. The all-company search covers every published profile. Each company appears under its release `primary_trade`; trade counts do not overlap. Sourced fit notes and service-area excerpts are retained, while `self_description` metadata is never used as About text.
+Trade pages lead with up to eight full-bar profiles, ordered by evidence and then rating. Other companies use compact rows in batches of 12. A versioned per-trade JSON index supports search, filters, sorting and more compact results. `assets/catalogue-data.mjs` losslessly encodes repeated field names as column indexes and decodes them in the browser, keeping larger directories within the payload budget. Non-full-bar company pages carry a limited-details note and a smaller layout. Area filters refer to the published business address, not promised service coverage. The all-company search covers every published profile. Each company appears under its release `primary_trade`; trade counts do not overlap. Sourced fit notes and service-area excerpts are retained, while `self_description` metadata is never used as About text.
 
 ## Validation
 
 ```sh
 node --test roster/scripts/import-db.test.mjs roster/scripts/presentation.test.mjs
-python3 -m unittest discover -s roster/scripts -p 'test_*logos.py'
+python3 -m unittest discover -s roster/scripts -p 'test_*.py'
 node roster/scripts/check-site.mjs
 ```
 
@@ -68,4 +68,6 @@ Public summaries and imported About text use customer-facing third-person copy d
 
 Company cards and profiles reserve space for a logo. Existing artwork is used when present, otherwise the slot shows company initials. Broken artwork falls back to initials. The build runs `scripts/fit-logos.py` (Python 3 with Pillow 12 or later) to measure transparent and plain-white margins and generate `assets/logo-fit.css`. CSS centers the complete artwork with proportional scaling, wider tiles for long wordmarks, and a dark background for predominantly white transparent logos. Original image bytes and checksums stay unchanged. SVGs retain their original viewBox and use the same larger default fit. New imported raster logos are measured automatically on rebuild.
 
-The importer maps release `ratings` into sourced, dated records and recalculates the combined score. Unknown review counts are never invented. Google widgets are treated as mirrors when a direct Google rating exists. Real release ratings replace the mockup on company pages, with source-method details available in disclosures. Full profiles without release rating records retain a clearly labelled mockup with 2-5 sources. `assets/review-model.mjs` holds sample fixtures and a review-count-weighted calculation. Sample scores never replace real sourced ratings, change directory sorting or enter structured data. The combined score is the sum of each rating multiplied by its count, divided by total reviews. Identified mirrors, incompatible scales and unusable counts are excluded. `lib/rating-summary.mjs` handles real records separately from the sample fixtures, with `assets/rating-display.mjs` shared by static and dynamically loaded cards. Directory filters and sorting use the real average. Cards pair this with main services and a labelled example service price when a specific published rate can be extracted. Before connecting a real data release, each source needs its platform, profile URL, capture date, rating, scale, count and any mirror relationship. Deduplication is not automatic.
+The importer maps release `ratings` into sourced, dated records and recalculates the combined score. Unknown review counts are never invented. Company-site widgets and self-reported scores are excluded, including a legacy curated score explicitly moved to `self_reported_rating` by a release. Trustpilot TrustScores are displayed separately and do not enter the average. Profiles without an eligible rating say "No rating yet". Sample score fixtures remain for development but are not rendered on company pages.
+
+The combined score is the sum of each eligible rating multiplied by its count, divided by total reviews. A single eligible source supplies its score directly. Identified mirrors, incompatible scales and unusable counts are excluded. `lib/rating-summary.mjs` handles real records, with `assets/rating-display.mjs` shared by static and dynamically loaded cards. Directory filters and sorting use the real average. Cards pair this with main services and a labelled example service price when a specific published rate can be extracted. Each source needs its platform, profile URL, capture date, rating, scale, count and any mirror relationship. Deduplication is not automatic.

@@ -1,4 +1,36 @@
-# Roster import review: release 2227
+# Roster import review: release 1044
+
+Updated 12 October 2026. Imported the exact requested release `companies-20261012-1044.json`, also named by Drive's `db-expanded/releases/LATEST`.
+
+Verified SHA256 before import:
+
+- JSON: `84e57a61cc9acdfe68b87a2b6d5b9399d456177b5fa915b38cf0ea88934aaac2`.
+- Logo bundle `logos-20261012-1044.tar.gz`: `42feb3616c5122eaab3ab3b6463bd034db1491e61143e6b46aa57d3fed47a78e`.
+
+## Current build
+
+- 6,478 source records, 719 published companies and 5,759 excluded records.
+- 126 newly eligible listings and one withdrawal from release 2227. Skywave Solutions is now flagged commercial-only; its old URL redirects to the relevant trade directory.
+- Trade totals: 225 aircon, 92 plumbing, 113 electrician, 97 handyman and 192 cleaning companies. There are 262 full profiles and 457 compact listings.
+- 499 release logos installed and checked against per-image SHA256 values. Two existing curated images remain. The importer now validates static GIF and ICO images; original bytes are preserved. Twenty-one published companies retain initials because their logos are uncertain.
+- Map checks produced 691 verified building pins, including 39 sourced OneMap address locations, and 28 address-only fallbacks. Fifty of the previous 55 unresolved pins are fixed. No previously verified pin regressed. Unit details stay out of map requests, captions and directions.
+- The 28 fallbacks comprise 24 Google place/postal conflicts, two OneMap address mismatches, one missing usable CID/postal pair and one place marker that could not be matched. PS Home Maintenance's released coordinates point to a different street and remain hidden. Home Plumbing Services has only a district and postal code in its published address, so the building match remains unresolved.
+- All 16 original source write-ups remain protected. Matching, sourced postals fill missing fields for 1st Electrical and SK Electrical without replacing their text. Billy Aircon remains withheld under its existing flag.
+- Company-site widget scores and self-reported scores are excluded from averages. Trustpilot TrustScores remain visible as separate sources. Full profiles without a real rating show "No rating yet" rather than sample figures.
+- Per-unit price calculations and minimum quantities supplied by the release appear alongside the original totals and conditions.
+- All 739 generated pages remain noindex. Authentication and the account, quote and claim previews are unchanged.
+
+## Validation
+
+All 39 JavaScript tests and 15 Python tests pass. Site checks validate generated pages, internal links and fragments, metadata, schema restrictions, publication counts and the original write-ups. Repeated JSON field names are now encoded as column indexes and decoded losslessly in the browser. The largest trade HTML plus index is 292.7 KB, within the existing 300 KB limit.
+
+Browser review covered AirCare+, Sauber Cleaning Services, Lion City Aircon, Daylight Electrician, SK Electrical, 1st Electrical, CleanAndFix, PS Home Maintenance, CBM Home and BCD Engineering. Checked headings, maps or address fallback, rating displays, logo or initials presentation, and page width. CleanAndFix's new OneMap building pin was visually confirmed. Lion City's Trustpilot score is visible separately from its Google-based average.
+
+Desktop filtering and load more passed at 1440px. Mobile checks at 390px and 320px covered new logo/profile rendering, service and FAQ disclosures, search, rating and location filters, sorting, save/unsave and dynamic filter counts. The Eunos plumbing search with a 4.8 minimum returns three matches, with zero published-price matches and two WhatsApp matches. Selecting WhatsApp narrows it to two, and saving a company updates the saved count immediately. No horizontal overflow was found in the sampled mobile views.
+
+## Previous review: release 2227
+
+The following historical review is retained for the audit trail.
 
 Updated 11 October 2026. Imported the exact requested release `companies-20261011-2227.json`, also named by Drive's `db-expanded/releases/LATEST`.
 

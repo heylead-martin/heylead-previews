@@ -1,12 +1,14 @@
 """Install only published logo assets after validating the entire requested batch."""
 import hashlib
 import base64
+import io
 import json
 from pathlib import Path
 import re
 import sys
 import tarfile
 import xml.etree.ElementTree as ET
+from PIL import Image
 
 
 def check_image(raw, suffix):
@@ -16,6 +18,8 @@ def check_image(raw, suffix):
         '.jpeg': raw.startswith(b'\xff\xd8\xff'),
         '.webp': raw[:4] == b'RIFF' and raw[8:12] == b'WEBP',
         '.avif': raw[4:8] == b'ftyp' and b'avif' in raw[8:40],
+        '.gif': raw[:6] in {b'GIF87a', b'GIF89a'},
+        '.ico': raw[:4] == b'\x00\x00\x01\x00',
     }
     if suffix == '.svg':
         if b'<!ENTITY' in raw:
@@ -37,6 +41,11 @@ def check_image(raw, suffix):
             raise ValueError('External SVG styles are not supported')
     elif not valid.get(suffix):
         raise ValueError('Logo file does not match its image extension')
+    if suffix in {'.gif', '.ico'}:
+        with Image.open(io.BytesIO(raw)) as image:
+            if getattr(image, 'is_animated', False):
+                raise ValueError('Animated logos are not supported')
+            image.verify()
 
 
 def install(config):
@@ -44,7 +53,7 @@ def install(config):
     expected = {}
     for logo in config['logos']:
         name, digest = logo['localPath'], logo['sha256']
-        if not re.fullmatch(r'logos/[a-zA-Z0-9_-]+\.(png|jpe?g|webp|avif|svg)', name) or not re.fullmatch(r'[a-f0-9]{64}', digest):
+        if not re.fullmatch(r'logos/[a-zA-Z0-9_-]+\.(png|jpe?g|webp|avif|svg|gif|ico)', name) or not re.fullmatch(r'[a-f0-9]{64}', digest):
             raise ValueError('Invalid logo path or checksum')
         file = Path(name)
         destination = f'/roster/assets/logos/{file.stem}-{digest[:12]}{file.suffix}'

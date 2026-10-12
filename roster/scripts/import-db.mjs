@@ -20,6 +20,11 @@ const contact = (x, fallback) => value(x) ? {value:value(x),sourceUrl:http(x?.so
 export function blockAddress(address) {
   return text(address).replace(/[\u2010-\u2015]/g,'-').replace(/#\s*[a-z0-9]+(?:\s*[-/]\s*[a-z0-9]+|\s+\d{1,4}\b)?/gi,'').replace(/\bunit\s*#?\s*[\w]+(?:\s*[-/]\s*[\w]+)*/gi,'').replace(/\s*,\s*,/g,',').replace(/\s+,/g,',').replace(/\s{2,}/g,' ').trim();
 }
+export function supplementPostalAddress(current, incoming) {
+  if (!current?.value || current.postal || !/^\d{6}$/.test(incoming?.postal || '') || !cited(incoming)) return current;
+  const words = address => blockAddress(address).toLowerCase().replace(/\b(?:singapore|\d{6})\b/g,'').replace(/\b(?:avenue|av)\b/g,'ave').replace(/\broad\b/g,'rd').replace(/\bstreet\b/g,'st').replace(/\blane\b/g,'ln').replace(/\b(?:blk|block)\b/g,'').match(/[a-z0-9]+/g)?.sort().join(' ');
+  return words(current.value) === words(incoming.value) ? {...current,postal:incoming.postal,postalSourceUrl:cited(incoming)} : current;
+}
 const areaNames = ['Ang Mo Kio','Bedok','Bishan','Bukit Batok','Bukit Merah','Bukit Panjang','Bukit Timah','Choa Chu Kang','Clementi','Geylang','Hougang','Jurong East','Jurong West','Kallang','Marine Parade','Pasir Ris','Punggol','Queenstown','Sembawang','Sengkang','Serangoon','Tampines','Toa Payoh','Woodlands','Yishun','Changi','Eunos','Paya Lebar','Ubi','Simei','Sungei Kadut','Tuas','Seletar','Sungei Kadut'];
 function district(address) { return areaNames.find(a=>address.toLowerCase().includes(a.toLowerCase())) || 'Other Singapore locations'; }
 function serviceKey(name, trade) {
@@ -56,6 +61,8 @@ function serviceRows(row, trade) {
 export function priceOption(item) {
   const details = [
     item.qty != null ? `Quantity: ${item.qty}` : '',
+    Number.isFinite(item.unit_price_sgd) ? `Calculated per-unit price: S$${item.unit_price_sgd}${Number.isFinite(item.unit_price_max_sgd)?` to S$${item.unit_price_max_sgd}`:''}${item.units_in_price?` (${item.units_in_price} units in the published total)`:''}` : '',
+    item.min_units != null ? `Minimum ${item.min_units} units` : '',
     text(item.unit)+(item.unitInferred?' (inferred from the job type; confirm with the company)':''),
     item.sessions_per_month != null ? `${item.sessions_per_month} sessions per month` : '',
     item.hours_per_session != null ? `${item.hours_per_session} hours per session` : '',
@@ -78,16 +85,16 @@ export function verifyRelease(source, checksum) {
 }
 
 export function bundledLogo(logo) {
-  if (logo?.logo_unsure === true) return null;
+  if (logo?.logo_unsure === true || logo?.display === 'initials') return null;
   if (!logo?.local_path) return null;
-  if (!/^logos\/[a-z0-9_-]+\.(?:png|jpe?g|webp|avif|svg)$/i.test(logo.local_path) || !/^[a-f0-9]{64}$/i.test(logo.sha256 || '') || !http(logo.source_url) || !http(logo.url)) throw new Error('Invalid sourced logo asset metadata');
+  if (!/^logos\/[a-z0-9_-]+\.(?:png|jpe?g|webp|avif|svg|gif|ico)$/i.test(logo.local_path) || !/^[a-f0-9]{64}$/i.test(logo.sha256 || '') || !http(logo.source_url) || !http(logo.url)) throw new Error(`Invalid sourced logo asset metadata: ${logo.local_path}`);
   const parsed=path.posix.parse(logo.local_path), sha256=logo.sha256.toLowerCase();
   return {localPath:logo.local_path,sha256,src:`/roster/assets/logos/${parsed.name}-${sha256.slice(0,12)}${parsed.ext}`,sourceUrl:http(logo.source_url),originalUrl:http(logo.url),capturedAt:text(logo.capturedAt)};
 }
 
 export function reviewSources(row) {
-  const hasGoogle=!!row.google_rating || (row.ratings||[]).some(r=>/^google maps$/i.test(r.source||''));
-  return (row.ratings||[]).filter(r=>text(r.source)&&Number.isFinite(r.rating)&&r.rating>=0&&r.rating<=5&&r.scale===5&&http(r.url)&&/^\d{4}-\d{2}-\d{2}/.test(r.capturedAt||'')).map(r=>({name:text(r.source),rating:r.rating,count:Number.isInteger(r.count)&&r.count>0?r.count:null,scale:r.scale,sourceUrl:http(r.url),checkedAt:text(r.capturedAt),method:text(r.method),note:text(r.method_detail),mirrorsSource:text(r.mirrorsSource||r.mirrors_source)||(/google.*widget/i.test(r.source)&&hasGoogle?'Google Maps':'')}));
+  const siteHost=http(value(row.website)) ? new URL(http(value(row.website))).hostname.replace(/^www\./,'') : '';
+  return (row.ratings||[]).filter(r=>text(r.source)&&Number.isFinite(r.rating)&&r.rating>=0&&r.rating<=5&&(r.scale===5||r.scale==='trustscore')&&http(r.url)&&/^\d{4}-\d{2}-\d{2}/.test(r.capturedAt||'')&&!/widget|company website|self.reported/i.test(r.source)&&new URL(r.url).hostname.replace(/^www\./,'')!==siteHost).map(r=>({name:text(r.source),rating:r.rating,count:Number.isInteger(r.count)&&r.count>0?r.count:null,scale:/trustpilot/i.test(r.source)?'trustscore':r.scale,sourceUrl:http(r.url),checkedAt:text(r.capturedAt),method:text(r.method),note:[text(r.method_detail),text(r.scale_note)].filter(Boolean).join(' '),mirrorsSource:text(r.mirrorsSource||r.mirrors_source)}));
 }
 
 export function alternatePhones(phone, primary) {
@@ -163,6 +170,10 @@ export function importDatabase(db, seeds, registry={}) {
       if(deadReviews.length) {company.reviews=company.reviews.filter(r=>!deadReviews.includes(r.sourceUrl));report.warnings.push({slug,issue:'Invalidated review source removed',urls:deadReviews});}
     }
     company.databaseId=row.id;company.enrichment=enrichment;
+    company.address=supplementPostalAddress(company.address,row.address);
+    company.mapEvidence=row.map ? {status:row.map.status,precision:row.map.precision,postal:text(row.address?.postal),addressValue:value(row.address),addressSourceUrl:cited(row.address),place:row.map.place||null,geocode:row.map.geocode||null,latitude:row.map.lat,longitude:row.map.lng} : null;
+    if(row.self_reported_rating||row.rosterProfile?.rating_moved_to) company.rating=null;
+    company.selfReportedRating=row.self_reported_rating&&cited(row.self_reported_rating)?row.self_reported_rating:null;
     company.reviewSources=reviewSources(row);
     company.listingDepth={full:row.profile_bar?.meetsFullBar===true,evidenceScore:['priceWithJob','serviceAreaCited','residentialSentence','summary','unflagged'].filter(key=>row.profile_bar?.[key]===true).length+Number(!!enrichment.hours)+Number(!!company.reviews?.length),checkedAt:row.profile_bar?.checkedAt||null};
     company.primaryTrade=category;company.category=category;company.schemaType=types[category];
@@ -178,7 +189,7 @@ export function importDatabase(db, seeds, registry={}) {
     }
     if(original && !presentation[slug].published) {const fresh=enrichment.priceLines.filter(p=>!indicative(p));if(fresh.length) presentation[slug]={...presentation[slug],published:true,price:'See published prices',detail:`${fresh.length} newly sourced pricing entries. Confirm the job, inclusions and total.`};}
     const photos=(row.photos||[]).filter(p=>http(p.fileUrl)&&http(p.pageUrl));
-    const uncertainLogo=row.logo?.logo_unsure===true;
+    const uncertainLogo=row.logo?.logo_unsure===true||row.logo?.display==='initials';
     const logoAsset=bundledLogo(row.logo);
     if(logoAsset) {presentation[slug].logo=logoAsset.src;presentation[slug].logoAsset=logoAsset;}
     if(uncertainLogo) {

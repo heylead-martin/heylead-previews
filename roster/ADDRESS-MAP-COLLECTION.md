@@ -1,6 +1,6 @@
 # Roster address and map collection rules
 
-For Grok and every bot collecting or verifying Roster business data. Updated 11 October 2026.
+For Grok and every bot collecting or verifying Roster business data. Updated 12 October 2026.
 
 ## Required outcome
 
@@ -32,7 +32,13 @@ HDB and other residential locations must display a block/building pin only. Remo
 
 ## Current site implementation
 
-`roster/scripts/verify-map-pins.py` reads published companies and their cited Google place CIDs. It accepts a marker only when the returned CID and postal code match and the coordinates fall within Singapore. It writes `roster/data/map-pins.json`, keyed by company slug. The cache contains building coordinates, source URL, match method, capture date and an address hash. No unit text is published in that cache.
+`roster/scripts/verify-map-pins.py` reads published companies and their imported map evidence. It checks a Google place marker against its CID and the published postal code, with coordinates inside Singapore. A sourced release `map.place` can supply the specific CID independently of the rating source URL.
+
+For `map.status: address-geocoded`, the checker reopens the official OneMap postal search. It requires the sourced business address, capture date, matching six-digit postal code, one matching building result and agreement with the released coordinates. The published address must identify the matching block, street or building; a district alone is insufficient. A conflicting house number is rejected. This verifies the published address location, not company ownership or a Google business-place identity.
+
+For this pathway, collect `map.geocode.url`, `postal`, `blk` and `capturedAt`, plus `map.lat` and `map.lng`. Keep the company address source alongside them. A returned error or HTTP success alone is not evidence: the checker needs the actual matching address result. If access requires authentication, use the documented authorization or leave the map unresolved.
+
+The checker writes `roster/data/map-pins.json`, keyed by company slug. The cache contains building coordinates, source URL, match method, capture date and an address hash. No unit text is published in that cache. `--only slug-a slug-b` rechecks selected published listings while preserving the other cache records.
 
 `roster/lib/expanded.mjs` uses a cached pin only when its address hash still matches the listing. It renders a coordinate-based Google map at zoom 17 and directions to the same point. An unresolved or stale pin produces an address card without an iframe. Updating the address therefore cannot leave the old pin attached unnoticed.
 

@@ -1,5 +1,6 @@
 import {renderCard,renderCompactCard,splitDirectory} from './catalogue-card.mjs?v=20261011-density';
 import {filterCatalogue} from './catalogue-filter.mjs?v=20261011-counts';
+import {decodeCatalogue} from './catalogue-data.mjs?v=20261012-release';
 const root=document.querySelector('[data-catalogue]');
 if(root) {
   const header=document.querySelector('.top');
@@ -32,7 +33,7 @@ if(root) {
   }
   async function load() {
     more.disabled=true;error.hidden=true;
-    try {const response=await fetch(root.dataset.index,{credentials:'same-origin'});if(!response.ok)throw new Error('Index unavailable');const data=await response.json();if(!Array.isArray(data.companies))throw new Error('Invalid index');rows=data.companies;loaded=true;apply();}
+    try {const response=await fetch(root.dataset.index,{credentials:'same-origin'});if(!response.ok)throw new Error('Index unavailable');rows=decodeCatalogue(await response.json());loaded=true;apply();}
     catch {error.hidden=false;status.textContent='The full list could not be loaded. The first companies are shown below.';}
     finally{more.disabled=false;}
   }

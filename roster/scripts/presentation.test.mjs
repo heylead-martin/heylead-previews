@@ -6,6 +6,15 @@ import {ratingSummary} from '../lib/rating-summary.mjs';
 import {splitDirectory} from '../assets/catalogue-card.mjs';
 import {companyMatch} from '../assets/company-match.mjs';
 import {filterCatalogue} from '../assets/catalogue-filter.mjs';
+import {encodeCatalogue,decodeCatalogue} from '../assets/catalogue-data.mjs';
+
+test('Compact catalogue format preserves every field, null and optional value through JSON',()=>{
+ const rows=[{name:'A',category:'aircon',ratingValue:null,logo:'image.png',average:null},{name:'B',category:'cleaning',ratingValue:4.5,average:{count:null,value:4.5,sources:[]},offerings:['Cleaning'],fullProfile:false}];
+ assert.deepEqual(decodeCatalogue(JSON.parse(JSON.stringify(encodeCatalogue(rows)))),rows);
+ assert.deepEqual(decodeCatalogue({companies:rows}),rows);
+ assert.throws(()=>decodeCatalogue({format:'unknown',companies:rows}),/Unsupported/);
+ assert.throws(()=>decodeCatalogue({format:'roster-columns-v1',fields:['name'],companies:[{999:'bad'}]}),/Invalid/);
+});
 
 test('Combined scores weight the number of reviews rather than averaging sources equally', () => {
   assert.deepEqual(weightedRating([{rating:5,count:90},{rating:1,count:10}]), {rating:4.6,count:100,sources:2});
@@ -43,11 +52,18 @@ test('Real averages use one source as-is and weight independent sources while ex
   assert.equal(ratingSummary(c).value,3.4);
   assert.equal(ratingSummary(c).count,34);
   assert.equal(ratingSummary(c).sourceCount,1);
-  c.reviewSources=[{name:'Trustpilot',rating:4.5,count:10,scale:5,sourceUrl:'https://trustpilot.com/review/example',checkedAt:'2026-10-11'}, {name:'Mirror',rating:5,count:100,scale:5,sourceUrl:'https://example.com/reviews',checkedAt:'2026-10-11',mirrorsSource:'Google Maps'}];
+  c.reviewSources=[{name:'Yelp',rating:4.5,count:10,scale:5,sourceUrl:'https://yelp.com/biz/example',checkedAt:'2026-10-11'}, {name:'Mirror',rating:5,count:100,scale:5,sourceUrl:'https://example.com/reviews',checkedAt:'2026-10-11',mirrorsSource:'Google Maps'}];
   assert.equal(ratingSummary(c).value,(3.4*34+4.5*10)/44);
   assert.equal(ratingSummary(c).count,44);
   assert.equal(ratingSummary(c).sourceCount,2);
   assert.equal(ratingSummary({}),null);
+});
+test('TrustScores never affect the combined average or supply a missing rating',()=>{
+ const source={name:'Trustpilot',rating:4.7,count:42,scale:'trustscore',sourceUrl:'https://trustpilot.com/review/example',checkedAt:'2026-10-12'};
+ assert.equal(ratingSummary({reviewSources:[source]}),null);
+ const google={value:5,count:100,sourceUrl:'https://maps.google.com/?cid=1',checkedAt:'2026-10-12'};
+ assert.equal(ratingSummary({googleRating:google,reviewSources:[source]}).value,5);
+ assert.equal(ratingSummary({googleRating:google,reviewSources:[{...source,scale:5}]}).count,100);
 });
 
 test('Claim matching preselects a slug, ignores punctuation and only autofills unambiguous names', () => {

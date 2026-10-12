@@ -5,6 +5,7 @@ import runpy
 import tarfile
 import tempfile
 import unittest
+from PIL import Image
 
 install = runpy.run_path(str(Path(__file__).with_name('import-logos.py')))['install']
 
@@ -61,6 +62,17 @@ class LogoImportTests(unittest.TestCase):
                 with self.assertRaises(ValueError):
                     install(self.config([(name, raw)]))
         self.assertFalse((self.root / 'assets').exists())
+
+    def test_static_gif_and_icon_are_validated_without_changing_bytes(self):
+        for ext, kind in [('gif', 'GIF'), ('ico', 'ICO')]:
+            stream = io.BytesIO()
+            Image.new('RGBA', (32, 32), (40, 90, 60, 255)).save(stream, format=kind)
+            raw = stream.getvalue()
+            config = self.config([(f'logos/example.{ext}', raw)])
+            self.assertEqual(install(config)['verifiedFiles'], 1)
+            self.assertEqual((self.root / config['logos'][0]['src'].removeprefix('/roster/')).read_bytes(), raw)
+        with self.assertRaises(Exception):
+            install(self.config([('logos/broken.ico', b'\x00\x00\x01\x00broken')]))
 
 
 if __name__ == '__main__':

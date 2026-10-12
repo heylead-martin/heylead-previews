@@ -14,7 +14,7 @@ export function ratingSummary(company) {
   const seen = new Set();
   const sources = candidates.filter(s => {
     const id = String(s.name || '').toLowerCase().replace(/^google maps$/, 'google');
-    if (!id || seen.has(id) || s.mirrorsSource || s.scale !== 5 || !Number.isFinite(s.rating) || s.rating < 0 || s.rating > 5 || !/^https?:\/\//.test(s.sourceUrl || '') || !/^\d{4}-\d{2}-\d{2}/.test(s.checkedAt || '')) return false;
+    if (!id || /trustpilot|widget|self.reported/i.test(id) || seen.has(id) || s.mirrorsSource || s.scale !== 5 || !Number.isFinite(s.rating) || s.rating < 0 || s.rating > 5 || !/^https?:\/\//.test(s.sourceUrl || '') || !/^\d{4}-\d{2}-\d{2}/.test(s.checkedAt || '')) return false;
     seen.add(id);
     return true;
   });
