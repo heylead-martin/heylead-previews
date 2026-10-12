@@ -58,7 +58,7 @@ test('No coverage hides the section; coverage displays without source and captur
 });
 test('Long town lists group by region and disclose towns beyond the first twelve',()=>{
  const entries=normaliseServiceLocations(planningAreas.slice(0,18).map(a=>entry(a.name)),'https://example.com');
- const html=renderServiceAreas(entries,ctx);assert.match(html,/Show all 18 areas/);assert.match(html,/class="area-region"/);
+ const html=renderServiceAreas(entries,ctx);assert.match(html,/Show 6 more areas/);assert.match(html,/class="area-region"/);
  const [before,after]=html.split('<details class="area-more">');assert.equal((before.match(/<li>/g)||[]).length,12);assert.equal((after.match(/<li>/g)||[]).length,6);
  for(const item of entries)assert.ok(html.includes(item.name));
 });
