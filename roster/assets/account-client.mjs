@@ -1,9 +1,9 @@
-import {createClient} from '@supabase/supabase-js';
+import {getSupabaseClient, loadAccountConfig} from './supabase-client.mjs';
 import {createSavedStore, GUEST_KEY, safeNext} from './account-model.mjs';
 import {decodeCatalogue} from './catalogue-data.mjs';
 import {renderCompactCard} from './catalogue-card.mjs';
 
-const config = ROSTER_ACCOUNT_CONFIG;
+let config = {configured:false, googleEnabled:false};
 const form = document.querySelector('[data-account-form]');
 const mode = form?.dataset.accountForm;
 const savedPage = document.querySelector('[data-saved-page]');
@@ -134,13 +134,19 @@ async function acceptUser(newUser) {
   render();
 }
 async function initialise() {
-  if(!config.configured) {
-    status='guest';render();
-    document.querySelectorAll('[data-account-setup]').forEach(el=>el.hidden=false);
-    setBusy(false);return;
-  }
+  const params=new URLSearchParams(location.search);
+  const code=params.get('code');
+  const providerError=params.has('error');
+  // Strip callback credentials even if loading configuration fails.
+  if(callback||mode==='reset-password') history.replaceState(null,'',location.pathname);
   try {
-    client=createClient(config.url,config.publishableKey,{auth:{flowType:'pkce',detectSessionInUrl:false,persistSession:true,autoRefreshToken:true,storageKey:'roster-auth-v1'}});
+    config=await loadAccountConfig();
+    if(!config.configured) {
+      status='guest';render();
+      document.querySelectorAll('[data-account-setup]').forEach(el=>el.hidden=false);
+      setBusy(false);return;
+    }
+    client=getSupabaseClient(config);
     let finishing=false;
     client.auth.onAuthStateChange((event,session)=>{
       if(event==='PASSWORD_RECOVERY') recoveryAllowed=true;
@@ -156,12 +162,7 @@ async function initialise() {
         }
       },0);
     });
-    const params=new URLSearchParams(location.search);
-    const code=params.get('code');
-    const providerError=params.has('error');
     if(callback||mode==='reset-password') {
-      // Remove callback credentials before rendering any error or navigation.
-      history.replaceState(null,'',location.pathname);
       if(providerError) throw new Error('Sign-in was cancelled or the link expired. Please try again.');
       if(!code||code.length>4000) throw new Error(mode==='reset-password'?'Open the reset link from your email to set a new password.':'This sign-in link is missing or has expired. Please sign in again.');
       finishing=true;

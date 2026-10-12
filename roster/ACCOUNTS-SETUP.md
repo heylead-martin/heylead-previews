@@ -2,7 +2,7 @@
 
 ## Current status
 
-The frontend integration is implemented on `service-areas-1253`. No Supabase project, Google OAuth client or email sender has been configured. `accounts.json` is deliberately empty. Account forms show a connection-pending message and cannot submit until configuration is supplied. Guest saved companies work now. This branch has not been published.
+The frontend integration is implemented on `service-areas-1253`. The owner supplied the new Roster project's public configuration on 12 October 2026. It is stored in the ignored `roster/.env.local`, and the read-only hosted connection check passes. The local CLI is initialized but linking requires the owner's CLI login. The saved-company migration is proposed and has not been applied remotely. Auth settings, email delivery and OAuth providers remain under the owner's control. This branch has not been published.
 
 The integration covers email/password sign-up and sign-in, verification email resend, password recovery, Google OAuth, sign-out, account navigation and a dedicated Saved page. Guest bookmarks can be explicitly imported into a signed-in account. Quote requests and listing claims remain previews.
 
@@ -14,23 +14,82 @@ Verification and reset emails need a configured email sender. Its cost depends o
 
 ## Connect the project
 
-1. Create a Supabase project on the Free plan in the owner's account. Keep the database password outside this public repository.
-2. Apply `supabase/migrations/202610120001_saved_companies.sql` once through Supabase's SQL editor or normal migration tooling. It creates the saved-company table and its private row policies. Do not disable RLS to work around errors.
-3. Copy the project URL and **publishable** key into `roster/accounts.json`. A legacy `anon` key is also accepted. These are public browser configuration. Never use a secret key, service-role key, database password or Google client secret here.
+Roster uses plain JavaScript ES modules, a static Node build and npm. It has no SSR framework or TypeScript. The existing official `@supabase/supabase-js` SDK is reused; `@supabase/ssr` and generated TypeScript types are not needed. Use Node 22 or later.
 
-```json
-{
-  "url": "https://YOUR_PROJECT_REF.supabase.co",
-  "publishableKey": "YOUR_PUBLIC_PUBLISHABLE_KEY",
-  "googleEnabled": false
-}
+The project is on Free in Singapore (`ap-southeast-1`). Do not enable paid add-ons. No server needs elevated database access for the implemented account features, so no secret key is required.
+
+From `roster/`, install dependencies and copy the template only if `.env.local` does not already exist:
+
+```sh
+npm ci --ignore-scripts
+cp -n .env.example .env.local
 ```
 
-The build rejects incomplete configuration and secret/service-role key types. RLS provides access control; a public key alone does not authorize reading other accounts' saved companies.
+Edit `.env.local` with the Project URL and publishable key. This static build uses its own explicit public prefix:
+
+```dotenv
+ROSTER_PUBLIC_SUPABASE_URL=
+ROSTER_PUBLIC_SUPABASE_PUBLISHABLE_KEY=
+ROSTER_PUBLIC_SUPABASE_GOOGLE_ENABLED=
+ROSTER_ACCOUNT_PREVIEW=
+```
+
+Leave the Google setting empty or false until the owner configures the provider. The build fails clearly for missing values, incomplete pairs or an elevated/legacy key. An explicit `ROSTER_ACCOUNT_PREVIEW=1` permits a disconnected design build only when both public values are absent. Shell environment values override `.env.local`; the file is parsed as data and never executed.
+
+`assets/supabase-client.mjs` is the shared browser-client module. It loads `/roster/accounts.public.json` at runtime and validates the settings. The build writes that file using an allowlist of public values. It is ignored by git, and no project key is embedded in the committed JavaScript bundle. The publishable key is necessarily visible to browsers that use the app, as described in [Supabase's key documentation](https://supabase.com/docs/guides/getting-started/api-keys). RLS controls access to users' saved companies.
+
+Never put secret keys, service-role keys, database passwords or Google client secrets in browser configuration. This implementation does not need `SUPABASE_SECRET_KEY`. If a future server requires one, leave it empty for the owner to provide outside source control.
+
+## Link and review the migration
+
+The official Supabase CLI is pinned as a local dev dependency. `supabase init` has already created `supabase/config.toml`; this file describes a local development stack and is not a request to change hosted Auth settings. Do not run `supabase config push` or enable providers as part of this setup.
+
+Run in your own terminal from `roster/`:
+
+```sh
+npm run supabase -- login
+npm run supabase:link
+```
+
+The link helper derives the project reference from `.env.local`. Complete the CLI sign-in and enter the database password locally if prompted. Do not paste either credential into chat, source files or shell command arguments. Local link state is under ignored `supabase/.temp/`.
+
+Review `supabase/migrations/202610120001_saved_companies.sql` before applying it. This is the complete proposed application schema:
+
+| Field | Purpose |
+| --- | --- |
+| `user_id` | Supabase Auth user UUID, deleted automatically when the account is deleted |
+| `company_slug` | Stable company URL slug, validated and unique per user |
+| `created_at` | Save timestamp generated by the database |
+
+The table has RLS enabled and forced. Signed-in users may select, insert and delete only rows with their own user ID. Anonymous access, updates and duplicate saves are denied. The company directory remains in the existing release/import files. Auth owns user identities; quote and claim previews do not create database records.
+
+**Approval required:** do not run `supabase db push` until Martin approves this migration. After approval and a successful link:
+
+```sh
+npm run supabase -- db push --dry-run
+npm run supabase -- db push
+npm run check:supabase -- --schema
+```
+
+Use a new migration for future schema changes. Do not bypass migration history with direct remote SQL changes. See [Supabase migration workflow](https://supabase.com/docs/guides/deployment/database-migrations). Type generation is not part of this plain JavaScript project. If it adopts TypeScript later, run `supabase gen types typescript --linked` into a source type file after the migration is applied.
+
+## Read-only connection check
+
+```sh
+npm run check:supabase
+```
+
+The check reads Auth settings using only the publishable key and prints success/failure without response bodies or credentials. `--schema` additionally issues an empty saved-company query and expects anonymous access to be denied. That check confirms the table is available and anonymous grants are restricted; it does not replace authenticated RLS tests.
+
+## Deploying public configuration
+
+The current GitHub Pages site publishes committed files. A plain git push cannot include the ignored runtime configuration. Before publishing account support, the deployment must generate `accounts.public.json` from environment variables and include it in the Pages artifact. Do not commit the key or upload `.env.local`, CLI state or `node_modules`. This change prepares local setup and does not modify the existing shared deployment pipeline.
+
+The generated public JSON belongs in the deployed website alongside the committed assets. Run `npm run build:accounts` in that artifact's `roster/` directory with the public environment variables set. Deploy it only after the migration and owner-managed Auth settings are ready.
 
 ## Email and redirect settings
 
-In Supabase Auth:
+For the owner to configure later in Supabase Auth. No settings have been changed by this setup:
 
 - Enable email/password sign-in and email confirmation. Set the minimum password length to 12 characters to match the forms.
 - Set Site URL to `https://previews.heylead.com/roster/`.
@@ -53,7 +112,7 @@ The existing shared HeyLead preview gate is separate from Roster accounts. Teste
 2. Create a Web application OAuth client. Use the Supabase callback URL shown in the Google provider panel, normally `https://YOUR_PROJECT_REF.supabase.co/auth/v1/callback`, as Google's authorized redirect URI.
 3. Enter the Google client ID and client secret into Supabase Auth's Google provider configuration and enable it. Keep the secret out of source files, chat and frontend configuration.
 4. Use only normal sign-in scopes: `openid`, `email` and `profile`. If the Google app is in testing mode, add the intended test users in Google Cloud.
-5. Set `googleEnabled` to `true` in `accounts.json` after the provider is ready, then rebuild.
+5. Set `ROSTER_PUBLIC_SUPABASE_GOOGLE_ENABLED=true` in `.env.local` after the owner has enabled the provider, then rebuild.
 
 The Google button redirects to Google's account chooser. It never accepts a Google password inside Roster. Follow [Supabase's Google guide](https://supabase.com/docs/guides/auth/social-login/auth-google) for current console steps.
 
@@ -79,7 +138,7 @@ node --test roster/scripts/*.test.mjs
 node roster/scripts/check-site.mjs
 ```
 
-Every site build regenerates `assets/accounts.js` with the current public configuration. Commit the generated bundle and HTML alongside source changes. Future imports do not modify account settings.
+Every site build regenerates `assets/accounts.js` without project keys and creates the ignored public runtime JSON separately. Commit the generated bundle and HTML alongside source changes. Future imports do not modify `.env.local`. A disconnected design preview can use `ROSTER_ACCOUNT_PREVIEW=1` when the public values are empty.
 
 To exercise the exact row policies using a local PostgreSQL installation:
 
@@ -99,8 +158,12 @@ After configuring Supabase, complete these checks with owner-controlled test acc
 6. Sign out and switch accounts. Confirm private saved lists never carry over. Verify database policies with two real test users as well as the local SQL test.
 7. Test a lost connection, reload and both sign-out actions. Review Supabase Auth logs for provider errors without copying tokens into reports.
 
-Local model and SQL tests cannot verify actual email delivery, Google consent or hosted project settings. Those activation checks remain pending until the project exists. Do not describe accounts as live before they pass.
+Local model and SQL tests cannot verify actual email delivery, Google consent or hosted project settings. Those activation checks remain pending until the owner configures Auth and approves the migration. Do not describe accounts as live before they pass.
 
-## Local validation on 12 October 2026
+## Initial local validation on 12 October 2026
 
 All 76 JavaScript tests passed, including eight account-state tests. The actual SQL migration passed the isolated PostgreSQL permission checks. The build generated 744 pages and passed the site link, metadata, schema and publication checks. Browser checks at desktop and 390-pixel mobile widths covered saving, reload persistence, removal, the empty list, loaded logos and disabled account forms before configuration. There were no console errors in those checks. Test bookmarks were removed afterward.
+
+## Project connection follow-up, 12 October 2026
+
+The supplied publishable key passed the hosted read-only Auth settings check. All 80 JavaScript tests pass, including configuration allowlisting, missing-env handling and runtime configuration errors. The actual migration also passed the isolated PostgreSQL row-policy checks. The site builds 744 pages and passes static validation with the real public configuration in an ignored runtime file. A scan confirms the supplied project key is absent from tracked files. Browser checks confirm email forms are enabled, Google remains disabled and no console errors occur. Hosted CLI linking requires the owner's login, and no remote migration or Auth setting has been changed.
