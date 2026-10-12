@@ -6,11 +6,11 @@ Only web format conversion and resizing were performed with macOS sips. Source P
 
 ## Behaviour
 
-The heading keeps “Find your next” fixed while five profession names and photos change together. Rotation runs every seven seconds, with manual category and pause controls. It pauses during keyboard interaction, while the page is hidden, and when the hero is offscreen. Reduced-motion users get manual controls with no autoplay or transition. Search values and the active search tab never change with a slide.
+The heading keeps “Find your next” fixed while five profession names and photos change together. Rotation runs every seven seconds, with a small pause/play control inside the image. The profession button row has been removed so it does not compete with the category navigation in the header. Rotation pauses during keyboard interaction, while the page is hidden, and when the hero is offscreen. Reduced-motion users get a static image without autoplay or transition. Search values and the active search tab never change with a slide.
 
 The first image loads eagerly. Remaining images load before they are shown, and a failed image leaves the current image visible.
 
-## Validation
+## Initial validation
 
 - Build: 741 pages. Static site validation passes, including local links, metadata and the 16 original company write-ups.
 - All 68 existing JavaScript tests pass.
@@ -18,6 +18,13 @@ The first image loads eagerly. Remaining images load before they are shown, and 
 - Typing pauses rotation. Manual profession changes preserve quick-search text, AI-search text and the selected search tab. AI search still opens the shortlist.
 - Responsive image decoding retries after a source change caused by resizing. Desktop-to-mobile-to-desktop checks pass.
 - Unpublished local preview: http://127.0.0.1:8881/roster/
+
+## Control simplification, 12 October 2026
+
+- Removed the five profession buttons beneath the photo and moved the pause/play button into its top-right corner.
+- Rebuilt 744 pages. Static site validation passes.
+- Browser checks at 320, 390 and 1100 pixels confirm the compact layout. The pause control remains 44 pixels square and does not overlap the image caption.
+- Automatic photo, heading and destination-link changes work. Pause keeps the current slide visible; resume restarts rotation.
 
 ## Exact image-generation prompts and files
 

@@ -2,10 +2,8 @@ const hero = document.querySelector('[data-profession-hero]');
 if (hero) {
   const photos = [...hero.querySelectorAll('[data-profession-photo]')];
   const words = [...hero.querySelectorAll('[data-profession-word]')];
-  const buttons = [...hero.querySelectorAll('[data-profession]')];
   const pause = hero.querySelector('[data-profession-pause]');
   const browse = hero.querySelector('[data-profession-browse]');
-  const live = hero.querySelector('[data-profession-live]');
   const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
   let active = 0;
   let paused = motion.matches;
@@ -71,37 +69,26 @@ if (hero) {
     pause.title = label;
   }
 
-  async function show(index, manual = false) {
+  async function show(index) {
     const version = ++request;
     stopTimer();
-    if (manual) {
-      paused = true;
-      updatePause();
-    }
     const ready = await loadPhoto(index);
     if (version !== request) return;
     if (!ready) {
-      if (manual) live.textContent = 'This photo is unavailable. Choose another profession.';
       schedule();
       return;
     }
     // A pending image must not resume a slide change while someone types.
-    if (!manual && (paused || motion.matches || document.hidden || !visible ||
-      (hero.contains(document.activeElement) && document.activeElement !== pause))) return;
+    if (paused || motion.matches || document.hidden || !visible ||
+      (hero.contains(document.activeElement) && document.activeElement !== pause)) return;
     active = index;
     photos.forEach((photo, i) => photo.classList.toggle('is-active', i === active));
     words.forEach((word, i) => word.classList.toggle('is-active', i === active));
-    buttons.forEach((button, i) => button.setAttribute('aria-pressed', String(i === active)));
-    browse.href = buttons[active].dataset.professionUrl;
-    if (manual) live.textContent = `Showing ${buttons[active].textContent.trim()}. Image rotation paused.`;
+    browse.href = photos[active].dataset.professionUrl;
     schedule();
     if (!motion.matches) void loadPhoto(nextPhoto());
   }
 
-  buttons.forEach((button, index) => {
-    button.disabled = false;
-    button.addEventListener('click', () => show(index, true));
-  });
   pause.addEventListener('click', () => {
     paused = !paused;
     ++request;
