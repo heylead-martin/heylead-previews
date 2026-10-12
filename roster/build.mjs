@@ -1097,6 +1097,7 @@ for (const company of publishedCompanies) {
 
 // Keep previously published, withdrawn URLs useful without restoring excluded profiles.
 const retired=[
+  {slug:'skywave-solutions-pte-ltd',name:'Skywave Solutions Pte. Ltd.',target:'/roster/electrician/',trade:'electrical'},
   {slug:'billy-aircon',name:'Billy Aircon',target:'/roster/aircon-servicing/',trade:'aircon servicing'},
   {slug:'aeon-environmental-services',name:'Aeon Environmental Services',target:'/roster/home-cleaning/',trade:'home cleaning'},
   {slug:'city-cleaning',name:'City Cleaning',target:'/roster/home-cleaning/',trade:'home cleaning'},

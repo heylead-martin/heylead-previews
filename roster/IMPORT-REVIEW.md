@@ -18,7 +18,7 @@ Verified SHA256 before import:
 - All 16 original source write-ups remain protected. Matching, sourced postals fill missing fields for 1st Electrical and SK Electrical without replacing their text. Billy Aircon remains withheld under its existing flag.
 - Company-site widget scores and self-reported scores are excluded from averages. Trustpilot TrustScores remain visible as separate sources. Full profiles without a real rating show "No rating yet" rather than sample figures.
 - Per-unit price calculations and minimum quantities supplied by the release appear alongside the original totals and conditions.
-- All 739 generated pages remain noindex. Authentication and the account, quote and claim previews are unchanged.
+- All 740 generated pages remain noindex. Authentication and the account, quote and claim previews are unchanged.
 
 ## Validation
 
