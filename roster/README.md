@@ -51,7 +51,7 @@ Trade pages lead with up to eight full-bar profiles, ordered by evidence and the
 ## Validation
 
 ```sh
-node --test roster/scripts/import-db.test.mjs roster/scripts/presentation.test.mjs roster/scripts/home-snapshot.test.mjs roster/scripts/service-areas.test.mjs roster/scripts/job-match.test.mjs
+node --test roster/scripts/import-db.test.mjs roster/scripts/presentation.test.mjs roster/scripts/home-snapshot.test.mjs roster/scripts/service-areas.test.mjs roster/scripts/job-match.test.mjs roster/scripts/quote-contact.test.mjs
 python3 -m unittest discover -s roster/scripts -p 'test_*.py'
 node roster/scripts/check-site.mjs
 ```
@@ -101,3 +101,6 @@ A shortlist starts with five companies and can expand to ten. Named jobs must ma
 Every fresh shortlist selects all visible companies. Switching between five and ten selects the new visible set; clicking the already-active size keeps manual choices. Visitors can untick individual companies, clear the selection or select all again. Editing the brief clears stale results and selections until the next search. The prominent Request a quote button sits at the top of the desktop sidebar and above the mobile results, and still opens only a preview. Logo tiles keep fitted artwork proportions and centered initials without the extra LOGO label. Selection checkboxes are 32 pixels within a 44-pixel touch target. The dialog shows the exact brief and selected companies. Finish preview sends nothing and does not collect personal contact details. Preview forms stay disabled until their local handler loads. Descriptions are carried in URL fragments rather than HTTP query parameters; selections stay in memory. There is no AI service, quote API, new database or change to the existing quote panel.
 
 See `AI-SEARCH-PREVIEW.md` for validation and local review links. Publication still requires Martin's approval.
+
+
+The quote sidebar beta now accepts a job description and region, then shows a WhatsApp/email contact preview with explicit recipient permission. Nothing is sent or persisted. Contact details are cleared when the dialog closes. See [AI-SEARCH-PREVIEW.md](AI-SEARCH-PREVIEW.md) for matching, delivery boundaries and verification. Publishing still requires Martin's approval.

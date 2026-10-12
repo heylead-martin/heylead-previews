@@ -1,4 +1,5 @@
 import {renderMatchPage} from './lib/job-search.mjs';
+import {renderQuoteComposer} from './lib/quote-flow.mjs';
 import {renderAreaFilter} from './lib/service-areas.mjs';
 import {priceOption} from './scripts/import-db.mjs';
 import { readFile, writeFile, mkdir, rm } from "node:fs/promises";
@@ -23,7 +24,7 @@ const origin = "https://previews.heylead.com/roster";
 let checked = "9 Oct 2026 and 10 Oct 2026";
 // Content hashes keep cached assets in sync with each generated page.
 const assetVersions = Object.fromEntries(await Promise.all(
-  ["job-search.css", "job-search.js", "job-results.js", "service-areas.css", "home.css", "home.js", "site.css", "directory.css", "experience.css", "form.js", "directory.js", "experience.js", "expanded.css", "logo-fit.css", "catalogue.js", "catalogue-card.mjs", "claim.js", "review-preview.mjs"].map(async (name) => [
+  ["quote-flow.css", "quote-start.js", "job-search.css", "job-search.js", "job-results.js", "service-areas.css", "home.css", "home.js", "site.css", "directory.css", "experience.css", "form.js", "directory.js", "experience.js", "expanded.css", "logo-fit.css", "catalogue.js", "catalogue-card.mjs", "claim.js", "review-preview.mjs"].map(async (name) => [
     name,
     createHash("sha256").update(await readFile(path.join(root, "assets", name))).digest("hex").slice(0, 12)
   ])
@@ -392,6 +393,7 @@ function abs(pathname) {
    Line icons on a 24 grid. They are decorative. Every one is aria-hidden. */
 
 const iconPaths = {
+  mail: `<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 6 9 7 9-7"/>`,
   search: `<circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/>`,
   bookmark: `<path d="M6 4h12v17l-6-4-6 4z"/>`,
   sliders: `<path d="M4 7h6m4 0h6M4 17h10m4 0h2"/><circle cx="12" cy="7" r="2"/><circle cx="16" cy="17" r="2"/>`,
@@ -633,7 +635,7 @@ ${shareImage ? `<meta property="og:image" content="${esc(shareImage)}"><meta nam
 <link rel="stylesheet" href="/roster/assets/experience.css?v=${assetVersions["experience.css"]}">
 <link rel="stylesheet" href="/roster/assets/expanded.css?v=${assetVersions["expanded.css"]}">
 <link rel="stylesheet" href="/roster/assets/service-areas.css?v=${assetVersions["service-areas.css"]}">
-<link rel="stylesheet" href="/roster/assets/logo-fit.css?v=${assetVersions["logo-fit.css"]}">${bodyClass === "home-page" ? `\n<link rel="stylesheet" href="/roster/assets/home.css?v=${assetVersions["home.css"]}">` : ""}${["home-page","match-page"].includes(bodyClass) ? `\n<link rel="stylesheet" href="/roster/assets/job-search.css?v=${assetVersions["job-search.css"]}">` : ""}
+<link rel="stylesheet" href="/roster/assets/logo-fit.css?v=${assetVersions["logo-fit.css"]}">${bodyClass === "home-page" ? `\n<link rel="stylesheet" href="/roster/assets/home.css?v=${assetVersions["home.css"]}">` : ""}${["home-page","match-page"].includes(bodyClass) ? `\n<link rel="stylesheet" href="/roster/assets/job-search.css?v=${assetVersions["job-search.css"]}">` : ""}${["directory-page","match-page"].includes(bodyClass) ? `\n<link rel="stylesheet" href="/roster/assets/quote-flow.css?v=${assetVersions["quote-flow.css"]}">` : ""}
 <script type="application/ld+json">${graph}</script>
 </head>
 <body${bodyClass ? ` class="${bodyClass}"` : ""}>
@@ -648,7 +650,7 @@ ${renderFooter()}
 <script src="/roster/assets/experience.js?v=${assetVersions["experience.js"]}"></script>${bodyClass === "home-page" ? `\n<script type="module" src="/roster/assets/home.js?v=${assetVersions["home.js"]}"></script>` : ""}${bodyClass === "home-page" ? `\n<script type="module" src="/roster/assets/job-search.js?v=${assetVersions["job-search.js"]}"></script>` : ""}${bodyClass === "match-page" ? `\n<script type="module" src="/roster/assets/job-results.js?v=${assetVersions["job-results.js"]}"></script>` : ""}
 ${bodyClass === "claim-page" ? `<script type="module" src="/roster/assets/claim.js?v=${assetVersions["claim.js"]}"></script>` : ""}
 ${bodyClass.split(" ").includes("company-page") ? `<script type="module" src="/roster/assets/review-preview.mjs?v=${assetVersions["review-preview.mjs"]}"></script>` : ""}
-${bodyClass === "directory-page" ? `<script type="module" src="/roster/assets/catalogue.js?v=${assetVersions["catalogue.js"]}"></script>` : ""}
+${bodyClass === "directory-page" ? `<script type="module" src="/roster/assets/catalogue.js?v=${assetVersions["catalogue.js"]}"></script><script type="module" src="/roster/assets/quote-start.js?v=${assetVersions["quote-start.js"]}"></script>` : ""}
 </body>
 </html>
 `;
@@ -661,7 +663,7 @@ ${bodyClass === "directory-page" ? `<script type="module" src="/roster/assets/ca
   const withoutSearchForms = nonPreviewHtml
     .replace(/<form action="\/roster\/search\/" method="get" class="hero-quick-form">[\s\S]*?<\/form>/g, "")
     .replace(/<form class="hero-guided-form" data-job-start method="dialog"><fieldset disabled>[\s\S]*?<\/form>/g, "")
-    .replace(/<form data-job-edit method="dialog"><fieldset disabled>[\s\S]*?<\/form>/g, "");
+    .replace(/<form data-(?:job-edit|quote-start|quote-contact) method="dialog"><fieldset disabled>[\s\S]*?<\/form>/g, "");
   if (/<form[\s>]/i.test(withoutSearchForms)) {
     throw new Error("A form element leaked into " + canonicalPath);
   }
@@ -804,7 +806,7 @@ function renderCollection(spec, companies, crumbs) {
     isAircon ? airconSubnav(canonicalPath) : "",
     shortlist(companies, spec.service),
     `<details class="list-explainer"><summary>About this ${esc(categoryLabel.toLowerCase())} shortlist${icon("chevron")}</summary><p>${esc(spec.intro[0])}</p>${notes}<p><a href="/roster/how-it-works/">How the list is made</a>. Checked ${checked}.</p></details>`,
-    `</div><aside class="discovery-rail"><section class="help-card"><span class="rail-symbol">${icon("list")}</span><p class="kicker">A LITTLE HOMEWORK HELPS</p><h2>A little clarity.<br>A better choice.</h2><p>Look beyond a star rating. A few details make the choice easier.</p><ol><li><span>1</span>Compare the price for your actual job.</li><li><span>2</span>Read what suits you, and what might not.</li><li><span>3</span>Call or WhatsApp the company directly.</li></ol><a href="/roster/how-it-works/">Get to know Roster${icon("arrow")}</a></section><section class="quote-teaser"><span class="beta">BETA PREVIEW</span><h2>One job.<br>A few options.</h2><p>Try a quote request for up to three companies.</p><a class="btn btn-solid" href="#quote-request">Preview a request${icon("arrow")}</a><small>Preview only. Nothing is sent or stored.</small></section><div class="rail-note">${icon("calendar")}<p>Facts last checked<br><strong>${esc(checked)}</strong><br>Each figure links to its source.</p></div></aside></div>`,
+    `</div><aside class="discovery-rail" aria-label="Get quotes"><details class="quote-rail-disclosure" open><summary>Get quotes for your job ${icon("sparkle")}</summary>${renderQuoteComposer({icon})}</details><div class="rail-note">${icon("calendar")}<p>Facts last checked<br><strong>${esc(checked)}</strong><br>Each figure links to its source.</p></div></aside></div>`,
     tradeId !== "all" ? `<div id="quote-request">${renderForm(spec.jobs, companies.filter(c => !c.imported), "ask")}</div>` : `<div id="quote-request" class="search-end"><h2>Start with the service you need</h2><p>Choose a service above to explore its shortlist and preview a quote request.</p></div>`,
     renderFaq(spec.faqs, "A few things worth knowing"),
     `<section class="browse-more"><p class="kicker">WHILE YOU'RE HERE</p><h2>A little help around the home.</h2><div>${trades.filter(t => t.id !== tradeId).map(t => `<a href="/roster/${t.slug}/">${icon(tradeIcon[t.id])}<span>${esc(t.name)}</span>${icon("arrow")}</a>`).join("")}</div></section>`

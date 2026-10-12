@@ -8,12 +8,19 @@ The homepage now puts search in the hero. Quick search opens the existing compan
 
 The dedicated shortlist starts with five selected companies. Switching to ten selects all ten, and switching back selects the five shown. Visitors can untick individual companies, clear the selection or select all again. Clicking the already-active shortlist size preserves those manual choices. Five is the recommended default because it gives a useful comparison without making the first decision feel too large. Every card shows the real average rating, review count, published price details, services and a short explanation of the match.
 
-Request a quote now appears at the top of the desktop sidebar and above the mobile results, with a clear beta notice. The quote preview displays the user's brief and the exact selected companies. Logo tiles are larger and retain their artwork proportions; initials are centered without a LOGO label. Selection checkboxes are 32 pixels with at least a 44-pixel touch target. Nothing is sent. There is no account requirement, contact-data collection, quote endpoint or backend added in this update. The original quote panel is unchanged.
+The directory right rail now has a shared quote composer: a free-text job, a Singapore region selector and Get started. On smaller screens it becomes an expandable entry above the results. The shortlist uses the same composer in its sidebar, with an optional manual service choice and precise town choices. On mobile it appears before the shortlist. The older three-company form at the foot of trade pages is unchanged.
+
+Get started finds five selected companies and opens a contact preview. Existing manual exclusions are preserved if the brief is unchanged. Visitors choose WhatsApp (the default) or email, review the exact selected companies and explicitly allow those companies to reply about the job. Copy explains that a future live request would share the chosen contact detail and brief with those companies, who would respond individually. Roster does not promise to collect or deliver quotes itself.
+
+The contact step is a local preview only. It validates email format or a Singapore/international mobile number format, but does not verify WhatsApp registration. Contact inputs have no submission names, are never placed in URLs or browser storage, and are cleared on channel change, close, Escape, completion and page exit. There is no messaging endpoint, real AI connection or delivery backend. The final button says Preview request and the completion message explicitly says nothing was sent. No CAPTCHA or false submission success is simulated.
+
+Request a quote remains above the results, with a fixed mobile action. Five or ten shown companies start selected; each can be removed before proceeding. Logo tiles preserve the fitted source artwork and centered initials. Selection checkboxes remain 32 pixels with at least a 44-pixel touch target.
 
 ## Matching and boundaries
 
 - Keyword rules identify a service, specific jobs and a town. Multiple services or towns require a manual choice. Unsupported requests do not receive arbitrary recommendations.
 - Every detected job must match the company's listed offerings. The beta does not understand unrestricted natural language, synonyms or negation as a real language model would.
+- Region choices require explicit region or islandwide coverage. A single town in that region narrows the match further; a conflicting town or multiple towns requires a correction. A business covering one town is never presented as covering an entire region.
 - Stated town coverage ranks first, followed by region coverage and islandwide coverage. Companies without coverage evidence are excluded when a town is chosen. Business addresses never imply service coverage.
 - Completeness of listing details, real average rating and review count order companies within each coverage group. Listings remain unpaid.
 - Timing, budget, availability and suitability must be confirmed directly. An example published price can describe another service; its name and conditions remain visible and it is never presented as a quote for the whole request.
@@ -22,7 +29,7 @@ Request a quote now appears at the top of the desktop sidebar and above the mobi
 
 ## Verification
 
-- 65 JavaScript tests pass, including 10 new parser, coverage, ranking, selection and real-data tests.
+- 68 JavaScript tests pass, including parser, region coverage, ranking, selection, contact-format and real-data tests.
 - Rebuilt 741 pages. Site checks pass for internal links, fragments, metadata, noindex, schema restrictions, logos, publication totals and the 16 protected write-ups.
 - Checked responsive widths of 375, 390, 768, 1024 and 1440 pixels. No horizontal page overflow was found.
 - Browser checks cover normal search, keyboard-operated hero tabs, example jobs, automatic service and town detection, manual overrides, ambiguous requests, URL reload, individual selection, select all, switching five and ten, and the quote preview.
@@ -40,3 +47,13 @@ Request a quote now appears at the top of the desktop sidebar and above the mobi
 The preview server is local to this computer. Production preview authentication is unchanged.
 
 Screenshots are saved beside this worktree in the task workspace: `roster-search-hero.png`, `roster-job-shortlist.png`, `roster-shortlist-mobile.png` and `roster-quote-preview.png`.
+
+
+## Quote sidebar verification - 12 October 2026
+
+- Directory description and region handoff, then the contact modal with five selected companies.
+- WhatsApp and email choices show the appropriate field and sharing explanation.
+- Invalid phone numbers and missing permission block preview completion. Successful previews clear all contact inputs without sending.
+- Ten-company selection, manual deselection and preserving exclusions on the already-active size.
+- Region/town conflicts clear stale results. Empty and unsupported descriptions remain explicit.
+- Responsive review includes desktop, laptop and phone layouts. The dialog remains scrollable when its recipient disclosure is expanded.

@@ -1,21 +1,20 @@
 import {decodeCatalogue} from './catalogue-data.mjs?v=20261012-areas';
-import {matchJob,selectedVisible} from './job-match.mjs?v=20261012-search';
+import {matchJob,selectedVisible} from './job-match.mjs?v=20261012-quotes';
+import {validWhatsAppNumber} from './quote-contact.mjs?v=20261012-quotes';
 import {renderLogo} from './catalogue-card.mjs?v=20261012-areas';
 const esc=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const root=document.querySelector('[data-job-matches]');
 if(root){
  const $=selector=>root.querySelector(selector);
  const form=$('[data-job-edit]'),input=$('#match-job'),trade=$('[data-job-trade]'),area=$('[data-job-area]');
- const dialog=$('[data-quote-dialog]');let rows=[],matches=[],selected=[],limit=5,intent=null,loaded=false,opener=null;
+ const dialog=$('[data-quote-dialog]'),contactForm=$('[data-quote-contact]'),phone=$('#quote-phone'),email=$('#quote-email'),consent=$('[data-quote-consent]');let rows=[],matches=[],selected=[],limit=5,intent=null,loaded=false,opener=null;
  const params=new URLSearchParams(location.hash.slice(1));input.value=(params.get('job')||'').slice(0,1200);trade.value=params.get('trade')||'';area.value=params.get('area')??'auto';if(!area.selectedOptions.length)area.value='auto';limit=params.get('limit')==='10'?10:5;
  function updateHash(){const p=new URLSearchParams();if(input.value.trim())p.set('job',input.value.trim().slice(0,1200));if(trade.value)p.set('trade',trade.value);if(area.value!=='auto')p.set('area',area.value);if(limit===10)p.set('limit','10');history.replaceState(null,'',location.pathname+(p.size?'#'+p.toString():''));}
  function announce(text){$('[data-match-live]').textContent=text;}
  function current(){return matches.slice(0,limit);}
  function selection(){
   selected=selectedVisible(selected,matches,limit);
-  const recipients=current().filter(c=>selected.includes(c.slug));
-  $('[data-selected-count]').textContent=`${selected.length} selected`;$('[data-quote-count]').textContent=selected.length;$('[data-mobile-count]').textContent=selected.length;
-  $('[data-quote-recipients]').innerHTML=recipients.length?recipients.map(c=>`<li>${esc(c.name)}</li>`).join(''):'<li class="no-recipients">Select companies to build your request.</li>';
+  $('[data-selected-count]').textContent=`${selected.length} selected`;$('[data-mobile-count]').textContent=selected.length;
   root.querySelectorAll('[data-quote-open]').forEach(b=>b.disabled=!selected.length);
   root.querySelectorAll('[data-select-company]').forEach(el=>{el.checked=selected.includes(el.value);el.closest('.match-card').classList.toggle('is-selected',el.checked);el.nextElementSibling.textContent=el.checked?'Selected':'Select';});
   $('[data-mobile-selection]').hidden=!matches.length;
@@ -39,21 +38,22 @@ if(root){
  function search(focus=false){
   if(!loaded)return;selected=[];$('[data-match-notice]').hidden=true;dialog.close();
   const result=matchJob(rows,input.value,{trade:trade.value,area:area.value});matches=input.value.trim()?result.matches:[];intent=result.intent;selected=current().map(c=>c.slug);render();updateHash();
-  if(!input.value.trim())showEmpty('What needs doing?','Write a sentence about your job above. Add your town to find companies that state coverage for your area.');
-  else if(intent.needsTrade)showEmpty('Which service do you need?','Choose a service above to guide this beta search. For jobs across several trades, start with one service at a time.');
-  else if(intent.needsArea)showEmpty('Choose the area for this job.','Your description mentions more than one town. Select the job area above, or choose Any area.');
-  else if(!matches.length)showEmpty('No close matches this time.','No published companies match all the detected services and stated area coverage. Try a simpler description or choose Any area to broaden your search.');
+  if(!input.value.trim())showEmpty('What needs doing?','Write a sentence about your job in the quote form. Add your town to find companies that state coverage for your area.');
+  else if(intent.needsTrade)showEmpty('Which service do you need?','Open Choose a service manually in the quote form to guide this beta search. For jobs across several trades, start with one service at a time.');
+  else if(intent.needsArea)showEmpty('Choose the area for this job.',intent.areaConflict?'The town in your description is outside the selected region. Update your description or area so they agree.':'Your description mentions more than one town. Select a specific town, or choose Anywhere in Singapore.');
+  else if(!matches.length)showEmpty('No close matches this time.','No published companies match all the detected services and stated area coverage. Try a simpler description or choose Anywhere in Singapore to broaden your search.');
+  if(intent.needsTrade)$('[data-service-refine]').open=true;
   if(matches.length){announce(`${Math.min(limit,matches.length)} companies shown. ${selected.length} selected. You can untick any company.`);if(focus)$('#match-results-title').focus();}
   else {announce($('[data-empty-title]').textContent);if(focus){$('[data-empty-title]').tabIndex=-1;$('[data-empty-title]').focus();}}
  }
  async function load(){
-  $('[data-match-loading]').hidden=false;$('[data-match-error]').hidden=true;
-  try{const response=await fetch(root.dataset.index,{credentials:'same-origin'});if(!response.ok)throw new Error('Company index unavailable');rows=decodeCatalogue(await response.json());loaded=true;search();}
+  $('[data-match-loading]').hidden=false;$('[data-match-error]').hidden=true;form.querySelector('[type=submit]').disabled=true;
+  try{const response=await fetch(root.dataset.index,{credentials:'same-origin'});if(!response.ok)throw new Error('Company index unavailable');rows=decodeCatalogue(await response.json());loaded=true;search();if(params.get('contact')==='1'){params.delete('contact');if(selected.length)openQuote(form.querySelector('[type=submit]'));}}
   catch{$('[data-match-error]').hidden=false;}
-  finally{$('[data-match-loading]').hidden=true;}
+  finally{$('[data-match-loading]').hidden=true;form.querySelector('[type=submit]').disabled=false;}
  }
- form.addEventListener('submit',event=>{event.preventDefault();if(!input.value.trim()){input.setCustomValidity('Tell us a little about the job.');input.reportValidity();return;}search(true);});
- function invalidate(){if(!loaded)return;matches=[];selected=[];selection();$('[data-match-results]').hidden=true;$('[data-match-notice]').hidden=true;showEmpty('Refresh your shortlist.','Your brief has changed. Choose Find matches to update the companies.');}
+ form.addEventListener('submit',event=>{event.preventDefault();if(!input.value.trim()){input.setCustomValidity('Tell us a little about the job.');input.reportValidity();return;}if(!matches.length)search(true);if(selected.length)openQuote(form.querySelector('[type=submit]'));else if(matches.length){announce('Select at least one company before continuing.');$('#match-results-title').focus();}});
+ function invalidate(){if(!loaded)return;matches=[];selected=[];selection();$('[data-match-results]').hidden=true;$('[data-match-notice]').hidden=true;showEmpty('Refresh your shortlist.','Your brief has changed. Choose Get started to update the companies.');}
  input.addEventListener('input',()=>{input.setCustomValidity('');invalidate();});trade.addEventListener('change',invalidate);area.addEventListener('change',invalidate);
  form.querySelector('fieldset').disabled=false;
  $('[data-match-retry]').addEventListener('click',load);
@@ -61,10 +61,36 @@ if(root){
  $('[data-match-cards]').addEventListener('change',event=>{const checkbox=event.target.closest('[data-select-company]');if(!checkbox)return;selected=checkbox.checked?[...selected,checkbox.value]:selected.filter(slug=>slug!==checkbox.value);selection();});
  $('[data-select-all]').addEventListener('click',()=>{selected=current().map(c=>c.slug);selection();announce(`${selected.length} companies selected.`);});
  $('[data-clear-selection]').addEventListener('click',()=>{selected=[];selection();announce('Selection cleared.');});
- root.querySelectorAll('[data-quote-open]').forEach(button=>button.addEventListener('click',()=>{if(!selected.length)return;opener=button;$('[data-quote-brief]').textContent=input.value.trim();$('[data-quote-list]').innerHTML=current().filter(c=>selected.includes(c.slug)).map(c=>`<li>${renderLogo(c)}<span>${esc(c.name)}</span></li>`).join('');dialog.showModal();}));
- function close(){dialog.close();opener?.focus();}
+ function channel(){return contactForm.querySelector('[name="reply-channel"]:checked').value;}
+ function updateChannel(){
+  const whatsapp=channel()==='whatsapp';
+  $('[data-contact-whatsapp]').hidden=!whatsapp;$('[data-contact-email]').hidden=whatsapp;
+  phone.disabled=!whatsapp;phone.required=whatsapp;email.disabled=whatsapp;email.required=!whatsapp;
+  phone.value='';email.value='';phone.setCustomValidity('');consent.checked=false;
+  $('#quote-sharing').textContent=`In the live service, the ${selected.length} selected ${selected.length===1?'company would':'companies would'} receive your job details and ${whatsapp?'WhatsApp number':'email address'}, then reply individually. You choose whom to book.`;
+ }
+ function openQuote(button){
+  if(!selected.length)return;opener=button;contactForm.reset();updateChannel();
+  $('[data-quote-brief]').textContent=input.value.trim();$('[data-quote-area]').textContent=intent.area?.name||'Anywhere in Singapore';
+  $('[data-contact-count]').textContent=selected.length;
+  $('[data-quote-list]').innerHTML=current().filter(c=>selected.includes(c.slug)).map(c=>`<li>${renderLogo(c)}<span>${esc(c.name)}</span></li>`).join('');
+  $('.quote-recipient-review').open=false;dialog.showModal();$('#quote-dialog-title').focus();
+ }
+ root.querySelectorAll('[data-quote-open]').forEach(button=>button.addEventListener('click',()=>openQuote(button)));
+ function close(){dialog.close();}
  root.querySelectorAll('[data-quote-close]').forEach(button=>button.addEventListener('click',close));
- $('[data-quote-finish]').addEventListener('click',()=>{close();$('[data-match-notice]').textContent=`Preview complete for ${selected.length} ${selected.length===1?'company':'companies'}. No quote requests were sent.`;$('[data-match-notice]').hidden=false;announce($('[data-match-notice]').textContent);});
- dialog.addEventListener('close',()=>opener?.focus());
+ contactForm.querySelectorAll('[name="reply-channel"]').forEach(radio=>radio.addEventListener('change',updateChannel));
+ phone.addEventListener('input',()=>phone.setCustomValidity(''));
+ contactForm.addEventListener('submit',event=>{
+  event.preventDefault();
+  if(channel()==='whatsapp'&&!validWhatsAppNumber(phone.value)){phone.setCustomValidity('Enter an 8-digit Singapore mobile number, or an international number with its country code.');phone.reportValidity();return;}
+  if(!contactForm.reportValidity())return;
+  const method=channel()==='whatsapp'?'WhatsApp':'email';
+  close();$('[data-match-notice]').textContent=`Preview complete: ${selected.length} ${selected.length===1?'company':'companies'}, with replies by ${method}. Nothing was sent and your contact details have been cleared.`;$('[data-match-notice]').hidden=false;announce($('[data-match-notice]').textContent);
+ });
+ // Keep contact details out of storage, links and network requests, including on Escape.
+ dialog.addEventListener('close',()=>{contactForm.reset();phone.value='';email.value='';phone.setCustomValidity('');opener?.focus();});
+ window.addEventListener('pagehide',()=>{phone.value='';email.value='';consent.checked=false;});
+ contactForm.querySelector('fieldset').disabled=false;
  await load();
 }

@@ -26,6 +26,15 @@ test('Town coverage ranks ahead of region and islandwide; missing or nonmatching
  assert.deepEqual(matchJob(rows,'My sink is leaking in Bedok').matches.map(c=>c.slug),['town','region','island']);
  assert.equal(matchJob(rows,'My sink is leaking in Bedok',{area:''}).matches.length,5);
 });
+test('Region selection requires region coverage, while an explicit town gives more precise matches',()=>{
+ const rows=[company('island',['Islandwide']),company('town',['Bedok']),company('region',['East']),company('unknown',[]),company('elsewhere',['North'])];
+ assert.deepEqual(matchJob(rows,'My sink is leaking',{area:'region:east'}).matches.map(c=>c.slug),['region','island']);
+ assert.deepEqual(matchJob(rows,'My sink is leaking in Bedok',{area:'region:east'}).matches.map(c=>c.slug),['town','region','island']);
+ assert.equal(interpretJob('My sink is leaking in Woodlands',{area:'region:east'}).areaConflict,true);
+ assert.equal(matchJob(rows,'My sink is leaking in Woodlands',{area:'region:east'}).matches.length,0);
+ assert.equal(interpretJob('Plumbing in Bedok or Tampines',{area:'region:east'}).needsArea,true);
+ assert.equal(interpretJob('Plumbing',{area:'region:north-east'}).area.region,'North-East');
+});
 test('Every named job must be listed, and office addresses never create coverage claims',()=>{
  const rows=[company('both',['Islandwide']),company('sink-only',['Bedok'],{offerings:['sink plumbing']}),company('office',[],{area:'Bedok'}),company('wrong-trade',['Bedok'],{category:'cleaning'})];
  const r=matchJob(rows,'My sink is leaking in Bedok');assert.deepEqual(r.matches.map(c=>c.slug),['both']);

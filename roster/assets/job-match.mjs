@@ -1,4 +1,4 @@
-import {planningAreas,coverageMatch,findArea} from './service-areas.mjs';
+import {planningAreas,coverageMatch,findArea,regions,areaSlug} from './service-areas.mjs';
 
 export const serviceTypes = [
   {id:'aircon',name:'Aircon',pattern:/\b(?:air\s?con|air\s?conditioning|air conditioner|ac unit)\b/},
@@ -49,9 +49,12 @@ export function interpretJob(text,{trade:override='',area:areaOverride='auto'}={
   const validOverride=serviceTypes.some(t=>t.id===override)?override:'';
   const trade=validOverride||(trades.length===1?trades[0]:'');
   const areas=planningAreas.filter(a=>new RegExp(`\\b${a.name.toLowerCase().replace(/-/g,' ')}\\b`).test(positive));
-  const area=areaOverride==='auto'?(areas.length===1?areas[0]:null):findArea(areaOverride);
+  const region=Object.keys(regions).find(name=>areaOverride===`region:${areaSlug(name)}`);
+  // A named town within the selected region remains the more precise job location.
+  const conflict=!!region&&areas.some(a=>a.region!==region);
+  const area=region?(areas.length===1&&!conflict?areas[0]:{name:`${region} region`,region,slug:areaOverride,kind:'region'}):areaOverride==='auto'?(areas.length===1?areas[0]:null):findArea(areaOverride);
   return {trade,tradeName:serviceTypes.find(t=>t.id===trade)?.name||'',jobs:jobs.filter(j=>j.trade===trade),area,
-    needsTrade:!trade,needsArea:areaOverride==='auto'&&areas.length>1,detectedTrades:trades,detectedAreas:areas,
+    needsTrade:!trade,needsArea:conflict||((areaOverride==='auto'||!!region)&&areas.length>1),areaConflict:conflict,detectedTrades:trades,detectedAreas:areas,
     preferences:{timing:/\b(?:today|tonight|tomorrow|urgent|asap|weekend|emergency)\b/.test(query),budget:/\$|\b(?:budget|under \d|less than \d|cheap|affordable)\b/.test(query)}};
 }
 export function matchJob(rows,text,options={}) {
@@ -61,7 +64,10 @@ export function matchJob(rows,text,options={}) {
     if(c.category!==intent.trade)return [];
     const offerings=(c.offerings||[]).join(' ').toLowerCase();
     if(intent.jobs.some(job=>!job.offer.test(offerings)))return [];
-    const coverage=intent.area?coverageMatch(c.serviceAreas,intent.area.slug):null;
+    const coverage=intent.area?.kind==='region'
+      ? c.serviceAreas?.includes(intent.area.region)?{rank:1,kind:'region',label:`Serves the ${intent.area.region} region`}
+        :c.serviceAreas?.includes('Islandwide')?{rank:2,kind:'islandwide',label:'Islandwide'}:null
+      :intent.area?coverageMatch(c.serviceAreas,intent.area.slug):null;
     if(intent.area&&(!coverage||coverage.kind==='unstated'))return [];
     const reasons=[intent.jobs.length?`Lists ${intent.jobs.map(j=>j.label.toLowerCase()).join(' and ')}`:`Listed under ${intent.tradeName.toLowerCase()}`];
     if(coverage)reasons.push(coverage.label==='Islandwide'?'States islandwide coverage':coverage.label);
