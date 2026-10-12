@@ -2,7 +2,7 @@
 
 ## Current status
 
-The frontend integration is implemented on `service-areas-1253`. The owner supplied the new Roster project's public configuration on 12 October 2026. It is stored in the ignored `roster/.env.local`, and the read-only hosted connection check passes. The local CLI is initialized but linking requires the owner's CLI login. The saved-company migration is proposed and has not been applied remotely. Auth settings, email delivery and OAuth providers remain under the owner's control. This branch has not been published.
+The frontend integration is implemented on `service-areas-1253`. Martin approved applying the saved-company migration and publishing after successful tests on 12 October 2026. The public project configuration is stored in ignored `roster/.env.local` and has also been configured in GitHub deployment settings. The hosted connection check passes, but the saved-company table is not present yet. Applying the approved migration is blocked on the owner's Supabase CLI login. No migration or Auth settings have been changed, and the release has not been published. Google remains disabled in both the hosted provider and frontend configuration.
 
 The integration covers email/password sign-up and sign-in, verification email resend, password recovery, Google OAuth, sign-out, account navigation and a dedicated Saved page. Guest bookmarks can be explicitly imported into a signed-in account. Quote requests and listing claims remain previews.
 
@@ -63,7 +63,7 @@ Review `supabase/migrations/202610120001_saved_companies.sql` before applying it
 
 The table has RLS enabled and forced. Signed-in users may select, insert and delete only rows with their own user ID. Anonymous access, updates and duplicate saves are denied. The company directory remains in the existing release/import files. Auth owns user identities; quote and claim previews do not create database records.
 
-**Approval required:** do not run `supabase db push` until Martin approves this migration. After approval and a successful link:
+**Approved on 12 October 2026:** Martin authorized applying this exact migration. Do not ask again for this migration approval. After the owner completes CLI login and the project is linked:
 
 ```sh
 npm run supabase -- db push --dry-run
@@ -83,9 +83,19 @@ The check reads Auth settings using only the publishable key and prints success/
 
 ## Deploying public configuration
 
-The current GitHub Pages site publishes committed files. A plain git push cannot include the ignored runtime configuration. Before publishing account support, the deployment must generate `accounts.public.json` from environment variables and include it in the Pages artifact. Do not commit the key or upload `.env.local`, CLI state or `node_modules`. This change prepares local setup and does not modify the existing shared deployment pipeline.
+The live site still uses branch-based GitHub Pages. `.github/workflows/pages.yml` prepares an artifact deployment that generates the ignored public account configuration from GitHub settings. It has not been activated or pushed. See [DEPLOYMENT-READINESS.md](DEPLOYMENT-READINESS.md).
 
-The generated public JSON belongs in the deployed website alongside the committed assets. Run `npm run build:accounts` in that artifact's `roster/` directory with the public environment variables set. Deploy it only after the migration and owner-managed Auth settings are ready.
+Repository configuration is prepared:
+
+- Variable `ROSTER_PUBLIC_SUPABASE_URL`
+- Masked Actions secret `ROSTER_PUBLIC_SUPABASE_PUBLISHABLE_KEY`
+- Variable `ROSTER_PUBLIC_SUPABASE_GOOGLE_ENABLED`, currently false
+
+The workflow installs pinned dependencies, builds the account bundle, checks the hosted saved-company table, runs all JavaScript tests, and stages tracked site files with the generated public configuration. It refuses local environment files, CLI state, dependencies, symlinks or unexpected configuration fields. The publishable key is intended for browser use; elevated credentials are never deployed.
+
+Before switching Pages to the workflow, complete the approved migration and hosted account tests. Use the latest `origin/main` as the release base and apply the Roster changes without removing unrelated preview work. In particular, preserve the separately added `/keywords/` tool and root navigation. Configure the existing Pages project to use GitHub Actions only when the release is ready, preserving its custom domain. The workflow publishes every preview directory, not only Roster.
+
+The earlier instruction to leave Auth settings and OAuth providers to the owner remains in force. Do not enable Google, change redirects or configure SMTP without the owner doing so or explicitly authorizing those settings.
 
 ## Email and redirect settings
 
