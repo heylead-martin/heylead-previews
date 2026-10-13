@@ -14,7 +14,7 @@ import {execFileSync} from 'node:child_process';
 
 import { createProfileRenderer, directoryRecord, concise, ratingFact } from "./lib/expanded.mjs";
 import {renderHomeSnapshot, buildHomeSnapshot} from './lib/home-snapshot.mjs';
-import {loadGuides, parseGuide, renderEditorial, guideCards, editorialSchema} from './lib/editorial.mjs';
+import {loadGuides, parseGuide, renderEditorial, renderGuideTeaser, guideCards, editorialSchema} from './lib/editorial.mjs';
 import {encodeCatalogue} from './assets/catalogue-data.mjs';
 import {priceView, servicePrice, serviceGuide} from "./lib/profile-copy.mjs";
 import {renderClaimPage} from "./lib/claim-page.mjs";
@@ -23,6 +23,7 @@ import { renderCard, renderCompactCard, splitDirectory } from "./assets/catalogu
 const root = path.dirname(fileURLToPath(import.meta.url));
 const editorialGuides = await loadGuides(root);
 const editorialByPath = new Map(editorialGuides.map(g=>[g.path,g]));
+const editorialByDirectory = new Map(editorialGuides.filter(g=>g.directoryPath).map(g=>[g.directoryPath,g]));
 const methodGuide = {...parseGuide(await readFile(path.join(root,"content/how-it-works.md"),"utf8"),"method"),id:"method",slug:"how-it-works",trade:"all",h1:"How Roster works",updated:"2026-10-12",path:"/roster/how-it-works/"};
 await import('./scripts/build-accounts.mjs');
 console.log('Logo framing:', execFileSync('python3', [path.join(root, 'scripts/fit-logos.py')], {encoding:'utf8'}).trim());
@@ -527,7 +528,7 @@ function renderFooter() {
 <div class="foot-brand"><a class="brand" href="/roster/">${brandMark()}<span class="wordmark">Roster</span></a><p>Find the right help for your home. Compare services, prices and reviews from companies across Singapore.</p><p class="foot-note">Business details and reviews link to their original sources. Last checked ${checked}.</p></div>
 <div class="foot-col"><h2>Jobs</h2><ul>${jobs}</ul></div>
 <div class="foot-col"><h2>About</h2><ul><li><a href="/roster/how-it-works/">How the list is made</a></li><li><a href="/roster/claim-listing/">Claim your listing</a></li><li><a href="/roster/aircon-servicing/chemical-wash/">Aircon chemical wash</a></li><li><a href="/roster/aircon-servicing/gas-top-up/">Aircon gas top-up</a></li></ul></div>
-<div class="footer-guides" aria-label="Home-service guides">${trades.map(t=>`<details><summary>${esc(t.name)} guides</summary><ul>${editorialGuides.filter(g=>g.trade===t.id).map(g=>`<li><a href="${g.path}${g.directory?'#guide':''}">${esc(g.label)}</a></li>`).join('')}</ul></details>`).join('')}</div>
+<div class="footer-guides" aria-label="Home-service guides">${trades.map(t=>`<details><summary>${esc(t.name)} guides</summary><ul>${editorialGuides.filter(g=>g.trade===t.id).map(g=>`<li><a href="${g.path}">${esc(g.label)}</a></li>`).join('')}</ul></details>`).join('')}</div>
 <p class="footer-logo-ownership">${logoOwnerNote}</p><p class="foot-line">Singapore beta. Unpaid listings. No commission on your job. ${previewFeatures?"Quote requests are a preview and do not send.":""}</p>
 </div></footer>`;
 }
@@ -792,11 +793,11 @@ function airconSubnav(active) {
 
 function renderCollection(spec, companies, crumbs) {
   const count = companies.length;
-  const guide = editorialByPath.get(`/roster/${spec.slug}/`);
-  const title = guide?.title || (count === 0
+  const guide = editorialByDirectory.get(`/roster/${spec.slug}/`);
+  const title = (count === 0
     ? `${spec.h1.replace(" in Singapore", "")} in Singapore: no shortlist yet | Roster`
     : `${spec.titleName || spec.name} in Singapore: shortlist of ${count} ${count === 1 ? "company" : "companies"} | Roster`);
-  const description = guide?.description || concise(`Compare ${count} ${spec.name.toLowerCase()} companies in Singapore. Explore sourced services, published prices, ratings and contact details.`);
+  const description = concise(`Compare ${count} ${spec.name.toLowerCase()} companies in Singapore. Explore sourced services, published prices, ratings and contact details.`);
   const canonicalPath = `/roster/${spec.slug}/`;
   const tradeId = spec.parent || spec.id;
   const isAircon = tradeId === "aircon";
@@ -814,23 +815,23 @@ function renderCollection(spec, companies, crumbs) {
   const filter = (key, label, n) => `<label class="filter-check"><input type="checkbox" data-filter="${key}"><span>${label}</span><small data-filter-count="${key}">${n}</small></label>`;
   const body = [
     renderCrumbs(crumbs),
-    `<section class="directory-hero"><div><p class="kicker">THE SINGAPORE HOME DIRECTORY</p><h1>${tradeId === "all" ? "Find your next helping hand." : guide ? esc(guide.h1).replace(" in Singapore", " <em>in Singapore.</em>") : `${esc(categoryLabel)} <em>in Singapore.</em>`}</h1><p>${esc(summaries[tradeId])}</p>${guide?`<a class="guide-jump" href="#guide">Read the ${esc(guide.label.toLowerCase())} guide ${icon("arrow")}</a>`:""}</div><div class="hero-stamp"><span class="stamp-icon">${icon(tradeIcon[tradeId] || "search")}</span><div><strong>${count}</strong><span>${count === 1 ? "company to explore" : "companies to explore"}</span></div></div></section>`,
+    `<section class="directory-hero"><div><p class="kicker">THE SINGAPORE HOME DIRECTORY</p><h1>${tradeId === "all" ? "Find your next helping hand." : `${esc(categoryLabel)} <em>in Singapore.</em>`}</h1><p>${esc(summaries[tradeId])}</p>${guide?`<a class="guide-jump" href="${guide.path}">Read the ${esc(guide.label.toLowerCase())} guide ${icon("arrow")}</a>`:""}</div><div class="hero-stamp"><span class="stamp-icon">${icon(tradeIcon[tradeId] || "search")}</span><div><strong>${count}</strong><span>${count === 1 ? "company to explore" : "companies to explore"}</span></div></div></section>`,
     `<div class="directory-layout${previewFeatures?'':' directory-browse-only'}" id="company-results" data-catalogue data-index="${indexPath(spec)}"><aside class="filters" aria-label="Filter companies"><div class="filters-head"><h2>${icon("sliders")}Refine your list</h2><button type="button" class="filter-toggle" data-toggle-filters aria-controls="company-filters" aria-expanded="true">${icon("sliders")}Filters <span data-active-filters></span>${icon("chevron")}</button><button type="button" data-reset>Reset</button></div><div class="filter-content" id="company-filters"><label class="filter-search">Search this list<input type="search" placeholder="Company or keyword" data-filter-search></label>${renderAreaFilter(esc)}<label class="filter-select">Average rating<select data-rating aria-label="Minimum average rating"><option value="">Any rating</option><option value="4">4.0 and above</option><option value="4.5">4.5 and above</option><option value="4.8">4.8 and above</option></select></label>${tradeId === "all" ? `<label class="filter-select">Service<select data-category-filter><option value="">All services</option>${trades.map(t=>`<option value="${t.id}">${esc(t.name)}</option>`).join("")}</select></label>` : ""}<fieldset><legend>What matters to you?</legend>${filter("price", "Published pricing", companies.filter(c => priceSummary(c, spec.service).published).length)}${filter("reviews", "Dated reviews", companies.filter(c => c.reviews.length).length)}${filter("whatsapp", "WhatsApp contact", companies.filter(c => c.whatsapp?.value).length)}${previewFeatures?filter("saved", "Saved companies", 0):""}</fieldset><details class="filter-categories"><summary>Explore services${icon("chevron")}</summary>${trades.map(t => `<a href="/roster/${t.slug}/"${t.id === tradeId ? ' aria-current="page"' : ""}>${icon(tradeIcon[t.id])}${esc(t.name)}${icon("chevron")}</a>`).join("")}<div class="filter-foot">${icon("shield")}<p>A place on Roster is unpaid.<br>Always your choice.</p></div></details></div></aside><div class="directory-results">`,
     isAircon ? airconSubnav(canonicalPath) : "",
     shortlist(companies, spec.service),
     `<details class="list-explainer"><summary>About this ${esc(categoryLabel.toLowerCase())} shortlist${icon("chevron")}</summary><p>${esc(spec.intro[0])}</p>${notes}<p><a href="/roster/how-it-works/">How the list is made</a>. Checked ${checked}.</p></details>`,
     `</div><aside class="discovery-rail" aria-label="Directory information">${previewFeatures?`<details class="quote-rail-disclosure" open><summary>Get quotes for your job ${icon("sparkle")}</summary>${renderQuoteComposer({icon})}</details>`:''}<div class="rail-note">${icon("calendar")}<p>Facts last checked<br><strong>${esc(checked)}</strong><br>Each figure links to its source.</p></div></aside></div>`,
     previewFeatures && tradeId !== "all" ? `<div id="quote-request">${renderForm(spec.jobs, companies.filter(c => !c.imported), "ask")}</div>` : previewFeatures ? `<div id="quote-request" class="search-end"><h2>Start with the service you need</h2><p>Choose a service above to explore its shortlist and preview a quote request.</p></div>` : "",
-    guide ? renderEditorial(guide,editorialGuides,{embedded:true}) : renderFaq(spec.faqs, "A few things worth knowing"),
+    guide ? renderGuideTeaser(guide) : renderFaq(spec.faqs, "A few things worth knowing"),
     `<section class="browse-more"><p class="kicker">WHILE YOU'RE HERE</p><h2>A little help around the home.</h2><div>${trades.filter(t => t.id !== tradeId).map(t => `<a href="/roster/${t.slug}/">${icon(tradeIcon[t.id])}<span>${esc(t.name)}</span>${icon("arrow")}</a>`).join("")}</div></section>`
   ].join("\n");
   const jsonLd = [
     webPage(title, canonicalPath, description),
-    ...(!guide ? [{ "@type": "CollectionPage", name: spec.h1, url: abs(canonicalPath) }] : []),
+    { "@type": "CollectionPage", name: spec.h1, url: abs(canonicalPath) },
     crumbsLd(crumbs.map((item, index) => (
       index === crumbs.length - 1 ? { href: canonicalPath, label: item.label } : item
     ))),
-    ...(guide ? editorialSchema(guide,origin) : [faqLd(spec.faqs)])
+    ...(!guide ? [faqLd(spec.faqs)] : [])
   ];
   if (companies.length) {
     const visible=splitDirectory(companies.map(c=>directoryRecord(c,priceSummary(c,spec.service),tradeById(c.category))));
@@ -954,8 +955,8 @@ function renderHow() {
 
 function renderGuidePage(guide) {
   const hub=editorialGuides.find(g=>g.trade===guide.trade&&g.hub);
-  const crumbs=[...(hub.id!==guide.id?[{href:hub.path,label:hub.label}]:[]),{href:guide.path,label:guide.label}];
   const trade=tradeById(guide.trade);
+  const crumbs=[{href:`/roster/${trade.slug}/`,label:trade.name},...(hub.id!==guide.id?[{href:hub.path,label:hub.label}]:[]),{href:guide.path,label:guide.directoryPath?'Guide':guide.label}];
   const image=abs(heroPhoto(guide.trade).sizes[1200].src);
   const body=renderCrumbs(crumbs)+`<header class="guide-hero"><div><p class="kicker">THE ROSTER HOME GUIDE</p><h1>${esc(guide.h1)}</h1><p class="guide-dek">${esc(guide.description)}</p><div class="guide-hero-actions"><a class="btn btn-solid" href="/roster/${trade.slug}/">Compare ${esc(trade.name.toLowerCase())} companies ${icon('arrow')}</a><a href="#guide">Read the guide</a></div></div><figure><img src="${heroPhoto(guide.trade).sizes[640].src}" width="600" height="400" alt="" fetchpriority="high"><figcaption><a href="${esc(heroPhoto(guide.trade).url)}">${esc(photoCredit(guide.trade))}</a></figcaption></figure></header>`+renderEditorial(guide,editorialGuides,{extra:guide.id==='AC-03'?renderGuidePrices():''});
   const jsonLd=[webPage(guide.title,guide.path,guide.description),crumbsLd(crumbs),...editorialSchema(guide,origin),...(guide.hub?[{"@type":"ItemList",name:`${guide.label}: related guides`,itemListElement:editorialGuides.filter(g=>g.trade===guide.trade&&g.id!==guide.id).map((g,i)=>({"@type":"ListItem",position:i+1,name:g.label,url:abs(g.path)}))}]:[])];
@@ -1037,7 +1038,7 @@ for (const intent of intents) {
   written.push(await writePage(intent.slug, renderCollection(intent, sortCompanies(companies), crumbs)));
 }
 
-for (const guide of editorialGuides.filter(g=>!g.directory)) written.push(await writePage(guide.slug,renderGuidePage(guide)));
+for (const guide of editorialGuides) written.push(await writePage(guide.slug,renderGuidePage(guide)));
 
 for (const company of publishedCompanies) {
   written.push(await writePage(
@@ -1068,7 +1069,7 @@ for (const rel of previous) if(!currentPaths.includes(rel) && /^company\/[a-z0-9
 await writeFile(path.join(root,'data/build-manifest.json'),JSON.stringify(currentPaths,null,2)+'\n');
 // Preview pages are intentionally noindex, so none belong in a submitted sitemap.
 // This review manifest is the proposed launch set, pending an approved production domain and indexing review.
-const launchPages=[{path:"/roster/",kind:"home"},{path:"/roster/how-it-works/",kind:"method"},...editorialGuides.map(g=>({id:g.id,path:g.path,words:g.words,kind:g.directory?"directory-guide":"guide"}))];
+const launchPages=[{path:"/roster/",kind:"home"},{path:"/roster/how-it-works/",kind:"method"},...trades.map(t=>({path:`/roster/${t.slug}/`,kind:"directory"})),...editorialGuides.map(g=>({id:g.id,path:g.path,words:g.words,kind:"guide"}))];
 await writeFile(path.join(root,'data/seo-launch-pages.json'),JSON.stringify({status:"preview-noindex",canonicalOrigin:origin,updated:"2026-10-12",pages:launchPages},null,2)+'\n');
 await writeFile(path.join(root,'sitemap.xml'),'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"></urlset>\n');
 await writeFile(path.join(root,'robots.txt'),'# Beta preview. Every HTML page also carries noindex.\nUser-agent: *\nDisallow: /roster/\n');

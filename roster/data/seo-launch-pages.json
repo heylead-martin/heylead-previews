@@ -12,6 +12,26 @@
       "kind": "method"
     },
     {
+      "path": "/roster/aircon-servicing/",
+      "kind": "directory"
+    },
+    {
+      "path": "/roster/plumbing/",
+      "kind": "directory"
+    },
+    {
+      "path": "/roster/electrician/",
+      "kind": "directory"
+    },
+    {
+      "path": "/roster/handyman/",
+      "kind": "directory"
+    },
+    {
+      "path": "/roster/home-cleaning/",
+      "kind": "directory"
+    },
+    {
       "id": "AC-01",
       "path": "/roster/aircon/",
       "words": 1271,
@@ -19,9 +39,9 @@
     },
     {
       "id": "AC-02",
-      "path": "/roster/aircon-servicing/",
+      "path": "/roster/aircon-servicing/guide/",
       "words": 1258,
-      "kind": "directory-guide"
+      "kind": "guide"
     },
     {
       "id": "AC-03",
@@ -43,9 +63,9 @@
     },
     {
       "id": "CL-01",
-      "path": "/roster/home-cleaning/",
+      "path": "/roster/home-cleaning/guide/",
       "words": 1276,
-      "kind": "directory-guide"
+      "kind": "guide"
     },
     {
       "id": "CL-02",
@@ -67,9 +87,9 @@
     },
     {
       "id": "PL-01",
-      "path": "/roster/plumbing/",
+      "path": "/roster/plumbing/guide/",
       "words": 1246,
-      "kind": "directory-guide"
+      "kind": "guide"
     },
     {
       "id": "PL-02",
@@ -97,9 +117,9 @@
     },
     {
       "id": "EL-01",
-      "path": "/roster/electrician/",
+      "path": "/roster/electrician/guide/",
       "words": 1253,
-      "kind": "directory-guide"
+      "kind": "guide"
     },
     {
       "id": "EL-02",
@@ -121,9 +141,9 @@
     },
     {
       "id": "HM-01",
-      "path": "/roster/handyman/",
+      "path": "/roster/handyman/guide/",
       "words": 1258,
-      "kind": "directory-guide"
+      "kind": "guide"
     },
     {
       "id": "HM-02",

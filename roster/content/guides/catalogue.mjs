@@ -21,5 +21,17 @@ const rows = [
  ['HM-01','handyman','handyman','Handyman services in Singapore','Handyman Services in Singapore: Compare Companies | Roster','Compare handyman companies in Singapore for mounting, assembly and small repairs. Plan a job list, understand charges and choose the right specialist.','Handyman services'],
  ['HM-02','handyman','handyman/door-window-repair','Door and window repair in Singapore','Door & Window Repair in Singapore | Roster','Plan door and window repairs in Singapore. Compare adjustment and replacement, identify parts and check when an approved window contractor is needed.','Door & window repair']
 ];
-export const guideCatalogue = rows.map(([id,trade,slug,h1,title,description,label])=>({id,trade,slug,h1,title,description,label,path:`/roster/${slug}/`,updated:'2026-10-12',hub:['AC-01','CL-01','PL-01','EL-01','HM-01'].includes(id),directory:['AC-02','CL-01','PL-01','EL-01','HM-01'].includes(id)}));
+const directoryGuideIds = new Set(['AC-02','CL-01','PL-01','EL-01','HM-01']);
+const guideTitles = {
+ 'AC-02':'Aircon Servicing Guide in Singapore | Roster',
+ 'CL-01':'Home Cleaning Guide in Singapore | Roster',
+ 'PL-01':'Plumbing Guide in Singapore | Roster',
+ 'EL-01':'Electrical Services Guide in Singapore | Roster',
+ 'HM-01':'Handyman Guide in Singapore | Roster'
+};
+export const guideCatalogue = rows.map(([id,trade,baseSlug,h1,title,description,label])=>{
+ const directoryPath = directoryGuideIds.has(id) ? `/roster/${baseSlug}/` : null;
+ const slug = directoryPath ? `${baseSlug}/guide` : baseSlug;
+ return {id,trade,slug,h1,title:guideTitles[id]||title,description,label,path:`/roster/${slug}/`,directoryPath,updated:'2026-10-12',hub:['AC-01','CL-01','PL-01','EL-01','HM-01'].includes(id)};
+});
 export const guideByPath = new Map(guideCatalogue.map(g=>[g.path,g]));

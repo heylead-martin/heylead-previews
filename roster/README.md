@@ -138,7 +138,7 @@ The quote sidebar beta now accepts a job description and region, then shows a Wh
 
 ## SEO and AEO content
 
-The 20 core editorial pages are defined in `content/guides/catalogue.mjs`, with Markdown copy in `content/guides/`. Five enrich existing directories and 15 are standalone guides. `content/how-it-works.md` supplies the methodology page. Edit these source files and rebuild instead of editing generated HTML.
+The 20 core editorial pages are defined in `content/guides/catalogue.mjs`, with Markdown copy in `content/guides/`. All 20 are standalone guides. The five general trade guides live at `/roster/{trade-directory}/guide/`; company directories keep only a compact reading link. The old directory `#guide` anchors land on those link cards. `content/how-it-works.md` supplies the methodology page. Edit these source files and rebuild instead of editing generated HTML.
 
 `lib/editorial.mjs` renders the supported Markdown subset into readable sections, comparison tables, a contents panel, related links and matching FAQ data. `assets/editorial.css` controls the responsive reading layout. The homepage and shared footer link to the guides.
 

@@ -89,3 +89,13 @@ Screenshots are beside the worktree in `../review-20261013/`: `home-desktop.png`
 - No email provider exists. Accounts and request delivery remain parked.
 
 No remote settings, SMTP configuration, Supabase schema or keys were created or changed. No merge, push or deployment was performed.
+
+## Follow-up: separate guides from directories
+
+At Martin's request, the five long trade guides now have their own pages: `/roster/home-cleaning/guide/`, `/roster/plumbing/guide/`, `/roster/electrician/guide/`, `/roster/handyman/guide/` and `/roster/aircon-servicing/guide/`. All 20 editorial guides are now standalone. Directories have a compact guide link card instead of the full article. The previous `#guide` anchors still land on that card.
+
+Homepage cards, footer links, related guides and in-article links now use the new URLs. Each guide has its own canonical, Article and FAQ schema, a contents panel and a link back to company browsing. Directories retain CollectionPage/ItemList schema and do not duplicate the article or its FAQs. Noindex remains on. The 1,000-word minimum and all existing editorial copy are preserved.
+
+Validation: 765 generated pages, zero broken internal links/fragments, 92 JavaScript tests and 15 Python tests passed. All 20 editorial pages pass their existing word-count, FAQ and metadata checks plus new directory/guide separation checks. The cleaning directory and new guide were checked at 1366px and 390px, including the old anchor, guide link, contents and return link. New screenshots are `../review-20261013/cleaning-guide-link-desktop.png`, `cleaning-guide-desktop.png` and `cleaning-guide-mobile.png`.
+
+Company totals, release data and parked features are unchanged. This follow-up remains local, with no merge, push or deployment.

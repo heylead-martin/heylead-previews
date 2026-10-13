@@ -14,7 +14,7 @@
     },
     {
       "id": "AC-02",
-      "path": "/roster/aircon-servicing/",
+      "path": "/roster/aircon-servicing/guide/",
       "words": 1258,
       "faqs": 4,
       "sourceReferences": 2,
@@ -46,7 +46,7 @@
     },
     {
       "id": "CL-01",
-      "path": "/roster/home-cleaning/",
+      "path": "/roster/home-cleaning/guide/",
       "words": 1276,
       "faqs": 4,
       "sourceReferences": 1,
@@ -78,7 +78,7 @@
     },
     {
       "id": "PL-01",
-      "path": "/roster/plumbing/",
+      "path": "/roster/plumbing/guide/",
       "words": 1246,
       "faqs": 4,
       "sourceReferences": 2,
@@ -118,7 +118,7 @@
     },
     {
       "id": "EL-01",
-      "path": "/roster/electrician/",
+      "path": "/roster/electrician/guide/",
       "words": 1253,
       "faqs": 4,
       "sourceReferences": 3,
@@ -150,7 +150,7 @@
     },
     {
       "id": "HM-01",
-      "path": "/roster/handyman/",
+      "path": "/roster/handyman/guide/",
       "words": 1258,
       "faqs": 4,
       "sourceReferences": 4,

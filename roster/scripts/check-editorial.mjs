@@ -19,6 +19,15 @@ for(const g of guides){
   for(const t of g.toc)assert.ok(article.includes(`id="${t.id}"`),`${g.id}: contents anchor`);
   assert.ok(html.includes('class="footer-guides"'));
   assert.ok(!article.match(/\[VERIFY\]|lorem ipsum|guaranteed response|verified bookings/i));
+  if(g.directoryPath){
+    const directory=await readFile(`${root}/${g.directoryPath.replace('/roster/','')}index.html`,'utf8');
+    assert.ok(!directory.includes('data-editorial-id='),`${g.id}: directory must not embed long-form content`);
+    assert.ok(directory.includes('id="guide"'),`${g.id}: old guide anchor stays useful`);
+    assert.ok(directory.includes(`href="${g.path}"`),`${g.id}: directory links to standalone guide`);
+    assert.ok(html.includes(`href="${g.directoryPath}"`),`${g.id}: guide links back to directory`);
+    const directorySchema=JSON.parse(directory.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1]);
+    assert.ok(!directorySchema['@graph'].some(node=>node['@type']==='Article'||node['@type']==='FAQPage'),`${g.id}: guide schema belongs only on the guide page`);
+  }
   results.push({id:g.id,path:g.path,words:g.words,faqs:g.faqs.length,sourceReferences:g.sources.length,updated:g.updated});
 }
 const method=await readFile(`${root}/content/how-it-works.md`,'utf8');
@@ -26,6 +35,6 @@ assert.ok(wordCount(method)>=1000);
 const sitemap=await readFile(`${root}/sitemap.xml`,'utf8');
 assert.ok(!sitemap.includes('<loc>'),'No noindex preview pages in the sitemap');
 const home=await readFile(`${root}/index.html`,'utf8');
-for(const g of guides.filter(g=>g.hub))assert.ok(home.includes(`href="${g.path}${g.directory?'#guide':''}"`));
+for(const g of guides.filter(g=>g.hub))assert.ok(home.includes(`href="${g.path}"`));
 await writeFile(`${root}/data/editorial-audit.json`,JSON.stringify({checked:'2026-10-12',corePages:results.length,totalWords:results.reduce((s,r)=>s+r.words,0),methodPageWords:wordCount(method),pages:results},null,2)+'\n');
 console.log(`PASS: ${results.length} core pages, ${results.reduce((s,r)=>s+r.words,0)} editorial words, matching FAQs, canonicals, contents links and preview indexing safeguards.`);

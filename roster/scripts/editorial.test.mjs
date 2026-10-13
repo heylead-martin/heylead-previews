@@ -8,8 +8,9 @@ test('20 distinct core guides contain substantial copy and matching FAQ schema',
   const guides=await loadGuides(root);
   assert.equal(guides.length,20);
   assert.equal(new Set(guides.map(g=>g.path)).size,20);
-  assert.equal(guides.filter(g=>g.directory).length,5);
+  assert.equal(guides.filter(g=>g.directoryPath).length,5);
   for(const g of guides){
+    if(g.directoryPath){assert.equal(g.path,g.directoryPath+'guide/');assert.ok(!guides.some(other=>other.path===g.directoryPath));}
     assert.ok(g.words>=1000,`${g.id}: ${g.words} words`);
     assert.ok(g.title.length<=60,`${g.id}: title length`);
     assert.ok(g.description.length<=155,`${g.id}: description length`);
@@ -17,6 +18,7 @@ test('20 distinct core guides contain substantial copy and matching FAQ schema',
     assert.equal(new Set(g.toc.map(t=>t.id)).size,g.toc.length);
     assert.ok(g.body.includes('<table>'),`${g.id}: useful comparison table`);
     const schema=editorialSchema(g,'https://example.test/roster');
+    assert.equal(schema[0]['@type'],'Article');
     assert.equal(schema.find(s=>s['@type']==='FAQPage').mainEntity.length,4);
     for(const [q,a] of g.faqs){assert.ok(g.body.includes(inline(q)));assert.ok(a.length>100);}
     assert.ok(!JSON.stringify(schema).match(/"(?:Service|AggregateRating|Offer|Review)"/));
