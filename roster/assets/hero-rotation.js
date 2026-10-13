@@ -4,6 +4,7 @@ if (hero) {
   const words = [...hero.querySelectorAll('[data-profession-word]')];
   const pause = hero.querySelector('[data-profession-pause]');
   const browse = hero.querySelector('[data-profession-browse]');
+  const credit = hero.querySelector('a[data-photo-credit]');
   const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
   let active = 0;
   let paused = motion.matches;
@@ -85,6 +86,8 @@ if (hero) {
     photos.forEach((photo, i) => photo.classList.toggle('is-active', i === active));
     words.forEach((word, i) => word.classList.toggle('is-active', i === active));
     browse.href = photos[active].dataset.professionUrl;
+    credit.textContent = photos[active].dataset.photoCredit;
+    credit.href = photos[active].dataset.photoPage;
     schedule();
     if (!motion.matches) void loadPhoto(nextPhoto());
   }

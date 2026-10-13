@@ -26,17 +26,8 @@ jobs:
           cache-dependency-path: roster/package-lock.json
       - name: Install pinned Roster build dependencies
         run: npm --prefix roster ci --ignore-scripts
-      - name: Generate public account configuration
-        env:
-          ROSTER_PUBLIC_SUPABASE_URL: ${{ vars.ROSTER_PUBLIC_SUPABASE_URL }}
-          ROSTER_PUBLIC_SUPABASE_PUBLISHABLE_KEY: ${{ secrets.ROSTER_PUBLIC_SUPABASE_PUBLISHABLE_KEY }}
-          ROSTER_PUBLIC_SUPABASE_GOOGLE_ENABLED: ${{ vars.ROSTER_PUBLIC_SUPABASE_GOOGLE_ENABLED }}
+      - name: Build parked account assets without connection settings
         run: npm --prefix roster run build:accounts
-      - name: Verify the account database is ready
-        env:
-          ROSTER_PUBLIC_SUPABASE_URL: ${{ vars.ROSTER_PUBLIC_SUPABASE_URL }}
-          ROSTER_PUBLIC_SUPABASE_PUBLISHABLE_KEY: ${{ secrets.ROSTER_PUBLIC_SUPABASE_PUBLISHABLE_KEY }}
-        run: npm --prefix roster run check:supabase -- --schema
       - name: Test account and directory logic
         run: npm --prefix roster test
       - name: Stage committed sites and generated public configuration

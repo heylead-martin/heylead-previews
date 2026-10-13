@@ -1,4 +1,4 @@
-import {renderCard,renderCompactCard,splitDirectory} from './catalogue-card.mjs?v=20261012-areas';
+import {renderCard,renderCompactCard,splitDirectory} from './catalogue-card.mjs?v=20261013-review';
 import {filterCatalogue} from './catalogue-filter.mjs?v=20261012-areas';
 import {decodeCatalogue} from './catalogue-data.mjs?v=20261012-areas';
 import {setupAreaPicker} from './area-picker.mjs?v=20261012-areas';

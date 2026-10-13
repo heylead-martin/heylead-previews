@@ -325,6 +325,7 @@
         ],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -541,6 +542,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -928,6 +930,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -1133,6 +1136,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -1413,6 +1417,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -2064,6 +2069,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -2356,6 +2362,11 @@
           }
         ]
       },
+      "quoteEvidence": {
+        "excerpt": "A: You can request a service or quote by using the “Request a Quote” form on our website or by contacting us directly via phone or email.",
+        "sourceUrl": "https://www.360maintenance.sg/",
+        "capturedAt": "2026-10-10"
+      },
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -2618,6 +2629,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -2833,6 +2845,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -3107,6 +3120,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -3437,6 +3451,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -3738,6 +3753,7 @@
         ],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -3928,6 +3944,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -4430,6 +4447,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "address-geocoded",
         "precision": "building",
@@ -4833,6 +4851,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -5089,6 +5108,11 @@
           }
         ]
       },
+      "quoteEvidence": {
+        "excerpt": "Whether you’re planning a major renovation, need a quick repair, or simply want a quotation for painting works, A&A RENO PAINT ENGINEERING PTE.LTD. is here to assist.",
+        "sourceUrl": "https://aarenopaintsg.com/contact-us/",
+        "capturedAt": "2026-10-10"
+      },
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -5268,6 +5292,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -5666,6 +5691,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -5900,6 +5926,11 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": {
+        "excerpt": "What we quote is what you pay.",
+        "sourceUrl": "https://apowerelectricalsg.com/why-a-power-electrical-is-the-cheapest-choice-for-your-electrical-needs/",
+        "capturedAt": "2026-10-11"
+      },
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -6092,6 +6123,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -6331,6 +6363,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -6527,6 +6560,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -6804,6 +6838,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -7148,6 +7183,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -7503,6 +7539,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -7728,6 +7765,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -8028,6 +8066,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -8227,6 +8266,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -8381,6 +8421,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -9065,6 +9106,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -9383,6 +9425,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -9697,6 +9740,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -9857,6 +9901,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -10551,6 +10596,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -10939,6 +10985,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -11202,6 +11249,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -11699,6 +11747,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -11927,6 +11976,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -12155,6 +12205,11 @@
         "brands": [],
         "payments": [],
         "socials": []
+      },
+      "quoteEvidence": {
+        "excerpt": "We provide transparent pricing , offering clear quotes with no hidden costs.",
+        "sourceUrl": "https://www.handymanservicessingapore.com/toilet-choke-and-repair/",
+        "capturedAt": "2026-10-11"
       },
       "mapEvidence": {
         "status": "address-geocoded",
@@ -12684,6 +12739,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -12933,6 +12989,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -13189,6 +13246,11 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": {
+        "excerpt": "We diagnose first and quote before repairing, so you always approve the price before work starts.",
+        "sourceUrl": "https://afraelectrician.com/emergency-electrician.html",
+        "capturedAt": "2026-10-11"
+      },
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -13382,6 +13444,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -13678,6 +13741,11 @@
           }
         ]
       },
+      "quoteEvidence": {
+        "excerpt": "We provide free quotations with transparent pricing.",
+        "sourceUrl": "https://kingcarpentry.sg/faq",
+        "capturedAt": "2026-10-10"
+      },
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -13870,6 +13938,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -14038,6 +14107,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -14359,6 +14429,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -14561,6 +14632,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -14882,6 +14954,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -15099,6 +15172,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -15397,6 +15471,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -15953,6 +16028,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -16167,6 +16243,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -16556,6 +16633,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -16754,6 +16832,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -16968,6 +17047,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -17181,6 +17261,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -17399,6 +17480,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "address-geocoded",
         "precision": "building",
@@ -17962,6 +18044,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "address-geocoded",
         "precision": "building",
@@ -18440,6 +18523,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -18964,6 +19048,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -19311,6 +19396,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -19553,6 +19639,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -19727,6 +19814,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -19964,6 +20052,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "address-geocoded",
         "precision": "building",
@@ -20243,6 +20332,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -20645,6 +20735,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -20916,6 +21007,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -21189,6 +21281,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -21769,6 +21862,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "address-geocoded",
         "precision": "building",
@@ -21968,6 +22062,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -22238,6 +22333,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -22906,6 +23002,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "address-geocoded",
         "precision": "building",
@@ -23252,6 +23349,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "address-geocoded",
         "precision": "building",
@@ -23630,6 +23728,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -24037,6 +24136,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -24452,6 +24552,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -24632,6 +24733,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -25015,6 +25117,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -25367,6 +25470,11 @@
           }
         ]
       },
+      "quoteEvidence": {
+        "excerpt": "You receive a firm quotation before any work begins.",
+        "sourceUrl": "https://www.amhandymansg.com/services/plumbing-services",
+        "capturedAt": "2026-10-11"
+      },
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -25633,6 +25741,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -25895,6 +26004,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -26142,6 +26252,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -26706,6 +26817,11 @@
         ],
         "socials": []
       },
+      "quoteEvidence": {
+        "excerpt": "Our technicians will always inspect your issue on-site and provide a clear, upfront quotation before any work begins.",
+        "sourceUrl": "https://anjecont.com/?utm_source=google&utm_medium=organic&utm_campaign=gbp",
+        "capturedAt": "2026-10-10"
+      },
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -26999,6 +27115,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -27187,6 +27304,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -27363,6 +27481,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -27614,6 +27733,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -27871,6 +27991,7 @@
         ],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -28083,6 +28204,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "address-geocoded",
         "precision": "building",
@@ -28602,6 +28724,7 @@
         ],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -28980,6 +29103,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -29239,6 +29363,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -29502,6 +29627,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "address-geocoded",
         "precision": "building",
@@ -29774,6 +29900,11 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": {
+        "excerpt": "We provide clear and transparent quotations after assessing the issue, so you understand the expected cost before major work begins.",
+        "sourceUrl": "https://araelectricalservices.com/electrical-troubleshooting-emergency-services/",
+        "capturedAt": "2026-10-11"
+      },
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -29950,6 +30081,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "unresolved",
         "precision": null,
@@ -30458,6 +30590,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -30638,6 +30771,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -30990,6 +31124,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -31387,6 +31522,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -31836,6 +31972,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -32020,6 +32157,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -32257,6 +32395,11 @@
           }
         ]
       },
+      "quoteEvidence": {
+        "excerpt": "We recommend requesting a detailed quotation for an accurate estimate.",
+        "sourceUrl": "https://atelectrical.com.sg/electrical-wiring-rewiring/",
+        "capturedAt": "2026-10-11"
+      },
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -32468,6 +32611,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -32765,6 +32909,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -33048,6 +33193,7 @@
         ],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -33354,6 +33500,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -33559,6 +33706,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -34136,6 +34284,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -34345,6 +34494,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -34533,6 +34683,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -34797,6 +34948,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -35006,6 +35158,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -35423,6 +35576,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -35607,6 +35761,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -35896,6 +36051,11 @@
           }
         ]
       },
+      "quoteEvidence": {
+        "excerpt": "Assessment and Quote : Our expert team conducts a thorough assessment of the job and provides a clear, upfront quote with no hidden fees.",
+        "sourceUrl": "https://besthandymanservices.net/water-hater-repair/",
+        "capturedAt": "2026-10-11"
+      },
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -36119,6 +36279,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -36482,6 +36643,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -36711,6 +36873,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -36975,6 +37138,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -37293,6 +37457,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -37570,6 +37735,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -37770,6 +37936,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -37969,6 +38136,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -38339,6 +38507,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -38672,6 +38841,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -39085,6 +39255,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -39346,6 +39517,11 @@
         "brands": [],
         "payments": [],
         "socials": []
+      },
+      "quoteEvidence": {
+        "excerpt": "WhatsApp your floor plan or photos and we will prepare an itemised quote.",
+        "sourceUrl": "https://bshsg.com/services/landed-home-electrical",
+        "capturedAt": "2026-10-11"
       },
       "mapEvidence": {
         "status": "verified",
@@ -39691,6 +39867,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -39895,6 +40072,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -40139,6 +40317,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "unresolved",
         "precision": null,
@@ -40321,6 +40500,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -40676,6 +40856,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "address-geocoded",
         "precision": "building",
@@ -41005,6 +41186,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -41220,6 +41402,11 @@
             "capturedAt": "2026-10-10"
           }
         ]
+      },
+      "quoteEvidence": {
+        "excerpt": "Provide us with details of the necessary roof repair works for your home by filling out our Quote form, and we will send you a comprehensive quotation within 1-2 working days.",
+        "sourceUrl": "https://caprishandyman.com/services/roof-repair/",
+        "capturedAt": "2026-10-11"
       },
       "mapEvidence": {
         "status": "verified",
@@ -41444,6 +41631,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -41656,6 +41844,11 @@
             "capturedAt": "2026-10-10"
           }
         ]
+      },
+      "quoteEvidence": {
+        "excerpt": "Contact us today via WhatsApp at +65 8241 0032 to discuss your project and receive a quote.",
+        "sourceUrl": "https://carpentercube.com/",
+        "capturedAt": "2026-10-10"
       },
       "mapEvidence": {
         "status": "verified",
@@ -41938,6 +42131,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -42103,6 +42297,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -42409,6 +42604,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -42656,6 +42852,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -42968,6 +43165,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -43287,6 +43485,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -43486,6 +43685,11 @@
         "brands": [],
         "payments": [],
         "socials": []
+      },
+      "quoteEvidence": {
+        "excerpt": "Get a Quote for Our CSE Service!",
+        "sourceUrl": "https://chengseng.com.sg/our-services/",
+        "capturedAt": "2026-10-10"
       },
       "mapEvidence": {
         "status": "verified",
@@ -43703,6 +43907,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -44052,6 +44257,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -44594,6 +44800,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -44822,6 +45029,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -45098,6 +45306,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -45406,6 +45615,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -45571,6 +45781,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -45746,6 +45957,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -45973,6 +46185,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -46293,6 +46506,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -46517,6 +46731,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "unresolved",
         "precision": null,
@@ -46791,6 +47006,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "address-geocoded",
         "precision": "building",
@@ -47349,6 +47565,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -47588,6 +47805,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -47899,6 +48117,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "address-geocoded",
         "precision": "building",
@@ -48137,6 +48356,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -48436,6 +48656,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -48660,6 +48881,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -48910,6 +49132,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -49080,6 +49303,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "address-geocoded",
         "precision": "building",
@@ -49281,6 +49505,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -49484,6 +49709,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -49720,6 +49946,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -49963,6 +50190,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -50149,6 +50377,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -50673,6 +50902,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -50884,6 +51114,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -51210,6 +51441,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -51456,6 +51688,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -51671,6 +51904,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -51949,6 +52183,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -52171,6 +52406,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -52370,6 +52606,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -52594,6 +52831,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -52865,6 +53103,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -53660,6 +53899,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -53979,6 +54219,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -54429,6 +54670,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -55189,6 +55431,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -55451,6 +55694,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -55700,6 +55944,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -55944,6 +56189,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "address-geocoded",
         "precision": "building",
@@ -56252,6 +56498,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -56664,6 +56911,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -56931,6 +57179,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "address-geocoded",
         "precision": "building",
@@ -57409,6 +57658,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -57576,6 +57826,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -57936,6 +58187,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -58214,6 +58466,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -58529,6 +58782,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -58884,6 +59138,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -59087,6 +59342,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -59431,6 +59687,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -59738,6 +59995,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -59996,6 +60254,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "address-geocoded",
         "precision": "building",
@@ -60235,6 +60494,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -60509,6 +60769,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -60735,6 +60996,11 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": {
+        "excerpt": "We quote after seeing photos or measuring on site, and the quotation itemises preparation, paint, and coats so you can compare it fairly.",
+        "sourceUrl": "https://www.dkconstructionandengineering.com/our-services/painting",
+        "capturedAt": "2026-10-11"
+      },
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -60944,6 +61210,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -61146,6 +61413,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "unresolved",
         "precision": null,
@@ -61345,6 +61613,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -61664,6 +61933,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -61881,6 +62151,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -62359,6 +62630,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -62691,6 +62963,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -63040,6 +63313,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -63291,6 +63565,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "address-geocoded",
         "precision": "building",
@@ -63620,6 +63895,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -64036,6 +64312,7 @@
         ],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -64301,6 +64578,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -64605,6 +64883,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -64790,6 +65069,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -65112,6 +65392,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -65400,6 +65681,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -65618,6 +65900,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "address-geocoded",
         "precision": "building",
@@ -65843,6 +66126,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -66416,6 +66700,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -66862,6 +67147,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "address-geocoded",
         "precision": "building",
@@ -67052,6 +67338,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "address-geocoded",
         "precision": "building",
@@ -67252,6 +67539,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -67430,6 +67718,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "address-geocoded",
         "precision": "building",
@@ -67656,6 +67945,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -67864,6 +68154,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -68044,6 +68335,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -68442,6 +68734,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -68735,6 +69028,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -68970,6 +69264,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -69566,6 +69861,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -69766,6 +70062,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -69991,6 +70288,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -70227,6 +70525,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -70498,6 +70797,7 @@
         ],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -70674,6 +70974,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -70999,6 +71300,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -71268,6 +71570,11 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": {
+        "excerpt": "Fill out the form below or call us directly to schedule your repair or get a quote.",
+        "sourceUrl": "https://electricrepairsg.com/faq/",
+        "capturedAt": "2026-10-10"
+      },
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -71455,6 +71762,11 @@
         "brands": [],
         "payments": [],
         "socials": []
+      },
+      "quoteEvidence": {
+        "excerpt": "BSM Engineering offers competitive waterproofing work costs in Singapore, providing transparent quotes without hidden fees.",
+        "sourceUrl": "https://bsmengg.com/waterproofing-services/",
+        "capturedAt": "2026-10-11"
       },
       "mapEvidence": {
         "status": "verified",
@@ -71673,6 +71985,11 @@
         "brands": [],
         "payments": [],
         "socials": []
+      },
+      "quoteEvidence": {
+        "excerpt": "Contact us for a fast, no-obligation quote.",
+        "sourceUrl": "https://electrical.jshandyman.sg/db-box-upgrade.php",
+        "capturedAt": "2026-10-11"
       },
       "mapEvidence": {
         "status": "verified",
@@ -72044,6 +72361,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -72235,6 +72553,11 @@
           }
         ]
       },
+      "quoteEvidence": {
+        "excerpt": "Contact us for a detailed quotation after assessment.",
+        "sourceUrl": "https://electrocraft.sg/electrical-services-singapore",
+        "capturedAt": "2026-10-11"
+      },
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -72421,6 +72744,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -72660,6 +72984,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -73089,6 +73414,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -73333,6 +73659,11 @@
           }
         ]
       },
+      "quoteEvidence": {
+        "excerpt": "You can contact us, tell us your location, and get an estimated quote for the place you require our services.",
+        "sourceUrl": "https://elite-electricians.com/services/electrical-wiring/",
+        "capturedAt": "2026-10-11"
+      },
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -73568,6 +73899,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -73788,6 +74120,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -74109,6 +74442,11 @@
           }
         ]
       },
+      "quoteEvidence": {
+        "excerpt": "You get a clear quote before we start.",
+        "sourceUrl": "https://www.emssengineering.sg/",
+        "capturedAt": "2026-10-10"
+      },
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -74313,6 +74651,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -74580,6 +74919,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -74946,6 +75286,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -75229,6 +75570,11 @@
             "capturedAt": "2026-10-10"
           }
         ]
+      },
+      "quoteEvidence": {
+        "excerpt": "Honest & Transparent Pricing: We believe in straightforward communication, clear upfront quotes, and timely service with absolutely no hidden costs.",
+        "sourceUrl": "https://ercoolhandymansg.com/about-us/",
+        "capturedAt": "2026-10-10"
       },
       "mapEvidence": {
         "status": "verified",
@@ -75529,6 +75875,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -75727,6 +76074,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -76070,6 +76418,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -76424,6 +76773,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -76663,6 +77013,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -76846,6 +77197,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -77071,6 +77423,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -77244,6 +77597,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -77450,6 +77804,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -77636,6 +77991,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -77970,6 +78326,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -78219,6 +78576,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -78911,6 +79269,7 @@
         ],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -79159,6 +79518,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "unresolved",
         "precision": null,
@@ -79439,6 +79799,11 @@
             "capturedAt": "2026-10-10"
           }
         ]
+      },
+      "quoteEvidence": {
+        "excerpt": "We provide affordable pricing and free quotations before starting work.",
+        "sourceUrl": "https://fairpricehandymanservices.com/door-repair/",
+        "capturedAt": "2026-10-11"
       },
       "mapEvidence": {
         "status": "verified",
@@ -79784,6 +80149,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -80141,6 +80507,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -80396,6 +80763,11 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": {
+        "excerpt": "Contact us with details about your requirements, and we'll provide a transparent and competitive quote.",
+        "sourceUrl": "https://fastfixhandyman.sg/about-us/",
+        "capturedAt": "2026-10-10"
+      },
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -80563,6 +80935,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -80733,6 +81106,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -81065,6 +81439,11 @@
           }
         ]
       },
+      "quoteEvidence": {
+        "excerpt": "We will provide a transparent quote and explain the breakdown before starting any work.",
+        "sourceUrl": "https://www.firstservicerenovation.sg/services/electrical-services",
+        "capturedAt": "2026-10-11"
+      },
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -81323,6 +81702,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -81748,6 +82128,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -82522,6 +82903,7 @@
         ],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "unresolved",
         "precision": null,
@@ -82778,6 +83160,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -82998,6 +83381,7 @@
         ],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -83284,6 +83668,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -83486,6 +83871,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -83675,6 +84061,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -83910,6 +84297,7 @@
         ],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -84159,6 +84547,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "address-geocoded",
         "precision": "building",
@@ -84393,6 +84782,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -84617,6 +85007,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -85075,6 +85466,7 @@
         ],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "unresolved",
         "precision": null,
@@ -85301,6 +85693,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -85501,6 +85894,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -85840,6 +86234,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -86067,6 +86462,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "unresolved",
         "precision": null,
@@ -86287,6 +86683,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -86461,6 +86858,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -86746,6 +87144,11 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": {
+        "excerpt": "Our technicians will assess your floor plan, identify the best cable routes, and provide a detailed quotation based on your specific network requirements.",
+        "sourceUrl": "https://glenhillpeoperty.com/data-cabling-work/",
+        "capturedAt": "2026-10-11"
+      },
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -86940,6 +87343,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -87455,6 +87859,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "unresolved",
         "precision": null,
@@ -87664,6 +88069,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -88156,6 +88562,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -88597,6 +89004,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -88961,6 +89369,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -89377,6 +89786,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -89618,6 +90028,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -89812,6 +90223,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -90018,6 +90430,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -90289,6 +90702,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -90629,6 +91043,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -90880,6 +91295,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -91098,6 +91514,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -91371,6 +91788,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -91612,6 +92030,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -91849,6 +92268,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "address-geocoded",
         "precision": "building",
@@ -92226,6 +92646,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -92520,6 +92941,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -92923,6 +93345,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -93108,6 +93531,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -93338,6 +93762,11 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": {
+        "excerpt": "Transparent Pricing - Honest quotes with no hidden charges.",
+        "sourceUrl": "https://handymanfixpro.com/about-us/",
+        "capturedAt": "2026-10-11"
+      },
       "mapEvidence": {
         "status": "unresolved",
         "precision": null,
@@ -93558,6 +93987,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -93785,6 +94215,11 @@
         "brands": [],
         "payments": [],
         "socials": []
+      },
+      "quoteEvidence": {
+        "excerpt": "We provide clear, upfront quotes before any work begins, ensuring you know exactly what to expect without hidden fees.",
+        "sourceUrl": "https://handymanhomeservice.site/",
+        "capturedAt": "2026-10-10"
       },
       "mapEvidence": {
         "status": "verified",
@@ -94168,6 +94603,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -94448,6 +94884,11 @@
         "brands": [],
         "payments": [],
         "socials": []
+      },
+      "quoteEvidence": {
+        "excerpt": "Contact us for a quick inspection and quotation.",
+        "sourceUrl": "https://handymanquickservices.com/leak-repair-services-in-singapore/",
+        "capturedAt": "2026-10-11"
       },
       "mapEvidence": {
         "status": "verified",
@@ -94732,6 +95173,11 @@
             "capturedAt": "2026-10-10"
           }
         ]
+      },
+      "quoteEvidence": {
+        "excerpt": "We offer free quotes and consultations to help you find the perfect solution for your needs quickly and hassle-free.",
+        "sourceUrl": "https://handymanrpl.com/",
+        "capturedAt": "2026-10-10"
       },
       "mapEvidence": {
         "status": "verified",
@@ -95143,6 +95589,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -95364,6 +95811,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -95641,6 +96089,11 @@
         "brands": [],
         "payments": [],
         "socials": []
+      },
+      "quoteEvidence": {
+        "excerpt": "Yes, we always quote before starting any work-no hidden charges.",
+        "sourceUrl": "https://handymanservicesg.com/best-locksmith-services-in-singapore/",
+        "capturedAt": "2026-10-11"
       },
       "mapEvidence": {
         "status": "verified",
@@ -96093,6 +96546,11 @@
           }
         ]
       },
+      "quoteEvidence": {
+        "excerpt": "Contact Handyman Super Services today for a free quote and colour consultation WhatsApp or call or visit us at 395 Jalan Besar, Singapore 209006.",
+        "sourceUrl": "https://handymansuperservices.com/door-repair-singapore-fast-24-hr-service/",
+        "capturedAt": "2026-10-11"
+      },
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -96376,6 +96834,11 @@
             "capturedAt": "2026-10-10"
           }
         ]
+      },
+      "quoteEvidence": {
+        "excerpt": "We provide clear explanations, honest quotations, and keep you informed every step of the way.",
+        "sourceUrl": "https://handymantopservices.com/about/",
+        "capturedAt": "2026-10-10"
       },
       "mapEvidence": {
         "status": "verified",
@@ -96665,6 +97128,11 @@
             "capturedAt": "2026-10-10"
           }
         ]
+      },
+      "quoteEvidence": {
+        "excerpt": "We provide a quote before the work begins.",
+        "sourceUrl": "https://handymanunique.com/burst-pipe-repair-cost-singapore/",
+        "capturedAt": "2026-10-11"
       },
       "mapEvidence": {
         "status": "verified",
@@ -96964,6 +97432,11 @@
             "capturedAt": "2026-10-10"
           }
         ]
+      },
+      "quoteEvidence": {
+        "excerpt": "We’ll provide you with a transparent, no-obligation quote based on the service you need.",
+        "sourceUrl": "https://handymanzonesg.com/cheap-handyman-services-in-singapore/",
+        "capturedAt": "2026-10-11"
       },
       "mapEvidence": {
         "status": "verified",
@@ -97379,6 +97852,11 @@
           }
         ]
       },
+      "quoteEvidence": {
+        "excerpt": "We highly recommend you take advantage of our free quotation and consultation service.",
+        "sourceUrl": "https://handymanpluses.com/tv-bracket-installation/",
+        "capturedAt": "2026-10-11"
+      },
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -97636,6 +98114,11 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": {
+        "excerpt": "The quote is only approved by you before we start work.",
+        "sourceUrl": "https://www.handymenplus-sg.com/emergency-electrical-service-in-singapore/",
+        "capturedAt": "2026-10-11"
+      },
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -97885,6 +98368,11 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": {
+        "excerpt": "You receive a clear quotation before work begins.",
+        "sourceUrl": "https://handytech.sg/",
+        "capturedAt": "2026-10-10"
+      },
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -98121,6 +98609,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "unresolved",
         "precision": null,
@@ -98285,6 +98774,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -98515,6 +99005,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -99213,6 +99704,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -99395,6 +99887,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -99706,6 +100199,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -99955,6 +100449,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -100404,6 +100899,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -100597,6 +101093,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -100946,6 +101443,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -101154,6 +101652,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -101392,6 +101891,11 @@
             "capturedAt": "2026-10-10"
           }
         ]
+      },
+      "quoteEvidence": {
+        "excerpt": "We'll assess the requirements and give you a clear, upfront quote before starting.",
+        "sourceUrl": "https://hmhandymansg.com/services/carpentry/wardrobes",
+        "capturedAt": "2026-10-11"
       },
       "mapEvidence": {
         "status": "verified",
@@ -101686,6 +102190,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -101935,6 +102440,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -102278,6 +102784,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -102552,6 +103059,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -102975,6 +103483,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -103245,6 +103754,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "address-geocoded",
         "precision": "building",
@@ -103700,6 +104210,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -104030,6 +104541,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -104309,6 +104821,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -104525,6 +105038,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -104775,6 +105289,11 @@
         ],
         "socials": []
       },
+      "quoteEvidence": {
+        "excerpt": "We’ll always provide a clear, upfront quote before starting any work.",
+        "sourceUrl": "https://www.homeunited-repair.com/",
+        "capturedAt": "2026-10-10"
+      },
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -105013,6 +105532,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -105357,6 +105877,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -105553,6 +106074,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -105933,6 +106455,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -106314,6 +106837,11 @@
           }
         ]
       },
+      "quoteEvidence": {
+        "excerpt": "Talk to our team today for a free, no-obligation quote.",
+        "sourceUrl": "https://www.hujaifahandymansg.com/services/kitchen-cabinet-repair",
+        "capturedAt": "2026-10-11"
+      },
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -106539,6 +107067,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -106802,6 +107331,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -107104,6 +107634,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -107302,6 +107833,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -107621,6 +108153,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -108038,6 +108571,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -108218,6 +108752,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -108424,6 +108959,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -108608,6 +109144,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -108835,6 +109372,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -109054,6 +109592,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -109250,6 +109789,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -109551,6 +110091,11 @@
           }
         ]
       },
+      "quoteEvidence": {
+        "excerpt": "Contact us today for a free quotation or same-day service.",
+        "sourceUrl": "https://handymanservicesg.net/basin-stopper-installation/",
+        "capturedAt": "2026-10-11"
+      },
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -109716,6 +110261,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -110029,6 +110575,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -110304,6 +110851,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -110469,6 +111017,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -110689,6 +111238,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -110938,6 +111488,7 @@
         ],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -111213,6 +111764,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "unresolved",
         "precision": null,
@@ -111407,6 +111959,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -111791,6 +112344,11 @@
           }
         ]
       },
+      "quoteEvidence": {
+        "excerpt": "If a specific part or fixture is needed, we'll source it and include it in the upfront quote.",
+        "sourceUrl": "https://jbmneservicesg.com/",
+        "capturedAt": "2026-10-10"
+      },
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -111982,6 +112540,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -112406,6 +112965,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -112874,6 +113434,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -113076,6 +113637,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -113415,6 +113977,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -113779,6 +114342,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -114143,6 +114707,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -114581,6 +115146,11 @@
           }
         ]
       },
+      "quoteEvidence": {
+        "excerpt": "💰 Transparent Pricing - Full Quote Before We Start, Zero Hidden Fees",
+        "sourceUrl": "https://jshandyman.sg/emergency-electrician-singapore/",
+        "capturedAt": "2026-10-11"
+      },
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -114876,6 +115446,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "address-geocoded",
         "precision": "building",
@@ -115369,6 +115940,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -115558,6 +116130,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "unresolved",
         "precision": null,
@@ -115788,6 +116361,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -116050,6 +116624,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -116562,6 +117137,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -116845,6 +117421,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -117081,6 +117658,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -117273,6 +117851,11 @@
             "capturedAt": "2026-10-10"
           }
         ]
+      },
+      "quoteEvidence": {
+        "excerpt": "Send us a quotation request and we'll get back to you ASAP!",
+        "sourceUrl": "https://www.keydence.com/services/smart-lighting-systems",
+        "capturedAt": "2026-10-12"
       },
       "mapEvidence": {
         "status": "verified",
@@ -117492,6 +118075,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -117907,6 +118491,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "unresolved",
         "precision": null,
@@ -118180,6 +118765,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -118381,6 +118967,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "address-geocoded",
         "precision": "building",
@@ -118657,6 +119244,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "address-geocoded",
         "precision": "building",
@@ -118977,6 +119565,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -119337,6 +119926,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -119568,6 +120158,11 @@
         "brands": [],
         "payments": [],
         "socials": []
+      },
+      "quoteEvidence": {
+        "excerpt": "Contact Kitchen Cabinet Genius Singapore for your free consultation and quote.",
+        "sourceUrl": "https://kitchencabinetgenius.com/",
+        "capturedAt": "2026-10-10"
       },
       "mapEvidence": {
         "status": "verified",
@@ -119865,6 +120460,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -120485,6 +121081,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "address-geocoded",
         "precision": "building",
@@ -120740,6 +121337,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -121331,6 +121929,7 @@
         ],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "address-geocoded",
         "precision": "building",
@@ -121705,6 +122304,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "address-geocoded",
         "precision": "building",
@@ -121944,6 +122544,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -122135,6 +122736,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -122372,6 +122974,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -122721,6 +123324,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -122905,6 +123509,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "unresolved",
         "precision": null,
@@ -123123,6 +123728,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -123339,6 +123945,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -123557,6 +124164,11 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": {
+        "excerpt": "Contact us today for a free, no-obligation consultation and transparent quotation.",
+        "sourceUrl": "https://lexuanrenovation.com/services/",
+        "capturedAt": "2026-10-10"
+      },
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -123724,6 +124336,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -124098,6 +124711,7 @@
         ],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -124745,6 +125359,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -124906,6 +125521,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -125071,6 +125687,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -125298,6 +125915,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -125534,6 +126152,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -125795,6 +126414,11 @@
           }
         ]
       },
+      "quoteEvidence": {
+        "excerpt": "➡ Get your free renovation quote now ! ⬅",
+        "sourceUrl": "https://www.lightdebath.com/",
+        "capturedAt": "2026-10-12"
+      },
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -125994,6 +126618,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -126865,6 +127490,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "address-geocoded",
         "precision": "building",
@@ -127390,6 +128016,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -128105,6 +128732,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -128257,6 +128885,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -128761,6 +129390,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -129192,6 +129822,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -129415,6 +130046,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -129676,6 +130308,11 @@
             "capturedAt": "2026-10-10"
           }
         ]
+      },
+      "quoteEvidence": {
+        "excerpt": "We provide transparent pricing and free quotes before starting any work.",
+        "sourceUrl": "https://lotus-electrical-services.com/",
+        "capturedAt": "2026-10-10"
       },
       "mapEvidence": {
         "status": "verified",
@@ -129958,6 +130595,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -130233,6 +130871,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -130497,6 +131136,11 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": {
+        "excerpt": "Our friendly team is here to answer your questions and provide you with a detailed quote tailored to your installation needs.",
+        "sourceUrl": "https://www.handymansingapore.net/distribution-box-installation/",
+        "capturedAt": "2026-10-11"
+      },
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -130681,6 +131325,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "unresolved",
         "precision": null,
@@ -130898,6 +131543,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -131074,6 +131720,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -131258,6 +131905,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "unresolved",
         "precision": null,
@@ -131412,6 +132060,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -132000,6 +132649,7 @@
         ],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -132207,6 +132857,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -132439,6 +133090,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -132634,6 +133286,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -132848,6 +133501,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -133069,6 +133723,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -133291,6 +133946,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -133598,6 +134254,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -134088,6 +134745,7 @@
         ],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -134290,6 +134948,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "unresolved",
         "precision": null,
@@ -134515,6 +135174,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "address-geocoded",
         "precision": "building",
@@ -134751,6 +135411,11 @@
           }
         ]
       },
+      "quoteEvidence": {
+        "excerpt": "We provide accurate quotes and estimates, so there are no surprises or hidden fees.",
+        "sourceUrl": "https://merdekacontractor.sg/plumbing/",
+        "capturedAt": "2026-10-12"
+      },
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -134960,6 +135625,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -135117,6 +135783,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -135307,6 +135974,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -135556,6 +136224,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -135780,6 +136449,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "unresolved",
         "precision": null,
@@ -136017,6 +136687,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -136256,6 +136927,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -136664,6 +137336,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -136865,6 +137538,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -137069,6 +137743,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -137304,6 +137979,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -137666,6 +138342,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -137888,6 +138565,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "unresolved",
         "precision": null,
@@ -138163,6 +138841,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -138374,6 +139053,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -138601,6 +139281,11 @@
         "brands": [],
         "payments": [],
         "socials": []
+      },
+      "quoteEvidence": {
+        "excerpt": "We assess your needs and provide a clear, transparent quotation with no hidden cost.",
+        "sourceUrl": "https://namsanengineering.com/electrical-services/",
+        "capturedAt": "2026-10-11"
       },
       "mapEvidence": {
         "status": "verified",
@@ -138879,6 +139564,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -139275,6 +139961,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -139482,6 +140169,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -139676,6 +140364,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -140022,6 +140711,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -140412,6 +141102,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -140946,6 +141637,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -141130,6 +141822,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -141508,6 +142201,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -141760,6 +142454,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -142329,6 +143024,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -142725,6 +143421,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -142976,6 +143673,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -143163,6 +143861,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -143428,6 +144127,11 @@
           }
         ],
         "socials": []
+      },
+      "quoteEvidence": {
+        "excerpt": "Contact us for a free, no-obligation quote.",
+        "sourceUrl": "https://onbest.sg/",
+        "capturedAt": "2026-10-12"
       },
       "mapEvidence": {
         "status": "verified",
@@ -143710,6 +144414,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -143952,6 +144657,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "unresolved",
         "precision": null,
@@ -144248,6 +144954,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "address-geocoded",
         "precision": "building",
@@ -144448,6 +145155,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -144606,6 +145314,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -145016,6 +145725,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -145213,6 +145923,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -145447,6 +146158,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -145708,6 +146420,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -145996,6 +146709,11 @@
             "capturedAt": "2026-10-10"
           }
         ]
+      },
+      "quoteEvidence": {
+        "excerpt": "We offer clear, upfront quotes with no hidden fees.",
+        "sourceUrl": "https://bestpaintingsg.com/plumbing-service-in-singapore/",
+        "capturedAt": "2026-10-12"
       },
       "mapEvidence": {
         "status": "verified",
@@ -146289,6 +147007,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -146751,6 +147470,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -147000,6 +147720,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -147180,6 +147901,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -147559,6 +148281,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -147956,6 +148679,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -148259,6 +148983,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -148431,6 +149156,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -148598,6 +149324,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -148769,6 +149496,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -149445,6 +150173,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -149665,6 +150394,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -149833,6 +150563,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -150142,6 +150873,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -150361,6 +151093,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -150567,6 +151300,11 @@
         "brands": [],
         "payments": [],
         "socials": []
+      },
+      "quoteEvidence": {
+        "excerpt": "We can provide a home rewiring quote and complete the work as soon as required.",
+        "sourceUrl": "https://www.getelectriciansg.com/electrician-in-singapore.html",
+        "capturedAt": "2026-10-11"
       },
       "mapEvidence": {
         "status": "verified",
@@ -150862,6 +151600,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -151137,6 +151876,11 @@
         "brands": [],
         "payments": [],
         "socials": []
+      },
+      "quoteEvidence": {
+        "excerpt": "To get an accurate quote, simply WhatsApp us a photo or video of the issue, and we’ll provide a transparent estimate with no hidden costs.",
+        "sourceUrl": "https://pnthandyman.com/",
+        "capturedAt": "2026-10-10"
       },
       "mapEvidence": {
         "status": "verified",
@@ -151550,6 +152294,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -151807,6 +152552,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -152344,6 +153090,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -152580,6 +153327,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -152819,6 +153567,11 @@
           }
         ],
         "socials": []
+      },
+      "quoteEvidence": {
+        "excerpt": "Our team will review the details and provide you with a clear, no-obligation quote as soon as possible.",
+        "sourceUrl": "https://profix-handyman-singapore.com/",
+        "capturedAt": "2026-10-10"
       },
       "mapEvidence": {
         "status": "verified",
@@ -153080,6 +153833,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -153412,6 +154166,11 @@
           }
         ]
       },
+      "quoteEvidence": {
+        "excerpt": "We offer free quotes after assessing the job, so you’ll always know the cost upfront before work begins.",
+        "sourceUrl": "https://www.pshomemaintenance.com/",
+        "capturedAt": "2026-10-10"
+      },
       "mapEvidence": {
         "status": "address-geocoded",
         "precision": "building",
@@ -153699,6 +154458,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -153939,6 +154699,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -154271,6 +155032,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -154642,6 +155404,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -154984,6 +155747,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -155290,6 +156054,11 @@
           }
         ]
       },
+      "quoteEvidence": {
+        "excerpt": "We believe in honest pricing, providing transparent quotes with no hidden costs or surprises.",
+        "sourceUrl": "https://quickcarpentrysg.com/about",
+        "capturedAt": "2026-10-10"
+      },
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -155488,6 +156257,11 @@
         "brands": [],
         "payments": [],
         "socials": []
+      },
+      "quoteEvidence": {
+        "excerpt": "Honest quotes We explain what needs doing and what it will cost before we begin.",
+        "sourceUrl": "https://quickhandymansg.com/about-us/",
+        "capturedAt": "2026-10-10"
       },
       "mapEvidence": {
         "status": "verified",
@@ -155778,6 +156552,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -156053,6 +156828,11 @@
           }
         ]
       },
+      "quoteEvidence": {
+        "excerpt": "We believe in honest pricing, providing transparent quotes with no hidden costs or surprises.",
+        "sourceUrl": "https://rbhandymansg.com/about",
+        "capturedAt": "2026-10-10"
+      },
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -156254,6 +157034,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -156457,6 +157238,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -156628,6 +157410,11 @@
         "brands": [],
         "payments": [],
         "socials": []
+      },
+      "quoteEvidence": {
+        "excerpt": "You may contact us for free quotation and all our prices are subjected to 7% G.S.T.",
+        "sourceUrl": "https://www.electricalservices.sg/",
+        "capturedAt": "2026-10-10"
       },
       "mapEvidence": {
         "status": "unresolved",
@@ -156872,6 +157659,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -157109,6 +157897,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -157425,6 +158214,11 @@
             "capturedAt": "2026-10-10"
           }
         ]
+      },
+      "quoteEvidence": {
+        "excerpt": "We provide a transparent quote before arriving.",
+        "sourceUrl": "https://www.renohandymansg.com/services/drilling-and-installation",
+        "capturedAt": "2026-10-11"
       },
       "mapEvidence": {
         "status": "verified",
@@ -157847,6 +158641,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -158163,6 +158958,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -158561,6 +159357,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -159143,6 +159940,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -159359,6 +160157,11 @@
         "brands": [],
         "payments": [],
         "socials": []
+      },
+      "quoteEvidence": {
+        "excerpt": "Tell us about your project and we'll get back to you with a no-obligation quote within one business day.",
+        "sourceUrl": "https://resengrg.com/",
+        "capturedAt": "2026-10-10"
       },
       "mapEvidence": {
         "status": "verified",
@@ -159699,6 +160502,11 @@
           }
         ]
       },
+      "quoteEvidence": {
+        "excerpt": "Rezeca provides itemised quotes with full 30-year ROI projections at no cost.",
+        "sourceUrl": "https://www.rezeca.com/faqs",
+        "capturedAt": "2026-10-12"
+      },
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -159947,6 +160755,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "address-geocoded",
         "precision": "building",
@@ -160137,6 +160946,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -160621,6 +161431,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -160824,6 +161635,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -161267,6 +162079,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -161525,6 +162338,11 @@
             "capturedAt": "2026-10-10"
           }
         ]
+      },
+      "quoteEvidence": {
+        "excerpt": "Step 1: Request a Free Quote Click to call or message us with your repair needs.",
+        "sourceUrl": "https://rmhandymansg.com/",
+        "capturedAt": "2026-10-10"
       },
       "mapEvidence": {
         "status": "verified",
@@ -161813,6 +162631,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -162086,6 +162905,11 @@
         "brands": [],
         "payments": [],
         "socials": []
+      },
+      "quoteEvidence": {
+        "excerpt": "For HDB flats we quote by flat type.",
+        "sourceUrl": "https://rrelectricalservices.com.sg/electrical-services/whole-house-rewiring/",
+        "capturedAt": "2026-10-11"
       },
       "mapEvidence": {
         "status": "verified",
@@ -162457,6 +163281,11 @@
           }
         ]
       },
+      "quoteEvidence": {
+        "excerpt": "After inspecting the issue, we give you a fixed, upfront quote.",
+        "sourceUrl": "https://www.rrhandymansg.com/faq",
+        "capturedAt": "2026-10-10"
+      },
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -162732,6 +163561,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -162910,6 +163740,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -163278,6 +164109,7 @@
         ],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -163722,6 +164554,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -163892,6 +164725,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -164137,6 +164971,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -164684,6 +165519,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -165192,6 +166028,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -165395,6 +166232,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -165863,6 +166701,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -166064,6 +166903,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -166237,6 +167077,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -166492,6 +167333,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -166658,6 +167500,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -166985,6 +167828,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -167202,6 +168046,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -167371,6 +168216,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -167682,6 +168528,11 @@
             "capturedAt": "2026-10-10"
           }
         ]
+      },
+      "quoteEvidence": {
+        "excerpt": "Basic electrical repairs start from affordable rates, and we always provide a clear, itemised quotation before starting.",
+        "sourceUrl": "https://electricman.com.sg/",
+        "capturedAt": "2026-10-10"
       },
       "mapEvidence": {
         "status": "verified",
@@ -168046,6 +168897,11 @@
           }
         ]
       },
+      "quoteEvidence": {
+        "excerpt": "For larger projects like painting or flooring, we provide a clear, detailed quotation.",
+        "sourceUrl": "https://sghandymanengineering.com/",
+        "capturedAt": "2026-10-10"
+      },
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -168332,6 +169188,11 @@
           }
         ]
       },
+      "quoteEvidence": {
+        "excerpt": "Have a question, need a quick quote, or want to book a service? We’re just a call or message away!",
+        "sourceUrl": "https://www.sghandymanpro.com/contact-us/",
+        "capturedAt": "2026-10-12"
+      },
       "mapEvidence": {
         "status": "unresolved",
         "precision": null,
@@ -168539,6 +169400,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -168848,6 +169710,11 @@
           }
         ]
       },
+      "quoteEvidence": {
+        "excerpt": "Once you share the details or photos via WhatsApp, we provide a clear quotation before any work begins-with zero hidden fees.",
+        "sourceUrl": "https://www.sghomefixing.com/services/electrical-service",
+        "capturedAt": "2026-10-10"
+      },
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -169090,6 +169957,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -169333,6 +170201,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -169949,6 +170818,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -170109,6 +170979,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -170307,6 +171178,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -170556,6 +171428,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -170810,6 +171683,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -171032,6 +171906,11 @@
         "brands": [],
         "payments": [],
         "socials": []
+      },
+      "quoteEvidence": {
+        "excerpt": "We also offer free quotation for your service needs.",
+        "sourceUrl": "https://www.sg1electrician.com/hdb-electrical-contractor/",
+        "capturedAt": "2026-10-11"
       },
       "mapEvidence": {
         "status": "verified",
@@ -171427,6 +172306,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "address-geocoded",
         "precision": "building",
@@ -171767,6 +172647,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -172161,6 +173042,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "address-geocoded",
         "precision": "building",
@@ -172409,6 +173291,11 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": {
+        "excerpt": "Contact us with your requirements, and we'll provide a transparent, no-obligation quote.",
+        "sourceUrl": "https://sgphandyman.services/services/door-repair-singapore/",
+        "capturedAt": "2026-10-11"
+      },
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -172589,6 +173476,11 @@
         "brands": [],
         "payments": [],
         "socials": []
+      },
+      "quoteEvidence": {
+        "excerpt": "Upon agreement on the solution and quote, our handyman will work on it.",
+        "sourceUrl": "https://singaporehandymanservices.com/",
+        "capturedAt": "2026-10-10"
       },
       "mapEvidence": {
         "status": "verified",
@@ -172784,6 +173676,11 @@
             "capturedAt": "2026-10-10"
           }
         ]
+      },
+      "quoteEvidence": {
+        "excerpt": "Contact us to get a free quote now!",
+        "sourceUrl": "https://sh-integrated.com/service/plumbing-sanitary-works/",
+        "capturedAt": "2026-10-11"
       },
       "mapEvidence": {
         "status": "verified",
@@ -173016,6 +173913,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -173241,6 +174139,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -173612,6 +174511,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -173928,6 +174828,7 @@
         ],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -174233,6 +175134,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -174419,6 +175321,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -174773,6 +175676,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -174950,6 +175854,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -175298,6 +176203,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -175630,6 +176536,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -175985,6 +176892,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -176492,6 +177400,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -176783,6 +177692,11 @@
             "capturedAt": "2026-10-10"
           }
         ]
+      },
+      "quoteEvidence": {
+        "excerpt": "Call SK Electrical with your house wiring or rewiring requirements and our team will assist you with the quotation.",
+        "sourceUrl": "https://skelectrical.com.sg/whole-house-rewiring-services",
+        "capturedAt": "2026-10-11"
       },
       "mapEvidence": {
         "status": "verified",
@@ -177132,6 +178046,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -177339,6 +178254,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -177753,6 +178669,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -178126,6 +179043,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -178332,6 +179250,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -178730,6 +179649,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -179097,6 +180017,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -179332,6 +180253,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -179740,6 +180662,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -179960,6 +180883,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -180339,6 +181263,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -180592,6 +181517,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -180960,6 +181886,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -181780,6 +182707,7 @@
         ],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "unresolved",
         "precision": null,
@@ -182186,6 +183114,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -182584,6 +183513,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -183016,6 +183946,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -183198,6 +184129,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -183466,6 +184398,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -183749,6 +184682,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -184110,6 +185044,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -184449,6 +185384,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -184651,6 +185587,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -184929,6 +185866,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -185092,6 +186030,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -185518,6 +186457,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -185733,6 +186673,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -186001,6 +186942,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -186413,6 +187355,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -186681,6 +187624,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -186868,6 +187812,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -187059,6 +188004,11 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": {
+        "excerpt": "You get honest quotes with no hidden fees-pay only for the work you need",
+        "sourceUrl": "https://wireman.sg/",
+        "capturedAt": "2026-10-12"
+      },
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -187249,6 +188199,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -187764,6 +188715,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -187978,6 +188930,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -188218,6 +189171,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -188585,6 +189539,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -189039,6 +189994,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -189310,6 +190266,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -189537,6 +190494,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -190188,6 +191146,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -190713,6 +191672,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -191008,6 +191968,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "address-geocoded",
         "precision": "building",
@@ -191244,6 +192205,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -191515,6 +192477,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -191791,6 +192754,11 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": {
+        "excerpt": "What we quote is exactly what you pay - honest and fair electrical services.",
+        "sourceUrl": "https://swyftfix.sg/electrician-service-singapore/",
+        "capturedAt": "2026-10-11"
+      },
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -191926,6 +192894,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "address-geocoded",
         "precision": "building",
@@ -192277,6 +193246,11 @@
           }
         ]
       },
+      "quoteEvidence": {
+        "excerpt": "Contact us for a free quote.",
+        "sourceUrl": "https://www.tasolutionsg.com/",
+        "capturedAt": "2026-10-12"
+      },
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -192554,6 +193528,11 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": {
+        "excerpt": "Call us today and get a Free Quotation !",
+        "sourceUrl": "https://talenthandymanservicessg.com/door-repair-services/",
+        "capturedAt": "2026-10-11"
+      },
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -192761,6 +193740,11 @@
         "brands": [],
         "payments": [],
         "socials": []
+      },
+      "quoteEvidence": {
+        "excerpt": "We assess your site, provide transparent quotes, and help you choose the right solution.",
+        "sourceUrl": "https://www.tayengsvc.com/electrical-maintenance-singapore",
+        "capturedAt": "2026-10-11"
       },
       "mapEvidence": {
         "status": "verified",
@@ -192977,6 +193961,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -193245,6 +194230,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -193431,6 +194417,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -193573,6 +194560,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -193760,6 +194748,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -193978,6 +194967,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -194175,6 +195165,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -194374,6 +195365,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -194559,6 +195551,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -194752,6 +195745,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -195255,6 +196249,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -195531,6 +196526,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -195764,6 +196760,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -196135,6 +197132,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -196508,6 +197506,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -196814,6 +197813,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "address-geocoded",
         "precision": "building",
@@ -197054,6 +198054,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -197307,6 +198308,11 @@
           }
         ]
       },
+      "quoteEvidence": {
+        "excerpt": "Get in touch with our team today for a free, no-obligation consultation and quotation.",
+        "sourceUrl": "https://toimorengineering.com/about",
+        "capturedAt": "2026-10-12"
+      },
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -197517,6 +198523,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -197816,6 +198823,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -198115,6 +199123,11 @@
         "brands": [],
         "payments": [],
         "socials": []
+      },
+      "quoteEvidence": {
+        "excerpt": "Contact us for a free quote, and we’ll provide an estimate based on your needs.",
+        "sourceUrl": "https://trhandyservice.com/",
+        "capturedAt": "2026-10-10"
       },
       "mapEvidence": {
         "status": "verified",
@@ -198694,6 +199707,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -199020,6 +200034,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -199203,6 +200218,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "unresolved",
         "precision": null,
@@ -199405,6 +200421,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -199714,6 +200731,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -200085,6 +201103,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -200246,6 +201265,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -200448,6 +201468,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -200638,6 +201659,7 @@
         ],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -200840,6 +201862,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -201162,6 +202185,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -201431,6 +202455,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -201649,6 +202674,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -201929,6 +202955,11 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": {
+        "excerpt": "Transparent quotations You see the price before work starts, and we ask before doing anything extra.",
+        "sourceUrl": "https://v2sservices.com/",
+        "capturedAt": "2026-10-10"
+      },
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -202144,6 +203175,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -202592,6 +203624,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -202853,6 +203886,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -203152,6 +204186,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -203511,6 +204546,11 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": {
+        "excerpt": "Do you provide a quotation before rewiring? Yes. The electrical condition and required points should be assessed before a proper scope and quotation are confirmed.",
+        "sourceUrl": "https://vmgelectrical.sg/whole-house-rewiring-services.php",
+        "capturedAt": "2026-10-11"
+      },
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -203753,6 +204793,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -203965,6 +205006,11 @@
         "brands": [],
         "payments": [],
         "socials": []
+      },
+      "quoteEvidence": {
+        "excerpt": "We’ll schedule a convenient time for a free assessment and provide a detailed quotation.",
+        "sourceUrl": "https://www.voltagepro.org/smart-home-workspace/",
+        "capturedAt": "2026-10-11"
       },
       "mapEvidence": {
         "status": "verified",
@@ -204192,6 +205238,7 @@
         ],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -204481,6 +205528,11 @@
         "brands": [],
         "payments": [],
         "socials": []
+      },
+      "quoteEvidence": {
+        "excerpt": "Honest & Transparent Pricing: We believe in straightforward communication, clear upfront quotes, and timely service with absolutely no hidden costs.",
+        "sourceUrl": "https://wahomefix.com/about-us/",
+        "capturedAt": "2026-10-10"
       },
       "mapEvidence": {
         "status": "verified",
@@ -204823,6 +205875,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -205006,6 +206059,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -205190,6 +206244,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -205584,6 +206639,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -205820,6 +206876,11 @@
         "brands": [],
         "payments": [],
         "socials": []
+      },
+      "quoteEvidence": {
+        "excerpt": "Contact us for a free quotation based on your specific requirements.",
+        "sourceUrl": "https://weiengineeringsg.com/services/electrical-services/",
+        "capturedAt": "2026-10-12"
       },
       "mapEvidence": {
         "status": "verified",
@@ -206189,6 +207250,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -206503,6 +207565,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -206703,6 +207766,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -206943,6 +208007,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -207278,6 +208343,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -207762,6 +208828,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -208095,6 +209162,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -208489,6 +209557,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -208748,6 +209817,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -209054,6 +210124,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -209336,6 +210407,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -209484,6 +210556,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -209846,6 +210919,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -210111,6 +211185,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -210338,6 +211413,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -210555,6 +211631,7 @@
         "payments": [],
         "socials": []
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -210842,6 +211919,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",
@@ -211044,6 +212122,7 @@
           }
         ]
       },
+      "quoteEvidence": null,
       "mapEvidence": {
         "status": "verified",
         "precision": "building",

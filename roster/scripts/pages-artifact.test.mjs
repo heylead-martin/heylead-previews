@@ -7,7 +7,7 @@ import {spawnSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
 
 const checker = fileURLToPath(new URL('./check-pages-artifact.mjs',import.meta.url));
-const config = {configured:true,url:'https://project.supabase.co',publishableKey:'sb_publishable_fixture_only_not_a_real_key',googleEnabled:false};
+const config = {configured:false,url:'',publishableKey:'',googleEnabled:false};
 async function fixture(action) {
   const root=await mkdtemp(join(tmpdir(),'roster-pages-test-'));
   try {
@@ -19,7 +19,7 @@ async function fixture(action) {
     await action(root,()=>spawnSync(process.execPath,[checker,root],{encoding:'utf8'}));
   } finally {await rm(root,{recursive:true,force:true});}
 }
-test('Deployment accepts connected public-only configuration and complete sites',()=>fixture(async(root,run)=>{
+test('Deployment accepts disconnected empty configuration and complete sites',()=>fixture(async(root,run)=>{
   assert.equal(run().status,0);
 }));
 test('Deployment refuses local environment files and CLI state',()=>fixture(async(root,run)=>{
@@ -30,8 +30,8 @@ test('Deployment refuses local environment files and CLI state',()=>fixture(asyn
   await mkdir(join(root,'roster/supabase/.temp'),{recursive:true});
   assert.notEqual(run().status,0);
 }));
-test('Deployment refuses unexpected configuration and unconnected accounts',()=>fixture(async(root,run)=>{
-  for(const data of [{...config,SUPABASE_SECRET_KEY:'fixture_must_not_ship'},{...config,configured:false},{...config,publishableKey:'sb_secret_fixture_must_not_ship'}]) {
+test('Deployment refuses unexpected configuration and active accounts while parked',()=>fixture(async(root,run)=>{
+  for(const data of [{...config,SUPABASE_SECRET_KEY:'fixture_must_not_ship'},{...config,configured:true},{...config,publishableKey:'sb_secret_fixture_must_not_ship'}]) {
     await writeFile(join(root,'roster/accounts.public.json'),JSON.stringify(data));
     const result=run();assert.notEqual(result.status,0);assert.equal(result.stderr.includes('fixture_must_not_ship'),false);
   }

@@ -1,10 +1,11 @@
+import {previewFeatures} from '../assets/features.mjs';
 import {build} from 'esbuild';
 import {readFile,writeFile,rm,rename} from 'node:fs/promises';
 import {fileURLToPath} from 'node:url';
 import {readPublicAccountConfig} from './account-config.mjs';
 const root = fileURLToPath(new URL('../', import.meta.url));
 let config;
-try { config = await readPublicAccountConfig(); }
+try { config = previewFeatures ? await readPublicAccountConfig() : {configured:false,url:'',publishableKey:'',googleEnabled:false}; }
 catch (error) {
   await rm(root+'accounts.public.json', {force:true});
   throw error;

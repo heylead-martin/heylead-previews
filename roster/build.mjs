@@ -1,3 +1,6 @@
+import {heroPhoto,photoCredit} from './lib/hero-professions.mjs';
+import {previewFeatures} from './assets/features.mjs';
+import {renderQuoteEvidence,logoOwnerNote} from './assets/evidence-display.mjs';
 import {accountContent,accountHome,savedContent,callbackContent} from './lib/account-pages.mjs';
 import {renderMatchPage} from './lib/job-search.mjs';
 import {renderQuoteComposer} from './lib/quote-flow.mjs';
@@ -506,7 +509,7 @@ const navItems = [
 
 function renderNav(current, home = false) {
   const links = navItems.filter(([, , trade]) => trade).map(([href, label, trade]) => `<a href="${href}"${href === current ? ' aria-current="page"' : ""}>${icon(tradeIcon[trade], "ic nav-ic")}<span>${esc(label)}</span></a>`).join("");
-  return `<header class="top"><div class="top-inner"><a class="brand" href="/roster/">${brandMark()}<span class="wordmark">Roster<span class="brand-dot">.</span></span></a>${home ? "" : `<div class="global-search" role="search"><label class="sr-only" for="site-search">Find a service or company</label>${icon("search")}<input id="site-search" type="search" placeholder="Find a service or company" autocomplete="off" data-site-search><span class="search-location">${icon("pin")} Singapore</span><button class="search-submit" type="button" aria-label="Search Roster" data-search-submit>${icon("arrow")}</button></div>`}<a class="saved-link" aria-label="Saved companies" href="/roster/saved/">${icon("bookmark")}<span>Saved</span><b data-saved-count hidden></b></a><nav class="account-nav" aria-label="Account"><a data-account-guest href="/roster/sign-in/">Sign in</a><a data-account-guest class="nav-signup" href="/roster/sign-up/">Sign up</a><a data-account-member href="/roster/account/" hidden>Account</a><button data-account-member data-sign-out type="button" hidden>Sign out</button></nav></div><div class="nav-shell"><nav class="nav" aria-label="Services">${links}</nav><span class="nav-note">Home services. A more considered choice.</span></div></header>`;
+  return `<header class="top"><div class="top-inner"><a class="brand" href="/roster/">${brandMark()}<span class="wordmark">Roster<span class="brand-dot">.</span></span></a>${home ? "" : `<div class="global-search" role="search"><label class="sr-only" for="site-search">Find a service or company</label>${icon("search")}<input id="site-search" type="search" placeholder="Find a service or company" autocomplete="off" data-site-search><span class="search-location">${icon("pin")} Singapore</span><button class="search-submit" type="button" aria-label="Search Roster" data-search-submit>${icon("arrow")}</button></div>`}${previewFeatures?`<a class="saved-link" aria-label="Saved companies" href="/roster/saved/">${icon("bookmark")}<span>Saved</span><b data-saved-count hidden></b></a><nav class="account-nav" aria-label="Account"><a data-account-guest href="/roster/sign-in/">Sign in</a><a data-account-guest class="nav-signup" href="/roster/sign-up/">Sign up</a><a data-account-member href="/roster/account/" hidden>Account</a><button data-account-member data-sign-out type="button" hidden>Sign out</button></nav>`:''}</div><div class="nav-shell"><nav class="nav" aria-label="Services">${links}</nav><span class="nav-note">Home services. A more considered choice.</span></div></header>`;
 }
 
 function renderCrumbs(items) {
@@ -525,12 +528,16 @@ function renderFooter() {
 <div class="foot-col"><h2>Jobs</h2><ul>${jobs}</ul></div>
 <div class="foot-col"><h2>About</h2><ul><li><a href="/roster/how-it-works/">How the list is made</a></li><li><a href="/roster/claim-listing/">Claim your listing</a></li><li><a href="/roster/aircon-servicing/chemical-wash/">Aircon chemical wash</a></li><li><a href="/roster/aircon-servicing/gas-top-up/">Aircon gas top-up</a></li></ul></div>
 <div class="footer-guides" aria-label="Home-service guides">${trades.map(t=>`<details><summary>${esc(t.name)} guides</summary><ul>${editorialGuides.filter(g=>g.trade===t.id).map(g=>`<li><a href="${g.path}${g.directory?'#guide':''}">${esc(g.label)}</a></li>`).join('')}</ul></details>`).join('')}</div>
-<p class="foot-line">Singapore beta. Unpaid listings. No commission on your job. Quote requests are a preview and do not send.</p>
+<p class="footer-logo-ownership">${logoOwnerNote}</p><p class="foot-line">Singapore beta. Unpaid listings. No commission on your job. ${previewFeatures?"Quote requests are a preview and do not send.":""}</p>
 </div></footer>`;
 }
 
+function publicFaqs(faqs) {
+  return previewFeatures ? faqs : faqs.filter(([question]) => !/quote (?:preview|form)/i.test(question));
+}
+
 function renderFaq(faqs, heading = "Questions") {
-  const items = faqs.map(([q, a]) => `<details><summary><span>${esc(q)}</span><span class="faq-mark" aria-hidden="true"></span></summary><p>${esc(a)}</p></details>`).join("");
+  const items = publicFaqs(faqs).map(([q, a]) => `<details><summary><span>${esc(q)}</span><span class="faq-mark" aria-hidden="true"></span></summary><p>${esc(a)}</p></details>`).join("");
   return `<section class="faq"><h2>${esc(heading)}</h2><div class="faq-list">${items}</div></section>`;
 }
 
@@ -553,7 +560,7 @@ function nameList(companies) {
 }
 
 function renderForm(jobs, recipients, uid) {
-  if (!recipients.length) return "";
+  if (!previewFeatures || !recipients.length) return "";
   const options = jobs.map((job) => `<option>${esc(job)}</option>`).join("");
   const maximum = Math.min(3, recipients.length);
   const id = (name) => `${uid}-${name}`;
@@ -575,6 +582,7 @@ function renderForm(jobs, recipients, uid) {
 
 function priceSummary(company, service) {
   const display = presentation[company.slug] || { price: "Ask for a quote", detail: "No published rate captured", published: false };
+  if(company.quoteEvidence)return {...display,price:'Quote on request',detail:'',published:false,examplePrice:false,quoteEvidence:company.quoteEvidence};
   const sourcePrices=(company.enrichment?.priceLines||[]).filter(p=>!service||p.job===service);
   const example = company.imported ? sourcePrices.map(priceOption).map(priceView).find(p=>!p.indicative && /^(?:from\s+)?S?\$\s*\d/i.test(p.price) && p.price.length<=40 && p.label) : null;
   const cleanDisplay = example ? {...display,price:example.price,detail:`${example.label}. See service details for inclusions.`,examplePrice:true} : company.imported ? {...display, detail:display.published ? "Explore service prices and confirm your final quote with the team." : "Contact the team for a quote tailored to your job."} : display;
@@ -591,13 +599,17 @@ function shortlist(companies, service) {
 }
 
 function pageShell({ title, description, canonicalPath, current, jsonLd, body, bodyClass = "", shareImage = "" }) {
-  if (!shareImage && editorialByPath.has(canonicalPath)) shareImage = abs(`/roster/assets/hero/${editorialByPath.get(canonicalPath).trade}-v1.jpg`);
+  if (!shareImage && editorialByPath.has(canonicalPath)) shareImage = abs(heroPhoto(editorialByPath.get(canonicalPath).trade).sizes[1200].src);
+  if(!previewFeatures && /^\/roster\/(?:sign-in|sign-up|forgot-password|reset-password|account|auth\/callback|saved|matches)\/$/.test(canonicalPath)) {
+    body=`<section class="pending-feature"><p class="kicker">CONNECTION PENDING</p><h1>${canonicalPath.includes('matches')?'Job matching':canonicalPath.includes('saved')?'Saved companies':'Accounts'} preview.</h1><p>This feature is not available on the public site yet. Browse companies and contact them directly.</p><a class="btn btn-solid" href="/roster/search/">Browse companies</a></section>`;
+    bodyClass='pending-page';
+  }
   description = concise(description);
   const canonical = abs(canonicalPath);
   const graph = JSON.stringify({
     "@context": "https://schema.org",
     "@graph": jsonLd
-  }).replace(/</g, "\\u003c");
+  }, (_key,value) => typeof value==='string' ? value.replace(/S?\$/g,'SGD ').replace(/[★☆]/g,'') : value).replace(/</g, "\\u003c");
   assertNoDashes(graph, canonicalPath);
   const html = `<!doctype html>
 <html lang="en-SG">
@@ -644,13 +656,13 @@ ${renderNav(current, bodyClass === "home-page")}
 ${body}
 </main>
 ${renderFooter()}
-<script src="/roster/assets/form.js?v=${assetVersions["form.js"]}"></script>
-<script type="module" src="/roster/assets/accounts.js?v=${assetVersions["accounts.js"]}"></script>
+${previewFeatures?`<script src="/roster/assets/form.js?v=${assetVersions["form.js"]}"></script>`:""}
+${previewFeatures?`<script type="module" src="/roster/assets/accounts.js?v=${assetVersions["accounts.js"]}"></script>`:""}
 <script src="/roster/assets/directory.js?v=${assetVersions["directory.js"]}"></script>
-<script src="/roster/assets/experience.js?v=${assetVersions["experience.js"]}"></script>${bodyClass === "home-page" ? `\n<script type="module" src="/roster/assets/home.js?v=${assetVersions["home.js"]}"></script>` : ""}${bodyClass === "home-page" ? `\n<script type="module" src="/roster/assets/job-search.js?v=${assetVersions["job-search.js"]}"></script><script type="module" src="/roster/assets/hero-rotation.js?v=${assetVersions["hero-rotation.js"]}"></script>` : ""}${bodyClass === "match-page" ? `\n<script type="module" src="/roster/assets/job-results.js?v=${assetVersions["job-results.js"]}"></script>` : ""}
+<script src="/roster/assets/experience.js?v=${assetVersions["experience.js"]}"></script>${bodyClass === "home-page" ? `\n<script type="module" src="/roster/assets/home.js?v=${assetVersions["home.js"]}"></script>` : ""}${bodyClass === "home-page" ? `\n${previewFeatures?`<script type="module" src="/roster/assets/job-search.js?v=${assetVersions["job-search.js"]}"></script>`:""}<script type="module" src="/roster/assets/hero-rotation.js?v=${assetVersions["hero-rotation.js"]}"></script>` : ""}${previewFeatures && bodyClass === "match-page" ? `\n<script type="module" src="/roster/assets/job-results.js?v=${assetVersions["job-results.js"]}"></script>` : ""}
 ${bodyClass === "claim-page" ? `<script type="module" src="/roster/assets/claim.js?v=${assetVersions["claim.js"]}"></script>` : ""}
 ${bodyClass.split(" ").includes("company-page") ? `<script type="module" src="/roster/assets/review-preview.mjs?v=${assetVersions["review-preview.mjs"]}"></script>` : ""}
-${bodyClass === "directory-page" ? `<script type="module" src="/roster/assets/catalogue.js?v=${assetVersions["catalogue.js"]}"></script><script type="module" src="/roster/assets/quote-start.js?v=${assetVersions["quote-start.js"]}"></script>` : ""}
+${bodyClass === "directory-page" ? `<script type="module" src="/roster/assets/catalogue.js?v=${assetVersions["catalogue.js"]}"></script>${previewFeatures?`<script type="module" src="/roster/assets/quote-start.js?v=${assetVersions["quote-start.js"]}"></script>`:""}` : ""}
 </body>
 </html>
 `;
@@ -691,7 +703,7 @@ function crumbsLd(items) {
 function faqLd(faqs) {
   return {
     "@type": "FAQPage",
-    mainEntity: faqs.map(([q, a]) => ({
+    mainEntity: publicFaqs(faqs).map(([q, a]) => ({
       "@type": "Question",
       name: q,
       acceptedAnswer: { "@type": "Answer", text: a }
@@ -803,12 +815,12 @@ function renderCollection(spec, companies, crumbs) {
   const body = [
     renderCrumbs(crumbs),
     `<section class="directory-hero"><div><p class="kicker">THE SINGAPORE HOME DIRECTORY</p><h1>${tradeId === "all" ? "Find your next helping hand." : guide ? esc(guide.h1).replace(" in Singapore", " <em>in Singapore.</em>") : `${esc(categoryLabel)} <em>in Singapore.</em>`}</h1><p>${esc(summaries[tradeId])}</p>${guide?`<a class="guide-jump" href="#guide">Read the ${esc(guide.label.toLowerCase())} guide ${icon("arrow")}</a>`:""}</div><div class="hero-stamp"><span class="stamp-icon">${icon(tradeIcon[tradeId] || "search")}</span><div><strong>${count}</strong><span>${count === 1 ? "company to explore" : "companies to explore"}</span></div></div></section>`,
-    `<div class="directory-layout" id="company-results" data-catalogue data-index="${indexPath(spec)}"><aside class="filters" aria-label="Filter companies"><div class="filters-head"><h2>${icon("sliders")}Refine your list</h2><button type="button" class="filter-toggle" data-toggle-filters aria-controls="company-filters" aria-expanded="true">${icon("sliders")}Filters <span data-active-filters></span>${icon("chevron")}</button><button type="button" data-reset>Reset</button></div><div class="filter-content" id="company-filters"><label class="filter-search">Search this list<input type="search" placeholder="Company or keyword" data-filter-search></label>${renderAreaFilter(esc)}<label class="filter-select">Average rating<select data-rating aria-label="Minimum average rating"><option value="">Any rating</option><option value="4">4.0 and above</option><option value="4.5">4.5 and above</option><option value="4.8">4.8 and above</option></select></label>${tradeId === "all" ? `<label class="filter-select">Service<select data-category-filter><option value="">All services</option>${trades.map(t=>`<option value="${t.id}">${esc(t.name)}</option>`).join("")}</select></label>` : ""}<fieldset><legend>What matters to you?</legend>${filter("price", "Published pricing", companies.filter(c => priceSummary(c, spec.service).published).length)}${filter("reviews", "Dated reviews", companies.filter(c => c.reviews.length).length)}${filter("whatsapp", "WhatsApp contact", companies.filter(c => c.whatsapp?.value).length)}${filter("saved", "Saved companies", 0)}</fieldset><details class="filter-categories"><summary>Explore services${icon("chevron")}</summary>${trades.map(t => `<a href="/roster/${t.slug}/"${t.id === tradeId ? ' aria-current="page"' : ""}>${icon(tradeIcon[t.id])}${esc(t.name)}${icon("chevron")}</a>`).join("")}<div class="filter-foot">${icon("shield")}<p>A place on Roster is unpaid.<br>Always your choice.</p></div></details></div></aside><div class="directory-results">`,
+    `<div class="directory-layout${previewFeatures?'':' directory-browse-only'}" id="company-results" data-catalogue data-index="${indexPath(spec)}"><aside class="filters" aria-label="Filter companies"><div class="filters-head"><h2>${icon("sliders")}Refine your list</h2><button type="button" class="filter-toggle" data-toggle-filters aria-controls="company-filters" aria-expanded="true">${icon("sliders")}Filters <span data-active-filters></span>${icon("chevron")}</button><button type="button" data-reset>Reset</button></div><div class="filter-content" id="company-filters"><label class="filter-search">Search this list<input type="search" placeholder="Company or keyword" data-filter-search></label>${renderAreaFilter(esc)}<label class="filter-select">Average rating<select data-rating aria-label="Minimum average rating"><option value="">Any rating</option><option value="4">4.0 and above</option><option value="4.5">4.5 and above</option><option value="4.8">4.8 and above</option></select></label>${tradeId === "all" ? `<label class="filter-select">Service<select data-category-filter><option value="">All services</option>${trades.map(t=>`<option value="${t.id}">${esc(t.name)}</option>`).join("")}</select></label>` : ""}<fieldset><legend>What matters to you?</legend>${filter("price", "Published pricing", companies.filter(c => priceSummary(c, spec.service).published).length)}${filter("reviews", "Dated reviews", companies.filter(c => c.reviews.length).length)}${filter("whatsapp", "WhatsApp contact", companies.filter(c => c.whatsapp?.value).length)}${previewFeatures?filter("saved", "Saved companies", 0):""}</fieldset><details class="filter-categories"><summary>Explore services${icon("chevron")}</summary>${trades.map(t => `<a href="/roster/${t.slug}/"${t.id === tradeId ? ' aria-current="page"' : ""}>${icon(tradeIcon[t.id])}${esc(t.name)}${icon("chevron")}</a>`).join("")}<div class="filter-foot">${icon("shield")}<p>A place on Roster is unpaid.<br>Always your choice.</p></div></details></div></aside><div class="directory-results">`,
     isAircon ? airconSubnav(canonicalPath) : "",
     shortlist(companies, spec.service),
     `<details class="list-explainer"><summary>About this ${esc(categoryLabel.toLowerCase())} shortlist${icon("chevron")}</summary><p>${esc(spec.intro[0])}</p>${notes}<p><a href="/roster/how-it-works/">How the list is made</a>. Checked ${checked}.</p></details>`,
-    `</div><aside class="discovery-rail" aria-label="Get quotes"><details class="quote-rail-disclosure" open><summary>Get quotes for your job ${icon("sparkle")}</summary>${renderQuoteComposer({icon})}</details><div class="rail-note">${icon("calendar")}<p>Facts last checked<br><strong>${esc(checked)}</strong><br>Each figure links to its source.</p></div></aside></div>`,
-    tradeId !== "all" ? `<div id="quote-request">${renderForm(spec.jobs, companies.filter(c => !c.imported), "ask")}</div>` : `<div id="quote-request" class="search-end"><h2>Start with the service you need</h2><p>Choose a service above to explore its shortlist and preview a quote request.</p></div>`,
+    `</div><aside class="discovery-rail" aria-label="Directory information">${previewFeatures?`<details class="quote-rail-disclosure" open><summary>Get quotes for your job ${icon("sparkle")}</summary>${renderQuoteComposer({icon})}</details>`:''}<div class="rail-note">${icon("calendar")}<p>Facts last checked<br><strong>${esc(checked)}</strong><br>Each figure links to its source.</p></div></aside></div>`,
+    previewFeatures && tradeId !== "all" ? `<div id="quote-request">${renderForm(spec.jobs, companies.filter(c => !c.imported), "ask")}</div>` : previewFeatures ? `<div id="quote-request" class="search-end"><h2>Start with the service you need</h2><p>Choose a service above to explore its shortlist and preview a quote request.</p></div>` : "",
     guide ? renderEditorial(guide,editorialGuides,{embedded:true}) : renderFaq(spec.faqs, "A few things worth knowing"),
     `<section class="browse-more"><p class="kicker">WHILE YOU'RE HERE</p><h2>A little help around the home.</h2><div>${trades.filter(t => t.id !== tradeId).map(t => `<a href="/roster/${t.slug}/">${icon(tradeIcon[t.id])}<span>${esc(t.name)}</span>${icon("arrow")}</a>`).join("")}</div></section>`
   ].join("\n");
@@ -878,8 +890,8 @@ function renderServiceExplanation(service) {
 function renderServiceRow(service, index) {
   if (!Array.isArray(service.prices)) throw new Error(`Missing pricing state: ${service.name}`);
   if (service.prices.length > 1 && !service.priceSummary) throw new Error(`Missing price summary: ${service.name}`);
-  const price = service.imported ? servicePrice(service) : service.priceSummary || service.prices[0]?.price || "Ask for a quote";
-  return `<details class="service-rate" id="service-price-${index + 1}"><summary><span class="service-rate-label"><strong>${esc(service.name)}</strong></span><strong class="service-rate-price${service.prices.length ? "" : " service-rate-quote"}"><span class="sr-only">${service.prices.some(p=>!p.indicative) ? "Published price: " : "Pricing: "}</span>${esc(price)}</strong><span class="service-toggle-icon">${icon("chevron")}</span></summary>${renderServiceExplanation(service)}</details>`;
+  const price = service.quoteEvidence ? 'Quote on request' : service.imported ? servicePrice(service) : service.priceSummary || service.prices[0]?.price || "Ask for a quote";
+  return `<details class="service-rate" id="service-price-${index + 1}"><summary><span class="service-rate-label"><strong>${esc(service.name)}</strong></span><span class="service-rate-price${service.prices.length ? "" : " service-rate-quote"}"><strong><span class="sr-only">${service.prices.some(p=>!p.indicative) ? "Published price: " : "Pricing: "}</span>${esc(price)}</strong></span><span class="service-toggle-icon">${icon("chevron")}</span>${renderQuoteEvidence(service.quoteEvidence)}</summary>${renderServiceExplanation(service)}</details>`;
 }
 
 /* ---------- Accounts ---------- */
@@ -937,15 +949,15 @@ function renderHow() {
   const description="Understand Roster's unpaid listings, weighted ratings, sourced prices and coverage filters. Learn what the beta quote and claim tools do.";
   const canonicalPath="/roster/how-it-works/";
   const body=renderCrumbs([{label:"How it works"}])+`<header class="guide-hero guide-hero-method"><div><p class="kicker">A LITTLE CLARITY</p><h1>How Roster works.</h1><p class="guide-dek">The details behind a more considered choice.</p></div></header>`+renderEditorial(methodGuide,editorialGuides,{utility:true});
-  return pageShell({title,description,canonicalPath,current:canonicalPath,jsonLd:[webPage(title,canonicalPath,description),crumbsLd([{href:canonicalPath,label:"How it works"}]),faqLd(methodGuide.faqs)],body,bodyClass:"guide-page",shareImage:abs("/roster/assets/hero/plumbing-v1.jpg")});
+  return pageShell({title,description,canonicalPath,current:canonicalPath,jsonLd:[webPage(title,canonicalPath,description),crumbsLd([{href:canonicalPath,label:"How it works"}]),faqLd(methodGuide.faqs)],body,bodyClass:"guide-page",shareImage:abs(heroPhoto('plumbing').sizes[1200].src)});
 }
 
 function renderGuidePage(guide) {
   const hub=editorialGuides.find(g=>g.trade===guide.trade&&g.hub);
   const crumbs=[...(hub.id!==guide.id?[{href:hub.path,label:hub.label}]:[]),{href:guide.path,label:guide.label}];
   const trade=tradeById(guide.trade);
-  const image=abs(`/roster/assets/hero/${guide.trade}-v1.jpg`);
-  const body=renderCrumbs(crumbs)+`<header class="guide-hero"><div><p class="kicker">THE ROSTER HOME GUIDE</p><h1>${esc(guide.h1)}</h1><p class="guide-dek">${esc(guide.description)}</p><div class="guide-hero-actions"><a class="btn btn-solid" href="/roster/${trade.slug}/">Compare ${esc(trade.name.toLowerCase())} companies ${icon('arrow')}</a><a href="#guide">Read the guide</a></div></div><figure><img src="/roster/assets/hero/${guide.trade}-v1-small.jpg" width="600" height="400" alt="" fetchpriority="high"><figcaption>Illustrative imagery</figcaption></figure></header>`+renderEditorial(guide,editorialGuides,{extra:guide.id==='AC-03'?renderGuidePrices():''});
+  const image=abs(heroPhoto(guide.trade).sizes[1200].src);
+  const body=renderCrumbs(crumbs)+`<header class="guide-hero"><div><p class="kicker">THE ROSTER HOME GUIDE</p><h1>${esc(guide.h1)}</h1><p class="guide-dek">${esc(guide.description)}</p><div class="guide-hero-actions"><a class="btn btn-solid" href="/roster/${trade.slug}/">Compare ${esc(trade.name.toLowerCase())} companies ${icon('arrow')}</a><a href="#guide">Read the guide</a></div></div><figure><img src="${heroPhoto(guide.trade).sizes[640].src}" width="600" height="400" alt="" fetchpriority="high"><figcaption><a href="${esc(heroPhoto(guide.trade).url)}">${esc(photoCredit(guide.trade))}</a></figcaption></figure></header>`+renderEditorial(guide,editorialGuides,{extra:guide.id==='AC-03'?renderGuidePrices():''});
   const jsonLd=[webPage(guide.title,guide.path,guide.description),crumbsLd(crumbs),...editorialSchema(guide,origin),...(guide.hub?[{"@type":"ItemList",name:`${guide.label}: related guides`,itemListElement:editorialGuides.filter(g=>g.trade===guide.trade&&g.id!==guide.id).map((g,i)=>({"@type":"ListItem",position:i+1,name:g.label,url:abs(g.path)}))}]:[])];
   forbidSchema(jsonLd);
   return pageShell({title:guide.title,description:guide.description,canonicalPath:guide.path,current:`/roster/${trade.slug}/`,jsonLd,body,bodyClass:'guide-page',shareImage:image});
@@ -1001,6 +1013,7 @@ for (const intent of intents) await writeIndex(intent,grouped[intent.parent].fil
 written.push(await writePage("", renderHome(grouped)));
 written.push(await writePage("how-it-works", renderHow()));
 written.push(await writePage("matches", renderMatchPage({esc,icon,pageShell,indexPath:indexPath({id:"all"})})));
+written.push(await writePage('logo-removal',pageShell({title:'Logo removal requests | Roster',description:'Information for business owners who would like a company logo removed from Roster. The public removal contact inbox is awaiting confirmation.',canonicalPath:'/roster/logo-removal/',current:'',jsonLd:[],body:`<section class="pending-feature"><p class="kicker">FOR BUSINESS OWNERS</p><h1>Logo removal requests</h1><p>Logos belong to their owners. We can remove a logo without removing the business listing.</p><h2>Contact route pending</h2><p>The removal inbox is not connected yet. This preview cannot receive a request.</p><p>When the contact route is available, include the company name, its Roster page URL and your relationship to the logo owner. Do not send passwords or identity documents.</p><a href="/roster/">Back to Roster</a></section>`})));
 written.push(await writePage("claim-listing", renderClaimPage({esc,icon,pageShell,renderCrumbs},sortCompanies(publishedCompanies))));
 for (const mode of ["sign-in", "sign-up", "forgot-password", "reset-password"]) written.push(await writePage(mode, renderAccount(mode)));
 written.push(await writePage('account',pageShell({title:'Your account | Roster',description:'Manage your Roster account and keep your saved Singapore home-service companies together across devices.',canonicalPath:'/roster/account/',current:'',jsonLd:[],bodyClass:'account-page',body:accountHome({icon})})));

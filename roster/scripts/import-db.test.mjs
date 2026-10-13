@@ -127,3 +127,11 @@ test('Price labels drop UI noise and the build never invents a missing unit',()=
  assert.equal(priceOption(source).label,'Regular cleaning');assert.equal(priceOption(source).detail,'');
  for(const label of ['Login','+65 9662 2361','1. What is the standard rate?']) assert.equal(priceOption({...source,service:label}).label,'Regular cleaning');
 });
+
+test('Explicit quote-on-request statements retain linked dated evidence without inferring it',()=>{
+ const source={wording:'statement',excerpt:'We diagnose first and quote before repairing.',source_url:'https://example.com/prices',capturedAt:'2026-10-11'};
+ const candidate={...row(),pricing_model:'quote_on_request',pricing_model_source:source};
+ const imported=importDatabase(db([candidate]),empty).companies.companies[0];
+ assert.deepEqual(imported.quoteEvidence,{excerpt:source.excerpt,sourceUrl:source.source_url,capturedAt:source.capturedAt});
+ for(const variant of [{pricing_model:null},{pricing_model_source:null},{pricing_model_source:{...source,wording:'inferred'}},{pricing_model_source:{...source,capturedAt:null}}])assert.equal(importDatabase(db([{...candidate,...variant}]),empty).companies.companies[0].quoteEvidence,null);
+});

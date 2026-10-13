@@ -24,12 +24,15 @@ for(const rel of manifest) {
  assert.ok(html.includes('content="noindex, nofollow, noarchive"'),rel);
  assert.ok(html.includes('href="/roster/claim-listing/"'),`Missing footer claim link: ${rel}`);
  assert.ok(!/[\u2013\u2014]/.test(html),`Long dash: ${rel}`);
- assert.ok(!/>\s*(?:undefined|null|NaN|N\/A)\s*</.test(html),`Empty data text: ${rel}`);
+ assert.ok(!/\b(?:undefined|null|NaN|LOGO)\b|â€/.test(html),`Invalid generated text: ${rel}`);
  const desc=html.match(/<meta name="description" content="([^"]+)"/)[1].replace(/&amp;/g,'&').replace(/&quot;/g,'"').replace(/&lt;/g,'<').replace(/&gt;/g,'>');
  assert.ok(desc.length<=160&&/[.?!)]$/.test(desc),`Description length/ending: ${rel}`);
  assert.ok(!descriptions.has(desc),`Duplicate description: ${rel}`);descriptions.add(desc);
  const title=html.match(/<title>(.*?)<\/title>/)[1];assert.ok(!titles.has(title),`Duplicate title: ${rel}`);titles.add(title);
+ assert.ok(!/data-save=|data-account-form|data-job-matches|data-job-start|data-quote-start|data-quote-steps|class="saved-link"/.test(html),`Parked feature leaked: ${rel}`);
+ assert.ok(!/src="[^"]*(?:accounts\.js|job-results\.js|quote-start\.js)/.test(html),`Parked script leaked: ${rel}`);
  const ld=JSON.parse(html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1]);
+ assert.ok(!/[$★☆]/.test(JSON.stringify(ld)),`Currency or stars in schema: ${rel}`);
  assert.ok(!/"(?:aggregateRating|review|offers|priceRange)"|"@type":"(?:AggregateRating|Review|Offer|Rating)"/.test(JSON.stringify(ld)),`Forbidden schema: ${rel}`);
  if(rel.startsWith('company/')&&!html.includes('data-retired-listing')){
   assert.ok(html.includes('class="listing-logo listing-logo-large'),`Missing logo slot: ${rel}`);
@@ -37,6 +40,9 @@ for(const rel of manifest) {
   assert.ok(!html.includes('data-review-preview'),`Sample ratings on live profile: ${rel}`);
   if(!record.listingDepth.full) assert.ok(html.includes('Limited details')&&!html.includes('data-review-preview'),`Missing compact profile: ${rel}`);
   assert.ok(html.includes('src="/roster/assets/review-preview.mjs?'),`Missing review selector script: ${rel}`);
+  if(record.quoteEvidence){assert.ok(html.includes('Quote on request'),`Missing explicit quote price: ${rel}`);assert.ok(html.includes(record.quoteEvidence.excerpt.replaceAll('&','&amp;').replaceAll('"','&quot;').replaceAll("'",'&#39;').replaceAll('<','&lt;').replaceAll('>','&gt;')),`Missing quote excerpt: ${rel}`);assert.ok(!html.includes('>Ask for a quote<'),`Generic quote replacing sourced statement: ${rel}`);}
+  if(record.selfReportedRating)assert.ok(html.includes('The company says it has a '),`Missing self-reported rating: ${rel}`);
+  for(const image of html.matchAll(/data-company-logo src="([^"]+)"/g))assert.ok(image[1].startsWith('/roster/assets/logos/'),`Hotlinked logo: ${rel}`);
   const intro=html.match(/<p class="company-intro">(.*?)<\/p>/)?.[1]||'';
   assert.ok(intro&&!/Its website mentions|Its site says|Roster found no/.test(intro),`Research wording remains: ${rel}`);
   assert.ok(!JSON.stringify(ld).includes('sample reviews'),`Sample reviews leaked into schema: ${rel}`);

@@ -11,9 +11,15 @@ npm --prefix roster ci --ignore-scripts
 node roster/scripts/import-db.mjs && node roster/build.mjs
 ```
 
-Install dependencies once per checkout and after lockfile changes. The site build bundles the official Supabase client and separately generates ignored public runtime configuration from `.env.local`. Complete the Supabase setup below first, or explicitly use `ROSTER_ACCOUNT_PREVIEW=1` for a disconnected design preview with empty public values.
+Install dependencies once per checkout and after lockfile changes. `assets/features.mjs` defaults `previewFeatures` to false. The build preserves the account bundle but generates disconnected public configuration without reading account environment values. No Supabase login, project, key or email provider is required for this review build.
 
-## Supabase setup
+## Parked features
+
+The default public build hides sign-in, saved controls, the quote sidebar and AI matching. Their direct URLs show a connection-pending page with no active forms or feature scripts. The source remains available for later review behind `previewFeatures` in `assets/features.mjs`. Do not enable the flag, configure a provider or change remote settings as part of this review. See [SERVICE-AREAS-REVIEW.md](SERVICE-AREAS-REVIEW.md) for the separate dependencies of each feature. The deployment workflow creates empty account configuration while the flag is off.
+
+## Supabase setup (parked reference)
+
+These instructions are retained for a separately approved future accounts task. They are not prerequisites for the current public build.
 
 Roster uses static JavaScript ES modules, npm and Node 22 or later. No SSR package or TypeScript generation is needed. Copy `roster/.env.example` to `roster/.env.local` if it does not already exist and set `ROSTER_PUBLIC_SUPABASE_URL` and `ROSTER_PUBLIC_SUPABASE_PUBLISHABLE_KEY`. Keep Google disabled until the owner configures it. No server secret key is needed.
 
@@ -66,7 +72,7 @@ Company pages start with Services & pricing, Areas served when stated, About the
 
 Company headers and directory cards feature the real average rating, total review count and number of sources. A single source supplies the average as-is; multiple independent sources are weighted by their review counts. Source links and dates remain visible. The reviews section also preserves the original Google Maps snapshot sentence and other source labels. No rating, review or offer structured data is emitted. Map iframes use verified building coordinates from `data/map-pins.json`; unresolved or stale addresses show no iframe. Unit numbers are removed from public map captions and directions. Read `ADDRESS-MAP-COLLECTION.md` before collecting or updating location evidence. Sourced alternate phone numbers appear as "Also listed" with their source label. The primary number remains the main call action.
 
-All pages remain noindex. Account screens use Supabase for email/password, recovery and private saved companies. Public project configuration is now supplied locally; the hosted migration and owner-managed Auth setup still need completion. Google stays disabled until the owner enables it. Follow [ACCOUNTS-SETUP.md](ACCOUNTS-SETUP.md) to activate and verify real accounts. The quote and claim previews still send and store nothing. Shared preview authentication is unchanged.
+All pages remain noindex. Accounts, saved lists, quote requests and matching are parked behind the default-off flag. No SMTP or hosted Auth settings were changed in this review. The separate claim preview still sends and stores nothing. Shared preview authentication is unchanged.
 
 Trade pages lead with up to eight full-bar profiles, ordered by evidence and then rating. Other companies use compact rows in batches of 12. A versioned per-trade JSON index supports search, filters, sorting and more compact results. `assets/catalogue-data.mjs` losslessly encodes repeated field names as column indexes and repeated service-area names in a shared dictionary and decodes them in the browser, keeping larger directories within the payload budget. Non-full-bar company pages carry a limited-details note and a smaller layout. Area filters use sourced `service_locations`, never office addresses. A selected town ranks explicit town matches first, followed by region matches and islandwide coverage. Companies without stated areas are excluded unless the user enables the optional toggle. The selected area and other filters persist in URL query parameters. The all-company search covers every published profile. Each company appears under its release `primary_trade`; trade counts do not overlap. Sourced fit notes and service-area excerpts are retained, while `self_description` metadata is never used as About text.
 
@@ -90,7 +96,7 @@ Public summaries and imported About text use customer-facing third-person copy d
 
 Company cards and profiles reserve space for a logo. Existing artwork is used when present, otherwise the slot shows company initials. Broken artwork falls back to initials. The build runs `scripts/fit-logos.py` (Python 3 with Pillow 12 or later) to measure transparent and plain-white margins and generate `assets/logo-fit.css`. CSS centers the complete artwork with proportional scaling, wider tiles for long wordmarks, and a dark background for predominantly white transparent logos. Original image bytes and checksums stay unchanged. SVGs retain their original viewBox and use the same larger default fit. New imported raster logos are measured automatically on rebuild.
 
-The importer maps release `ratings` into sourced, dated records and recalculates the combined score. Unknown review counts are never invented. Company-site widgets and self-reported scores are excluded, including a legacy curated score explicitly moved to `self_reported_rating` by a release. Trustpilot TrustScores are displayed separately and do not enter the average. Profiles without an eligible rating say "No rating yet". Sample score fixtures remain for development but are not rendered on company pages.
+The importer maps release `ratings` into sourced, dated records and recalculates the combined score. Unknown review counts are never invented. Company-site widgets and self-reported scores are excluded, including a legacy curated score explicitly moved to `self_reported_rating` by a release. Trustpilot TrustScores are displayed separately and do not enter the average. Profiles without an eligible rating say "No ratings found yet. We list ratings only from dated, linked sources." Self-reported ratings use a plain linked sentence and never contribute to averages or sorting. Sample score fixtures remain for development but are not rendered on company pages.
 
 The combined score is the sum of each eligible rating multiplied by its count, divided by total reviews. A single eligible source supplies its score directly. Identified mirrors, incompatible scales and unusable counts are excluded. `lib/rating-summary.mjs` handles real records, with `assets/rating-display.mjs` shared by static and dynamically loaded cards. Directory filters and sorting use the real average. Cards pair this with main services and a labelled example service price when a specific published rate can be extracted. Each source needs its platform, profile URL, capture date, rating, scale, count and any mirror relationship. Deduplication is not automatic.
 
@@ -112,7 +118,9 @@ python3 roster/scripts/prepare-home-map.py /path/to/NationalMapPolygon.geojson
 
 `assets/service-areas.mjs` maps all 55 planning areas to their official URA 2019 regions. Its source and Singapore Open Data Licence links are recorded in that file. `assets/area-picker.mjs` provides typed filtering, grouped options, keyboard selection and clearing. Coverage matching and facet counts run before pagination. When an area is selected, a single compact results list preserves town-first ordering across full and limited profiles and across all sort choices.
 
-## Hero search and job shortlist beta
+## Hero search and job shortlist beta (parked)
+
+The following describes retained preview code. With `previewFeatures = false`, only Quick search is public. AI search, the matching page, quote sidebar, request dialog and account/saved controls are absent.
 
 The homepage moves search from the header into a hero with Quick search and AI search tabs. Quick search opens the existing directory. AI search is clearly labelled as an unconnected beta: full sentences are interpreted by local service and town keyword rules, using only published company records. It makes no AI, availability, timing, suitability or budget claims.
 
@@ -120,7 +128,7 @@ The homepage moves search from the header into a hero with Quick search and AI s
 
 A shortlist starts with five companies and can expand to ten. Named jobs must match listed offerings. A chosen town uses stated service coverage, with town before region before islandwide, never office addresses. Unstated coverage is excluded for a chosen area. An ambiguous trade or area asks the visitor to refine the brief. Real average ratings and published prices retain their details and sources. Prices are examples or named service rates, not quotes for the visitor's entire job.
 
-Every fresh shortlist selects all visible companies. Switching between five and ten selects the new visible set; clicking the already-active size keeps manual choices. Visitors can untick individual companies, clear the selection or select all again. Editing the brief clears stale results and selections until the next search. The prominent Request a quote button sits at the top of the desktop sidebar and above the mobile results, and still opens only a preview. Logo tiles keep fitted artwork proportions and centered initials without the extra LOGO label. Selection checkboxes are 32 pixels within a 44-pixel touch target. The dialog shows the exact brief and selected companies. Finish preview sends nothing and does not collect personal contact details. Preview forms stay disabled until their local handler loads. Descriptions are carried in URL fragments rather than HTTP query parameters; selections stay in memory. There is no AI service, quote API, new database or change to the existing quote panel.
+Every fresh shortlist selects all visible companies. Switching between five and ten selects the new visible set; clicking the already-active size keeps manual choices. Visitors can untick individual companies, clear the selection or select all again. Editing the brief clears stale results and selections until the next search. The prominent Request a quote button sits at the top of the desktop sidebar and above the mobile results, and still opens only a preview. Logo tiles keep fitted artwork proportions and centered initials without an extra label. Selection checkboxes are 32 pixels within a 44-pixel touch target. The dialog shows the exact brief and selected companies. Finish preview sends nothing and does not collect personal contact details. Preview forms stay disabled until their local handler loads. Descriptions are carried in URL fragments rather than HTTP query parameters; selections stay in memory. There is no AI service, quote API, new database or change to the existing quote panel.
 
 See `AI-SEARCH-PREVIEW.md` for validation and local review links. Publication still requires Martin's approval.
 
@@ -137,3 +145,13 @@ The 20 core editorial pages are defined in `content/guides/catalogue.mjs`, with 
 Run `npm run check:editorial` from `roster/` after building. It verifies the 1,000-word minimum, generated content, metadata, FAQs, contents anchors and preview indexing safeguards, then writes `data/editorial-audit.json`. The current 20 core pages contain over 1,200 editorial words each. Shared navigation and company cards do not count toward this minimum.
 
 All pages remain noindex. `sitemap.xml` is empty during preview, and `data/seo-launch-pages.json` records candidate public pages for an approved future launch. Confirm the production domain and indexing scope before generating a public sitemap. Read [SEO-AEO-REVIEW.md](SEO-AEO-REVIEW.md) for the page inventory, word counts, evidence decisions and validation.
+
+## Quote evidence and logo ownership
+
+An explicit `quote_on_request` model with `pricing_model_source.wording = statement`, a source URL, excerpt and capture date produces "Quote on request" with a linked "Their site" excerpt. This is carried into directory cards, shortlist records and Services & pricing. Missing evidence uses the existing generic "Ask for a quote" fallback. Indicative rates keep their qualifiers.
+
+Real logos are self-hosted and carry an ownership/removal note below the artwork. The footer repeats that note. Initials have no extra label. The removal route is `/roster/logo-removal/`; its inbox is intentionally pending at the owner's request, so the page clearly says requests cannot yet be submitted. No email address was invented or configured.
+
+## Pexels hero photography
+
+Each trade uses a pinned Pexels photo showing tools, hands or equipment with no faces or visible logos. The files are self-hosted; `data/hero-photos.json` records IDs, original URLs, credits and checksums. The normal build is offline. To refresh the same selected photos, set `PEXELS_API_KEY` in the ignored `.env.local` or process environment, then run `node scripts/import-hero-photos.mjs` from `roster/`. Never commit the key. Review replacement candidates visually before changing pinned IDs. See [HERO-PHOTOGRAPHY.md](HERO-PHOTOGRAPHY.md).

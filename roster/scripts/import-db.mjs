@@ -172,6 +172,8 @@ export function importDatabase(db, seeds, registry={}) {
       if(deadReviews.length) {company.reviews=company.reviews.filter(r=>!deadReviews.includes(r.sourceUrl));report.warnings.push({slug,issue:'Invalidated review source removed',urls:deadReviews});}
     }
     company.databaseId=row.id;company.enrichment=enrichment;
+    const quote=row.pricing_model_source;
+    company.quoteEvidence=row.pricing_model==='quote_on_request' && quote?.wording==='statement' && text(quote.excerpt) && cited(quote) && /^\d{4}-\d{2}-\d{2}/.test(quote.capturedAt||'') ? {excerpt:text(quote.excerpt),sourceUrl:cited(quote),capturedAt:quote.capturedAt.slice(0,10)} : null;
     company.address=supplementPostalAddress(company.address,row.address);
     company.mapEvidence=row.map ? {status:row.map.status,precision:row.map.precision,postal:text(row.address?.postal),addressValue:value(row.address),addressSourceUrl:cited(row.address),place:row.map.place||null,geocode:row.map.geocode||null,latitude:row.map.lat,longitude:row.map.lng} : null;
     if(row.self_reported_rating||row.rosterProfile?.rating_moved_to) company.rating=null;
@@ -200,7 +202,7 @@ export function importDatabase(db, seeds, registry={}) {
       presentation[slug].logoReview={status:'needs-review',reason:text(row.logo.logo_unsure_reason),sourceUrl:http(row.logo.source_url),checkedAt:text(row.logo.audit?.checkedAt)};
       report.warnings.push({slug,issue:'Uncertain logo withheld; initials shown',reason:text(row.logo.logo_unsure_reason)});
     }
-    if(!uncertainLogo&&!presentation[slug].logo) {const logo=photos.find(p=>p.kind==='logo');if(logo) presentation[slug].logo=logo.fileUrl;}
+    if(presentation[slug].logo && !presentation[slug].logo.startsWith('/roster/assets/logos/')) delete presentation[slug].logo;
     if(!presentation[slug].photos?.length) presentation[slug].photos=photos.filter(p=>p.kind!=='logo').slice(0,3).map(p=>({src:p.fileUrl,sourceUrl:p.pageUrl,caption:`${human(p.kind)} photo from ${company.name}`}));
     companies.push(company);
     report.published.push({id:row.id,slug,name:company.name,categories:company.categories,primaryTrade:category,curated:!!original});
