@@ -1247,18 +1247,6 @@
     },
     "photos": []
   },
-  "flash-aircon": {
-    "published": true,
-    "price": "See published prices",
-    "detail": "1 sourced pricing entries. Confirm the job, inclusions and total.",
-    "logoReview": {
-      "status": "needs-review",
-      "reason": "Logo shows 'Flash' (the site's brand, flashaircon.com), not the row name Signature Engineering Services.",
-      "sourceUrl": "https://flashaircon.com/",
-      "checkedAt": "2026-10-11T22:24+03:00"
-    },
-    "photos": []
-  },
   "sky-blue-aircon-engineering-pte-ltd": {
     "published": true,
     "price": "See published prices",
@@ -5594,18 +5582,6 @@
     },
     "photos": []
   },
-  "reliable-electrical-services": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
-    "logoReview": {
-      "status": "needs-review",
-      "reason": "Site icon shows the letters 'AS', not the row name Reliable Electrical Services.",
-      "sourceUrl": "https://www.electricalservices.sg/",
-      "checkedAt": "2026-10-11T22:24+03:00"
-    },
-    "photos": []
-  },
   "tz-electrical-engineering": {
     "published": false,
     "price": "Ask for a quote",
@@ -7959,11 +7935,14 @@
     "published": false,
     "price": "Ask for a quote",
     "detail": "No company rate captured. Ask for a job-specific quote.",
-    "logoReview": {
-      "status": "needs-review",
-      "reason": "r10: selected automatically (touch-icon icon); not visually checked",
+    "logo": "/roster/assets/logos/gm-15188191145931753727-750c7f7442e9.png",
+    "logoAsset": {
+      "localPath": "logos/gm-15188191145931753727.png",
+      "sha256": "750c7f7442e911161568385791bb9fba1521441b779c39f8010b9bf77f7c2456",
+      "src": "/roster/assets/logos/gm-15188191145931753727-750c7f7442e9.png",
       "sourceUrl": "https://renoexpertsg.com/",
-      "checkedAt": "2026-10-11T23:23+03:00"
+      "originalUrl": "https://renoexpertsg.com/wp-content/uploads/2026/06/cropped-WhatsApp_Image_2026-06-15_at_7.57.54_AM-removebg-preview-300x152.png",
+      "capturedAt": "2026-10-13"
     },
     "photos": []
   },
@@ -8259,11 +8238,14 @@
     "published": true,
     "price": "See published prices",
     "detail": "3 sourced pricing entries. Confirm the job, inclusions and total.",
-    "logoReview": {
-      "status": "needs-review",
-      "reason": "r10: selected automatically (header-img, no \"logo\" in the file name or alt text); not visually checked",
+    "logo": "/roster/assets/logos/gm-15151981107414050952-b6775c91ec71.png",
+    "logoAsset": {
+      "localPath": "logos/gm-15151981107414050952.png",
+      "sha256": "b6775c91ec719c8b10b0967616b8c639ce916d8a33bc5040c7a2f571bf56fc49",
+      "src": "/roster/assets/logos/gm-15151981107414050952-b6775c91ec71.png",
       "sourceUrl": "https://sg.helpergo.co/",
-      "checkedAt": "2026-10-12T00:16+03:00"
+      "originalUrl": "https://sg.helpergo.co/img/icon-sg.png",
+      "capturedAt": "2026-10-12"
     },
     "photos": []
   },
@@ -8493,11 +8475,14 @@
     "published": false,
     "price": "Ask for a quote",
     "detail": "No company rate captured. Ask for a job-specific quote.",
-    "logoReview": {
-      "status": "needs-review",
-      "reason": "r10: selected automatically (header-img, no \"logo\" in the file name or alt text); not visually checked",
+    "logo": "/roster/assets/logos/gm-7566628692602502984-6d17f4ab79b0.webp",
+    "logoAsset": {
+      "localPath": "logos/gm-7566628692602502984.webp",
+      "sha256": "6d17f4ab79b00dcdc878c0ed2fe2723c01eddf1e94b96443e1a7f2cb9ad71793",
+      "src": "/roster/assets/logos/gm-7566628692602502984-6d17f4ab79b0.webp",
       "sourceUrl": "https://cleanlad.com/",
-      "checkedAt": "2026-10-12T00:16+03:00"
+      "originalUrl": "https://cleanlad.com/wp-content/uploads/2022/10/cropped-cleadlad-white-01-1-222x74.png",
+      "capturedAt": "2026-10-12"
     },
     "photos": []
   },

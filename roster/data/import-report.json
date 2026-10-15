@@ -860,16 +860,6 @@
       "curated": false
     },
     {
-      "id": "202029908K",
-      "slug": "flash-aircon",
-      "name": "SIGNATURE ENGINEERING SERVICES PTE LTD",
-      "categories": [
-        "aircon"
-      ],
-      "primaryTrade": "aircon",
-      "curated": false
-    },
-    {
       "id": "201414003N",
       "slug": "sky-blue-aircon-engineering-pte-ltd",
       "name": "SKY BLUE AIRCON ENGINEERING PTE. LTD.",
@@ -4453,16 +4443,6 @@
         "plumbing"
       ],
       "primaryTrade": "plumbing",
-      "curated": false
-    },
-    {
-      "id": "gm-3930479307478095976",
-      "slug": "reliable-electrical-services",
-      "name": "Reliable Electrical Services",
-      "categories": [
-        "electrician"
-      ],
-      "primaryTrade": "electrician",
       "curated": false
     },
     {
@@ -25012,6 +24992,17 @@
         "missing-sourced-about",
         "missing-sourced-services",
         "missing-company-website"
+      ]
+    },
+    {
+      "id": "202029908K",
+      "name": "SIGNATURE ENGINEERING SERVICES PTE LTD",
+      "categories": [
+        "aircon"
+      ],
+      "primaryTrade": "aircon",
+      "reasons": [
+        "website-not-company-site"
       ]
     },
     {
@@ -71205,6 +71196,18 @@
       ]
     },
     {
+      "id": "gm-3930479307478095976",
+      "name": "Reliable Electrical Services",
+      "categories": [
+        "electrician"
+      ],
+      "primaryTrade": "electrician",
+      "reasons": [
+        "no-sg-postal-code",
+        "missing-sourced-address"
+      ]
+    },
+    {
       "id": "gm-16276817438539997219",
       "name": "Fixlaa",
       "categories": [
@@ -85259,15 +85262,6 @@
       "issue": "Alternate address exists; primary database address retained"
     },
     {
-      "slug": "flash-aircon",
-      "issue": "Uncertain logo withheld; initials shown",
-      "reason": "Logo shows 'Flash' (the site's brand, flashaircon.com), not the row name Signature Engineering Services."
-    },
-    {
-      "slug": "flash-aircon",
-      "issue": "Alternate address exists; primary database address retained"
-    },
-    {
       "slug": "sky-blue-aircon-engineering-pte-ltd",
       "issue": "Alternate address exists; primary database address retained"
     },
@@ -86519,11 +86513,6 @@
       "issue": "Inferred price units labelled for confirmation"
     },
     {
-      "slug": "reliable-electrical-services",
-      "issue": "Uncertain logo withheld; initials shown",
-      "reason": "Site icon shows the letters 'AS', not the row name Reliable Electrical Services."
-    },
-    {
       "slug": "mr-electrician-pte-ltd",
       "issue": "Automatically extracted price text needs editorial review; source wording retained"
     },
@@ -86846,11 +86835,6 @@
       "reason": "r10: selected automatically (touch-icon icon); not visually checked"
     },
     {
-      "slug": "renoexpert-pte-ltd",
-      "issue": "Uncertain logo withheld; initials shown",
-      "reason": "r10: selected automatically (touch-icon icon); not visually checked"
-    },
-    {
       "slug": "fix-fast-pte-ltd",
       "issue": "Uncertain logo withheld; initials shown",
       "reason": "r10: selected automatically (favicon icon); not visually checked"
@@ -86911,11 +86895,6 @@
       "issue": "Automatically extracted price text needs editorial review; source wording retained"
     },
     {
-      "slug": "helpergo",
-      "issue": "Uncertain logo withheld; initials shown",
-      "reason": "r10: selected automatically (header-img, no \"logo\" in the file name or alt text); not visually checked"
-    },
-    {
       "slug": "epiclean",
       "issue": "Automatically extracted price text needs editorial review; source wording retained"
     },
@@ -86951,11 +86930,6 @@
     {
       "slug": "goodview-cleaning-services",
       "issue": "Automatically extracted price text needs editorial review; source wording retained"
-    },
-    {
-      "slug": "cleanlad-mattress-cleaning-singapore",
-      "issue": "Uncertain logo withheld; initials shown",
-      "reason": "r10: selected automatically (header-img, no \"logo\" in the file name or alt text); not visually checked"
     },
     {
       "slug": "kin-klean-pte-ltd",
@@ -87001,16 +86975,16 @@
   ],
   "byTrade": {
     "aircon": {
-      "published": 225,
-      "excluded": 1837
+      "published": 224,
+      "excluded": 1838
     },
     "plumbing": {
       "published": 92,
       "excluded": 549
     },
     "electrician": {
-      "published": 113,
-      "excluded": 2207
+      "published": 112,
+      "excluded": 2208
     },
     "handyman": {
       "published": 97,
@@ -87021,14 +86995,14 @@
       "excluded": 630
     }
   },
-  "publishedCount": 719,
-  "excludedCount": 5759,
-  "sourceSha256": "3850fc0b4891afd5a2940f5efaaa9a958d88014af24b7fd454e70d5190cff352",
-  "sourceRelease": "companies-20261012-1253.json",
+  "publishedCount": 717,
+  "excludedCount": 5761,
+  "sourceSha256": "960ac87d0ff724e39c14a18f3acd361df58d23af3886c3d35d1a0a8e93e5421b",
+  "sourceRelease": "companies-20261014-1546.json",
   "logos": {
-    "verifiedFiles": 499,
-    "publishedCompanies": 499,
-    "bytes": 39724609,
-    "bundle": "logos-20261012-1253.tar.gz"
+    "verifiedFiles": 502,
+    "publishedCompanies": 502,
+    "bytes": 39765763,
+    "bundle": "logos-20261014-1546.tar.gz"
   }
 }

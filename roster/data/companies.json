@@ -2094,11 +2094,28 @@
       },
       "selfReportedRating": {
         "rating": 4.9,
-        "count": 10338,
+        "count": null,
         "excerpt": "4.9, review count disagrees across their pages",
-        "note": "A Daikin installation page shows 4.9 and 10,388 reviews, and also 9,338+ Google reviews. A system-1 unit page says 10,338+ Google reviews. These are the company's own figures. They were not re-counted.",
+        "note": "A Daikin installation page shows 4.9 and 10,388 reviews, and also 9,338+ Google reviews. A system-1 unit page says 10,338+ Google reviews. These are the company's own figures. They were not re-counted. Re-read 13 Oct 2026: the Daikin page prints \"4.9 10,388 Reviews and Counting\" and \"Over 9,338+ Google Reviews\"; its structured data says ratingCount 8489. The stored 10,338 matches none of these on that page. Counts conflict; no single count is chosen.",
         "source_url": "https://www.338aircon.sg/daikin-aircon-installation",
-        "capturedAt": null
+        "capturedAt": "2026-10-13",
+        "claims": [
+          {
+            "capturedAt": "2026-10-13",
+            "source_url": "https://www.338aircon.sg/daikin-aircon-installation",
+            "rating": 4.9,
+            "wording": [
+              "4.9 10,388 Reviews and Counting",
+              "Over 9,338+ Google Reviews"
+            ],
+            "structured_data": {
+              "ratingValue": "4.9",
+              "ratingCount": "8489"
+            }
+          }
+        ],
+        "previous_count": 10338,
+        "count_conflict": true
       },
       "reviewSources": [
         {
@@ -40319,26 +40336,24 @@
       },
       "quoteEvidence": null,
       "mapEvidence": {
-        "status": "unresolved",
-        "precision": null,
+        "status": "address-geocoded",
+        "precision": "building",
         "postal": "417943",
         "addressValue": "61 KAKI BUKIT AVENUE 1 #03-05, SHUN LI INDUSTRIAL PARK, Singapore 417943",
         "addressSourceUrl": "https://data.gov.sg/datasets/d_dcda79be4aded5f9e769b8e23ff69b47/view",
-        "place": {
-          "name": "@bsolute Solutions",
-          "cid": "17956241022916285455",
-          "place_id": "ChIJ6VsDyVgW2jERD9Q4-BJiMfk",
-          "url": "https://maps.google.com/?cid=17956241022916285455",
-          "address": "5 Ang Mo Kio Industrial Park 2A, Singapore 567760",
-          "postal": "567760",
-          "phone": "+65 6844 8444",
-          "website": "https://www.absolutesolutions.com.sg/",
-          "readVia": "https://www.google.com/search?tbm=map&hl=en&gl=sg&q=%40bsolute+Solutions+5+Ang+Mo+Kio+Industrial+Park+2A%2C+Singapore+567760",
-          "readAt": "2026-10-12T00:01+03:00"
+        "place": null,
+        "geocode": {
+          "source": "OneMap search (onemap.gov.sg)",
+          "url": "https://www.onemap.gov.sg/api/common/elastic/search?searchVal=417943&returnGeom=Y&getAddrDetails=Y&pageNum=1",
+          "matched": "61 KAKI BUKIT AVENUE 1 SHUN LI INDUSTRIAL PARK SINGAPORE 417943",
+          "postal": "417943",
+          "blk": "61",
+          "building": "SHUN LI INDUSTRIAL PARK",
+          "capturedAt": "2026-10-13",
+          "basis": "published address (address.sourceUrl, re-read 2026-10-13); same postal code and block; single OneMap result"
         },
-        "geocode": null,
-        "latitude": null,
-        "longitude": null
+        "latitude": 1.336689063056073,
+        "longitude": 103.9106637620937
       },
       "selfReportedRating": null,
       "reviewSources": [
@@ -44259,26 +44274,24 @@
       },
       "quoteEvidence": null,
       "mapEvidence": {
-        "status": "verified",
+        "status": "address-geocoded",
         "precision": "building",
         "postal": "737856",
         "addressValue": "39 WOODLANDS CLOSE #03-05, MEGA@WOODLANDS, Singapore 737856",
         "addressSourceUrl": "https://data.gov.sg/datasets/d_dcda79be4aded5f9e769b8e23ff69b47/view",
-        "place": {
-          "name": "Citicool Engineering Pte. Ltd.",
-          "cid": "7110022421125080682",
-          "place_id": "ChIJcwzZVxwY2jERaiY5tLjfq2I",
-          "url": "https://maps.google.com/?cid=7110022421125080682",
-          "address": "#03-05 Mega@Woodlands, Singapore 737 856 (visit is strictly by appointment only, 39 Woodlands Cl",
+        "place": null,
+        "geocode": {
+          "source": "OneMap search (onemap.gov.sg)",
+          "url": "https://www.onemap.gov.sg/api/common/elastic/search?searchVal=737856&returnGeom=Y&getAddrDetails=Y&pageNum=1",
+          "matched": "39 WOODLANDS CLOSE MEGA@WOODLANDS SINGAPORE 737856",
           "postal": "737856",
-          "phone": "+65 6876 0581",
-          "website": "http://citicoolaircon.com/",
-          "readVia": "https://www.google.com/search?tbm=map&hl=en&gl=sg&q=Citicool+Engineering+Pte.+Ltd.+Singapore",
-          "readAt": "2026-10-10T21:57+03:00"
+          "blk": "39",
+          "building": "MEGA@WOODLANDS",
+          "capturedAt": "2026-10-13",
+          "basis": "published address (address.sourceUrl, re-read 2026-10-13); same postal code and block; single OneMap result"
         },
-        "geocode": null,
-        "latitude": 1.4378735,
-        "longitude": 103.8067738
+        "latitude": 1.438091431881193,
+        "longitude": 103.8071191601408
       },
       "selfReportedRating": null,
       "reviewSources": [
@@ -46572,9 +46585,9 @@
         "sourceUrl": "https://maps.google.com/?cid=5341885205106804791"
       },
       "address": {
-        "value": "181A Boon Lay Drive S641181",
+        "value": "181A Boon Lay Drive, Singapore 641181",
         "sourceUrl": "https://cleanupcrewsolutions.com/contact-us/",
-        "street": "181A Boon Lay Drive S641181",
+        "street": "181A Boon Lay Drive, Singapore 641181",
         "postal": "641181"
       },
       "website": {
@@ -46733,26 +46746,24 @@
       },
       "quoteEvidence": null,
       "mapEvidence": {
-        "status": "unresolved",
-        "precision": null,
+        "status": "address-geocoded",
+        "precision": "building",
         "postal": "641181",
-        "addressValue": "181A Boon Lay Drive S641181",
+        "addressValue": "181A Boon Lay Drive, Singapore 641181",
         "addressSourceUrl": "https://cleanupcrewsolutions.com/contact-us/",
-        "place": {
-          "name": "Clean Up Crew Solutions Cleaning Services",
-          "cid": "5341885205106804791",
-          "place_id": "ChIJf19Z7Rbh6YwRN0hOoUowIko",
-          "url": "https://maps.google.com/?cid=5341885205106804791",
-          "address": null,
-          "postal": null,
-          "phone": "+65 8894 6474",
-          "website": "http://www.cleanupcrewsolutions.com/",
-          "readVia": "https://www.google.com/search?tbm=map&hl=en&gl=sg&q=Clean+Up+Crew+Solutions+Cleaning+Services+Singapore",
-          "readAt": "2026-10-11T23:59+03:00"
+        "place": null,
+        "geocode": {
+          "source": "OneMap search (onemap.gov.sg)",
+          "url": "https://www.onemap.gov.sg/api/common/elastic/search?searchVal=641181&returnGeom=Y&getAddrDetails=Y&pageNum=1",
+          "matched": "181A BOON LAY DRIVE BOON LAY MEADOW SINGAPORE 641181",
+          "postal": "641181",
+          "blk": "181A",
+          "building": "BOON LAY MEADOW",
+          "capturedAt": "2026-10-13",
+          "basis": "published address (address.sourceUrl, re-read 2026-10-13); same postal code and block; single OneMap result"
         },
-        "geocode": null,
-        "latitude": null,
-        "longitude": null
+        "latitude": 1.348490837925726,
+        "longitude": 103.7080972626209
       },
       "selfReportedRating": null,
       "reviewSources": [
@@ -53924,11 +53935,34 @@
       },
       "selfReportedRating": {
         "rating": 4.9,
-        "count": 366,
-        "excerpt": "4.9, badge says 360+, page data says 366, and a block says 5.0",
-        "note": "Homepage badge, opened 10 Oct 2026: 4.9 and 360+ Google reviews. The aria label says Rated 4.9 from 360+ Google reviews. The same homepage structured data says ratingValue 4.9 and reviewCount 366. A separate block says Rated 5.0 on Google and 360+ five-star reviews. The pricing footer says 360+ 5-star reviews. Not re-counted.",
+        "count": 370,
+        "excerpt": "4.9 from 370+ reviews",
+        "note": "Homepage badge, opened 10 Oct 2026: 4.9 and 360+ Google reviews. The aria label says Rated 4.9 from 360+ Google reviews. The same homepage structured data says ratingValue 4.9 and reviewCount 366. A separate block says Rated 5.0 on Google and 360+ five-star reviews. The pricing footer says 360+ 5-star reviews. Not re-counted. Re-read 13 Oct 2026: the homepage badge says \"4.9 · 370+ Google reviews\"; structured data says ratingValue 4.9 and reviewCount 373; a separate block says \"Rated 5.0 on Google\". The display uses the badge (4.9, 370+), which pairs a rating with a count; the 373 and 5.0 figures are recorded, not blended.",
         "source_url": "https://coolaircon.sg/",
-        "capturedAt": "2026-10-10"
+        "capturedAt": "2026-10-13",
+        "claims": [
+          {
+            "capturedAt": "2026-10-10",
+            "rating": 4.9,
+            "wording": "4.9 and 360+ Google reviews; structured data 366; block \"Rated 5.0 on Google\""
+          },
+          {
+            "capturedAt": "2026-10-13",
+            "source_url": "https://coolaircon.sg/",
+            "rating": 4.9,
+            "wording": [
+              "4.9 · 370+ Google reviews",
+              "Rated 5.0 on Google",
+              "370+ five-star Google reviews"
+            ],
+            "structured_data": {
+              "ratingValue": "4.9",
+              "reviewCount": "373"
+            }
+          }
+        ],
+        "count_qualifier": "plus",
+        "previous_count": 366
       },
       "reviewSources": [
         {
@@ -61415,26 +61449,24 @@
       },
       "quoteEvidence": null,
       "mapEvidence": {
-        "status": "unresolved",
-        "precision": null,
+        "status": "address-geocoded",
+        "precision": "building",
         "postal": "536199",
         "addressValue": "6 NEW INDUSTRIAL ROAD #05-01, NEW CENTURY, Singapore 536199",
         "addressSourceUrl": "https://data.gov.sg/datasets/d_dcda79be4aded5f9e769b8e23ff69b47/view",
-        "place": {
-          "name": "Day&Night Services",
-          "cid": "14914246809800709953",
-          "place_id": "ChIJq6qqVfIX2jERQZesVnQM-s4",
-          "url": "https://maps.google.com/?cid=14914246809800709953",
-          "address": "8 Ubi Rd 2, #02-01 Zervex, Singapore 408538",
-          "postal": "408538",
-          "phone": "+65 6834 4468",
-          "website": "https://www.dnsgroup.com.sg/",
-          "readVia": "https://www.google.com/search?tbm=map&hl=en&gl=sg&q=Day%26Night+Services+8+Ubi+Rd+2%2C+%2302-01+Zervex%2C+Singapore+408538",
-          "readAt": "2026-10-11T23:18+03:00"
+        "place": null,
+        "geocode": {
+          "source": "OneMap search (onemap.gov.sg)",
+          "url": "https://www.onemap.gov.sg/api/common/elastic/search?searchVal=536199&returnGeom=Y&getAddrDetails=Y&pageNum=1",
+          "matched": "6 NEW INDUSTRIAL ROAD NEW CENTURY SINGAPORE 536199",
+          "postal": "536199",
+          "blk": "6",
+          "building": "NEW CENTURY",
+          "capturedAt": "2026-10-13",
+          "basis": "published address (address.sourceUrl, re-read 2026-10-13); same postal code and block; single OneMap result"
         },
-        "geocode": null,
-        "latitude": null,
-        "longitude": null
+        "latitude": 1.341434712383266,
+        "longitude": 103.8853323901572
       },
       "selfReportedRating": null,
       "reviewSources": [
@@ -61640,7 +61672,7 @@
         "rating": 5,
         "count": 3105,
         "excerpt": "5.0, review count disagrees across their pages",
-        "note": "A page on their site showed 5.0 from 3,105 reviews on 9 Oct 2026. Other pages have shown 3,156, 3,116, 3,115, and 3,091, also at 5.0. The sort uses 3,105, the figure on the page cited here. This is their widget, not a Google API pull.",
+        "note": "A page on their site showed 5.0 from 3,105 reviews on 9 Oct 2026. Other pages have shown 3,156, 3,116, 3,115, and 3,091, also at 5.0.",
         "source_url": "https://www.daylightelectrician.com/guide-on-selecting-a-hdb-approved-electrician-in-singapore/electricians-doing-repairs-electrical-services-everyworks-electrician-singapore/",
         "capturedAt": "2026-10-09"
       },
@@ -63602,7 +63634,8 @@
         "excerpt": "5.0 from 3,388+ reviews",
         "note": "Chokes and drains page, opened 10 Oct 2026, prints 5.0 and 3,388+ reviews. The same page prints 3,588+ homes fixed. Homes fixed is a different number.",
         "source_url": "https://directplumber.sg/chokes-drains/",
-        "capturedAt": "2026-10-10"
+        "capturedAt": "2026-10-10",
+        "count_qualifier": "plus"
       },
       "reviewSources": [
         {
@@ -82176,9 +82209,9 @@
         "sourceUrl": "https://maps.google.com/?cid=12685592287518222373"
       },
       "address": {
-        "value": "- 223 Guillemard Road, #06-03 Mori, Singapore 399738",
+        "value": "223 Guillemard Road, #06-03 Mori, Singapore 399738",
         "sourceUrl": "https://www.fixmove.sg/about-us.html",
-        "street": "- 223 Guillemard Road, #06-03 Mori, Singapore 399738",
+        "street": "223 Guillemard Road, #06-03 Mori, Singapore 399738",
         "postal": "399738"
       },
       "website": {
@@ -82905,26 +82938,24 @@
       },
       "quoteEvidence": null,
       "mapEvidence": {
-        "status": "unresolved",
-        "precision": null,
+        "status": "address-geocoded",
+        "precision": "building",
         "postal": "399738",
-        "addressValue": "- 223 Guillemard Road, #06-03 Mori, Singapore 399738",
+        "addressValue": "223 Guillemard Road, #06-03 Mori, Singapore 399738",
         "addressSourceUrl": "https://www.fixmove.sg/about-us.html",
-        "place": {
-          "name": "FixMove",
-          "cid": "12685592287518222373",
-          "place_id": "ChIJMcKMFD0EtGwRJWj1bvlGDLA",
-          "url": "https://maps.google.com/?cid=12685592287518222373",
-          "address": null,
-          "postal": null,
-          "phone": "+65 9823 7108",
-          "website": "https://fixmove.sg/",
-          "readVia": "https://www.google.com/search?tbm=map&hl=en&gl=sg&q=FixMove+Singapore",
-          "readAt": "2026-10-11T23:12+03:00"
+        "place": null,
+        "geocode": {
+          "source": "OneMap search (onemap.gov.sg)",
+          "url": "https://www.onemap.gov.sg/api/common/elastic/search?searchVal=399738&returnGeom=Y&getAddrDetails=Y&pageNum=1",
+          "matched": "223 GUILLEMARD ROAD MORI SINGAPORE 399738",
+          "postal": "399738",
+          "blk": "223",
+          "building": "MORI",
+          "capturedAt": "2026-10-13",
+          "basis": "published address (address.sourceUrl, re-read 2026-10-13); same postal code and block; single OneMap result"
         },
-        "geocode": null,
-        "latitude": null,
-        "longitude": null
+        "latitude": 1.31131219787605,
+        "longitude": 103.882972095616
       },
       "selfReportedRating": null,
       "reviewSources": [
@@ -82953,263 +82984,6 @@
         "count": 83,
         "sourceUrl": "https://maps.google.com/?cid=12685592287518222373",
         "checkedAt": "2026-10-11T23:12+03:00",
-        "sourceType": "google-maps-search"
-      }
-    },
-    {
-      "slug": "flash-aircon",
-      "name": "SIGNATURE ENGINEERING SERVICES PTE LTD",
-      "category": "aircon",
-      "categories": [
-        "aircon"
-      ],
-      "schemaType": "HVACBusiness",
-      "phone": {
-        "value": "+65 9126 0686",
-        "sourceUrl": "https://data.gov.sg/datasets/d_dcda79be4aded5f9e769b8e23ff69b47/view"
-      },
-      "address": {
-        "value": "200 JALAN SULTAN #03-17, TEXTILE CENTRE, Singapore 199018",
-        "sourceUrl": "https://data.gov.sg/datasets/d_dcda79be4aded5f9e769b8e23ff69b47/view",
-        "street": "200 JALAN SULTAN #03-17, TEXTILE CENTRE, Singapore 199018",
-        "postal": "199018"
-      },
-      "website": {
-        "value": "https://flashaircon.com/",
-        "sourceUrl": "https://flashaircon.com/"
-      },
-      "email": {
-        "value": "info@flashaircon.com",
-        "sourceUrl": "https://flashaircon.com/"
-      },
-      "whatsapp": null,
-      "mapsUrl": "https://maps.google.com/?cid=14336986031148670576",
-      "rating": null,
-      "reviews": [],
-      "services": [
-        "chemical-wash",
-        "gas-top-up"
-      ],
-      "bestFor": "",
-      "poorFit": "",
-      "priceNote": "Contact the company to confirm the scope, total price and GST.",
-      "priceSourceUrl": "https://flashaircon.com/pricing-packages/",
-      "facts": [],
-      "imported": true,
-      "databaseId": "202029908K",
-      "enrichment": {
-        "checkedAt": "2026-10-10",
-        "supportedServices": [
-          {
-            "name": "General service",
-            "sourceUrl": "https://flashaircon.com/",
-            "capturedAt": "2026-10-10"
-          },
-          {
-            "name": "Chemical wash",
-            "sourceUrl": "https://flashaircon.com/pricing-packages/",
-            "capturedAt": "2026-10-10"
-          },
-          {
-            "name": "Chemical overhaul",
-            "sourceUrl": "https://flashaircon.com/",
-            "capturedAt": "2026-10-10"
-          },
-          {
-            "name": "Gas top up",
-            "sourceUrl": "https://flashaircon.com/about-us/",
-            "capturedAt": "2026-10-10"
-          },
-          {
-            "name": "Installation",
-            "sourceUrl": "https://flashaircon.com/pricing-packages/",
-            "capturedAt": "2026-10-10"
-          },
-          {
-            "name": "Repair",
-            "sourceUrl": "https://flashaircon.com/",
-            "capturedAt": "2026-10-10"
-          },
-          {
-            "name": "Troubleshooting",
-            "sourceUrl": "https://flashaircon.com/",
-            "capturedAt": "2026-10-10"
-          },
-          {
-            "name": "Dismantle replacement",
-            "sourceUrl": "https://flashaircon.com/",
-            "capturedAt": "2026-10-10"
-          },
-          {
-            "name": "Aircon servicing",
-            "sourceUrl": "https://flashaircon.com/about-us/",
-            "capturedAt": "2026-10-10"
-          }
-        ],
-        "about": [
-          {
-            "text": "We are well established Singapore based Company. We have been providing Air Conditioning, Refrigeration & Ventilation Works, Plumbing & Sanitary, Electrical, Domestic Pump System, Fire Protection System, CCTV Installation, Building Minor Construction, Building Renovation & Upgradation to meet the needs of all residential, industrial and commercial businesses. We provide a good quality of services in the market. Our Engineers are highly motivated",
-            "sourceUrl": "https://flashaircon.com/",
-            "capturedAt": "2026-10-10"
-          }
-        ],
-        "hours": null,
-        "serviceArea": null,
-        "residential": {
-          "value": "yes",
-          "excerpt": "We have been providing Air Conditioning, Refrigeration & Ventilation Works, Plumbing & Sanitary, Electrical, Domestic Pump System, Fire Protection System, CCTV Installation, Building Minor Construction, Building Renovation & Upgradation to meet the needs of all residential, industrial and commercial",
-          "sourceUrl": "https://flashaircon.com/",
-          "fullSentence": true,
-          "pageFetchedAt": "2026-10-10T22:01:12+03:00",
-          "capturedAt": "2026-10-10",
-          "previousExcerpt": "Building Renovation & Upgradation to meet the needs of all residential, industrial and commercial businesses. We provide a good qu",
-          "previousSourceUrl": "https://flashaircon.com/"
-        },
-        "licences": [
-          {
-            "type": "BCA registration (claimed)",
-            "number": null,
-            "verifiedOn": null,
-            "claimedOn": "https://flashaircon.com/",
-            "excerpt": "BCA Registered Contractor",
-            "capturedAt": "2026-10-10"
-          },
-          {
-            "type": "bizSAFE (claimed)",
-            "number": null,
-            "verifiedOn": null,
-            "claimedOn": "https://flashaircon.com/",
-            "excerpt": "BIZSAFE Level 3",
-            "capturedAt": "2026-10-10"
-          }
-        ],
-        "management": [],
-        "uen": "202029908K",
-        "uenSource": "",
-        "operatorGroup": null,
-        "priceLines": [
-          {
-            "job": "general-service",
-            "service": "General Servicing",
-            "qty": 1,
-            "unit": "per unit",
-            "amount_sgd": 22,
-            "was_amount_sgd": null,
-            "promo": false,
-            "gst": "not stated",
-            "price_text": "$ 22/Unit",
-            "sourceUrl": "https://flashaircon.com/pricing-packages/",
-            "excerpt": "General Servicing | $ 22/Unit",
-            "capturedAt": "2026-10-10",
-            "unitBasis": "per unit printed next to the price",
-            "unitInferred": false,
-            "unit_price_basis": "price is for one unit as printed",
-            "units_in_price": 1,
-            "unit_price_sgd": 22
-          }
-        ],
-        "websiteCheck": {
-          "url": "https://flashaircon.com/",
-          "finalUrl": "https://flashaircon.com/",
-          "httpStatus": 200,
-          "checkedAt": "2026-10-10T22:05+03:00",
-          "result": "active"
-        },
-        "serviceLocations": [],
-        "bestFor": [
-          {
-            "text": "Prints a general service price on its site: S$22 per unit (GST not stated)",
-            "excerpt": "General Servicing | $ 22/Unit",
-            "source_url": "https://flashaircon.com/pricing-packages/",
-            "capturedAt": "2026-10-10",
-            "sourceUrl": "https://flashaircon.com/pricing-packages/"
-          }
-        ],
-        "poorFit": [],
-        "summary": {
-          "text": "SIGNATURE ENGINEERING SERVICES PTE LTD is an aircon servicing business in Singapore. Its website mentions general service, chemical wash, chemical overhaul, gas top up and other services. It publishes prices for general service. Its site says it takes residential jobs. Google Maps search data showed 3.3 stars from 10 reviews on 2026-10-11.",
-          "sources": [
-            "https://data.gov.sg/datasets/d_dcda79be4aded5f9e769b8e23ff69b47/view",
-            "https://flashaircon.com/",
-            "https://flashaircon.com/pricing-packages/",
-            "https://maps.google.com/?cid=14336986031148670576"
-          ],
-          "capturedAt": "2026-10-11T22:26+03:00"
-        },
-        "faqs": [],
-        "highlights": [
-          {
-            "text": "Google rating 3.3 from 10 reviews (Google Maps search data, read 2026-10-11)",
-            "source_url": "https://maps.google.com/?cid=14336986031148670576",
-            "capturedAt": "2026-10-11",
-            "sourceUrl": "https://maps.google.com/?cid=14336986031148670576"
-          }
-        ],
-        "warranty": null,
-        "foundedYear": null,
-        "emergency": null,
-        "responseTime": null,
-        "brands": [],
-        "payments": [],
-        "socials": [
-          {
-            "name": "facebook",
-            "url": "https://www.facebook.com/Flashairconsollution/",
-            "sourceUrl": "https://flashaircon.com/",
-            "capturedAt": "2026-10-10"
-          }
-        ]
-      },
-      "quoteEvidence": null,
-      "mapEvidence": {
-        "status": "verified",
-        "precision": "building",
-        "postal": "199018",
-        "addressValue": "200 JALAN SULTAN #03-17, TEXTILE CENTRE, Singapore 199018",
-        "addressSourceUrl": "https://data.gov.sg/datasets/d_dcda79be4aded5f9e769b8e23ff69b47/view",
-        "place": {
-          "name": "FLASH AIRCON",
-          "cid": "14336986031148670576",
-          "place_id": "ChIJawWAD-cT2jERcJ5asNU098Y",
-          "url": "https://maps.google.com/?cid=14336986031148670576",
-          "address": "200 Jln Sultan, #03-17 Textile Centre, Singapore 199018",
-          "postal": "199018",
-          "phone": "+65 9126 0686",
-          "website": "https://flashaircon.com/",
-          "readVia": "https://www.google.com/search?tbm=map&hl=en&gl=sg&q=aircon+servicing&pb=!4m12!1m3!1d6000!2d103.86!3d1.29!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!7i20!8i20!10b1!12m6!2m3!5m1!6e2!20e3!10b1!16b1",
-          "readAt": "2026-10-10T21:54+03:00"
-        },
-        "geocode": null,
-        "latitude": 1.3037352,
-        "longitude": 103.8613749
-      },
-      "selfReportedRating": null,
-      "reviewSources": [
-        {
-          "name": "Google Maps",
-          "rating": 3.3,
-          "count": 10,
-          "scale": 5,
-          "sourceUrl": "https://maps.google.com/?cid=14336986031148670576",
-          "checkedAt": "2026-10-10",
-          "method": "Google Maps place (cid 14336986031148670576) read via www.google.com/search?tbm=map at 2026-10-10T22:05+03:00; existing google_rating/google_review_count reused",
-          "note": "",
-          "mirrorsSource": ""
-        }
-      ],
-      "listingDepth": {
-        "full": false,
-        "evidenceScore": 4,
-        "checkedAt": "2026-10-12T10:44+03:00"
-      },
-      "primaryTrade": "aircon",
-      "alternatePhones": [],
-      "area": "Other Singapore locations",
-      "googleRating": {
-        "value": 3.3,
-        "count": 10,
-        "sourceUrl": "https://maps.google.com/?cid=14336986031148670576",
-        "checkedAt": "2026-10-10T22:05+03:00",
         "sourceType": "google-maps-search"
       }
     },
@@ -86464,26 +86238,24 @@
       },
       "quoteEvidence": null,
       "mapEvidence": {
-        "status": "unresolved",
-        "precision": null,
+        "status": "address-geocoded",
+        "precision": "building",
         "postal": "408564",
         "addressValue": "10 UBI CRESCENT #05-31, UBI TECHPARK, Singapore 408564",
         "addressSourceUrl": "https://data.gov.sg/datasets/d_dcda79be4aded5f9e769b8e23ff69b47/view",
-        "place": {
-          "name": "Getz Cleanz",
-          "cid": "16061097621133706975",
-          "place_id": "ChIJA4-slo0X2jER38aL6jB75N4",
-          "url": "https://maps.google.com/?cid=16061097621133706975",
-          "address": "61 Ubi Rd 1, #02-34, Lobby 2 Oxley Bizhub, Singapore 408727",
-          "postal": "408727",
-          "phone": "+65 8866 3030",
-          "website": "https://www.getzcleanz.com.sg/",
-          "readVia": "https://www.google.com/search?tbm=map&hl=en&gl=sg&q=Getz+Cleanz+61+Ubi+Rd+1%2C+%2302-34%2C+Lobby+2+Oxley+Bizhub%2C+Singapore+408727",
-          "readAt": "2026-10-11T23:17+03:00"
+        "place": null,
+        "geocode": {
+          "source": "OneMap search (onemap.gov.sg)",
+          "url": "https://www.onemap.gov.sg/api/common/elastic/search?searchVal=408564&returnGeom=Y&getAddrDetails=Y&pageNum=1",
+          "matched": "10 UBI CRESCENT UBI TECHPARK SINGAPORE 408564",
+          "postal": "408564",
+          "blk": "10",
+          "building": "UBI TECHPARK",
+          "capturedAt": "2026-10-13",
+          "basis": "published address (address.sourceUrl, re-read 2026-10-13); same postal code and block; single OneMap result"
         },
-        "geocode": null,
-        "latitude": null,
-        "longitude": null
+        "latitude": 1.326336832922053,
+        "longitude": 103.8962622153951
       },
       "selfReportedRating": null,
       "reviewSources": [
@@ -87861,26 +87633,24 @@
       },
       "quoteEvidence": null,
       "mapEvidence": {
-        "status": "unresolved",
-        "precision": null,
+        "status": "address-geocoded",
+        "precision": "building",
         "postal": "408731",
         "addressValue": "69 Ubi Road 1, #08-32, Singapore 408731",
         "addressSourceUrl": "https://www.gocleaners.sg/",
-        "place": {
-          "name": "Go Cleaners Pte Ltd",
-          "cid": "10856405664311345551",
-          "place_id": "ChIJBc5tvhmLz0gRjwHRlm6zqZY",
-          "url": "https://maps.google.com/?cid=10856405664311345551",
-          "address": null,
-          "postal": null,
-          "phone": "+65 8950 0767",
-          "website": "https://www.gocleaners.sg/",
-          "readVia": "https://www.google.com/search?tbm=map&hl=en&gl=sg&q=Go+Cleaners+Pte+Ltd+Singapore",
-          "readAt": "2026-10-11T23:53+03:00"
+        "place": null,
+        "geocode": {
+          "source": "OneMap search (onemap.gov.sg)",
+          "url": "https://www.onemap.gov.sg/api/common/elastic/search?searchVal=408731&returnGeom=Y&getAddrDetails=Y&pageNum=1",
+          "matched": "69 UBI ROAD 1 OXLEY BIZHUB SINGAPORE 408731",
+          "postal": "408731",
+          "blk": "69",
+          "building": "OXLEY BIZHUB",
+          "capturedAt": "2026-10-13",
+          "basis": "published address (address.sourceUrl, re-read 2026-10-13); same postal code and block; single OneMap result"
         },
-        "geocode": null,
-        "latitude": null,
-        "longitude": null
+        "latitude": 1.331746575950575,
+        "longitude": 103.890231605492
       },
       "selfReportedRating": null,
       "reviewSources": [
@@ -93768,26 +93538,24 @@
         "capturedAt": "2026-10-11"
       },
       "mapEvidence": {
-        "status": "unresolved",
-        "precision": null,
+        "status": "address-geocoded",
+        "precision": "building",
         "postal": "207668",
         "addressValue": "92A Syed Alwi Road, #02-06, Singapore 207668",
         "addressSourceUrl": "https://handymanfixpro.com/contact-us/",
-        "place": {
-          "name": "Handyman Fix Pro",
-          "cid": "17327468022269265109",
-          "place_id": "ChIJ0Xv73j_DuEMR1cRMhFyId_A",
-          "url": "https://maps.google.com/?cid=17327468022269265109",
-          "address": null,
-          "postal": null,
-          "phone": "+65 8694 9030",
-          "website": "https://handymanfixpro.com/",
-          "readVia": "https://www.google.com/search?tbm=map&hl=en&gl=sg&q=handyman+Bukit+Merah&pb=!4m12!1m3!1d6000!2d103.8239!3d1.2819!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!7i20!8i60!10b1!12m6!2m3!5m1!6e2!20e3!10b1!16b1",
-          "readAt": "2026-10-11T23:03+03:00"
+        "place": null,
+        "geocode": {
+          "source": "OneMap search (onemap.gov.sg)",
+          "url": "https://www.onemap.gov.sg/api/common/elastic/search?searchVal=207668&returnGeom=Y&getAddrDetails=Y&pageNum=1",
+          "matched": "92A SYED ALWI ROAD SINGAPORE 207668",
+          "postal": "207668",
+          "blk": "92A",
+          "building": "NIL",
+          "capturedAt": "2026-10-13",
+          "basis": "published address (address.sourceUrl, re-read 2026-10-13); same postal code and block; single OneMap result"
         },
-        "geocode": null,
-        "latitude": null,
-        "longitude": null
+        "latitude": 1.309408733701725,
+        "longitude": 103.8555440203025
       },
       "selfReportedRating": null,
       "reviewSources": [
@@ -98611,26 +98379,24 @@
       },
       "quoteEvidence": null,
       "mapEvidence": {
-        "status": "unresolved",
-        "precision": null,
+        "status": "address-geocoded",
+        "precision": "building",
         "postal": "639535",
         "addressValue": "16C Tuas Avenue 1, #09-53, Space@Tuas, Singapore 639535",
         "addressSourceUrl": "https://www.happyhomes.sg/",
-        "place": {
-          "name": "Happy Homes Handyman Services",
-          "cid": "11820267603860882688",
-          "place_id": "ChIJI-iUUVgvjUkRAIUvXsIGCqQ",
-          "url": "https://maps.google.com/?cid=11820267603860882688",
-          "address": null,
-          "postal": null,
-          "phone": "+65 9862 5243",
-          "website": "https://www.happyhomes.sg/?utm_source=google&utm_medium=wix_google_business_profile&utm_campaign=12843668143519164443",
-          "readVia": "https://www.google.com/search?tbm=map&hl=en&gl=sg&q=handyman+Jurong+West&pb=!4m12!1m3!1d6000!2d103.709!3d1.3404!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!7i20!8i20!10b1!12m6!2m3!5m1!6e2!20e3!10b1!16b1",
-          "readAt": "2026-10-11T23:02+03:00"
+        "place": null,
+        "geocode": {
+          "source": "OneMap search (onemap.gov.sg)",
+          "url": "https://www.onemap.gov.sg/api/common/elastic/search?searchVal=639535&returnGeom=Y&getAddrDetails=Y&pageNum=1",
+          "matched": "16C TUAS AVENUE 1 JTC SPACE @ TUAS SINGAPORE 639535",
+          "postal": "639535",
+          "blk": "16C",
+          "building": "JTC SPACE @ TUAS",
+          "capturedAt": "2026-10-13",
+          "basis": "published address (address.sourceUrl, re-read 2026-10-13); same postal code and block; single OneMap result"
         },
-        "geocode": null,
-        "latitude": null,
-        "longitude": null
+        "latitude": 1.32274997635561,
+        "longitude": 103.6614331606939
       },
       "selfReportedRating": null,
       "reviewSources": [],
@@ -103549,9 +103315,9 @@
         "sourceUrl": "https://maps.google.com/?cid=4362460352461252246"
       },
       "address": {
-        "value": "Yishun, Singapore 760386",
+        "value": "386 Yishun Ring Road, Yishun, Singapore 760386",
         "sourceUrl": "https://www.homeplumbingservices.sg/contact",
-        "street": "Yishun, Singapore 760386",
+        "street": "386 Yishun Ring Road, Yishun, Singapore 760386",
         "postal": "760386"
       },
       "website": {
@@ -103759,28 +103525,18 @@
         "status": "address-geocoded",
         "precision": "building",
         "postal": "760386",
-        "addressValue": "Yishun, Singapore 760386",
+        "addressValue": "386 Yishun Ring Road, Yishun, Singapore 760386",
         "addressSourceUrl": "https://www.homeplumbingservices.sg/contact",
-        "place": {
-          "name": "Home-Plumbing Services",
-          "cid": "4362460352461252246",
-          "place_id": "ChIJAQBQxkIU2jERlqYtx5OSijw",
-          "url": "https://maps.google.com/?cid=4362460352461252246",
-          "address": null,
-          "postal": null,
-          "phone": "+65 9108 0830",
-          "website": "http://homeplumbingservices.sg/",
-          "readVia": "https://www.google.com/search?tbm=map&hl=en&gl=sg&q=plumber&pb=!4m12!1m3!1d6000!2d103.83!3d1.44!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!7i20!8i20!10b1!12m6!2m3!5m1!6e2!20e3!10b1!16b1",
-          "readAt": "2026-10-10T18:21+03:00"
-        },
+        "place": null,
         "geocode": {
           "source": "OneMap search (onemap.gov.sg)",
           "url": "https://www.onemap.gov.sg/api/common/elastic/search?searchVal=760386&returnGeom=Y&getAddrDetails=Y&pageNum=1",
           "matched": "386 YISHUN RING ROAD SINGAPORE 760386",
           "postal": "760386",
           "blk": "386",
-          "capturedAt": "2026-10-12",
-          "basis": "published company address (address.sourceUrl); same postal code and block/house number"
+          "building": "NIL",
+          "capturedAt": "2026-10-13",
+          "basis": "published address (address.sourceUrl, re-read 2026-10-13); same postal code and block; single OneMap result"
         },
         "latitude": 1.428980649265172,
         "longitude": 103.8464734897217
@@ -111554,9 +111310,9 @@
         "sourceUrl": "https://maps.google.com/?cid=9615257223318556627"
       },
       "address": {
-        "value": "#04-08, Singapore 555859",
+        "value": "55 Serangoon North Avenue 4, #04-08, Singapore 555859",
         "sourceUrl": "https://www.juenvirolution.com/",
-        "street": "#04-08, Singapore 555859",
+        "street": "55 Serangoon North Avenue 4, #04-08, Singapore 555859",
         "postal": "555859"
       },
       "website": {
@@ -111766,26 +111522,24 @@
       },
       "quoteEvidence": null,
       "mapEvidence": {
-        "status": "unresolved",
-        "precision": null,
+        "status": "address-geocoded",
+        "precision": "building",
         "postal": "555859",
-        "addressValue": "#04-08, Singapore 555859",
+        "addressValue": "55 Serangoon North Avenue 4, #04-08, Singapore 555859",
         "addressSourceUrl": "https://www.juenvirolution.com/",
-        "place": {
-          "name": "J+U Envirolution Pte Ltd",
-          "cid": "9615257223318556627",
-          "place_id": "ChIJNQVJJlLcA2gR00_pM4BBcIU",
-          "url": "https://maps.google.com/?cid=9615257223318556627",
-          "address": null,
-          "postal": null,
-          "phone": "+65 8814 9919",
-          "website": "https://www.juenvirolution.com/",
-          "readVia": "https://www.google.com/search?tbm=map&hl=en&gl=sg&q=J%2BU+Envirolution+Pte+Ltd+Singapore",
-          "readAt": "2026-10-12T03:32+03:00"
+        "place": null,
+        "geocode": {
+          "source": "OneMap search (onemap.gov.sg)",
+          "url": "https://www.onemap.gov.sg/api/common/elastic/search?searchVal=555859&returnGeom=Y&getAddrDetails=Y&pageNum=1",
+          "matched": "55 SERANGOON NORTH AVENUE 4 S9 SINGAPORE 555859",
+          "postal": "555859",
+          "blk": "55",
+          "building": "S9",
+          "capturedAt": "2026-10-13",
+          "basis": "published address (address.sourceUrl, re-read 2026-10-13); same postal code and block; single OneMap result"
         },
-        "geocode": null,
-        "latitude": null,
-        "longitude": null
+        "latitude": 1.376997168251962,
+        "longitude": 103.874737539072
       },
       "selfReportedRating": null,
       "reviewSources": [
@@ -111808,7 +111562,7 @@
       },
       "primaryTrade": "cleaning",
       "alternatePhones": [],
-      "area": "Other Singapore locations",
+      "area": "Serangoon",
       "googleRating": {
         "value": 4.8,
         "count": 63,
@@ -116132,26 +115886,24 @@
       },
       "quoteEvidence": null,
       "mapEvidence": {
-        "status": "unresolved",
-        "precision": null,
+        "status": "address-geocoded",
+        "precision": "building",
         "postal": "737853",
         "addressValue": "11 Woodlands Close #05-33, Woodlands 11, Singapore 737853",
         "addressSourceUrl": "https://www.justcoolsg.com/contact-us/",
-        "place": {
-          "name": "Just Cool Aircon Engineering Pte Ltd",
-          "cid": "744625222849869623",
-          "place_id": "ChIJyyrcTMcT2jERNzfD6rFwVQo",
-          "url": "https://maps.google.com/?cid=744625222849869623",
-          "address": "Woodlands Street 11, #03-35 11号",
-          "postal": null,
-          "phone": "+65 9774 2225",
-          "website": "https://www.justcoolsg.com/",
-          "readVia": "https://www.google.com/search?tbm=map&hl=en&gl=sg&q=aircon+servicing&pb=!4m12!1m3!1d6000!2d103.79!3d1.43!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!7i20!10b1!12m6!2m3!5m1!6e2!20e3!10b1!16b1",
-          "readAt": "2026-10-10T18:10+03:00"
+        "place": null,
+        "geocode": {
+          "source": "OneMap search (onemap.gov.sg)",
+          "url": "https://www.onemap.gov.sg/api/common/elastic/search?searchVal=737853&returnGeom=Y&getAddrDetails=Y&pageNum=1",
+          "matched": "11 WOODLANDS CLOSE WOODLANDS 11 SINGAPORE 737853",
+          "postal": "737853",
+          "blk": "11",
+          "building": "WOODLANDS 11",
+          "capturedAt": "2026-10-13",
+          "basis": "published address (address.sourceUrl, re-read 2026-10-13); same postal code and block; single OneMap result"
         },
-        "geocode": null,
-        "latitude": null,
-        "longitude": null
+        "latitude": 1.434758410911524,
+        "longitude": 103.8027210555322
       },
       "selfReportedRating": null,
       "reviewSources": [
@@ -123511,26 +123263,24 @@
       },
       "quoteEvidence": null,
       "mapEvidence": {
-        "status": "unresolved",
-        "precision": null,
+        "status": "address-geocoded",
+        "precision": "building",
         "postal": "768159",
         "addressValue": "2 YISHUN INDUSTRIAL STREET 1 #04-30, NORTH POINT BIZHUB, Singapore 768159",
         "addressSourceUrl": "https://data.gov.sg/datasets/d_dcda79be4aded5f9e769b8e23ff69b47/view",
-        "place": {
-          "name": "LANDSPECT SG PTE LTD",
-          "cid": "14385103584571749832",
-          "place_id": "ChIJM4cx8qUb2jERyPWYn34nosc",
-          "url": "https://maps.google.com/?cid=14385103584571749832",
-          "address": "BLOCK 721 Clementi West Street 2, Singapore 120721",
-          "postal": "120721",
-          "phone": "+65 9100 0401",
-          "website": "https://landspectsg.com/",
-          "readVia": "https://www.google.com/search?tbm=map&hl=en&gl=sg&q=LANDSPECT+SG+PTE+LTD+BLOCK+721+Clementi+West+Street+2%2C+Singapore+120721",
-          "readAt": "2026-10-12T04:52+03:00"
+        "place": null,
+        "geocode": {
+          "source": "OneMap search (onemap.gov.sg)",
+          "url": "https://www.onemap.gov.sg/api/common/elastic/search?searchVal=768159&returnGeom=Y&getAddrDetails=Y&pageNum=1",
+          "matched": "2 YISHUN INDUSTRIAL STREET 1 NORTH POINT BIZHUB SINGAPORE 768159",
+          "postal": "768159",
+          "blk": "2",
+          "building": "NORTH POINT BIZHUB",
+          "capturedAt": "2026-10-13",
+          "basis": "published address (address.sourceUrl, re-read 2026-10-13); same postal code and block; single OneMap result"
         },
-        "geocode": null,
-        "latitude": null,
-        "longitude": null
+        "latitude": 1.436188434554599,
+        "longitude": 103.8430976340242
       },
       "selfReportedRating": null,
       "reviewSources": [
@@ -131907,26 +131657,24 @@
       },
       "quoteEvidence": null,
       "mapEvidence": {
-        "status": "unresolved",
-        "precision": null,
+        "status": "address-geocoded",
+        "precision": "building",
         "postal": "058358",
         "addressValue": "101A UPPER CROSS STREET #09-16, PEOPLE'S PARK CENTRE, Singapore 058358",
         "addressSourceUrl": "https://data.gov.sg/datasets/d_dcda79be4aded5f9e769b8e23ff69b47/view",
-        "place": {
-          "name": "Luminary Service Pte. Ltd.",
-          "cid": "17814294197139003462",
-          "place_id": "ChIJPyZe2jwX2jERRtjFKDAWOfc",
-          "url": "https://maps.google.com/?cid=17814294197139003462",
-          "address": "24 Sin Ming Ln, #04-91, Singapore 573970",
-          "postal": "573970",
-          "phone": "+65 9100 7485",
-          "website": "https://luminary.com.sg/",
-          "readVia": "https://www.google.com/search?tbm=map&hl=en&gl=sg&q=Luminary+Service+Pte.+Ltd.+24+Sin+Ming+Ln%2C+%2304-91%2C+Singapore+573970",
-          "readAt": "2026-10-11T23:16+03:00"
+        "place": null,
+        "geocode": {
+          "source": "OneMap search (onemap.gov.sg)",
+          "url": "https://www.onemap.gov.sg/api/common/elastic/search?searchVal=058358&returnGeom=Y&getAddrDetails=Y&pageNum=1",
+          "matched": "101A UPPER CROSS STREET PEOPLE'S PARK CENTRE SINGAPORE 058358",
+          "postal": "058358",
+          "blk": "101A",
+          "building": "PEOPLE'S PARK CENTRE",
+          "capturedAt": "2026-10-13",
+          "basis": "published address (address.sourceUrl, re-read 2026-10-13); same postal code and block; single OneMap result"
         },
-        "geocode": null,
-        "latitude": null,
-        "longitude": null
+        "latitude": 1.285770099544321,
+        "longitude": 103.8439801231094
       },
       "selfReportedRating": null,
       "reviewSources": [],
@@ -134950,26 +134698,24 @@
       },
       "quoteEvidence": null,
       "mapEvidence": {
-        "status": "unresolved",
-        "precision": null,
+        "status": "address-geocoded",
+        "precision": "building",
         "postal": "528845",
         "addressValue": "9012 TAMPINES STREET 93 #01-191, TAMPINES INDUSTRIAL PARK A, Singapore 528845",
         "addressSourceUrl": "https://data.gov.sg/datasets/d_dcda79be4aded5f9e769b8e23ff69b47/view",
-        "place": {
-          "name": "Media Aire-con Engineering Pte Ltd",
-          "cid": "6060495471280248200",
-          "place_id": "ChIJwYGsZfzTukgRiNWFcIU0G1Q",
-          "url": "https://maps.google.com/?cid=6060495471280248200",
-          "address": null,
-          "postal": null,
-          "phone": "+65 9365 0600",
-          "website": "http://mediaaire.com/",
-          "readVia": "https://www.google.com/search?tbm=map&hl=en&gl=sg&q=Media+Aire-con+Engineering+Pte+Ltd+Singapore",
-          "readAt": "2026-10-12T00:49+03:00"
+        "place": null,
+        "geocode": {
+          "source": "OneMap search (onemap.gov.sg)",
+          "url": "https://www.onemap.gov.sg/api/common/elastic/search?searchVal=528845&returnGeom=Y&getAddrDetails=Y&pageNum=1",
+          "matched": "9012 TAMPINES STREET 93 TAMPINES INDUSTRIAL PARK A SINGAPORE 528845",
+          "postal": "528845",
+          "blk": "9012",
+          "building": "TAMPINES INDUSTRIAL PARK A",
+          "capturedAt": "2026-10-13",
+          "basis": "published address (address.sourceUrl, re-read 2026-10-13); same postal code and block; single OneMap result"
         },
-        "geocode": null,
-        "latitude": null,
-        "longitude": null
+        "latitude": 1.34087590102932,
+        "longitude": 103.9437108465914
       },
       "selfReportedRating": null,
       "reviewSources": [
@@ -136451,26 +136197,24 @@
       },
       "quoteEvidence": null,
       "mapEvidence": {
-        "status": "unresolved",
-        "precision": null,
+        "status": "address-geocoded",
+        "precision": "building",
         "postal": "339568",
         "addressValue": "12 JALAN LEMBAH KALLANG #02-1B, CONCORDE BUILDING, Singapore 339568",
         "addressSourceUrl": "https://data.gov.sg/datasets/d_dcda79be4aded5f9e769b8e23ff69b47/view",
-        "place": {
-          "name": "MJD VENTURE PTE LTD",
-          "cid": "15548227576007062803",
-          "place_id": "ChIJeYl5MxwZ2jERE3XVMppmxtc",
-          "url": "https://maps.google.com/?cid=15548227576007062803",
-          "address": "8B Admiralty St, #04-08, Singapore 757440",
-          "postal": "757440",
-          "phone": "+65 6203 7549",
-          "website": "http://www.mjdventure.com.sg/",
-          "readVia": "https://www.google.com/search?tbm=map&hl=en&gl=sg&q=MJD+VENTURE+PTE+LTD+8B+Admiralty+St%2C+%2304-08%2C+Singapore+757440",
-          "readAt": "2026-10-12T05:09+03:00"
+        "place": null,
+        "geocode": {
+          "source": "OneMap search (onemap.gov.sg)",
+          "url": "https://www.onemap.gov.sg/api/common/elastic/search?searchVal=339568&returnGeom=Y&getAddrDetails=Y&pageNum=1",
+          "matched": "12 JALAN LEMBAH KALLANG CONCORDE BUILDING SINGAPORE 339568",
+          "postal": "339568",
+          "blk": "12",
+          "building": "CONCORDE BUILDING",
+          "capturedAt": "2026-10-13",
+          "basis": "published address (address.sourceUrl, re-read 2026-10-13); same postal code and block; single OneMap result"
         },
-        "geocode": null,
-        "latitude": null,
-        "longitude": null
+        "latitude": 1.314718647940882,
+        "longitude": 103.8626467212748
       },
       "selfReportedRating": null,
       "reviewSources": [
@@ -144659,26 +144403,24 @@
       },
       "quoteEvidence": null,
       "mapEvidence": {
-        "status": "unresolved",
-        "precision": null,
+        "status": "address-geocoded",
+        "precision": "building",
         "postal": "609966",
         "addressValue": "18 Boon Lay Way #09-127, Tradehub 21, Singapore 609966",
         "addressSourceUrl": "https://data.gov.sg/datasets/d_dcda79be4aded5f9e769b8e23ff69b47/view",
-        "place": {
-          "name": "One Hub Integrated Pte Ltd",
-          "cid": "1262942748733216840",
-          "place_id": "ChIJFactLoKITGoRSBjmFb3fhhE",
-          "url": "https://maps.google.com/?cid=1262942748733216840",
-          "address": null,
-          "postal": null,
-          "phone": "+65 8544 5074",
-          "website": "https://onehubintegrate.com.sg/",
-          "readVia": null,
-          "readAt": "2026-10-12T05:12+03:00"
+        "place": null,
+        "geocode": {
+          "source": "OneMap search (onemap.gov.sg)",
+          "url": "https://www.onemap.gov.sg/api/common/elastic/search?searchVal=609966&returnGeom=Y&getAddrDetails=Y&pageNum=1",
+          "matched": "18 BOON LAY WAY TRADEHUB 21 SINGAPORE 609966",
+          "postal": "609966",
+          "blk": "18",
+          "building": "TRADEHUB 21",
+          "capturedAt": "2026-10-13",
+          "basis": "published address (address.sourceUrl, re-read 2026-10-13); same postal code and block; single OneMap result"
         },
-        "geocode": null,
-        "latitude": null,
-        "longitude": null
+        "latitude": 1.328571953191451,
+        "longitude": 103.7527156350003
       },
       "selfReportedRating": null,
       "reviewSources": [
@@ -157292,183 +157034,6 @@
       }
     },
     {
-      "slug": "reliable-electrical-services",
-      "name": "Reliable Electrical Services",
-      "category": "electrician",
-      "categories": [
-        "electrician"
-      ],
-      "schemaType": "Electrician",
-      "phone": {
-        "value": "+65 6854 4977",
-        "sourceUrl": "https://maps.google.com/?cid=3930479307478095976"
-      },
-      "address": {
-        "value": "Contact Us now - LS Electrician Singapore 663189",
-        "sourceUrl": "https://www.electricalservices.sg/contact-us/",
-        "street": "Contact Us now - LS Electrician Singapore 663189",
-        "postal": "663189"
-      },
-      "website": {
-        "value": "https://www.electricalservices.sg/",
-        "sourceUrl": "https://www.electricalservices.sg/"
-      },
-      "email": null,
-      "whatsapp": {
-        "value": "+65 8188 8070",
-        "sourceUrl": "https://www.electricalservices.sg/"
-      },
-      "mapsUrl": "https://maps.google.com/?cid=3930479307478095976",
-      "rating": null,
-      "reviews": [],
-      "services": [],
-      "bestFor": "",
-      "poorFit": "",
-      "priceNote": "Contact the company to confirm the scope, total price and GST.",
-      "priceSourceUrl": "https://www.electricalservices.sg/",
-      "facts": [],
-      "imported": true,
-      "databaseId": "gm-3930479307478095976",
-      "enrichment": {
-        "checkedAt": "2026-10-10",
-        "supportedServices": [
-          {
-            "name": "Rewiring",
-            "sourceUrl": "https://www.electricalservices.sg/",
-            "capturedAt": "2026-10-10"
-          },
-          {
-            "name": "Light installation",
-            "sourceUrl": "https://www.electricalservices.sg/",
-            "capturedAt": "2026-10-10"
-          },
-          {
-            "name": "Ceiling fan",
-            "sourceUrl": "https://www.electricalservices.sg/",
-            "capturedAt": "2026-10-10"
-          },
-          {
-            "name": "Power point",
-            "sourceUrl": "https://www.electricalservices.sg/",
-            "capturedAt": "2026-10-10"
-          }
-        ],
-        "about": [
-          {
-            "text": "If you have commercial electrical work, we will work with you to meet the legal standards and make your place of work perfect for you and your team. We even provide emergency services! If you are looking for electrical services or electrician near me, you come to right place.",
-            "sourceUrl": "https://www.electricalservices.sg/",
-            "capturedAt": "2026-10-10"
-          }
-        ],
-        "hours": {
-          "text": "Saturday 8 am-10 pm",
-          "sourceUrl": "https://maps.google.com/?cid=3930479307478095976",
-          "sourceLabel": "Google Maps place data",
-          "capturedAt": "2026-10-10T18:37+03:00"
-        },
-        "serviceArea": null,
-        "residential": {
-          "value": "yes",
-          "excerpt": "If you need residential work, we can help you renovate and improve your home.",
-          "sourceUrl": "https://www.electricalservices.sg/",
-          "fullSentence": true,
-          "pageFetchedAt": "2026-10-10T18:32:18+03:00",
-          "capturedAt": "2026-10-10",
-          "previousExcerpt": "o take on any issue or project you can give us. If you need residential work, we can help you renovate and improve your home.",
-          "previousSourceUrl": "https://www.electricalservices.sg/"
-        },
-        "licences": [],
-        "management": [],
-        "uen": "",
-        "uenSource": "",
-        "operatorGroup": "sg-6854-49xx-ls-network",
-        "priceLines": [],
-        "websiteCheck": {
-          "url": "https://www.electricalservices.sg/",
-          "finalUrl": "https://www.electricalservices.sg/",
-          "httpStatus": 200,
-          "checkedAt": "2026-10-10T18:37+03:00",
-          "result": "active"
-        },
-        "serviceLocations": [],
-        "bestFor": [],
-        "poorFit": [],
-        "summary": {
-          "text": "Reliable Electrical Services is an electrical business in Singapore. Its website mentions rewiring, light installation, ceiling fan, power point. Its site says it quotes on request. Its site says it takes residential jobs. Google Maps search data showed 4.9 stars from 156 reviews on 2026-10-10.",
-          "sources": [
-            "https://maps.google.com/?cid=3930479307478095976",
-            "https://www.electricalservices.sg/"
-          ],
-          "capturedAt": "2026-10-11T22:26+03:00"
-        },
-        "faqs": [],
-        "highlights": [],
-        "warranty": null,
-        "foundedYear": null,
-        "emergency": null,
-        "responseTime": null,
-        "brands": [],
-        "payments": [],
-        "socials": []
-      },
-      "quoteEvidence": {
-        "excerpt": "You may contact us for free quotation and all our prices are subjected to 7% G.S.T.",
-        "sourceUrl": "https://www.electricalservices.sg/",
-        "capturedAt": "2026-10-10"
-      },
-      "mapEvidence": {
-        "status": "unresolved",
-        "precision": null,
-        "postal": "663189",
-        "addressValue": "Contact Us now - LS Electrician Singapore 663189",
-        "addressSourceUrl": "https://www.electricalservices.sg/contact-us/",
-        "place": {
-          "name": "Reliable Electrical Services",
-          "cid": "3930479307478095976",
-          "place_id": "ChIJVRCKli0R2jERaFhBBxveizY",
-          "url": "https://maps.google.com/?cid=3930479307478095976",
-          "address": null,
-          "postal": null,
-          "phone": "+65 6854 4977",
-          "website": "https://www.electricalservices.sg/",
-          "readVia": "https://www.google.com/search?tbm=map&hl=en&gl=sg&q=electrician&pb=!4m12!1m3!1d6000!2d103.75!3d1.38!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!7i20!10b1!12m6!2m3!5m1!6e2!20e3!10b1!16b1",
-          "readAt": "2026-10-10T18:15+03:00"
-        },
-        "geocode": null,
-        "latitude": null,
-        "longitude": null
-      },
-      "selfReportedRating": null,
-      "reviewSources": [
-        {
-          "name": "Google Maps",
-          "rating": 4.9,
-          "count": 156,
-          "scale": 5,
-          "sourceUrl": "https://maps.google.com/?cid=3930479307478095976",
-          "checkedAt": "2026-10-10",
-          "method": "Google Maps place (cid 3930479307478095976) read via www.google.com/search?tbm=map at 2026-10-10T18:37+03:00; existing google_rating/google_review_count reused",
-          "note": "",
-          "mirrorsSource": ""
-        }
-      ],
-      "listingDepth": {
-        "full": false,
-        "evidenceScore": 4,
-        "checkedAt": "2026-10-12T10:44+03:00"
-      },
-      "primaryTrade": "electrician",
-      "alternatePhones": [],
-      "area": "Other Singapore locations",
-      "googleRating": {
-        "value": 4.9,
-        "count": 156,
-        "sourceUrl": "https://maps.google.com/?cid=3930479307478095976",
-        "checkedAt": "2026-10-10T18:37+03:00",
-        "sourceType": "google-maps-search"
-      }
-    },
-    {
       "slug": "reliable-plumbing-services-licensed-plumber",
       "name": "Reliable Plumbing Services (Licensed Plumber)",
       "category": "plumbing",
@@ -159383,10 +158948,23 @@
       "selfReportedRating": {
         "rating": 4.9,
         "count": 3000,
-        "excerpt": "4.9 and more than 3,000, on the electrician page",
-        "note": "The electrician page says 4.9/5 and more than 3,000 Google reviews. An isolator-switch page on the same site says 5.0 from 2,948 reviews. A directory has listed 4.7 from 43 reviews at an address that was not on their own page. Not reconciled. The sort uses the electrician-page claim.",
+        "excerpt": "4.9 from more than 3,000 reviews",
+        "note": "The electrician page says 4.9/5 and more than 3,000 Google reviews. An isolator-switch page on the same site says 5.0 from 2,948 reviews. A directory has listed 4.7 from 43 reviews at an address that was not on their own page. Not reconciled. Re-read 13 Oct 2026: same wording (\"more than 3,000 Google reviews\", \"4.9/5\"). The page structured data separately says ratingValue 5, reviewCount 3011; recorded, not used.",
         "source_url": "https://repair.sg/electrician-singapore/",
-        "capturedAt": null
+        "capturedAt": "2026-10-13",
+        "count_qualifier": "more_than",
+        "claims": [
+          {
+            "capturedAt": "2026-10-13",
+            "source_url": "https://repair.sg/electrician-singapore/",
+            "rating": 4.9,
+            "wording": "These are only a few of our more than 3,000 Google reviews that we have accumulated over the last 10 years that add up to our 4.9/5 star rating.",
+            "structured_data": {
+              "ratingValue": 5,
+              "reviewCount": 3011
+            }
+          }
+        ]
       },
       "reviewSources": [
         {
@@ -168928,9 +168506,18 @@
         "rating": 4.9,
         "count": 70,
         "excerpt": "4.9 from 70 reviews",
-        "note": "Contact page widget, opened 10 Oct 2026, prints 4.9 and 70 Google reviews. The review cards on that widget have names and empty date fields, so no excerpt is stored.",
+        "note": "Contact page widget, opened 10 Oct 2026, prints 4.9 and 70 Google reviews. The review cards on that widget have names and empty date fields, so no excerpt is stored. Re-read 13 Oct 2026: unchanged, 4.9 and 70 Google reviews.",
         "source_url": "https://sghandymanengineering.com/contact/",
-        "capturedAt": "2026-10-10"
+        "capturedAt": "2026-10-13",
+        "count_qualifier": "exact",
+        "claims": [
+          {
+            "capturedAt": "2026-10-13",
+            "source_url": "https://sghandymanengineering.com/contact/",
+            "rating": 4.9,
+            "wording": "SG Handyman Engineering Pte. Ltd. 4.9 70 Google reviews"
+          }
+        ]
       },
       "reviewSources": [
         {
@@ -169194,26 +168781,24 @@
         "capturedAt": "2026-10-12"
       },
       "mapEvidence": {
-        "status": "unresolved",
-        "precision": null,
+        "status": "address-geocoded",
+        "precision": "building",
         "postal": "608609",
         "addressValue": "Toh Guan Centre, Singapore 608609",
         "addressSourceUrl": "https://www.sghandymanpro.com/",
-        "place": {
-          "name": "Sg Handyman Pro",
-          "cid": "17691740223260901465",
-          "place_id": "ChIJFQWcSC2b6G8RWcD0if-vhfU",
-          "url": "https://maps.google.com/?cid=17691740223260901465",
-          "address": null,
-          "postal": null,
-          "phone": "+65 9390 1441",
-          "website": "https://www.sghandymanpro.com/",
-          "readVia": "https://www.google.com/search?tbm=map&hl=en&gl=sg&q=handyman+Jurong+East&pb=!4m12!1m3!1d6000!2d103.7436!3d1.3329!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!7i20!8i20!10b1!12m6!2m3!5m1!6e2!20e3!10b1!16b1",
-          "readAt": "2026-10-12T01:53+03:00"
+        "place": null,
+        "geocode": {
+          "source": "OneMap search (onemap.gov.sg)",
+          "url": "https://www.onemap.gov.sg/api/common/elastic/search?searchVal=608609&returnGeom=Y&getAddrDetails=Y&pageNum=1",
+          "matched": "21 TOH GUAN ROAD EAST TOH GUAN CENTRE SINGAPORE 608609",
+          "postal": "608609",
+          "blk": "21",
+          "building": "TOH GUAN CENTRE",
+          "capturedAt": "2026-10-13",
+          "basis": "published address (address.sourceUrl, re-read 2026-10-13); same postal code and block; single OneMap result"
         },
-        "geocode": null,
-        "latitude": null,
-        "longitude": null
+        "latitude": 1.3376451991357,
+        "longitude": 103.7546831574749
       },
       "selfReportedRating": null,
       "reviewSources": [],
@@ -182709,26 +182294,24 @@
       },
       "quoteEvidence": null,
       "mapEvidence": {
-        "status": "unresolved",
-        "precision": null,
+        "status": "address-geocoded",
+        "precision": "building",
         "postal": "048545",
         "addressValue": "14 Robinson Road 08-01A, Far East Finance Building, Singapore 048545",
         "addressSourceUrl": "https://data.gov.sg/datasets/d_dcda79be4aded5f9e769b8e23ff69b47/view",
-        "place": {
-          "name": "Snowflake Aircon Services",
-          "cid": "233857014564641962",
-          "place_id": "ChIJ872tAOmwlKkRqtxbObfTPgM",
-          "url": "https://maps.google.com/?cid=233857014564641962",
-          "address": null,
-          "postal": null,
-          "phone": "+65 8770 8270",
-          "website": "https://snowflakeaircon.sg/",
-          "readVia": "https://www.google.com/search?tbm=map&hl=en&gl=sg&q=Snowflake+Aircon+Services+Singapore",
-          "readAt": "2026-10-12T00:32+03:00"
+        "place": null,
+        "geocode": {
+          "source": "OneMap search (onemap.gov.sg)",
+          "url": "https://www.onemap.gov.sg/api/common/elastic/search?searchVal=048545&returnGeom=Y&getAddrDetails=Y&pageNum=1",
+          "matched": "14 ROBINSON ROAD FAR EAST FINANCE BUILDING SINGAPORE 048545",
+          "postal": "048545",
+          "blk": "14",
+          "building": "FAR EAST FINANCE BUILDING",
+          "capturedAt": "2026-10-13",
+          "basis": "published address (address.sourceUrl, re-read 2026-10-13); same postal code and block; single OneMap result"
         },
-        "geocode": null,
-        "latitude": null,
-        "longitude": null
+        "latitude": 1.282141709625899,
+        "longitude": 103.8507548326601
       },
       "selfReportedRating": null,
       "reviewSources": [
@@ -200100,9 +199683,9 @@
         "sourceUrl": "https://maps.google.com/?cid=11881757532658058995"
       },
       "address": {
-        "value": "623 ALJUNIED ROAD #02-01, ALJUNILED INDUSTRIAL COMPLEX, Singapore 389835",
+        "value": "623 ALJUNIED ROAD #02-01, ALJUNIED INDUSTRIAL COMPLEX, Singapore 389835",
         "sourceUrl": "https://data.gov.sg/datasets/d_dcda79be4aded5f9e769b8e23ff69b47/view",
-        "street": "623 ALJUNIED ROAD #02-01, ALJUNILED INDUSTRIAL COMPLEX, Singapore 389835",
+        "street": "623 ALJUNIED ROAD #02-01, ALJUNIED INDUSTRIAL COMPLEX, Singapore 389835",
         "postal": "389835"
       },
       "website": {
@@ -200220,26 +199803,24 @@
       },
       "quoteEvidence": null,
       "mapEvidence": {
-        "status": "unresolved",
-        "precision": null,
+        "status": "address-geocoded",
+        "precision": "building",
         "postal": "389835",
-        "addressValue": "623 ALJUNIED ROAD #02-01, ALJUNILED INDUSTRIAL COMPLEX, Singapore 389835",
+        "addressValue": "623 ALJUNIED ROAD #02-01, ALJUNIED INDUSTRIAL COMPLEX, Singapore 389835",
         "addressSourceUrl": "https://data.gov.sg/datasets/d_dcda79be4aded5f9e769b8e23ff69b47/view",
-        "place": {
-          "name": "TSM Group Pte Ltd",
-          "cid": "11881757532658058995",
-          "place_id": "ChIJVVUVBZwT2jER88ZnEYZ75KQ",
-          "url": "https://maps.google.com/?cid=11881757532658058995",
-          "address": null,
-          "postal": null,
-          "phone": "+65 6994 6420",
-          "website": "https://tsmgpl.com/",
-          "readVia": "https://www.google.com/search?tbm=map&hl=en&gl=sg&q=TSM+Group+Pte+Ltd+Singapore",
-          "readAt": "2026-10-12T00:31+03:00"
+        "place": null,
+        "geocode": {
+          "source": "OneMap search (onemap.gov.sg)",
+          "url": "https://www.onemap.gov.sg/api/common/elastic/search?searchVal=389835&returnGeom=Y&getAddrDetails=Y&pageNum=1",
+          "matched": "623 ALJUNIED ROAD ALJUNIED INDUSTRIAL COMPLEX SINGAPORE 389835",
+          "postal": "389835",
+          "blk": "623",
+          "building": "ALJUNIED INDUSTRIAL COMPLEX",
+          "capturedAt": "2026-10-13",
+          "basis": "published address (address.sourceUrl, re-read 2026-10-13); same postal code and block; single OneMap result"
         },
-        "geocode": null,
-        "latitude": null,
-        "longitude": null
+        "latitude": 1.324908430905462,
+        "longitude": 103.8793840555767
       },
       "selfReportedRating": null,
       "reviewSources": [
