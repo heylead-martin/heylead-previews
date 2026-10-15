@@ -383,6 +383,16 @@
   ],
   "blog": [
     {
+      "hero": "plumbing",
+      "slug": "home-maintenance-calendar",
+      "path": "/roster/blog/home-maintenance-calendar/",
+      "words": 1009,
+      "faqs": 3,
+      "ctas": 2,
+      "sources": 2
+    },
+    {
+      "hero": "aircon",
       "slug": "aircon-chemical-wash-vs-general-servicing",
       "path": "/roster/blog/aircon-chemical-wash-vs-general-servicing/",
       "words": 1105,
@@ -391,6 +401,16 @@
       "sources": 2
     },
     {
+      "hero": "plumbing",
+      "slug": "bathroom-maintenance-to-prevent-leaks-and-chokes",
+      "path": "/roster/blog/bathroom-maintenance-to-prevent-leaks-and-chokes/",
+      "words": 1007,
+      "faqs": 3,
+      "ctas": 2,
+      "sources": 2
+    },
+    {
+      "hero": "plumbing",
       "slug": "ceiling-leak-what-to-do",
       "path": "/roster/blog/ceiling-leak-what-to-do/",
       "words": 956,
@@ -399,6 +419,34 @@
       "sources": 2
     },
     {
+      "hero": "plumbing",
+      "slug": "emergency-plumbing-at-night",
+      "path": "/roster/blog/emergency-plumbing-at-night/",
+      "words": 1188,
+      "faqs": 3,
+      "ctas": 2,
+      "sources": 2
+    },
+    {
+      "hero": "electrician",
+      "slug": "handyman-or-specialist",
+      "path": "/roster/blog/handyman-or-specialist/",
+      "words": 994,
+      "faqs": 3,
+      "ctas": 2,
+      "sources": 2
+    },
+    {
+      "hero": "handyman",
+      "slug": "hdb-or-condo-repairs-who-to-ask",
+      "path": "/roster/blog/hdb-or-condo-repairs-who-to-ask/",
+      "words": 974,
+      "faqs": 3,
+      "ctas": 2,
+      "sources": 3
+    },
+    {
+      "hero": "cleaning",
       "slug": "home-cleaning-checklist",
       "path": "/roster/blog/home-cleaning-checklist/",
       "words": 952,
@@ -407,6 +455,7 @@
       "sources": 1
     },
     {
+      "hero": "electrician",
       "slug": "home-electrical-safety-checklist",
       "path": "/roster/blog/home-electrical-safety-checklist/",
       "words": 998,
@@ -415,12 +464,103 @@
       "sources": 3
     },
     {
+      "hero": "cleaning",
+      "slug": "how-to-clean-a-shower-curtain",
+      "path": "/roster/blog/how-to-clean-a-shower-curtain/",
+      "words": 985,
+      "faqs": 3,
+      "ctas": 2,
+      "sources": 1
+    },
+    {
+      "hero": "handyman",
+      "slug": "how-to-compare-home-service-quotes",
+      "path": "/roster/blog/how-to-compare-home-service-quotes/",
+      "words": 1055,
+      "faqs": 3,
+      "ctas": 2,
+      "sources": 2
+    },
+    {
+      "hero": "aircon",
+      "slug": "prepare-home-for-aircon-servicing",
+      "path": "/roster/blog/prepare-home-for-aircon-servicing/",
+      "words": 1141,
+      "faqs": 3,
+      "ctas": 2,
+      "sources": 1
+    },
+    {
+      "hero": "plumbing",
+      "slug": "low-water-pressure-at-home",
+      "path": "/roster/blog/low-water-pressure-at-home/",
+      "words": 1082,
+      "faqs": 3,
+      "ctas": 2,
+      "sources": 1
+    },
+    {
+      "hero": "cleaning",
+      "slug": "new-home-move-in-checklist",
+      "path": "/roster/blog/new-home-move-in-checklist/",
+      "words": 947,
+      "faqs": 3,
+      "ctas": 3,
+      "sources": 2
+    },
+    {
+      "hero": "electrician",
+      "slug": "planning-electrical-points-before-renovation",
+      "path": "/roster/blog/planning-electrical-points-before-renovation/",
+      "words": 1071,
+      "faqs": 3,
+      "ctas": 2,
+      "sources": 2
+    },
+    {
+      "hero": "handyman",
+      "slug": "questions-to-ask-before-hiring-a-handyman",
+      "path": "/roster/blog/questions-to-ask-before-hiring-a-handyman/",
+      "words": 960,
+      "faqs": 3,
+      "ctas": 2,
+      "sources": 2
+    },
+    {
+      "hero": "aircon",
+      "slug": "repair-or-replace-old-aircon",
+      "path": "/roster/blog/repair-or-replace-old-aircon/",
+      "words": 1007,
+      "faqs": 3,
+      "ctas": 2,
+      "sources": 2
+    },
+    {
+      "hero": "plumbing",
       "slug": "signs-you-need-a-plumber",
       "path": "/roster/blog/signs-you-need-a-plumber/",
       "words": 1039,
       "faqs": 3,
       "ctas": 2,
       "sources": 2
+    },
+    {
+      "hero": "cleaning",
+      "slug": "sofa-and-curtain-care-between-cleans",
+      "path": "/roster/blog/sofa-and-curtain-care-between-cleans/",
+      "words": 1029,
+      "faqs": 3,
+      "ctas": 2,
+      "sources": 1
+    },
+    {
+      "hero": "electrician",
+      "slug": "water-heater-safety-warning-signs",
+      "path": "/roster/blog/water-heater-safety-warning-signs/",
+      "words": 1024,
+      "faqs": 3,
+      "ctas": 2,
+      "sources": 3
     }
   ]
 }

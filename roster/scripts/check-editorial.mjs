@@ -75,8 +75,14 @@ for(const b of blog){
   }
   assert.ok(!article.match(/\[VERIFY\]|lorem ipsum|guaranteed|best in singapore|cheapest/i),`${b.slug}: unsupported claims`);
   for(const t of article.matchAll(/<table data-sourced-rates="([^"]+)">/g))assert.ok(b.markdown.includes(`[[rates ${t[1]}]]`));
-  blogResults.push({slug:b.slug,path:b.path,words:b.words,faqs:b.faqs.length,ctas:ctas.length,sources:b.sources.length});
+  const hero=JSON.parse(await readFile(`${root}/data/hero-photos.json`,'utf8'))[b.hero||b.trade];
+  assert.ok(hero&&html.includes(`src="${hero.sizes[640].src}"`)&&html.includes(`Illustrative photo: ${hero.photographer} / Pexels`),`${b.slug}: hero photo and its credit`);
+  blogResults.push({hero:b.hero||b.trade,slug:b.slug,path:b.path,words:b.words,faqs:b.faqs.length,ctas:ctas.length,sources:b.sources.length});
 }
+// Blog posts must not repeat a guide's topic or each other's headline, and should vary the hero photos.
+for(const b of blog){assert.ok(!guides.some(g=>g.h1.toLowerCase()===b.h1.toLowerCase()||g.slug.endsWith('/'+b.slug)),`${b.slug}: duplicates a guide`);}
+assert.equal(new Set(blog.map(b=>b.h1.toLowerCase())).size,blog.length,'Duplicate blog headline');
+if(blog.length>=10)assert.ok(new Set(blogResults.map(b=>b.hero)).size>=4,'Vary blog hero photos across the reviewed set');
 const home=await readFile(`${root}/index.html`,'utf8');
 for(const g of guides.filter(g=>g.hub))assert.ok(home.includes(`href="${g.path}"`));
 await writeFile(`${root}/data/editorial-audit.json`,JSON.stringify({checked:'2026-10-12',corePages:results.length,totalWords:results.reduce((s,r)=>s+r.words,0),methodPageWords:wordCount(method),pages:results,blog:blogResults},null,2)+'\n');

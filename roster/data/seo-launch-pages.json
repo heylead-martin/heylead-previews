@@ -1067,13 +1067,38 @@
       "kind": "blog-index"
     },
     {
+      "path": "/roster/blog/home-maintenance-calendar/",
+      "words": 1009,
+      "kind": "blog"
+    },
+    {
       "path": "/roster/blog/aircon-chemical-wash-vs-general-servicing/",
       "words": 1105,
       "kind": "blog"
     },
     {
+      "path": "/roster/blog/bathroom-maintenance-to-prevent-leaks-and-chokes/",
+      "words": 1007,
+      "kind": "blog"
+    },
+    {
       "path": "/roster/blog/ceiling-leak-what-to-do/",
       "words": 956,
+      "kind": "blog"
+    },
+    {
+      "path": "/roster/blog/emergency-plumbing-at-night/",
+      "words": 1188,
+      "kind": "blog"
+    },
+    {
+      "path": "/roster/blog/handyman-or-specialist/",
+      "words": 994,
+      "kind": "blog"
+    },
+    {
+      "path": "/roster/blog/hdb-or-condo-repairs-who-to-ask/",
+      "words": 974,
       "kind": "blog"
     },
     {
@@ -1087,8 +1112,58 @@
       "kind": "blog"
     },
     {
+      "path": "/roster/blog/how-to-clean-a-shower-curtain/",
+      "words": 985,
+      "kind": "blog"
+    },
+    {
+      "path": "/roster/blog/how-to-compare-home-service-quotes/",
+      "words": 1055,
+      "kind": "blog"
+    },
+    {
+      "path": "/roster/blog/prepare-home-for-aircon-servicing/",
+      "words": 1141,
+      "kind": "blog"
+    },
+    {
+      "path": "/roster/blog/low-water-pressure-at-home/",
+      "words": 1082,
+      "kind": "blog"
+    },
+    {
+      "path": "/roster/blog/new-home-move-in-checklist/",
+      "words": 947,
+      "kind": "blog"
+    },
+    {
+      "path": "/roster/blog/planning-electrical-points-before-renovation/",
+      "words": 1071,
+      "kind": "blog"
+    },
+    {
+      "path": "/roster/blog/questions-to-ask-before-hiring-a-handyman/",
+      "words": 960,
+      "kind": "blog"
+    },
+    {
+      "path": "/roster/blog/repair-or-replace-old-aircon/",
+      "words": 1007,
+      "kind": "blog"
+    },
+    {
       "path": "/roster/blog/signs-you-need-a-plumber/",
       "words": 1039,
+      "kind": "blog"
+    },
+    {
+      "path": "/roster/blog/sofa-and-curtain-care-between-cleans/",
+      "words": 1029,
+      "kind": "blog"
+    },
+    {
+      "path": "/roster/blog/water-heater-safety-warning-signs/",
+      "words": 1024,
       "kind": "blog"
     }
   ]

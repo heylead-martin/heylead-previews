@@ -31,7 +31,7 @@ export function parseBlog(markdown, slug, {renderRates}) {
     if((m=chunk.match(/^\[\[cta (\/roster\/[a-z0-9/-]*) \| ([^|]+) \| ([^\]]+)\]\]$/))){ctas++;return `<div class="guide-cta blog-cta" data-blog-cta><p class="kicker">NEXT STEP</p><p>${inline(m[3].trim())}</p><a class="btn btn-solid" href="${m[1]}">${escapeHtml(m[2].trim())} <span aria-hidden="true">→</span></a></div>`;}
     if((m=chunk.match(/^\[\[rates ([A-Za-z0-9-]+)\]\]$/))){const table=renderRates(m[1]);if(!table)throw new Error(`Blog ${slug}: rate table ${m[1]} has too few companies`);return table;}
     if(chunk.startsWith('[['))throw new Error(`Blog ${slug}: unknown block ${chunk}`);
-    if(chunk.startsWith('## ')){flush();const title=chunk.slice(3).trim(),id=`${slug}-${slugify(title)}`;faq=/questions/i.test(title);toc.push({title,id});return `<h2 id="${id}">${inline(title)}</h2>`;}
+    if(chunk.startsWith('## ')){flush();const title=chunk.slice(3).trim(),id=`${slug}-${slugify(title)}`;faq=/^questions$/i.test(title);toc.push({title,id});return `<h2 id="${id}">${inline(title)}</h2>`;}
     if(chunk.startsWith('### ')){flush();const title=chunk.slice(4).trim();if(faq)question=plainText(title);return `<h3>${inline(title)}</h3>`;}
     if(chunk.startsWith('> ')){const text=chunk.replace(/^> ?/gm,'').replace(/\n/g,' ');const [label,rest]=text.includes(': ')?[text.slice(0,text.indexOf(': ')),text.slice(text.indexOf(': ')+2)]:['Tip',text];return `<aside class="guide-editor-note blog-callout" data-blog-callout><strong>${escapeHtml(label)}</strong><p>${inline(rest)}</p></aside>`;}
     if(chunk.startsWith('- '))return `<ul>${chunk.split('\n').map(s=>`<li>${inline(s.replace(/^- /,''))}</li>`).join('')}</ul>`;
