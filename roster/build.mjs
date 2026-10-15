@@ -1146,7 +1146,7 @@ function renderHubBlog(spec, tradeId) {
 // Official licence lookups. Roster does not show licence status for individual companies.
 const licenceLookups = {
   electrician:[['EMA: search for a licensed electrical worker','https://elise.ema.gov.sg/elise/LEWs.jsp'],['EMA: how to search for or verify a licensed electrical worker','https://www.ema.gov.sg/resources/faqs/worker-licences/electrical-worker-licence/how-do-i-search-for-or-verify-a-licensed-electrical-worker-lew'],['EMA: engaging licensed workers','https://www.ema.gov.sg/consumer-information/electricity/engaging-licensed-workers']],
-  plumbing:[['PUB: licensed plumbers','https://pub.gov.sg/Professionals/Requirements/Licensed-Plumbers'],['PUB: requirements for plumbing works','https://www.pub.gov.sg/Professionals/Requirements/Licensed-Plumbers/Plumbing-Works']]
+  plumbing:[['PUB: licensed plumbers','https://www.pub.gov.sg/Professionals/Requirements/Licensed-Plumbers'],['PUB: requirements for plumbing works','https://www.pub.gov.sg/Professionals/Requirements/Licensed-Plumbers/Plumbing-Works']]
 };
 function renderLicenceLookup(tradeId) {
   const links=licenceLookups[tradeId];if(!links)return '';
