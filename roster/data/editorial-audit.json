@@ -1,7 +1,7 @@
 {
   "checked": "2026-10-12",
-  "corePages": 20,
-  "totalWords": 24884,
+  "corePages": 24,
+  "totalWords": 29578,
   "methodPageWords": 1386,
   "pages": [
     {
@@ -31,7 +31,7 @@
     {
       "id": "AC-04",
       "path": "/roster/aircon/installation/",
-      "words": 1238,
+      "words": 1343,
       "faqs": 4,
       "sourceReferences": 3,
       "updated": "2026-10-12"
@@ -71,7 +71,7 @@
     {
       "id": "CL-04",
       "path": "/roster/home-cleaning/move-out-cleaning/",
-      "words": 1254,
+      "words": 1351,
       "faqs": 4,
       "sourceReferences": 0,
       "updated": "2026-10-12"
@@ -154,6 +154,38 @@
       "words": 1258,
       "faqs": 4,
       "sourceReferences": 4,
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "AC-06",
+      "path": "/roster/aircon/repair/",
+      "words": 1256,
+      "faqs": 4,
+      "sourceReferences": 4,
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "AC-07",
+      "path": "/roster/aircon/leaking-water/",
+      "words": 1137,
+      "faqs": 4,
+      "sourceReferences": 1,
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "CL-05",
+      "path": "/roster/home-cleaning/part-time-cleaner/",
+      "words": 1062,
+      "faqs": 4,
+      "sourceReferences": 1,
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "CL-06",
+      "path": "/roster/home-cleaning/post-renovation-cleaning/",
+      "words": 1037,
+      "faqs": 4,
+      "sourceReferences": 1,
       "updated": "2026-10-12"
     },
     {

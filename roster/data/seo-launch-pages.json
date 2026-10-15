@@ -52,7 +52,7 @@
     {
       "id": "AC-04",
       "path": "/roster/aircon/installation/",
-      "words": 1238,
+      "words": 1343,
       "kind": "guide"
     },
     {
@@ -82,7 +82,7 @@
     {
       "id": "CL-04",
       "path": "/roster/home-cleaning/move-out-cleaning/",
-      "words": 1254,
+      "words": 1351,
       "kind": "guide"
     },
     {
@@ -143,6 +143,30 @@
       "id": "HM-01",
       "path": "/roster/handyman/guide/",
       "words": 1258,
+      "kind": "guide"
+    },
+    {
+      "id": "AC-06",
+      "path": "/roster/aircon/repair/",
+      "words": 1256,
+      "kind": "guide"
+    },
+    {
+      "id": "AC-07",
+      "path": "/roster/aircon/leaking-water/",
+      "words": 1137,
+      "kind": "guide"
+    },
+    {
+      "id": "CL-05",
+      "path": "/roster/home-cleaning/part-time-cleaner/",
+      "words": 1062,
+      "kind": "guide"
+    },
+    {
+      "id": "CL-06",
+      "path": "/roster/home-cleaning/post-renovation-cleaning/",
+      "words": 1037,
       "kind": "guide"
     },
     {
