@@ -24,26 +24,39 @@ for(const rel of manifest) {
  assert.ok(html.includes('content="noindex, nofollow, noarchive"'),rel);
  assert.ok(html.includes('href="/roster/claim-listing/"'),`Missing footer claim link: ${rel}`);
  assert.ok(!/[\u2013\u2014]/.test(html),`Long dash: ${rel}`);
- assert.ok(!/>\s*(?:undefined|null|NaN|N\/A)\s*</.test(html),`Empty data text: ${rel}`);
+ assert.ok(!/\b(?:undefined|null|NaN|LOGO)\b|â€/.test(html),`Invalid generated text: ${rel}`);
+ assert.ok(!/\bsort uses\b/i.test(html),`Obsolete sorting note: ${rel}`);
+ assert.ok(!/\b1 sourced excerpts\b/.test(html),`Singular review excerpt grammar: ${rel}`);
+ assert.ok(!/\b1 units\b/.test(html),`Singular unit grammar: ${rel}`);
+ assert.ok(!/\(\s*(?:as low as|from|at)\s+\)|\b(?:begins at|starts at|from|at)\s+\.(?=[\s<])|,\s*,/.test(html),`Broken price or address text: ${rel}`);
+ const ogImage=html.match(/<meta property="og:image" content="([^"]+)"/)?.[1];
+ if(ogImage)assert.ok(/^https:\/\//.test(ogImage),`Relative share image: ${rel}`);
  const desc=html.match(/<meta name="description" content="([^"]+)"/)[1].replace(/&amp;/g,'&').replace(/&quot;/g,'"').replace(/&lt;/g,'<').replace(/&gt;/g,'>');
  assert.ok(desc.length<=160&&/[.?!)]$/.test(desc),`Description length/ending: ${rel}`);
  assert.ok(!descriptions.has(desc),`Duplicate description: ${rel}`);descriptions.add(desc);
  const title=html.match(/<title>(.*?)<\/title>/)[1];assert.ok(!titles.has(title),`Duplicate title: ${rel}`);titles.add(title);
+ assert.ok(!/data-save=|data-account-form|data-job-matches|data-job-start|data-quote-start|data-quote-steps|class="saved-link"/.test(html),`Parked feature leaked: ${rel}`);
+ assert.ok(!/src="[^"]*(?:accounts\.js|job-results\.js|quote-start\.js)/.test(html),`Parked script leaked: ${rel}`);
  const ld=JSON.parse(html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1]);
+ assert.ok(!/[$★☆]/.test(JSON.stringify(ld)),`Currency or stars in schema: ${rel}`);
  assert.ok(!/"(?:aggregateRating|review|offers|priceRange)"|"@type":"(?:AggregateRating|Review|Offer|Rating)"/.test(JSON.stringify(ld)),`Forbidden schema: ${rel}`);
  if(rel.startsWith('company/')&&!html.includes('data-retired-listing')){
   assert.ok(html.includes('class="listing-logo listing-logo-large'),`Missing logo slot: ${rel}`);
   const record=data.companies.find(c=>rel===`company/${c.slug}/index.html`);
   assert.ok(!html.includes('data-review-preview'),`Sample ratings on live profile: ${rel}`);
-  if(!record.listingDepth.full) assert.ok(html.includes('Limited details')&&!html.includes('data-review-preview'),`Missing compact profile: ${rel}`);
+  if(!record.listingDepth.full) assert.ok(html.includes(record.imported?'Limited details':'Some details unconfirmed')&&!html.includes('data-review-preview'),`Missing compact profile: ${rel}`);
   assert.ok(html.includes('src="/roster/assets/review-preview.mjs?'),`Missing review selector script: ${rel}`);
+  if(record.quoteEvidence){assert.ok(html.includes('Quote on request'),`Missing explicit quote price: ${rel}`);assert.ok(html.includes(record.quoteEvidence.excerpt.replaceAll('&','&amp;').replaceAll('"','&quot;').replaceAll("'",'&#39;').replaceAll('<','&lt;').replaceAll('>','&gt;')),`Missing quote excerpt: ${rel}`);assert.ok(!html.includes('>Ask for a quote<'),`Generic quote replacing sourced statement: ${rel}`);}
+  if(record.selfReportedRating)assert.ok(html.includes('The company says it has a '),`Missing self-reported rating: ${rel}`);
+  if(record.selfReportedRating?.count_conflict===true)assert.ok(/The company says it has a [\d.]+ rating on its own site; its pages give different review counts\./.test(html)&&!/The company says it has a [\d.]+ rating from /.test(html),`Conflicting self-reported count shown: ${rel}`);
+  for(const image of html.matchAll(/data-company-logo src="([^"]+)"/g))assert.ok(image[1].startsWith('/roster/assets/logos/'),`Hotlinked logo: ${rel}`);
   const intro=html.match(/<p class="company-intro">(.*?)<\/p>/)?.[1]||'';
   assert.ok(intro&&!/Its website mentions|Its site says|Roster found no/.test(intro),`Research wording remains: ${rel}`);
   assert.ok(!JSON.stringify(ld).includes('sample reviews'),`Sample reviews leaked into schema: ${rel}`);
   const business=ld['@graph'].find(x=>String(x['@id']).endsWith('#business'));assert.ok(business?.telephone&&business.sameAs?.length,`Missing business schema: ${rel}`);
   if(presentation[record.slug]?.logoAsset)assert.ok(html.includes(`src="${presentation[record.slug].logoAsset.src}"`),`Missing bundled logo: ${rel}`);
   assert.ok(!html.includes('No dated excerpts')&&!html.includes('rating-value'),`Empty review block or bare score: ${rel}`);
-  const ids=[...html.matchAll(/<section class="profile-section" id="([^"]+)"/g)].map(m=>m[1]);assert.equal(ids[0],'pricing');assert.equal(ids[1],'overview');assert.equal(ids[2],'contact');if(ids.includes('reviews'))assert.equal(ids.at(-2),'reviews');
+  const ids=[...html.matchAll(/<section class="profile-section" id="([^"]+)"/g)].map(m=>m[1]);assert.equal(ids[0],'pricing');const hasAreas=!!record.enrichment?.serviceLocations?.length;assert.equal(ids.includes('areas-served'),hasAreas);assert.deepEqual(ids.slice(0,hasAreas?4:3),hasAreas?['pricing','areas-served','overview','contact']:['pricing','overview','contact']);if(ids.includes('reviews'))assert.equal(ids.at(-2),'reviews');
   for(const m of html.matchAll(/<iframe[^>]+src="([^"]+)"/g)){const src=m[1].replaceAll('&amp;','&');const u=new URL(src);if(u.searchParams.has('q'))assert.ok(!/#\s*\d|\bUnit\s+\d/i.test(u.searchParams.get('q')),`Unit in map: ${rel}`);}
  }
 }
@@ -74,9 +87,11 @@ for(const excluded of report.excluded.filter(c=>c.curated))assert.ok(!pages.has(
 const categories={aircon:'aircon-servicing',plumbing:'plumbing',electrician:'electrician',handyman:'handyman',cleaning:'home-cleaning'};
 for(const [id,slug] of Object.entries(categories)){
  const index={companies:decodeCatalogue(await load(`data/index/${id}.json`))};assert.equal(index.companies.length,report.byTrade[id].published);assert.ok(index.companies.every(c=>c.category===id),`Wrong primary trade in ${id}`);
- for(const c of index.companies){assert.equal(c.ratingValue,c.average?.value??null);assert.equal(c.ratingCount,c.average?.count||0);}
+ for(const c of index.companies){assert.equal(c.ratingValue,c.average?.value??null);assert.equal(c.ratingCount,c.average?.count||0);const company=data.companies.find(row=>row.slug===c.slug);assert.deepEqual(c.serviceAreas,[...new Set(company.enrichment.serviceLocations.map(e=>e.name))],`Coverage index differs from evidence: ${c.slug}`);}
  const directory=pages.get(slug+'/index.html');
  assert.ok(directory.includes('Minimum average rating'));
+ assert.equal((directory.match(/id="service-area"/g)||[]).length,1,'One service coverage picker per directory');
+ assert.ok(!directory.includes('Business location'),'Office-address filter must not duplicate coverage');
  const highlighted=[...directory.matchAll(/class="business-card catalogue-card"[^>]+data-slug="([^"]+)"/g)].map(m=>m[1]);
  assert.ok(highlighted.length<=8);assert.ok(highlighted.every(s=>index.companies.find(c=>c.slug===s).fullProfile));
  assert.ok(directory.includes('Other companies'));
@@ -84,4 +99,4 @@ for(const [id,slug] of Object.entries(categories)){
 }
 assert.equal(Object.values(report.byTrade).reduce((n,t)=>n+t.published,0),report.publishedCount,'Primary-trade totals must not overlap');
 const all=await load('data/index/all.json');assert.equal(all.companies.length,data.companies.length);
-console.log(`PASS: ${pages.size} pages, all local links/fragments, unique metadata, schema restrictions, publication counts and 16 original write-ups.`);
+console.log(`PASS: ${pages.size} pages, all local links/fragments, unique metadata, schema restrictions, publication counts and ${Object.keys(old).length} original write-ups.`);

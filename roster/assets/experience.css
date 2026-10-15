@@ -164,7 +164,7 @@
 .company-page .service-explanation>p,.company-page .service-booking-question>p{font-size:16px;line-height:1.8;font-weight:400;color:var(--ink-soft);margin:0;max-width:68ch}
 .service-explainer .service-explanation{padding-top:18px}
 .service-booking-question{margin-top:19px;padding:16px 0 0;border-top:1px solid #d8e3d0}
-.company-page .service-booking-question h4{font-size:14px;line-height:1.6;margin:0 0 6px;color:var(--green-ink);font-weight:600}
+.company-page .service-booking-question h3{font-size:14px;line-height:1.6;margin:0 0 6px;color:var(--green-ink);font-weight:600}
 .company-page .service-list-help{font-size:14px;line-height:1.8;color:var(--muted);margin:0 0 16px}
 .service-price-list{border:1px solid var(--rule);border-radius:12px;overflow:hidden}
 .service-price-list-heading,.service-rate>summary{display:grid;grid-template-columns:minmax(0,1fr) minmax(130px,210px) 34px;gap:18px;align-items:center}

@@ -1,1 +1,8 @@
 __pycache__/
+node_modules/
+.env
+.env.*
+!.env.example
+accounts.local.json
+accounts.public.json
+accounts.public.json.tmp

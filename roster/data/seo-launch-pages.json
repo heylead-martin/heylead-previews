@@ -1,0 +1,317 @@
+{
+  "status": "preview-noindex",
+  "canonicalOrigin": "https://previews.heylead.com/roster",
+  "updated": "2026-10-12",
+  "pages": [
+    {
+      "path": "/roster/",
+      "kind": "home"
+    },
+    {
+      "path": "/roster/how-it-works/",
+      "kind": "method"
+    },
+    {
+      "path": "/roster/aircon-servicing/",
+      "kind": "directory"
+    },
+    {
+      "path": "/roster/plumbing/",
+      "kind": "directory"
+    },
+    {
+      "path": "/roster/electrician/",
+      "kind": "directory"
+    },
+    {
+      "path": "/roster/handyman/",
+      "kind": "directory"
+    },
+    {
+      "path": "/roster/home-cleaning/",
+      "kind": "directory"
+    },
+    {
+      "id": "AC-01",
+      "path": "/roster/aircon/",
+      "words": 1267,
+      "kind": "guide"
+    },
+    {
+      "id": "AC-02",
+      "path": "/roster/aircon-servicing/guide/",
+      "words": 1258,
+      "kind": "guide"
+    },
+    {
+      "id": "AC-03",
+      "path": "/roster/aircon/servicing-price/",
+      "words": 1259,
+      "kind": "guide"
+    },
+    {
+      "id": "AC-04",
+      "path": "/roster/aircon/installation/",
+      "words": 1343,
+      "kind": "guide"
+    },
+    {
+      "id": "AC-05",
+      "path": "/roster/aircon/types/",
+      "words": 1221,
+      "kind": "guide"
+    },
+    {
+      "id": "CL-01",
+      "path": "/roster/home-cleaning/guide/",
+      "words": 1273,
+      "kind": "guide"
+    },
+    {
+      "id": "CL-02",
+      "path": "/roster/home-cleaning/deep-cleaning/",
+      "words": 1249,
+      "kind": "guide"
+    },
+    {
+      "id": "CL-03",
+      "path": "/roster/home-cleaning/sofa-carpet-cleaning/",
+      "words": 1259,
+      "kind": "guide"
+    },
+    {
+      "id": "CL-04",
+      "path": "/roster/home-cleaning/move-out-cleaning/",
+      "words": 1351,
+      "kind": "guide"
+    },
+    {
+      "id": "PL-01",
+      "path": "/roster/plumbing/guide/",
+      "words": 1240,
+      "kind": "guide"
+    },
+    {
+      "id": "PL-02",
+      "path": "/roster/plumbing/choked-drain/",
+      "words": 1276,
+      "kind": "guide"
+    },
+    {
+      "id": "PL-03",
+      "path": "/roster/plumbing/toilet-repair/",
+      "words": 1374,
+      "kind": "guide"
+    },
+    {
+      "id": "PL-04",
+      "path": "/roster/plumbing/leak-repair/",
+      "words": 1215,
+      "kind": "guide"
+    },
+    {
+      "id": "PL-05",
+      "path": "/roster/plumbing/water-heater/",
+      "words": 1214,
+      "kind": "guide"
+    },
+    {
+      "id": "EL-01",
+      "path": "/roster/electrician/guide/",
+      "words": 1250,
+      "kind": "guide"
+    },
+    {
+      "id": "EL-02",
+      "path": "/roster/electrician/24-hour/",
+      "words": 1266,
+      "kind": "guide"
+    },
+    {
+      "id": "EL-03",
+      "path": "/roster/electrician/hdb/",
+      "words": 1220,
+      "kind": "guide"
+    },
+    {
+      "id": "EL-04",
+      "path": "/roster/electrician/wiring/",
+      "words": 1229,
+      "kind": "guide"
+    },
+    {
+      "id": "HM-01",
+      "path": "/roster/handyman/guide/",
+      "words": 1258,
+      "kind": "guide"
+    },
+    {
+      "id": "AC-06",
+      "path": "/roster/aircon/repair/",
+      "words": 1256,
+      "kind": "guide"
+    },
+    {
+      "id": "AC-07",
+      "path": "/roster/aircon/leaking-water/",
+      "words": 1137,
+      "kind": "guide"
+    },
+    {
+      "id": "CL-05",
+      "path": "/roster/home-cleaning/part-time-cleaner/",
+      "words": 1062,
+      "kind": "guide"
+    },
+    {
+      "id": "CL-06",
+      "path": "/roster/home-cleaning/post-renovation-cleaning/",
+      "words": 1037,
+      "kind": "guide"
+    },
+    {
+      "id": "CL-07",
+      "path": "/roster/home-cleaning/steam-cleaning/",
+      "words": 1074,
+      "kind": "guide"
+    },
+    {
+      "id": "PL-06",
+      "path": "/roster/plumbing/instant-water-heater/",
+      "words": 1011,
+      "kind": "guide"
+    },
+    {
+      "id": "CL-08",
+      "path": "/roster/home-cleaning/office-cleaning/",
+      "words": 1101,
+      "kind": "guide"
+    },
+    {
+      "id": "HM-04",
+      "path": "/roster/handyman/tv-mounting/",
+      "words": 1113,
+      "kind": "guide"
+    },
+    {
+      "id": "HM-03",
+      "path": "/roster/handyman/painting/",
+      "words": 1029,
+      "kind": "guide"
+    },
+    {
+      "id": "CL-09",
+      "path": "/roster/home-cleaning/mattress-cleaning/",
+      "words": 1057,
+      "kind": "guide"
+    },
+    {
+      "id": "AC-08",
+      "path": "/roster/aircon-servicing/chemical-overhaul/",
+      "words": 1045,
+      "kind": "guide"
+    },
+    {
+      "id": "AC-09",
+      "path": "/roster/aircon-servicing/condenser-cleaning/",
+      "words": 1033,
+      "kind": "guide"
+    },
+    {
+      "id": "AC-10",
+      "path": "/roster/aircon-servicing/how-often-service-aircon/",
+      "words": 1040,
+      "kind": "guide"
+    },
+    {
+      "id": "CL-10",
+      "path": "/roster/home-cleaning/curtain-cleaning/",
+      "words": 1027,
+      "kind": "guide"
+    },
+    {
+      "id": "HM-05",
+      "path": "/roster/handyman/furniture-assembly/",
+      "words": 1018,
+      "kind": "guide"
+    },
+    {
+      "id": "EL-05",
+      "path": "/roster/electrician/power-trip/",
+      "words": 1016,
+      "kind": "guide"
+    },
+    {
+      "id": "EL-06",
+      "path": "/roster/electrician/licensed-electrician/",
+      "words": 1003,
+      "kind": "guide"
+    },
+    {
+      "id": "PL-07",
+      "path": "/roster/plumbing/licensed-plumber/",
+      "words": 1011,
+      "kind": "guide"
+    },
+    {
+      "id": "EL-07",
+      "path": "/roster/electrician/light-installation/",
+      "words": 1032,
+      "kind": "guide"
+    },
+    {
+      "id": "HM-06",
+      "path": "/roster/handyman/door-lock-replacement/",
+      "words": 1024,
+      "kind": "guide"
+    },
+    {
+      "id": "HM-07",
+      "path": "/roster/handyman/curtain-installation/",
+      "words": 1014,
+      "kind": "guide"
+    },
+    {
+      "id": "PL-08",
+      "path": "/roster/plumbing/tap-replacement/",
+      "words": 1003,
+      "kind": "guide"
+    },
+    {
+      "id": "EL-08",
+      "path": "/roster/electrician/socket-installation/",
+      "words": 1011,
+      "kind": "guide"
+    },
+    {
+      "id": "PL-09",
+      "path": "/roster/plumbing/basin-installation/",
+      "words": 1048,
+      "kind": "guide"
+    },
+    {
+      "id": "CL-11",
+      "path": "/roster/home-cleaning/ad-hoc-cleaning/",
+      "words": 1036,
+      "kind": "guide"
+    },
+    {
+      "id": "EL-09",
+      "path": "/roster/electrician/db-box-replacement/",
+      "words": 1046,
+      "kind": "guide"
+    },
+    {
+      "id": "CL-12",
+      "path": "/roster/home-cleaning/disinfection/",
+      "words": 1001,
+      "kind": "guide"
+    },
+    {
+      "id": "HM-02",
+      "path": "/roster/handyman/door-window-repair/",
+      "words": 1216,
+      "kind": "guide"
+    }
+  ]
+}
