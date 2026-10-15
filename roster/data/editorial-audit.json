@@ -1,7 +1,7 @@
 {
   "checked": "2026-10-12",
-  "corePages": 43,
-  "totalWords": 49240,
+  "corePages": 47,
+  "totalWords": 53523,
   "methodPageWords": 1386,
   "pages": [
     {
@@ -95,7 +95,7 @@
     {
       "id": "PL-03",
       "path": "/roster/plumbing/toilet-repair/",
-      "words": 1222,
+      "words": 1374,
       "faqs": 4,
       "sourceReferences": 1,
       "updated": "2026-10-12"
@@ -338,6 +338,38 @@
       "words": 1011,
       "faqs": 4,
       "sourceReferences": 3,
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "PL-09",
+      "path": "/roster/plumbing/basin-installation/",
+      "words": 1048,
+      "faqs": 4,
+      "sourceReferences": 2,
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "CL-11",
+      "path": "/roster/home-cleaning/ad-hoc-cleaning/",
+      "words": 1036,
+      "faqs": 4,
+      "sourceReferences": 1,
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "EL-09",
+      "path": "/roster/electrician/db-box-replacement/",
+      "words": 1046,
+      "faqs": 4,
+      "sourceReferences": 2,
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "CL-12",
+      "path": "/roster/home-cleaning/disinfection/",
+      "words": 1001,
+      "faqs": 4,
+      "sourceReferences": 1,
       "updated": "2026-10-12"
     },
     {

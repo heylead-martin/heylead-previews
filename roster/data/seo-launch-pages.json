@@ -100,7 +100,7 @@
     {
       "id": "PL-03",
       "path": "/roster/plumbing/toilet-repair/",
-      "words": 1222,
+      "words": 1374,
       "kind": "guide"
     },
     {
@@ -281,6 +281,30 @@
       "id": "EL-08",
       "path": "/roster/electrician/socket-installation/",
       "words": 1011,
+      "kind": "guide"
+    },
+    {
+      "id": "PL-09",
+      "path": "/roster/plumbing/basin-installation/",
+      "words": 1048,
+      "kind": "guide"
+    },
+    {
+      "id": "CL-11",
+      "path": "/roster/home-cleaning/ad-hoc-cleaning/",
+      "words": 1036,
+      "kind": "guide"
+    },
+    {
+      "id": "EL-09",
+      "path": "/roster/electrician/db-box-replacement/",
+      "words": 1046,
+      "kind": "guide"
+    },
+    {
+      "id": "CL-12",
+      "path": "/roster/home-cleaning/disinfection/",
+      "words": 1001,
       "kind": "guide"
     },
     {
