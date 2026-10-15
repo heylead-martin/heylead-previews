@@ -147,18 +147,20 @@ Local work on `service-areas-1253`. No push, deployment, account activation or S
 
 Every new page uses the existing guide pipeline (at least 1,000 words, four FAQs, noindex). Rate tables list one sourced, non-promotional rate per company with company, source and capture date, and appear only when at least three companies publish a matching rate. Ranges are shown only for the most common unit.
 
-- Guides added: aircon repair, aircon leaking water, chemical overhaul, condenser cleaning, how often to service aircon, part-time cleaners, post-renovation cleaning, steam cleaning, office cleaning, mattress cleaning, curtain cleaning, instant water heaters, licensed plumbers, tap replacement, power trips, licensed electricians, light installation, socket installation, house painting, TV mounting, furniture assembly, door locks and curtain installation.
+- Guides added: aircon repair, aircon leaking water, chemical overhaul, condenser cleaning, how often to service aircon, part-time cleaners, post-renovation cleaning, steam cleaning, office cleaning, mattress cleaning, curtain cleaning, ad hoc cleaning, home disinfection, instant water heaters, licensed plumbers, tap replacement, basin installation, power trips, licensed electricians, light installation, socket installation, DB box replacement, house painting, TV mounting, furniture assembly, door locks and curtain installation.
 - Area pages: `/roster/plumbing/woodlands/`, `/roster/plumbing/tampines/` and `/roster/plumbing/yishun/`, listing only companies that name the town, each linked to its coverage source. Every trade hub has an "Areas we serve" section linking 18 towns to the existing coverage filter.
 - Merged into existing pages: chemical wash and gas top-up rates on their intent pages, installation price into the aircon installation guide, end-of-tenancy into the move-out guide, and duplicate hub keywords (cleaning services, plumber near me and similar).
 
+- Final round (50/mo rows with at least three sourced companies): basin installation (10 rates), ad hoc cleaning (10), DB box replacement (5) and home disinfection (3). Toilet flush and cistern repair was merged into the toilet repair guide as a section. Aircon dismantle was dropped: only one company publishes a dismantling rate.
+
 ### Validation
 
-791 pages. 97 JavaScript tests and 15 Python tests pass. `check-site.mjs` passes with all internal links and fragments; `check-editorial.mjs` passes for 43 guides and 49,240 words. Largest trade payload: aircon at 241.5 KB of HTML plus JSON. No browser review of the new pages yet.
+795 pages. 97 JavaScript tests and 15 Python tests pass. `check-site.mjs` passes with all internal links and fragments; `check-editorial.mjs` passes for 47 guides and 53,523 words. Largest trade payload: aircon at about 241 KB of HTML plus JSON. No browser review of the new pages yet.
 
 ### Open items
 
 - Aircon unit size: needs a sourced room-size guide before a page can give sizes.
-- Not built for lack of sourced rates (fewer than three companies): 24-hour plumber, wall drilling, ceiling fan installation, window cleaning, EV chargers, water heater brands (Rheem, Ariston, Joven) and aircon trunking. Most 50/mo rows remain.
+- Not built for lack of sourced rates (fewer than three companies): 24-hour plumber, wall drilling, ceiling fan installation, window cleaning, EV chargers, water heater brands (Rheem, Ariston, Joven), aircon trunking and aircon dismantle. Most 50/mo rows remain.
 - The `,,` address case reported for Go Cleaners and Handyman Fix Pro did not reproduce with r13 data; the code was hardened and a site check added.
 - 338 Aircon's protected original write-up still lists the conflicting counts in "Things to check first". Edit only with approval.
 - CleanBreeze, Ironing Maids and Part-time Home Maid share the Everyworks WhatsApp number but are not in that operator group; next data release.

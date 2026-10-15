@@ -4,10 +4,10 @@ import {fileURLToPath} from 'node:url';
 import {loadGuides,parseGuide,inline,wordCount,editorialSchema} from '../lib/editorial.mjs';
 const root=fileURLToPath(new URL('../',import.meta.url));
 
-test('43 distinct core guides contain substantial copy and matching FAQ schema',async()=>{
+test('47 distinct core guides contain substantial copy and matching FAQ schema',async()=>{
   const guides=await loadGuides(root);
-  assert.equal(guides.length,43);
-  assert.equal(new Set(guides.map(g=>g.path)).size,43);
+  assert.equal(guides.length,47);
+  assert.equal(new Set(guides.map(g=>g.path)).size,47);
   assert.equal(guides.filter(g=>g.directoryPath).length,5);
   for(const g of guides){
     if(g.directoryPath){assert.equal(g.path,g.directoryPath+'guide/');assert.ok(!guides.some(other=>other.path===g.directoryPath));}
