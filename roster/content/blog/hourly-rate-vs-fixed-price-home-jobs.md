@@ -26,9 +26,9 @@ With a fixed price you pay for an agreed result. It is common for clearly define
 
 ## Where surprises come from
 
-Most unexpected bills come from a few familiar sources. Ask about each one before you book.
+Unexpected costs often come from a few familiar sources. Ask about each one before you book.
 
-- **Minimum hours or a minimum charge:** many hourly offers have a minimum session length, so a short task costs the same as a longer one. Fixed-price jobs can also carry a minimum job charge.
+- **Minimum hours or a minimum charge:** some hourly offers have a minimum session length, so a short task costs the same as a longer one. Fixed-price jobs can also carry a minimum job charge.
 - **Travel and call-out charges:** some companies add a charge for travelling to you or for attending at all, separate from the hourly rate or job price.
 - **Materials:** paint, fixings, cleaning products and parts may or may not be included. Ask who supplies them and how they are charged.
 - **Overruns:** on an hourly job, extra time is extra cost. Ask how time is counted, whether it is rounded up and whether the worker will check with you before going past an agreed limit.
@@ -60,7 +60,7 @@ An hourly rate and a fixed price cannot be compared directly. You need to turn b
 - **Ask fixed-price companies what the price includes:** materials, preparation, clean-up and what counts as extra.
 - **Compare totals, not headline rates:** a low hourly rate with a long minimum can cost more than a fixed price for a small job.
 
-Published rates are a useful reference point. These are each company's lowest published painting rate, with the source and the date it was captured. They are advertised rates with conditions, not quotes, and they use a mix of units, such as per room, per wall or per flat, so compare like with like before drawing conclusions.
+Published rates are a useful reference point. These are each company's lowest published painting rate, with the source and the date it was captured. They are advertised rates with conditions, not quotes, and they use a mix of units, so check each source and compare like with like before drawing conclusions.
 
 [[rates HM-03]]
 

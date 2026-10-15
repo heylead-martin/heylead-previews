@@ -59,3 +59,6 @@
 .aircon-matrix tbody tr:nth-child(even) th{background:#f9faf7}
 .map-foot a,.company-facts dd a,.guide-editor-note>a,.crumbs a,.home-snapshot a,.snapshot-table a{display:inline-flex;align-items:center;min-height:24px}
 .price-sample li a{display:inline-flex;align-items:center;min-height:24px}
+.blog-index-jump{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}.blog-index-jump a{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0 14px;border:1px solid var(--rule);border-radius:8px;background:#fff;font-size:14px;text-decoration:none;color:var(--ink)}.blog-index-jump small{color:var(--muted)}
+.hub-blog{margin:40px 0;padding-top:28px;border-top:1px solid var(--rule)}.hub-blog h2{font:500 30px/1.2 var(--serif);color:var(--green-ink);margin:8px 0 10px}.hub-blog ul{list-style:none;padding:0;margin:16px 0}.hub-blog>p a{display:inline-flex;align-items:center;min-height:44px;color:var(--green)}
+.guide-hero>div{min-width:0}.guide-hero-actions .btn{white-space:normal;max-width:100%;text-align:left}.crumbs a{min-width:24px;justify-content:center}

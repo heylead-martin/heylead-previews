@@ -32,6 +32,7 @@ for(const rel of manifest) {
  assert.ok(!/\bsort uses\b/i.test(html),`Obsolete sorting note: ${rel}`);
  assert.ok(!/\b1 sourced excerpts\b/.test(html),`Singular review excerpt grammar: ${rel}`);
  assert.ok(!/\b1 units\b/.test(html),`Singular unit grammar: ${rel}`);
+ assert.ok(!/\bfrom 1 reviews\b|\b1 companies\b|\b1 towns\b/.test(html),`Singular count grammar: ${rel}`);
  assert.ok(!/\(\s*(?:as low as|from|at)\s+\)|\b(?:begins at|starts at|from|at)\s+\.(?=[\s<])|,\s*,/.test(html),`Broken price or address text: ${rel}`);
  const ogImage=html.match(/<meta property="og:image" content="([^"]+)"/)?.[1];
  if(ogImage)assert.ok(/^https:\/\//.test(ogImage),`Relative share image: ${rel}`);

@@ -18,12 +18,12 @@ export function concise(text,max=155) {
   return text.slice(0,max-1).replace(/\s+\S*$/,'').replace(/[,:;.!?]+$/,'')+'.';
 }
 export function ratingFact(c) {
-  if(c.googleRating) {const g=c.googleRating;return {text:`Google Maps: ${g.value.toFixed(1)}${g.count?` from ${g.count.toLocaleString('en-SG')} reviews`:''} (checked ${dateLabel(g.checkedAt)})`,url:g.sourceUrl,value:g.value,count:g.count||0,google:true};}
+  if(c.googleRating) {const g=c.googleRating;return {text:`Google Maps: ${g.value.toFixed(1)}${g.count?` from ${g.count.toLocaleString('en-SG')} ${g.count===1?'review':'reviews'}`:''} (checked ${dateLabel(g.checkedAt)})`,url:g.sourceUrl,value:g.value,count:g.count||0,google:true};}
   const r=c.rating;if(!r||c.selfReportedRating)return null;
   const host=new URL(r.sourceUrl).hostname;
   const google=/(^|\.)(google\.com|maps\.google\.com)$/.test(host);
   const own=c.website?.value&&host.replace(/^www\./,'')===new URL(c.website.value).hostname.replace(/^www\./,'');
-  return {text:`${google?'Google Maps':own?'Company website reports':'Review mirror reports'}: ${r.value.toFixed(1)}${r.count?` from ${r.count.toLocaleString('en-SG')} reviews`:''} (checked 9-10 Oct 2026)`,url:r.sourceUrl,value:google?r.value:null,count:google?r.count||0:0,google};
+  return {text:`${google?'Google Maps':own?'Company website reports':'Review mirror reports'}: ${r.value.toFixed(1)}${r.count?` from ${r.count.toLocaleString('en-SG')} ${r.count===1?'review':'reviews'}`:''} (checked 9-10 Oct 2026)`,url:r.sourceUrl,value:google?r.value:null,count:google?r.count||0:0,google};
 }
 export function structuredHours(hours) {
   if(!hours?.text)return undefined;

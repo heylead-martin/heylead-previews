@@ -10,15 +10,15 @@ updated: 2026-10-15
 
 ## Two ways to keep an aircon serviced
 
-Most aircon companies offer two ways to book routine servicing. You can book each visit when you decide it is due, or you can sign a maintenance contract or package that sets out a number of visits over a period, usually paid upfront or in instalments.
+There are two ways to book routine aircon servicing. You can book each visit when you decide it is due, or you can sign a maintenance contract or package that sets out a number of visits over a period, usually paid upfront or in instalments.
 
-Neither is right for every home. A contract can save you the effort of remembering and rebooking, and some companies price it lower per visit than a single booking. Booking visit by visit keeps you free to change company, skip a visit or switch to a deeper clean when the unit needs one.
+Neither is right for every home. A contract can save you the effort of remembering and rebooking, and it may be priced lower per visit than a single booking; compare the terms to find out. Booking visit by visit keeps you free to change company, skip a visit or switch to a deeper clean when the unit needs one.
 
 This article compares the two, explains what a contract usually lists and gives you questions to ask before you sign. It does not cover how often to service, which the [guide to how often to service your aircon](/roster/aircon-servicing/how-often-service-aircon/) explains, or how to choose a company, which the [aircon servicing guide](/roster/aircon-servicing/guide/) covers.
 
 ## What a maintenance contract usually lists
 
-Contracts differ between companies, so read the actual terms rather than the headline. Most set out the same handful of points in their own words.
+Contracts differ between companies, so read the actual terms rather than the headline. Look for these points in the company's own wording.
 
 - **Number of visits:** how many servicing visits the contract includes and over what period.
 - **Units covered:** which indoor units are included, sometimes listed by room, and whether the outdoor unit is part of each visit.
@@ -55,7 +55,7 @@ Ask whether a visit you cannot make can be rescheduled, how much notice you need
 
 ### Are repairs and gas top-ups included?
 
-Most servicing contracts cover cleaning, not repairs. Ask whether a fault found during a visit is charged separately, whether the contract gives any discount on repairs and whether a gas top-up is included or extra. If the unit is not cooling properly, the [aircon repair guide](/roster/aircon/repair/) explains what a repair visit involves.
+A servicing contract may cover cleaning only. Ask whether a fault found during a visit is charged separately, whether the contract gives any discount on repairs and whether a gas top-up is included or extra. If the unit is not cooling properly, the [aircon repair guide](/roster/aircon/repair/) explains what a repair visit involves.
 
 > Note: A gas top-up is a separate job from servicing. If one is suggested during a contract visit, ask what reading or symptom led to the recommendation and what it will cost before agreeing.
 
@@ -91,12 +91,12 @@ If you live in an HDB flat and the work involves installing or moving units, rea
 
 ### Is an aircon maintenance contract cheaper than booking visits one by one?
 
-Sometimes. Some companies price contract visits lower than single visits, but the saving only holds if you use every visit. Work out the price per visit and per unit, and check what happens to missed visits before you sign.
+It can be, but any saving only holds if you use every visit. Work out the price per visit and per unit, and check what happens to missed visits before you sign.
 
 ### Does a servicing contract cover repairs?
 
-Usually not. Most contracts cover routine cleaning, and repairs or gas top-ups are charged separately, sometimes at a discount. Ask the company to state in writing what is included and what is extra.
+Check the terms. A contract may cover routine cleaning only, with repairs or gas top-ups charged separately. Ask the company to state in writing what is included and what is extra.
 
 ### What happens to my contract if I move house?
 
-It depends on the terms. Some companies let you transfer visits to a new address or to the next occupant, and some do not. Ask about moving, cancellation and refunds before you pay upfront.
+It depends on the terms. Ask whether visits can move to a new address or pass to the next occupant. Ask about moving, cancellation and refunds before you pay upfront.

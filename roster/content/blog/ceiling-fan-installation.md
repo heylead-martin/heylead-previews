@@ -18,7 +18,7 @@ This article covers what to check before you book, who should carry out the work
 
 A few minutes of checking at home makes the conversation with a company much shorter, and helps them bring the right parts on the first visit.
 
-- **Ceiling type:** is the ceiling bare concrete, or is there a false ceiling made of board below it? Concrete ceilings are common in many flats, while false ceilings are common in condominiums and renovated homes.
+- **Ceiling type:** is the ceiling bare concrete, or is there a false ceiling made of board below it?
 - **Ceiling height:** a fan needs enough clearance below the blades for people to walk and reach up safely. Low ceilings may suit a flush-mounted fan, and high ceilings may need an extension rod.
 - **Existing point:** is there already a ceiling point where you want the fan, such as an old fan hook, a fan point or a light point? A new location usually means new wiring, which the [wiring guide](/roster/electrician/wiring/) covers.
 - **Fan weight and size:** check the product details for the weight and the blade span. Larger fans with lights attached are heavier, which matters for the mounting.
@@ -29,7 +29,7 @@ A few minutes of checking at home makes the conversation with a company much sho
 
 ### Concrete ceilings and false ceilings
 
-On a concrete ceiling, the fan is usually hung from a hook or bracket fixed into the slab. On a false ceiling, the board itself is rarely strong enough to carry a moving fan, so the mounting normally needs to reach the structure above, or a support has to be added. Ask the company how they plan to mount the fan on your ceiling type before they arrive, not on the day.
+On a concrete ceiling, the fan is usually hung from a hook or bracket fixed into the slab. On a false ceiling, the board itself may not be strong enough to carry a moving fan, so the mounting may need to reach the structure above, or a support may need to be added. Ask the company how they plan to mount the fan on your ceiling type before they arrive, not on the day.
 
 ## Who should install a ceiling fan
 
@@ -54,7 +54,7 @@ A clear brief helps a company tell you whether the job is straightforward and wh
 - **Photos:** the ceiling spot, the existing point, the old fan and the switch.
 - **Access:** whether a ladder will fit, whether furniture needs moving and any building rules on work hours.
 
-Ask whether the price covers assembly of the fan, mounting, wiring and testing, or only some of these. Some companies supply fans and install them together, while others only install a fan you have bought. Both are common; just make sure you know which one you are booking.
+Ask whether the price covers assembly of the fan, mounting, wiring and testing, or only some of these. Some companies supply fans and install them together, while others only install a fan you have bought. Make sure you know which one you are booking.
 
 If the fan has a light kit, ask whether it needs any extra wiring or a separate switch, and whether the company will test both the fan and the light before leaving.
 
@@ -73,13 +73,13 @@ Questions worth asking before the visit:
 
 > Note: If the fan wobbles after installation, switch it off and ask the company to come back. Do not keep using a fan that shakes noticeably.
 
-There is no published rate table for fan installation here, since companies price it in very different ways, often depending on the fan, the ceiling and whether removal is needed. Ask for a written quote that lists what is included, and compare like with like.
+Roster does not have enough comparable published rates for fan installation to show a table. Prices can depend on the fan, the ceiling and whether removal is needed. Ask for a written quote that lists what is included, and compare like with like.
 
 [[cta /roster/electrician/punggol/ | See electricians serving Punggol | Area pages list the electricians that name your town on their own websites.]]
 
 ## Choosing who to call
 
-For most households, the decision comes down to whether you already have the fan and how much wiring is involved. If you have bought a fan and there is a working fan point, a fan installer or electrician can usually handle the job in one visit. If you need a new point, a new switch or work on a false ceiling, a licensed electrician who has seen your photos is the safer choice.
+Often, the decision comes down to whether you already have the fan and how much wiring is involved. If you have bought a fan and there is a working fan point, a fan installer or electrician can usually handle the job in one visit. If you need a new point, a new switch or work on a false ceiling, a licensed electrician who has seen your photos is the safer choice.
 
 You can compare electricians, their published prices and the areas they say they cover on the [electrician hub](/roster/electrician/), or start from an area page such as [electricians serving Punggol](/roster/electrician/punggol/) to build a shortlist close to home.
 
@@ -89,7 +89,7 @@ You can compare electricians, their published prices and the areas they say they
 
 ### Can I install a ceiling fan on a false ceiling?
 
-Often yes, but the board in a false ceiling is rarely strong enough to carry a moving fan by itself. The mounting usually needs to reach the structure above, or a support has to be added, so ask the company how they plan to mount it before the visit.
+Often yes, but the board in a false ceiling may not be strong enough to carry a moving fan by itself. The mounting may need to reach the structure above, or a support has to be added, so ask the company how they plan to mount it before the visit.
 
 ### Does a ceiling fan need a licensed electrician?
 
