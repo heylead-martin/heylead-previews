@@ -1004,6 +1004,11 @@ const guideEvidence = {
   'AC-09':{trade:'aircon',match:/condenser|outdoor unit clean/i,exclude:/tray|gas level|fan ?coil|overhaul|promotion|servicing,/i,unit:'per unit',title:'Published condenser cleaning rates',noun:'condenser cleaning'},
   'CL-10':{trade:'cleaning',match:/curtain/i,exclude:/install|track|rod|blind/i,title:'Published curtain cleaning rates',noun:'curtain cleaning'},
   'HM-05':{trade:'handyman',match:/assembl|ikea/i,exclude:/handyman help|starting prices/i,title:'Published furniture assembly rates',noun:'furniture assembly'},
+  'EL-07':{trade:'electrician',match:/light|downlight/i,exclude:/repair|fan/i,title:'Published light installation rates',noun:'light installation'},
+  'EL-08':{trade:'electrician',serviceOnly:true,match:/socket|power point/i,exclude:/isolator|hob|oven|water heater|aircon/i,title:'Published socket and power point rates',noun:'socket installation'},
+  'HM-06':{trade:'handyman',serviceOnly:true,match:/\block/i,exclude:/exclude lock|door repair|window repair/i,title:'Published lock replacement and repair rates',noun:'lock'},
+  'HM-07':{trade:'handyman',serviceOnly:true,match:/curtain|blind/i,exclude:/tv bracket/i,title:'Published curtain and blind installation rates',noun:'curtain installation'},
+  'PL-08':{trade:'plumbing',serviceOnly:true,match:/\btap\b|faucet|mixer/i,exclude:/washing machine/i,title:'Published tap replacement and repair rates',noun:'tap'},
   'CL-09':{trade:'cleaning',match:/mattress/i,title:'Published mattress cleaning rates',noun:'mattress cleaning'},
   'HM-03':{trade:'handyman',match:/paint/i,title:'Published painting rates',noun:'painting'},
   'HM-04':{trade:'handyman',match:/\btv\b|television/i,title:'Published TV mounting rates',noun:'TV mounting'},
@@ -1013,7 +1018,8 @@ const guideEvidence = {
 };
 function sourcedRates(spec) {
   return publishedCompanies.filter(c=>c.category===spec.trade).flatMap(c=>{
-    const lines=(c.enrichment?.priceLines||[]).filter(p=>spec.match.test(`${p.service} ${p.job||''}`)&&!(spec.exclude?.test(`${p.service} ${p.job||''}`))&&Number.isFinite(p.amount_sgd)&&p.amount_sgd>0&&!p.indicative&&!p.promo&&/^https?:\/\//.test(p.sourceUrl||'')&&/^\d{4}-\d{2}-\d{2}/.test(p.capturedAt||'')&&(!spec.unit||p.unit===spec.unit)).sort((a,b)=>a.amount_sgd-b.amount_sgd);
+    const text=p=>spec.serviceOnly?p.service:`${p.service} ${p.job||''}`;
+    const lines=(c.enrichment?.priceLines||[]).filter(p=>spec.match.test(text(p))&&!(spec.exclude?.test(text(p)))&&Number.isFinite(p.amount_sgd)&&p.amount_sgd>0&&!p.indicative&&!p.promo&&/^https?:\/\//.test(p.sourceUrl||'')&&/^\d{4}-\d{2}-\d{2}/.test(p.capturedAt||'')&&(!spec.unit||p.unit===spec.unit)).sort((a,b)=>a.amount_sgd-b.amount_sgd);
     return lines.length?[{company:c,line:lines[0]}]:[];
   }).sort((a,b)=>a.line.amount_sgd-b.line.amount_sgd);
 }

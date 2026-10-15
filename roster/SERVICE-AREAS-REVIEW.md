@@ -118,3 +118,49 @@ Validation: rebuild 765 pages / 719 profiles; 95 JavaScript tests and 15 Python 
 The renderer also supports an explicit `self_reported_rating.count_conflict: true`, displaying the company-claimed rating with a statement that its pages give different counts, instead of an exact count. Missing counts have no invented total. This support is ready for the next data release; no current record was marked conflicting automatically.
 
 Browser follow-up: Repair.sg and Direct Plumber count wording and Sureclean/1st Electrical source disclosures checked at 1366 x 900; Repair.sg checked at 390 x 844. No horizontal overflow. Screenshot: `../../review-20261014/repair-sg-mobile.jpg`. See `GROK-REVIEW-FOLLOWUP-20261014.md` for the next-release evidence and field requirements.
+
+
+## Release r13 import, fixes and new content: 15 October 2026
+
+Local work on `service-areas-1253`. No push, deployment, account activation or Supabase change. This section summarises the rounds of work done today.
+
+### Import of `companies-20261014-1546.json`
+
+- Release SHA256 `960ac87d0ff724e39c14a18f3acd361df58d23af3886c3d35d1a0a8e93e5421b` and logo bundle SHA256 `5e276c9507b4b1fb962392bf49dc8d855266561efe6b8a0ffff66165fca146fc` matched their sidecars before import.
+- Published profiles: 717 (was 719). Aircon 224, plumbing 92, electrician 112, handyman 97, cleaning 192. Full / compact 262 / 455.
+- Withheld: SIGNATURE ENGINEERING (`flash-aircon`, `website-not-company-site`) and Reliable Electrical Services (no sourced address). Both URLs now show the existing "listing unavailable" page.
+- Map pins after a full `verify-map-pins.py` rerun: 709 verified, 8 address-only (ARAS, Ezycontractors, GD Plumbing, Handytech SG, Kiasu Plumber, LS Plumber, MY Plumber, PS Home Maintenance). OneMap-verified pins rose from 39 to 59, so all 20 proposed pins verified.
+- Logos: 502 real, 215 initials. cleanLAD, HelperGo and RenoExpert added.
+- 338 Aircon shows its self-reported rating with no count ("its pages give different review counts"). Direct Plumber shows `3,388+`, Repair.sg `more than 3,000`.
+
+### Site fixes
+
+- Price labels: amounts stripped by the release ("begins at .", "(as low as )", "Frm") and mid-word truncations are tidied at render time by `tidyPriceLabel()`; stored data and excerpts are unchanged. Unit-tier labels in rate tables fall back to the job name.
+- Grammar: "1 unit", "Minimum 1 unit", sentence-case unit notes.
+- Parked features: public copy no longer describes saved lists, quote requests or matching as available; parked routes have "not available yet" titles and descriptions.
+- Profiles: single "No ratings found yet" sentence, "Some details unconfirmed" banner on the 8 original write-ups below full bar, Kiasu Plumber address highlight points to Location & contact, partial excerpts marked with ellipses, h3 service headings, no empty area lists, readable coverage FAQ answers.
+- Schema: `$` converted to `SGD ` only for amounts, not URLs. Share images are absolute.
+- Map wording: "business address matched to its building" instead of "verified business address".
+- `blockAddress` collapses doubled commas. `check-site` now also rejects "1 units", leftover price text, relative share images and shown counts for conflicting self-reported ratings.
+
+### New content from the keyword plan
+
+Every new page uses the existing guide pipeline (at least 1,000 words, four FAQs, noindex). Rate tables list one sourced, non-promotional rate per company with company, source and capture date, and appear only when at least three companies publish a matching rate. Ranges are shown only for the most common unit.
+
+- Guides added: aircon repair, aircon leaking water, chemical overhaul, condenser cleaning, how often to service aircon, part-time cleaners, post-renovation cleaning, steam cleaning, office cleaning, mattress cleaning, curtain cleaning, instant water heaters, licensed plumbers, tap replacement, power trips, licensed electricians, light installation, socket installation, house painting, TV mounting, furniture assembly, door locks and curtain installation.
+- Area pages: `/roster/plumbing/woodlands/`, `/roster/plumbing/tampines/` and `/roster/plumbing/yishun/`, listing only companies that name the town, each linked to its coverage source. Every trade hub has an "Areas we serve" section linking 18 towns to the existing coverage filter.
+- Merged into existing pages: chemical wash and gas top-up rates on their intent pages, installation price into the aircon installation guide, end-of-tenancy into the move-out guide, and duplicate hub keywords (cleaning services, plumber near me and similar).
+
+### Validation
+
+791 pages. 97 JavaScript tests and 15 Python tests pass. `check-site.mjs` passes with all internal links and fragments; `check-editorial.mjs` passes for 43 guides and 49,240 words. Largest trade payload: aircon at 241.5 KB of HTML plus JSON. No browser review of the new pages yet.
+
+### Open items
+
+- Aircon unit size: needs a sourced room-size guide before a page can give sizes.
+- Not built for lack of sourced rates (fewer than three companies): 24-hour plumber, wall drilling, ceiling fan installation, window cleaning, EV chargers, water heater brands (Rheem, Ariston, Joven) and aircon trunking. Most 50/mo rows remain.
+- The `,,` address case reported for Go Cleaners and Handyman Fix Pro did not reproduce with r13 data; the code was hardened and a site check added.
+- 338 Aircon's protected original write-up still lists the conflicting counts in "Things to check first". Edit only with approval.
+- CleanBreeze, Ironing Maids and Part-time Home Maid share the Everyworks WhatsApp number but are not in that operator group; next data release.
+- Kiasu Plumber reply and arrival times, its hours versus 24/7, and AFRA's Saturday-only Google hours are company-stated conflicts left as data issues.
+- `DEPLOYMENT-READINESS.md` and older review notes still describe earlier counts and account plans.
