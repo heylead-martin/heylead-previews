@@ -410,6 +410,15 @@
       "sources": 2
     },
     {
+      "hero": "electrician",
+      "slug": "ceiling-fan-installation",
+      "path": "/roster/blog/ceiling-fan-installation/",
+      "words": 1348,
+      "faqs": 3,
+      "ctas": 3,
+      "sources": 3
+    },
+    {
       "hero": "plumbing",
       "slug": "ceiling-leak-what-to-do",
       "path": "/roster/blog/ceiling-leak-what-to-do/",
@@ -464,10 +473,10 @@
       "sources": 3
     },
     {
-      "hero": "cleaning",
-      "slug": "how-to-clean-a-shower-curtain",
-      "path": "/roster/blog/how-to-clean-a-shower-curtain/",
-      "words": 985,
+      "hero": "handyman",
+      "slug": "hourly-rate-vs-fixed-price-home-jobs",
+      "path": "/roster/blog/hourly-rate-vs-fixed-price-home-jobs/",
+      "words": 1022,
       "faqs": 3,
       "ctas": 2,
       "sources": 1
@@ -507,6 +516,24 @@
       "faqs": 3,
       "ctas": 3,
       "sources": 2
+    },
+    {
+      "hero": "aircon",
+      "slug": "one-off-aircon-servicing-vs-maintenance-contract",
+      "path": "/roster/blog/one-off-aircon-servicing-vs-maintenance-contract/",
+      "words": 1163,
+      "faqs": 3,
+      "ctas": 2,
+      "sources": 2
+    },
+    {
+      "hero": "cleaning",
+      "slug": "part-time-cleaner-vs-deep-cleaning",
+      "path": "/roster/blog/part-time-cleaner-vs-deep-cleaning/",
+      "words": 1125,
+      "faqs": 3,
+      "ctas": 2,
+      "sources": 1
     },
     {
       "hero": "electrician",

@@ -99,7 +99,8 @@ export function additionalRates(p) {
   return [...plain(p.price_text).matchAll(re)].filter(m => Number(m[2]) !== p.amount_sgd).map(m => ({from:!!m[1], amount:Number(m[2]), unit:unitName(m[3], true)}));
 }
 
-export const money = n => `S$${Number(n).toLocaleString('en-SG')}`;
+// Cents are shown as printed pairs ("S$163.50"), whole amounts without them.
+export const money = n => `S$${Number(n).toLocaleString('en-SG',{minimumFractionDigits:Number(n)%1?2:0,maximumFractionDigits:2})}`;
 export function rateCell(p) {
   const range = priceRange(p), unit = displayUnit(p);
   const amount = range ? `${money(p.amount_sgd)} to ${money(range.max)}${range.open ? '+' : ''}` : `${isFromPrice(p) ? 'From ' : ''}${money(p.amount_sgd)}`;

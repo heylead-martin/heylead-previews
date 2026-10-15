@@ -1,4 +1,5 @@
 import {planningAreas,areaSlug} from '../assets/service-areas.mjs';
+import adjacency from '../data/planning-area-adjacency.json' with {type:'json'};
 
 // Static trade x town pages (/roster/<trade>/<town>/).
 // Rule: a town is a URA Master Plan 2019 planning area. A page is built when at least
@@ -10,9 +11,9 @@ export const AREA_PAGE_MINIMUM = 5;
 // ?area= filter still covers them and nearby links point there.
 export const NON_RESIDENTIAL = new Set(['Lim Chu Kang','Tuas','Sungei Kadut','Pioneer','Seletar','Mandai','Changi']);
 // check-site: two area pages of one trade may share at most this share of their 5-word phrases.
-export const AREA_MAX_SIMILARITY = 0.85;
+export const AREA_MAX_SIMILARITY = 0.75;
 // ...and each must have at least this many 5-word phrases the other page lacks.
-export const AREA_MIN_DISTINCT = 40;
+export const AREA_MIN_DISTINCT = 80;
 
 const townNames = new Set(planningAreas.map(a=>a.name));
 export const townRegion = town => planningAreas.find(a=>a.name===town)?.region || '';
@@ -42,50 +43,28 @@ export function selectAreaPages(companies, trades, reserved = new Set()) {
   return {pages,collisions};
 }
 
-// Nearby towns: planning areas that share a boundary (or face each other across a narrow
-// river or reservoir) on the URA Master Plan 2019 map. Edges are listed once and used both ways.
-const edges = [
-  ['Ang Mo Kio','Bishan'],['Ang Mo Kio','Serangoon'],['Ang Mo Kio','Sengkang'],['Ang Mo Kio','Yishun'],['Ang Mo Kio','Seletar'],
-  ['Bedok','Tampines'],['Bedok','Paya Lebar'],['Bedok','Marine Parade'],['Bedok','Changi'],['Bedok','Geylang'],
-  ['Bishan','Toa Payoh'],['Bishan','Serangoon'],['Bishan','Novena'],
-  ['Boon Lay','Jurong West'],['Boon Lay','Pioneer'],
-  ['Bukit Batok','Bukit Panjang'],['Bukit Batok','Choa Chu Kang'],['Bukit Batok','Jurong East'],['Bukit Batok','Clementi'],['Bukit Batok','Bukit Timah'],['Bukit Batok','Tengah'],
-  ['Bukit Merah','Queenstown'],['Bukit Merah','Outram'],['Bukit Merah','Tanglin'],['Bukit Merah','River Valley'],
-  ['Bukit Panjang','Choa Chu Kang'],['Bukit Panjang','Bukit Timah'],['Bukit Panjang','Sungei Kadut'],
-  ['Bukit Timah','Clementi'],['Bukit Timah','Queenstown'],['Bukit Timah','Tanglin'],['Bukit Timah','Novena'],
-  ['Changi','Tampines'],['Changi','Pasir Ris'],
-  ['Choa Chu Kang','Tengah'],['Choa Chu Kang','Sungei Kadut'],['Choa Chu Kang','Lim Chu Kang'],
-  ['Clementi','Jurong East'],['Clementi','Queenstown'],
-  ['Downtown Core','Rochor'],['Downtown Core','Museum'],['Downtown Core','Singapore River'],['Downtown Core','Outram'],['Downtown Core','Kallang'],
-  ['Geylang','Kallang'],['Geylang','Paya Lebar'],['Geylang','Marine Parade'],['Geylang','Toa Payoh'],
-  ['Hougang','Serangoon'],['Hougang','Sengkang'],['Hougang','Punggol'],['Hougang','Paya Lebar'],
-  ['Jurong East','Jurong West'],
-  ['Jurong West','Tengah'],['Jurong West','Pioneer'],
-  ['Kallang','Toa Payoh'],['Kallang','Novena'],['Kallang','Rochor'],['Kallang','Marine Parade'],
-  ['Lim Chu Kang','Sungei Kadut'],['Lim Chu Kang','Tengah'],
-  ['Mandai','Woodlands'],['Mandai','Yishun'],['Mandai','Sungei Kadut'],
-  ['Newton','Novena'],['Newton','Orchard'],['Newton','Tanglin'],['Newton','Rochor'],['Newton','Museum'],
-  ['Novena','Toa Payoh'],['Novena','Tanglin'],
-  ['Orchard','Tanglin'],['Orchard','River Valley'],['Orchard','Museum'],
-  ['Outram','Singapore River'],['Outram','River Valley'],
-  ['Pasir Ris','Tampines'],['Pasir Ris','Punggol'],
-  ['Paya Lebar','Tampines'],
-  ['Pioneer','Tuas'],['Boon Lay','Tuas'],
-  ['Punggol','Sengkang'],['Punggol','Seletar'],
-  ['Queenstown','Tanglin'],
-  ['Seletar','Sengkang'],['Seletar','Yishun'],
-  ['Sembawang','Yishun'],['Sembawang','Woodlands'],['Sembawang','Simpang'],
-  ['Sengkang','Serangoon'],
-  ['Serangoon','Toa Payoh'],
-  ['Sungei Kadut','Woodlands'],
-  ['Museum','Rochor']
-];
+// Nearby towns: planning areas that share at least 200 m of boundary on the URA Master Plan 2019
+// map, computed from the official boundaries by scripts/build-adjacency.py (data.gov.sg, Singapore
+// Open Data Licence). Catchments, offshore islands and reclaimed land with no homes are not shown.
+export const NOT_A_TOWN = new Set(['Central Water Catchment','Western Water Catchment','Southern Islands','Western Islands','North-Eastern Islands','Changi Bay','Straits View','Marina East','Marina South','Simpang']);
 export const nearbyMap = (()=>{
   const map=new Map();
-  for(const [a,b] of edges){for(const [x,y] of [[a,b],[b,a]]){if(!map.has(x))map.set(x,new Set());map.get(x).add(y);}}
+  for(const [a,b] of adjacency.pairs)for(const [x,y] of [[a,b],[b,a]]){if(NOT_A_TOWN.has(x)||NOT_A_TOWN.has(y))continue;if(!map.has(x))map.set(x,new Set());map.get(x).add(y);}
   return new Map([...map].map(([k,v])=>[k,[...v].sort()]));
 })();
 export const nearbyTowns = town => nearbyMap.get(town) || [];
+
+// Readable names for the release's service names in area intros. Keys are the lower-cased
+// release names; the release itself is not changed. check-site fails on an intro service
+// without an entry, so new odd names get a label before they reach a page.
+export const serviceLabels = {
+  'chemical overhaul':'chemical overhaul','chemical wash':'chemical wash','gas top up':'gas top-up','general service':'general servicing','installation':'aircon installation','repair':'aircon repair',
+  'carpet':'carpet cleaning','curtain':'curtain cleaning','deep cleaning':'deep cleaning','disinfection':'disinfection','mattress':'mattress cleaning','upholstery sofa':'sofa and upholstery cleaning',
+  'ceiling fan':'ceiling fan installation','db box':'DB box work','light installation':'light installation','power point':'power points','power trip':'power trip repair','rewiring':'rewiring','water heater point':'water heater points',
+  'door lock':'door locks','drilling mounting':'drilling and mounting','electrical':'electrical jobs','furniture assembly':'furniture assembly','painting':'painting',
+  'choke clearing':'choke clearing','floor trap':'floor traps','leak repair':'leak repair','pipe replacement':'pipe replacement','sink':'sinks','tap mixer':'taps and mixers','toilet bowl':'toilet bowls','water heater':'water heaters'
+};
+export const serviceLabel = name => serviceLabels[String(name).toLowerCase()];
 
 // Services the companies name on their own sites, most common first.
 export function serviceCounts(companies) {

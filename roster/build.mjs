@@ -9,7 +9,7 @@ import {ratingSummary} from './lib/rating-summary.mjs';
 import {planningAreas} from './assets/service-areas.mjs';
 import {loadBlog,blogAuthor} from './lib/blog.mjs';
 import {airconMatrix,unitColumns,sizeColumns} from './lib/aircon-matrix.mjs';
-import {selectAreaPages,townCoverage,townRegion,nearbyTowns,serviceCounts} from './lib/area-pages.mjs';
+import {selectAreaPages,townCoverage,townRegion,nearbyTowns,serviceCounts,serviceLabel} from './lib/area-pages.mjs';
 import {priceOption} from './scripts/import-db.mjs';
 import { readFile, writeFile, mkdir, rm } from "node:fs/promises";
 import path from "node:path";
@@ -1057,7 +1057,7 @@ function renderAreaPage(page) {
   const rates=areaRates(tradeId,local);
   const lead=rates.find(r=>r.low);
   const intro=[`${countText(local.length,`${words.noun} company`,`${words.noun} companies`)} on Roster name ${town} on their own websites, in the ${regionName} region.`,
-    services.length?`The services they list most often are ${listText(services.map(([n,c])=>`${acronyms(n.toLowerCase())} (${c})`))}.`:'',
+    services.length?`The services they list most often are ${listText(services.map(([n,c])=>`${(serviceLabel(n)||acronyms(n.toLowerCase()))} (${c})`))}.`:'',
     `${priced} ${priced===1?'publishes prices on its site':'publish prices on their sites'}, ${countText(rated,'has','have')} a cited rating${emergency?`, and ${countText(emergency,'describes','describe')} emergency or after-hours work`:''}.`,
     lead?`For ${lead.spec.noun} work, the lowest published rates from ${lead.count} of these companies run from ${money(lead.low.line.amount_sgd)} ${lead.unit} at ${lead.low.company.name} to ${money(lead.high.line.amount_sgd)} at ${lead.high.company.name}, as each company advertises it.`:rates.length?`Published ${rates.map(r=>r.spec.noun).join(' and ')} rates from these companies are listed below; they use different units, so no single range is shown.`:`Fewer than ${minimumCompanies} of these companies publish a comparable rate for the same job, so no price range is shown for ${town}.`
   ].filter(Boolean).join(' ');
@@ -1066,6 +1066,14 @@ function renderAreaPage(page) {
   const rateTables=rates.map(r=>renderSourcedRates(r.key,local,{attr:'data-area-rates',scope:` from companies serving ${town}`})).join('');
   const nearby=nearbyTowns(town).filter(t=>planningAreas.some(a=>a.name===t));
   const nearbyLinks=nearby.map(t=>`<a href="${areaHref(trade,t)}">${esc(t)}</a>`).join('');
+  // Data-driven copy so area pages differ by more than the town name.
+  const names=c=>new Set((c.enrichment.serviceLocations||[]).map(l=>l.name));
+  const overlap=nearby.map(t=>[t,local.filter(c=>names(c).has(t)).length]).filter(([,n])=>n>0).sort((a,b)=>b[1]-a[1]||a[0].localeCompare(b[0])).slice(0,2);
+  const dates=local.map(c=>coverage(c)?.capturedAt).filter(Boolean).sort();
+  const unstated=publishedCompanies.filter(c=>c.category===tradeId&&!(c.enrichment.serviceLocations||[]).length).length;
+  const withPages=nearby.filter(t=>areaPagePath(tradeId,t));
+  const listNote=`${overlap.length?`Of these, ${listText(overlap.map(([t,n])=>`${n} also ${n===1?'names':'name'} ${t}`))}. `:''}${dates.length?(dates[0]===dates.at(-1)?`Coverage was captured on ${dates[0]}`:`Coverage was captured between ${dates[0]} and ${dates.at(-1)}`)+', so confirm your postal code when you call. ':''}Listed alphabetically.`;
+  const nearbyNote=withPages.length===nearby.length?`All ${nearby.length} have their own ${words.noun} page.`:withPages.length?`${listText(withPages)} ${withPages.length===1?'has its':'have their'} own ${words.noun} page; the others open the area filter.`:`None has its own ${words.noun} page yet, so each opens the area filter.`;
   const faqs=[
     [`How many ${words.noun} companies serve ${town}?`,`${local.length===1?`1 company names ${town} on its own website and is`:`${local.length} companies name ${town} on their own websites and are`} listed on this page. ${countText(region.length,'more company states','more companies state')} the ${regionName} region, and ${islandwide.length===1?'1 says it covers':`${islandwide.length} say they cover`} all of Singapore without naming ${town}.`],
     [`What do ${words.noun} companies serving ${town} charge?`,lead?`The lowest published ${lead.spec.noun} rates from ${lead.count} companies that name ${town} run from ${money(lead.low.line.amount_sgd)} to ${money(lead.high.line.amount_sgd)} ${lead.unit}. These are advertised rates with conditions, not quotes.`:rates.length?`The published ${rates.map(r=>r.spec.noun).join(' and ')} rates on this page use different units, so Roster does not show a single range. Each rate links to its source.`:`Fewer than ${minimumCompanies} companies that name ${town} publish a comparable rate for the same job, so Roster does not show a range. ${priced} ${priced===1?'company publishes':'companies publish'} some prices; ask the others for a quote.`],
@@ -1073,11 +1081,11 @@ function renderAreaPage(page) {
   ];
   const body=renderCrumbs(crumbs)+`<header class="guide-hero"><div><p class="kicker">${words.kicker}</p><h1>${esc(words.pro)} serving ${esc(town)}.</h1><p class="guide-dek" data-area-intro>${esc(intro)}</p><div class="guide-hero-actions"><a class="btn btn-solid" href="/roster/${trade.slug}/?area=${slug}#company-results">Filter all ${esc(trade.name.toLowerCase())} companies by ${esc(town)} ${icon('arrow')}</a>${hub?`<a href="${hub.path}">Read the ${esc(hub.label.toLowerCase())} guide</a>`:''}</div></div></header>
 <section class="editorial area-page" data-area-page="${tradeId}|${esc(town)}"><div class="guide-copy">
-<h2 id="named">Companies that name ${esc(town)}</h2><p>These companies list ${esc(town)} on their own websites. Coverage can change, so confirm your block and postal code when you call. The order is alphabetical, not a ranking.</p><ul class="area-company-list">${local.map(item).join('')}</ul>
+<h2 id="named">Companies that name ${esc(town)}</h2><p>${esc(listNote)}</p><ul class="area-company-list">${local.map(item).join('')}</ul>
 ${rateTables}
-<h2 id="wider">Wider coverage</h2><p>${region.length} more ${region.length===1?'company states':'companies state'} that ${region.length===1?'it serves':'they serve'} the ${esc(regionName)} region, and ${islandwide.length} ${islandwide.length===1?'says it serves':'say they serve'} all of Singapore without naming ${esc(town)}. The <a href="/roster/${trade.slug}/?area=${slug}#company-results">area filter</a> lists them after the companies that name the town. Companies that do not state any coverage are not counted here.</p>
-<h2 id="before">Before you call ${/^[aeiou]/i.test(words.one)?'an':'a'} ${words.one} in ${esc(town)}</h2>${words.tips(town)}<p>Ask for the call-out or inspection charge before the visit, and agree the price of any extra work before it starts.</p>
-<h2 id="nearby">Nearby towns</h2><p>Towns next to ${esc(town)} on the URA planning area map. Linked pages list the ${esc(words.noun)} companies that name each town; the others open the area filter.</p><div class="areas-we-serve-links" data-nearby>${nearbyLinks}<a href="/roster/${trade.slug}/">All ${esc(trade.name.toLowerCase())} companies</a></div>
+<h2 id="wider">Wider coverage</h2><p>${region.length} more ${region.length===1?'company states':'companies state'} that ${region.length===1?'it serves':'they serve'} the ${esc(regionName)} region, and ${islandwide.length} ${islandwide.length===1?'says it serves':'say they serve'} all of Singapore without naming ${esc(town)}. The <a href="/roster/${trade.slug}/?area=${slug}#company-results">area filter</a> shows them after the companies above${unstated?`, and can add the ${unstated} ${words.noun} ${unstated===1?'company that does':'companies that do'} not state ${unstated===1?'its':'their'} areas`:''}.</p>
+<h2 id="before">Before you call ${/^[aeiou]/i.test(words.one)?'an':'a'} ${words.one} in ${esc(town)}</h2>${words.tips(town)}${priced?`<p>${priced===local.length?`All ${priced}`:`${priced} of the ${local.length}`} companies above publish prices on their own sites; for the others, ask for the call-out or inspection charge before the visit.</p>`:`<p>None of the companies above publishes prices, so ask each for its call-out or inspection charge before the visit.</p>`}
+<h2 id="nearby">Nearby towns</h2><p>${nearby.length} ${nearby.length===1?'town shares':'towns share'} a boundary with ${esc(town)} on the URA Master Plan 2019 map. ${esc(nearbyNote)}</p><div class="areas-we-serve-links" data-nearby>${nearbyLinks}<a href="/roster/${trade.slug}/">All ${esc(trade.name.toLowerCase())} companies</a></div>
 </div></section>`+renderFaq(faqs,`Questions about ${words.pro.toLowerCase()} in ${town}`);
   const jsonLd=[webPage(title,canonicalPath,description),crumbsLd(crumbs),faqLd(faqs)];
   forbidSchema(jsonLd);
@@ -1301,6 +1309,8 @@ const currentPaths = written.map(f=>path.relative(root,f));
 let previous = [];
 try { previous = JSON.parse(await readFile(path.join(root,'data/build-manifest.json'),'utf8')); } catch(e) { if(e.code!=='ENOENT') throw e; }
 for (const rel of previous) if(!currentPaths.includes(rel) && /^company\/[a-z0-9-]+\/index\.html$/.test(rel)) await rm(path.join(root,rel),{force:true});
+// Blog posts whose Markdown was removed: remove the generated page and its folder.
+for (const rel of previous) if(!currentPaths.includes(rel) && /^blog\/[a-z0-9-]+\/index\.html$/.test(rel)) await rm(path.join(root,path.dirname(rel)),{recursive:true,force:true});
 // Area pages dropped by the selection rule: remove the file and its now-empty folder.
 const tradeDirs=new Set(trades.map(t=>t.slug));
 for (const rel of previous) if(!currentPaths.includes(rel) && /^[a-z-]+\/[a-z0-9-]+\/index\.html$/.test(rel) && tradeDirs.has(rel.split('/')[0])) {

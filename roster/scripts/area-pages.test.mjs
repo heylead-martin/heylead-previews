@@ -46,6 +46,16 @@ test('Nearby map leaves out towns that do not share a boundary',()=>{
  for(const [a,b] of [['Woodlands','Yishun'],['Hougang','Tampines'],['Bukit Batok','Jurong West'],['Paya Lebar','Serangoon']])assert.ok(!nearbyTowns(a).includes(b),`${a} / ${b}`);
 });
 
+test('Nearby towns come from the official boundaries: real neighbours only',async()=>{
+ const adj=JSON.parse(await readFile(new URL('../data/planning-area-adjacency.json',import.meta.url),'utf8'));
+ assert.match(adj.source,/data\.gov\.sg/);assert.match(adj.licence,/Open Data Licence/);
+ const names=new Set(planningAreas.map(a=>a.name));
+ for(const [a,b,m] of adj.pairs){assert.ok(names.has(a)&&names.has(b),`${a} / ${b}`);assert.ok(m>=200);}
+ for(const [a,b] of [['Bedok','Changi'],['Hougang','Punggol'],['Boon Lay','Tuas'],['Bishan','Novena']])assert.ok(!nearbyTowns(a).includes(b),`${a} / ${b}`);
+ for(const [a,b] of [['Bedok','Tampines'],['Woodlands','Sembawang'],['Toa Payoh','Bishan'],['Jurong West','Boon Lay']])assert.ok(nearbyTowns(a).includes(b),`${a} / ${b}`);
+ assert.ok(!nearbyTowns('Bishan').includes('Central Water Catchment'),'catchments are not towns');
+});
+
 test('Service counts merge case and count each company once',()=>{
  const rows=[{enrichment:{supportedServices:[{name:'Leak repair'},{name:'leak repair'}]}},{enrichment:{supportedServices:[{name:'Leak Repair'},{name:'Sink'}]}}];
  assert.deepEqual(serviceCounts(rows),[['Leak repair',2],['Sink',1]]);

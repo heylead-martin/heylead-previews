@@ -4,7 +4,7 @@ import { fileURLToPath } from 'node:url';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {decodeCatalogue} from '../assets/catalogue-data.mjs';
-import {selectAreaPages,townCoverage,nearbyTowns,AREA_PAGE_MINIMUM,AREA_MAX_SIMILARITY,AREA_MIN_DISTINCT,NON_RESIDENTIAL} from '../lib/area-pages.mjs';
+import {serviceCounts,serviceLabel,selectAreaPages,townCoverage,nearbyTowns,AREA_PAGE_MINIMUM,AREA_MAX_SIMILARITY,AREA_MIN_DISTINCT,NON_RESIDENTIAL} from '../lib/area-pages.mjs';
 import {areaSlug} from '../assets/service-areas.mjs';
 import {airconMatrix,unitColumns,sizeColumns} from '../lib/aircon-matrix.mjs';
 import {guideEvidence, sourcedRates, rateProblem, isFromPrice, minimumCompanies, maxLabelLength} from '../lib/sourced-rates.mjs';
@@ -124,6 +124,7 @@ for(const [key,spec] of Object.entries(guideEvidence))if(!rateTables.has(key))as
   assert.match(html,new RegExp(`<link rel="canonical" href="https://[^"/]+${page.path}">`),`Canonical: ${rel}`);
   const intro=unescape(html.match(/<p class="guide-dek" data-area-intro>([\s\S]*?)<\/p>/)[1]);
   assert.ok(intro.startsWith(`${page.count} `)&&intro.includes(page.town),`Area intro must state the town and count: ${rel}`);
+  for(const [name] of serviceCounts(local).filter(([,n])=>n>=2).slice(0,4))assert.ok(serviceLabel(name),`Area intro service needs a display name in lib/area-pages.mjs: ${name}`);
   assert.ok(!intros.has(intro),`Duplicate area intro: ${rel} and ${intros.get(intro)}`);intros.set(intro,rel);
   for(const table of html.matchAll(/<table data-area-rates="([^"]+)">([\s\S]*?)<\/table>/g)){
    const spec=guideEvidence[table[1]],rows=[...table[2].matchAll(/<tr><th scope="row"><a href="\/roster\/company\/([^/]+)\/#pricing">[\s\S]*?<td><a href="([^"]+)"/g)];
