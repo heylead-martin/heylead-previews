@@ -1000,6 +1000,10 @@ const guideEvidence = {
   'CL-06':{trade:'cleaning',match:/post.?reno/i,title:'Published post-renovation cleaning rates',noun:'post-renovation cleaning'},
   'CL-07':{trade:'cleaning',match:/steam/i,title:'Published steam cleaning rates',noun:'steam cleaning'},
   'CL-08':{trade:'cleaning',match:/office|commercial/i,exclude:/home|residential|house/i,title:'Published office cleaning rates',noun:'office cleaning'},
+  'AC-08':{trade:'aircon',match:/overhaul/i,exclude:/condenser|contract|package|annual|yearly/i,unit:'per unit',title:'Published chemical overhaul rates',noun:'chemical overhaul'},
+  'AC-09':{trade:'aircon',match:/condenser|outdoor unit clean/i,exclude:/tray|gas level|fan ?coil|overhaul|promotion|servicing,/i,unit:'per unit',title:'Published condenser cleaning rates',noun:'condenser cleaning'},
+  'CL-10':{trade:'cleaning',match:/curtain/i,exclude:/install|track|rod|blind/i,title:'Published curtain cleaning rates',noun:'curtain cleaning'},
+  'HM-05':{trade:'handyman',match:/assembl|ikea/i,exclude:/handyman help|starting prices/i,title:'Published furniture assembly rates',noun:'furniture assembly'},
   'CL-09':{trade:'cleaning',match:/mattress/i,title:'Published mattress cleaning rates',noun:'mattress cleaning'},
   'HM-03':{trade:'handyman',match:/paint/i,title:'Published painting rates',noun:'painting'},
   'HM-04':{trade:'handyman',match:/\btv\b|television/i,title:'Published TV mounting rates',noun:'TV mounting'},
@@ -1021,7 +1025,7 @@ function rateLabel(p) {
 }
 function renderSourcedRates(key) {
   const spec=guideEvidence[key];if(!spec)return '';
-  const rows=sourcedRates(spec);if(rows.length<2)return '';
+  const rows=sourcedRates(spec);if(rows.length<3)return '';
   const units=new Map();for(const {line} of rows)units.set(line.unit,(units.get(line.unit)||0)+1);
   const [unit,count]=[...units].sort((a,b)=>b[1]-a[1])[0];
   const same=rows.filter(r=>r.line.unit===unit).map(r=>r.line.amount_sgd);
