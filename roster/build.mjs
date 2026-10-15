@@ -244,7 +244,7 @@ const intents = [
       ],
       [
         "Can I contact a company directly?",
-        "Yes. The phone and WhatsApp links go directly to the company. The Roster quote request remains an unsent preview."
+        "Yes. The phone and WhatsApp links go directly to the company. Roster does not pass on requests or take bookings."
       ]
     ]
   },
@@ -274,7 +274,7 @@ const intents = [
       ],
       [
         "Can I contact a company directly?",
-        "Yes. The phone and WhatsApp links go directly to the company. The Roster quote request remains an unsent preview."
+        "Yes. The phone and WhatsApp links go directly to the company. Roster does not pass on requests or take bookings."
       ]
     ]
   }
@@ -529,7 +529,7 @@ function renderFooter() {
 <div class="foot-col"><h2>Jobs</h2><ul>${jobs}</ul></div>
 <div class="foot-col"><h2>About</h2><ul><li><a href="/roster/how-it-works/">How the list is made</a></li><li><a href="/roster/claim-listing/">Claim your listing</a></li><li><a href="/roster/aircon-servicing/chemical-wash/">Aircon chemical wash</a></li><li><a href="/roster/aircon-servicing/gas-top-up/">Aircon gas top-up</a></li></ul></div>
 <div class="footer-guides" aria-label="Home-service guides">${trades.map(t=>`<details><summary>${esc(t.name)} guides</summary><ul>${editorialGuides.filter(g=>g.trade===t.id).map(g=>`<li><a href="${g.path}">${esc(g.label)}</a></li>`).join('')}</ul></details>`).join('')}</div>
-<p class="footer-logo-ownership">${logoOwnerNote}</p><p class="foot-line">Singapore beta. Unpaid listings. No commission on your job. ${previewFeatures?"Quote requests are a preview and do not send.":""}</p>
+<p class="footer-logo-ownership">${logoOwnerNote}</p><p class="foot-line">Singapore beta. Unpaid listings. No commission on your job.${previewFeatures?" Quote requests are a preview and do not send.":""}</p>
 </div></footer>`;
 }
 
@@ -601,16 +601,22 @@ function shortlist(companies, service) {
 
 function pageShell({ title, description, canonicalPath, current, jsonLd, body, bodyClass = "", shareImage = "" }) {
   if (!shareImage && editorialByPath.has(canonicalPath)) shareImage = abs(heroPhoto(editorialByPath.get(canonicalPath).trade).sizes[1200].src);
-  if(!previewFeatures && /^\/roster\/(?:sign-in|sign-up|forgot-password|reset-password|account|auth\/callback|saved|matches)\/$/.test(canonicalPath)) {
+  // Social crawlers ignore relative image URLs.
+  if (shareImage) shareImage = new URL(shareImage, origin).href;
+  const parked={'sign-in':'Sign in','sign-up':'Account sign-up','forgot-password':'Password reset','reset-password':'New password','account':'Your account','auth/callback':'Account sign-in','saved':'Saved companies','matches':'Job matching'}[canonicalPath.replace(/^\/roster\/|\/$/g,'')];
+  if(!previewFeatures && parked) {
     body=`<section class="pending-feature"><p class="kicker">CONNECTION PENDING</p><h1>${canonicalPath.includes('matches')?'Job matching':canonicalPath.includes('saved')?'Saved companies':'Accounts'} preview.</h1><p>This feature is not available on the public site yet. Browse companies and contact them directly.</p><a class="btn btn-solid" href="/roster/search/">Browse companies</a></section>`;
     bodyClass='pending-page';
+    // Parked routes must not advertise the feature in search snippets or share cards.
+    title=`${parked}: not available yet | Roster`;
+    description=`${parked}: not available on Roster yet. Browse Singapore home-service companies and contact them directly.`;
   }
   description = concise(description);
   const canonical = abs(canonicalPath);
   const graph = JSON.stringify({
     "@context": "https://schema.org",
     "@graph": jsonLd
-  }, (_key,value) => typeof value==='string' ? value.replace(/S?\$/g,'SGD ').replace(/[★☆]/g,'') : value).replace(/</g, "\\u003c");
+  }, (_key,value) => typeof value!=='string' || /^https?:\/\//.test(value) ? value : value.replace(/(^|[^A-Za-z])S?\$\s?(?=\d)/g,'$1SGD ').replace(/[★☆]/g,'')).replace(/</g, "\\u003c");
   assertNoDashes(graph, canonicalPath);
   const html = `<!doctype html>
 <html lang="en-SG">
@@ -878,14 +884,29 @@ function profileBusinessGraph(company, content, canonicalPath) {
   return [business, ...services];
 }
 
+// Release excerpts are text windows that can start or stop mid-word. Mark them as excerpts and drop a
+// leading fragment that never appears as a whole word elsewhere in the sourced copy.
+let excerptWords;
+function excerptView(value) {
+  let text = String(value || '').trim();
+  if (text.length < 60) return text;
+  if (/^[a-z]/.test(text)) {
+    excerptWords ||= new Set(Object.values(profileContent).flatMap(p => [...(p.about || []), ...(p.services || []).map(s => s.explanation || '')]).flatMap(t => String(t).toLowerCase().match(/(?<=\s)[a-z’']+/g) || []));
+    const first = text.match(/^[a-z’']+/)[0];
+    if (!excerptWords.has(first)) text = text.slice(first.length).replace(/^[^\sA-Za-z0-9]*\s+/, '');
+    text = `…${text}`;
+  }
+  return /[.!?)"”…]$/.test(text) ? text : `${text}…`;
+}
+
 function renderServiceExplanation(service) {
   const guide = service.guide ? serviceGuides[service.guide] : null;
   if (service.guide && !guide?.body) throw new Error(`Missing guide: ${service.guide}`);
   const prices = service.prices.map(priceView);
   const reference = (p) => `<details class="price-original"><summary>Price reference & conditions</summary>${p.excerpt?`<p>${esc(p.excerpt)}</p>`:''}${p.sourceUrl?`<span class="data-source"><a href="${esc(p.sourceUrl)}">View price on company website</a><span>Checked ${esc(String(p.capturedAt||'2026-10-10').slice(0,10))}</span></span>`:''}</details>`;
-  const options = prices.length ? `<div class="service-options" aria-label="Service price options">${prices.map(p=>`<div class="service-option"><div class="service-option-heading"><h4>${esc(p.label || service.name)}</h4>${prices.length>1?`<strong>${esc(p.price)}</strong>`:''}</div>${p.indicative?'<span class="claim-label">General price guide, not a company quote</span>':''}${p.detail?`<p class="price-conditions">${esc(p.detail)}</p>`:''}${p.excerpt||p.sourceUrl?reference(p):''}</div>`).join('')}</div>` : '';
+  const options = prices.length ? `<div class="service-options" aria-label="Service price options">${prices.map(p=>`<div class="service-option"><div class="service-option-heading"><h3>${esc(p.label || service.name)}</h3>${prices.length>1?`<strong>${esc(p.price)}</strong>`:''}</div>${p.indicative?'<span class="claim-label">General price guide, not a company quote</span>':''}${p.detail?`<p class="price-conditions">${esc(p.detail)}</p>`:''}${p.excerpt||p.sourceUrl?reference(p):''}</div>`).join('')}</div>` : '';
   const explanation = guide?.body || (service.imported ? serviceGuide(service.name,service.trade) : service.explanation);
-  return `<div class="service-explanation">${service.description?`<p class="service-context">${esc(service.description)}</p>`:''}${explanation?`<p>${esc(explanation)}</p>`:''}${options}${guide?.ask?`<div class="service-booking-question"><h4>Before you book</h4><p>${esc(guide.ask)}</p></div>`:''}${service.sourceUrl?`<details class="service-reference"><summary>Service reference</summary>${service.explanation?`<p>${esc(service.explanation)}</p>`:''}<span class="data-source"><a href="${esc(service.sourceUrl)}">View service on company website</a><span>Checked ${esc(String(service.capturedAt||'2026-10-10').slice(0,10))}</span></span></details>`:''}</div>`;
+  return `<div class="service-explanation">${service.description?`<p class="service-context">${esc(service.description)}</p>`:''}${explanation?`<p>${esc(explanation)}</p>`:''}${options}${guide?.ask?`<div class="service-booking-question"><h3>Before you book</h3><p>${esc(guide.ask)}</p></div>`:''}${service.sourceUrl?`<details class="service-reference"><summary>Service reference</summary>${service.explanation?`<p>${esc(excerptView(service.explanation))}</p>`:''}<span class="data-source"><a href="${esc(service.sourceUrl)}">View service on company website</a><span>Checked ${esc(String(service.capturedAt||'2026-10-10').slice(0,10))}</span></span></details>`:''}</div>`;
 }
 
 function renderServiceRow(service, index) {
@@ -1054,7 +1075,9 @@ const retired=[
   {slug:'aeon-environmental-services',name:'Aeon Environmental Services',target:'/roster/home-cleaning/',trade:'home cleaning'},
   {slug:'city-cleaning',name:'City Cleaning',target:'/roster/home-cleaning/',trade:'home cleaning'},
   {slug:'greengarden-integrated-services-pte-ltd',name:'Greengarden Integrated Services Pte Ltd',target:'/roster/home-cleaning/',trade:'home cleaning'},
-  {slug:'sq-1-development-pte-ltd',name:'SQ 1 Development Pte Ltd',target:'/roster/home-cleaning/',trade:'home cleaning'}
+  {slug:'sq-1-development-pte-ltd',name:'SQ 1 Development Pte Ltd',target:'/roster/home-cleaning/',trade:'home cleaning'},
+  {slug:'flash-aircon',name:'Signature Engineering Services Pte Ltd',target:'/roster/aircon-servicing/',trade:'aircon servicing'},
+  {slug:'reliable-electrical-services',name:'Reliable Electrical Services',target:'/roster/electrician/',trade:'electrical'}
 ];
 for(const old of retired) if(!publishedCompanies.some(c=>c.slug===old.slug)) {
   const canonicalPath=`/roster/company/${old.slug}/`;

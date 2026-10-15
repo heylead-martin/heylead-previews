@@ -60,7 +60,16 @@ test('Trustpilot stays a separate source and supported legacy image formats keep
 });
 test('Normalised unit prices retain total quantity and minimum-booking conditions',()=>{
  const price=priceOption({service:'Three units',price_text:'S$90',unit:'total for 3 units',qty:3,unit_price_sgd:30,units_in_price:3,min_units:3,sourceUrl:'https://example.com'});
- assert.equal(price.price,'S$90');assert.match(price.detail,/Calculated per-unit price: S\$30/);assert.match(price.detail,/total for 3 units/);assert.match(price.detail,/Minimum 3 units/);
+ assert.equal(price.price,'S$90');assert.match(price.detail,/Calculated per-unit price: S\$30/);assert.match(price.detail,/Total for 3 units/);assert.match(price.detail,/Minimum 3 units/);
+ const single=priceOption({service:'Hourly cleaning',price_text:'S$18/hour',unit:'per hour',unit_price_sgd:18,units_in_price:1,min_units:1,sourceUrl:'https://example.com'});
+ assert.equal(single.detail,'Calculated per-unit price: S$18 (1 unit in the published total). Minimum 1 unit. Per hour');
+ assert.doesNotMatch(single.detail,/\b1 units\b|\)\. per/);
+});
+test('Unit stripping never leaves doubled or stray commas',()=>{
+ assert.equal(blockAddress('69 Ubi Road 1, #08-32, Singapore 408731'),'69 Ubi Road 1, Singapore 408731');
+ assert.equal(blockAddress('92A Syed Alwi Road, #02-06, Singapore 207668'),'92A Syed Alwi Road, Singapore 207668');
+ assert.equal(blockAddress('Blk 1, Unit 02-03, ,Singapore 123456'),'Blk 1, Singapore 123456');
+ assert.equal(blockAddress('#01-01, 10 Example St, #02-02, Singapore 123456'),'10 Example St, Singapore 123456');
 });
 test('Every publication-blocking flag and rollback excludes a full profile',()=>{for(const flag of BLOCKED){const result=importDatabase(db([{...row(),flags:[flag]}]),empty);assert.equal(result.companies.companies.length,0,flag);assert.ok(result.report.excluded[0].reasons.includes(flag));}assert.equal(importDatabase(db([{...row(),profile_rolled_back:{reason:'review'}}]),empty).report.excludedCount,1);});
 test('Missing sourced required fields prevents publication',()=>{for(const key of ['about','services','phone','address','website'])assert.equal(importDatabase(db([{...row(),[key]:null}]),empty).report.excludedCount,1,key);});

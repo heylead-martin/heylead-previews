@@ -15,11 +15,11 @@ if (explorer) {
     setText('[data-map-scale]',s.average?' / 5':'');
     setText('[data-map-priced]',s.priced);
     setText('[data-map-whatsapp]',s.whatsapp);
-    setText('[data-map-note]',`${s.mapped} of ${s.total} have verified locations. Companies may travel beyond their base.`);
+    setText('[data-map-note]',`${s.mapped} of ${s.total} have an address matched to a building. Companies may travel beyond their base.`);
     setText('[data-map-live]',`${trade?.name||'All services'}: ${s.total} companies, ${s.mapped} mapped, ${s.priced} with published prices. Average company rating ${s.average||'unavailable'}${s.average?' out of 5':''}, from ${s.rated} rated companies.`);
     const link=explorer.querySelector('[data-map-browse]');
     link.href=trade?`/roster/${trade.slug}/`:'/roster/search/';
     link.firstChild.textContent=trade?`Explore ${trade.noun} `:'Explore all companies ';
-    explorer.querySelector('#home-map-desc').textContent=`${s.mapped} verified business locations for ${trade?.name.toLowerCase()||'all home services'} in Singapore. Business addresses do not indicate service coverage.`;
+    explorer.querySelector('#home-map-desc').textContent=`${s.mapped} business addresses matched to a building for ${trade?.name.toLowerCase()||'all home services'} in Singapore. Business addresses do not indicate service coverage.`;
   });
 }

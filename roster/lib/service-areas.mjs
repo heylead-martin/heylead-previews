@@ -16,7 +16,7 @@ export function normaliseServiceLocations(entries, website) {
 export function renderServiceAreas(entries, {esc,icon}) {
   if(!entries?.length)return '';
   const names=new Set(entries.map(e=>e.name)),towns=planningAreas.filter(a=>names.has(a.name)).sort((a,b)=>a.name.localeCompare(b.name));
-  const chips=values=>`<ul class="area-chips">${values.map(name=>`<li>${esc(name)}</li>`).join('')}</ul>`;
+  const chips=values=>values.length?`<ul class="area-chips">${values.map(name=>`<li>${esc(name)}</li>`).join('')}</ul>`:'';
   const grouped=values=>towns.length>8?Object.keys(regions).map(region=>{const subset=values.filter(a=>a.region===region);return subset.length?`<div class="area-region"><h3>${region}</h3>${chips(subset.map(a=>a.name))}</div>`:'';}).join(''):chips(values.map(a=>a.name));
   const sorted=towns.length>8?Object.keys(regions).flatMap(r=>towns.filter(a=>a.region===r)):towns;
   return `<div class="service-area-card">${names.has('Islandwide')?`<p class="islandwide-badge">${icon('pin')}Serves all of Singapore</p>`:''}${chips(Object.keys(regions).filter(r=>names.has(r)).map(r=>r+' region'))}${towns.length?`<div class="area-groups">${grouped(sorted.slice(0,12))}</div>${towns.length>12?`<details class="area-more"><summary><span class="area-show">Show ${towns.length-12} more ${towns.length-12===1?'area':'areas'}</span><span class="area-hide">Show fewer areas</span>${icon('chevron')}</summary><div class="area-groups">${grouped(sorted.slice(12))}</div></details>`:''}`:''}</div>`;

@@ -19,7 +19,7 @@ const indicative = p => p.indicative || /typically|on average|industry average|a
 const cited = x => x && http(x.sourceUrl || x.source_url);
 const contact = (x, fallback) => value(x) ? {value:value(x),sourceUrl:http(x?.sourceUrl)||fallback} : null;
 export function blockAddress(address) {
-  return text(address).replace(/[\u2010-\u2015]/g,'-').replace(/#\s*[a-z0-9]+(?:\s*[-/]\s*[a-z0-9]+|\s+\d{1,4}\b)?/gi,'').replace(/\bunit\s*#?\s*[\w]+(?:\s*[-/]\s*[\w]+)*/gi,'').replace(/\s*,\s*,/g,',').replace(/\s+,/g,',').replace(/\s{2,}/g,' ').trim();
+  return text(address).replace(/[\u2010-\u2015]/g,'-').replace(/#\s*[a-z0-9]+(?:\s*[-/]\s*[a-z0-9]+|\s+\d{1,4}\b)?/gi,'').replace(/\bunit\s*#?\s*[\w]+(?:\s*[-/]\s*[\w]+)*/gi,'').replace(/\s*,(?:\s*,)+/g,',').replace(/\s+,/g,',').replace(/,(?=[A-Za-z])/g,', ').replace(/^[\s,]+|[\s,]+$/g,'').replace(/\s{2,}/g,' ').trim();
 }
 export function supplementPostalAddress(current, incoming) {
   if (!current?.value || current.postal || !/^\d{6}$/.test(incoming?.postal || '') || !cited(incoming)) return current;
@@ -59,12 +59,14 @@ function serviceRows(row, trade) {
   return [...groups.values()];
 }
 
+const units = n => `${n} ${Number(n) === 1 ? 'unit' : 'units'}`;
+const sentenceCase = x => x.replace(/^./, c => c.toUpperCase());
 export function priceOption(item) {
   const details = [
     item.qty != null ? `Quantity: ${item.qty}` : '',
-    Number.isFinite(item.unit_price_sgd) ? `Calculated per-unit price: S$${item.unit_price_sgd}${Number.isFinite(item.unit_price_max_sgd)?` to S$${item.unit_price_max_sgd}`:''}${item.units_in_price?` (${item.units_in_price} units in the published total)`:''}` : '',
-    item.min_units != null ? `Minimum ${item.min_units} units` : '',
-    text(item.unit)+(item.unitInferred?' (inferred from the job type; confirm with the company)':''),
+    Number.isFinite(item.unit_price_sgd) ? `Calculated per-unit price: S$${item.unit_price_sgd}${Number.isFinite(item.unit_price_max_sgd)?` to S$${item.unit_price_max_sgd}`:''}${item.units_in_price?` (${units(item.units_in_price)} in the published total)`:''}` : '',
+    item.min_units != null ? `Minimum ${units(item.min_units)}` : '',
+    sentenceCase(text(item.unit))+(item.unitInferred?' (inferred from the job type; confirm with the company)':''),
     item.sessions_per_month != null ? `${item.sessions_per_month} sessions per month` : '',
     item.hours_per_session != null ? `${item.hours_per_session} hours per session` : '',
     text(item.gst_note || item.gst) ? `GST: ${text(item.gst_note || item.gst)}` : '',

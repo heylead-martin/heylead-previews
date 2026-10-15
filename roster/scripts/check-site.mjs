@@ -27,6 +27,10 @@ for(const rel of manifest) {
  assert.ok(!/\b(?:undefined|null|NaN|LOGO)\b|â€/.test(html),`Invalid generated text: ${rel}`);
  assert.ok(!/\bsort uses\b/i.test(html),`Obsolete sorting note: ${rel}`);
  assert.ok(!/\b1 sourced excerpts\b/.test(html),`Singular review excerpt grammar: ${rel}`);
+ assert.ok(!/\b1 units\b/.test(html),`Singular unit grammar: ${rel}`);
+ assert.ok(!/\(\s*(?:as low as|from|at)\s+\)|\b(?:begins at|starts at|from|at)\s+\.(?=[\s<])|,\s*,/.test(html),`Broken price or address text: ${rel}`);
+ const ogImage=html.match(/<meta property="og:image" content="([^"]+)"/)?.[1];
+ if(ogImage)assert.ok(/^https:\/\//.test(ogImage),`Relative share image: ${rel}`);
  const desc=html.match(/<meta name="description" content="([^"]+)"/)[1].replace(/&amp;/g,'&').replace(/&quot;/g,'"').replace(/&lt;/g,'<').replace(/&gt;/g,'>');
  assert.ok(desc.length<=160&&/[.?!)]$/.test(desc),`Description length/ending: ${rel}`);
  assert.ok(!descriptions.has(desc),`Duplicate description: ${rel}`);descriptions.add(desc);
@@ -40,10 +44,11 @@ for(const rel of manifest) {
   assert.ok(html.includes('class="listing-logo listing-logo-large'),`Missing logo slot: ${rel}`);
   const record=data.companies.find(c=>rel===`company/${c.slug}/index.html`);
   assert.ok(!html.includes('data-review-preview'),`Sample ratings on live profile: ${rel}`);
-  if(!record.listingDepth.full) assert.ok(html.includes('Limited details')&&!html.includes('data-review-preview'),`Missing compact profile: ${rel}`);
+  if(!record.listingDepth.full) assert.ok(html.includes(record.imported?'Limited details':'Some details unconfirmed')&&!html.includes('data-review-preview'),`Missing compact profile: ${rel}`);
   assert.ok(html.includes('src="/roster/assets/review-preview.mjs?'),`Missing review selector script: ${rel}`);
   if(record.quoteEvidence){assert.ok(html.includes('Quote on request'),`Missing explicit quote price: ${rel}`);assert.ok(html.includes(record.quoteEvidence.excerpt.replaceAll('&','&amp;').replaceAll('"','&quot;').replaceAll("'",'&#39;').replaceAll('<','&lt;').replaceAll('>','&gt;')),`Missing quote excerpt: ${rel}`);assert.ok(!html.includes('>Ask for a quote<'),`Generic quote replacing sourced statement: ${rel}`);}
   if(record.selfReportedRating)assert.ok(html.includes('The company says it has a '),`Missing self-reported rating: ${rel}`);
+  if(record.selfReportedRating?.count_conflict===true)assert.ok(/The company says it has a [\d.]+ rating on its own site; its pages give different review counts\./.test(html)&&!/The company says it has a [\d.]+ rating from /.test(html),`Conflicting self-reported count shown: ${rel}`);
   for(const image of html.matchAll(/data-company-logo src="([^"]+)"/g))assert.ok(image[1].startsWith('/roster/assets/logos/'),`Hotlinked logo: ${rel}`);
   const intro=html.match(/<p class="company-intro">(.*?)<\/p>/)?.[1]||'';
   assert.ok(intro&&!/Its website mentions|Its site says|Roster found no/.test(intro),`Research wording remains: ${rel}`);
@@ -94,4 +99,4 @@ for(const [id,slug] of Object.entries(categories)){
 }
 assert.equal(Object.values(report.byTrade).reduce((n,t)=>n+t.published,0),report.publishedCount,'Primary-trade totals must not overlap');
 const all=await load('data/index/all.json');assert.equal(all.companies.length,data.companies.length);
-console.log(`PASS: ${pages.size} pages, all local links/fragments, unique metadata, schema restrictions, publication counts and 16 original write-ups.`);
+console.log(`PASS: ${pages.size} pages, all local links/fragments, unique metadata, schema restrictions, publication counts and ${Object.keys(old).length} original write-ups.`);

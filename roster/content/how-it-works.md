@@ -1,4 +1,4 @@
-Roster is a sourced directory of home-service companies in Singapore. It helps you compare services, published prices, areas served and external reviews before contacting a company directly. Listings are unpaid. The quote-request and claim experiences are beta previews, so they do not send a job, transfer contact details or confirm a booking.
+Roster is a sourced directory of home-service companies in Singapore. It helps you compare services, published prices, areas served and external reviews before contacting a company directly. Listings are unpaid. Roster does not send your job to companies, transfer your contact details or confirm a booking. The listing-claim page is a preview.
 
 ## Start with the job, then compare the details
 
@@ -56,13 +56,13 @@ Coverage tags come from what the company states about its service areas. They do
 
 Call and WhatsApp links contact the company directly. Roster does not receive or supervise that conversation. Keep the written quote and booking confirmation from the company, including the agreed scope and how additional work will be approved.
 
-## What the beta tools do
+## What is not available yet
 
-The guided search helps turn a job description and area into a shortlist using local matching. It is a beta experience rather than a live AI adviser or a professional diagnosis. Check the results against the job and the company's actual services before relying on the match.
+Saved lists, quote requests and guided job matching are not available on the public site. Use search, the service-area picker and the filters to narrow the directory, then compare the profiles yourself. Check each company's actual services against your job before contacting it.
 
-Quote requests are previews. You can explore the steps and choose companies, but no request is delivered and no booking is made. Contact a company directly when you are ready to arrange work. Do not use the preview as an emergency response channel.
+Roster does not deliver requests or make bookings. Contact a company directly when you are ready to arrange work. For an emergency, call the company or the appropriate emergency service rather than waiting on a directory.
 
-The claim-listing page is also a preview. Completing it does not establish ownership or change a company profile. Real ownership checks and live request handling need a separate operational process before those features can be offered as active services.
+The claim-listing page is a preview. Completing it does not establish ownership or change a company profile. Real ownership checks and live request handling need a separate operational process before those features can be offered as active services.
 
 ## Questions about Roster
 

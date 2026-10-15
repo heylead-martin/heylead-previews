@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {profileIntro, priceView, servicePrice} from '../lib/profile-copy.mjs';
+import {profileIntro, priceView, servicePrice, tidyPriceLabel} from '../lib/profile-copy.mjs';
 import {sampleSources, weightedRating} from '../assets/review-model.mjs';
 import {ratingSummary} from '../lib/rating-summary.mjs';
 import {splitDirectory} from '../assets/catalogue-card.mjs';
@@ -142,4 +142,19 @@ test('Counts cover every match, including companies beyond the first page', () =
   assert.equal(result.counts.price,30);
   assert.equal(result.counts.reviews,30);
   assert.equal(result.counts.whatsapp,30);
+});
+
+test('Price labels drop leftovers of a removed amount but keep real qualifiers',()=>{
+  const cases=[
+    ['Residential Cleaning - Affordable cleaning (as low as )','Residential Cleaning - Affordable cleaning'],
+    ['Your Reliable House Cleaning Agency - The best option for keeping your home sparkling clean. Recurring service begins at .','Your Reliable House Cleaning Agency - The best option for keeping your home sparkling clean.'],
+    ['Aircon Servicing Singapore | Service Aircon Frm','Aircon Servicing Singapore | Service Aircon'],
+    ['Trial 4-hour session - . Trial price is applicable to first-time customers only.','Trial 4-hour session. Trial price is applicable to first-time customers only.'],
+    ['General Weekly Bi-weekly Home Cleaning - .Minimum 3hours. Let','General Weekly Bi-weekly Home Cleaning. Minimum 3hours.'],
+    ['Aircon Cleaning Servicing - Reliable aircon service and cleaning for homes and offices, . Our technicians clean key componen','Aircon Cleaning Servicing - Reliable aircon service and cleaning for homes and offices.'],
+    ['Site survey - Overhaul Treatment *(For Contract rate )','Site survey - Overhaul Treatment (For Contract rate)']
+  ];
+  for(const [raw,expected] of cases)assert.equal(tidyPriceLabel(raw),expected);
+  for(const kept of ['General servicing, 3 units (from)','3-Bedroom: from','General servicing, 1st split FCU/CU (<3hp), incl. transport','FLOOR TRAP :from $60.(labor Only)','Normal Servicing, 2 fan coils'])assert.equal(tidyPriceLabel(kept),kept);
+  assert.equal(priceView({label:'Affordable cleaning (as low as )',price:'S$18'}).label,'Affordable cleaning');
 });
