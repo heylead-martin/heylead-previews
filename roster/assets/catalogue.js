@@ -29,8 +29,19 @@ if(root) {
     root.querySelectorAll('[data-filter]:checked').forEach(el=>params.set(el.dataset.filter,'1'));
     const query=params.toString();history.replaceState(null,'',location.pathname+(query?'?'+query:'')+location.hash);
   }
+  // Towns with a static area page: point the canonical at it and offer a link while ?area= is set.
+  const areaPages=JSON.parse(document.querySelector('[data-area-pages]')?.dataset.areaPages||'{}');
+  const canonical=document.querySelector('link[rel="canonical"]'),hubCanonical=canonical?.href;
+  const areaNote=document.createElement('p');areaNote.className='area-unstated';areaNote.dataset.areaPageNote='';areaNote.hidden=true;
+  root.querySelector('[data-area-unstated]').before(areaNote);
+  function syncAreaPage(){
+    const page=areaPages[area.value];
+    if(canonical)canonical.href=page?new URL(page,hubCanonical).href:hubCanonical;
+    areaNote.hidden=!page;areaNote.textContent='';
+    if(page){const link=document.createElement('a');link.href=page;link.textContent=`See the ${document.getElementById('area-'+area.value)?.textContent||'town'} page, with coverage sources and published prices`;areaNote.append(link);}
+  }
   function apply(reset=true,syncUrl=true) {
-    sortControl.sync();
+    sortControl.sync();syncAreaPage();
     if(!loaded)return;if(reset)limit=12;
     const savedSlugs=saved(),active=[...root.querySelectorAll('[data-filter]:checked')].map(x=>x.dataset.filter);
     const {matches,counts,unknownCount}=filterCatalogue(rows,{query:search.value,area:area.value,category:category?.value,rating:rating.value,active,savedSlugs,includeUnstated:unstated.checked});
@@ -67,5 +78,5 @@ if(root) {
   const toggle=root.querySelector('[data-toggle-filters]'),panel=root.querySelector('.filter-content'),mobile=matchMedia('(max-width:639px)');
   function showFilters(show){panel.hidden=!show;toggle.setAttribute('aria-expanded',String(show));}
   showFilters(!mobile.matches);toggle.addEventListener('click',()=>showFilters(panel.hidden));mobile.addEventListener('change',()=>showFilters(!mobile.matches));
-  readParams();await load();
+  readParams();syncAreaPage();await load();
 }

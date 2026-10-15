@@ -7,6 +7,7 @@ import {renderQuoteComposer} from './lib/quote-flow.mjs';
 import {renderAreaFilter} from './lib/service-areas.mjs';
 import {ratingSummary} from './lib/rating-summary.mjs';
 import {planningAreas} from './assets/service-areas.mjs';
+import {selectAreaPages,townCoverage,townRegion,nearbyTowns,serviceCounts} from './lib/area-pages.mjs';
 import {priceOption} from './scripts/import-db.mjs';
 import { readFile, writeFile, mkdir, rm } from "node:fs/promises";
 import path from "node:path";
@@ -993,51 +994,92 @@ function renderGuidePage(guide) {
 // Guides and intent pages show only published, sourced company rates: one lowest matching
 // non-promotional rate per company, each with its company, source link and capture date.
 // Matching, guards, labels and rate wording live in lib/sourced-rates.mjs.
-function renderSourcedRates(key) {
+function renderSourcedRates(key,companies=publishedCompanies,{attr='data-sourced-rates',scope=''}={}) {
   const spec=guideEvidence[key];if(!spec)return '';
-  const rows=sourcedRates(spec,publishedCompanies);if(rows.length<minimumCompanies)return '';
+  const rows=sourcedRates(spec,companies);if(rows.length<minimumCompanies)return '';
   const units=new Map();for(const {line} of rows){const unit=displayUnit(line);if(unit)units.set(unit,(units.get(unit)||0)+1);}
   const [unit,count]=[...units].sort((a,b)=>b[1]-a[1])[0]||['',0];
   const same=rows.filter(r=>displayUnit(r.line)===unit).map(r=>r.line.amount_sgd);
   const range=count>=3?`<p>For the most common unit (${esc(unit)}), the lowest published rates from ${count} companies run from <strong>${money(Math.min(...same))}</strong> to <strong>${money(Math.max(...same))}</strong>. Each figure is one company's own advertised rate with its conditions, not a market average or a quote.</p>`:`<p>Each figure is one company's own advertised rate with its conditions, not a market average or a quote.</p>`;
-  return `<section class="guide-price-sample" aria-labelledby="${key}-rates-title"><p class="kicker">FROM THE ROSTER DIRECTORY</p><h2 id="${key}-rates-title">${esc(spec.title)}</h2>${range}<details><summary>See ${rows.length} published ${esc(spec.noun)} rates and sources</summary><div class="guide-table-scroll" tabindex="0" role="region" aria-label="${esc(spec.title)}"><table data-sourced-rates="${esc(key)}"><caption>Lowest matching advertised rate per company, in SGD as published. "From" marks a starting price and ranges are shown in full. Check the source for minimums, GST and inclusions.</caption><thead><tr><th scope="col">Company</th><th scope="col">Service as listed</th><th scope="col">Rate</th><th scope="col">Source</th></tr></thead><tbody>${rows.map(({company:c,line:p})=>`<tr><th scope="row"><a href="/roster/company/${c.slug}/#pricing">${esc(c.name)}</a></th><td>${esc(rateLabel(p,spec,c.name))}</td><td>${esc(rateCell(p))}</td><td><a href="${esc(p.sourceUrl)}">${esc(new URL(p.sourceUrl).hostname.replace(/^www\./,''))} · ${esc(p.capturedAt.slice(0,10))}</a></td></tr>`).join('')}</tbody></table></div></details></section>`;
+  return `<section class="guide-price-sample" aria-labelledby="${key}-rates-title"><p class="kicker">FROM THE ROSTER DIRECTORY</p><h2 id="${key}-rates-title">${esc(spec.title+scope)}</h2>${range}<details><summary>See ${rows.length} published ${esc(spec.noun)} rates and sources</summary><div class="guide-table-scroll" tabindex="0" role="region" aria-label="${esc(spec.title)}"><table ${attr}="${esc(key)}"><caption>Lowest matching advertised rate per company, in SGD as published. "From" marks a starting price and ranges are shown in full. Check the source for minimums, GST and inclusions.</caption><thead><tr><th scope="col">Company</th><th scope="col">Service as listed</th><th scope="col">Rate</th><th scope="col">Source</th></tr></thead><tbody>${rows.map(({company:c,line:p})=>`<tr><th scope="row"><a href="/roster/company/${c.slug}/#pricing">${esc(c.name)}</a></th><td>${esc(rateLabel(p,spec,c.name))}</td><td>${esc(rateCell(p))}</td><td><a href="${esc(p.sourceUrl)}">${esc(new URL(p.sourceUrl).hostname.replace(/^www\./,''))} · ${esc(p.capturedAt.slice(0,10))}</a></td></tr>`).join('')}</tbody></table></div></details></section>`;
 }
 
-// Towns from the keyword plan. Links use the existing coverage filter; plumbing has three full area pages.
+// Towns from the keyword plan, plus every town with a static area page. Towns with a page
+// link to it; the rest use the coverage filter. Page selection rule: lib/area-pages.mjs.
 const areaTowns = ['Ang Mo Kio','Bedok','Bishan','Bukit Batok','Bukit Panjang','Choa Chu Kang','Clementi','Hougang','Jurong West','Pasir Ris','Punggol','Queenstown','Sengkang','Serangoon','Tampines','Toa Payoh','Woodlands','Yishun'];
-const areaPages = {plumbing:['Woodlands','Tampines','Yishun']};
 const townSlug = name => name.toLowerCase().replace(/[^a-z0-9]+/g,'-');
+const areaPagePath = (tradeId,town) => areaPages.find(p=>p.trade===tradeId&&p.town===town)?.path;
+const areaHref = (spec,town) => areaPagePath(spec.id,town)||`/roster/${spec.slug}/?area=${townSlug(town)}#company-results`;
 function renderAreasWeServe(spec) {
-  const pages=new Set(areaPages[spec.id]||[]);
-  const links=areaTowns.map(town=>pages.has(town)?`<a href="/roster/${spec.slug}/${townSlug(town)}/">${esc(town)}</a>`:`<a href="/roster/${spec.slug}/?area=${townSlug(town)}#company-results">${esc(town)}</a>`).join('');
-  return `<section class="areas-we-serve" aria-labelledby="areas-title"><p class="kicker">BY TOWN</p><h2 id="areas-title">Areas we serve</h2><p>Pick a town to filter this list by the coverage each company states on its own website. A company's office address is not used as coverage, and companies that do not state their areas are shown separately.</p><div class="areas-we-serve-links">${links}</div></section>`;
+  const towns=[...new Set([...areaTowns,...areaPages.filter(p=>p.trade===spec.id).map(p=>p.town)])].sort((a,b)=>a.localeCompare(b));
+  const map=Object.fromEntries(areaPages.filter(p=>p.trade===spec.id).map(p=>[townSlug(p.town),p.path]));
+  const links=towns.map(town=>`<a href="${areaHref(spec,town)}"${areaPagePath(spec.id,town)?' data-area-page-link':''}>${esc(town)}</a>`).join('');
+  return `<section class="areas-we-serve" aria-labelledby="areas-title" data-area-pages="${esc(JSON.stringify(map))}"><p class="kicker">BY TOWN</p><h2 id="areas-title">Areas we serve</h2><p>Pick a town to see the companies that name it on their own websites. A company's office address is not used as coverage, and companies that do not state their areas are shown separately.</p><div class="areas-we-serve-links">${links}</div></section>`;
 }
-function areaCompanies(trade, town) {
-  const region=planningAreas.find(a=>a.name===town)?.region;
-  const stated=c=>new Set((c.enrichment?.serviceLocations||[]).map(l=>l.name));
-  const rows=publishedCompanies.filter(c=>c.category===trade);
-  return {town:rows.filter(c=>stated(c).has(town)),region:rows.filter(c=>!stated(c).has(town)&&region&&stated(c).has(region)),islandwide:rows.filter(c=>!stated(c).has(town)&&!(region&&stated(c).has(region))&&stated(c).has('Islandwide'))};
+// Wording per trade for area pages. Advice only; every number on the page comes from the data.
+const areaWords = {
+  plumbing:{pro:'Plumbers',noun:'plumbing',one:'plumber',kicker:'PLUMBING BY TOWN',tips:town=>`<p>Share the block number, the floor and the room with the fault, plus a photo of the pipe, trap or fitting. Say whether it is an HDB flat, a condo or a landed home, and mention any lift booking or parking arrangements the technician needs.</p><p>Leaks and chokes in shared areas, such as a common drainage stack or a corridor pipe, are normally handled by your Town Council or management office rather than a private plumber. Check with them first if water is coming from outside your unit, then book a plumber for work inside your home in ${esc(town)}.</p><p>The <a href="/roster/plumbing/leak-repair/">leak repair guide</a> and <a href="/roster/plumbing/choked-drain/">choked drain guide</a> explain what to describe for the most common jobs.</p>`},
+  aircon:{pro:'Aircon servicing companies',noun:'aircon servicing',one:'aircon technician',kicker:'AIRCON SERVICING BY TOWN',tips:town=>`<p>Count your indoor units and note the brand and model of each, plus whether you need a general service, a chemical wash or a repair. A photo of the unit label and any leak or error code helps the company quote before the visit to ${esc(town)}.</p><p>Ask whether the price is per unit and whether a minimum number of units applies. The <a href="/roster/aircon-servicing/guide/">aircon servicing guide</a> explains the common service types.</p>`},
+  electrician:{pro:'Electricians',noun:'electrical',one:'electrician',kicker:'ELECTRICIANS BY TOWN',tips:town=>`<p>Describe what happened, such as a trip when one appliance runs or a socket that has stopped working, and send a photo of your DB box. Give the block, floor and unit so the company can confirm it covers your part of ${esc(town)}.</p><p>The <a href="/roster/electrician/power-trip/">power trip guide</a> and <a href="/roster/electrician/licensed-electrician/">licensed electrician guide</a> explain what to check.</p>`},
+  handyman:{pro:'Handymen',noun:'handyman',one:'handyman',kicker:'HANDYMEN BY TOWN',tips:town=>`<p>List every small job you want done in one visit, with photos and measurements, and say which items you are supplying. Give the block, floor and unit so the company can confirm it covers your part of ${esc(town)}.</p><p>Ask whether the price is per job, per item or per hour, and whether a minimum charge applies. The <a href="/roster/handyman/guide/">handyman guide</a> covers the common jobs.</p>`},
+  cleaning:{pro:'Home cleaners',noun:'home cleaning',one:'cleaner',kicker:'HOME CLEANING BY TOWN',tips:town=>`<p>Say whether you want a one-off clean, a regular schedule or a move-out clean, and give the flat type and size. Mention pets, parking and access so the company can confirm it covers your address in ${esc(town)}.</p><p>Ask what is included, whether supplies are brought, and whether the rate is per hour or per session. The <a href="/roster/home-cleaning/guide/">home cleaning guide</a> explains the common options.</p>`}
+};
+const acronyms = s => s.replace(/\b(db|lew|ev|tv|hdb|ikea|ups)\b/gi,m=>m.toUpperCase());
+const countText = (n,one,many) => `${n} ${n===1?one:many}`;
+const listText = items => items.length<2?items.join(''):items.slice(0,-1).join(', ')+' and '+items.at(-1);
+// Published rate summaries for the companies that name the town, by guideEvidence spec.
+// Same rules as the guides: one lowest rate per company, and no range under minimumCompanies.
+function areaRates(tradeId, local) {
+  return Object.entries(guideEvidence).filter(([,spec])=>spec.trade===tradeId).map(([key,spec])=>{
+    const rows=sourcedRates(spec,local);if(rows.length<minimumCompanies)return null;
+    const units=new Map();for(const {line} of rows){const unit=displayUnit(line);if(unit)units.set(unit,(units.get(unit)||0)+1);}
+    const [unit,count]=[...units].sort((a,b)=>b[1]-a[1])[0]||['',0];
+    const same=rows.filter(r=>displayUnit(r.line)===unit);
+    return {key,spec,rows,unit,count,low:count>=minimumCompanies?same[0]:null,high:count>=minimumCompanies?same.at(-1):null};
+  }).filter(Boolean);
 }
-
-function renderAreaPage(tradeId, town) {
-  const trade=tradeById(tradeId),slug=townSlug(town),canonicalPath=`/roster/${trade.slug}/${slug}/`;
+function renderAreaPage(page) {
+  const {trade:tradeId,town}=page,trade=tradeById(tradeId),words=areaWords[tradeId],slug=townSlug(town),canonicalPath=page.path;
   const {town:local,region,islandwide}=areaCompanies(tradeId,town);
-  const regionName=planningAreas.find(a=>a.name===town)?.region;
-  const title=`Plumbers Serving ${town}, Singapore | Roster`;
-  const description=concise(`Compare ${local.length} plumbing companies that state they serve ${town}, with coverage sources, published prices and direct contact details.`);
+  const regionName=townRegion(town);
+  const hub=editorialGuides.find(g=>g.trade===tradeId&&g.hub);
+  const title=`${words.pro} Serving ${town}, Singapore | Roster`;
+  const description=concise(`Compare ${local.length} ${words.noun} companies that state they serve ${town}, with coverage sources, published prices and direct contact details.`);
   const crumbs=[{href:`/roster/${trade.slug}/`,label:trade.name},{href:canonicalPath,label:town}];
+  const services=serviceCounts(local).filter(([,n])=>n>=2).slice(0,4);
+  const priced=local.filter(c=>presentation[c.slug]?.published).length;
+  const rated=local.filter(c=>ratingSummary(c)).length;
+  const emergency=local.filter(c=>c.enrichment?.emergency?.value===true).length;
+  const rates=areaRates(tradeId,local);
+  const lead=rates.find(r=>r.low);
+  const intro=[`${countText(local.length,`${words.noun} company`,`${words.noun} companies`)} on Roster name ${town} on their own websites, in the ${regionName} region.`,
+    services.length?`The services they list most often are ${listText(services.map(([n,c])=>`${acronyms(n.toLowerCase())} (${c})`))}.`:'',
+    `${priced} ${priced===1?'publishes prices on its site':'publish prices on their sites'}, ${countText(rated,'has','have')} a cited rating${emergency?`, and ${countText(emergency,'describes','describe')} emergency or after-hours work`:''}.`,
+    lead?`For ${lead.spec.noun} work, the lowest published rates from ${lead.count} of these companies run from ${money(lead.low.line.amount_sgd)} ${lead.unit} at ${lead.low.company.name} to ${money(lead.high.line.amount_sgd)} at ${lead.high.company.name}, as each company advertises it.`:`Fewer than ${minimumCompanies} of these companies publish a comparable rate for the same job, so no price range is shown for ${town}.`
+  ].filter(Boolean).join(' ');
   const coverage=c=>(c.enrichment.serviceLocations||[]).find(l=>l.name===town);
   const item=c=>{const e=coverage(c),r=ratingSummary(c);return `<li><div><a href="/roster/company/${c.slug}/">${esc(c.name)}</a><span>${r?`${r.value.toFixed(1)} / 5 from ${r.count?r.count.toLocaleString('en-SG')+' reviews':'cited sources'}`:'No ratings found yet'}${presentation[c.slug]?.published?' · Publishes prices':''}</span></div>${e?`<a href="${esc(e.sourceUrl)}">Coverage stated on ${esc(new URL(e.sourceUrl).hostname.replace(/^www\./,''))} · ${esc(e.capturedAt)}</a>`:''}</li>`;};
-  const body=renderCrumbs(crumbs)+`<header class="guide-hero"><div><p class="kicker">PLUMBING BY TOWN</p><h1>Plumbers serving ${esc(town)}.</h1><p class="guide-dek">${local.length} plumbing companies on Roster name ${esc(town)} in the areas they serve. Each listing links to the page where the company says so.</p><div class="guide-hero-actions"><a class="btn btn-solid" href="/roster/${trade.slug}/?area=${slug}#company-results">Filter all plumbers by ${esc(town)} ${icon('arrow')}</a><a href="/roster/plumbing/guide/">Read the plumbing guide</a></div></div></header>
-<section class="editorial area-page"><div class="guide-copy">
-<h2 id="named">Companies that name ${esc(town)}</h2><p>These companies list ${esc(town)} on their own websites. Coverage can change, so confirm your block and postal code when you call. The order is alphabetical, not a ranking.</p><ul class="area-company-list">${local.sort((a,b)=>a.name.localeCompare(b.name)).map(item).join('')}</ul>
-<h2 id="wider">Wider coverage</h2><p>${region.length} more ${region.length===1?'company states':'companies state'} that ${region.length===1?'it serves':'they serve'} the ${esc(regionName||'surrounding')} region, and ${islandwide.length} ${islandwide.length===1?'says it serves':'say they serve'} all of Singapore without naming ${esc(town)}. The <a href="/roster/${trade.slug}/?area=${slug}#company-results">area filter</a> lists them after the companies that name the town. Companies that do not state any coverage are not counted here.</p>
-<h2 id="before">Before you call a plumber in ${esc(town)}</h2><p>Share the block number, the floor and the room with the fault, plus a photo of the pipe, trap or fitting. Say whether it is an HDB flat, a condo or a landed home, and mention any lift booking or parking arrangements the technician needs.</p><p>Leaks and chokes in shared areas, such as a common drainage stack or a corridor pipe, are normally handled by your Town Council or management office rather than a private plumber. Check with them first if water is coming from outside your unit, then book a plumber for work inside your home.</p><p>Ask for the call-out or inspection charge before the visit, and agree the price of any extra work before it starts. The <a href="/roster/plumbing/leak-repair/">leak repair guide</a> and <a href="/roster/plumbing/choked-drain/">choked drain guide</a> explain what to describe for the most common jobs.</p>
-</div></section>`;
-  const jsonLd=[webPage(title,canonicalPath,description),crumbsLd(crumbs)];
+  const rateTables=rates.map(r=>renderSourcedRates(r.key,local,{attr:'data-area-rates',scope:` from companies serving ${town}`})).join('');
+  const nearby=nearbyTowns(town).filter(t=>planningAreas.some(a=>a.name===t));
+  const nearbyLinks=nearby.map(t=>`<a href="${areaHref(trade,t)}">${esc(t)}</a>`).join('');
+  const faqs=[
+    [`How many ${words.noun} companies serve ${town}?`,`${countText(local.length,'company names','companies name')} ${town} on its own website and ${local.length===1?'is':'are'} listed on this page. ${countText(region.length,'more company states','more companies state')} the ${regionName} region, and ${countText(islandwide.length,'says','say')} it covers all of Singapore without naming ${town}.`],
+    [`What do ${words.noun} companies serving ${town} charge?`,lead?`The lowest published ${lead.spec.noun} rates from ${lead.count} companies that name ${town} run from ${money(lead.low.line.amount_sgd)} to ${money(lead.high.line.amount_sgd)} ${lead.unit}. These are advertised rates with conditions, not quotes.`:`Fewer than ${minimumCompanies} companies that name ${town} publish a comparable rate for the same job, so Roster does not show a range. ${priced} ${priced===1?'company publishes':'companies publish'} some prices; ask the others for a quote.`],
+    [`Is this list a ranking?`,`No. Companies that name ${town} are listed alphabetically. Roster listings are unpaid.`]
+  ];
+  const body=renderCrumbs(crumbs)+`<header class="guide-hero"><div><p class="kicker">${words.kicker}</p><h1>${esc(words.pro)} serving ${esc(town)}.</h1><p class="guide-dek" data-area-intro>${esc(intro)}</p><div class="guide-hero-actions"><a class="btn btn-solid" href="/roster/${trade.slug}/?area=${slug}#company-results">Filter all ${esc(trade.name.toLowerCase())} companies by ${esc(town)} ${icon('arrow')}</a>${hub?`<a href="${hub.path}">Read the ${esc(hub.label.toLowerCase())} guide</a>`:''}</div></div></header>
+<section class="editorial area-page" data-area-page="${tradeId}|${esc(town)}"><div class="guide-copy">
+<h2 id="named">Companies that name ${esc(town)}</h2><p>These companies list ${esc(town)} on their own websites. Coverage can change, so confirm your block and postal code when you call. The order is alphabetical, not a ranking.</p><ul class="area-company-list">${local.map(item).join('')}</ul>
+${rateTables}
+<h2 id="wider">Wider coverage</h2><p>${region.length} more ${region.length===1?'company states':'companies state'} that ${region.length===1?'it serves':'they serve'} the ${esc(regionName)} region, and ${islandwide.length} ${islandwide.length===1?'says it serves':'say they serve'} all of Singapore without naming ${esc(town)}. The <a href="/roster/${trade.slug}/?area=${slug}#company-results">area filter</a> lists them after the companies that name the town. Companies that do not state any coverage are not counted here.</p>
+<h2 id="before">Before you call ${/^[aeiou]/i.test(words.one)?'an':'a'} ${words.one} in ${esc(town)}</h2>${words.tips(town)}<p>Ask for the call-out or inspection charge before the visit, and agree the price of any extra work before it starts.</p>
+<h2 id="nearby">Nearby towns</h2><p>Towns next to ${esc(town)} on the URA planning area map. Linked pages list the ${esc(words.noun)} companies that name each town; the others open the area filter.</p><div class="areas-we-serve-links" data-nearby>${nearbyLinks}<a href="/roster/${trade.slug}/">All ${esc(trade.name.toLowerCase())} companies</a></div>
+</div></section>`+renderFaq(faqs,`Questions about ${words.noun} in ${town}`);
+  const jsonLd=[webPage(title,canonicalPath,description),crumbsLd(crumbs),faqLd(faqs)];
   forbidSchema(jsonLd);
   return pageShell({title,description,canonicalPath,current:`/roster/${trade.slug}/`,jsonLd,body,bodyClass:'guide-page'});
 }
+function areaCompanies(trade, town) { return townCoverage(publishedCompanies, trade, town); }
 
 function renderGuidePrices() {
   const {samples,average}=buildHomeSnapshot(publishedCompanies,mapPins,presentation).prices.aircon;
@@ -1062,6 +1104,8 @@ validate(raw.companies);
 const operatorGroups = JSON.parse(await readFile(path.join(root, "data", "operator-groups.json"), "utf8"));
 const renderProfile = createProfileRenderer({esc,icon,tradeById,profileContent,priceSummary,renderCrumbs,pageShell,webPage,crumbsLd,faqLd,profileBusinessGraph,forbidSchema,renderServiceRow,renderForm,operatorGroups,mapPins});
 const publishedCompanies = raw.companies.filter((company) => company.publish !== false);
+// Existing guide and intent pages own their slugs; a town page never replaces one.
+const {pages:areaPages,collisions:areaCollisions}=selectAreaPages(publishedCompanies,trades,new Set([...editorialGuides.map(g=>g.slug),...intents.map(i=>i.slug)]));
 const grouped = {};
 for (const trade of trades) grouped[trade.id] = [];
 for (const company of publishedCompanies) grouped[company.primaryTrade || company.category].push(company);
@@ -1114,7 +1158,8 @@ for (const intent of intents) {
 }
 
 for (const guide of editorialGuides) written.push(await writePage(guide.slug,renderGuidePage(guide)));
-for (const [tradeId,towns] of Object.entries(areaPages)) for (const town of towns) written.push(await writePage(`${tradeById(tradeId).slug}/${townSlug(town)}`,renderAreaPage(tradeId,town)));
+for (const page of areaPages) written.push(await writePage(page.slug,renderAreaPage(page)));
+for (const c of areaCollisions) console.log(`Area page skipped, slug in use: ${c.slug}`);
 
 for (const company of publishedCompanies) {
   written.push(await writePage(
@@ -1147,7 +1192,7 @@ for (const rel of previous) if(!currentPaths.includes(rel) && /^company\/[a-z0-9
 await writeFile(path.join(root,'data/build-manifest.json'),JSON.stringify(currentPaths,null,2)+'\n');
 // Preview pages are intentionally noindex, so none belong in a submitted sitemap.
 // This review manifest is the proposed launch set, pending an approved production domain and indexing review.
-const launchPages=[{path:"/roster/",kind:"home"},{path:"/roster/how-it-works/",kind:"method"},...trades.map(t=>({path:`/roster/${t.slug}/`,kind:"directory"})),...editorialGuides.map(g=>({id:g.id,path:g.path,words:g.words,kind:"guide"}))];
+const launchPages=[{path:"/roster/",kind:"home"},{path:"/roster/how-it-works/",kind:"method"},...trades.map(t=>({path:`/roster/${t.slug}/`,kind:"directory"})),...editorialGuides.map(g=>({id:g.id,path:g.path,words:g.words,kind:"guide"})),...areaPages.map(p=>({path:p.path,trade:p.trade,town:p.town,companies:p.count,kind:"area"}))];
 await writeFile(path.join(root,'data/seo-launch-pages.json'),JSON.stringify({status:"preview-noindex",canonicalOrigin:origin,updated:"2026-10-12",pages:launchPages},null,2)+'\n');
 await writeFile(path.join(root,'sitemap.xml'),'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"></urlset>\n');
 await writeFile(path.join(root,'robots.txt'),'# Beta preview. Every HTML page also carries noindex.\nUser-agent: *\nDisallow: /roster/\n');

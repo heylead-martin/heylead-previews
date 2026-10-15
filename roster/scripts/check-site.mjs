@@ -4,6 +4,8 @@ import { fileURLToPath } from 'node:url';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {decodeCatalogue} from '../assets/catalogue-data.mjs';
+import {selectAreaPages,townCoverage,nearbyTowns,AREA_PAGE_MINIMUM,AREA_MAX_SIMILARITY,AREA_MIN_DISTINCT} from '../lib/area-pages.mjs';
+import {areaSlug} from '../assets/service-areas.mjs';
 import {guideEvidence, sourcedRates, rateProblem, isFromPrice, minimumCompanies, maxLabelLength} from '../lib/sourced-rates.mjs';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const load=async f=>JSON.parse(await readFile(path.join(root,f),'utf8'));
@@ -85,6 +87,60 @@ for(const [rel,html] of pages)for(const table of html.matchAll(/<table data-sour
  });
 }
 for(const [key,spec] of Object.entries(guideEvidence))if(!rateTables.has(key))assert.ok(sourcedRates(spec,data.companies).length<minimumCompanies,`Rate table missing: ${key}`);
+// Static area pages: the selection rule, real coverage lists, sourced town rates, visible FAQs,
+// breadcrumbs, nearby links, hub links and distinct copy. Rule and nearby map: lib/area-pages.mjs.
+{
+ const tradeSlugs={aircon:'aircon-servicing',plumbing:'plumbing',electrician:'electrician',handyman:'handyman',cleaning:'home-cleaning'};
+ // Guide and intent pages already built own their slugs; selection must skip them, as the build does.
+ const reserved=new Set([...pages].filter(([rel,html])=>!rel.startsWith('company/')&&!html.includes('data-area-page=')).map(([rel])=>rel.replace(/\/?index\.html$/,'')));
+ const expected=selectAreaPages(data.companies,Object.entries(tradeSlugs).map(([id,slug])=>({id,slug})),reserved);
+ const launch=await load('data/seo-launch-pages.json');
+ assert.equal(await readFile(path.join(root,'sitemap.xml'),'utf8'),'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"></urlset>\n','Preview sitemap must stay empty while every page is noindex');
+ const text=html=>unescape(html.match(/<main[^>]*>([\s\S]*?)<\/main>/)[1].replace(/<script[\s\S]*?<\/script>/g,' ')).replace(/\s+/g,' ').trim();
+ const shingles=s=>{const w=s.toLowerCase().split(/\W+/).filter(Boolean),out=new Set();for(let i=0;i+5<=w.length;i++)out.add(w.slice(i,i+5).join(' '));return out;};
+ const intros=new Map(),byTrade={};
+ for(const page of expected.pages){
+  const rel=`${page.slug}/index.html`,html=pages.get(rel);assert.ok(html,`Missing area page: ${rel}`);
+  assert.ok(page.count>=AREA_PAGE_MINIMUM,`Area page under minimum: ${rel}`);
+  assert.ok(launch.pages.some(p=>p.kind==='area'&&p.path===page.path),`Area page missing from launch manifest: ${rel}`);
+  assert.ok(html.includes(`data-area-page="${page.trade}|${page.town}"`),`Area page marker: ${rel}`);
+  const {town:local}=townCoverage(data.companies,page.trade,page.town);assert.equal(local.length,page.count);
+  const listed=[...html.match(/<ul class="area-company-list">([\s\S]*?)<\/ul>/)[1].matchAll(/<li><div><a href="\/roster\/company\/([^/]+)\//g)].map(m=>m[1]);
+  assert.deepEqual(listed,local.map(c=>c.slug),`Area company list differs from stated coverage: ${rel}`);
+  assert.match(html,new RegExp(`<link rel="canonical" href="https://[^"/]+${page.path}">`),`Canonical: ${rel}`);
+  const intro=unescape(html.match(/<p class="guide-dek" data-area-intro>([\s\S]*?)<\/p>/)[1]);
+  assert.ok(intro.startsWith(`${page.count} `)&&intro.includes(page.town),`Area intro must state the town and count: ${rel}`);
+  assert.ok(!intros.has(intro),`Duplicate area intro: ${rel} and ${intros.get(intro)}`);intros.set(intro,rel);
+  for(const table of html.matchAll(/<table data-area-rates="([^"]+)">([\s\S]*?)<\/table>/g)){
+   const spec=guideEvidence[table[1]],rows=[...table[2].matchAll(/<tr><th scope="row"><a href="\/roster\/company\/([^/]+)\/#pricing">[\s\S]*?<td><a href="([^"]+)"/g)];
+   assert.ok(spec&&spec.trade===page.trade,`Area rate table trade: ${rel}`);assert.ok(rows.length>=minimumCompanies,`Area rate table under ${minimumCompanies} companies: ${rel}`);
+   const want=sourcedRates(spec,local);assert.deepEqual(rows.map(m=>m[1]),want.map(r=>r.company.slug),`Area rate rows differ from the town's companies: ${table[1]} ${rel}`);
+   rows.forEach((m,i)=>assert.equal(unescape(m[2]),want[i].line.sourceUrl,`Area rate source: ${rel}`));
+  }
+  const ld=JSON.parse(html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1])['@graph'];
+  assert.equal(ld.find(x=>x['@type']==='BreadcrumbList')?.itemListElement.length,3,`Area breadcrumbs: ${rel}`);
+  assert.ok(html.includes('<nav class="crumbs" aria-label="Breadcrumb">'),`Visible breadcrumbs: ${rel}`);
+  const faq=ld.find(x=>x['@type']==='FAQPage');
+  if(faq)for(const q of faq.mainEntity){const vis=html.replaceAll('&#39;',"'").replaceAll('&quot;','"').replaceAll('&amp;','&');assert.ok(vis.includes(`<span>${q.name}</span>`)&&vis.includes(`<p>${q.acceptedAnswer.text.replace(/SGD /g,'S$')}</p>`),`FAQ schema not visible on page: ${rel}: ${q.name}`);}
+  const nearby=html.match(/<div class="areas-we-serve-links" data-nearby>([\s\S]*?)<\/div>/)?.[1]||'';
+  assert.ok(nearby.includes(`href="/roster/${tradeSlugs[page.trade]}/"`),`Nearby block must link back to the hub: ${rel}`);
+  for(const town of nearbyTowns(page.town)){const target=expected.pages.find(p=>p.trade===page.trade&&p.town===town);assert.ok(nearby.includes(target?`href="${target.path}"`:`?area=${areaSlug(town)}#company-results`),`Nearby link ${town}: ${rel}`);}
+  (byTrade[page.trade]||=[]).push([rel,shingles(text(html))]);
+ }
+ // Thin or duplicate copy: pages in one trade must not share most of their 5-word phrases.
+ let maxSim=0,minDistinct=Infinity;
+ for(const list of Object.values(byTrade))for(let i=0;i<list.length;i++)for(let j=i+1;j<list.length;j++){
+  const [a,sa]=list[i],[b,sb]=list[j];let both=0;for(const s of sa)if(sb.has(s))both++;
+  const jaccard=both/(sa.size+sb.size-both);maxSim=Math.max(maxSim,jaccard);minDistinct=Math.min(minDistinct,sa.size-both,sb.size-both);assert.ok(Math.min(sa.size,sb.size)-both>=AREA_MIN_DISTINCT,`Area pages lack distinct content: ${a} ${b}`);assert.ok(jaccard<AREA_MAX_SIMILARITY,`Area pages too similar (${jaccard.toFixed(2)}): ${a} ${b}`);
+ }
+ // Hubs link each static page and keep ?area= only for towns without one.
+ for(const [id,slug] of Object.entries(tradeSlugs)){
+  const hub=pages.get(`${slug}/index.html`),section=hub.match(/<section class="areas-we-serve"[\s\S]*?<\/section>/)[0];
+  const map=JSON.parse(unescape(section.match(/data-area-pages="([^"]*)"/)[1]));
+  for(const page of expected.pages.filter(p=>p.trade===id)){assert.ok(section.includes(`href="${page.path}"`),`Hub missing area page link: ${page.path}`);assert.ok(!section.includes(`?area=${areaSlug(page.town)}#`),`Hub still filters a town with a page: ${page.path}`);assert.equal(map[areaSlug(page.town)],page.path);}
+ }
+ console.log(`Area pages: ${expected.pages.length} (${Object.entries(byTrade).map(([t,l])=>`${t} ${l.length}`).join(', ')}); collisions: ${expected.collisions.length}; highest similarity ${maxSim.toFixed(2)}, fewest distinct phrases ${minDistinct}`);
+}
 const claim=pages.get('claim-listing/index.html');
 assert.match(claim, /<input id="claim-company"[^>]+list="claim-companies"/);
 assert.ok(!claim.includes('<select id="claim-company"'));
