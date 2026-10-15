@@ -177,3 +177,28 @@ Every new page uses the existing guide pipeline (at least 1,000 words, four FAQs
 - Hubs link every town that has a page; `?area=` still works, and when the town has a page the directory script points the canonical at it and shows a link.
 - `sitemap.xml` lists the launch set from `data/seo-launch-pages.json` (home, method, hubs, guides, area pages, blog) as absolute preview URLs, at Martin's request. Every page stays noindex and robots.txt is unchanged; check-site requires each URL to be a built, canonical-self page and every area page to be listed.
 - check-site: unique intros, at most 0.85 five-word-phrase overlap and at least 40 distinct phrases between any two pages of a trade, company lists equal to stated coverage, visible FAQ text matching FAQPage schema, breadcrumbs, nearby and hub links.
+
+
+## 15 October 2026, evening: area pages, blog, gap features and QA fixes
+
+### Built
+- **Area pages:** 107 static `/roster/<trade>/<town>/` pages (aircon 28, plumbing 34, electrician 22, handyman 20, home cleaning 3). Rule: at least 5 published companies of that primary trade name the URA planning area itself; Islandwide and region names never count; mostly non-residential areas (Lim Chu Kang, Tuas, Sungei Kadut, Pioneer, Seletar, Mandai, Changi) get no page. Intros, list notes and FAQs are built from release data only; town price ranges follow `lib/sourced-rates.mjs`, including the 3-company minimum. Nearby towns come from official URA boundaries (`data/planning-area-adjacency.json`, data.gov.sg, Singapore Open Data Licence; shared boundary of at least 200 m). Hubs, including `/roster/aircon/`, link every town that has a page; `?area=` keeps working and points the canonical at the static page when one exists.
+- **Blog:** `/roster/blog/` grouped by trade, with posts from `content/blog/*.md`. Each post has contents, callouts, two to four calls to action, a visible FAQ with matching FAQPage schema, Article and BreadcrumbList schema, a credited Pexels hero from the reviewed set, official sources only (PUB, EMA, NEA, HDB, SCDF, BCA), and prices only from sourced rate tables. check-editorial enforces 900 to 1500 words, no unsourced numbers and no repeated guide topics. Each trade hub lists its posts.
+- **Gap features:** aircon price matrix by number of units and by unit size (cells empty under 3 companies, with a full source list) on `/roster/aircon/servicing-price/`; quick picks by need on every trade hub, using sourced fields only; official EMA and PUB licence lookups on the electrician and plumbing hubs; the symptom finder at `/roster/what-service-do-i-need/`.
+- **Sitemap:** lists the launch set (home, method page, hubs, guides, area pages, symptom finder, blog) as absolute preview URLs. Every page stays noindex and `/roster/robots.txt` still disallows `/roster/`.
+
+### QA fixes (live QA, 15 October)
+- Profile price rows that are testimonials, page headings or condition fragments are hidden at render time (14 of 1,082 rows, 8 companies), without changing data files.
+- Obvious source typos in quoted labels are marked [sic] by one rule (a doubled initial consonant); one source typo matches.
+- Grammar in data-built copy ("1 review", zero counts, plural agreement), human-readable capture dates, tap targets of at least 24px, and no horizontal overflow at 390px on the checked templates.
+- The hand-made nearby-town map had ten wrong pairs; it was replaced with computed adjacency.
+
+### Open items
+- **Access gate (QA P1-6):** the sign-in overlay is client-side only; the HTML and `/roster/data/index/*.json` are served without authentication. Whether the preview should be private (server-side protection) or public (no gate) is Martin's decision. Not changed.
+- **robots.txt at the host root:** `https://previews.heylead.com/robots.txt` returns 404; crawlers only read robots.txt at the root. The page-level noindex still applies. Needs a change outside `roster/`.
+- **Data release fixes:**
+  - Snowflake price lines in the database still contain heading and testimonial fragments (hidden on the site, still in the data).
+  - Service names in the release ("drilling mounting", "upholstery sofa" and others) need proper names; area intros use a display map until then.
+  - Aircon unit and BTU mislabels in the release (for example a "$19 each" rate stored as a 6-unit total, a 2-unit price recorded as 1 unit, sizes taken from the wrong part of an entry) are excluded from the matrix by guards but remain in the data.
+  - Home Plumbing Services: the database `map_display_level` is "building" rather than "block". The site does not read that field; the pin is a verified OneMap postal match.
+  - Opening hours, warranty terms and per-company licence status need sourced collection before they can be shown or filtered.

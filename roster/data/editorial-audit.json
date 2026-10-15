@@ -437,6 +437,15 @@
       "sources": 2
     },
     {
+      "hero": "handyman",
+      "slug": "handyman-vs-painting-contractor",
+      "path": "/roster/blog/handyman-vs-painting-contractor/",
+      "words": 1036,
+      "faqs": 3,
+      "ctas": 2,
+      "sources": 1
+    },
+    {
       "hero": "electrician",
       "slug": "handyman-or-specialist",
       "path": "/roster/blog/handyman-or-specialist/",
@@ -579,6 +588,15 @@
       "faqs": 3,
       "ctas": 2,
       "sources": 1
+    },
+    {
+      "hero": "plumbing",
+      "slug": "supply-your-own-parts-vs-company-supplied",
+      "path": "/roster/blog/supply-your-own-parts-vs-company-supplied/",
+      "words": 1169,
+      "faqs": 3,
+      "ctas": 2,
+      "sources": 2
     },
     {
       "hero": "electrician",
