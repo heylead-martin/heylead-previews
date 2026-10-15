@@ -2517,6 +2517,101 @@
     ],
     "updatedAt": "2026-10-10"
   },
+  "chan-brothers-aircon": {
+    "headline": "Services published by CHAN BROTHERS AIR-CONDITIONING ENGINEERING PTE LTD.",
+    "about": [
+      "With more than 20 years in the aircon repair & aircon servicing, we offer only our best services and prices on time deliveries, professional air-conditioning service and maintenance workmanship."
+    ],
+    "services": [
+      {
+        "name": "Chemical overhaul",
+        "description": "",
+        "explanation": "Chemical Overhaul Aircon Servicing",
+        "sourceUrl": "https://chanbrothers.sg/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      },
+      {
+        "name": "Gas top-up",
+        "description": "",
+        "explanation": "Gas Top-Up",
+        "sourceUrl": "https://chanbrothers.sg/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      },
+      {
+        "name": "Installation",
+        "description": "",
+        "explanation": "Aircon Installation",
+        "sourceUrl": "https://chanbrothers.sg/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      },
+      {
+        "name": "Repair",
+        "description": "",
+        "explanation": "Aircon Repair",
+        "sourceUrl": "https://chanbrothers.sg/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      },
+      {
+        "name": "Troubleshooting",
+        "description": "",
+        "explanation": "Aircon Troubleshooting",
+        "sourceUrl": "https://chanbrothers.sg/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      },
+      {
+        "name": "Maintenance contracts",
+        "description": "",
+        "explanation": "Aircon Servicing Contract (Yearly)",
+        "sourceUrl": "https://chanbrothers.sg/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      },
+      {
+        "name": "Dismantle replacement",
+        "description": "",
+        "explanation": "Dismantle entire aircon unit during the cleaning process. Fan Coil Included",
+        "sourceUrl": "https://chanbrothers.sg/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      },
+      {
+        "name": "General servicing",
+        "description": "",
+        "explanation": "ChanBrothers: Aircon Servicing & Repair Service Singapore",
+        "sourceUrl": "https://chanbrothers.sg/",
+        "capturedAt": "2026-10-15",
+        "prices": [
+          {
+            "label": "Chan Brothers: Aircon Servicing & Repair Singapore Price - From $19",
+            "price": "See source details",
+            "detail": "Calculated per-unit price: S$19 (1 unit in the published total). As printed. GST: not stated",
+            "excerpt": "| Chan Brothers: Aircon Servicing & Repair Singapore Price - From $19",
+            "sourceUrl": "https://chanbrothers.sg/aircon-services/",
+            "capturedAt": "2026-10-15",
+            "indicative": false
+          }
+        ]
+      },
+      {
+        "name": "Aircon cleaning",
+        "description": "",
+        "explanation": "aircon cleaning",
+        "sourceUrl": "https://chanbrothers.sg/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      }
+    ],
+    "highlights": [],
+    "sourceUrls": [
+      "https://chanbrothers.sg/"
+    ],
+    "updatedAt": "2026-10-12"
+  },
   "cheng-seng-electric-co-pte-ltd": {
     "headline": "Services published by CHENG SENG ELECTRIC CO PTE LTD.",
     "about": [
@@ -3948,6 +4043,75 @@
       "https://www.everest-aircon.com/"
     ],
     "updatedAt": "2026-10-10"
+  },
+  "fix-first-pte-ltd": {
+    "headline": "Services published by FIX FIRST PTE LTD..",
+    "about": [
+      "Whatsapp us, book an appintment with us. We come down and fix it, that's it. While that is a simple summary. The more information you provide us with, such as pictures. The less questions we have to ask, and the faster we get give you an accurate quote and schedule an appointment with you. Let us know your issues in as much detail as possible! Communication is key!"
+    ],
+    "services": [
+      {
+        "name": "Choke clearing",
+        "description": "",
+        "explanation": "Drain Unclogging",
+        "sourceUrl": "https://fixfirst.sg/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      },
+      {
+        "name": "Leak repair",
+        "description": "",
+        "explanation": "Leak Repair",
+        "sourceUrl": "https://fixfirst.sg/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      },
+      {
+        "name": "Toilet bowl",
+        "description": "",
+        "explanation": "Installing toilet bowl and toilet fixtures for residential units.",
+        "sourceUrl": "https://fixfirst.sg/our-services/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      },
+      {
+        "name": "Taps & mixers",
+        "description": "",
+        "explanation": "Faucet Replacement",
+        "sourceUrl": "https://fixfirst.sg/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      },
+      {
+        "name": "Sink",
+        "description": "",
+        "explanation": "Tap and Sink Installation",
+        "sourceUrl": "https://fixfirst.sg/our-services/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      },
+      {
+        "name": "Bidet",
+        "description": "",
+        "explanation": "Bidet Valve Installation",
+        "sourceUrl": "https://fixfirst.sg/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      },
+      {
+        "name": "Plumbing repair",
+        "description": "",
+        "explanation": "Plumbing Services",
+        "sourceUrl": "https://fixfirst.sg/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      }
+    ],
+    "highlights": [],
+    "sourceUrls": [
+      "https://fixfirst.sg/"
+    ],
+    "updatedAt": "2026-10-12"
   },
   "fortuna-air-conditioning-electrical-pte-ltd": {
     "headline": "Services published by FORTUNA AIR CONDITIONING & ELECTRICAL PTE LTD.",
@@ -54351,5 +54515,1338 @@
       "https://bestpaintingsg.com/about-us/"
     ],
     "updatedAt": "2026-10-10"
+  },
+  "airmaxx-aircon-pte-ltd": {
+    "headline": "Services published by Airmaxx Aircon Pte Ltd.",
+    "about": [
+      "Airmaxx Aircon Servicing Singapore is your one stop servicing provider in for all servicing aircon needs. Airmaxx Aircon Servicing Singapore provide air conditioning service , aircon installation and AC repair service , we pride ourselves in providing our customers the best value for money and professional air conditioning servicing."
+    ],
+    "services": [
+      {
+        "name": "General servicing",
+        "description": "",
+        "explanation": "AC General Services, Repair & AC Overhaul",
+        "sourceUrl": "https://airmaxxaircon.com/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      },
+      {
+        "name": "Chemical wash",
+        "description": "",
+        "explanation": "Aircon Chemical Wash Singapore",
+        "sourceUrl": "https://airmaxxaircon.com/",
+        "capturedAt": "2026-10-15",
+        "prices": [
+          {
+            "label": "Chemical wash",
+            "price": "typical price for general AC servicing Singapore starts from S$40",
+            "detail": "Quantity: 1. Calculated per-unit price: S$40 (1 unit in the published total). Per unit (inferred from the job type; confirm with the company). GST: not stated",
+            "excerpt": "The | typical price for general AC servicing Singapore starts from S$40",
+            "sourceUrl": "https://airmaxxaircon.com/",
+            "capturedAt": "2026-10-15",
+            "indicative": true
+          },
+          {
+            "label": "Chemical wash",
+            "price": "See source details",
+            "detail": "Quantity: 1. Calculated per-unit price: S$85 (1 unit in the published total). Per unit (inferred from the job type; confirm with the company). GST: not stated",
+            "excerpt": "The | typical price for aircon chemical wash service in Singapore starts from S$85",
+            "sourceUrl": "https://airmaxxaircon.com/",
+            "capturedAt": "2026-10-15",
+            "indicative": true
+          }
+        ],
+        "priceSummary": "Pricing reference"
+      },
+      {
+        "name": "Chemical overhaul",
+        "description": "",
+        "explanation": "Aircon Chemical Overhaul Service",
+        "sourceUrl": "https://airmaxxaircon.com/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      },
+      {
+        "name": "Gas top-up",
+        "description": "",
+        "explanation": "rvicing, AC repair, air conditioning installation, AC chemical-wash, and aircon gas top-up.",
+        "sourceUrl": "https://airmaxxaircon.com/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      },
+      {
+        "name": "Installation",
+        "description": "",
+        "explanation": "aircon installation and",
+        "sourceUrl": "https://airmaxxaircon.com/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      },
+      {
+        "name": "Repair",
+        "description": "",
+        "explanation": "provide aircon servicing, air conditioner cleaning, aircon repair service, and aircon installation in Singapore.",
+        "sourceUrl": "https://airmaxxaircon.com/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      },
+      {
+        "name": "Dismantle replacement",
+        "description": "",
+        "explanation": "- Dismantle of fan coil unit",
+        "sourceUrl": "https://airmaxxaircon.com/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      },
+      {
+        "name": "Condenser cleaning",
+        "description": "",
+        "explanation": "",
+        "sourceUrl": "https://airmaxxaircon.com/",
+        "capturedAt": "2026-10-15",
+        "prices": [
+          {
+            "label": "Chemical Wash Condenser Unit",
+            "price": "$80",
+            "detail": "Quantity: 1. Calculated per-unit price: S$80 (1 unit in the published total). Per unit (inferred from the job type; confirm with the company). GST: not stated",
+            "excerpt": "Chemical Wash Condenser Unit | $80",
+            "sourceUrl": "https://airmaxxaircon.com/",
+            "capturedAt": "2026-10-15",
+            "indicative": false
+          },
+          {
+            "label": "Dry Clean Condenser Unit",
+            "price": "$60",
+            "detail": "Quantity: 1. Calculated per-unit price: S$60 (1 unit in the published total). Per unit (inferred from the job type; confirm with the company). GST: not stated",
+            "excerpt": "Dry Clean Condenser Unit | $60",
+            "sourceUrl": "https://airmaxxaircon.com/",
+            "capturedAt": "2026-10-15",
+            "indicative": false
+          }
+        ],
+        "priceSummary": "2 pricing entries"
+      }
+    ],
+    "highlights": [],
+    "sourceUrls": [
+      "https://airmaxxaircon.com/"
+    ],
+    "updatedAt": "2026-10-15"
+  },
+  "koomax-engineering-pte-ltd": {
+    "headline": "Services published by Koomax Engineering Pte Ltd.",
+    "about": [
+      "With more than 18 years of experiences in this industry, we are a trusted choice when it comes to air-conditioning services be it Aircon Service, Aircon Repair or Aircon installation across all secto rs (residential, commercial & industrial)."
+    ],
+    "services": [
+      {
+        "name": "Installation",
+        "description": "",
+        "explanation": "Aircon Installation",
+        "sourceUrl": "https://koomax.com.sg/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      },
+      {
+        "name": "Repair",
+        "description": "",
+        "explanation": "Aircon Repair",
+        "sourceUrl": "https://koomax.com.sg/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      },
+      {
+        "name": "Steam cleaning",
+        "description": "",
+        "explanation": "What is steam cleaning? and what's the difference with chemical cleaning?",
+        "sourceUrl": "https://koomax.com.sg/faq/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      },
+      {
+        "name": "Troubleshooting",
+        "description": "",
+        "explanation": "Expertise in troubleshooting of",
+        "sourceUrl": "https://koomax.com.sg/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      },
+      {
+        "name": "General servicing",
+        "description": "",
+        "explanation": "Aircon Service",
+        "sourceUrl": "https://koomax.com.sg/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      },
+      {
+        "name": "Aircon cleaning",
+        "description": "",
+        "explanation": "Very happy with the aircon cleaning services",
+        "sourceUrl": "https://koomax.com.sg/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      }
+    ],
+    "highlights": [],
+    "sourceUrls": [
+      "https://koomax.com.sg/"
+    ],
+    "updatedAt": "2026-10-15"
+  },
+  "pure-airconditioning-pte-ltd": {
+    "headline": "Services published by Pure Airconditioning Pte Ltd.",
+    "about": [
+      "We’ll always be there for you. With over 20 years of experience, we have established ourselves as a reliable Air-conditioning Specialist. We customize our solutions to fit best to your needs."
+    ],
+    "services": [
+      {
+        "name": "General servicing",
+        "description": "",
+        "explanation": "General Servicing",
+        "sourceUrl": "https://www.pureair.com.sg/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      },
+      {
+        "name": "Chemical wash",
+        "description": "",
+        "explanation": "ve by general maintenance alone, our chemical cleaning service provides a total chemical wash of internal air-con parts such as fan coil, drainage device, and a",
+        "sourceUrl": "https://www.pureair.com.sg/our-services/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      },
+      {
+        "name": "Chemical overhaul",
+        "description": "",
+        "explanation": "Chemical Overhaul",
+        "sourceUrl": "https://www.pureair.com.sg/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      },
+      {
+        "name": "Installation",
+        "description": "",
+        "explanation": "Aircon Installation",
+        "sourceUrl": "https://www.pureair.com.sg/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      },
+      {
+        "name": "Repair",
+        "description": "",
+        "explanation": "Aircon Repair / Troubleshoot",
+        "sourceUrl": "https://www.pureair.com.sg/our-services/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      },
+      {
+        "name": "Troubleshooting",
+        "description": "",
+        "explanation": "Repair/ Troubleshoot",
+        "sourceUrl": "https://www.pureair.com.sg/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      }
+    ],
+    "highlights": [],
+    "sourceUrls": [
+      "https://www.pureair.com.sg/"
+    ],
+    "updatedAt": "2026-10-15"
+  },
+  "xpower-electrical-pte-ltd": {
+    "headline": "Services published by Xpower Electrical Pte Ltd.",
+    "about": [
+      "From HDB rewiring to commercial electrical maintenance, our expert team delivers cost-effective and long-lasting electrical solutions.",
+      "At XPower Electrical Singapore, we are more than just an electrical contractor Singapore - we are a trusted partner in keeping homes, businesses, and properties safe, connected, and powered. Our journey began with a simple mission: to provide reliable, affordable, and professional electrician services in Singapore, available whenever our customers need them most."
+    ],
+    "services": [
+      {
+        "name": "Power trip",
+        "description": "",
+        "explanation": "ngapore services, ensuring fast response times for power failures, outages, and tripping issues. Our mission is to provide safe, compliant, and long-lasting ele",
+        "sourceUrl": "https://xpower.com.sg/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      },
+      {
+        "name": "Rewiring",
+        "description": "",
+        "explanation": "From HDB rewiring to commercial electrical maintenance, our expert team delivers cost-effectiv",
+        "sourceUrl": "https://xpower.com.sg/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      },
+      {
+        "name": "Light installation",
+        "description": "",
+        "explanation": "Lighting Installation",
+        "sourceUrl": "https://xpower.com.sg/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      },
+      {
+        "name": "Ceiling fan",
+        "description": "",
+        "explanation": "Ceiling Fan Installation",
+        "sourceUrl": "https://xpower.com.sg/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      },
+      {
+        "name": "Power point",
+        "description": "",
+        "explanation": "Power Point Installation",
+        "sourceUrl": "https://xpower.com.sg/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      },
+      {
+        "name": "Distribution board",
+        "description": "",
+        "explanation": "Electrical DB Box Installation",
+        "sourceUrl": "https://xpower.com.sg/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      },
+      {
+        "name": "Electrical troubleshooting",
+        "description": "",
+        "explanation": "an Singapore for lighting installation, ceiling fan setup, DB box upgrades, and electrical repairs.",
+        "sourceUrl": "https://xpower.com.sg/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      },
+      {
+        "name": "Wiring",
+        "description": "",
+        "explanation": "Our electricians handle ceiling fan installation and repairs, ensuring proper wiring and safe setup.",
+        "sourceUrl": "https://xpower.com.sg/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      },
+      {
+        "name": "Electrical installation",
+        "description": "",
+        "explanation": "electrician services in Singapore, available 24/7.We deliver safe and compliant electrical installations, testing, and repairs for HDBs, private homes, and comm",
+        "sourceUrl": "https://xpower.com.sg/about.php",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      }
+    ],
+    "highlights": [],
+    "sourceUrls": [
+      "https://xpower.com.sg/",
+      "https://xpower.com.sg/about.php"
+    ],
+    "updatedAt": "2026-10-15"
+  },
+  "island-electric": {
+    "headline": "Services published by Island Electric.",
+    "about": [
+      "Established in 2008, our team of skilled domestic and commercial electricians are qualified to undertake almost any kind of electrical work."
+    ],
+    "services": [
+      {
+        "name": "Power trip",
+        "description": "",
+        "explanation": "Power Trip Repair",
+        "sourceUrl": "https://islandelectric.sg/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      },
+      {
+        "name": "Rewiring",
+        "description": "",
+        "explanation": "Safe wiring and rewiring for HDB flats, condominiums, landed homes and commercial properties.",
+        "sourceUrl": "https://islandelectric.sg/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      },
+      {
+        "name": "Light installation",
+        "description": "",
+        "explanation": "Light Installation",
+        "sourceUrl": "https://islandelectric.sg/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      },
+      {
+        "name": "Ceiling fan",
+        "description": "",
+        "explanation": "Ceiling Fan Installation",
+        "sourceUrl": "https://islandelectric.sg/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      },
+      {
+        "name": "Power point",
+        "description": "",
+        "explanation": "Power Point Installation",
+        "sourceUrl": "https://islandelectric.sg/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      },
+      {
+        "name": "Distribution board",
+        "description": "",
+        "explanation": "Inspection, replacement and upgrading of circuit breakers and distribution boards.",
+        "sourceUrl": "https://islandelectric.sg/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      },
+      {
+        "name": "Water heater point",
+        "description": "",
+        "explanation": "Water Heater Electrical Points",
+        "sourceUrl": "https://islandelectric.sg/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      },
+      {
+        "name": "LEW endorsement",
+        "description": "",
+        "explanation": "Energy Market Authority explains when a Licensed Electrical Worker is needed",
+        "sourceUrl": "https://islandelectric.sg/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      },
+      {
+        "name": "Electrical troubleshooting",
+        "description": "",
+        "explanation": "Electrical Repair",
+        "sourceUrl": "https://islandelectric.sg/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      },
+      {
+        "name": "Wiring",
+        "description": "",
+        "explanation": "Electrical Wiring",
+        "sourceUrl": "https://islandelectric.sg/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      },
+      {
+        "name": "Switch replacement",
+        "description": "",
+        "explanation": "Light Switch Installation",
+        "sourceUrl": "https://islandelectric.sg/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      },
+      {
+        "name": "Electrical installation",
+        "description": "",
+        "explanation": "Electrical installation and repair for offices and shops.",
+        "sourceUrl": "https://islandelectric.sg/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      }
+    ],
+    "highlights": [],
+    "sourceUrls": [
+      "https://islandelectric.sg/"
+    ],
+    "updatedAt": "2026-10-15"
+  },
+  "nation-electric": {
+    "headline": "Services published by Nation Electric.",
+    "about": [
+      "We have over 15 years experience and provide a fixed priced quote guarantee; can be sure to get exactly what you pay for hassle-free. We are Singapore’s most reliable electricians."
+    ],
+    "services": [
+      {
+        "name": "Power trip",
+        "description": "",
+        "explanation": "Power Trip Repair",
+        "sourceUrl": "https://nationelectric.sg/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      },
+      {
+        "name": "Rewiring",
+        "description": "",
+        "explanation": "Electrical Rewiring",
+        "sourceUrl": "https://nationelectric.sg/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      },
+      {
+        "name": "Light installation",
+        "description": "",
+        "explanation": "Lighting Installation",
+        "sourceUrl": "https://nationelectric.sg/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      },
+      {
+        "name": "Ceiling fan",
+        "description": "",
+        "explanation": "Ceiling Fan Installation",
+        "sourceUrl": "https://nationelectric.sg/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      },
+      {
+        "name": "Power point",
+        "description": "",
+        "explanation": "Power Points, Sockets & Switches",
+        "sourceUrl": "https://nationelectric.sg/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      },
+      {
+        "name": "Distribution board",
+        "description": "",
+        "explanation": "Distribution Board Installation",
+        "sourceUrl": "https://nationelectric.sg/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      },
+      {
+        "name": "Water heater point",
+        "description": "",
+        "explanation": "Water Heater Installation",
+        "sourceUrl": "https://nationelectric.sg/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      },
+      {
+        "name": "LEW endorsement",
+        "description": "",
+        "explanation": "equipment if it is safe to do so and arrange an assessment by an appropriately Licensed Electrical Worker.",
+        "sourceUrl": "https://nationelectric.sg/electrical-repair-services/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      },
+      {
+        "name": "Electrical troubleshooting",
+        "description": "",
+        "explanation": "Electrical Repair Services",
+        "sourceUrl": "https://nationelectric.sg/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      },
+      {
+        "name": "Wiring",
+        "description": "",
+        "explanation": "Electrical Wiring Services",
+        "sourceUrl": "https://nationelectric.sg/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      },
+      {
+        "name": "Switch replacement",
+        "description": "",
+        "explanation": "Power Point, Socket & Switch Installation",
+        "sourceUrl": "https://nationelectric.sg/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      },
+      {
+        "name": "Electrical installation",
+        "description": "",
+        "explanation": "Electrical installation, repair and maintenance support for offices, shops and commercial premises.",
+        "sourceUrl": "https://nationelectric.sg/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      }
+    ],
+    "highlights": [],
+    "sourceUrls": [
+      "https://nationelectric.sg/"
+    ],
+    "updatedAt": "2026-10-15"
+  },
+  "rsf-waterproofing-contractors-pte-ltd": {
+    "headline": "Services published by RSF Waterproofing & Contractors Pte Ltd.",
+    "about": [
+      "RSF provides expert waterproofing services in Singapore for all property types. From roof leakage repair and toilet waterproofing to wall seepage repair , balcony waterproofing , ceiling leakage repair , and PU injection waterproofing - our licensed team diagnoses the root cause and delivers a long-lasting fix."
+    ],
+    "services": [
+      {
+        "name": "Choke clearing",
+        "description": "",
+        "explanation": "Drain pipe cleaning & blockage clearing",
+        "sourceUrl": "https://rsfwaterproofing.com.sg/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      },
+      {
+        "name": "Leak repair",
+        "description": "",
+        "explanation": "Waterproofing & Plumbing Contractor Singapore | Leakage, Tile, Door & Handyman | RSF",
+        "sourceUrl": "https://rsfwaterproofing.com.sg/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      },
+      {
+        "name": "Toilet bowl",
+        "description": "",
+        "explanation": "Leaking tap repair, pipe leakage repair, toilet bowl repair, drain pipe cleaning, water heater installation & emergency plumber.",
+        "sourceUrl": "https://rsfwaterproofing.com.sg/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      },
+      {
+        "name": "Water heater",
+        "description": "",
+        "explanation": "Water Heater Installation",
+        "sourceUrl": "https://rsfwaterproofing.com.sg/",
+        "capturedAt": "2026-10-15",
+        "prices": [
+          {
+            "label": "Emergency water heater repair | S$100-S$400",
+            "price": "Emergency water heater repair | S$100-S$400",
+            "detail": "Calculated per-unit price: S$100 to S$400 (1 unit in the published total). Per job (inferred from the job type; confirm with the company). GST: not stated",
+            "excerpt": "Emergency water heater repair | S$100-S$400",
+            "sourceUrl": "https://rsfwaterproofing.com.sg/emergency-plumbing/",
+            "capturedAt": "2026-10-15",
+            "indicative": false
+          }
+        ]
+      },
+      {
+        "name": "Taps & mixers",
+        "description": "",
+        "explanation": "Leaking tap repair, pipe leakage repair, toilet bowl repair, drain pipe cleaning, water hea",
+        "sourceUrl": "https://rsfwaterproofing.com.sg/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      },
+      {
+        "name": "Pipe replacement",
+        "description": "",
+        "explanation": "Roof Leakage, Toilet Waterproofing, Pipe Repair, Handyman & Renovation - HDB, Condo & Landed.",
+        "sourceUrl": "https://rsfwaterproofing.com.sg/",
+        "capturedAt": "2026-10-15",
+        "prices": [
+          {
+            "label": "Burst pipe repair | S$150-S$500+",
+            "price": "Burst pipe repair | S$150-S$500+",
+            "detail": "Calculated per-unit price: S$150 to S$500 (1 unit in the published total). Per job (inferred from the job type; confirm with the company). GST: not stated",
+            "excerpt": "Burst pipe repair | S$150-S$500+",
+            "sourceUrl": "https://rsfwaterproofing.com.sg/emergency-plumbing/",
+            "capturedAt": "2026-10-15",
+            "indicative": false
+          }
+        ]
+      },
+      {
+        "name": "Plumbing repair",
+        "description": "",
+        "explanation": "Plumbing Services in Singapore",
+        "sourceUrl": "https://rsfwaterproofing.com.sg/",
+        "capturedAt": "2026-10-15",
+        "prices": [
+          {
+            "label": "Emergency call-out (after hours) | S$80-S$150",
+            "price": "Emergency call-out (after hours) | S$80-S$150",
+            "detail": "Calculated per-unit price: S$80 to S$150 (1 unit in the published total). Per visit. GST: not stated",
+            "excerpt": "Emergency call-out (after hours) | S$80-S$150",
+            "sourceUrl": "https://rsfwaterproofing.com.sg/emergency-plumbing/",
+            "capturedAt": "2026-10-15",
+            "indicative": false
+          }
+        ]
+      }
+    ],
+    "highlights": [],
+    "sourceUrls": [
+      "https://rsfwaterproofing.com.sg/"
+    ],
+    "updatedAt": "2026-10-15"
+  },
+  "oppa-handyman-singapore-oppa-annyeong-pte-ltd": {
+    "headline": "Services published by OPPA Handyman Singapore (OPPA Annyeong Pte Ltd).",
+    "about": [
+      "let us know about your concerns and the services you need and we will provide you the most suitable solution"
+    ],
+    "services": [
+      {
+        "name": "Plumbing",
+        "description": "",
+        "explanation": "Plumbing",
+        "sourceUrl": "https://www.oppaannyeong.com/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      },
+      {
+        "name": "Electrical",
+        "description": "",
+        "explanation": "Electrical",
+        "sourceUrl": "https://www.oppaannyeong.com/",
+        "capturedAt": "2026-10-15",
+        "prices": [
+          {
+            "label": "Electrical (lights, switches, power trip) | From $70 nett (includes transport)",
+            "price": "See source details",
+            "detail": "Calculated per-unit price: S$70 (1 unit in the published total). As printed. GST: inclusive",
+            "excerpt": "Electrical (lights, switches, power trip) | From $70 nett (includes transport)",
+            "sourceUrl": "https://www.oppaannyeong.com/reliable-handyman-services-singapore",
+            "capturedAt": "2026-10-15",
+            "indicative": false
+          }
+        ]
+      },
+      {
+        "name": "Painting",
+        "description": "",
+        "explanation": "Painting",
+        "sourceUrl": "https://www.oppaannyeong.com/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      },
+      {
+        "name": "Curtain blinds",
+        "description": "",
+        "explanation": "Curtain Cleaning",
+        "sourceUrl": "https://www.oppaannyeong.com/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      },
+      {
+        "name": "Tiling flooring",
+        "description": "",
+        "explanation": "Flooring",
+        "sourceUrl": "https://www.oppaannyeong.com/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      }
+    ],
+    "highlights": [],
+    "sourceUrls": [
+      "https://www.oppaannyeong.com/about-best-handyman-singapore"
+    ],
+    "updatedAt": "2026-10-15"
+  },
+  "b-w-integrated-services-b-w-builders-private-limited": {
+    "headline": "Services published by B+W Integrated Services (B+W Builders Private Limited).",
+    "about": [
+      "B+W Integrated Services is the property maintenance and handyman arm of the B+W Group in Singapore. We help homeowners, MCSTs and businesses with waterproofing & leak detection, plumbing, electrical repairs, painting, aircon servicing, reinstatement works, network cabling & CCTV, and carpentry & interior fitting-out. Whether you need routine upkeep or urgent repairs, our team delivers prompt, reliable service to keep your property safe, comfortab"
+    ],
+    "services": [
+      {
+        "name": "Plumbing",
+        "description": "",
+        "explanation": "Plumbing & Sanitary",
+        "sourceUrl": "https://bwis.com.sg/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      },
+      {
+        "name": "Electrical",
+        "description": "",
+        "explanation": "Electrical Engineering & Maintenance",
+        "sourceUrl": "https://bwis.com.sg/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      },
+      {
+        "name": "Carpentry",
+        "description": "",
+        "explanation": "Carpentry Works & Interior Fitting Out Works",
+        "sourceUrl": "https://bwis.com.sg/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      },
+      {
+        "name": "Painting",
+        "description": "",
+        "explanation": "Painting and Protective Coatings",
+        "sourceUrl": "https://bwis.com.sg/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      },
+      {
+        "name": "Door lock",
+        "description": "",
+        "explanation": "Firedoor.sg",
+        "sourceUrl": "https://bwis.com.sg/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      }
+    ],
+    "highlights": [],
+    "sourceUrls": [
+      "https://bwis.com.sg/"
+    ],
+    "updatedAt": "2026-10-15"
+  },
+  "home-plumbers-singapore": {
+    "headline": "Services published by Home Plumbers Singapore.",
+    "about": [
+      "With 20 years of practical experience, we help with chokes, leaks, pipework, bathroom fittings, water heaters and commercial plumbing. The first step is to understand the symptom and define the work clearly."
+    ],
+    "services": [
+      {
+        "name": "Choke clearing",
+        "description": "",
+        "explanation": "Chokes, Drains & Flooding",
+        "sourceUrl": "https://homeplumbers.com.sg/",
+        "capturedAt": "2026-10-15",
+        "prices": [
+          {
+            "label": "Clear a toilet bowl choke",
+            "price": "From $80",
+            "detail": "Calculated per-unit price: S$80 (1 unit in the published total). Per job (inferred from the job type; confirm with the company). GST: not stated",
+            "excerpt": "Clear a toilet bowl choke | From $80",
+            "sourceUrl": "https://homeplumbers.com.sg/hdb-plumbers-singapore-plumbing-service-prices/",
+            "capturedAt": "2026-10-15",
+            "indicative": false
+          }
+        ]
+      },
+      {
+        "name": "Leak repair",
+        "description": "",
+        "explanation": "Leaks & Pipework",
+        "sourceUrl": "https://homeplumbers.com.sg/",
+        "capturedAt": "2026-10-15",
+        "prices": [
+          {
+            "label": "Detect concealed-pipe leakage in an HDB flat or condominium",
+            "price": "From $120",
+            "detail": "Calculated per-unit price: S$120 (1 unit in the published total). Per job (inferred from the job type; confirm with the company). GST: not stated",
+            "excerpt": "Detect concealed-pipe leakage in an HDB flat or condominium | From $120",
+            "sourceUrl": "https://homeplumbers.com.sg/hdb-plumbers-singapore-plumbing-service-prices/",
+            "capturedAt": "2026-10-15",
+            "indicative": false
+          },
+          {
+            "label": "Detect concealed or underground-pipe leakage at a landed property",
+            "price": "From $250",
+            "detail": "Calculated per-unit price: S$250 (1 unit in the published total). Per job (inferred from the job type; confirm with the company). GST: not stated",
+            "excerpt": "Detect concealed or underground-pipe leakage at a landed property | From $250",
+            "sourceUrl": "https://homeplumbers.com.sg/hdb-plumbers-singapore-plumbing-service-prices/",
+            "capturedAt": "2026-10-15",
+            "indicative": false
+          }
+        ],
+        "priceSummary": "2 pricing entries"
+      },
+      {
+        "name": "Toilet bowl",
+        "description": "",
+        "explanation": "Toilet Bowl Installation",
+        "sourceUrl": "https://homeplumbers.com.sg/",
+        "capturedAt": "2026-10-15",
+        "prices": [
+          {
+            "label": "Replace a toilet bowl valve",
+            "price": "From $90",
+            "detail": "Calculated per-unit price: S$90 (1 unit in the published total). Per job (inferred from the job type; confirm with the company). GST: not stated",
+            "excerpt": "Replace a toilet bowl valve | From $90",
+            "sourceUrl": "https://homeplumbers.com.sg/hdb-plumbers-singapore-plumbing-service-prices/",
+            "capturedAt": "2026-10-15",
+            "indicative": false
+          },
+          {
+            "label": "Dismantle and replace a toilet bowl set",
+            "price": "From $400",
+            "detail": "Calculated per-unit price: S$400 (1 unit in the published total). Per job (inferred from the job type; confirm with the company). GST: not stated",
+            "excerpt": "Dismantle and replace a toilet bowl set | From $400",
+            "sourceUrl": "https://homeplumbers.com.sg/hdb-plumbers-singapore-plumbing-service-prices/",
+            "capturedAt": "2026-10-15",
+            "indicative": false
+          },
+          {
+            "label": "Replace a sink, basin or cistern flexible hose",
+            "price": "$40-$60",
+            "detail": "Calculated per-unit price: S$40 (1 unit in the published total). Per job (inferred from the job type; confirm with the company). GST: not stated",
+            "excerpt": "Replace a sink, basin or cistern flexible hose | $40-$60",
+            "sourceUrl": "https://homeplumbers.com.sg/hdb-plumbers-singapore-plumbing-service-prices/",
+            "capturedAt": "2026-10-15",
+            "indicative": false
+          }
+        ],
+        "priceSummary": "3 pricing entries"
+      },
+      {
+        "name": "Water heater",
+        "description": "",
+        "explanation": "Water Heater Installation & Replacement",
+        "sourceUrl": "https://homeplumbers.com.sg/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      },
+      {
+        "name": "Taps & mixers",
+        "description": "",
+        "explanation": "Tap, Faucet & Mixer Repair",
+        "sourceUrl": "https://homeplumbers.com.sg/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      },
+      {
+        "name": "Pipe replacement",
+        "description": "",
+        "explanation": "Pipe Repair",
+        "sourceUrl": "https://homeplumbers.com.sg/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      },
+      {
+        "name": "Sink",
+        "description": "",
+        "explanation": "Sink, Basin & Bottle Trap Services",
+        "sourceUrl": "https://homeplumbers.com.sg/",
+        "capturedAt": "2026-10-15",
+        "prices": [
+          {
+            "label": "Supply and install a basin",
+            "price": "From $180",
+            "detail": "Calculated per-unit price: S$180 (1 unit in the published total). Per job (inferred from the job type; confirm with the company). GST: not stated",
+            "excerpt": "Supply and install a basin | From $180",
+            "sourceUrl": "https://homeplumbers.com.sg/hdb-plumbers-singapore-plumbing-service-prices/",
+            "capturedAt": "2026-10-15",
+            "indicative": false
+          },
+          {
+            "label": "Supply and replace a kitchen-sink bottle trap",
+            "price": "From $50",
+            "detail": "Calculated per-unit price: S$50 (1 unit in the published total). Per job (inferred from the job type; confirm with the company). GST: not stated",
+            "excerpt": "Supply and replace a kitchen-sink bottle trap | From $50",
+            "sourceUrl": "https://homeplumbers.com.sg/hdb-plumbers-singapore-plumbing-service-prices/",
+            "capturedAt": "2026-10-15",
+            "indicative": false
+          }
+        ],
+        "priceSummary": "2 pricing entries"
+      },
+      {
+        "name": "Plumbing repair",
+        "description": "",
+        "explanation": "Home Plumbers | Recommended HDB Plumbing Service 24/7",
+        "sourceUrl": "https://homeplumbers.com.sg/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      }
+    ],
+    "highlights": [],
+    "sourceUrls": [
+      "https://homeplumbers.com.sg/"
+    ],
+    "updatedAt": "2026-10-15"
+  },
+  "syh-plumber-electrical-pte-ltd": {
+    "headline": "Services published by SYH Plumber & Electrical Pte Ltd.",
+    "about": [
+      "SYH is grown from strength to strength, established since 2014. We are always expanding and we strive to be the best in our industry. To keep up with our high service standards, we do not outsource our workflow in order to have full control over quality assurance and we take great pride in that."
+    ],
+    "services": [
+      {
+        "name": "Choke clearing",
+        "description": "",
+        "explanation": "Clear Choke",
+        "sourceUrl": "https://www.syhplumber.com.sg/services/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      },
+      {
+        "name": "Toilet bowl",
+        "description": "",
+        "explanation": "e managed to find the right model of the basin to go with the same brand of the toilet bowl which I wished to order. I have finally decided to purchase 2 sets o",
+        "sourceUrl": "https://www.syhplumber.com.sg/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      },
+      {
+        "name": "Taps & mixers",
+        "description": "",
+        "explanation": "Supply Washing Machine Faucet",
+        "sourceUrl": "https://www.syhplumber.com.sg/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      },
+      {
+        "name": "Pipe replacement",
+        "description": "",
+        "explanation": "Conceal Copper Pipe for Kitchen",
+        "sourceUrl": "https://www.syhplumber.com.sg/services/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      },
+      {
+        "name": "Plumbing repair",
+        "description": "",
+        "explanation": "Plumbing Services",
+        "sourceUrl": "https://www.syhplumber.com.sg/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      }
+    ],
+    "highlights": [],
+    "sourceUrls": [
+      "https://www.syhplumber.com.sg/about-us/"
+    ],
+    "updatedAt": "2026-10-15"
+  },
+  "gc-werkz": {
+    "headline": "Services published by GC Werkz.",
+    "about": [
+      "Very professional and helpful team. They assisted us promptly with our jobsite matters, even on tight timelines. Would happily work together again!"
+    ],
+    "services": [
+      {
+        "name": "Choke clearing",
+        "description": "",
+        "explanation": "there is active dripping, spreading dampness, electrical risk, ceiling sagging, blocked drainage, or a shop or office disruption, send a WhatsApp message first.",
+        "sourceUrl": "https://www.gcwerkz.com/contact/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      },
+      {
+        "name": "Leak repair",
+        "description": "",
+        "explanation": "Defect, leak, plumbing, handyman, waterproofing and maintenance-led support.",
+        "sourceUrl": "https://www.gcwerkz.com/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      },
+      {
+        "name": "Sink",
+        "description": "",
+        "explanation": "Plan cabinet layouts, sink positions, finishes, wet points, and practical repair items before kitchen reno",
+        "sourceUrl": "https://www.gcwerkz.com/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      },
+      {
+        "name": "Floor trap",
+        "description": "",
+        "explanation": "Review wet-area seepage, grout lines, floor traps, wall junctions, and waterproofing repair options for bathrooms.",
+        "sourceUrl": "https://www.gcwerkz.com/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      },
+      {
+        "name": "Plumbing repair",
+        "description": "",
+        "explanation": "Plumbing Services",
+        "sourceUrl": "https://www.gcwerkz.com/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      }
+    ],
+    "highlights": [],
+    "sourceUrls": [
+      "https://www.gcwerkz.com/"
+    ],
+    "updatedAt": "2026-10-15"
+  },
+  "sin-plumbing-singapore": {
+    "headline": "Services published by Sin Plumbing Singapore.",
+    "about": [
+      "Sin Plumbing is a customer oriented plumbing service company based in Singapore. All our technicians are highly experienced and skilled in Singapore to give our clients the highest quality of service at an affordable rate. Our team specializes in handling all types of plumbing troubles. From residential, commercial to industrial buildings, we can fix them all!"
+    ],
+    "services": [
+      {
+        "name": "Choke clearing",
+        "description": "",
+        "explanation": "Clear clogged toilet bowl",
+        "sourceUrl": "https://sinplumbing.com/our-rates/",
+        "capturedAt": "2026-10-15",
+        "prices": [
+          {
+            "label": "Clear clogged toilet bowl",
+            "price": "from S$70",
+            "detail": "Calculated per-unit price: S$70 (1 unit in the published total). Per job (inferred from the job type; confirm with the company). GST: not stated",
+            "excerpt": "Clear clogged toilet bowl | from S$70",
+            "sourceUrl": "https://sinplumbing.com/our-rates/",
+            "capturedAt": "2026-10-15",
+            "indicative": false
+          },
+          {
+            "label": "Clear clogged floor trap",
+            "price": "from S$60",
+            "detail": "Calculated per-unit price: S$60 (1 unit in the published total). Per job (inferred from the job type; confirm with the company). GST: not stated",
+            "excerpt": "Clear clogged floor trap | from S$60",
+            "sourceUrl": "https://sinplumbing.com/our-rates/",
+            "capturedAt": "2026-10-15",
+            "indicative": false
+          }
+        ],
+        "priceSummary": "2 pricing entries"
+      },
+      {
+        "name": "Leak repair",
+        "description": "",
+        "explanation": "We provide all types of Professional Plumbing services in : Chokage, Leakage, Install& Repair and ALL other Plumbing Services.",
+        "sourceUrl": "https://sinplumbing.com/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      },
+      {
+        "name": "Toilet bowl",
+        "description": "",
+        "explanation": "Clear clogged toilet bowl",
+        "sourceUrl": "https://sinplumbing.com/our-rates/",
+        "capturedAt": "2026-10-15",
+        "prices": [
+          {
+            "label": "Rectify water discharge into toilet bowl by replacing new siphon",
+            "price": "from S$80",
+            "detail": "Calculated per-unit price: S$80 (1 unit in the published total). Per job (inferred from the job type; confirm with the company). GST: not stated",
+            "excerpt": "Rectify water discharge into toilet bowl by replacing new siphon | from S$80",
+            "sourceUrl": "https://sinplumbing.com/our-rates/",
+            "capturedAt": "2026-10-15",
+            "indicative": false
+          },
+          {
+            "label": "Replace Sink/Basin/Cistern flexible hose",
+            "price": "from S$40",
+            "detail": "Calculated per-unit price: S$40 (1 unit in the published total). Per job (inferred from the job type; confirm with the company). GST: not stated",
+            "excerpt": "Replace Sink/Basin/Cistern flexible hose | from S$40",
+            "sourceUrl": "https://sinplumbing.com/our-rates/",
+            "capturedAt": "2026-10-15",
+            "indicative": false
+          }
+        ],
+        "priceSummary": "2 pricing entries"
+      },
+      {
+        "name": "Taps & mixers",
+        "description": "",
+        "explanation": "Replace kitchen sink/basin tap",
+        "sourceUrl": "https://sinplumbing.com/our-rates/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      },
+      {
+        "name": "Pipe replacement",
+        "description": "",
+        "explanation": "Repair leaking exposed copper pipe or UPVC pipe (Supply & Labour)",
+        "sourceUrl": "https://sinplumbing.com/our-rates/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      },
+      {
+        "name": "Sink",
+        "description": "",
+        "explanation": "Replace kitchen sink/basin tap",
+        "sourceUrl": "https://sinplumbing.com/our-rates/",
+        "capturedAt": "2026-10-15",
+        "prices": [
+          {
+            "label": "Supply & replace bottle trap for kitchen sink",
+            "price": "from S$50",
+            "detail": "Calculated per-unit price: S$50 (1 unit in the published total). Per job (inferred from the job type; confirm with the company). GST: not stated",
+            "excerpt": "Supply & replace bottle trap for kitchen sink | from S$50",
+            "sourceUrl": "https://sinplumbing.com/our-rates/",
+            "capturedAt": "2026-10-15",
+            "indicative": false
+          }
+        ]
+      },
+      {
+        "name": "Floor trap",
+        "description": "",
+        "explanation": "Clear clogged floor trap",
+        "sourceUrl": "https://sinplumbing.com/our-rates/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      },
+      {
+        "name": "Plumbing repair",
+        "description": "",
+        "explanation": "is a customer oriented plumbing service company based in Singapore. All our technicians are highly experienced and skil",
+        "sourceUrl": "https://sinplumbing.com/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      }
+    ],
+    "highlights": [],
+    "sourceUrls": [
+      "https://sinplumbing.com/"
+    ],
+    "updatedAt": "2026-10-15"
+  },
+  "uncle-plumber": {
+    "headline": "Services published by Uncle Plumber.",
+    "about": [
+      "We specialise in Drainage Choking, HDB Plumbing Services, Emergency Plumber, Repairing, Installation and Replacement of Plumbing, Water Leakage and Pipe Repairs, both Residential and Commercial Plumbing. Contact us to find out more!",
+      "Uncle Plumber believes that everyone should have access to essential plumbing services without having to worry about breaking the bank. Each service we provide is reasonably-priced, because we believe you deserve to enjoy the utmost comfort at home or at work. We can handle anything from simple drain cleaning to plumbing installation and repair. If you’re ready to get started, please call us. Same day appointments are available."
+    ],
+    "services": [
+      {
+        "name": "Leak repair",
+        "description": "",
+        "explanation": "Water Leakage and Pipe Repair",
+        "sourceUrl": "https://uncleplumber.sg/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      },
+      {
+        "name": "Water heater",
+        "description": "",
+        "explanation": "Fixing water heaters (instant or storage)",
+        "sourceUrl": "https://uncleplumber.sg/hdb-plumbing-services/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      },
+      {
+        "name": "Pipe replacement",
+        "description": "",
+        "explanation": "Water Leakage and Pipe Repair",
+        "sourceUrl": "https://uncleplumber.sg/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      },
+      {
+        "name": "Floor trap",
+        "description": "",
+        "explanation": "Clear clogged floor trap",
+        "sourceUrl": "https://uncleplumber.sg/our-rates/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      },
+      {
+        "name": "Plumbing repair",
+        "description": "",
+        "explanation": "HDB Plumbing Services",
+        "sourceUrl": "https://uncleplumber.sg/",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      },
+      {
+        "name": "Choke clearing",
+        "description": "",
+        "explanation": "",
+        "sourceUrl": "https://uncleplumber.sg/our-rates/",
+        "capturedAt": "2026-10-15",
+        "prices": [
+          {
+            "label": "Clear clogged toilet bowl",
+            "price": "from $70",
+            "detail": "Calculated per-unit price: S$70 (1 unit in the published total). Per job (inferred from the job type; confirm with the company). GST: not stated",
+            "excerpt": "Clear clogged toilet bowl | from $70",
+            "sourceUrl": "https://uncleplumber.sg/our-rates/",
+            "capturedAt": "2026-10-15",
+            "indicative": false
+          },
+          {
+            "label": "Clear clogged floor trap",
+            "price": "from $60",
+            "detail": "Calculated per-unit price: S$60 (1 unit in the published total). Per job (inferred from the job type; confirm with the company). GST: not stated",
+            "excerpt": "Clear clogged floor trap | from $60",
+            "sourceUrl": "https://uncleplumber.sg/our-rates/",
+            "capturedAt": "2026-10-15",
+            "indicative": false
+          }
+        ],
+        "priceSummary": "2 pricing entries"
+      },
+      {
+        "name": "Toilet bowl",
+        "description": "",
+        "explanation": "",
+        "sourceUrl": "https://uncleplumber.sg/our-rates/",
+        "capturedAt": "2026-10-15",
+        "prices": [
+          {
+            "label": "Rectify water discharge into the toilet bowl by replacing new siphon",
+            "price": "from $80",
+            "detail": "Calculated per-unit price: S$80 (1 unit in the published total). Per job (inferred from the job type; confirm with the company). GST: not stated",
+            "excerpt": "Rectify water discharge into the toilet bowl by replacing new siphon | from $80",
+            "sourceUrl": "https://uncleplumber.sg/our-rates/",
+            "capturedAt": "2026-10-15",
+            "indicative": false
+          },
+          {
+            "label": "Replacement of sink/basin/Cistern flexible hose",
+            "price": "from $40",
+            "detail": "Calculated per-unit price: S$40 (1 unit in the published total). Per job (inferred from the job type; confirm with the company). GST: not stated",
+            "excerpt": "Replacement of sink/basin/Cistern flexible hose | from $40",
+            "sourceUrl": "https://uncleplumber.sg/our-rates/",
+            "capturedAt": "2026-10-15",
+            "indicative": false
+          },
+          {
+            "label": "WC Installation & Supplier",
+            "price": "from $250",
+            "detail": "Calculated per-unit price: S$250 (1 unit in the published total). Per job (inferred from the job type; confirm with the company). GST: not stated",
+            "excerpt": "WC Installation & Supplier | from $250",
+            "sourceUrl": "https://uncleplumber.sg/our-rates/",
+            "capturedAt": "2026-10-15",
+            "indicative": false
+          }
+        ],
+        "priceSummary": "3 pricing entries"
+      },
+      {
+        "name": "Sink",
+        "description": "",
+        "explanation": "",
+        "sourceUrl": "https://uncleplumber.sg/our-rates/",
+        "capturedAt": "2026-10-15",
+        "prices": [
+          {
+            "label": "Supply and Replace bottle trap for kitchen sink",
+            "price": "from $50",
+            "detail": "Calculated per-unit price: S$50 (1 unit in the published total). Per job (inferred from the job type; confirm with the company). GST: not stated",
+            "excerpt": "Supply and Replace bottle trap for kitchen sink | from $50",
+            "sourceUrl": "https://uncleplumber.sg/our-rates/",
+            "capturedAt": "2026-10-15",
+            "indicative": false
+          },
+          {
+            "label": "Basin Installation & Supplier",
+            "price": "from $150",
+            "detail": "Calculated per-unit price: S$150 (1 unit in the published total). Per job (inferred from the job type; confirm with the company). GST: not stated",
+            "excerpt": "Basin Installation & Supplier | from $150",
+            "sourceUrl": "https://uncleplumber.sg/our-rates/",
+            "capturedAt": "2026-10-15",
+            "indicative": false
+          }
+        ],
+        "priceSummary": "2 pricing entries"
+      }
+    ],
+    "highlights": [],
+    "sourceUrls": [
+      "https://uncleplumber.sg/",
+      "https://uncleplumber.sg/about-us/"
+    ],
+    "updatedAt": "2026-10-15"
+  },
+  "v3-contracts-pte-ltd": {
+    "headline": "Services published by V3 Contracts Pte Ltd.",
+    "about": [
+      "We are V3 Contracts, a trusted renovation contractor outfit known for our expert renovation services. We specialize in delivering high-quality renovation, construction, and fit-out services across Singapore. With years of experience as a certified HDB renovation contractor in both residential and commercial sectors, we bring renovation craftsmanship, precision, innovation and renovation expertise to every project-no matter the size or scope."
+    ],
+    "services": [
+      {
+        "name": "Taps & mixers",
+        "description": "",
+        "explanation": "Installation of 1 kitchen sink and tap",
+        "sourceUrl": "https://www.v3contracts.com/kitchen-renovation-package-singapore",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      },
+      {
+        "name": "Sink",
+        "description": "",
+        "explanation": "for 2 toilets (1 WC, 1 sink, 1 shower set each)",
+        "sourceUrl": "https://www.v3contracts.com/kitchen-renovation-package-singapore",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      },
+      {
+        "name": "Plumbing repair",
+        "description": "",
+        "explanation": "Complete Plumbing Works",
+        "sourceUrl": "https://www.v3contracts.com/kitchen-renovation-package-singapore",
+        "capturedAt": "2026-10-15",
+        "prices": []
+      }
+    ],
+    "highlights": [],
+    "sourceUrls": [
+      "https://www.v3contracts.com/"
+    ],
+    "updatedAt": "2026-10-15"
   }
 }

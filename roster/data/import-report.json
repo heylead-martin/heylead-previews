@@ -1,7 +1,7 @@
 {
-  "sourceChecked": "2026-10-12",
-  "sourceRows": 6478,
-  "sourceProfiles": 845,
+  "sourceChecked": "2026-10-15",
+  "sourceRows": 6509,
+  "sourceProfiles": 878,
   "published": [
     {
       "id": "roster-338-aircon",
@@ -250,6 +250,16 @@
       "curated": false
     },
     {
+      "id": "201231183K",
+      "slug": "chan-brothers-aircon",
+      "name": "CHAN BROTHERS AIR-CONDITIONING ENGINEERING PTE LTD",
+      "categories": [
+        "aircon"
+      ],
+      "primaryTrade": "aircon",
+      "curated": false
+    },
+    {
       "id": "198802500M",
       "slug": "cheng-seng-electric-co-pte-ltd",
       "name": "CHENG SENG ELECTRIC CO PTE LTD",
@@ -438,6 +448,17 @@
         "aircon"
       ],
       "primaryTrade": "aircon",
+      "curated": false
+    },
+    {
+      "id": "202336276R",
+      "slug": "fix-first-pte-ltd",
+      "name": "FIX FIRST PTE LTD.",
+      "categories": [
+        "plumbing",
+        "aircon"
+      ],
+      "primaryTrade": "plumbing",
       "curated": false
     },
     {
@@ -7204,6 +7225,156 @@
       ],
       "primaryTrade": "handyman",
       "curated": false
+    },
+    {
+      "id": "web-airmaxxaircon-com",
+      "slug": "airmaxx-aircon-pte-ltd",
+      "name": "Airmaxx Aircon Pte Ltd",
+      "categories": [
+        "aircon"
+      ],
+      "primaryTrade": "aircon",
+      "curated": false
+    },
+    {
+      "id": "gm-17955160989056097423",
+      "slug": "koomax-engineering-pte-ltd",
+      "name": "Koomax Engineering Pte Ltd",
+      "categories": [
+        "aircon"
+      ],
+      "primaryTrade": "aircon",
+      "curated": false
+    },
+    {
+      "id": "web-pureair-com-sg",
+      "slug": "pure-airconditioning-pte-ltd",
+      "name": "Pure Airconditioning Pte Ltd",
+      "categories": [
+        "aircon"
+      ],
+      "primaryTrade": "aircon",
+      "curated": false
+    },
+    {
+      "id": "gm-674643746409384908",
+      "slug": "xpower-electrical-pte-ltd",
+      "name": "Xpower Electrical Pte Ltd",
+      "categories": [
+        "electrician"
+      ],
+      "primaryTrade": "electrician",
+      "curated": false
+    },
+    {
+      "id": "web-islandelectric-sg",
+      "slug": "island-electric",
+      "name": "Island Electric",
+      "categories": [
+        "electrician"
+      ],
+      "primaryTrade": "electrician",
+      "curated": false
+    },
+    {
+      "id": "web-nationelectric-sg",
+      "slug": "nation-electric",
+      "name": "Nation Electric",
+      "categories": [
+        "electrician"
+      ],
+      "primaryTrade": "electrician",
+      "curated": false
+    },
+    {
+      "id": "gm-2787771237098937028",
+      "slug": "rsf-waterproofing-contractors-pte-ltd",
+      "name": "RSF Waterproofing & Contractors Pte Ltd",
+      "categories": [
+        "plumbing"
+      ],
+      "primaryTrade": "plumbing",
+      "curated": false
+    },
+    {
+      "id": "web-oppaannyeong-com",
+      "slug": "oppa-handyman-singapore-oppa-annyeong-pte-ltd",
+      "name": "OPPA Handyman Singapore (OPPA Annyeong Pte Ltd)",
+      "categories": [
+        "handyman"
+      ],
+      "primaryTrade": "handyman",
+      "curated": false
+    },
+    {
+      "id": "web-bwis-com-sg",
+      "slug": "b-w-integrated-services-b-w-builders-private-limited",
+      "name": "B+W Integrated Services (B+W Builders Private Limited)",
+      "categories": [
+        "handyman"
+      ],
+      "primaryTrade": "handyman",
+      "curated": false
+    },
+    {
+      "id": "web-homeplumbers-com-sg",
+      "slug": "home-plumbers-singapore",
+      "name": "Home Plumbers Singapore",
+      "categories": [
+        "plumbing"
+      ],
+      "primaryTrade": "plumbing",
+      "curated": false
+    },
+    {
+      "id": "web-syhplumber-com-sg",
+      "slug": "syh-plumber-electrical-pte-ltd",
+      "name": "SYH Plumber & Electrical Pte Ltd",
+      "categories": [
+        "plumbing"
+      ],
+      "primaryTrade": "plumbing",
+      "curated": false
+    },
+    {
+      "id": "gm-12447164591247841955",
+      "slug": "gc-werkz",
+      "name": "GC Werkz",
+      "categories": [
+        "plumbing"
+      ],
+      "primaryTrade": "plumbing",
+      "curated": false
+    },
+    {
+      "id": "web-sinplumbing-com",
+      "slug": "sin-plumbing-singapore",
+      "name": "Sin Plumbing Singapore",
+      "categories": [
+        "plumbing"
+      ],
+      "primaryTrade": "plumbing",
+      "curated": false
+    },
+    {
+      "id": "web-uncleplumber-sg",
+      "slug": "uncle-plumber",
+      "name": "Uncle Plumber",
+      "categories": [
+        "plumbing"
+      ],
+      "primaryTrade": "plumbing",
+      "curated": false
+    },
+    {
+      "id": "gm-1320275249863608087",
+      "slug": "v3-contracts-pte-ltd",
+      "name": "V3 Contracts Pte Ltd",
+      "categories": [
+        "plumbing"
+      ],
+      "primaryTrade": "plumbing",
+      "curated": false
     }
   ],
   "excluded": [
@@ -11196,19 +11367,6 @@
       ]
     },
     {
-      "id": "201231183K",
-      "name": "CHAN BROTHERS AIR-CONDITIONING ENGINEERING PTE LTD",
-      "categories": [
-        "aircon"
-      ],
-      "primaryTrade": "aircon",
-      "reasons": [
-        "missing-sourced-about",
-        "missing-sourced-services",
-        "missing-company-website"
-      ]
-    },
-    {
       "id": "201313151K",
       "name": "CHAO JUN ELECTRICAL PTE. LTD.",
       "categories": [
@@ -14847,19 +15005,6 @@
     {
       "id": "200916624D",
       "name": "FIVE STAR AIR CON SERVICES PTE LTD",
-      "categories": [
-        "aircon"
-      ],
-      "primaryTrade": "aircon",
-      "reasons": [
-        "missing-sourced-about",
-        "missing-sourced-services",
-        "missing-company-website"
-      ]
-    },
-    {
-      "id": "202336276R",
-      "name": "FIX FIRST PTE LTD.",
       "categories": [
         "aircon"
       ],
@@ -84667,6 +84812,199 @@
         "missing-sourced-services",
         "missing-company-website"
       ]
+    },
+    {
+      "id": "web-coolbestaircon-com",
+      "name": "Coolbest Aircon Servicing",
+      "categories": [
+        "aircon"
+      ],
+      "primaryTrade": "aircon",
+      "reasons": [
+        "no-sg-postal-code",
+        "missing-sourced-address"
+      ]
+    },
+    {
+      "id": "web-coolworldaircon-com-sg",
+      "name": "Cool World Aircon",
+      "categories": [
+        "aircon"
+      ],
+      "primaryTrade": "aircon",
+      "reasons": [
+        "no-sg-postal-code",
+        "missing-sourced-address"
+      ]
+    },
+    {
+      "id": "gm-3186479271670410904",
+      "name": "Aircool Pte Ltd",
+      "categories": [
+        "aircon"
+      ],
+      "primaryTrade": "aircon",
+      "reasons": [
+        "missing-sourced-about"
+      ]
+    },
+    {
+      "id": "gm-1222669494774184019",
+      "name": "COOL LAND ACMV PTE. LTD.",
+      "categories": [
+        "aircon"
+      ],
+      "primaryTrade": "aircon",
+      "reasons": [
+        "no-sg-postal-code",
+        "missing-sourced-address"
+      ]
+    },
+    {
+      "id": "web-besthandyman-sg",
+      "name": "Best Handyman 24/7 (KDL Solutions Pte Ltd)",
+      "categories": [
+        "handyman"
+      ],
+      "primaryTrade": "handyman",
+      "reasons": [
+        "no-sg-postal-code",
+        "missing-sourced-about",
+        "missing-sourced-address"
+      ]
+    },
+    {
+      "id": "web-unitedelectriciansingapore-com",
+      "name": "United Electricians",
+      "categories": [
+        "electrician"
+      ],
+      "primaryTrade": "electrician",
+      "reasons": [
+        "no-sg-postal-code",
+        "missing-sourced-address"
+      ]
+    },
+    {
+      "id": "web-24hourelectriciansingapore-com",
+      "name": "24 Hour Electrician Singapore",
+      "categories": [
+        "electrician"
+      ],
+      "primaryTrade": "electrician",
+      "reasons": [
+        "no-sg-postal-code",
+        "missing-sourced-address"
+      ]
+    },
+    {
+      "id": "web-forhadhandyman-com",
+      "name": "Forhad Handyman Services",
+      "categories": [
+        "handyman"
+      ],
+      "primaryTrade": "handyman",
+      "reasons": [
+        "no-sg-postal-code",
+        "missing-sourced-about",
+        "missing-sourced-address"
+      ]
+    },
+    {
+      "id": "web-handymanms-sg",
+      "name": "Handymanms",
+      "categories": [
+        "handyman"
+      ],
+      "primaryTrade": "handyman",
+      "reasons": [
+        "no-sg-postal-code",
+        "missing-sourced-address"
+      ]
+    },
+    {
+      "id": "web-singaporepaintingservice-com",
+      "name": "Singapore Painting Service",
+      "categories": [
+        "handyman"
+      ],
+      "primaryTrade": "handyman",
+      "reasons": [
+        "no-sg-postal-code",
+        "missing-sourced-address"
+      ]
+    },
+    {
+      "id": "web-my24hrsplumbing-com-sg",
+      "name": "My24hrsplumbing Singapore",
+      "categories": [
+        "plumbing"
+      ],
+      "primaryTrade": "plumbing",
+      "reasons": [
+        "no-sg-postal-code",
+        "missing-sourced-address"
+      ]
+    },
+    {
+      "id": "web-hedircool-sg-com",
+      "name": "HEDIRCOOL Pte. Ltd.",
+      "categories": [
+        "plumbing"
+      ],
+      "primaryTrade": "plumbing",
+      "reasons": [
+        "no-sg-postal-code",
+        "missing-sourced-address"
+      ]
+    },
+    {
+      "id": "web-topplumbing-com-sg",
+      "name": "Top Plumbing Services Pte Ltd",
+      "categories": [
+        "plumbing"
+      ],
+      "primaryTrade": "plumbing",
+      "reasons": [
+        "no-sg-postal-code",
+        "missing-sourced-address"
+      ]
+    },
+    {
+      "id": "web-hdleakpro-sg",
+      "name": "HD Leak Pro",
+      "categories": [
+        "plumbing"
+      ],
+      "primaryTrade": "plumbing",
+      "reasons": [
+        "no-sg-postal-code",
+        "missing-sourced-address"
+      ]
+    },
+    {
+      "id": "web-beeplumbing-com-sg",
+      "name": "BEE PLUMBING",
+      "categories": [
+        "plumbing"
+      ],
+      "primaryTrade": "plumbing",
+      "reasons": [
+        "no-sg-postal-code",
+        "missing-sourced-address"
+      ]
+    },
+    {
+      "id": "web-24hrsplumber-com-sg",
+      "name": "24hrs Plumber Singapore",
+      "categories": [
+        "plumbing"
+      ],
+      "primaryTrade": "plumbing",
+      "reasons": [
+        "no-sg-postal-code",
+        "missing-sourced-address"
+      ]
     }
   ],
   "warnings": [
@@ -84850,6 +85188,18 @@
       "issue": "Alternate address exists; primary database address retained"
     },
     {
+      "slug": "chan-brothers-aircon",
+      "issue": "Alternate phone shown with source label; primary phone remains the main contact"
+    },
+    {
+      "slug": "chan-brothers-aircon",
+      "issue": "Alternate address exists; primary database address retained"
+    },
+    {
+      "slug": "chan-brothers-aircon",
+      "issue": "Automatically extracted price text needs editorial review; source wording retained"
+    },
+    {
       "slug": "cheng-seng-electric-co-pte-ltd",
       "issue": "Alternate address exists; primary database address retained"
     },
@@ -84991,6 +85341,14 @@
     },
     {
       "slug": "everest-aircon-pte-ltd",
+      "issue": "Alternate address exists; primary database address retained"
+    },
+    {
+      "slug": "fix-first-pte-ltd",
+      "issue": "Alternate phone shown with source label; primary phone remains the main contact"
+    },
+    {
+      "slug": "fix-first-pte-ltd",
       "issue": "Alternate address exists; primary database address retained"
     },
     {
@@ -86969,40 +87327,77 @@
       "issue": "Automatically extracted price text needs editorial review; source wording retained"
     },
     {
+      "slug": "airmaxx-aircon-pte-ltd",
+      "issue": "Inferred price units labelled for confirmation"
+    },
+    {
+      "slug": "airmaxx-aircon-pte-ltd",
+      "issue": "General pricing references labelled separately from company rates"
+    },
+    {
+      "slug": "airmaxx-aircon-pte-ltd",
+      "issue": "Automatically extracted price text needs editorial review; source wording retained"
+    },
+    {
+      "slug": "koomax-engineering-pte-ltd",
+      "issue": "Uncertain logo withheld; initials shown",
+      "reason": "r10: selected automatically (touch-icon icon); not visually checked"
+    },
+    {
+      "slug": "rsf-waterproofing-contractors-pte-ltd",
+      "issue": "Inferred price units labelled for confirmation"
+    },
+    {
+      "slug": "oppa-handyman-singapore-oppa-annyeong-pte-ltd",
+      "issue": "Automatically extracted price text needs editorial review; source wording retained"
+    },
+    {
+      "slug": "home-plumbers-singapore",
+      "issue": "Inferred price units labelled for confirmation"
+    },
+    {
+      "slug": "sin-plumbing-singapore",
+      "issue": "Inferred price units labelled for confirmation"
+    },
+    {
+      "slug": "uncle-plumber",
+      "issue": "Inferred price units labelled for confirmation"
+    },
+    {
       "slug": "billy-aircon",
       "issue": "Original write-up preserved in source data; page withheld because release has a blocking flag"
     }
   ],
   "byTrade": {
     "aircon": {
-      "published": 224,
-      "excluded": 1838
+      "published": 228,
+      "excluded": 1840
     },
     "plumbing": {
-      "published": 92,
-      "excluded": 549
+      "published": 100,
+      "excluded": 555
     },
     "electrician": {
-      "published": 112,
-      "excluded": 2208
+      "published": 115,
+      "excluded": 2210
     },
     "handyman": {
-      "published": 97,
-      "excluded": 536
+      "published": 99,
+      "excluded": 540
     },
     "cleaning": {
       "published": 192,
       "excluded": 630
     }
   },
-  "publishedCount": 717,
-  "excludedCount": 5761,
-  "sourceSha256": "960ac87d0ff724e39c14a18f3acd361df58d23af3886c3d35d1a0a8e93e5421b",
-  "sourceRelease": "companies-20261014-1546.json",
+  "publishedCount": 734,
+  "excludedCount": 5775,
+  "sourceSha256": "30556dbfcad2f49a63db8f7884ef045dcd50f720a448774d5457bbe17d7f14ec",
+  "sourceRelease": "companies-20261015-1304.json",
   "logos": {
-    "verifiedFiles": 502,
-    "publishedCompanies": 502,
-    "bytes": 39765763,
-    "bundle": "logos-20261014-1546.tar.gz"
+    "verifiedFiles": 516,
+    "publishedCompanies": 516,
+    "bytes": 41012295,
+    "bundle": "logos-20261015-1304.tar.gz"
   }
 }

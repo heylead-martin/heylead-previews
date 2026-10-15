@@ -572,6 +572,21 @@
     },
     "photos": []
   },
+  "chan-brothers-aircon": {
+    "published": true,
+    "price": "See published prices",
+    "detail": "1 sourced pricing entries. Confirm the job, inclusions and total.",
+    "logo": "/roster/assets/logos/201231183K-453dcdf87871.png",
+    "logoAsset": {
+      "localPath": "logos/201231183K.png",
+      "sha256": "453dcdf878718d8c1dfdf0be43bff85fad130e2d2f59d6d8a0bb4440452f4aac",
+      "src": "/roster/assets/logos/201231183K-453dcdf87871.png",
+      "sourceUrl": "https://chanbrothers.sg/",
+      "originalUrl": "https://chanbrothers.sg/wp-content/uploads/2018/11/logo4.png",
+      "capturedAt": "2026-10-15"
+    },
+    "photos": []
+  },
   "cheng-seng-electric-co-pte-ltd": {
     "published": false,
     "price": "Ask for a quote",
@@ -771,6 +786,21 @@
     "published": false,
     "price": "Ask for a quote",
     "detail": "No company rate captured. Ask for a job-specific quote.",
+    "photos": []
+  },
+  "fix-first-pte-ltd": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "logo": "/roster/assets/logos/202336276R-8e07bf1302ce.png",
+    "logoAsset": {
+      "localPath": "logos/202336276R.png",
+      "sha256": "8e07bf1302cec1948fc16068e357502c6d27ba4c15b745f9a004a4ee360b6fbe",
+      "src": "/roster/assets/logos/202336276R-8e07bf1302ce.png",
+      "sourceUrl": "https://fixfirst.sg/",
+      "originalUrl": "https://fixfirst.sg/wp-content/uploads/2023/09/cropped-cropped-Serious-Contractor-3.png",
+      "capturedAt": "2026-10-15"
+    },
     "photos": []
   },
   "fortuna-air-conditioning-electrical-pte-ltd": {
@@ -9012,6 +9042,210 @@
       "originalUrl": "https://bestpaintingsg.com/wp-content/uploads/2024/08/best-paint-sg-.jpg",
       "capturedAt": "2026-10-12"
     },
+    "photos": []
+  },
+  "airmaxx-aircon-pte-ltd": {
+    "published": true,
+    "price": "See published prices",
+    "detail": "2 sourced pricing entries. Confirm the job, inclusions and total.",
+    "logo": "/roster/assets/logos/web-airmaxxaircon-com-27039866e735.png",
+    "logoAsset": {
+      "localPath": "logos/web-airmaxxaircon-com.png",
+      "sha256": "27039866e73545936957b17dcdbe9206eea0cd3307b265ce9f516d33aaab147b",
+      "src": "/roster/assets/logos/web-airmaxxaircon-com-27039866e735.png",
+      "sourceUrl": "https://airmaxxaircon.com/",
+      "originalUrl": "https://airmaxxaircon.com/wp-content/uploads/2015/12/airmaxxaircon-logo.png",
+      "capturedAt": "2026-10-15"
+    },
+    "photos": []
+  },
+  "koomax-engineering-pte-ltd": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "logoReview": {
+      "status": "needs-review",
+      "reason": "r10: selected automatically (touch-icon icon); not visually checked",
+      "sourceUrl": "https://koomax.com.sg/",
+      "checkedAt": "2026-10-15T12:58+03:00"
+    },
+    "photos": []
+  },
+  "pure-airconditioning-pte-ltd": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "logo": "/roster/assets/logos/web-pureair-com-sg-3abc2053c05b.png",
+    "logoAsset": {
+      "localPath": "logos/web-pureair-com-sg.png",
+      "sha256": "3abc2053c05b4004ceb238b265536361dafc3404b40ee4b7f7d9e4bd72d0e291",
+      "src": "/roster/assets/logos/web-pureair-com-sg-3abc2053c05b.png",
+      "sourceUrl": "https://www.pureair.com.sg/",
+      "originalUrl": "https://www.pureair.com.sg/wp-content/uploads/2021/06/pureair-logo.png",
+      "capturedAt": "2026-10-15"
+    },
+    "photos": []
+  },
+  "xpower-electrical-pte-ltd": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "logo": "/roster/assets/logos/gm-674643746409384908-0ebbe2e5c49a.png",
+    "logoAsset": {
+      "localPath": "logos/gm-674643746409384908.png",
+      "sha256": "0ebbe2e5c49a49d0361e88cc531dac5c844e29b4e404ea817560f0f10ef86152",
+      "src": "/roster/assets/logos/gm-674643746409384908-0ebbe2e5c49a.png",
+      "sourceUrl": "https://xpower.com.sg/",
+      "originalUrl": "https://xpower.com.sg/assets/img/logo/logo.png",
+      "capturedAt": "2026-10-15"
+    },
+    "photos": []
+  },
+  "island-electric": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "logo": "/roster/assets/logos/web-islandelectric-sg-7247c9ff34ba.png",
+    "logoAsset": {
+      "localPath": "logos/web-islandelectric-sg.png",
+      "sha256": "7247c9ff34ba7130479c4e1feba81bf75110b88c79cdda0a59de03d704beba9b",
+      "src": "/roster/assets/logos/web-islandelectric-sg-7247c9ff34ba.png",
+      "sourceUrl": "https://islandelectric.sg/",
+      "originalUrl": "https://islandelectric.sg/wp-content/uploads/2022/07/cropped-logo.png",
+      "capturedAt": "2026-10-15"
+    },
+    "photos": []
+  },
+  "nation-electric": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "logo": "/roster/assets/logos/web-nationelectric-sg-e62d238dd9d7.png",
+    "logoAsset": {
+      "localPath": "logos/web-nationelectric-sg.png",
+      "sha256": "e62d238dd9d787b39b8f40c3aaaf46535dfcd62f6ac8baec78bcc3efe28c9560",
+      "src": "/roster/assets/logos/web-nationelectric-sg-e62d238dd9d7.png",
+      "sourceUrl": "https://nationelectric.sg/",
+      "originalUrl": "https://nationelectric.sg/wp-content/uploads/2019/10/logo2-1.png",
+      "capturedAt": "2026-10-15"
+    },
+    "photos": []
+  },
+  "rsf-waterproofing-contractors-pte-ltd": {
+    "published": true,
+    "price": "See published prices",
+    "detail": "3 sourced pricing entries. Confirm the job, inclusions and total.",
+    "logo": "/roster/assets/logos/gm-2787771237098937028-820af7dd249c.jpg",
+    "logoAsset": {
+      "localPath": "logos/gm-2787771237098937028.jpg",
+      "sha256": "820af7dd249cad9028672e2ee9771d23be2e29ea9783f7814b010c8527c186f4",
+      "src": "/roster/assets/logos/gm-2787771237098937028-820af7dd249c.jpg",
+      "sourceUrl": "https://rsfwaterproofing.com.sg/",
+      "originalUrl": "https://rsfwaterproofing.com.sg/wp-content/uploads/2022/10/RSF-LOGO-1-copy.jpg",
+      "capturedAt": "2026-10-15"
+    },
+    "photos": []
+  },
+  "oppa-handyman-singapore-oppa-annyeong-pte-ltd": {
+    "published": true,
+    "price": "See published prices",
+    "detail": "1 sourced pricing entries. Confirm the job, inclusions and total.",
+    "photos": []
+  },
+  "b-w-integrated-services-b-w-builders-private-limited": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "logo": "/roster/assets/logos/web-bwis-com-sg-73d97182ef0c.png",
+    "logoAsset": {
+      "localPath": "logos/web-bwis-com-sg.png",
+      "sha256": "73d97182ef0c7734cdf273aa0d06a9937007273d770380327da213a16f057979",
+      "src": "/roster/assets/logos/web-bwis-com-sg-73d97182ef0c.png",
+      "sourceUrl": "https://bwis.com.sg/",
+      "originalUrl": "https://bwis.com.sg/wp-content/uploads/2025/02/BWIS-Logo_Version02_FA.png",
+      "capturedAt": "2026-10-15"
+    },
+    "photos": []
+  },
+  "home-plumbers-singapore": {
+    "published": true,
+    "price": "See published prices",
+    "detail": "8 sourced pricing entries. Confirm the job, inclusions and total.",
+    "logo": "/roster/assets/logos/web-homeplumbers-com-sg-3e9225854c2a.png",
+    "logoAsset": {
+      "localPath": "logos/web-homeplumbers-com-sg.png",
+      "sha256": "3e9225854c2ab85d11f567de75d7283f45b9260327ef854b929010ea4fa95bd7",
+      "src": "/roster/assets/logos/web-homeplumbers-com-sg-3e9225854c2a.png",
+      "sourceUrl": "https://homeplumbers.com.sg/",
+      "originalUrl": "https://homeplumbers.com.sg/wp-content/uploads/2016/03/home-plumbers.png",
+      "capturedAt": "2026-10-15"
+    },
+    "photos": []
+  },
+  "syh-plumber-electrical-pte-ltd": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "logo": "/roster/assets/logos/web-syhplumber-com-sg-f1cef22054e2.svg",
+    "logoAsset": {
+      "localPath": "logos/web-syhplumber-com-sg.svg",
+      "sha256": "f1cef22054e23d50f317058f56c572274294c5e4b487cc1eda8aa208e94f6d4c",
+      "src": "/roster/assets/logos/web-syhplumber-com-sg-f1cef22054e2.svg",
+      "sourceUrl": "https://www.syhplumber.com.sg/",
+      "originalUrl": "https://www.syhplumber.com.sg/wp-content/uploads/2023/04/Header-Logo.svg",
+      "capturedAt": "2026-10-15"
+    },
+    "photos": []
+  },
+  "gc-werkz": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "logo": "/roster/assets/logos/gm-12447164591247841955-3ab7e929e676.webp",
+    "logoAsset": {
+      "localPath": "logos/gm-12447164591247841955.webp",
+      "sha256": "3ab7e929e676858fd64acd0641c308034a7289b05e0c8ad418327015e6333cad",
+      "src": "/roster/assets/logos/gm-12447164591247841955-3ab7e929e676.webp",
+      "sourceUrl": "https://www.gcwerkz.com/",
+      "originalUrl": "https://www.gcwerkz.com/wp-content/uploads/2026/06/cropped-GC-Werkz-Logo-GIF-scaled-1.webp",
+      "capturedAt": "2026-10-15"
+    },
+    "photos": []
+  },
+  "sin-plumbing-singapore": {
+    "published": true,
+    "price": "See published prices",
+    "detail": "5 sourced pricing entries. Confirm the job, inclusions and total.",
+    "logo": "/roster/assets/logos/web-sinplumbing-com-05a1d11c0804.png",
+    "logoAsset": {
+      "localPath": "logos/web-sinplumbing-com.png",
+      "sha256": "05a1d11c0804ab28929e257205bffaa496437290106d177af59a8231558cb292",
+      "src": "/roster/assets/logos/web-sinplumbing-com-05a1d11c0804.png",
+      "sourceUrl": "https://sinplumbing.com/",
+      "originalUrl": "https://sinplumbing.com/wp-content/uploads/2022/03/Logo-2-02-1.png",
+      "capturedAt": "2026-10-15"
+    },
+    "photos": []
+  },
+  "uncle-plumber": {
+    "published": true,
+    "price": "See published prices",
+    "detail": "7 sourced pricing entries. Confirm the job, inclusions and total.",
+    "logo": "/roster/assets/logos/web-uncleplumber-sg-2e97735a7f97.png",
+    "logoAsset": {
+      "localPath": "logos/web-uncleplumber-sg.png",
+      "sha256": "2e97735a7f975a6b1376f7ff616cb84b283077797dbcd18ee7eac82a278c451e",
+      "src": "/roster/assets/logos/web-uncleplumber-sg-2e97735a7f97.png",
+      "sourceUrl": "https://uncleplumber.sg/",
+      "originalUrl": "https://uncleplumber.sg/wp-content/uploads/2025/06/UP_logo_247removed.png",
+      "capturedAt": "2026-10-15"
+    },
+    "photos": []
+  },
+  "v3-contracts-pte-ltd": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
     "photos": []
   }
 }
