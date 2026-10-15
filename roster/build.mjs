@@ -999,6 +999,10 @@ const guideEvidence = {
   'CL-05':{trade:'cleaning',match:/part.?time|hourly|weekly|fortnightly|regular/i,exclude:/deep|post.?reno|office|move/i,unit:'per hour',title:'Published part-time cleaning rates',noun:'part-time cleaning'},
   'CL-06':{trade:'cleaning',match:/post.?reno/i,title:'Published post-renovation cleaning rates',noun:'post-renovation cleaning'},
   'CL-07':{trade:'cleaning',match:/steam/i,title:'Published steam cleaning rates',noun:'steam cleaning'},
+  'CL-08':{trade:'cleaning',match:/office|commercial/i,exclude:/home|residential|house/i,title:'Published office cleaning rates',noun:'office cleaning'},
+  'CL-09':{trade:'cleaning',match:/mattress/i,title:'Published mattress cleaning rates',noun:'mattress cleaning'},
+  'HM-03':{trade:'handyman',match:/paint/i,title:'Published painting rates',noun:'painting'},
+  'HM-04':{trade:'handyman',match:/\btv\b|television/i,title:'Published TV mounting rates',noun:'TV mounting'},
   'PL-06':{trade:'plumbing',match:/instant|water heater|storage heater/i,exclude:/repair|servic/i,title:'Published water heater installation rates',noun:'water heater'},
   'chemical-wash':{trade:'aircon',match:/chemical wash/i,exclude:/overhaul|contract|package|annual/i,unit:'per unit',title:'Published chemical wash rates',noun:'chemical wash'},
   'gas-top-up':{trade:'aircon',match:/gas top|refrigerant|r32|r410|r22/i,exclude:/servic|chemical|install/i,title:'Published gas top-up rates',noun:'gas top-up'}
@@ -1009,6 +1013,12 @@ function sourcedRates(spec) {
     return lines.length?[{company:c,line:lines[0]}]:[];
   }).sort((a,b)=>a.line.amount_sgd-b.line.amount_sgd);
 }
+// A label that is only a list of unit tiers ("for 1 unit, for 2 units, ...") says nothing about the job.
+function rateLabel(p) {
+  const label=tidyPriceLabel(p.service);
+  const tiers=/^(?:for\s+)?\d+\+?\s*(?:units?|fan coils?|pcs|pieces)\b[^.]*,\s*(?:for\s+)?\d/i.test(label)||/^for\s+\d/i.test(label);
+  return (tiers||!label)&&p.job ? p.job.replace(/-/g,' ').replace(/^./,c=>c.toUpperCase()) : label;
+}
 function renderSourcedRates(key) {
   const spec=guideEvidence[key];if(!spec)return '';
   const rows=sourcedRates(spec);if(rows.length<2)return '';
@@ -1017,7 +1027,7 @@ function renderSourcedRates(key) {
   const same=rows.filter(r=>r.line.unit===unit).map(r=>r.line.amount_sgd);
   const money=n=>`S$${Number(n).toLocaleString('en-SG')}`;
   const range=count>=3?`<p>For the most common unit (${esc(unit)}), the lowest published rates from ${count} companies run from <strong>${money(Math.min(...same))}</strong> to <strong>${money(Math.max(...same))}</strong>. Each figure is one company's own advertised rate with its conditions, not a market average or a quote.</p>`:`<p>Each figure is one company's own advertised rate with its conditions, not a market average or a quote.</p>`;
-  return `<section class="guide-price-sample" aria-labelledby="${key}-rates-title"><p class="kicker">FROM THE ROSTER DIRECTORY</p><h2 id="${key}-rates-title">${esc(spec.title)}</h2>${range}<details><summary>See ${rows.length} published ${esc(spec.noun)} rates and sources</summary><div class="guide-table-scroll" tabindex="0" role="region" aria-label="${esc(spec.title)}"><table><caption>Lowest matching advertised rate per company, in SGD as published. Check the source for minimums, GST and inclusions.</caption><thead><tr><th scope="col">Company</th><th scope="col">Service as listed</th><th scope="col">Rate</th><th scope="col">Source</th></tr></thead><tbody>${rows.map(({company:c,line:p})=>`<tr><th scope="row"><a href="/roster/company/${c.slug}/#pricing">${esc(c.name)}</a></th><td>${esc(tidyPriceLabel(p.service)||p.job||'')}</td><td>${money(p.amount_sgd)} ${esc(p.unit||'')}</td><td><a href="${esc(p.sourceUrl)}">${esc(new URL(p.sourceUrl).hostname.replace(/^www\./,''))} · ${esc(p.capturedAt.slice(0,10))}</a></td></tr>`).join('')}</tbody></table></div></details></section>`;
+  return `<section class="guide-price-sample" aria-labelledby="${key}-rates-title"><p class="kicker">FROM THE ROSTER DIRECTORY</p><h2 id="${key}-rates-title">${esc(spec.title)}</h2>${range}<details><summary>See ${rows.length} published ${esc(spec.noun)} rates and sources</summary><div class="guide-table-scroll" tabindex="0" role="region" aria-label="${esc(spec.title)}"><table><caption>Lowest matching advertised rate per company, in SGD as published. Check the source for minimums, GST and inclusions.</caption><thead><tr><th scope="col">Company</th><th scope="col">Service as listed</th><th scope="col">Rate</th><th scope="col">Source</th></tr></thead><tbody>${rows.map(({company:c,line:p})=>`<tr><th scope="row"><a href="/roster/company/${c.slug}/#pricing">${esc(c.name)}</a></th><td>${esc(rateLabel(p))}</td><td>${money(p.amount_sgd)} ${esc(p.unit||'')}</td><td><a href="${esc(p.sourceUrl)}">${esc(new URL(p.sourceUrl).hostname.replace(/^www\./,''))} · ${esc(p.capturedAt.slice(0,10))}</a></td></tr>`).join('')}</tbody></table></div></details></section>`;
 }
 
 // Towns from the keyword plan. Links use the existing coverage filter; plumbing has three full area pages.
