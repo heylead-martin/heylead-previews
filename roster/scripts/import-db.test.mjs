@@ -43,11 +43,12 @@ test('New release evidence fills only matching missing postal codes and keeps or
  assert.deepEqual(supplementPostalAddress(current,{...incoming,value:'60 Another Road, Singapore 737869'}),current);
  assert.deepEqual(supplementPostalAddress(current,{...incoming,sourceUrl:''}),current);
  assert.deepEqual(supplementPostalAddress({...current,postal:'111111'},incoming),{...current,postal:'111111'});
- const r={...row(),rosterProfile:{slug:'original',rating:null,rating_moved_to:'self_reported_rating'},self_reported_rating:{rating:5,count:3000,source_url:'https://example.com'},map:{status:'verified',place:{cid:'123',postal:'737869'}}};
+ const r={...row(),rosterProfile:{slug:'original',rating:null,rating_moved_to:'self_reported_rating'},self_reported_rating:{rating:5,count:3000,count_qualifier:'more_than',source_url:'https://example.com'},map:{status:'verified',place:{cid:'123',postal:'737869'}}};
  const seed={companies:{companies:[{...row(),slug:'original',category:'aircon',rating:{value:5,count:3000,sourceUrl:'https://example.com'}}]},profiles:{original:{about:['Original words.'],services:[]}},presentation:{original:{published:false}}};
  const result=importDatabase(db([r]),seed);
  assert.equal(result.companies.companies[0].rating,null);
  assert.equal(result.companies.companies[0].selfReportedRating.count,3000);
+ assert.equal(result.companies.companies[0].selfReportedRating.count_qualifier,'more_than');
  assert.equal(result.companies.companies[0].mapEvidence.place.cid,'123');
  assert.deepEqual(result.profiles.original,seed.profiles.original);
 });

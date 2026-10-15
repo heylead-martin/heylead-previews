@@ -99,3 +99,22 @@ Homepage cards, footer links, related guides and in-article links now use the ne
 Validation: 765 generated pages, zero broken internal links/fragments, 92 JavaScript tests and 15 Python tests passed. All 20 editorial pages pass their existing word-count, FAQ and metadata checks plus new directory/guide separation checks. The cleaning directory and new guide were checked at 1366px and 390px, including the old anchor, guide link, contents and return link. New screenshots are `../review-20261013/cleaning-guide-link-desktop.png`, `cleaning-guide-desktop.png` and `cleaning-guide-mobile.png`.
 
 Company totals, release data and parked features are unchanged. This follow-up remains local, with no merge, push or deployment.
+
+
+## Grok review follow-up: 14 October 2026
+
+Reviewed `GROK-REVIEW-RESPONSE-20261013.md`. Changes remain local on `service-areas-1253`, after commit `4a4e4d422`. No merge, push, deployment, account activation or data release import.
+
+- B1 fixed in the shared renderer: Direct Plumber keeps `3,388+ reviews`; Repair.sg keeps `more than 3,000 reviews`. Existing recorded excerpts provide these qualifiers. New releases can use `self_reported_rating.count_qualifier` with `plus`, `more_than` or `exact`. A missing field falls back only to a qualifier attached to the matching number in the recorded excerpt. Another count or a homes-served number does not supply the qualifier. Import preservation is tested. Independent averages and sorting remain unchanged.
+- B2 fixed in page output: retired `The sort uses...` sentences are removed from public rating notes while source comparisons remain. The immutable release and raw archived notes are unchanged; their cleanup belongs in the next release. A site-wide check now rejects obsolete sorting claims.
+- B3 fixed: all three single-excerpt pages (Repair.sg, Mr Plumber and SoCool) use `1 sourced excerpt`. A site-wide grammar check prevents regression.
+- B4 to B6 remain data work: Reliable Electrical's scraped address, formatting/street corrections, and the unresolved Flash/SIGNATURE company identity. None was silently rewritten from review notes.
+- Grok proposes 20 official address matches and three confirmed logos. They still need a checksummed release, logo provenance and map-pin verification after import. The current snapshot remains 690 verified pins / 29 unresolved, 499 real logos / 220 initials, with 21 uncertain logos. Do not report the proposed resolutions as imported.
+- 338 Aircon and Cool Aircon have conflicting or changed counts. No new count or capture date was invented or imported. Keep them as self-reported and separate from independent ratings; resolve conflicting count representation with the new release.
+
+Validation: rebuild 765 pages / 719 profiles; 95 JavaScript tests and 15 Python tests pass; editorial checks pass for 20 guides / 24,907 words; site checks find zero broken internal links or fragments and no forbidden text, obsolete sorting notes or singular/plural errors. The original 16 write-ups, noindex, structured-data restrictions, parked features and Areas served checks pass. Trade counts and page budgets are unchanged.
+
+
+The renderer also supports an explicit `self_reported_rating.count_conflict: true`, displaying the company-claimed rating with a statement that its pages give different counts, instead of an exact count. Missing counts have no invented total. This support is ready for the next data release; no current record was marked conflicting automatically.
+
+Browser follow-up: Repair.sg and Direct Plumber count wording and Sureclean/1st Electrical source disclosures checked at 1366 x 900; Repair.sg checked at 390 x 844. No horizontal overflow. Screenshot: `../../review-20261014/repair-sg-mobile.jpg`. See `GROK-REVIEW-FOLLOWUP-20261014.md` for the next-release evidence and field requirements.

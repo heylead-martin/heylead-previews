@@ -1,4 +1,4 @@
-import {noRatingText} from './evidence-display.mjs';
+import {noRatingText} from './evidence-display.mjs?v=20261014-ratings';
 const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 export function renderAverage(average, href, large=false) {
   if (!average) return `<a class="average-rating average-rating-empty${large?' average-rating-large':''}" href="${esc(href)}"><span class="average-label">Reviews</span><span>${noRatingText}</span></a>`;

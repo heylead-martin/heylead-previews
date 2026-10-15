@@ -25,6 +25,8 @@ for(const rel of manifest) {
  assert.ok(html.includes('href="/roster/claim-listing/"'),`Missing footer claim link: ${rel}`);
  assert.ok(!/[\u2013\u2014]/.test(html),`Long dash: ${rel}`);
  assert.ok(!/\b(?:undefined|null|NaN|LOGO)\b|â€/.test(html),`Invalid generated text: ${rel}`);
+ assert.ok(!/\bsort uses\b/i.test(html),`Obsolete sorting note: ${rel}`);
+ assert.ok(!/\b1 sourced excerpts\b/.test(html),`Singular review excerpt grammar: ${rel}`);
  const desc=html.match(/<meta name="description" content="([^"]+)"/)[1].replace(/&amp;/g,'&').replace(/&quot;/g,'"').replace(/&lt;/g,'<').replace(/&gt;/g,'>');
  assert.ok(desc.length<=160&&/[.?!)]$/.test(desc),`Description length/ending: ${rel}`);
  assert.ok(!descriptions.has(desc),`Duplicate description: ${rel}`);descriptions.add(desc);

@@ -1,6 +1,6 @@
-import {renderAverage} from './rating-display.mjs?v=20261013-review';
+import {renderAverage} from './rating-display.mjs?v=20261014-ratings';
 import {previewFeatures} from './features.mjs';
-import {renderQuoteEvidence, renderSelfReported, noRatingText, logoOwnerNote} from './evidence-display.mjs';
+import {renderQuoteEvidence, renderSelfReported, noRatingText, logoOwnerNote} from './evidence-display.mjs?v=20261014-ratings';
 const esc=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 export function renderLogo(c, large=false) {
   const initials=String(c.name).replace(/[^\p{L}\p{N}\s]/gu,'').trim().split(/\s+/).slice(0,2).map(word=>word[0]).join('').toUpperCase();

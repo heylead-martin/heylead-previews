@@ -1,8 +1,8 @@
-import {renderQuoteEvidence,noRatingText} from './evidence-display.mjs';
+import {renderQuoteEvidence,noRatingText} from './evidence-display.mjs?v=20261014-ratings';
 import {decodeCatalogue} from './catalogue-data.mjs?v=20261012-areas';
 import {matchJob,selectedVisible} from './job-match.mjs?v=20261012-quotes';
 import {validWhatsAppNumber} from './quote-contact.mjs?v=20261012-quotes';
-import {renderLogo} from './catalogue-card.mjs?v=20261013-review';
+import {renderLogo} from './catalogue-card.mjs?v=20261014-ratings';
 const esc=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const root=document.querySelector('[data-job-matches]');
 if(root){
