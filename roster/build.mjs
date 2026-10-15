@@ -18,8 +18,9 @@ import { createProfileRenderer, directoryRecord, concise, ratingFact } from "./l
 import {renderHomeSnapshot, buildHomeSnapshot} from './lib/home-snapshot.mjs';
 import {loadGuides, parseGuide, renderEditorial, renderGuideTeaser, guideCards, editorialSchema} from './lib/editorial.mjs';
 import {encodeCatalogue} from './assets/catalogue-data.mjs';
-import {priceView, servicePrice, serviceGuide, tidyPriceLabel} from "./lib/profile-copy.mjs";
+import {priceView, servicePrice, serviceGuide} from "./lib/profile-copy.mjs";
 import {renderClaimPage} from "./lib/claim-page.mjs";
+import {guideEvidence, sourcedRates, rateLabel, rateCell, displayUnit, isFromPrice, minimumCompanies, money} from "./lib/sourced-rates.mjs";
 import { renderCard, renderCompactCard, splitDirectory } from "./assets/catalogue-card.mjs";
 
 const root = path.dirname(fileURLToPath(import.meta.url));
@@ -991,57 +992,15 @@ function renderGuidePage(guide) {
 
 // Guides and intent pages show only published, sourced company rates: one lowest matching
 // non-promotional rate per company, each with its company, source link and capture date.
-const guideEvidence = {
-  'AC-04':{trade:'aircon',match:/install/i,exclude:/dismantl|remov|trunking only|chemical|servic/i,title:'Published aircon installation rates',noun:'installation'},
-  'AC-06':{trade:'aircon',match:/repair|troubleshoot|diagnos|inspection|compressor/i,exclude:/servic|chemical|wash|install/i,title:'Published aircon repair and inspection rates',noun:'repair or inspection'},
-  'AC-07':{trade:'aircon',match:/leak|water pump|condensate|drain/i,exclude:/servic|chemical|install/i,title:'Published rates for aircon leak work',noun:'leak-related'},
-  'CL-04':{trade:'cleaning',match:/tenancy|move.?out|move.?in.*out|handover/i,title:'Published move-out and end-of-tenancy cleaning rates',noun:'move-out cleaning'},
-  'CL-05':{trade:'cleaning',match:/part.?time|hourly|weekly|fortnightly|regular/i,exclude:/deep|post.?reno|office|move/i,unit:'per hour',title:'Published part-time cleaning rates',noun:'part-time cleaning'},
-  'CL-06':{trade:'cleaning',match:/post.?reno/i,title:'Published post-renovation cleaning rates',noun:'post-renovation cleaning'},
-  'CL-07':{trade:'cleaning',match:/steam/i,title:'Published steam cleaning rates',noun:'steam cleaning'},
-  'CL-08':{trade:'cleaning',match:/office|commercial/i,exclude:/home|residential|house/i,title:'Published office cleaning rates',noun:'office cleaning'},
-  'AC-08':{trade:'aircon',match:/overhaul/i,exclude:/condenser|contract|package|annual|yearly/i,unit:'per unit',title:'Published chemical overhaul rates',noun:'chemical overhaul'},
-  'AC-09':{trade:'aircon',match:/condenser|outdoor unit clean/i,exclude:/tray|gas level|fan ?coil|overhaul|promotion|servicing,/i,unit:'per unit',title:'Published condenser cleaning rates',noun:'condenser cleaning'},
-  'CL-10':{trade:'cleaning',match:/curtain/i,exclude:/install|track|rod|blind/i,title:'Published curtain cleaning rates',noun:'curtain cleaning'},
-  'HM-05':{trade:'handyman',match:/assembl|ikea/i,exclude:/handyman help|starting prices/i,title:'Published furniture assembly rates',noun:'furniture assembly'},
-  'EL-07':{trade:'electrician',match:/light|downlight/i,exclude:/repair|fan/i,title:'Published light installation rates',noun:'light installation'},
-  'EL-08':{trade:'electrician',serviceOnly:true,match:/socket|power point/i,exclude:/isolator|hob|oven|water heater|aircon/i,title:'Published socket and power point rates',noun:'socket installation'},
-  'HM-06':{trade:'handyman',serviceOnly:true,match:/\block/i,exclude:/exclude lock|door repair|window repair/i,title:'Published lock replacement and repair rates',noun:'lock'},
-  'HM-07':{trade:'handyman',serviceOnly:true,match:/curtain|blind/i,exclude:/tv bracket/i,title:'Published curtain and blind installation rates',noun:'curtain installation'},
-  'PL-08':{trade:'plumbing',serviceOnly:true,match:/\btap\b|faucet|mixer/i,exclude:/washing machine/i,title:'Published tap replacement and repair rates',noun:'tap'},
-  'PL-09':{trade:'plumbing',serviceOnly:true,match:/basin/i,exclude:/tap|faucet|choke|clog|mixer|hose|leak/i,title:'Published basin installation rates',noun:'basin'},
-  'CL-11':{trade:'cleaning',serviceOnly:true,match:/ad.?hoc|one.?time|one.?off/i,exclude:/deep|move|post|office|aircon/i,title:'Published ad hoc cleaning rates',noun:'ad hoc cleaning'},
-  'EL-09':{trade:'electrician',serviceOnly:true,match:/db box|distribution board/i,exclude:/trunking|cable pull/i,title:'Published DB box replacement rates',noun:'DB box'},
-  'CL-12':{trade:'cleaning',serviceOnly:true,match:/disinfect|sanitis/i,exclude:/steam/i,title:'Published disinfection rates',noun:'disinfection'},
-  'CL-09':{trade:'cleaning',match:/mattress/i,title:'Published mattress cleaning rates',noun:'mattress cleaning'},
-  'HM-03':{trade:'handyman',match:/paint/i,title:'Published painting rates',noun:'painting'},
-  'HM-04':{trade:'handyman',match:/\btv\b|television/i,title:'Published TV mounting rates',noun:'TV mounting'},
-  'PL-06':{trade:'plumbing',match:/instant|water heater|storage heater/i,exclude:/repair|servic/i,title:'Published water heater installation rates',noun:'water heater'},
-  'chemical-wash':{trade:'aircon',match:/chemical wash/i,exclude:/overhaul|contract|package|annual/i,unit:'per unit',title:'Published chemical wash rates',noun:'chemical wash'},
-  'gas-top-up':{trade:'aircon',match:/gas top|refrigerant|r32|r410|r22/i,exclude:/servic|chemical|install/i,title:'Published gas top-up rates',noun:'gas top-up'}
-};
-function sourcedRates(spec) {
-  return publishedCompanies.filter(c=>c.category===spec.trade).flatMap(c=>{
-    const text=p=>spec.serviceOnly?p.service:`${p.service} ${p.job||''}`;
-    const lines=(c.enrichment?.priceLines||[]).filter(p=>spec.match.test(text(p))&&!(spec.exclude?.test(text(p)))&&Number.isFinite(p.amount_sgd)&&p.amount_sgd>0&&!p.indicative&&!p.promo&&/^https?:\/\//.test(p.sourceUrl||'')&&/^\d{4}-\d{2}-\d{2}/.test(p.capturedAt||'')&&(!spec.unit||p.unit===spec.unit)).sort((a,b)=>a.amount_sgd-b.amount_sgd);
-    return lines.length?[{company:c,line:lines[0]}]:[];
-  }).sort((a,b)=>a.line.amount_sgd-b.line.amount_sgd);
-}
-// A label that is only a list of unit tiers ("for 1 unit, for 2 units, ...") says nothing about the job.
-function rateLabel(p) {
-  const label=tidyPriceLabel(p.service);
-  const tiers=/^(?:for\s+)?\d+\+?\s*(?:units?|fan coils?|pcs|pieces)\b[^.]*,\s*(?:for\s+)?\d/i.test(label)||/^for\s+\d/i.test(label);
-  return (tiers||!label)&&p.job ? p.job.replace(/-/g,' ').replace(/^./,c=>c.toUpperCase()) : label;
-}
+// Matching, guards, labels and rate wording live in lib/sourced-rates.mjs.
 function renderSourcedRates(key) {
   const spec=guideEvidence[key];if(!spec)return '';
-  const rows=sourcedRates(spec);if(rows.length<3)return '';
-  const units=new Map();for(const {line} of rows)units.set(line.unit,(units.get(line.unit)||0)+1);
-  const [unit,count]=[...units].sort((a,b)=>b[1]-a[1])[0];
-  const same=rows.filter(r=>r.line.unit===unit).map(r=>r.line.amount_sgd);
-  const money=n=>`S$${Number(n).toLocaleString('en-SG')}`;
+  const rows=sourcedRates(spec,publishedCompanies);if(rows.length<minimumCompanies)return '';
+  const units=new Map();for(const {line} of rows){const unit=displayUnit(line);if(unit)units.set(unit,(units.get(unit)||0)+1);}
+  const [unit,count]=[...units].sort((a,b)=>b[1]-a[1])[0]||['',0];
+  const same=rows.filter(r=>displayUnit(r.line)===unit).map(r=>r.line.amount_sgd);
   const range=count>=3?`<p>For the most common unit (${esc(unit)}), the lowest published rates from ${count} companies run from <strong>${money(Math.min(...same))}</strong> to <strong>${money(Math.max(...same))}</strong>. Each figure is one company's own advertised rate with its conditions, not a market average or a quote.</p>`:`<p>Each figure is one company's own advertised rate with its conditions, not a market average or a quote.</p>`;
-  return `<section class="guide-price-sample" aria-labelledby="${key}-rates-title"><p class="kicker">FROM THE ROSTER DIRECTORY</p><h2 id="${key}-rates-title">${esc(spec.title)}</h2>${range}<details><summary>See ${rows.length} published ${esc(spec.noun)} rates and sources</summary><div class="guide-table-scroll" tabindex="0" role="region" aria-label="${esc(spec.title)}"><table><caption>Lowest matching advertised rate per company, in SGD as published. Check the source for minimums, GST and inclusions.</caption><thead><tr><th scope="col">Company</th><th scope="col">Service as listed</th><th scope="col">Rate</th><th scope="col">Source</th></tr></thead><tbody>${rows.map(({company:c,line:p})=>`<tr><th scope="row"><a href="/roster/company/${c.slug}/#pricing">${esc(c.name)}</a></th><td>${esc(rateLabel(p))}</td><td>${money(p.amount_sgd)} ${esc(p.unit||'')}</td><td><a href="${esc(p.sourceUrl)}">${esc(new URL(p.sourceUrl).hostname.replace(/^www\./,''))} · ${esc(p.capturedAt.slice(0,10))}</a></td></tr>`).join('')}</tbody></table></div></details></section>`;
+  return `<section class="guide-price-sample" aria-labelledby="${key}-rates-title"><p class="kicker">FROM THE ROSTER DIRECTORY</p><h2 id="${key}-rates-title">${esc(spec.title)}</h2>${range}<details><summary>See ${rows.length} published ${esc(spec.noun)} rates and sources</summary><div class="guide-table-scroll" tabindex="0" role="region" aria-label="${esc(spec.title)}"><table data-sourced-rates="${esc(key)}"><caption>Lowest matching advertised rate per company, in SGD as published. "From" marks a starting price and ranges are shown in full. Check the source for minimums, GST and inclusions.</caption><thead><tr><th scope="col">Company</th><th scope="col">Service as listed</th><th scope="col">Rate</th><th scope="col">Source</th></tr></thead><tbody>${rows.map(({company:c,line:p})=>`<tr><th scope="row"><a href="/roster/company/${c.slug}/#pricing">${esc(c.name)}</a></th><td>${esc(rateLabel(p,spec,c.name))}</td><td>${esc(rateCell(p))}</td><td><a href="${esc(p.sourceUrl)}">${esc(new URL(p.sourceUrl).hostname.replace(/^www\./,''))} · ${esc(p.capturedAt.slice(0,10))}</a></td></tr>`).join('')}</tbody></table></div></details></section>`;
 }
 
 // Towns from the keyword plan. Links use the existing coverage filter; plumbing has three full area pages.
@@ -1083,7 +1042,7 @@ function renderAreaPage(tradeId, town) {
 function renderGuidePrices() {
   const {samples,average}=buildHomeSnapshot(publishedCompanies,mapPins,presentation).prices.aircon;
   if(!average)return '';
-  return `<section class="guide-price-sample" aria-labelledby="sample-title"><p class="kicker">FROM THE ROSTER DIRECTORY</p><h2 id="sample-title">Published general-servicing rates</h2><strong class="guide-price-number">S$${average} <small>per unit</small></strong><p>Average advertised starting rate across ${samples.length} companies. One matching rate per company, rounded to the nearest dollar. Minimum bookings and other conditions apply. These are source snapshots, not current quotes.</p><details><summary>See all ${samples.length} rates and sources</summary><div class="guide-table-scroll" tabindex="0" role="region" aria-label="Sourced aircon servicing prices"><table><caption>Advertised rates in SGD. Capture dates are shown per source.</caption><thead><tr><th scope="col">Company</th><th scope="col">Starting rate</th><th scope="col">Source checked</th></tr></thead><tbody>${samples.map(s=>`<tr><th scope="row"><a href="/roster/company/${s.slug}/#pricing">${esc(s.name)}</a></th><td>S$${s.amount} / unit</td><td><a href="${esc(s.sourceUrl)}">${esc(s.checkedAt.slice(0,10))} · Conditions</a></td></tr>`).join('')}</tbody></table></div></details></section>`;
+  return `<section class="guide-price-sample" aria-labelledby="sample-title"><p class="kicker">FROM THE ROSTER DIRECTORY</p><h2 id="sample-title">Published general-servicing rates</h2><strong class="guide-price-number">S$${average} <small>per unit</small></strong><p>Average advertised starting rate across ${samples.length} companies. One matching rate per company, rounded to the nearest dollar. Minimum bookings and other conditions apply. These are source snapshots, not current quotes.</p><details><summary>See all ${samples.length} rates and sources</summary><div class="guide-table-scroll" tabindex="0" role="region" aria-label="Sourced aircon servicing prices"><table><caption>Advertised rates in SGD. Capture dates are shown per source.</caption><thead><tr><th scope="col">Company</th><th scope="col">Rate</th><th scope="col">Source checked</th></tr></thead><tbody>${samples.map(s=>`<tr><th scope="row"><a href="/roster/company/${s.slug}/#pricing">${esc(s.name)}</a></th><td>${esc(s.rate)}</td><td><a href="${esc(s.sourceUrl)}">${esc(s.checkedAt.slice(0,10))} · Conditions</a></td></tr>`).join('')}</tbody></table></div></details></section>`;
 }
 
 /* ---------- Build ---------- */

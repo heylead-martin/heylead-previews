@@ -2,6 +2,7 @@ import {renderSearchHero} from './job-search.mjs';
 import {createHash} from 'node:crypto';
 import {ratingSummary} from './rating-summary.mjs';
 import {tidyPriceLabel} from './profile-copy.mjs';
+import {isFromPrice, rateCell} from './sourced-rates.mjs';
 
 export const snapshotTrades = [
   {id:'aircon', name:'Aircon', noun:'aircon companies', slug:'aircon-servicing', icon:'aircon', job:'general-service', label:'General aircon service', unit:'per unit', note:'Multi-unit minimums may apply.'},
@@ -51,7 +52,7 @@ export function buildHomeSnapshot(companies, pins, presentation) {
       if (!candidates.length) return [];
       const p = candidates[0];
       return [{slug:c.slug,name:c.name,amount:p.amount_sgd,service:tidyPriceLabel(p.service),sourceUrl:p.sourceUrl,checkedAt:p.capturedAt,
-        unit:p.unit,unitInferred:!!p.unitInferred,condition:p.price_text || p.excerpt || '',gst:p.gst || 'not stated'}];
+        unit:p.unit,unitInferred:!!p.unitInferred,condition:p.price_text || p.excerpt || '',gst:p.gst || 'not stated',from:isFromPrice(p),rate:rateCell(p)}];
     });
     return [trade.id,{samples, average:samples.length >= 3 ? Math.round(samples.reduce((sum,s)=>sum+s.amount,0)/samples.length) : null}];
   }));
@@ -75,7 +76,7 @@ export function renderHomeSnapshot({companies,pins,presentation,outline,checked,
     const s=data.stats[t.id],p=data.prices[t.id];
     return `<article class="quick-trade" data-quick-trade="${t.id}"><div class="quick-trade-info"><div class="quick-trade-heading"><span class="quick-trade-icon">${icon(t.icon)}</span><h3>${esc(t.name)}</h3></div><p class="quick-job">${esc(t.label)}</p></div><div class="quick-quote"><p class="quick-price${p.average===null?' quick-price-unknown':''}">${p.average===null?'<strong>Ask for a quote</strong>':`<strong>S$${p.average}</strong><span>/ ${t.unit.replace('per ','')}</span>`}</p><p class="quick-sample">${p.average===null?'No comparable average':`Avg. · ${p.samples.length} companies`}</p></div><div class="quick-trade-footer"><div class="quick-rating" aria-label="${esc(s.average ? `Average company rating: ${s.average} out of 5` : 'No average rating available')}">${icon('star')}<strong>${s.average||'No rating'}</strong>${s.average?'<span>/5 avg.</span>':''}</div><a href="/roster/${t.slug}/" aria-label="Compare ${s.total} ${esc(t.noun)}">Compare ${s.total}${icon('arrow')}</a></div></article>`;
   }).join('');
-  const methodology = snapshotTrades.map(t=>{const p=data.prices[t.id];return `<details class="price-sample"><summary>${esc(t.label)}<span>${p.samples.length} price sources</span></summary><p>${esc(t.note)} For job prices, the unit may be inferred from the named task. Confirm inclusions before booking.</p><ul>${p.samples.map(s=>`<li><div><a href="/roster/company/${s.slug}/#pricing">${esc(s.name)}</a><span>${esc(s.service)}</span></div><div><strong>S$${s.amount}</strong><a href="${esc(s.sourceUrl)}">Source · ${esc(s.checkedAt)}</a></div></li>`).join('')}</ul></details>`;}).join('');
+  const methodology = snapshotTrades.map(t=>{const p=data.prices[t.id];return `<details class="price-sample"><summary>${esc(t.label)}<span>${p.samples.length} price sources</span></summary><p>${esc(t.note)} For job prices, the unit may be inferred from the named task. Confirm inclusions before booking.</p><ul>${p.samples.map(s=>`<li><div><a href="/roster/company/${s.slug}/#pricing">${esc(s.name)}</a><span>${esc(s.service)}</span></div><div><strong>${s.from ? 'From ' : ''}S$${s.amount}</strong><a href="${esc(s.sourceUrl)}">Source · ${esc(s.checkedAt)}</a></div></li>`).join('')}</ul></details>`;}).join('');
   const clientData = JSON.stringify({stats:data.stats,trades:snapshotTrades.map(({id,name,noun,slug})=>({id,name,noun,slug}))}).replace(/</g,'\\u003c');
   return `${renderSearchHero({esc,icon,count:all.total})}
 <section class="home-explorer" aria-labelledby="explorer-title" data-home-explorer><div class="explorer-heading"><div><p class="kicker">A LITTLE LOCAL KNOWLEDGE</p><h2 id="explorer-title">See where the help is.</h2></div><span class="explorer-checked">${icon('calendar')} Updated ${esc(checked)}</span></div>
