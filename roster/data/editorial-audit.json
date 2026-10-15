@@ -1,7 +1,7 @@
 {
   "checked": "2026-10-12",
-  "corePages": 24,
-  "totalWords": 29578,
+  "corePages": 30,
+  "totalWords": 35963,
   "methodPageWords": 1386,
   "pages": [
     {
@@ -186,6 +186,54 @@
       "words": 1037,
       "faqs": 4,
       "sourceReferences": 1,
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "CL-07",
+      "path": "/roster/home-cleaning/steam-cleaning/",
+      "words": 1074,
+      "faqs": 4,
+      "sourceReferences": 0,
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "PL-06",
+      "path": "/roster/plumbing/instant-water-heater/",
+      "words": 1011,
+      "faqs": 4,
+      "sourceReferences": 3,
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "CL-08",
+      "path": "/roster/home-cleaning/office-cleaning/",
+      "words": 1101,
+      "faqs": 4,
+      "sourceReferences": 1,
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "HM-04",
+      "path": "/roster/handyman/tv-mounting/",
+      "words": 1113,
+      "faqs": 4,
+      "sourceReferences": 2,
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "HM-03",
+      "path": "/roster/handyman/painting/",
+      "words": 1029,
+      "faqs": 4,
+      "sourceReferences": 1,
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "CL-09",
+      "path": "/roster/home-cleaning/mattress-cleaning/",
+      "words": 1057,
+      "faqs": 4,
+      "sourceReferences": 0,
       "updated": "2026-10-12"
     },
     {

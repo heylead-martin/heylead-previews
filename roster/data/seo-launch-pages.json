@@ -170,6 +170,42 @@
       "kind": "guide"
     },
     {
+      "id": "CL-07",
+      "path": "/roster/home-cleaning/steam-cleaning/",
+      "words": 1074,
+      "kind": "guide"
+    },
+    {
+      "id": "PL-06",
+      "path": "/roster/plumbing/instant-water-heater/",
+      "words": 1011,
+      "kind": "guide"
+    },
+    {
+      "id": "CL-08",
+      "path": "/roster/home-cleaning/office-cleaning/",
+      "words": 1101,
+      "kind": "guide"
+    },
+    {
+      "id": "HM-04",
+      "path": "/roster/handyman/tv-mounting/",
+      "words": 1113,
+      "kind": "guide"
+    },
+    {
+      "id": "HM-03",
+      "path": "/roster/handyman/painting/",
+      "words": 1029,
+      "kind": "guide"
+    },
+    {
+      "id": "CL-09",
+      "path": "/roster/home-cleaning/mattress-cleaning/",
+      "words": 1057,
+      "kind": "guide"
+    },
+    {
       "id": "HM-02",
       "path": "/roster/handyman/door-window-repair/",
       "words": 1216,
