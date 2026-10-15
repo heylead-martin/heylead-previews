@@ -248,6 +248,42 @@
       "kind": "guide"
     },
     {
+      "id": "PL-07",
+      "path": "/roster/plumbing/licensed-plumber/",
+      "words": 1011,
+      "kind": "guide"
+    },
+    {
+      "id": "EL-07",
+      "path": "/roster/electrician/light-installation/",
+      "words": 1032,
+      "kind": "guide"
+    },
+    {
+      "id": "HM-06",
+      "path": "/roster/handyman/door-lock-replacement/",
+      "words": 1024,
+      "kind": "guide"
+    },
+    {
+      "id": "HM-07",
+      "path": "/roster/handyman/curtain-installation/",
+      "words": 1014,
+      "kind": "guide"
+    },
+    {
+      "id": "PL-08",
+      "path": "/roster/plumbing/tap-replacement/",
+      "words": 1003,
+      "kind": "guide"
+    },
+    {
+      "id": "EL-08",
+      "path": "/roster/electrician/socket-installation/",
+      "words": 1011,
+      "kind": "guide"
+    },
+    {
       "id": "HM-02",
       "path": "/roster/handyman/door-window-repair/",
       "words": 1216,

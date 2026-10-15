@@ -1,7 +1,7 @@
 {
   "checked": "2026-10-12",
-  "corePages": 37,
-  "totalWords": 43145,
+  "corePages": 43,
+  "totalWords": 49240,
   "methodPageWords": 1386,
   "pages": [
     {
@@ -288,6 +288,54 @@
       "id": "EL-06",
       "path": "/roster/electrician/licensed-electrician/",
       "words": 1003,
+      "faqs": 4,
+      "sourceReferences": 3,
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "PL-07",
+      "path": "/roster/plumbing/licensed-plumber/",
+      "words": 1011,
+      "faqs": 4,
+      "sourceReferences": 2,
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "EL-07",
+      "path": "/roster/electrician/light-installation/",
+      "words": 1032,
+      "faqs": 4,
+      "sourceReferences": 2,
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "HM-06",
+      "path": "/roster/handyman/door-lock-replacement/",
+      "words": 1024,
+      "faqs": 4,
+      "sourceReferences": 1,
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "HM-07",
+      "path": "/roster/handyman/curtain-installation/",
+      "words": 1014,
+      "faqs": 4,
+      "sourceReferences": 2,
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "PL-08",
+      "path": "/roster/plumbing/tap-replacement/",
+      "words": 1003,
+      "faqs": 4,
+      "sourceReferences": 1,
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "EL-08",
+      "path": "/roster/electrician/socket-installation/",
+      "words": 1011,
       "faqs": 4,
       "sourceReferences": 3,
       "updated": "2026-10-12"
