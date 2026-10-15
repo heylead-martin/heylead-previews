@@ -7,7 +7,7 @@ import {decodeCatalogue} from '../assets/catalogue-data.mjs';
 import {serviceCounts,serviceLabel,selectAreaPages,townCoverage,nearbyTowns,AREA_PAGE_MINIMUM,AREA_MAX_SIMILARITY,AREA_MIN_DISTINCT,NON_RESIDENTIAL} from '../lib/area-pages.mjs';
 import {areaSlug} from '../assets/service-areas.mjs';
 import {airconMatrix,unitColumns,sizeColumns} from '../lib/aircon-matrix.mjs';
-import {guideEvidence, sourcedRates, rateProblem, isFromPrice, minimumCompanies, maxLabelLength} from '../lib/sourced-rates.mjs';
+import {profileRowProblem,guideEvidence, sourcedRates, rateProblem, isFromPrice, minimumCompanies, maxLabelLength} from '../lib/sourced-rates.mjs';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const load=async f=>JSON.parse(await readFile(path.join(root,f),'utf8'));
 const data=await load('data/companies.json'),manifest=await load('data/build-manifest.json'),report=await load('data/import-report.json');
@@ -187,6 +187,10 @@ for(const [key,spec] of Object.entries(guideEvidence))if(!rateTables.has(key))as
   assert.equal(!!licence,['electrician','plumbing'].includes(id),`Licence lookup block only on electrician and plumbing hubs: ${slug}`);
   if(licence){for(const m of licence.matchAll(/href="(https:[^"]+)"/g))assert.match(new URL(m[1]).host,/(?:^|\.)(?:ema|pub)\.gov\.sg$/,`Licence lookup links must be EMA or PUB: ${m[1]}`);assert.ok(!/data-slug|\/roster\/company\//.test(licence),'No per-company licence status');}
  }
+ // The /roster/aircon/ guide hub carries the same Areas section as the aircon servicing directory.
+ const airconHub=pages.get('aircon/index.html'),airconAreas=airconHub.match(/<section class="areas-we-serve"[\s\S]*?<\/section>/)?.[0];
+ assert.ok(airconAreas,'Areas section on /roster/aircon/');
+ assert.equal(airconAreas,pages.get('aircon-servicing/index.html').match(/<section class="areas-we-serve"[\s\S]*?<\/section>/)[0],'Aircon hub areas match the aircon servicing directory');
  const finder=pages.get('what-service-do-i-need/index.html');assert.ok(finder?.includes('data-symptom-finder'),'Symptom finder page');
  assert.ok((await readFile(path.join(root,'sitemap.xml'),'utf8')).includes('<loc>https://previews.heylead.com/roster/what-service-do-i-need/</loc>'),'Symptom finder in sitemap');
 }
@@ -200,6 +204,7 @@ for(const [rel,html] of pages)for(const match of html.matchAll(/(?:href|src)="([
  const u=new URL(raw,'https://previews.heylead.com/roster/'+rel);let file=u.pathname.replace(/^\/roster\//,'');if(file.endsWith('/'))file+='index.html';
  await access(path.join(root,file));if(u.hash&&byRel.has(file))assert.ok(byRel.get(file).has(decodeURIComponent(u.hash.slice(1))),`Broken fragment ${rel}: ${raw}`);
 }
+let hiddenRows=0;
 for(const c of data.companies){
  const rel=`company/${c.slug}/index.html`;assert.ok(pages.has(rel),`Missing page: ${c.slug}`);
  const html=pages.get(rel),e=c.enrichment;
@@ -211,7 +216,12 @@ for(const c of data.companies){
  if(c.alternatePhones?.length){assert.ok(html.includes('Also listed:'),`Missing alternate phones: ${rel}`);for(const p of c.alternatePhones)assert.ok(html.includes(p.sourceLabel.replaceAll('&','&amp;')),`Missing alternate phone source: ${rel}`);}
  if(e.faqs?.length) assert.ok(html.includes('Answer from the company website'),`Missing sourced FAQ: ${rel}`);
  if(e.summary?.text) assert.ok(html.includes('class="company-intro"'),`Missing summary: ${rel}`);
- if(c.imported) assert.equal((html.match(/<div class="service-options"/g)||[]).length,current[c.slug].services.filter(s=>s.prices.length).length,`Pricing options: ${rel}`);
+ if(c.imported) assert.equal((html.match(/<div class="service-options"/g)||[]).length,current[c.slug].services.filter(s=>s.prices.some(p=>!profileRowProblem(p))).length,`Pricing options: ${rel}`);
+ // Testimonials, headings and condition fragments captured as price rows stay out of the pricing section.
+ const pricingHtml=html.match(/<section class="profile-section" id="pricing"[\s\S]*?<\/section>/)?.[0]||'';
+ for(const s of current[c.slug]?.services||[])for(const p of s.prices){const why=profileRowProblem(p);if(!why)continue;hiddenRows++;
+  const probe=String(p.excerpt||'').replace(/^[\W\d]*\|\s*/,'').slice(0,40).replaceAll('&','&amp;').replaceAll('"','&quot;').replaceAll("'",'&#39;').replaceAll('<','&lt;').replaceAll('>','&gt;');
+  if(probe.length>=12)assert.ok(!pricingHtml.includes(probe),`Profile price row shown despite guard (${why}): ${rel}: ${probe}`);}
 }
 for(const excluded of report.excluded.filter(c=>c.curated))assert.ok(!pages.has(`company/${excluded.slug}/index.html`)||pages.get(`company/${excluded.slug}/index.html`).includes('data-retired-listing'),`Flagged full profile still published: ${excluded.slug}`);
 const categories={aircon:'aircon-servicing',plumbing:'plumbing',electrician:'electrician',handyman:'handyman',cleaning:'home-cleaning'};
@@ -229,4 +239,5 @@ for(const [id,slug] of Object.entries(categories)){
 }
 assert.equal(Object.values(report.byTrade).reduce((n,t)=>n+t.published,0),report.publishedCount,'Primary-trade totals must not overlap');
 const all=await load('data/index/all.json');assert.equal(all.companies.length,data.companies.length);
+console.log(`Profile price rows hidden by guards: ${hiddenRows}`);
 console.log(`PASS: ${pages.size} pages, all local links/fragments, unique metadata, schema restrictions, publication counts and ${Object.keys(old).length} original write-ups.`);

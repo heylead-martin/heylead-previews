@@ -76,8 +76,11 @@ export function tidyPriceLabel(value) {
   const kept = sentences.filter((s, i) => !broken(s, i));
   if (sentences.length > 1) sentences = kept.length && kept.join(' ').length >= 15 ? kept : [sentences[0].replace(/\s*[.,]$/, '')];
   label = sentences.join(' ').replace(trailing, '').replace(/\s+([.,])/g, '$1');
-  return label.replace(/[\s,|*-]+$/, '').replace(/\s:$/, '').trim();
+  return markSic(label.replace(/[\s,|*-]+$/, '').replace(/\s:$/, '').trim());
 }
+// Quoted source wording keeps its typos; a word that starts with the same consonant twice
+// ("Ttroubleshooting") is marked [sic]. Words like "llama" or "eerie" are not affected.
+export const markSic = value => String(value).replace(/\b([b-df-hj-km-np-tv-z])\1[a-z]{3,}\b(?! \[sic\])/gi, m => `${m} [sic]`);
 // Only split the unambiguous "job | price" pattern. Preserve ranges and qualifiers.
 export function priceView(p) {
   const suffix = /\s*\|\s*((?:(?:from|starting at)\s+)?(?:S?\$|SGD)\s*\d[\d,.]*(?:\s*(?:-|to)\s*(?:S?\$|SGD)?\s*\d[\d,.]*)?(?:\s*(?:\+|\+\+|onwards|nett))?)\s*$/i;
