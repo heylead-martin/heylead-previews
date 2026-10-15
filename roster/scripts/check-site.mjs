@@ -4,6 +4,7 @@ import { fileURLToPath } from 'node:url';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {decodeCatalogue} from '../assets/catalogue-data.mjs';
+import {guideEvidence, sourcedRates, rateProblem, isFromPrice, minimumCompanies, maxLabelLength} from '../lib/sourced-rates.mjs';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const load=async f=>JSON.parse(await readFile(path.join(root,f),'utf8'));
 const data=await load('data/companies.json'),manifest=await load('data/build-manifest.json'),report=await load('data/import-report.json');
@@ -60,6 +61,30 @@ for(const rel of manifest) {
   for(const m of html.matchAll(/<iframe[^>]+src="([^"]+)"/g)){const src=m[1].replaceAll('&amp;','&');const u=new URL(src);if(u.searchParams.has('q'))assert.ok(!/#\s*\d|\bUnit\s+\d/i.test(u.searchParams.get('q')),`Unit in map: ${rel}`);}
  }
 }
+// Sourced-rate tables: the rows the release supports, starting prices and ranges as printed, plain labels.
+const unescape=s=>s.replace(/<[^>]+>/g,'').replace(/&quot;/g,'"').replace(/&#39;/g,"'").replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&amp;/g,'&');
+const rateTables=new Set();
+for(const [rel,html] of pages)for(const table of html.matchAll(/<table data-sourced-rates="([^"]+)">([\s\S]*?)<\/table>/g)){
+ const [,key,body]=table,spec=guideEvidence[key];assert.ok(spec,`Unknown rate table ${key}: ${rel}`);rateTables.add(key);
+ const rows=[...body.matchAll(/<tr><th scope="row"><a href="\/roster\/company\/([^/]+)\/#pricing">[\s\S]*?<\/a><\/th><td>([\s\S]*?)<\/td><td>([\s\S]*?)<\/td><td><a href="([^"]+)"/g)].map(m=>({slug:m[1],label:unescape(m[2]),cell:unescape(m[3]),source:unescape(m[4])}));
+ assert.ok(rows.length>=minimumCompanies,`Rate table under ${minimumCompanies} companies: ${key} ${rel}`);
+ const expected=sourcedRates(spec,data.companies);
+ assert.deepEqual(rows.map(r=>r.slug),expected.map(r=>r.company.slug),`Rate table rows differ from release: ${key} ${rel}`);
+ rows.forEach((row,i)=>{
+  const p=expected[i].line,where=`${key} ${row.slug}: ${rel}`;
+  assert.equal(rateProblem(p,spec),null,`Not a ${spec.noun} price: ${where}`);
+  assert.equal(row.source,p.sourceUrl,`Rate source: ${where}`);
+  assert.ok(row.label.length<=maxLabelLength&&!/\|\s*(?:each|per\b|\/)|\s\|$|\$\d/.test(row.label),`Service label fragment: ${where}: ${row.label}`);
+  assert.ok(!/as printed/.test(row.cell),`Unit placeholder in rate: ${where}`);
+  // Independent of the renderer: read the release fields directly.
+  const printedRange=new RegExp(String.raw`\$\s*${p.amount_sgd}(?:\.0+)?\s*(?:-|to)\s*(?:S?\$)?\s*\d`).test(String(p.price_text).replace(/,(?=\d{3})/g,''));
+  if(p.amount_max_sgd>p.amount_sgd||printedRange)assert.ok(/ to S\$/.test(row.cell),`Range shortened to its low end: ${where}: ${row.cell}`);
+  else if(/\bfrom\s*(?:S\$|SGD\s*\$?|SG\s*\$|\$)\s*[\d,.]+/i.test(p.price_text)&&isFromPrice(p))assert.ok(row.cell.startsWith('From S$'),`Starting price shown as firm: ${where}: ${row.cell}`);
+  if(/\bper (?:unit|piece|hour)\b|\/\s*(?:hour|hr|unit|pc)\b/i.test(p.price_text)&&p.unitInferred)assert.match(row.cell,/ per (?:unit|piece|hour|additional)/,`Source unit dropped: ${where}`);
+  assert.ok(!/\bbooked their\b|\bno upsell\b|\bvery good service\b|\bno chemical wash needed\b|\badds \$|\+\$\d/i.test(`${row.label} ${p.price_text}`),`Review, surcharge or negated entry: ${where}`);
+ });
+}
+for(const [key,spec] of Object.entries(guideEvidence))if(!rateTables.has(key))assert.ok(sourcedRates(spec,data.companies).length<minimumCompanies,`Rate table missing: ${key}`);
 const claim=pages.get('claim-listing/index.html');
 assert.match(claim, /<input id="claim-company"[^>]+list="claim-companies"/);
 assert.ok(!claim.includes('<select id="claim-company"'));

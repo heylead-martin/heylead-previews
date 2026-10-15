@@ -1,7 +1,7 @@
 {
   "checked": "2026-10-12",
   "corePages": 47,
-  "totalWords": 53523,
+  "totalWords": 53541,
   "methodPageWords": 1386,
   "pages": [
     {
@@ -367,7 +367,7 @@
     {
       "id": "CL-12",
       "path": "/roster/home-cleaning/disinfection/",
-      "words": 1001,
+      "words": 1019,
       "faqs": 4,
       "sourceReferences": 1,
       "updated": "2026-10-12"
