@@ -1,3 +1,12 @@
+import {heroPhoto,photoCredit} from './lib/hero-professions.mjs';
+import {previewFeatures} from './assets/features.mjs';
+import {renderQuoteEvidence,logoOwnerNote} from './assets/evidence-display.mjs';
+import {accountContent,accountHome,savedContent,callbackContent} from './lib/account-pages.mjs';
+import {renderMatchPage} from './lib/job-search.mjs';
+import {renderQuoteComposer} from './lib/quote-flow.mjs';
+import {renderAreaFilter} from './lib/service-areas.mjs';
+import {ratingSummary} from './lib/rating-summary.mjs';
+import {planningAreas} from './assets/service-areas.mjs';
 import {priceOption} from './scripts/import-db.mjs';
 import { readFile, writeFile, mkdir, rm } from "node:fs/promises";
 import path from "node:path";
@@ -6,13 +15,19 @@ import { fileURLToPath } from "node:url";
 import {execFileSync} from 'node:child_process';
 
 import { createProfileRenderer, directoryRecord, concise, ratingFact } from "./lib/expanded.mjs";
-import {renderHomeSnapshot} from './lib/home-snapshot.mjs';
+import {renderHomeSnapshot, buildHomeSnapshot} from './lib/home-snapshot.mjs';
+import {loadGuides, parseGuide, renderEditorial, renderGuideTeaser, guideCards, editorialSchema} from './lib/editorial.mjs';
 import {encodeCatalogue} from './assets/catalogue-data.mjs';
-import {priceView, servicePrice, serviceGuide} from "./lib/profile-copy.mjs";
+import {priceView, servicePrice, serviceGuide, tidyPriceLabel} from "./lib/profile-copy.mjs";
 import {renderClaimPage} from "./lib/claim-page.mjs";
 import { renderCard, renderCompactCard, splitDirectory } from "./assets/catalogue-card.mjs";
 
 const root = path.dirname(fileURLToPath(import.meta.url));
+const editorialGuides = await loadGuides(root);
+const editorialByPath = new Map(editorialGuides.map(g=>[g.path,g]));
+const editorialByDirectory = new Map(editorialGuides.filter(g=>g.directoryPath).map(g=>[g.directoryPath,g]));
+const methodGuide = {...parseGuide(await readFile(path.join(root,"content/how-it-works.md"),"utf8"),"method"),id:"method",slug:"how-it-works",trade:"all",h1:"How Roster works",updated:"2026-10-12",path:"/roster/how-it-works/"};
+await import('./scripts/build-accounts.mjs');
 console.log('Logo framing:', execFileSync('python3', [path.join(root, 'scripts/fit-logos.py')], {encoding:'utf8'}).trim());
 const mapPins=JSON.parse(await readFile(path.join(root,"data/map-pins.json"),"utf8"));
 const homeOutline=JSON.parse(await readFile(path.join(root,"data/singapore-outline.json"),"utf8"));
@@ -21,7 +36,7 @@ const origin = "https://previews.heylead.com/roster";
 let checked = "9 Oct 2026 and 10 Oct 2026";
 // Content hashes keep cached assets in sync with each generated page.
 const assetVersions = Object.fromEntries(await Promise.all(
-  ["home.css", "home.js", "site.css", "directory.css", "experience.css", "form.js", "directory.js", "experience.js", "expanded.css", "logo-fit.css", "catalogue.js", "catalogue-card.mjs", "claim.js", "review-preview.mjs"].map(async (name) => [
+  ["editorial.css", "sort-control.css", "accounts.css", "accounts.js", "hero-rotation.css", "hero-rotation.js", "quote-flow.css", "quote-start.js", "job-search.css", "job-search.js", "job-results.js", "service-areas.css", "home.css", "home.js", "site.css", "directory.css", "experience.css", "form.js", "directory.js", "experience.js", "expanded.css", "logo-fit.css", "catalogue.js", "catalogue-card.mjs", "claim.js", "review-preview.mjs"].map(async (name) => [
     name,
     createHash("sha256").update(await readFile(path.join(root, "assets", name))).digest("hex").slice(0, 12)
   ])
@@ -231,7 +246,7 @@ const intents = [
       ],
       [
         "Can I contact a company directly?",
-        "Yes. The phone and WhatsApp links go directly to the company. The Roster quote request remains an unsent preview."
+        "Yes. The phone and WhatsApp links go directly to the company. Roster does not pass on requests or take bookings."
       ]
     ]
   },
@@ -261,29 +276,17 @@ const intents = [
       ],
       [
         "Can I contact a company directly?",
-        "Yes. The phone and WhatsApp links go directly to the company. The Roster quote request remains an unsent preview."
+        "Yes. The phone and WhatsApp links go directly to the company. Roster does not pass on requests or take bookings."
       ]
     ]
   }
 ];
 
 const howFaqs = [
-  [
-    "Can a company buy its position?",
-    "No. Directory listings are unpaid. The default order is alphabetical; you can choose a rating or review-count sort using the cited Google Maps snapshots."
-  ],
-  [
-    "Where do the ratings and reviews come from?",
-    "Each rating and review links to its source and names when it was checked. Company-site ratings are labelled separately from Google Maps data."
-  ],
-  [
-    "Does the quote form send my number?",
-    "No. The quote panel is a local preview. It does not send or store your contact details."
-  ],
-  [
-    "Which companies get a profile?",
-    "Profiles require sourced services and company information. Flagged or incomplete database rows stay out of the directory. The original hand-checked write-ups are preserved."
-  ]
+  ["Can a company buy its position?", "No. Directory listings are unpaid. Recommended ordering considers the available evidence; you can also sort by average rating, review count or name."],
+  ["Where do the ratings and reviews come from?", "Ratings and reviews link to external sources with capture dates. Compatible scores are weighted by review count. They are not verified Roster bookings."],
+  ["Does the quote form send my number?", "No. The quote panel is a local preview. It does not send or store your contact details."],
+  ["Which companies get a profile?", "Profiles use sourced services and business information. Records flagged for exclusion stay out of the directory; the original hand-written content is preserved."]
 ];
 
 function walkStrings(value, visit, trail = "") {
@@ -390,6 +393,7 @@ function abs(pathname) {
    Line icons on a 24 grid. They are decorative. Every one is aria-hidden. */
 
 const iconPaths = {
+  mail: `<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 6 9 7 9-7"/>`,
   search: `<circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/>`,
   bookmark: `<path d="M6 4h12v17l-6-4-6 4z"/>`,
   sliders: `<path d="M4 7h6m4 0h6M4 17h10m4 0h2"/><circle cx="12" cy="7" r="2"/><circle cx="16" cy="17" r="2"/>`,
@@ -506,9 +510,9 @@ const navItems = [
   ["/roster/how-it-works/", "How it works", null]
 ];
 
-function renderNav(current) {
+function renderNav(current, home = false) {
   const links = navItems.filter(([, , trade]) => trade).map(([href, label, trade]) => `<a href="${href}"${href === current ? ' aria-current="page"' : ""}>${icon(tradeIcon[trade], "ic nav-ic")}<span>${esc(label)}</span></a>`).join("");
-  return `<header class="top"><div class="top-inner"><a class="brand" href="/roster/">${brandMark()}<span class="wordmark">Roster<span class="brand-dot">.</span></span></a><div class="global-search" role="search"><label class="sr-only" for="site-search">Find a service or company</label>${icon("search")}<input id="site-search" type="search" placeholder="Find a service or company" autocomplete="off" data-site-search><span class="search-location">${icon("pin")} Singapore</span><button class="search-submit" type="button" aria-label="Search Roster" data-search-submit>${icon("arrow")}</button></div><a class="saved-link" aria-label="Saved companies" href="/roster/search/?saved=1">${icon("bookmark")}<span>Saved</span></a><nav class="account-nav" aria-label="Account"><a href="/roster/sign-in/">Sign in</a><a class="nav-signup" href="/roster/sign-up/">Sign up</a></nav></div><div class="nav-shell"><nav class="nav" aria-label="Services">${links}</nav><span class="nav-note">Home services. A more considered choice.</span></div></header>`;
+  return `<header class="top"><div class="top-inner"><a class="brand" href="/roster/">${brandMark()}<span class="wordmark">Roster<span class="brand-dot">.</span></span></a>${home ? "" : `<div class="global-search" role="search"><label class="sr-only" for="site-search">Find a service or company</label>${icon("search")}<input id="site-search" type="search" placeholder="Find a service or company" autocomplete="off" data-site-search><span class="search-location">${icon("pin")} Singapore</span><button class="search-submit" type="button" aria-label="Search Roster" data-search-submit>${icon("arrow")}</button></div>`}${previewFeatures?`<a class="saved-link" aria-label="Saved companies" href="/roster/saved/">${icon("bookmark")}<span>Saved</span><b data-saved-count hidden></b></a><nav class="account-nav" aria-label="Account"><a data-account-guest href="/roster/sign-in/">Sign in</a><a data-account-guest class="nav-signup" href="/roster/sign-up/">Sign up</a><a data-account-member href="/roster/account/" hidden>Account</a><button data-account-member data-sign-out type="button" hidden>Sign out</button></nav>`:''}</div><div class="nav-shell"><nav class="nav" aria-label="Services">${links}</nav><span class="nav-note">Home services. A more considered choice.</span></div></header>`;
 }
 
 function renderCrumbs(items) {
@@ -526,12 +530,17 @@ function renderFooter() {
 <div class="foot-brand"><a class="brand" href="/roster/">${brandMark()}<span class="wordmark">Roster</span></a><p>Find the right help for your home. Compare services, prices and reviews from companies across Singapore.</p><p class="foot-note">Business details and reviews link to their original sources. Last checked ${checked}.</p></div>
 <div class="foot-col"><h2>Jobs</h2><ul>${jobs}</ul></div>
 <div class="foot-col"><h2>About</h2><ul><li><a href="/roster/how-it-works/">How the list is made</a></li><li><a href="/roster/claim-listing/">Claim your listing</a></li><li><a href="/roster/aircon-servicing/chemical-wash/">Aircon chemical wash</a></li><li><a href="/roster/aircon-servicing/gas-top-up/">Aircon gas top-up</a></li></ul></div>
-<p class="foot-line">Singapore beta. Unpaid listings. No commission on your job. Quote requests are a preview and do not send.</p>
+<div class="footer-guides" aria-label="Home-service guides">${trades.map(t=>`<details><summary>${esc(t.name)} guides</summary><ul>${editorialGuides.filter(g=>g.trade===t.id).map(g=>`<li><a href="${g.path}">${esc(g.label)}</a></li>`).join('')}</ul></details>`).join('')}</div>
+<p class="footer-logo-ownership">${logoOwnerNote}</p><p class="foot-line">Singapore beta. Unpaid listings. No commission on your job.${previewFeatures?" Quote requests are a preview and do not send.":""}</p>
 </div></footer>`;
 }
 
+function publicFaqs(faqs) {
+  return previewFeatures ? faqs : faqs.filter(([question]) => !/quote (?:preview|form)/i.test(question));
+}
+
 function renderFaq(faqs, heading = "Questions") {
-  const items = faqs.map(([q, a]) => `<details><summary><span>${esc(q)}</span><span class="faq-mark" aria-hidden="true"></span></summary><p>${esc(a)}</p></details>`).join("");
+  const items = publicFaqs(faqs).map(([q, a]) => `<details><summary><span>${esc(q)}</span><span class="faq-mark" aria-hidden="true"></span></summary><p>${esc(a)}</p></details>`).join("");
   return `<section class="faq"><h2>${esc(heading)}</h2><div class="faq-list">${items}</div></section>`;
 }
 
@@ -554,7 +563,7 @@ function nameList(companies) {
 }
 
 function renderForm(jobs, recipients, uid) {
-  if (!recipients.length) return "";
+  if (!previewFeatures || !recipients.length) return "";
   const options = jobs.map((job) => `<option>${esc(job)}</option>`).join("");
   const maximum = Math.min(3, recipients.length);
   const id = (name) => `${uid}-${name}`;
@@ -576,6 +585,7 @@ function renderForm(jobs, recipients, uid) {
 
 function priceSummary(company, service) {
   const display = presentation[company.slug] || { price: "Ask for a quote", detail: "No published rate captured", published: false };
+  if(company.quoteEvidence)return {...display,price:'Quote on request',detail:'',published:false,examplePrice:false,quoteEvidence:company.quoteEvidence};
   const sourcePrices=(company.enrichment?.priceLines||[]).filter(p=>!service||p.job===service);
   const example = company.imported ? sourcePrices.map(priceOption).map(priceView).find(p=>!p.indicative && /^(?:from\s+)?S?\$\s*\d/i.test(p.price) && p.price.length<=40 && p.label) : null;
   const cleanDisplay = example ? {...display,price:example.price,detail:`${example.label}. See service details for inclusions.`,examplePrice:true} : company.imported ? {...display, detail:display.published ? "Explore service prices and confirm your final quote with the team." : "Contact the team for a quote tailored to your job."} : display;
@@ -588,20 +598,32 @@ function indexPath(spec) { return `/roster/data/index/${indexName(spec)}.json?v=
 function shortlist(companies, service) {
   const records = companies.map(c => directoryRecord(c, priceSummary(c, service), tradeById(c.category)));
   const groups=splitDirectory(records);
-  return `<div class="results-toolbar"><div><h2>Companies to consider</h2><p data-result-count aria-live="polite">${groups.shortlist.length} on the shortlist · ${groups.others.length} other companies</p></div><label class="sort-control">Sort by<select data-sort aria-label="Sort companies"><option value="evidence">Most complete details</option><option value="rating">Average rating</option><option value="reviews">Review count</option><option value="name">Name A to Z</option></select></label></div><p class="results-method">Unpaid listings. The shortlist leads with companies that have prices for named jobs, coverage and residential service details. Average ratings are weighted by review count. <a href="/roster/how-it-works/">Our approach</a></p><div class="index-error" data-index-error hidden><p>The complete list could not load. Please try again.</p><button type="button" class="btn" data-retry>Retry loading companies</button></div><div data-shortlist-section${groups.shortlist.length?'':' hidden'}><p class="shortlist-caption">A shortlist with fuller details</p><ol class="shortlist">${groups.shortlist.map(c=>renderCard(c)).join('')}</ol></div><section class="other-companies" data-other-section${groups.others.length?'':' hidden'}><div class="other-companies-heading"><h2>Other companies</h2><p>More options to explore. Some listings have limited details.</p></div><ol class="compact-list" data-other-list>${groups.others.slice(0,12).map(c=>renderCompactCard(c)).join('')}</ol><div class="load-more-wrap"><button class="btn" data-load-more type="button"${groups.others.length<=12?' hidden':''}>Show more companies</button></div></section><div class="no-results" data-no-results hidden><h3>No companies match these filters</h3><p>Try a different search or clear your filters.</p><button type="button" class="btn" data-reset>Clear filters</button></div><noscript><p>Enable JavaScript to filter the list. All company listings are available below.</p><ul>${companies.map(c => `<li><a href="/roster/company/${c.slug}/">${esc(c.name)}</a></li>`).join('')}</ul></noscript>`;
+  return `<div class="results-toolbar"><div><h2>Companies to consider</h2><p data-result-count aria-live="polite">${groups.shortlist.length} on the shortlist · ${groups.others.length} other companies</p></div><div class="sort-control"><label class="sort-native">Sort: <select data-sort aria-label="Sort companies"><option value="evidence">Recommended</option><option value="rating">Highest rated</option><option value="reviews">Most reviewed</option><option value="name">Name A to Z</option></select></label></div></div><p class="results-method">Unpaid listings. <span data-shortlist-explanation>The shortlist leads with companies that have prices for named jobs, coverage and residential service details. </span>Average ratings are weighted by review count. <a href="/roster/how-it-works/">Our approach</a></p><div class="index-error" data-index-error hidden><p>The complete list could not load. Please try again.</p><button type="button" class="btn" data-retry>Retry loading companies</button></div><div class="area-unstated" data-area-unstated hidden><label><input type="checkbox" data-include-unstated><span><strong data-unstated-count>0</strong> companies did not state their areas. Show them anyway.</span></label></div><div data-shortlist-section${groups.shortlist.length?'':' hidden'}><p class="shortlist-caption">A shortlist with fuller details</p><ol class="shortlist">${groups.shortlist.map(c=>renderCard(c)).join('')}</ol></div><section class="other-companies" data-other-section${groups.others.length?'':' hidden'}><div class="other-companies-heading"><h2 data-other-heading>Other companies</h2><p data-other-note>More options to explore. Some listings have limited details.</p></div><ol class="compact-list" data-other-list>${groups.others.slice(0,12).map(c=>renderCompactCard(c)).join('')}</ol><div class="load-more-wrap"><button class="btn" data-load-more type="button"${groups.others.length<=12?' hidden':''}>Show more companies</button></div></section><div class="no-results" data-no-results hidden><h3>No companies match these filters</h3><p>Try a different search or clear your filters.</p><button type="button" class="btn" data-reset>Clear filters</button></div><noscript><p>Enable JavaScript to filter the list. All company listings are available below.</p><ul>${companies.map(c => `<li><a href="/roster/company/${c.slug}/">${esc(c.name)}</a></li>`).join('')}</ul></noscript>`;
 }
 
 function pageShell({ title, description, canonicalPath, current, jsonLd, body, bodyClass = "", shareImage = "" }) {
+  if (!shareImage && editorialByPath.has(canonicalPath)) shareImage = abs(heroPhoto(editorialByPath.get(canonicalPath).trade).sizes[1200].src);
+  // Social crawlers ignore relative image URLs.
+  if (shareImage) shareImage = new URL(shareImage, origin).href;
+  const parked={'sign-in':'Sign in','sign-up':'Account sign-up','forgot-password':'Password reset','reset-password':'New password','account':'Your account','auth/callback':'Account sign-in','saved':'Saved companies','matches':'Job matching'}[canonicalPath.replace(/^\/roster\/|\/$/g,'')];
+  if(!previewFeatures && parked) {
+    body=`<section class="pending-feature"><p class="kicker">CONNECTION PENDING</p><h1>${canonicalPath.includes('matches')?'Job matching':canonicalPath.includes('saved')?'Saved companies':'Accounts'} preview.</h1><p>This feature is not available on the public site yet. Browse companies and contact them directly.</p><a class="btn btn-solid" href="/roster/search/">Browse companies</a></section>`;
+    bodyClass='pending-page';
+    // Parked routes must not advertise the feature in search snippets or share cards.
+    title=`${parked}: not available yet | Roster`;
+    description=`${parked}: not available on Roster yet. Browse Singapore home-service companies and contact them directly.`;
+  }
   description = concise(description);
   const canonical = abs(canonicalPath);
   const graph = JSON.stringify({
     "@context": "https://schema.org",
     "@graph": jsonLd
-  }).replace(/</g, "\\u003c");
+  }, (_key,value) => typeof value!=='string' || /^https?:\/\//.test(value) ? value : value.replace(/(^|[^A-Za-z])S?\$\s?(?=\d)/g,'$1SGD ').replace(/[★☆]/g,'')).replace(/</g, "\\u003c");
   assertNoDashes(graph, canonicalPath);
   const html = `<!doctype html>
-<html lang="en">
+<html lang="en-SG">
 <head>
+${bodyClass === "account-page" ? '<meta name="referrer" content="no-referrer">' : ""}
 <script src="/auth-config.js"></script>
 <script src="/auth.js"></script>
 <meta charset="utf-8">
@@ -611,13 +633,13 @@ function pageShell({ title, description, canonicalPath, current, jsonLd, body, b
 <meta name="theme-color" content="#f3f0e9">
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(description)}">
-<meta property="og:type" content="website">
+<meta property="og:type" content="${bodyClass === "guide-page" ? "article" : "website"}">
 <meta property="og:site_name" content="Roster">
 <meta property="og:locale" content="en_SG">
 <meta property="og:title" content="${esc(title)}">
 <meta property="og:description" content="${esc(description)}">
 <meta property="og:url" content="${canonical}">
-<meta name="twitter:card" content="summary">
+<meta name="twitter:card" content="${shareImage ? "summary_large_image" : "summary"}">
 <meta name="twitter:title" content="${esc(title)}">
 <meta name="twitter:description" content="${esc(description)}">
 ${shareImage ? `<meta property="og:image" content="${esc(shareImage)}"><meta name="twitter:image" content="${esc(shareImage)}">` : ""}
@@ -630,22 +652,26 @@ ${shareImage ? `<meta property="og:image" content="${esc(shareImage)}"><meta nam
 <link rel="stylesheet" href="/roster/assets/directory.css?v=${assetVersions["directory.css"]}">
 <link rel="stylesheet" href="/roster/assets/experience.css?v=${assetVersions["experience.css"]}">
 <link rel="stylesheet" href="/roster/assets/expanded.css?v=${assetVersions["expanded.css"]}">
-<link rel="stylesheet" href="/roster/assets/logo-fit.css?v=${assetVersions["logo-fit.css"]}">${bodyClass === "home-page" ? `\n<link rel="stylesheet" href="/roster/assets/home.css?v=${assetVersions["home.css"]}">` : ""}
+<link rel="stylesheet" href="/roster/assets/service-areas.css?v=${assetVersions["service-areas.css"]}">
+<link rel="stylesheet" href="/roster/assets/accounts.css?v=${assetVersions["accounts.css"]}">${bodyClass === "directory-page" ? `<link rel="stylesheet" href="/roster/assets/sort-control.css?v=${assetVersions["sort-control.css"]}">` : ""}
+<link rel="stylesheet" href="/roster/assets/logo-fit.css?v=${assetVersions["logo-fit.css"]}">${bodyClass === "home-page" ? `\n<link rel="stylesheet" href="/roster/assets/home.css?v=${assetVersions["home.css"]}">` : ""}${["home-page","match-page"].includes(bodyClass) ? `\n<link rel="stylesheet" href="/roster/assets/job-search.css?v=${assetVersions["job-search.css"]}">` : ""}${bodyClass === "home-page" ? `\n<link rel="stylesheet" href="/roster/assets/hero-rotation.css?v=${assetVersions["hero-rotation.css"]}">` : ""}${["directory-page","match-page"].includes(bodyClass) ? `\n<link rel="stylesheet" href="/roster/assets/quote-flow.css?v=${assetVersions["quote-flow.css"]}">` : ""}
+<link rel="stylesheet" href="/roster/assets/editorial.css?v=${assetVersions["editorial.css"]}">
 <script type="application/ld+json">${graph}</script>
 </head>
 <body${bodyClass ? ` class="${bodyClass}"` : ""}>
 <a class="skip" href="#content">Skip to content</a>
-${renderNav(current)}
+${renderNav(current, bodyClass === "home-page")}
 <main id="content" class="wrap">
 ${body}
 </main>
 ${renderFooter()}
-<script src="/roster/assets/form.js?v=${assetVersions["form.js"]}"></script>
+${previewFeatures?`<script src="/roster/assets/form.js?v=${assetVersions["form.js"]}"></script>`:""}
+${previewFeatures?`<script type="module" src="/roster/assets/accounts.js?v=${assetVersions["accounts.js"]}"></script>`:""}
 <script src="/roster/assets/directory.js?v=${assetVersions["directory.js"]}"></script>
-<script src="/roster/assets/experience.js?v=${assetVersions["experience.js"]}"></script>${bodyClass === "home-page" ? `\n<script type="module" src="/roster/assets/home.js?v=${assetVersions["home.js"]}"></script>` : ""}
+<script src="/roster/assets/experience.js?v=${assetVersions["experience.js"]}"></script>${bodyClass === "home-page" ? `\n<script type="module" src="/roster/assets/home.js?v=${assetVersions["home.js"]}"></script>` : ""}${bodyClass === "home-page" ? `\n${previewFeatures?`<script type="module" src="/roster/assets/job-search.js?v=${assetVersions["job-search.js"]}"></script>`:""}<script type="module" src="/roster/assets/hero-rotation.js?v=${assetVersions["hero-rotation.js"]}"></script>` : ""}${previewFeatures && bodyClass === "match-page" ? `\n<script type="module" src="/roster/assets/job-results.js?v=${assetVersions["job-results.js"]}"></script>` : ""}
 ${bodyClass === "claim-page" ? `<script type="module" src="/roster/assets/claim.js?v=${assetVersions["claim.js"]}"></script>` : ""}
 ${bodyClass.split(" ").includes("company-page") ? `<script type="module" src="/roster/assets/review-preview.mjs?v=${assetVersions["review-preview.mjs"]}"></script>` : ""}
-${bodyClass === "directory-page" ? `<script type="module" src="/roster/assets/catalogue.js?v=${assetVersions["catalogue.js"]}"></script>` : ""}
+${bodyClass === "directory-page" ? `<script type="module" src="/roster/assets/catalogue.js?v=${assetVersions["catalogue.js"]}"></script>${previewFeatures?`<script type="module" src="/roster/assets/quote-start.js?v=${assetVersions["quote-start.js"]}"></script>`:""}` : ""}
 </body>
 </html>
 `;
@@ -653,9 +679,13 @@ ${bodyClass === "directory-page" ? `<script type="module" src="/roster/assets/ca
   if (/aggregateRating/i.test(html) || /"@type":"(Review|Offer|AggregateRating)"/.test(html)) {
     throw new Error("Rating, review, or offer schema leaked into " + canonicalPath);
   }
-  // Account previews use dialog forms with disabled fields until the local handler loads.
-  const nonPreviewHtml = html.replace(/<form method="dialog" data-claim-preview[^>]*>[\s\S]*?<\/form>/g, "").replace(/<form method="dialog" data-account-preview="(?:sign-in|sign-up|forgot-password|reset-password)"[^>]*>[\s\S]*?<\/form>/g, "");
-  if (/<form[\s>]/i.test(nonPreviewHtml)) {
+  // Account forms submit only through the bundled auth handler; quote and claim forms stay inert.
+  const nonPreviewHtml = html.replace(/<form method="dialog" data-claim-preview[^>]*>[\s\S]*?<\/form>/g, "").replace(/<form method="dialog" data-account-form="(?:sign-in|sign-up|forgot-password|reset-password)"[^>]*>[\s\S]*?<\/form>/g, "");
+  const withoutSearchForms = nonPreviewHtml
+    .replace(/<form action="\/roster\/search\/" method="get" class="hero-quick-form">[\s\S]*?<\/form>/g, "")
+    .replace(/<form class="hero-guided-form" data-job-start method="dialog"><fieldset disabled>[\s\S]*?<\/form>/g, "")
+    .replace(/<form data-(?:job-edit|quote-start|quote-contact) method="dialog"><fieldset disabled>[\s\S]*?<\/form>/g, "");
+  if (/<form[\s>]/i.test(withoutSearchForms)) {
     throw new Error("A form element leaked into " + canonicalPath);
   }
   if (/mailto:|formspree|fetch\(/i.test(html)) {
@@ -682,7 +712,7 @@ function crumbsLd(items) {
 function faqLd(faqs) {
   return {
     "@type": "FAQPage",
-    mainEntity: faqs.map(([q, a]) => ({
+    mainEntity: publicFaqs(faqs).map(([q, a]) => ({
       "@type": "Question",
       name: q,
       acceptedAnswer: { "@type": "Answer", text: a }
@@ -771,9 +801,10 @@ function airconSubnav(active) {
 
 function renderCollection(spec, companies, crumbs) {
   const count = companies.length;
-  const title = count === 0
+  const guide = editorialByDirectory.get(`/roster/${spec.slug}/`);
+  const title = (count === 0
     ? `${spec.h1.replace(" in Singapore", "")} in Singapore: no shortlist yet | Roster`
-    : `${spec.titleName || spec.name} in Singapore: shortlist of ${count} ${count === 1 ? "company" : "companies"} | Roster`;
+    : `${spec.titleName || spec.name} in Singapore: shortlist of ${count} ${count === 1 ? "company" : "companies"} | Roster`);
   const description = concise(`Compare ${count} ${spec.name.toLowerCase()} companies in Singapore. Explore sourced services, published prices, ratings and contact details.`);
   const canonicalPath = `/roster/${spec.slug}/`;
   const tradeId = spec.parent || spec.id;
@@ -792,14 +823,16 @@ function renderCollection(spec, companies, crumbs) {
   const filter = (key, label, n) => `<label class="filter-check"><input type="checkbox" data-filter="${key}"><span>${label}</span><small data-filter-count="${key}">${n}</small></label>`;
   const body = [
     renderCrumbs(crumbs),
-    `<section class="directory-hero"><div><p class="kicker">THE SINGAPORE HOME DIRECTORY</p><h1>${tradeId === "all" ? "Find your next helping hand." : `${esc(categoryLabel)} <em>in Singapore.</em>`}</h1><p>${esc(summaries[tradeId])}</p></div><div class="hero-stamp"><span class="stamp-icon">${icon(tradeIcon[tradeId] || "search")}</span><div><strong>${count}</strong><span>${count === 1 ? "company to explore" : "companies to explore"}</span></div></div></section>`,
-    `<div class="directory-layout" data-catalogue data-index="${indexPath(spec)}"><aside class="filters" aria-label="Filter companies"><div class="filters-head"><h2>${icon("sliders")}Refine your list</h2><button type="button" class="filter-toggle" data-toggle-filters aria-controls="company-filters" aria-expanded="true">${icon("sliders")}Filters <span data-active-filters></span>${icon("chevron")}</button><button type="button" data-reset>Reset</button></div><div class="filter-content" id="company-filters"><label class="filter-search">Search this list<input type="search" placeholder="Company or keyword" data-filter-search></label><label class="filter-select">Business location<select data-area aria-label="Business location"><option value="">All locations</option>${[...new Set(companies.map(c=>c.area))].filter(Boolean).sort().map(a=>`<option>${esc(a)}</option>`).join("")}</select></label><label class="filter-select">Average rating<select data-rating aria-label="Minimum average rating"><option value="">Any rating</option><option value="4">4.0 and above</option><option value="4.5">4.5 and above</option><option value="4.8">4.8 and above</option></select></label>${tradeId === "all" ? `<label class="filter-select">Service<select data-category-filter><option value="">All services</option>${trades.map(t=>`<option value="${t.id}">${esc(t.name)}</option>`).join("")}</select></label>` : ""}<fieldset><legend>What matters to you?</legend>${filter("price", "Published pricing", companies.filter(c => priceSummary(c, spec.service).published).length)}${filter("reviews", "Dated reviews", companies.filter(c => c.reviews.length).length)}${filter("whatsapp", "WhatsApp contact", companies.filter(c => c.whatsapp?.value).length)}${filter("saved", "Saved companies", 0)}</fieldset><details class="filter-categories"><summary>Explore services${icon("chevron")}</summary>${trades.map(t => `<a href="/roster/${t.slug}/"${t.id === tradeId ? ' aria-current="page"' : ""}>${icon(tradeIcon[t.id])}${esc(t.name)}${icon("chevron")}</a>`).join("")}<div class="filter-foot">${icon("shield")}<p>A place on Roster is unpaid.<br>Always your choice.</p></div></details></div></aside><div class="directory-results">`,
+    `<section class="directory-hero"><div><p class="kicker">THE SINGAPORE HOME DIRECTORY</p><h1>${tradeId === "all" ? "Find your next helping hand." : `${esc(categoryLabel)} <em>in Singapore.</em>`}</h1><p>${esc(summaries[tradeId])}</p>${guide?`<a class="guide-jump" href="${guide.path}">Read the ${esc(guide.label.toLowerCase())} guide ${icon("arrow")}</a>`:""}</div><div class="hero-stamp"><span class="stamp-icon">${icon(tradeIcon[tradeId] || "search")}</span><div><strong>${count}</strong><span>${count === 1 ? "company to explore" : "companies to explore"}</span></div></div></section>`,
+    `<div class="directory-layout${previewFeatures?'':' directory-browse-only'}" id="company-results" data-catalogue data-index="${indexPath(spec)}"><aside class="filters" aria-label="Filter companies"><div class="filters-head"><h2>${icon("sliders")}Refine your list</h2><button type="button" class="filter-toggle" data-toggle-filters aria-controls="company-filters" aria-expanded="true">${icon("sliders")}Filters <span data-active-filters></span>${icon("chevron")}</button><button type="button" data-reset>Reset</button></div><div class="filter-content" id="company-filters"><label class="filter-search">Search this list<input type="search" placeholder="Company or keyword" data-filter-search></label>${renderAreaFilter(esc)}<label class="filter-select">Average rating<select data-rating aria-label="Minimum average rating"><option value="">Any rating</option><option value="4">4.0 and above</option><option value="4.5">4.5 and above</option><option value="4.8">4.8 and above</option></select></label>${tradeId === "all" ? `<label class="filter-select">Service<select data-category-filter><option value="">All services</option>${trades.map(t=>`<option value="${t.id}">${esc(t.name)}</option>`).join("")}</select></label>` : ""}<fieldset><legend>What matters to you?</legend>${filter("price", "Published pricing", companies.filter(c => priceSummary(c, spec.service).published).length)}${filter("reviews", "Dated reviews", companies.filter(c => c.reviews.length).length)}${filter("whatsapp", "WhatsApp contact", companies.filter(c => c.whatsapp?.value).length)}${previewFeatures?filter("saved", "Saved companies", 0):""}</fieldset><details class="filter-categories"><summary>Explore services${icon("chevron")}</summary>${trades.map(t => `<a href="/roster/${t.slug}/"${t.id === tradeId ? ' aria-current="page"' : ""}>${icon(tradeIcon[t.id])}${esc(t.name)}${icon("chevron")}</a>`).join("")}<div class="filter-foot">${icon("shield")}<p>A place on Roster is unpaid.<br>Always your choice.</p></div></details></div></aside><div class="directory-results">`,
     isAircon ? airconSubnav(canonicalPath) : "",
     shortlist(companies, spec.service),
     `<details class="list-explainer"><summary>About this ${esc(categoryLabel.toLowerCase())} shortlist${icon("chevron")}</summary><p>${esc(spec.intro[0])}</p>${notes}<p><a href="/roster/how-it-works/">How the list is made</a>. Checked ${checked}.</p></details>`,
-    `</div><aside class="discovery-rail"><section class="help-card"><span class="rail-symbol">${icon("list")}</span><p class="kicker">A LITTLE HOMEWORK HELPS</p><h2>A little clarity.<br>A better choice.</h2><p>Look beyond a star rating. A few details make the choice easier.</p><ol><li><span>1</span>Compare the price for your actual job.</li><li><span>2</span>Read what suits you, and what might not.</li><li><span>3</span>Call or WhatsApp the company directly.</li></ol><a href="/roster/how-it-works/">Get to know Roster${icon("arrow")}</a></section><section class="quote-teaser"><span class="beta">BETA PREVIEW</span><h2>One job.<br>A few options.</h2><p>Try a quote request for up to three companies.</p><a class="btn btn-solid" href="#quote-request">Preview a request${icon("arrow")}</a><small>Preview only. Nothing is sent or stored.</small></section><div class="rail-note">${icon("calendar")}<p>Facts last checked<br><strong>${esc(checked)}</strong><br>Each figure links to its source.</p></div></aside></div>`,
-    tradeId !== "all" ? `<div id="quote-request">${renderForm(spec.jobs, companies.filter(c => !c.imported), "ask")}</div>` : `<div id="quote-request" class="search-end"><h2>Start with the service you need</h2><p>Choose a service above to explore its shortlist and preview a quote request.</p></div>`,
-    renderFaq(spec.faqs, "A few things worth knowing"),
+    `</div><aside class="discovery-rail" aria-label="Directory information">${previewFeatures?`<details class="quote-rail-disclosure" open><summary>Get quotes for your job ${icon("sparkle")}</summary>${renderQuoteComposer({icon})}</details>`:''}<div class="rail-note">${icon("calendar")}<p>Facts last checked<br><strong>${esc(checked)}</strong><br>Each figure links to its source.</p></div></aside></div>`,
+    previewFeatures && tradeId !== "all" ? `<div id="quote-request">${renderForm(spec.jobs, companies.filter(c => !c.imported), "ask")}</div>` : previewFeatures ? `<div id="quote-request" class="search-end"><h2>Start with the service you need</h2><p>Choose a service above to explore its shortlist and preview a quote request.</p></div>` : "",
+    spec.service ? renderSourcedRates(spec.service) : "",
+    tradeId !== "all" && !spec.service ? renderAreasWeServe(spec) : "",
+    guide ? renderGuideTeaser(guide) : renderFaq(spec.faqs, "A few things worth knowing"),
     `<section class="browse-more"><p class="kicker">WHILE YOU'RE HERE</p><h2>A little help around the home.</h2><div>${trades.filter(t => t.id !== tradeId).map(t => `<a href="/roster/${t.slug}/">${icon(tradeIcon[t.id])}<span>${esc(t.name)}</span>${icon("arrow")}</a>`).join("")}</div></section>`
   ].join("\n");
   const jsonLd = [
@@ -808,9 +841,13 @@ function renderCollection(spec, companies, crumbs) {
     crumbsLd(crumbs.map((item, index) => (
       index === crumbs.length - 1 ? { href: canonicalPath, label: item.label } : item
     ))),
-    faqLd(spec.faqs)
+    ...(!guide ? [faqLd(spec.faqs)] : [])
   ];
-  if (companies.length) jsonLd.push(listLd(spec.h1, companies));
+  if (companies.length) {
+    const visible=splitDirectory(companies.map(c=>directoryRecord(c,priceSummary(c,spec.service),tradeById(c.category))));
+    const bySlug=new Map(companies.map(c=>[c.slug,c]));
+    jsonLd.push(listLd(spec.h1,[...visible.shortlist,...visible.others.slice(0,12)].map(c=>bySlug.get(c.slug))));
+  }
   forbidSchema(jsonLd);
   return pageShell({
     title,
@@ -851,45 +888,43 @@ function profileBusinessGraph(company, content, canonicalPath) {
   return [business, ...services];
 }
 
+// Release excerpts are text windows that can start or stop mid-word. Mark them as excerpts and drop a
+// leading fragment that never appears as a whole word elsewhere in the sourced copy.
+let excerptWords;
+function excerptView(value) {
+  let text = String(value || '').trim();
+  if (text.length < 60) return text;
+  if (/^[a-z]/.test(text)) {
+    excerptWords ||= new Set(Object.values(profileContent).flatMap(p => [...(p.about || []), ...(p.services || []).map(s => s.explanation || '')]).flatMap(t => String(t).toLowerCase().match(/(?<=\s)[a-z’']+/g) || []));
+    const first = text.match(/^[a-z’']+/)[0];
+    if (!excerptWords.has(first)) text = text.slice(first.length).replace(/^[^\sA-Za-z0-9]*\s+/, '');
+    text = `…${text}`;
+  }
+  return /[.!?)"”…]$/.test(text) ? text : `${text}…`;
+}
+
 function renderServiceExplanation(service) {
   const guide = service.guide ? serviceGuides[service.guide] : null;
   if (service.guide && !guide?.body) throw new Error(`Missing guide: ${service.guide}`);
   const prices = service.prices.map(priceView);
   const reference = (p) => `<details class="price-original"><summary>Price reference & conditions</summary>${p.excerpt?`<p>${esc(p.excerpt)}</p>`:''}${p.sourceUrl?`<span class="data-source"><a href="${esc(p.sourceUrl)}">View price on company website</a><span>Checked ${esc(String(p.capturedAt||'2026-10-10').slice(0,10))}</span></span>`:''}</details>`;
-  const options = prices.length ? `<div class="service-options" aria-label="Service price options">${prices.map(p=>`<div class="service-option"><div class="service-option-heading"><h4>${esc(p.label || service.name)}</h4>${prices.length>1?`<strong>${esc(p.price)}</strong>`:''}</div>${p.indicative?'<span class="claim-label">General price guide, not a company quote</span>':''}${p.detail?`<p class="price-conditions">${esc(p.detail)}</p>`:''}${p.excerpt||p.sourceUrl?reference(p):''}</div>`).join('')}</div>` : '';
+  const options = prices.length ? `<div class="service-options" aria-label="Service price options">${prices.map(p=>`<div class="service-option"><div class="service-option-heading"><h3>${esc(p.label || service.name)}</h3>${prices.length>1?`<strong>${esc(p.price)}</strong>`:''}</div>${p.indicative?'<span class="claim-label">General price guide, not a company quote</span>':''}${p.detail?`<p class="price-conditions">${esc(p.detail)}</p>`:''}${p.excerpt||p.sourceUrl?reference(p):''}</div>`).join('')}</div>` : '';
   const explanation = guide?.body || (service.imported ? serviceGuide(service.name,service.trade) : service.explanation);
-  return `<div class="service-explanation">${service.description?`<p class="service-context">${esc(service.description)}</p>`:''}${explanation?`<p>${esc(explanation)}</p>`:''}${options}${guide?.ask?`<div class="service-booking-question"><h4>Before you book</h4><p>${esc(guide.ask)}</p></div>`:''}${service.sourceUrl?`<details class="service-reference"><summary>Service reference</summary>${service.explanation?`<p>${esc(service.explanation)}</p>`:''}<span class="data-source"><a href="${esc(service.sourceUrl)}">View service on company website</a><span>Checked ${esc(String(service.capturedAt||'2026-10-10').slice(0,10))}</span></span></details>`:''}</div>`;
+  return `<div class="service-explanation">${service.description?`<p class="service-context">${esc(service.description)}</p>`:''}${explanation?`<p>${esc(explanation)}</p>`:''}${options}${guide?.ask?`<div class="service-booking-question"><h3>Before you book</h3><p>${esc(guide.ask)}</p></div>`:''}${service.sourceUrl?`<details class="service-reference"><summary>Service reference</summary>${service.explanation?`<p>${esc(excerptView(service.explanation))}</p>`:''}<span class="data-source"><a href="${esc(service.sourceUrl)}">View service on company website</a><span>Checked ${esc(String(service.capturedAt||'2026-10-10').slice(0,10))}</span></span></details>`:''}</div>`;
 }
 
 function renderServiceRow(service, index) {
   if (!Array.isArray(service.prices)) throw new Error(`Missing pricing state: ${service.name}`);
   if (service.prices.length > 1 && !service.priceSummary) throw new Error(`Missing price summary: ${service.name}`);
-  const price = service.imported ? servicePrice(service) : service.priceSummary || service.prices[0]?.price || "Ask for a quote";
-  return `<details class="service-rate" id="service-price-${index + 1}"><summary><span class="service-rate-label"><strong>${esc(service.name)}</strong></span><strong class="service-rate-price${service.prices.length ? "" : " service-rate-quote"}"><span class="sr-only">${service.prices.some(p=>!p.indicative) ? "Published price: " : "Pricing: "}</span>${esc(price)}</strong><span class="service-toggle-icon">${icon("chevron")}</span></summary>${renderServiceExplanation(service)}</details>`;
+  const price = service.quoteEvidence ? 'Quote on request' : service.imported ? servicePrice(service) : service.priceSummary || service.prices[0]?.price || "Ask for a quote";
+  return `<details class="service-rate" id="service-price-${index + 1}"><summary><span class="service-rate-label"><strong>${esc(service.name)}</strong></span><span class="service-rate-price${service.prices.length ? "" : " service-rate-quote"}"><strong><span class="sr-only">${service.prices.some(p=>!p.indicative) ? "Published price: " : "Pricing: "}</span>${esc(price)}</strong></span><span class="service-toggle-icon">${icon("chevron")}</span>${renderQuoteEvidence(service.quoteEvidence)}</summary>${renderServiceExplanation(service)}</details>`;
 }
 
-/* ---------- Account interface previews ---------- */
+/* ---------- Accounts ---------- */
 
 function renderAccount(mode) {
-  const config = {
-    "sign-in": { title: "Welcome back.", intro: "Sign in to your Roster account.", action: "Sign in", prompt: "New to Roster?", link: "Create an account", href: "sign-up" },
-    "sign-up": { title: "Make yourself at home.", intro: "Create your Roster account.", action: "Create account", prompt: "Already have an account?", link: "Sign in", href: "sign-in" },
-    "forgot-password": { title: "Forgot your password?", intro: "Enter your email to preview password recovery.", action: "Send reset link", prompt: "Remember your password?", link: "Back to sign in", href: "sign-in" },
-    "reset-password": { title: "A fresh start.", intro: "Preview setting a new password for your account.", action: "Reset password", prompt: "Already sorted?", link: "Back to sign in", href: "sign-in" }
-  }[mode];
-  const usesPassword = mode !== "forgot-password";
-  const google = mode === "sign-in" || mode === "sign-up";
-  const passwordField = (id, label, hint = "") => `<label class="account-label" for="${id}">${label}</label><div class="password-field"><input id="${id}" type="password" autocomplete="off" required minlength="8"${hint ? ` aria-describedby="password-hint"` : ""}><button type="button" data-toggle-password="${id}" aria-label="Show ${label.toLowerCase()}" aria-pressed="false">Show</button></div>${hint ? `<p class="field-hint" id="password-hint">${hint}</p>` : ""}`;
-  const body = `<section class="account-layout"><div class="account-story"><p class="kicker">A LITTLE HELP FEELS GOOD</p><h2>Less searching.<br>More sorted.</h2><p>Find the people who help make your house feel like home.</p><div class="account-art">${heroIllustration()}</div><ul><li>${icon("bookmark")}A place for your favourite companies</li><li>${icon("star")}Reviews and prices, easier to compare</li><li>${icon("phone")}A direct line to your next helping hand</li></ul><a href="/roster/">Explore Roster${icon("arrow")}</a></div><div class="account-panel"><div class="account-card"><span class="account-preview-badge">ACCOUNT PREVIEW</span><h1>${config.title}</h1><p class="account-intro">${config.intro}</p><p class="account-beta-note">These are beta screens. Use sample details. Nothing is sent or saved, and no account is created.</p><noscript><p class="account-beta-note">Enable JavaScript to try the account preview.</p></noscript>
-<form method="dialog" data-account-preview="${mode}" autocomplete="off"><fieldset disabled><legend class="sr-only">${config.action} preview</legend>${google ? `<button class="google-button" type="button" data-google-preview><svg aria-hidden="true" viewBox="0 0 48 48" width="20" height="20"><path fill="#4285F4" d="M43.6 24.5c0-1.4-.1-2.8-.4-4.1H24v7.8h11a9.4 9.4 0 0 1-4.1 6.2v5.2h6.7c4-3.7 6-9.1 6-15.1Z"/><path fill="#34A853" d="M24 44c5.5 0 10.1-1.8 13.5-4.9l-6.7-5.2c-1.8 1.2-4.1 1.9-6.8 1.9-5.3 0-9.8-3.6-11.4-8.4H5.7v5.3A20 20 0 0 0 24 44Z"/><path fill="#FBBC05" d="M12.6 27.4a12 12 0 0 1 0-7.7v-5.3H5.7a20 20 0 0 0 0 18.3l6.9-5.3Z"/><path fill="#EA4335" d="M24 11.7c3 0 5.6 1 7.7 3l5.8-5.7A19.4 19.4 0 0 0 24 4 20 20 0 0 0 5.7 15l6.9 5.3A12 12 0 0 1 24 11.7Z"/></svg>Continue with Google</button><div class="account-divider"><span>or continue with email</span></div>` : ""}
-${mode === "sign-up" ? '<label class="account-label" for="account-name">Your name</label><input id="account-name" type="text" placeholder="Alex Tan" required autocomplete="off" maxlength="100">' : ""}
-${mode !== "reset-password" ? '<label class="account-label" for="account-email">Email address</label><input id="account-email" type="email" placeholder="you@example.com" autocomplete="off" required maxlength="254">' : ""}
-${usesPassword ? passwordField("account-password", mode === "reset-password" ? "New password" : "Password", mode !== "sign-in" ? "Use at least 8 characters for this preview." : "") : ""}
-${mode === "reset-password" ? passwordField("account-confirm", "Confirm new password") : ""}
-${mode === "sign-in" ? '<div class="account-options"><a href="/roster/forgot-password/">Forgot password?</a></div>' : ""}
-<p class="account-error" data-account-error role="alert" hidden></p><button type="submit" class="btn btn-solid account-submit">${config.action}${icon("arrow")}</button></fieldset></form>
-<div class="account-result" data-account-result role="status" tabindex="-1" hidden></div><p class="account-switch">${config.prompt} <a href="/roster/${config.href}/">${config.link}</a></p></div><p class="account-smallprint">Singapore beta. Real accounts are not enabled yet.</p></div></section>`;
-  return pageShell({ title: `${config.action} | Roster`, description: `Preview Roster ${config.action.toLowerCase()}. Try the beta account screens with sample details. No account is created and nothing is sent.`, canonicalPath: `/roster/${mode}/`, current: "", jsonLd: [], body, bodyClass: "account-page" });
+  const content = accountContent(mode,{icon,heroIllustration});
+  return pageShell({...content,canonicalPath:`/roster/${mode}/`,current:"",jsonLd:[],bodyClass:"account-page"});
 }
 
 /* ---------- Home ---------- */
@@ -897,11 +932,13 @@ ${mode === "sign-in" ? '<div class="account-options"><a href="/roster/forgot-pas
 function renderHome(grouped) {
   const title = "Roster | Short unpaid lists of home services in Singapore";
   const description = "Find the right help for your home. Compare services, prices and reviews from companies across Singapore.";
-  const body = renderHomeSnapshot({companies:publishedCompanies,pins:mapPins,presentation,outline:homeOutline,checked,esc,icon});
+  const body = renderHomeSnapshot({companies:publishedCompanies,pins:mapPins,presentation,outline:homeOutline,checked,esc,icon}) + guideCards(editorialGuides.filter(g=>g.hub));
   const jsonLd = [
-    { "@type": "WebSite", name: "Roster", url: origin + "/", description },
+    { "@type": "WebSite", "@id": origin + "/#website", name: "Roster", url: origin + "/", description, inLanguage:"en-SG" },
     {
       "@type": "Organization",
+      "@id": origin + "/#organization",
+      logo: abs("/roster/assets/favicon.svg"),
       name: "Roster",
       url: origin + "/",
       description: "A sourced directory of home-service companies in Singapore."
@@ -934,51 +971,119 @@ function renderHome(grouped) {
 /* ---------- How it works ---------- */
 
 function renderHow() {
-  const title = "How Roster works | Singapore beta";
-  const description = "How the shortlist is ordered, what a Featured slot would be, and why the quote form does not send.";
-  const canonicalPath = "/roster/how-it-works/";
-  const sections = [
-    ["What gets a company on the list", [
-      `New profiles need sourced company information, services, a phone number, an address and their own website. Flagged or rolled-back records stay off the site. The original hand-checked profiles retain their write-ups. A rating is optional and always carries its source and capture date. Checked ${checked}.`,
-      "A review line needs a name, a date or a relative time, and the page it was copied from. The words stay as published, including rough grammar. A quote with no date stays off the page."
-    ]],
-    ["How the order is chosen", [
-      "Companies are alphabetical by default. You can sort by a captured Google Maps rating or review count, and filter by area, pricing and other details. Company-site and review-mirror ratings are labelled separately and do not affect the Google rating sort. A company cannot pay for a higher position."
-    ]],
-    ["What a homeowner does", [
-      "Pick the job, read the shortlist, and use the form if you want to see it. The form asks about the job, property, postal code, timing, company count, and contact details. It does not send. A later version can pass one request to at most three companies that do that job and hold prepaid credits. The homeowner pays nothing."
-    ]],
-    ["What Featured would be", [
-      "A labeled slot under the shortlist and under the form. At most two on a page. The company would get a name, one line, a published price if they have one, and a button that calls or messages them directly. The slot would not include quote requests, and it would not change the number, the stars, or the reviews. A company could buy credits, or a Featured slot, or both. Credits would be charged only when a matching request is delivered.",
-      "There are no paid placements on these pages."
-    ]],
-    ["What stays off the page", [
-      "Roster does not print its own star score. It does not say we visited, we called, or an anonymous tester booked the job. A licence number appears only when the company publishes it, with the page, and with the note that the register was not opened. A UEN is the same."
-    ]]
-  ];
-  const html = sections.map(([heading, paragraphs], index) => `<section class="section how-step"><h2><span class="step-num">${String(index + 1).padStart(2, "0")}</span>${esc(heading)}</h2><div>${paragraphs.map((p) => `<p class="lede">${esc(p)}</p>`).join("")}</div></section>`).join("\n");
-  const body = `
-<div class="page-head">
-${renderCrumbs([{ label: "How it works" }])}
-<div class="head-row"><span class="disc">${icon("list", "ic ic-disc")}</span><div><p class="kicker">Method</p><h1>How this list is made</h1></div></div>
-<p class="dek">One profile per company. Browse by job and compare the details. The order is unpaid.</p>
-</div>
-${html}
-${renderFaq(howFaqs)}`;
-  const jsonLd = [
-    webPage(title, canonicalPath, description),
-    crumbsLd([{ label: "How it works" }]),
-    faqLd(howFaqs)
-  ];
+  const title="How Roster Works: Listings, Reviews & Prices | Roster";
+  const description="Understand Roster's unpaid listings, weighted ratings, sourced prices and coverage filters. Learn what the beta quote and claim tools do.";
+  const canonicalPath="/roster/how-it-works/";
+  const body=renderCrumbs([{label:"How it works"}])+`<header class="guide-hero guide-hero-method"><div><p class="kicker">A LITTLE CLARITY</p><h1>How Roster works.</h1><p class="guide-dek">The details behind a more considered choice.</p></div></header>`+renderEditorial(methodGuide,editorialGuides,{utility:true});
+  return pageShell({title,description,canonicalPath,current:canonicalPath,jsonLd:[webPage(title,canonicalPath,description),crumbsLd([{href:canonicalPath,label:"How it works"}]),faqLd(methodGuide.faqs)],body,bodyClass:"guide-page",shareImage:abs(heroPhoto('plumbing').sizes[1200].src)});
+}
+
+function renderGuidePage(guide) {
+  const hub=editorialGuides.find(g=>g.trade===guide.trade&&g.hub);
+  const trade=tradeById(guide.trade);
+  const crumbs=[{href:`/roster/${trade.slug}/`,label:trade.name},...(hub.id!==guide.id?[{href:hub.path,label:hub.label}]:[]),{href:guide.path,label:guide.directoryPath?'Guide':guide.label}];
+  const image=abs(heroPhoto(guide.trade).sizes[1200].src);
+  const body=renderCrumbs(crumbs)+`<header class="guide-hero"><div><p class="kicker">THE ROSTER HOME GUIDE</p><h1>${esc(guide.h1)}</h1><p class="guide-dek">${esc(guide.description)}</p><div class="guide-hero-actions"><a class="btn btn-solid" href="/roster/${trade.slug}/">Compare ${esc(trade.name.toLowerCase())} companies ${icon('arrow')}</a><a href="#guide">Read the guide</a></div></div><figure><img src="${heroPhoto(guide.trade).sizes[640].src}" width="600" height="400" alt="" fetchpriority="high"><figcaption><a href="${esc(heroPhoto(guide.trade).url)}">${esc(photoCredit(guide.trade))}</a></figcaption></figure></header>`+renderEditorial(guide,editorialGuides,{extra:guide.id==='AC-03'?renderGuidePrices():renderSourcedRates(guide.id)});
+  const jsonLd=[webPage(guide.title,guide.path,guide.description),crumbsLd(crumbs),...editorialSchema(guide,origin),...(guide.hub?[{"@type":"ItemList",name:`${guide.label}: related guides`,itemListElement:editorialGuides.filter(g=>g.trade===guide.trade&&g.id!==guide.id).map((g,i)=>({"@type":"ListItem",position:i+1,name:g.label,url:abs(g.path)}))}]:[])];
   forbidSchema(jsonLd);
-  return pageShell({
-    title,
-    description,
-    canonicalPath,
-    current: canonicalPath,
-    jsonLd,
-    body
-  });
+  return pageShell({title:guide.title,description:guide.description,canonicalPath:guide.path,current:`/roster/${trade.slug}/`,jsonLd,body,bodyClass:'guide-page',shareImage:image});
+}
+
+// Guides and intent pages show only published, sourced company rates: one lowest matching
+// non-promotional rate per company, each with its company, source link and capture date.
+const guideEvidence = {
+  'AC-04':{trade:'aircon',match:/install/i,exclude:/dismantl|remov|trunking only|chemical|servic/i,title:'Published aircon installation rates',noun:'installation'},
+  'AC-06':{trade:'aircon',match:/repair|troubleshoot|diagnos|inspection|compressor/i,exclude:/servic|chemical|wash|install/i,title:'Published aircon repair and inspection rates',noun:'repair or inspection'},
+  'AC-07':{trade:'aircon',match:/leak|water pump|condensate|drain/i,exclude:/servic|chemical|install/i,title:'Published rates for aircon leak work',noun:'leak-related'},
+  'CL-04':{trade:'cleaning',match:/tenancy|move.?out|move.?in.*out|handover/i,title:'Published move-out and end-of-tenancy cleaning rates',noun:'move-out cleaning'},
+  'CL-05':{trade:'cleaning',match:/part.?time|hourly|weekly|fortnightly|regular/i,exclude:/deep|post.?reno|office|move/i,unit:'per hour',title:'Published part-time cleaning rates',noun:'part-time cleaning'},
+  'CL-06':{trade:'cleaning',match:/post.?reno/i,title:'Published post-renovation cleaning rates',noun:'post-renovation cleaning'},
+  'CL-07':{trade:'cleaning',match:/steam/i,title:'Published steam cleaning rates',noun:'steam cleaning'},
+  'CL-08':{trade:'cleaning',match:/office|commercial/i,exclude:/home|residential|house/i,title:'Published office cleaning rates',noun:'office cleaning'},
+  'AC-08':{trade:'aircon',match:/overhaul/i,exclude:/condenser|contract|package|annual|yearly/i,unit:'per unit',title:'Published chemical overhaul rates',noun:'chemical overhaul'},
+  'AC-09':{trade:'aircon',match:/condenser|outdoor unit clean/i,exclude:/tray|gas level|fan ?coil|overhaul|promotion|servicing,/i,unit:'per unit',title:'Published condenser cleaning rates',noun:'condenser cleaning'},
+  'CL-10':{trade:'cleaning',match:/curtain/i,exclude:/install|track|rod|blind/i,title:'Published curtain cleaning rates',noun:'curtain cleaning'},
+  'HM-05':{trade:'handyman',match:/assembl|ikea/i,exclude:/handyman help|starting prices/i,title:'Published furniture assembly rates',noun:'furniture assembly'},
+  'EL-07':{trade:'electrician',match:/light|downlight/i,exclude:/repair|fan/i,title:'Published light installation rates',noun:'light installation'},
+  'EL-08':{trade:'electrician',serviceOnly:true,match:/socket|power point/i,exclude:/isolator|hob|oven|water heater|aircon/i,title:'Published socket and power point rates',noun:'socket installation'},
+  'HM-06':{trade:'handyman',serviceOnly:true,match:/\block/i,exclude:/exclude lock|door repair|window repair/i,title:'Published lock replacement and repair rates',noun:'lock'},
+  'HM-07':{trade:'handyman',serviceOnly:true,match:/curtain|blind/i,exclude:/tv bracket/i,title:'Published curtain and blind installation rates',noun:'curtain installation'},
+  'PL-08':{trade:'plumbing',serviceOnly:true,match:/\btap\b|faucet|mixer/i,exclude:/washing machine/i,title:'Published tap replacement and repair rates',noun:'tap'},
+  'PL-09':{trade:'plumbing',serviceOnly:true,match:/basin/i,exclude:/tap|faucet|choke|clog|mixer|hose|leak/i,title:'Published basin installation rates',noun:'basin'},
+  'CL-11':{trade:'cleaning',serviceOnly:true,match:/ad.?hoc|one.?time|one.?off/i,exclude:/deep|move|post|office|aircon/i,title:'Published ad hoc cleaning rates',noun:'ad hoc cleaning'},
+  'EL-09':{trade:'electrician',serviceOnly:true,match:/db box|distribution board/i,exclude:/trunking|cable pull/i,title:'Published DB box replacement rates',noun:'DB box'},
+  'CL-12':{trade:'cleaning',serviceOnly:true,match:/disinfect|sanitis/i,exclude:/steam/i,title:'Published disinfection rates',noun:'disinfection'},
+  'CL-09':{trade:'cleaning',match:/mattress/i,title:'Published mattress cleaning rates',noun:'mattress cleaning'},
+  'HM-03':{trade:'handyman',match:/paint/i,title:'Published painting rates',noun:'painting'},
+  'HM-04':{trade:'handyman',match:/\btv\b|television/i,title:'Published TV mounting rates',noun:'TV mounting'},
+  'PL-06':{trade:'plumbing',match:/instant|water heater|storage heater/i,exclude:/repair|servic/i,title:'Published water heater installation rates',noun:'water heater'},
+  'chemical-wash':{trade:'aircon',match:/chemical wash/i,exclude:/overhaul|contract|package|annual/i,unit:'per unit',title:'Published chemical wash rates',noun:'chemical wash'},
+  'gas-top-up':{trade:'aircon',match:/gas top|refrigerant|r32|r410|r22/i,exclude:/servic|chemical|install/i,title:'Published gas top-up rates',noun:'gas top-up'}
+};
+function sourcedRates(spec) {
+  return publishedCompanies.filter(c=>c.category===spec.trade).flatMap(c=>{
+    const text=p=>spec.serviceOnly?p.service:`${p.service} ${p.job||''}`;
+    const lines=(c.enrichment?.priceLines||[]).filter(p=>spec.match.test(text(p))&&!(spec.exclude?.test(text(p)))&&Number.isFinite(p.amount_sgd)&&p.amount_sgd>0&&!p.indicative&&!p.promo&&/^https?:\/\//.test(p.sourceUrl||'')&&/^\d{4}-\d{2}-\d{2}/.test(p.capturedAt||'')&&(!spec.unit||p.unit===spec.unit)).sort((a,b)=>a.amount_sgd-b.amount_sgd);
+    return lines.length?[{company:c,line:lines[0]}]:[];
+  }).sort((a,b)=>a.line.amount_sgd-b.line.amount_sgd);
+}
+// A label that is only a list of unit tiers ("for 1 unit, for 2 units, ...") says nothing about the job.
+function rateLabel(p) {
+  const label=tidyPriceLabel(p.service);
+  const tiers=/^(?:for\s+)?\d+\+?\s*(?:units?|fan coils?|pcs|pieces)\b[^.]*,\s*(?:for\s+)?\d/i.test(label)||/^for\s+\d/i.test(label);
+  return (tiers||!label)&&p.job ? p.job.replace(/-/g,' ').replace(/^./,c=>c.toUpperCase()) : label;
+}
+function renderSourcedRates(key) {
+  const spec=guideEvidence[key];if(!spec)return '';
+  const rows=sourcedRates(spec);if(rows.length<3)return '';
+  const units=new Map();for(const {line} of rows)units.set(line.unit,(units.get(line.unit)||0)+1);
+  const [unit,count]=[...units].sort((a,b)=>b[1]-a[1])[0];
+  const same=rows.filter(r=>r.line.unit===unit).map(r=>r.line.amount_sgd);
+  const money=n=>`S$${Number(n).toLocaleString('en-SG')}`;
+  const range=count>=3?`<p>For the most common unit (${esc(unit)}), the lowest published rates from ${count} companies run from <strong>${money(Math.min(...same))}</strong> to <strong>${money(Math.max(...same))}</strong>. Each figure is one company's own advertised rate with its conditions, not a market average or a quote.</p>`:`<p>Each figure is one company's own advertised rate with its conditions, not a market average or a quote.</p>`;
+  return `<section class="guide-price-sample" aria-labelledby="${key}-rates-title"><p class="kicker">FROM THE ROSTER DIRECTORY</p><h2 id="${key}-rates-title">${esc(spec.title)}</h2>${range}<details><summary>See ${rows.length} published ${esc(spec.noun)} rates and sources</summary><div class="guide-table-scroll" tabindex="0" role="region" aria-label="${esc(spec.title)}"><table><caption>Lowest matching advertised rate per company, in SGD as published. Check the source for minimums, GST and inclusions.</caption><thead><tr><th scope="col">Company</th><th scope="col">Service as listed</th><th scope="col">Rate</th><th scope="col">Source</th></tr></thead><tbody>${rows.map(({company:c,line:p})=>`<tr><th scope="row"><a href="/roster/company/${c.slug}/#pricing">${esc(c.name)}</a></th><td>${esc(rateLabel(p))}</td><td>${money(p.amount_sgd)} ${esc(p.unit||'')}</td><td><a href="${esc(p.sourceUrl)}">${esc(new URL(p.sourceUrl).hostname.replace(/^www\./,''))} · ${esc(p.capturedAt.slice(0,10))}</a></td></tr>`).join('')}</tbody></table></div></details></section>`;
+}
+
+// Towns from the keyword plan. Links use the existing coverage filter; plumbing has three full area pages.
+const areaTowns = ['Ang Mo Kio','Bedok','Bishan','Bukit Batok','Bukit Panjang','Choa Chu Kang','Clementi','Hougang','Jurong West','Pasir Ris','Punggol','Queenstown','Sengkang','Serangoon','Tampines','Toa Payoh','Woodlands','Yishun'];
+const areaPages = {plumbing:['Woodlands','Tampines','Yishun']};
+const townSlug = name => name.toLowerCase().replace(/[^a-z0-9]+/g,'-');
+function renderAreasWeServe(spec) {
+  const pages=new Set(areaPages[spec.id]||[]);
+  const links=areaTowns.map(town=>pages.has(town)?`<a href="/roster/${spec.slug}/${townSlug(town)}/">${esc(town)}</a>`:`<a href="/roster/${spec.slug}/?area=${townSlug(town)}#company-results">${esc(town)}</a>`).join('');
+  return `<section class="areas-we-serve" aria-labelledby="areas-title"><p class="kicker">BY TOWN</p><h2 id="areas-title">Areas we serve</h2><p>Pick a town to filter this list by the coverage each company states on its own website. A company's office address is not used as coverage, and companies that do not state their areas are shown separately.</p><div class="areas-we-serve-links">${links}</div></section>`;
+}
+function areaCompanies(trade, town) {
+  const region=planningAreas.find(a=>a.name===town)?.region;
+  const stated=c=>new Set((c.enrichment?.serviceLocations||[]).map(l=>l.name));
+  const rows=publishedCompanies.filter(c=>c.category===trade);
+  return {town:rows.filter(c=>stated(c).has(town)),region:rows.filter(c=>!stated(c).has(town)&&region&&stated(c).has(region)),islandwide:rows.filter(c=>!stated(c).has(town)&&!(region&&stated(c).has(region))&&stated(c).has('Islandwide'))};
+}
+
+function renderAreaPage(tradeId, town) {
+  const trade=tradeById(tradeId),slug=townSlug(town),canonicalPath=`/roster/${trade.slug}/${slug}/`;
+  const {town:local,region,islandwide}=areaCompanies(tradeId,town);
+  const regionName=planningAreas.find(a=>a.name===town)?.region;
+  const title=`Plumbers Serving ${town}, Singapore | Roster`;
+  const description=concise(`Compare ${local.length} plumbing companies that state they serve ${town}, with coverage sources, published prices and direct contact details.`);
+  const crumbs=[{href:`/roster/${trade.slug}/`,label:trade.name},{href:canonicalPath,label:town}];
+  const coverage=c=>(c.enrichment.serviceLocations||[]).find(l=>l.name===town);
+  const item=c=>{const e=coverage(c),r=ratingSummary(c);return `<li><div><a href="/roster/company/${c.slug}/">${esc(c.name)}</a><span>${r?`${r.value.toFixed(1)} / 5 from ${r.count?r.count.toLocaleString('en-SG')+' reviews':'cited sources'}`:'No ratings found yet'}${presentation[c.slug]?.published?' · Publishes prices':''}</span></div>${e?`<a href="${esc(e.sourceUrl)}">Coverage stated on ${esc(new URL(e.sourceUrl).hostname.replace(/^www\./,''))} · ${esc(e.capturedAt)}</a>`:''}</li>`;};
+  const body=renderCrumbs(crumbs)+`<header class="guide-hero"><div><p class="kicker">PLUMBING BY TOWN</p><h1>Plumbers serving ${esc(town)}.</h1><p class="guide-dek">${local.length} plumbing companies on Roster name ${esc(town)} in the areas they serve. Each listing links to the page where the company says so.</p><div class="guide-hero-actions"><a class="btn btn-solid" href="/roster/${trade.slug}/?area=${slug}#company-results">Filter all plumbers by ${esc(town)} ${icon('arrow')}</a><a href="/roster/plumbing/guide/">Read the plumbing guide</a></div></div></header>
+<section class="editorial area-page"><div class="guide-copy">
+<h2 id="named">Companies that name ${esc(town)}</h2><p>These companies list ${esc(town)} on their own websites. Coverage can change, so confirm your block and postal code when you call. The order is alphabetical, not a ranking.</p><ul class="area-company-list">${local.sort((a,b)=>a.name.localeCompare(b.name)).map(item).join('')}</ul>
+<h2 id="wider">Wider coverage</h2><p>${region.length} more ${region.length===1?'company states':'companies state'} that ${region.length===1?'it serves':'they serve'} the ${esc(regionName||'surrounding')} region, and ${islandwide.length} ${islandwide.length===1?'says it serves':'say they serve'} all of Singapore without naming ${esc(town)}. The <a href="/roster/${trade.slug}/?area=${slug}#company-results">area filter</a> lists them after the companies that name the town. Companies that do not state any coverage are not counted here.</p>
+<h2 id="before">Before you call a plumber in ${esc(town)}</h2><p>Share the block number, the floor and the room with the fault, plus a photo of the pipe, trap or fitting. Say whether it is an HDB flat, a condo or a landed home, and mention any lift booking or parking arrangements the technician needs.</p><p>Leaks and chokes in shared areas, such as a common drainage stack or a corridor pipe, are normally handled by your Town Council or management office rather than a private plumber. Check with them first if water is coming from outside your unit, then book a plumber for work inside your home.</p><p>Ask for the call-out or inspection charge before the visit, and agree the price of any extra work before it starts. The <a href="/roster/plumbing/leak-repair/">leak repair guide</a> and <a href="/roster/plumbing/choked-drain/">choked drain guide</a> explain what to describe for the most common jobs.</p>
+</div></section>`;
+  const jsonLd=[webPage(title,canonicalPath,description),crumbsLd(crumbs)];
+  forbidSchema(jsonLd);
+  return pageShell({title,description,canonicalPath,current:`/roster/${trade.slug}/`,jsonLd,body,bodyClass:'guide-page'});
+}
+
+function renderGuidePrices() {
+  const {samples,average}=buildHomeSnapshot(publishedCompanies,mapPins,presentation).prices.aircon;
+  if(!average)return '';
+  return `<section class="guide-price-sample" aria-labelledby="sample-title"><p class="kicker">FROM THE ROSTER DIRECTORY</p><h2 id="sample-title">Published general-servicing rates</h2><strong class="guide-price-number">S$${average} <small>per unit</small></strong><p>Average advertised starting rate across ${samples.length} companies. One matching rate per company, rounded to the nearest dollar. Minimum bookings and other conditions apply. These are source snapshots, not current quotes.</p><details><summary>See all ${samples.length} rates and sources</summary><div class="guide-table-scroll" tabindex="0" role="region" aria-label="Sourced aircon servicing prices"><table><caption>Advertised rates in SGD. Capture dates are shown per source.</caption><thead><tr><th scope="col">Company</th><th scope="col">Starting rate</th><th scope="col">Source checked</th></tr></thead><tbody>${samples.map(s=>`<tr><th scope="row"><a href="/roster/company/${s.slug}/#pricing">${esc(s.name)}</a></th><td>S$${s.amount} / unit</td><td><a href="${esc(s.sourceUrl)}">${esc(s.checkedAt.slice(0,10))} · Conditions</a></td></tr>`).join('')}</tbody></table></div></details></section>`;
 }
 
 /* ---------- Build ---------- */
@@ -1024,8 +1129,14 @@ for (const intent of intents) await writeIndex(intent,grouped[intent.parent].fil
 
 written.push(await writePage("", renderHome(grouped)));
 written.push(await writePage("how-it-works", renderHow()));
+written.push(await writePage("matches", renderMatchPage({esc,icon,pageShell,indexPath:indexPath({id:"all"})})));
+written.push(await writePage('logo-removal',pageShell({title:'Logo removal requests | Roster',description:'Information for business owners who would like a company logo removed from Roster. The public removal contact inbox is awaiting confirmation.',canonicalPath:'/roster/logo-removal/',current:'',jsonLd:[],body:`<section class="pending-feature"><p class="kicker">FOR BUSINESS OWNERS</p><h1>Logo removal requests</h1><p>Logos belong to their owners. We can remove a logo without removing the business listing.</p><h2>Contact route pending</h2><p>The removal inbox is not connected yet. This preview cannot receive a request.</p><p>When the contact route is available, include the company name, its Roster page URL and your relationship to the logo owner. Do not send passwords or identity documents.</p><a href="/roster/">Back to Roster</a></section>`})));
 written.push(await writePage("claim-listing", renderClaimPage({esc,icon,pageShell,renderCrumbs},sortCompanies(publishedCompanies))));
 for (const mode of ["sign-in", "sign-up", "forgot-password", "reset-password"]) written.push(await writePage(mode, renderAccount(mode)));
+written.push(await writePage('account',pageShell({title:'Your account | Roster',description:'Manage your Roster account and keep your saved Singapore home-service companies together across devices.',canonicalPath:'/roster/account/',current:'',jsonLd:[],bodyClass:'account-page',body:accountHome({icon})})));
+written.push(await writePage('auth/callback',pageShell({title:'Complete sign in | Roster',description:'Complete your secure Roster sign-in or verify your email, then return to your saved Singapore home-service companies.',canonicalPath:'/roster/auth/callback/',current:'',jsonLd:[],bodyClass:'account-page',body:callbackContent})));
+written.push(await writePage('saved',pageShell({title:'Your saved companies | Roster',description:'Your personal shortlist of Singapore home-service companies. Compare saved businesses, prices and reviews in one place.',canonicalPath:'/roster/saved/',current:'',jsonLd:[],bodyClass:'saved-page-body',body:savedContent({icon,indexPath:indexPath({id:'all'}),esc})})));
+
 written.push(await writePage("search", renderCollection({ id: "all", slug: "search", name: "Home services", h1: "Home services in Singapore", intro: ["Explore the sourced companies on Roster. Use search and filters to narrow your list."], jobs: [], faqs: howFaqs.slice(0, 3) }, sortCompanies(publishedCompanies), [{ label: "Find a company" }])));
 
 for (const trade of trades) {
@@ -1043,6 +1154,9 @@ for (const intent of intents) {
   written.push(await writePage(intent.slug, renderCollection(intent, sortCompanies(companies), crumbs)));
 }
 
+for (const guide of editorialGuides) written.push(await writePage(guide.slug,renderGuidePage(guide)));
+for (const [tradeId,towns] of Object.entries(areaPages)) for (const town of towns) written.push(await writePage(`${tradeById(tradeId).slug}/${townSlug(town)}`,renderAreaPage(tradeId,town)));
+
 for (const company of publishedCompanies) {
   written.push(await writePage(
     `company/${company.slug}`,
@@ -1057,7 +1171,9 @@ const retired=[
   {slug:'aeon-environmental-services',name:'Aeon Environmental Services',target:'/roster/home-cleaning/',trade:'home cleaning'},
   {slug:'city-cleaning',name:'City Cleaning',target:'/roster/home-cleaning/',trade:'home cleaning'},
   {slug:'greengarden-integrated-services-pte-ltd',name:'Greengarden Integrated Services Pte Ltd',target:'/roster/home-cleaning/',trade:'home cleaning'},
-  {slug:'sq-1-development-pte-ltd',name:'SQ 1 Development Pte Ltd',target:'/roster/home-cleaning/',trade:'home cleaning'}
+  {slug:'sq-1-development-pte-ltd',name:'SQ 1 Development Pte Ltd',target:'/roster/home-cleaning/',trade:'home cleaning'},
+  {slug:'flash-aircon',name:'Signature Engineering Services Pte Ltd',target:'/roster/aircon-servicing/',trade:'aircon servicing'},
+  {slug:'reliable-electrical-services',name:'Reliable Electrical Services',target:'/roster/electrician/',trade:'electrical'}
 ];
 for(const old of retired) if(!publishedCompanies.some(c=>c.slug===old.slug)) {
   const canonicalPath=`/roster/company/${old.slug}/`;
@@ -1070,8 +1186,11 @@ let previous = [];
 try { previous = JSON.parse(await readFile(path.join(root,'data/build-manifest.json'),'utf8')); } catch(e) { if(e.code!=='ENOENT') throw e; }
 for (const rel of previous) if(!currentPaths.includes(rel) && /^company\/[a-z0-9-]+\/index\.html$/.test(rel)) await rm(path.join(root,rel),{force:true});
 await writeFile(path.join(root,'data/build-manifest.json'),JSON.stringify(currentPaths,null,2)+'\n');
-const sitemapPaths=currentPaths.filter(p=>! /^(sign-in|sign-up|forgot-password|reset-password)\//.test(p)&&!retired.some(r=>p===`company/${r.slug}/index.html`));
-await writeFile(path.join(root,'sitemap.xml'),`<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${sitemapPaths.map(p=>`<url><loc>${esc(origin+'/'+p.replace(/index\.html$/,''))}</loc></url>`).join('')}</urlset>\n`);
+// Preview pages are intentionally noindex, so none belong in a submitted sitemap.
+// This review manifest is the proposed launch set, pending an approved production domain and indexing review.
+const launchPages=[{path:"/roster/",kind:"home"},{path:"/roster/how-it-works/",kind:"method"},...trades.map(t=>({path:`/roster/${t.slug}/`,kind:"directory"})),...editorialGuides.map(g=>({id:g.id,path:g.path,words:g.words,kind:"guide"}))];
+await writeFile(path.join(root,'data/seo-launch-pages.json'),JSON.stringify({status:"preview-noindex",canonicalOrigin:origin,updated:"2026-10-12",pages:launchPages},null,2)+'\n');
+await writeFile(path.join(root,'sitemap.xml'),'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"></urlset>\n');
 await writeFile(path.join(root,'robots.txt'),'# Beta preview. Every HTML page also carries noindex.\nUser-agent: *\nDisallow: /roster/\n');
 console.log(written.length + " pages");
 for (const trade of trades) {

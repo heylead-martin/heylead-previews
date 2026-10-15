@@ -43,11 +43,12 @@ test('New release evidence fills only matching missing postal codes and keeps or
  assert.deepEqual(supplementPostalAddress(current,{...incoming,value:'60 Another Road, Singapore 737869'}),current);
  assert.deepEqual(supplementPostalAddress(current,{...incoming,sourceUrl:''}),current);
  assert.deepEqual(supplementPostalAddress({...current,postal:'111111'},incoming),{...current,postal:'111111'});
- const r={...row(),rosterProfile:{slug:'original',rating:null,rating_moved_to:'self_reported_rating'},self_reported_rating:{rating:5,count:3000,source_url:'https://example.com'},map:{status:'verified',place:{cid:'123',postal:'737869'}}};
+ const r={...row(),rosterProfile:{slug:'original',rating:null,rating_moved_to:'self_reported_rating'},self_reported_rating:{rating:5,count:3000,count_qualifier:'more_than',source_url:'https://example.com'},map:{status:'verified',place:{cid:'123',postal:'737869'}}};
  const seed={companies:{companies:[{...row(),slug:'original',category:'aircon',rating:{value:5,count:3000,sourceUrl:'https://example.com'}}]},profiles:{original:{about:['Original words.'],services:[]}},presentation:{original:{published:false}}};
  const result=importDatabase(db([r]),seed);
  assert.equal(result.companies.companies[0].rating,null);
  assert.equal(result.companies.companies[0].selfReportedRating.count,3000);
+ assert.equal(result.companies.companies[0].selfReportedRating.count_qualifier,'more_than');
  assert.equal(result.companies.companies[0].mapEvidence.place.cid,'123');
  assert.deepEqual(result.profiles.original,seed.profiles.original);
 });
@@ -59,7 +60,16 @@ test('Trustpilot stays a separate source and supported legacy image formats keep
 });
 test('Normalised unit prices retain total quantity and minimum-booking conditions',()=>{
  const price=priceOption({service:'Three units',price_text:'S$90',unit:'total for 3 units',qty:3,unit_price_sgd:30,units_in_price:3,min_units:3,sourceUrl:'https://example.com'});
- assert.equal(price.price,'S$90');assert.match(price.detail,/Calculated per-unit price: S\$30/);assert.match(price.detail,/total for 3 units/);assert.match(price.detail,/Minimum 3 units/);
+ assert.equal(price.price,'S$90');assert.match(price.detail,/Calculated per-unit price: S\$30/);assert.match(price.detail,/Total for 3 units/);assert.match(price.detail,/Minimum 3 units/);
+ const single=priceOption({service:'Hourly cleaning',price_text:'S$18/hour',unit:'per hour',unit_price_sgd:18,units_in_price:1,min_units:1,sourceUrl:'https://example.com'});
+ assert.equal(single.detail,'Calculated per-unit price: S$18 (1 unit in the published total). Minimum 1 unit. Per hour');
+ assert.doesNotMatch(single.detail,/\b1 units\b|\)\. per/);
+});
+test('Unit stripping never leaves doubled or stray commas',()=>{
+ assert.equal(blockAddress('69 Ubi Road 1, #08-32, Singapore 408731'),'69 Ubi Road 1, Singapore 408731');
+ assert.equal(blockAddress('92A Syed Alwi Road, #02-06, Singapore 207668'),'92A Syed Alwi Road, Singapore 207668');
+ assert.equal(blockAddress('Blk 1, Unit 02-03, ,Singapore 123456'),'Blk 1, Singapore 123456');
+ assert.equal(blockAddress('#01-01, 10 Example St, #02-02, Singapore 123456'),'10 Example St, Singapore 123456');
 });
 test('Every publication-blocking flag and rollback excludes a full profile',()=>{for(const flag of BLOCKED){const result=importDatabase(db([{...row(),flags:[flag]}]),empty);assert.equal(result.companies.companies.length,0,flag);assert.ok(result.report.excluded[0].reasons.includes(flag));}assert.equal(importDatabase(db([{...row(),profile_rolled_back:{reason:'review'}}]),empty).report.excludedCount,1);});
 test('Missing sourced required fields prevents publication',()=>{for(const key of ['about','services','phone','address','website'])assert.equal(importDatabase(db([{...row(),[key]:null}]),empty).report.excludedCount,1,key);});
@@ -126,4 +136,12 @@ test('Price labels drop UI noise and the build never invents a missing unit',()=
  const source={job:'regular-cleaning',service:'Decrease/Increase quantity for Weekly Cleaning',price_text:'S$150',sourceUrl:'https://example.com'};
  assert.equal(priceOption(source).label,'Regular cleaning');assert.equal(priceOption(source).detail,'');
  for(const label of ['Login','+65 9662 2361','1. What is the standard rate?']) assert.equal(priceOption({...source,service:label}).label,'Regular cleaning');
+});
+
+test('Explicit quote-on-request statements retain linked dated evidence without inferring it',()=>{
+ const source={wording:'statement',excerpt:'We diagnose first and quote before repairing.',source_url:'https://example.com/prices',capturedAt:'2026-10-11'};
+ const candidate={...row(),pricing_model:'quote_on_request',pricing_model_source:source};
+ const imported=importDatabase(db([candidate]),empty).companies.companies[0];
+ assert.deepEqual(imported.quoteEvidence,{excerpt:source.excerpt,sourceUrl:source.source_url,capturedAt:source.capturedAt});
+ for(const variant of [{pricing_model:null},{pricing_model_source:null},{pricing_model_source:{...source,wording:'inferred'}},{pricing_model_source:{...source,capturedAt:null}}])assert.equal(importDatabase(db([{...candidate,...variant}]),empty).companies.companies[0].quoteEvidence,null);
 });

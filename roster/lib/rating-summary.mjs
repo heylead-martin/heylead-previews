@@ -6,7 +6,7 @@ export function ratingSummary(company) {
   if (company.googleRating) {
     const g = company.googleRating;
     candidates.unshift({name:'Google Maps',rating:g.value,count:g.count,scale:5,sourceUrl:g.sourceUrl,checkedAt:g.checkedAt});
-  } else if (company.rating) {
+  } else if (company.rating && !company.selfReportedRating) {
     const r = company.rating;
     const host = new URL(r.sourceUrl).hostname;
     candidates.unshift({name:/(^|\.)google\.com$/.test(host)?'Google Maps':'Reported rating',rating:r.value,count:r.count,scale:5,sourceUrl:r.sourceUrl,checkedAt:'2026-10-10'});
@@ -14,7 +14,9 @@ export function ratingSummary(company) {
   const seen = new Set();
   const sources = candidates.filter(s => {
     const id = String(s.name || '').toLowerCase().replace(/^google maps$/, 'google');
-    if (!id || /trustpilot|widget|self.reported/i.test(id) || seen.has(id) || s.mirrorsSource || s.scale !== 5 || !Number.isFinite(s.rating) || s.rating < 0 || s.rating > 5 || !/^https?:\/\//.test(s.sourceUrl || '') || !/^\d{4}-\d{2}-\d{2}/.test(s.checkedAt || '')) return false;
+    const host = url => {try{return new URL(url).hostname.replace(/^www\./,'');}catch{return '';}};
+    const ownSite = company.website?.value && host(s.sourceUrl) === host(company.website.value);
+    if (!id || ownSite || /trustpilot|widget|company website|self.reported/i.test(id) || seen.has(id) || s.mirrorsSource || s.scale !== 5 || !Number.isFinite(s.rating) || s.rating < 0 || s.rating > 5 || !/^https?:\/\//.test(s.sourceUrl || '') || !/^\d{4}-\d{2}-\d{2}/.test(s.checkedAt || '')) return false;
     seen.add(id);
     return true;
   });

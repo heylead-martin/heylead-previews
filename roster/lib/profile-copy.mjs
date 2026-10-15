@@ -52,12 +52,38 @@ export function readerNote(text) {
     .replace(/^Has a minimum booking: /, 'Minimum booking: ').replace(/^Adds a fee: /, 'Additional charge: ')
     .replace(/^Not available some days: /, 'Closed days: ');
 }
+// Release labels sometimes have the amount cut out ("begins at .", "(as low as )") or end mid-word.
+// Tidy only the leftover connective and fragments; the price and source excerpt are shown separately.
+const connective = String.raw`(?:begins at|starts at|starting at|starting from|starts from|starts|start|starting|from|frm|fr|(?:@|at) only|at|as low as|is currently|costs?|charges? (?:is|of)|charge of|typically)`;
+const abbreviation = /\b(?:incl|e\.g|i\.e|approx|min|max|hrs?|etc|vs|pte|ltd|blk|st|ave|rd|dr|mr|mrs)\.$/i;
+const sentencesOf = label => label.split(/(?<=[a-z0-9)]\s?[.!?])\s+/i).reduce((out, part) => {
+  if (out.length && abbreviation.test(out.at(-1))) out[out.length - 1] += ` ${part}`; else out.push(part);
+  return out;
+}, []);
+export function tidyPriceLabel(value) {
+  const original = String(value || '').replace(/\s+/g, ' ').trim();
+  // "(as low as )": the amount was removed from inside the brackets.
+  let label = original.replace(new RegExp(String.raw`\s*\*?\(\s*(?:[^()]*?\s)?${connective}\s+\)`, 'gi'), '')
+    .replace(/\s*\(\s*\/\s*[a-z]+\s*\)/gi, '').replace(/\(\s*,\s*/g, '(').replace(/\(\s*([^()]*?\S)\s+\)/g, '($1)')
+    .replace(/\s+\*\s+(?=\S)/g, ' ').replace(/\s*\*(?=\()/g, ' ')
+    .replace(new RegExp(String.raw`\s+(?:is currently|currently|starts from|starts)\s*-\s+`, 'gi'), ' ')
+    .replace(/\s*[,-]\s+\.\s*/g, '. ');
+  const stripped = new RegExp(String.raw`(?:^|[^,:(])\s\b${connective}\s*[.,]?$`, 'i');
+  const trailing = new RegExp(String.raw`(?<![,:(])\s+${connective}\s*[.,]?$`, 'i');
+  let sentences = sentencesOf(label);
+  // Drop sentences that lost their amount or were cut off, while a complete sentence remains.
+  const broken = (s, i) => stripped.test(s) || (i === sentences.length - 1 && !/[.!?)"]$/.test(s) && (original.length >= 100 || !/\s/.test(s)));
+  const kept = sentences.filter((s, i) => !broken(s, i));
+  if (sentences.length > 1) sentences = kept.length && kept.join(' ').length >= 15 ? kept : [sentences[0].replace(/\s*[.,]$/, '')];
+  label = sentences.join(' ').replace(trailing, '').replace(/\s+([.,])/g, '$1');
+  return label.replace(/[\s,|*-]+$/, '').replace(/\s:$/, '').trim();
+}
 // Only split the unambiguous "job | price" pattern. Preserve ranges and qualifiers.
 export function priceView(p) {
   const suffix = /\s*\|\s*((?:(?:from|starting at)\s+)?(?:S?\$|SGD)\s*\d[\d,.]*(?:\s*(?:-|to)\s*(?:S?\$|SGD)?\s*\d[\d,.]*)?(?:\s*(?:\+|\+\+|onwards|nett))?)\s*$/i;
   const match = String(p.price).match(suffix);
   const price = (match ? match[1] : p.price).replace(/\bSGD\s*/gi, 'S$');
-  const label = String(p.label || '').replace(suffix, '').trim();
+  const label = tidyPriceLabel(String(p.label || '').replace(suffix, ''));
   return {...p, price, label};
 }
 export function servicePrice(service) {

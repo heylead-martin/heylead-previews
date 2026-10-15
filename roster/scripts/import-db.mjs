@@ -1,3 +1,4 @@
+import {normaliseServiceLocations} from '../lib/service-areas.mjs';
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import path from 'node:path';
 import os from 'node:os';
@@ -18,7 +19,7 @@ const indicative = p => p.indicative || /typically|on average|industry average|a
 const cited = x => x && http(x.sourceUrl || x.source_url);
 const contact = (x, fallback) => value(x) ? {value:value(x),sourceUrl:http(x?.sourceUrl)||fallback} : null;
 export function blockAddress(address) {
-  return text(address).replace(/[\u2010-\u2015]/g,'-').replace(/#\s*[a-z0-9]+(?:\s*[-/]\s*[a-z0-9]+|\s+\d{1,4}\b)?/gi,'').replace(/\bunit\s*#?\s*[\w]+(?:\s*[-/]\s*[\w]+)*/gi,'').replace(/\s*,\s*,/g,',').replace(/\s+,/g,',').replace(/\s{2,}/g,' ').trim();
+  return text(address).replace(/[\u2010-\u2015]/g,'-').replace(/#\s*[a-z0-9]+(?:\s*[-/]\s*[a-z0-9]+|\s+\d{1,4}\b)?/gi,'').replace(/\bunit\s*#?\s*[\w]+(?:\s*[-/]\s*[\w]+)*/gi,'').replace(/\s*,(?:\s*,)+/g,',').replace(/\s+,/g,',').replace(/,(?=[A-Za-z])/g,', ').replace(/^[\s,]+|[\s,]+$/g,'').replace(/\s{2,}/g,' ').trim();
 }
 export function supplementPostalAddress(current, incoming) {
   if (!current?.value || current.postal || !/^\d{6}$/.test(incoming?.postal || '') || !cited(incoming)) return current;
@@ -58,12 +59,14 @@ function serviceRows(row, trade) {
   return [...groups.values()];
 }
 
+const units = n => `${n} ${Number(n) === 1 ? 'unit' : 'units'}`;
+const sentenceCase = x => x.replace(/^./, c => c.toUpperCase());
 export function priceOption(item) {
   const details = [
     item.qty != null ? `Quantity: ${item.qty}` : '',
-    Number.isFinite(item.unit_price_sgd) ? `Calculated per-unit price: S$${item.unit_price_sgd}${Number.isFinite(item.unit_price_max_sgd)?` to S$${item.unit_price_max_sgd}`:''}${item.units_in_price?` (${item.units_in_price} units in the published total)`:''}` : '',
-    item.min_units != null ? `Minimum ${item.min_units} units` : '',
-    text(item.unit)+(item.unitInferred?' (inferred from the job type; confirm with the company)':''),
+    Number.isFinite(item.unit_price_sgd) ? `Calculated per-unit price: S$${item.unit_price_sgd}${Number.isFinite(item.unit_price_max_sgd)?` to S$${item.unit_price_max_sgd}`:''}${item.units_in_price?` (${units(item.units_in_price)} in the published total)`:''}` : '',
+    item.min_units != null ? `Minimum ${units(item.min_units)}` : '',
+    sentenceCase(text(item.unit))+(item.unitInferred?' (inferred from the job type; confirm with the company)':''),
     item.sessions_per_month != null ? `${item.sessions_per_month} sessions per month` : '',
     item.hours_per_session != null ? `${item.hours_per_session} hours per session` : '',
     text(item.gst_note || item.gst) ? `GST: ${text(item.gst_note || item.gst)}` : '',
@@ -152,6 +155,7 @@ export function importDatabase(db, seeds, registry={}) {
     if(address) {address.street=address.value;address.postal=text(row.address?.postal);}
     const enrichment={checkedAt:row.checked,supportedServices:(row.services||[]).filter(cited).map(s=>({name:human(s.name),sourceUrl:s.sourceUrl,capturedAt:s.capturedAt})),about:(row.about||[]).filter(a=>text(a.text)&&cited(a)),hours:row.hours?.text&&cited(row.hours)?row.hours:row.hours_google?.text&&cited(row.hours_google)?row.hours_google:null,serviceArea:row.service_area?.value&&cited(row.service_area)?row.service_area:null,residential:row.residential?.value&&cited(row.residential)?row.residential:null,licences:(row.licences||[]).filter(l=>l.type&&http(l.claimedOn||l.sourceUrl)),management:(row.management||[]).filter(m=>m.name&&cited(m)),uen:text(row.uen),uenSource:http(row.uen_source?.sourceUrl),operatorGroup:row.operator_group,priceLines:(row.price_lines||[]).filter(p=>p.service&&p.price_text&&cited(p)),websiteCheck:row.profile?.websiteCheck||null};
     Object.assign(enrichment, {
+      serviceLocations:normaliseServiceLocations(row.service_locations,website),
       bestFor:(row.bestFor||[]).filter(f=>text(f.text)&&cited(f)).map(f=>({...f,sourceUrl:cited(f)})),
       poorFit:(row.poorFit||[]).filter(f=>text(f.text)&&cited(f)).map(f=>({...f,sourceUrl:cited(f)})),
       summary: row.summary?.text && row.summary?.sources?.some(http) ? {text:row.summary.text.replace(/\ba aircon\b/g,'an aircon').replace(/\ba electrician\b/g,'an electrician'),sources:row.summary.sources.map(http).filter(Boolean),capturedAt:row.summary.generatedAt} : null,
@@ -170,6 +174,8 @@ export function importDatabase(db, seeds, registry={}) {
       if(deadReviews.length) {company.reviews=company.reviews.filter(r=>!deadReviews.includes(r.sourceUrl));report.warnings.push({slug,issue:'Invalidated review source removed',urls:deadReviews});}
     }
     company.databaseId=row.id;company.enrichment=enrichment;
+    const quote=row.pricing_model_source;
+    company.quoteEvidence=row.pricing_model==='quote_on_request' && quote?.wording==='statement' && text(quote.excerpt) && cited(quote) && /^\d{4}-\d{2}-\d{2}/.test(quote.capturedAt||'') ? {excerpt:text(quote.excerpt),sourceUrl:cited(quote),capturedAt:quote.capturedAt.slice(0,10)} : null;
     company.address=supplementPostalAddress(company.address,row.address);
     company.mapEvidence=row.map ? {status:row.map.status,precision:row.map.precision,postal:text(row.address?.postal),addressValue:value(row.address),addressSourceUrl:cited(row.address),place:row.map.place||null,geocode:row.map.geocode||null,latitude:row.map.lat,longitude:row.map.lng} : null;
     if(row.self_reported_rating||row.rosterProfile?.rating_moved_to) company.rating=null;
@@ -198,7 +204,7 @@ export function importDatabase(db, seeds, registry={}) {
       presentation[slug].logoReview={status:'needs-review',reason:text(row.logo.logo_unsure_reason),sourceUrl:http(row.logo.source_url),checkedAt:text(row.logo.audit?.checkedAt)};
       report.warnings.push({slug,issue:'Uncertain logo withheld; initials shown',reason:text(row.logo.logo_unsure_reason)});
     }
-    if(!uncertainLogo&&!presentation[slug].logo) {const logo=photos.find(p=>p.kind==='logo');if(logo) presentation[slug].logo=logo.fileUrl;}
+    if(presentation[slug].logo && !presentation[slug].logo.startsWith('/roster/assets/logos/')) delete presentation[slug].logo;
     if(!presentation[slug].photos?.length) presentation[slug].photos=photos.filter(p=>p.kind!=='logo').slice(0,3).map(p=>({src:p.fileUrl,sourceUrl:p.pageUrl,caption:`${human(p.kind)} photo from ${company.name}`}));
     companies.push(company);
     report.published.push({id:row.id,slug,name:company.name,categories:company.categories,primaryTrade:category,curated:!!original});

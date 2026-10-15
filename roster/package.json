@@ -1,0 +1,24 @@
+{
+  "name": "roster-accounts",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node build.mjs",
+    "build:accounts": "node scripts/build-accounts.mjs",
+    "supabase": "supabase",
+    "supabase:link": "node scripts/link-supabase.mjs",
+    "check:supabase": "node scripts/check-supabase.mjs",
+    "test": "node --test scripts/*.test.mjs",
+    "check:editorial": "node scripts/check-editorial.mjs"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "2.117.3"
+  },
+  "devDependencies": {
+    "esbuild": "0.28.2",
+    "supabase": "2.120.0"
+  }
+}
