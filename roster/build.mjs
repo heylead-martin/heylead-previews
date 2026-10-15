@@ -8,6 +8,7 @@ import {renderAreaFilter} from './lib/service-areas.mjs';
 import {ratingSummary} from './lib/rating-summary.mjs';
 import {planningAreas} from './assets/service-areas.mjs';
 import {loadBlog,blogAuthor} from './lib/blog.mjs';
+import {airconMatrix,unitColumns,sizeColumns} from './lib/aircon-matrix.mjs';
 import {selectAreaPages,townCoverage,townRegion,nearbyTowns,serviceCounts} from './lib/area-pages.mjs';
 import {priceOption} from './scripts/import-db.mjs';
 import { readFile, writeFile, mkdir, rm } from "node:fs/promises";
@@ -532,7 +533,7 @@ function renderFooter() {
   return `<footer class="foot"><div class="wrap foot-inner">
 <div class="foot-brand"><a class="brand" href="/roster/">${brandMark()}<span class="wordmark">Roster</span></a><p>Find the right help for your home. Compare services, prices and reviews from companies across Singapore.</p><p class="foot-note">Business details and reviews link to their original sources. Last checked ${checked}.</p></div>
 <div class="foot-col"><h2>Jobs</h2><ul>${jobs}</ul></div>
-<div class="foot-col"><h2>About</h2><ul><li><a href="/roster/how-it-works/">How the list is made</a></li><li><a href="/roster/blog/">Home advice blog</a></li><li><a href="/roster/claim-listing/">Claim your listing</a></li><li><a href="/roster/aircon-servicing/chemical-wash/">Aircon chemical wash</a></li><li><a href="/roster/aircon-servicing/gas-top-up/">Aircon gas top-up</a></li></ul></div>
+<div class="foot-col"><h2>About</h2><ul><li><a href="/roster/how-it-works/">How the list is made</a></li><li><a href="/roster/blog/">Home advice blog</a></li><li><a href="/roster/what-service-do-i-need/">What service do I need?</a></li><li><a href="/roster/claim-listing/">Claim your listing</a></li><li><a href="/roster/aircon-servicing/chemical-wash/">Aircon chemical wash</a></li><li><a href="/roster/aircon-servicing/gas-top-up/">Aircon gas top-up</a></li></ul></div>
 <div class="footer-guides" aria-label="Home-service guides">${trades.map(t=>`<details><summary>${esc(t.name)} guides</summary><ul>${editorialGuides.filter(g=>g.trade===t.id).map(g=>`<li><a href="${g.path}">${esc(g.label)}</a></li>`).join('')}</ul></details>`).join('')}</div>
 <p class="footer-logo-ownership">${logoOwnerNote}</p><p class="foot-line">Singapore beta. Unpaid listings. No commission on your job.${previewFeatures?" Quote requests are a preview and do not send.":""}</p>
 </div></footer>`;
@@ -834,6 +835,8 @@ function renderCollection(spec, companies, crumbs) {
     `</div><aside class="discovery-rail" aria-label="Directory information">${previewFeatures?`<details class="quote-rail-disclosure" open><summary>Get quotes for your job ${icon("sparkle")}</summary>${renderQuoteComposer({icon})}</details>`:''}<div class="rail-note">${icon("calendar")}<p>Facts last checked<br><strong>${esc(checked)}</strong><br>Each figure links to its source.</p></div></aside></div>`,
     previewFeatures && tradeId !== "all" ? `<div id="quote-request">${renderForm(spec.jobs, companies.filter(c => !c.imported), "ask")}</div>` : previewFeatures ? `<div id="quote-request" class="search-end"><h2>Start with the service you need</h2><p>Choose a service above to explore its shortlist and preview a quote request.</p></div>` : "",
     spec.service ? renderSourcedRates(spec.service) : "",
+    tradeId !== "all" && !spec.service ? renderQuickPicks(spec, companies) : "",
+    tradeId !== "all" && !spec.service ? renderLicenceLookup(tradeId) : "",
     tradeId !== "all" && !spec.service ? renderAreasWeServe(spec) : "",
     guide ? renderGuideTeaser(guide) : renderFaq(spec.faqs, "A few things worth knowing"),
     `<section class="browse-more"><p class="kicker">WHILE YOU'RE HERE</p><h2>A little help around the home.</h2><div>${trades.filter(t => t.id !== tradeId).map(t => `<a href="/roster/${t.slug}/">${icon(tradeIcon[t.id])}<span>${esc(t.name)}</span>${icon("arrow")}</a>`).join("")}</div></section>`
@@ -986,7 +989,7 @@ function renderGuidePage(guide) {
   const trade=tradeById(guide.trade);
   const crumbs=[{href:`/roster/${trade.slug}/`,label:trade.name},...(hub.id!==guide.id?[{href:hub.path,label:hub.label}]:[]),{href:guide.path,label:guide.directoryPath?'Guide':guide.label}];
   const image=abs(heroPhoto(guide.trade).sizes[1200].src);
-  const body=renderCrumbs(crumbs)+`<header class="guide-hero"><div><p class="kicker">THE ROSTER HOME GUIDE</p><h1>${esc(guide.h1)}</h1><p class="guide-dek">${esc(guide.description)}</p><div class="guide-hero-actions"><a class="btn btn-solid" href="/roster/${trade.slug}/">Compare ${esc(trade.name.toLowerCase())} companies ${icon('arrow')}</a><a href="#guide">Read the guide</a></div></div><figure><img src="${heroPhoto(guide.trade).sizes[640].src}" width="600" height="400" alt="" fetchpriority="high"><figcaption><a href="${esc(heroPhoto(guide.trade).url)}">${esc(photoCredit(guide.trade))}</a></figcaption></figure></header>`+renderEditorial(guide,editorialGuides,{extra:guide.id==='AC-03'?renderGuidePrices():renderSourcedRates(guide.id)});
+  const body=renderCrumbs(crumbs)+`<header class="guide-hero"><div><p class="kicker">THE ROSTER HOME GUIDE</p><h1>${esc(guide.h1)}</h1><p class="guide-dek">${esc(guide.description)}</p><div class="guide-hero-actions"><a class="btn btn-solid" href="/roster/${trade.slug}/">Compare ${esc(trade.name.toLowerCase())} companies ${icon('arrow')}</a><a href="#guide">Read the guide</a></div></div><figure><img src="${heroPhoto(guide.trade).sizes[640].src}" width="600" height="400" alt="" fetchpriority="high"><figcaption><a href="${esc(heroPhoto(guide.trade).url)}">${esc(photoCredit(guide.trade))}</a></figcaption></figure></header>`+renderEditorial(guide,editorialGuides,{extra:guide.id==='AC-03'?renderGuidePrices()+renderAirconMatrix():renderSourcedRates(guide.id)});
   const jsonLd=[webPage(guide.title,guide.path,guide.description),crumbsLd(crumbs),...editorialSchema(guide,origin),...(guide.hub?[{"@type":"ItemList",name:`${guide.label}: related guides`,itemListElement:editorialGuides.filter(g=>g.trade===guide.trade&&g.id!==guide.id).map((g,i)=>({"@type":"ListItem",position:i+1,name:g.label,url:abs(g.path)}))}]:[])];
   forbidSchema(jsonLd);
   return pageShell({title:guide.title,description:guide.description,canonicalPath:guide.path,current:`/roster/${trade.slug}/`,jsonLd,body,bodyClass:'guide-page',shareImage:image});
@@ -1086,6 +1089,83 @@ function renderGuidePrices() {
   const {samples,average}=buildHomeSnapshot(publishedCompanies,mapPins,presentation).prices.aircon;
   if(!average)return '';
   return `<section class="guide-price-sample" aria-labelledby="sample-title"><p class="kicker">FROM THE ROSTER DIRECTORY</p><h2 id="sample-title">Published general-servicing rates</h2><strong class="guide-price-number">S$${average} <small>per unit</small></strong><p>Average advertised starting rate across ${samples.length} companies. One matching rate per company, rounded to the nearest dollar. Minimum bookings and other conditions apply. These are source snapshots, not current quotes.</p><details><summary>See all ${samples.length} rates and sources</summary><div class="guide-table-scroll" tabindex="0" role="region" aria-label="Sourced aircon servicing prices"><table><caption>Advertised rates in SGD. Capture dates are shown per source.</caption><thead><tr><th scope="col">Company</th><th scope="col">Rate</th><th scope="col">Source checked</th></tr></thead><tbody>${samples.map(s=>`<tr><th scope="row"><a href="/roster/company/${s.slug}/#pricing">${esc(s.name)}</a></th><td>${esc(s.rate)}</td><td><a href="${esc(s.sourceUrl)}">${esc(s.checkedAt.slice(0,10))} · Conditions</a></td></tr>`).join('')}</tbody></table></div></details></section>`;
+}
+
+/* ---------- Gap features: aircon price matrix, quick picks, licence lookups, symptom finder ---------- */
+
+function renderMatrixTable(id, title, note, columns) {
+  const rows=airconMatrix(publishedCompanies,columns);
+  const cell=c=>c.shown?`<td data-matrix-cell="${id}|${c.column.id}" data-count="${c.count}"><strong>${c.min===c.max?money(c.min):`${money(c.min)} to ${money(c.max)}`}</strong><small>${c.count} companies · median ${money(Math.round(c.median))}</small></td>`:`<td data-matrix-cell="${id}|${c.column.id}" data-count="${c.count}" class="matrix-empty"><small>${c.count?`Only ${c.count} ${c.count===1?'company':'companies'}`:'No published rates'}</small></td>`;
+  const sources=rows.flatMap(r=>r.cells.filter(c=>c.shown).flatMap(c=>c.entries.map(e=>({r,c,e}))));
+  return `<section class="guide-price-sample" aria-labelledby="matrix-${id}-title" data-aircon-matrix="${id}"><p class="kicker">FROM THE ROSTER DIRECTORY</p><h2 id="matrix-${id}-title">${esc(title)}</h2><p>${esc(note)} Each cell uses one lowest published rate per company and is left empty when fewer than ${minimumCompanies} companies publish one. Figures are advertised rates with conditions, not quotes or a market average.</p><div class="guide-table-scroll" tabindex="0" role="region" aria-label="${esc(title)}"><table class="aircon-matrix"><caption>SGD as published. Some figures are starting prices; see each source for conditions.</caption><thead><tr><th scope="col">Service</th>${columns.map(c=>`<th scope="col">${esc(c.label)}</th>`).join('')}</tr></thead><tbody>${rows.map(r=>`<tr data-matrix-row="${r.service.id}"><th scope="row">${esc(r.service.label)}</th>${r.cells.map(cell).join('')}</tr>`).join('')}</tbody></table></div><details><summary>See the ${sources.length} published rates and sources behind these cells</summary><div class="guide-table-scroll" tabindex="0" role="region" aria-label="${esc(title)}: sources"><table data-matrix-sources="${id}"><caption>Lowest matching rate per company in each cell, with the company's own wording.</caption><thead><tr><th scope="col">Company</th><th scope="col">Cell</th><th scope="col">Service as listed</th><th scope="col">Rate</th><th scope="col">Source</th></tr></thead><tbody>${sources.map(({r,c,e})=>`<tr><th scope="row"><a href="/roster/company/${e.company.slug}/#pricing">${esc(e.company.name)}</a></th><td>${esc(r.service.label)}, ${esc(c.column.label)}</td><td>${esc(tidyService(e.line.service_raw||e.line.service))}</td><td>${esc(rateCell(e.line))}</td><td><a href="${esc(e.line.sourceUrl)}">${esc(new URL(e.line.sourceUrl).hostname.replace(/^www\./,''))} · ${esc(e.line.capturedAt.slice(0,10))}</a></td></tr>`).join('')}</tbody></table></div></details></section>`;
+}
+const tidyService = s => String(s||'').replace(/\s+/g,' ').trim().slice(0,90);
+function renderAirconMatrix() {
+  return renderMatrixTable('units','Published aircon rates by number of units','Totals as printed for that many units in one booking.',unitColumns)+renderMatrixTable('sizes','Published single-unit rates by unit size','Single-unit rates where the company names the unit size or a ceiling cassette.',sizeColumns);
+}
+
+// Quick picks: groups built only from sourced fields. Not a ranking or a recommendation.
+const townCount = c => new Set((c.enrichment?.serviceLocations||[]).map(l=>l.name).filter(n=>planningAreas.some(a=>a.name===n))).size;
+function quickPicks(companies) {
+  const byName=(a,b)=>a.name.localeCompare(b.name);
+  return [
+    {id:'prices',title:'Publishes prices',how:'Has at least one dated price from its own website.',order:'Alphabetical.',rows:companies.filter(c=>presentation[c.slug]?.published).sort(byName),filter:'price'},
+    {id:'rating',title:'Has a cited rating',how:'Shows a rating with its source and check date.',order:'Most reviews first.',rows:companies.filter(c=>ratingSummary(c)).sort((a,b)=>(ratingSummary(b).count||0)-(ratingSummary(a).count||0)||byName(a,b)),filter:'reviews'},
+    {id:'emergency',title:'Describes emergency or 24-hour work',how:'Its website mentions emergency or round-the-clock service; hours are not verified.',order:'Alphabetical.',rows:companies.filter(c=>c.enrichment?.emergency?.value===true&&c.enrichment.emergency.excerpt).sort(byName)},
+    {id:'towns',title:'Names the most towns',how:'Count of planning areas named on its own website. Islandwide claims are counted separately.',order:'Most towns named first.',rows:companies.filter(c=>townCount(c)>0).sort((a,b)=>townCount(b)-townCount(a)||byName(a,b))},
+    {id:'islandwide',title:'Says it serves all of Singapore',how:'States islandwide coverage on its own website.',order:'Alphabetical.',rows:companies.filter(c=>(c.enrichment?.serviceLocations||[]).some(l=>l.name==='Islandwide')).sort(byName)}
+  ];
+}
+function renderQuickPicks(spec, companies) {
+  const picks=quickPicks(companies),total=companies.length;
+  const card=p=>`<div class="guide-card quick-pick" data-quick-pick="${p.id}" data-count="${p.rows.length}"><span>${p.rows.length} of ${total} companies</span><h3>${esc(p.title)}</h3><p>${esc(p.how)} ${esc(p.order)}</p><ul>${p.rows.slice(0,5).map(c=>`<li><a href="/roster/company/${c.slug}/">${esc(c.name)}</a>${p.id==='towns'?` <small>${townCount(c)} towns</small>`:''}</li>`).join('')}</ul>${p.filter?`<a href="/roster/${spec.slug}/?${p.filter}=1#company-results">Show all ${p.rows.length} in the list</a>`:''}</div>`;
+  return `<section class="guide-discovery quick-picks" aria-labelledby="quick-picks-title"><p class="kicker">QUICK PICKS BY NEED</p><h2 id="quick-picks-title">Start from what matters to you.</h2><p>Each group uses one sourced field from the company's own website or a cited rating source. Groups are filters, not rankings or recommendations, and a company can appear in several.</p><div class="guide-table-scroll" tabindex="0" role="region" aria-label="Summary of sourced fields"><table class="quick-pick-summary"><caption>${esc(spec.name)} companies on Roster by sourced field</caption><thead><tr><th scope="col">Need</th><th scope="col">Companies</th><th scope="col">How we know</th></tr></thead><tbody>${picks.map(p=>`<tr><th scope="row">${esc(p.title)}</th><td>${p.rows.length} of ${total}</td><td>${esc(p.how)}</td></tr>`).join('')}</tbody></table></div><div class="guide-card-grid">${picks.filter(p=>p.rows.length).map(card).join('')}</div><p class="quick-pick-gaps">Opening hours and warranty terms are not shown yet; they need their own sourced collection.</p></section>`;
+}
+
+// Official licence lookups. Roster does not show licence status for individual companies.
+const licenceLookups = {
+  electrician:[['EMA: search for a licensed electrical worker','https://elise.ema.gov.sg/elise/LEWs.jsp'],['EMA: how to search for or verify a licensed electrical worker','https://www.ema.gov.sg/resources/faqs/worker-licences/electrical-worker-licence/how-do-i-search-for-or-verify-a-licensed-electrical-worker-lew'],['EMA: engaging licensed workers','https://www.ema.gov.sg/consumer-information/electricity/engaging-licensed-workers']],
+  plumbing:[['PUB: licensed plumbers','https://pub.gov.sg/Professionals/Requirements/Licensed-Plumbers'],['PUB: requirements for plumbing works','https://www.pub.gov.sg/Professionals/Requirements/Licensed-Plumbers/Plumbing-Works']]
+};
+function renderLicenceLookup(tradeId) {
+  const links=licenceLookups[tradeId];if(!links)return '';
+  const guide={electrician:'/roster/electrician/licensed-electrician/',plumbing:'/roster/plumbing/licensed-plumber/'}[tradeId];
+  return `<section class="directory-guide-card licence-lookup" aria-labelledby="licence-title" data-licence-lookup><div><p class="kicker">CHECK A LICENCE YOURSELF</p><h2 id="licence-title">Official licence lookups.</h2><p>Roster does not show licence status for individual companies. Ask the company for the name and licence number of the worker who will do your job, then check it with the official source.</p><ul>${links.map(([label,url])=>`<li><a href="${url}">${esc(label)}</a></li>`).join('')}</ul></div><a class="btn btn-solid" href="${guide}">How to check a licence <span aria-hidden="true">→</span></a></section>`;
+}
+
+// Symptom finder: routes a problem to the service and the guide that already covers it.
+const symptoms = [
+  ['Aircon','Water dripping from the indoor unit','Often a blocked drain line; a general service usually clears it','/roster/aircon/leaking-water/','Why is my aircon leaking water?'],
+  ['Aircon','Musty smell or weak airflow after a recent service','Ask about a chemical wash or chemical overhaul','/roster/aircon-servicing/chemical-overhaul/','Chemical overhaul guide'],
+  ['Aircon','Running but not cold','Ask for a repair check; it may not be a cleaning problem','/roster/aircon/repair/','Aircon repair guide'],
+  ['Aircon','Due for routine upkeep','General servicing','/roster/aircon-servicing/how-often-service-aircon/','How often to service your aircon'],
+  ['Plumbing','Sink, basin or floor trap draining slowly','Choke clearing','/roster/plumbing/choked-drain/','Choked drain guide'],
+  ['Plumbing','Tap dripping after it is closed','Tap repair or replacement','/roster/plumbing/tap-replacement/','Tap replacement guide'],
+  ['Plumbing','Toilet keeps running or leaks at the base','Toilet repair','/roster/plumbing/toilet-repair/','Toilet repair guide'],
+  ['Plumbing','Damp patch, stain or drip from the ceiling','Speak to the unit above or your Town Council first; then leak detection inside your home','/roster/plumbing/leak-repair/','Leak repair guide'],
+  ['Plumbing','No hot water, or the heater trips or leaks','Stop using it and book a water heater check','/roster/plumbing/water-heater/','Water heater guide'],
+  ['Electrical','Breaker trips again after you reset it','Fault finding by a licensed electrician','/roster/electrician/power-trip/','Power trip guide'],
+  ['Electrical','Socket scorched, loose or not working','Socket repair or replacement','/roster/electrician/socket-installation/','Socket installation guide'],
+  ['Electrical','Lights flicker across a room, or a fitting needs replacing','Light repair or installation','/roster/electrician/light-installation/','Light installation guide'],
+  ['Electrical','Old DB box, or no labels on the circuits','DB box inspection or replacement','/roster/electrician/db-box-replacement/','DB box guide'],
+  ['Handyman','Door or window will not close or lock properly','Door and window repair','/roster/handyman/door-window-repair/','Door and window repair guide'],
+  ['Handyman','Flat-pack furniture to build','Furniture assembly','/roster/handyman/furniture-assembly/','Furniture assembly guide'],
+  ['Handyman','TV, shelves or curtains to mount','TV mounting or curtain installation','/roster/handyman/tv-mounting/','TV mounting guide'],
+  ['Cleaning','Moving out and need the flat ready for handover','Move-out cleaning','/roster/home-cleaning/move-out-cleaning/','Move-out cleaning guide'],
+  ['Cleaning','Dust everywhere after renovation','Post-renovation cleaning','/roster/home-cleaning/post-renovation-cleaning/','Post-renovation cleaning guide'],
+  ['Cleaning','Stains or odours in the sofa, carpet or mattress','Upholstery, carpet or mattress cleaning','/roster/home-cleaning/sofa-carpet-cleaning/','Sofa and carpet cleaning guide']
+];
+function renderSymptomFinder() {
+  const title='What Service Do I Need? Symptom Finder | Roster';
+  const description='Match a common home problem in Singapore to the service to ask for and the Roster guide that explains it, from aircon leaks to power trips.';
+  const canonicalPath='/roster/what-service-do-i-need/';
+  const crumbs=[{href:canonicalPath,label:'What service do I need?'}];
+  const groups=[...new Set(symptoms.map(s=>s[0]))];
+  const hub={Aircon:'/roster/aircon-servicing/',Plumbing:'/roster/plumbing/',Electrical:'/roster/electrician/',Handyman:'/roster/handyman/',Cleaning:'/roster/home-cleaning/'};
+  const body=renderCrumbs(crumbs)+`<header class="guide-hero guide-hero-method"><div><p class="kicker">SYMPTOM FINDER</p><h1>What service do I need?</h1><p class="guide-dek">Find your problem, see which service to ask for, and read the guide before you call. This is a starting point, not a diagnosis; the company that inspects the job may recommend something else.</p></div></header><section class="editorial" data-symptom-finder><div class="guide-copy">${groups.map(g=>`<h2 id="symptoms-${g.toLowerCase()}">${esc(g)}</h2><div class="guide-table-scroll" tabindex="0" role="region" aria-label="${esc(g)} symptoms"><table><caption>${esc(g)} problems and the service to ask for</caption><thead><tr><th scope="col">What you notice</th><th scope="col">Service to ask for</th><th scope="col">Read first</th></tr></thead><tbody>${symptoms.filter(s=>s[0]===g).map(([,s,service,href,label])=>`<tr><th scope="row">${esc(s)}</th><td>${esc(service)}</td><td><a href="${href}">${esc(label)}</a></td></tr>`).join('')}</tbody></table></div><p><a href="${hub[g]}">Compare ${esc(g.toLowerCase())} companies</a></p>`).join('')}<aside class="guide-editor-note"><strong>Safety first</strong><p>If water is near electrical points, or you smell burning or gas, switch off the supply if it is safe to do so and get help. For electrical work, read <a href="https://www.ema.gov.sg/consumer-information/electricity/electrical-safety">EMA's electrical safety guidance</a>.</p></aside></div></section>`;
+  const jsonLd=[webPage(title,canonicalPath,description),crumbsLd(crumbs)];
+  forbidSchema(jsonLd);
+  return pageShell({title,description,canonicalPath,current:'',jsonLd,body,bodyClass:'guide-page'});
 }
 
 /* ---------- Blog ---------- */
@@ -1189,6 +1269,7 @@ for (const intent of intents) {
 for (const guide of editorialGuides) written.push(await writePage(guide.slug,renderGuidePage(guide)));
 for (const page of areaPages) written.push(await writePage(page.slug,renderAreaPage(page)));
 written.push(await writePage('blog',renderBlogIndex(blogPosts)));
+written.push(await writePage('what-service-do-i-need',renderSymptomFinder()));
 for (const post of blogPosts) written.push(await writePage(`blog/${post.slug}`,renderBlogPost(post)));
 for (const c of areaCollisions) console.log(`Area page skipped, slug in use: ${c.slug}`);
 
@@ -1230,7 +1311,7 @@ await writeFile(path.join(root,'data/build-manifest.json'),JSON.stringify(curren
 // The sitemap lists the launch set (home, method, hubs, guides, area pages, blog) at the preview
 // origin, as requested for review. Every page still carries noindex, nofollow, noarchive and
 // robots.txt still disallows /roster/; indexing waits for an approved production domain.
-const launchPages=[{path:"/roster/",kind:"home"},{path:"/roster/how-it-works/",kind:"method"},...trades.map(t=>({path:`/roster/${t.slug}/`,kind:"directory"})),...editorialGuides.map(g=>({id:g.id,path:g.path,words:g.words,kind:"guide"})),...areaPages.map(p=>({path:p.path,trade:p.trade,town:p.town,companies:p.count,kind:"area"})),{path:"/roster/blog/",kind:"blog-index"},...blogPosts.map(b=>({path:b.path,words:b.words,kind:"blog"}))];
+const launchPages=[{path:"/roster/",kind:"home"},{path:"/roster/how-it-works/",kind:"method"},...trades.map(t=>({path:`/roster/${t.slug}/`,kind:"directory"})),...editorialGuides.map(g=>({id:g.id,path:g.path,words:g.words,kind:"guide"})),...areaPages.map(p=>({path:p.path,trade:p.trade,town:p.town,companies:p.count,kind:"area"})),{path:"/roster/what-service-do-i-need/",kind:"symptom-finder"},{path:"/roster/blog/",kind:"blog-index"},...blogPosts.map(b=>({path:b.path,words:b.words,kind:"blog"}))];
 await writeFile(path.join(root,'data/seo-launch-pages.json'),JSON.stringify({status:"preview-noindex",canonicalOrigin:origin,updated:"2026-10-12",pages:launchPages},null,2)+'\n');
 await writeFile(path.join(root,'sitemap.xml'),`<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${launchPages.map(p=>`<url><loc>${esc(abs(p.path))}</loc></url>`).join('\n')}\n</urlset>\n`);
 await writeFile(path.join(root,'robots.txt'),'# Beta preview. Every HTML page also carries noindex.\nUser-agent: *\nDisallow: /roster/\n');

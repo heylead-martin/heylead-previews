@@ -115,3 +115,17 @@ Feasibility key: **A** = can be filled now from existing release data or officia
 4. Editorial pieces (#8, #12, #14) and the calculator (#10) once #1 has enough coverage.
 
 Caveat: rankings come from US-region search results on 15 Oct 2026 and may differ from Google SG. Prices quoted above are competitors' published figures and are for context only. Do not import them into Roster.
+
+## Built from gaps (15 October 2026)
+
+| # | Gap | Status | Where |
+|---|---|---|---|
+| 1 | Aircon price matrix | **Built.** Two tables: number of units in the printed price (1 to 5 or more) and single-unit size (9,000 to 24,000 BTU, ceiling cassette), for general servicing, chemical wash, chemical overhaul and gas top-up. One lowest rate per company; cells under 3 companies stay empty; min, max, median and a full source list. Packages, contracts, per-unit wording on multi-unit totals and mismatched counts or sizes are excluded (`lib/aircon-matrix.mjs`). | `/roster/aircon/servicing-price/` |
+| 2 | Area pages | Built earlier (107 pages). | `/roster/<trade>/<town>/` |
+| 3 | Licence verification | **Partly built.** Official EMA and PUB lookup links on the electrician and plumbing hubs. Per-company licence status is not shown; it needs a sourced lookup per company (B). | electrician and plumbing hubs |
+| 4 | Quick picks and summary table | **Built** from sourced fields only: publishes prices, cited rating, describes emergency or 24-hour work (website wording, hours not verified), names the most towns, says islandwide. No "best" wording; groups are filters. | all five trade hubs |
+| 5 | Opening hours / 24h field | **Left.** Needs collection of hours with capture dates. | |
+| 6 | Surcharges and conditions table | Left for a later round; conditions stay visible in each rate's source wording. | |
+| 7 | Warranty comparison | **Left.** Needs collection of warranty statements. | |
+| 8 | Symptom to service guide | **Built** as a router page that links the existing guides rather than repeating them. | `/roster/what-service-do-i-need/` |
+| 9 to 15 | Packages, estimator, month stamps, X vs Y, brands, seasonal, Chinese | Left. X vs Y is partly covered by the blog (chemical wash vs general servicing, handyman or specialist). | |
