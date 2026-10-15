@@ -1,7 +1,7 @@
 {
   "checked": "2026-10-12",
-  "corePages": 30,
-  "totalWords": 35963,
+  "corePages": 37,
+  "totalWords": 43145,
   "methodPageWords": 1386,
   "pages": [
     {
@@ -234,6 +234,62 @@
       "words": 1057,
       "faqs": 4,
       "sourceReferences": 0,
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "AC-08",
+      "path": "/roster/aircon-servicing/chemical-overhaul/",
+      "words": 1045,
+      "faqs": 4,
+      "sourceReferences": 1,
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "AC-09",
+      "path": "/roster/aircon-servicing/condenser-cleaning/",
+      "words": 1033,
+      "faqs": 4,
+      "sourceReferences": 1,
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "AC-10",
+      "path": "/roster/aircon-servicing/how-often-service-aircon/",
+      "words": 1040,
+      "faqs": 4,
+      "sourceReferences": 1,
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "CL-10",
+      "path": "/roster/home-cleaning/curtain-cleaning/",
+      "words": 1027,
+      "faqs": 4,
+      "sourceReferences": 0,
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "HM-05",
+      "path": "/roster/handyman/furniture-assembly/",
+      "words": 1018,
+      "faqs": 4,
+      "sourceReferences": 1,
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "EL-05",
+      "path": "/roster/electrician/power-trip/",
+      "words": 1016,
+      "faqs": 4,
+      "sourceReferences": 4,
+      "updated": "2026-10-12"
+    },
+    {
+      "id": "EL-06",
+      "path": "/roster/electrician/licensed-electrician/",
+      "words": 1003,
+      "faqs": 4,
+      "sourceReferences": 3,
       "updated": "2026-10-12"
     },
     {
