@@ -1,13 +1,13 @@
 {
   "checked": "2026-10-12",
   "corePages": 20,
-  "totalWords": 24907,
-  "methodPageWords": 1398,
+  "totalWords": 24884,
+  "methodPageWords": 1386,
   "pages": [
     {
       "id": "AC-01",
       "path": "/roster/aircon/",
-      "words": 1271,
+      "words": 1267,
       "faqs": 4,
       "sourceReferences": 2,
       "updated": "2026-10-12"
@@ -47,7 +47,7 @@
     {
       "id": "CL-01",
       "path": "/roster/home-cleaning/guide/",
-      "words": 1276,
+      "words": 1273,
       "faqs": 4,
       "sourceReferences": 1,
       "updated": "2026-10-12"
@@ -79,7 +79,7 @@
     {
       "id": "PL-01",
       "path": "/roster/plumbing/guide/",
-      "words": 1246,
+      "words": 1240,
       "faqs": 4,
       "sourceReferences": 2,
       "updated": "2026-10-12"
@@ -103,7 +103,7 @@
     {
       "id": "PL-04",
       "path": "/roster/plumbing/leak-repair/",
-      "words": 1216,
+      "words": 1215,
       "faqs": 4,
       "sourceReferences": 3,
       "updated": "2026-10-12"
@@ -119,7 +119,7 @@
     {
       "id": "EL-01",
       "path": "/roster/electrician/guide/",
-      "words": 1253,
+      "words": 1250,
       "faqs": 4,
       "sourceReferences": 3,
       "updated": "2026-10-12"
@@ -127,7 +127,7 @@
     {
       "id": "EL-02",
       "path": "/roster/electrician/24-hour/",
-      "words": 1272,
+      "words": 1266,
       "faqs": 4,
       "sourceReferences": 3,
       "updated": "2026-10-12"

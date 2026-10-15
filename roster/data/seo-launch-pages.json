@@ -34,7 +34,7 @@
     {
       "id": "AC-01",
       "path": "/roster/aircon/",
-      "words": 1271,
+      "words": 1267,
       "kind": "guide"
     },
     {
@@ -64,7 +64,7 @@
     {
       "id": "CL-01",
       "path": "/roster/home-cleaning/guide/",
-      "words": 1276,
+      "words": 1273,
       "kind": "guide"
     },
     {
@@ -88,7 +88,7 @@
     {
       "id": "PL-01",
       "path": "/roster/plumbing/guide/",
-      "words": 1246,
+      "words": 1240,
       "kind": "guide"
     },
     {
@@ -106,7 +106,7 @@
     {
       "id": "PL-04",
       "path": "/roster/plumbing/leak-repair/",
-      "words": 1216,
+      "words": 1215,
       "kind": "guide"
     },
     {
@@ -118,13 +118,13 @@
     {
       "id": "EL-01",
       "path": "/roster/electrician/guide/",
-      "words": 1253,
+      "words": 1250,
       "kind": "guide"
     },
     {
       "id": "EL-02",
       "path": "/roster/electrician/24-hour/",
-      "words": 1272,
+      "words": 1266,
       "kind": "guide"
     },
     {
