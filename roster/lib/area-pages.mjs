@@ -45,11 +45,11 @@ export function selectAreaPages(companies, trades, reserved = new Set()) {
 // Nearby towns: planning areas that share a boundary (or face each other across a narrow
 // river or reservoir) on the URA Master Plan 2019 map. Edges are listed once and used both ways.
 const edges = [
-  ['Ang Mo Kio','Bishan'],['Ang Mo Kio','Serangoon'],['Ang Mo Kio','Hougang'],['Ang Mo Kio','Sengkang'],['Ang Mo Kio','Yishun'],['Ang Mo Kio','Seletar'],
+  ['Ang Mo Kio','Bishan'],['Ang Mo Kio','Serangoon'],['Ang Mo Kio','Sengkang'],['Ang Mo Kio','Yishun'],['Ang Mo Kio','Seletar'],
   ['Bedok','Tampines'],['Bedok','Paya Lebar'],['Bedok','Marine Parade'],['Bedok','Changi'],['Bedok','Geylang'],
   ['Bishan','Toa Payoh'],['Bishan','Serangoon'],['Bishan','Novena'],
   ['Boon Lay','Jurong West'],['Boon Lay','Pioneer'],
-  ['Bukit Batok','Bukit Panjang'],['Bukit Batok','Choa Chu Kang'],['Bukit Batok','Jurong East'],['Bukit Batok','Jurong West'],['Bukit Batok','Clementi'],['Bukit Batok','Bukit Timah'],['Bukit Batok','Tengah'],
+  ['Bukit Batok','Bukit Panjang'],['Bukit Batok','Choa Chu Kang'],['Bukit Batok','Jurong East'],['Bukit Batok','Clementi'],['Bukit Batok','Bukit Timah'],['Bukit Batok','Tengah'],
   ['Bukit Merah','Queenstown'],['Bukit Merah','Outram'],['Bukit Merah','Tanglin'],['Bukit Merah','River Valley'],
   ['Bukit Panjang','Choa Chu Kang'],['Bukit Panjang','Bukit Timah'],['Bukit Panjang','Sungei Kadut'],
   ['Bukit Timah','Clementi'],['Bukit Timah','Queenstown'],['Bukit Timah','Tanglin'],['Bukit Timah','Novena'],
@@ -58,18 +58,18 @@ const edges = [
   ['Clementi','Jurong East'],['Clementi','Queenstown'],
   ['Downtown Core','Rochor'],['Downtown Core','Museum'],['Downtown Core','Singapore River'],['Downtown Core','Outram'],['Downtown Core','Kallang'],
   ['Geylang','Kallang'],['Geylang','Paya Lebar'],['Geylang','Marine Parade'],['Geylang','Toa Payoh'],
-  ['Hougang','Serangoon'],['Hougang','Sengkang'],['Hougang','Punggol'],['Hougang','Paya Lebar'],['Hougang','Pasir Ris'],['Hougang','Tampines'],
+  ['Hougang','Serangoon'],['Hougang','Sengkang'],['Hougang','Punggol'],['Hougang','Paya Lebar'],
   ['Jurong East','Jurong West'],
   ['Jurong West','Tengah'],['Jurong West','Pioneer'],
   ['Kallang','Toa Payoh'],['Kallang','Novena'],['Kallang','Rochor'],['Kallang','Marine Parade'],
   ['Lim Chu Kang','Sungei Kadut'],['Lim Chu Kang','Tengah'],
   ['Mandai','Woodlands'],['Mandai','Yishun'],['Mandai','Sungei Kadut'],
   ['Newton','Novena'],['Newton','Orchard'],['Newton','Tanglin'],['Newton','Rochor'],['Newton','Museum'],
-  ['Novena','Toa Payoh'],['Novena','Tanglin'],['Novena','Rochor'],
+  ['Novena','Toa Payoh'],['Novena','Tanglin'],
   ['Orchard','Tanglin'],['Orchard','River Valley'],['Orchard','Museum'],
   ['Outram','Singapore River'],['Outram','River Valley'],
   ['Pasir Ris','Tampines'],['Pasir Ris','Punggol'],
-  ['Paya Lebar','Tampines'],['Paya Lebar','Serangoon'],
+  ['Paya Lebar','Tampines'],
   ['Pioneer','Tuas'],['Boon Lay','Tuas'],
   ['Punggol','Sengkang'],['Punggol','Seletar'],
   ['Queenstown','Tanglin'],
@@ -78,7 +78,7 @@ const edges = [
   ['Sengkang','Serangoon'],
   ['Serangoon','Toa Payoh'],
   ['Sungei Kadut','Woodlands'],
-  ['Woodlands','Yishun']
+  ['Museum','Rochor']
 ];
 export const nearbyMap = (()=>{
   const map=new Map();

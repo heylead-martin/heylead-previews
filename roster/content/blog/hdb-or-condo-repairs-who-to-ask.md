@@ -36,7 +36,7 @@ For work inside the flat, HDB publishes renovation guidance for flats. Read [HDB
 
 ## In a condominium
 
-In a condominium, the management office, acting for the management corporation, is usually the first point of contact. Most estates have by-laws or house rules that cover renovation hours, deposits, lift protection, contractor registration and changes to the look of the building.
+In a condominium, the management office, acting for the management corporation, is usually the first point of contact. Ask for the estate's house rules or by-laws, and check whether they cover renovation hours, deposits, lift protection, contractor registration and changes to the look of the building.
 
 Before any work, ask the management office:
 

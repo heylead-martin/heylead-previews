@@ -68,7 +68,7 @@ Water heaters sit across several trades, and the right person depends on the pro
 - **Plumber:** for leaks from pipes, valves or the tank, low hot-water flow and replacing the heater itself. Many plumbing companies install heaters and work with an electrician for the electrical connection.
 - **Gas worker:** for any gas heater fault, gas smell or work on gas pipes. Do not attempt any gas work yourself.
 
-[EMA's page on engaging licensed workers](https://www.ema.gov.sg/consumer-information/electricity/engaging-licensed-workers) explains which electrical and gas work needs a licensed worker and how to check one. When you call, ask who will do each part of the job and whether they hold the relevant licence.
+[EMA's page on engaging licensed workers](https://www.ema.gov.sg/consumer-information/electricity/engaging-licensed-workers) explains which electrical work needs a licensed worker and how to check one. For gas work, see [EMA's page on the gas service worker licence](https://www.ema.gov.sg/regulations-licences/licences/worker-licences/gas-service-workers-licence). When you call, ask who will do each part of the job and whether they hold the relevant licence.
 
 > Tip: If the heater is old and showing several warning signs, ask for a price on both a repair and a replacement, so you can compare before deciding.
 

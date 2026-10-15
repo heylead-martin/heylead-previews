@@ -386,7 +386,7 @@
       "hero": "plumbing",
       "slug": "home-maintenance-calendar",
       "path": "/roster/blog/home-maintenance-calendar/",
-      "words": 1009,
+      "words": 1007,
       "faqs": 3,
       "ctas": 2,
       "sources": 2
@@ -422,7 +422,7 @@
       "hero": "plumbing",
       "slug": "emergency-plumbing-at-night",
       "path": "/roster/blog/emergency-plumbing-at-night/",
-      "words": 1188,
+      "words": 1178,
       "faqs": 3,
       "ctas": 2,
       "sources": 2
@@ -440,7 +440,7 @@
       "hero": "handyman",
       "slug": "hdb-or-condo-repairs-who-to-ask",
       "path": "/roster/blog/hdb-or-condo-repairs-who-to-ask/",
-      "words": 974,
+      "words": 978,
       "faqs": 3,
       "ctas": 2,
       "sources": 3
@@ -485,7 +485,7 @@
       "hero": "aircon",
       "slug": "prepare-home-for-aircon-servicing",
       "path": "/roster/blog/prepare-home-for-aircon-servicing/",
-      "words": 1141,
+      "words": 1137,
       "faqs": 3,
       "ctas": 2,
       "sources": 1
@@ -530,7 +530,7 @@
       "hero": "aircon",
       "slug": "repair-or-replace-old-aircon",
       "path": "/roster/blog/repair-or-replace-old-aircon/",
-      "words": 1007,
+      "words": 1009,
       "faqs": 3,
       "ctas": 2,
       "sources": 2
@@ -557,10 +557,10 @@
       "hero": "electrician",
       "slug": "water-heater-safety-warning-signs",
       "path": "/roster/blog/water-heater-safety-warning-signs/",
-      "words": 1024,
+      "words": 1034,
       "faqs": 3,
       "ctas": 2,
-      "sources": 3
+      "sources": 4
     }
   ]
 }

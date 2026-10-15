@@ -77,7 +77,7 @@ Before the technician leaves, ask them to switch on each unit and let it run for
 - The floor and surfaces below each unit are dry and clean.
 - Any parts replaced or extra work done matches what you agreed.
 
-Ask the technician what they found. If they suggest a repair, gas top-up or chemical wash, ask them to explain why and to give you the price before they start. Keep the receipt and any warranty note, since some companies offer a short service warranty.
+Ask the technician what they found. If they suggest a repair, gas top-up or chemical wash, ask them to explain why and to give you the price before they start. Keep the receipt and any warranty note the company gives you.
 
 Run the units as normal over the next day or two. If a unit starts leaking, makes a new noise or cools less than before, contact the company promptly.
 

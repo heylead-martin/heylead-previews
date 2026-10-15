@@ -29,7 +29,7 @@ Ask the technician to explain what failed and why. A worn part on an otherwise h
 
 A chemical overhaul involves dismantling the indoor unit and cleaning its parts thoroughly. It suits units whose main problem is built-up dirt rather than a broken component.
 
-Signs that point towards an overhaul include weak airflow even after a general service, a musty smell that keeps coming back, water leaking because of a clogged tray or coil, and a unit that has not been cleaned properly for a long time. If the mechanical parts are sound, an overhaul can bring back much of the original cooling.
+Signs that point towards an overhaul include weak airflow even after a general service, a musty smell that keeps coming back, water leaking because of a clogged tray or coil, and a unit that has not been cleaned properly for a long time. If the mechanical parts are sound, an overhaul may improve airflow and cooling. Ask the technician what result to expect.
 
 An overhaul will not fix a failing compressor, a refrigerant leak or worn electronics. If the technician finds those during the job, you are back to the repair or replace question. It is reasonable to ask the company to inspect the unit first and tell you whether an overhaul is likely to help.
 
@@ -67,7 +67,7 @@ Ask whether the quote includes removing and disposing of the old unit, new pipin
 
 ## What repair visits cost, from published rates
 
-Many companies publish an inspection or repair charge. The table shows the lowest matching rate each company publishes, with the source and capture date. These are advertised rates with conditions, not quotes, and they usually cover the visit and diagnosis rather than parts.
+Many companies publish an inspection or repair charge. The table shows the lowest matching rate each company publishes, with the source and capture date. These are advertised rates with conditions, not quotes, so check on each source whether parts are included.
 
 [[rates AC-06]]
 

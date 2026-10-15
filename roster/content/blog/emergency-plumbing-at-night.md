@@ -59,9 +59,9 @@ If you can isolate one fitting and keep the rest of the home supplied, waiting u
 
 ## When the problem is a shared pipe
 
-If water is coming from a corridor pipe, a common drainage stack or the ceiling, the source may not be inside your unit at all. Shared pipes in HDB estates are normally handled by the Town Council, and in condominiums by the management office. Many of them run an after-hours hotline for urgent problems, so check your Town Council or management office notices for the number.
+If water is coming from a corridor pipe, a common drainage stack or the ceiling, the source may not be inside your unit at all. Shared pipes in HDB estates are normally handled by the Town Council, and in condominiums by the management office. Check your Town Council or management office notices for an after-hours contact number.
 
-For water coming through the ceiling from the flat above, [HDB's ceiling-leak guidance](https://www.hdb.gov.sg/sitecore/content/hdbinfoweb/home/managing-my-home/renovation-and-maintenance/home-maintenance/home-care-guide/ceiling-leaks) explains how inspection and repair usually work for flats. Contain the water, speak to your neighbour and follow that process before booking your own repair.
+For water coming through the ceiling from the flat above, [HDB's ceiling-leak guidance](https://www.hdb.gov.sg/sitecore/content/hdbinfoweb/home/managing-my-home/renovation-and-maintenance/home-maintenance/home-care-guide/ceiling-leaks) explains how ceiling leaks in flats are handled. Contain the water, speak to your neighbour and follow that process before booking your own repair.
 
 ## What to ask an after-hours plumber
 
@@ -92,4 +92,4 @@ If closing a valve stops the leak and the area is safe, waiting for a daytime vi
 
 ### What if the leak comes from a corridor pipe or the ceiling?
 
-The source may be a shared pipe or the unit above. Contact your Town Council or management office, many of which have an after-hours number, and follow HDB's ceiling-leak process for water from the flat above.
+The source may be a shared pipe or the unit above. Contact your Town Council or management office, using any after-hours number on their notices, and follow HDB's ceiling-leak process for water from the flat above.

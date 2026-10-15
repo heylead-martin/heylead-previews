@@ -42,6 +42,10 @@ test('Nearby towns are real planning areas, symmetric, and cover every built tow
  for(const p of launch.pages.filter(p=>p.kind==='area'))assert.ok(nearbyTowns(p.town).length>=2,`No nearby towns for ${p.town}`);
 });
 
+test('Nearby map leaves out towns that do not share a boundary',()=>{
+ for(const [a,b] of [['Woodlands','Yishun'],['Hougang','Tampines'],['Bukit Batok','Jurong West'],['Paya Lebar','Serangoon']])assert.ok(!nearbyTowns(a).includes(b),`${a} / ${b}`);
+});
+
 test('Service counts merge case and count each company once',()=>{
  const rows=[{enrichment:{supportedServices:[{name:'Leak repair'},{name:'leak repair'}]}},{enrichment:{supportedServices:[{name:'Leak Repair'},{name:'Sink'}]}}];
  assert.deepEqual(serviceCounts(rows),[['Leak repair',2],['Sink',1]]);

@@ -33,7 +33,7 @@ Some checks do not need monthly attention but are worth doing a few times a year
 
 ### Aircon servicing
 
-Many households book a general aircon service every few months, depending on how often the units run. Watch for signs that a unit needs attention sooner, such as water dripping, a musty smell or weaker cooling. The [aircon servicing guide](/roster/aircon-servicing/guide/) explains the main service types, and the [guide to how often to service aircon](/roster/aircon-servicing/how-often-service-aircon/) helps you choose an interval.
+How often to book a general aircon service depends on how often the units run. Watch for signs that a unit needs attention sooner, such as water dripping, a musty smell or weaker cooling. The [aircon servicing guide](/roster/aircon-servicing/guide/) explains the main service types, and the [guide to how often to service aircon](/roster/aircon-servicing/how-often-service-aircon/) helps you choose an interval.
 
 [[cta /roster/aircon-servicing/guide/ | Read the aircon servicing guide | See the main types of aircon service and what to ask companies before you book.]]
 
