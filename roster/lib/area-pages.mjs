@@ -6,6 +6,9 @@ import {planningAreas,areaSlug} from '../assets/service-areas.mjs';
 // itself in their sourced service locations. "Islandwide" and region names (North, East...)
 // never count toward a town; those companies appear only under "Wider coverage".
 export const AREA_PAGE_MINIMUM = 5;
+// Mostly non-residential planning areas get no static page, whatever the count; the
+// ?area= filter still covers them and nearby links point there.
+export const NON_RESIDENTIAL = new Set(['Lim Chu Kang','Tuas','Sungei Kadut','Pioneer','Seletar','Mandai','Changi']);
 // check-site: two area pages of one trade may share at most this share of their 5-word phrases.
 export const AREA_MAX_SIMILARITY = 0.85;
 // ...and each must have at least this many 5-word phrases the other page lacks.
@@ -30,7 +33,7 @@ export function selectAreaPages(companies, trades, reserved = new Set()) {
     const counts=new Map();
     for(const c of companies.filter(c=>c.category===trade.id))for(const name of stated(c))if(townNames.has(name))counts.set(name,(counts.get(name)||0)+1);
     for(const [town,count] of [...counts].sort((a,b)=>a[0].localeCompare(b[0]))){
-      if(count<AREA_PAGE_MINIMUM)continue;
+      if(count<AREA_PAGE_MINIMUM||NON_RESIDENTIAL.has(town))continue;
       const slug=`${trade.slug}/${areaSlug(town)}`;
       if(reserved.has(slug)){collisions.push({trade:trade.id,town,slug});continue;}
       pages.push({trade:trade.id,town,slug,path:`/roster/${slug}/`,count});

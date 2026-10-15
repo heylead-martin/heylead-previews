@@ -7,6 +7,7 @@ import {renderQuoteComposer} from './lib/quote-flow.mjs';
 import {renderAreaFilter} from './lib/service-areas.mjs';
 import {ratingSummary} from './lib/rating-summary.mjs';
 import {planningAreas} from './assets/service-areas.mjs';
+import {loadBlog,blogAuthor} from './lib/blog.mjs';
 import {selectAreaPages,townCoverage,townRegion,nearbyTowns,serviceCounts} from './lib/area-pages.mjs';
 import {priceOption} from './scripts/import-db.mjs';
 import { readFile, writeFile, mkdir, rm } from "node:fs/promises";
@@ -531,7 +532,7 @@ function renderFooter() {
   return `<footer class="foot"><div class="wrap foot-inner">
 <div class="foot-brand"><a class="brand" href="/roster/">${brandMark()}<span class="wordmark">Roster</span></a><p>Find the right help for your home. Compare services, prices and reviews from companies across Singapore.</p><p class="foot-note">Business details and reviews link to their original sources. Last checked ${checked}.</p></div>
 <div class="foot-col"><h2>Jobs</h2><ul>${jobs}</ul></div>
-<div class="foot-col"><h2>About</h2><ul><li><a href="/roster/how-it-works/">How the list is made</a></li><li><a href="/roster/claim-listing/">Claim your listing</a></li><li><a href="/roster/aircon-servicing/chemical-wash/">Aircon chemical wash</a></li><li><a href="/roster/aircon-servicing/gas-top-up/">Aircon gas top-up</a></li></ul></div>
+<div class="foot-col"><h2>About</h2><ul><li><a href="/roster/how-it-works/">How the list is made</a></li><li><a href="/roster/blog/">Home advice blog</a></li><li><a href="/roster/claim-listing/">Claim your listing</a></li><li><a href="/roster/aircon-servicing/chemical-wash/">Aircon chemical wash</a></li><li><a href="/roster/aircon-servicing/gas-top-up/">Aircon gas top-up</a></li></ul></div>
 <div class="footer-guides" aria-label="Home-service guides">${trades.map(t=>`<details><summary>${esc(t.name)} guides</summary><ul>${editorialGuides.filter(g=>g.trade===t.id).map(g=>`<li><a href="${g.path}">${esc(g.label)}</a></li>`).join('')}</ul></details>`).join('')}</div>
 <p class="footer-logo-ownership">${logoOwnerNote}</p><p class="foot-line">Singapore beta. Unpaid listings. No commission on your job.${previewFeatures?" Quote requests are a preview and do not send.":""}</p>
 </div></footer>`;
@@ -1087,6 +1088,31 @@ function renderGuidePrices() {
   return `<section class="guide-price-sample" aria-labelledby="sample-title"><p class="kicker">FROM THE ROSTER DIRECTORY</p><h2 id="sample-title">Published general-servicing rates</h2><strong class="guide-price-number">S$${average} <small>per unit</small></strong><p>Average advertised starting rate across ${samples.length} companies. One matching rate per company, rounded to the nearest dollar. Minimum bookings and other conditions apply. These are source snapshots, not current quotes.</p><details><summary>See all ${samples.length} rates and sources</summary><div class="guide-table-scroll" tabindex="0" role="region" aria-label="Sourced aircon servicing prices"><table><caption>Advertised rates in SGD. Capture dates are shown per source.</caption><thead><tr><th scope="col">Company</th><th scope="col">Rate</th><th scope="col">Source checked</th></tr></thead><tbody>${samples.map(s=>`<tr><th scope="row"><a href="/roster/company/${s.slug}/#pricing">${esc(s.name)}</a></th><td>${esc(s.rate)}</td><td><a href="${esc(s.sourceUrl)}">${esc(s.checkedAt.slice(0,10))} · Conditions</a></td></tr>`).join('')}</tbody></table></div></details></section>`;
 }
 
+/* ---------- Blog ---------- */
+
+const longDate = iso => new Date(iso+'T00:00:00Z').toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric',timeZone:'UTC'});
+function renderBlogPost(post) {
+  const trade=tradeById(post.trade),photo=heroPhoto(post.trade);
+  const crumbs=[{href:'/roster/blog/',label:'Blog'},{href:post.path,label:post.label}];
+  const sources=post.sources.length?`<div class="guide-editor-note" data-blog-sources><strong>Sources</strong><ul>${post.sources.map(s=>`<li><a href="${esc(s.url)}">${esc(s.title)}</a></li>`).join('')}</ul><p>Prices come only from the sourced company rates in the Roster directory, shown with each company and capture date.</p></div>`:'';
+  const body=renderCrumbs(crumbs)+`<header class="guide-hero"><div><p class="kicker">THE ROSTER BLOG</p><h1>${esc(post.h1)}</h1><p class="guide-dek">${esc(post.description)}</p><div class="guide-hero-actions"><a class="btn btn-solid" href="/roster/${trade.slug}/">Compare ${esc(trade.name.toLowerCase())} companies ${icon('arrow')}</a><a href="#${post.toc[0].id}">Start reading</a></div></div><figure><img src="${photo.sizes[640].src}" width="600" height="400" alt="" fetchpriority="high"><figcaption><a href="${esc(photo.url)}">${esc(photoCredit(post.trade))}</a></figcaption></figure></header>
+<section class="editorial" aria-label="${esc(post.h1)}"><div class="guide-layout"><aside class="guide-aside"><details open class="guide-toc"><summary>In this article</summary><nav aria-label="On this page">${post.toc.map((t,i)=>`<a href="#${t.id}"><span>${String(i+1).padStart(2,'0')}</span>${esc(t.title)}</a>`).join('')}</nav></details><a class="btn btn-solid" href="/roster/${trade.slug}/">Compare companies <span aria-hidden="true">→</span></a></aside><article class="guide-article" data-blog-post="${post.slug}"><div class="guide-byline"><span>By ${esc(blogAuthor)}</span><span>Updated <time datetime="${post.updated}">${longDate(post.updated)}</time></span><span>${Math.ceil(post.words/220)} min read</span></div><div class="guide-copy">${post.body}</div>${sources}</article></div></section>`;
+  const url=abs(post.path);
+  const jsonLd=[webPage(post.title,post.path,post.description),crumbsLd(crumbs),{'@type':'Article','@id':url+'#article',headline:post.h1,name:post.h1,url,description:post.description,inLanguage:'en-SG',datePublished:post.updated,dateModified:post.updated,image:new URL(photo.sizes[1200].src,origin).href,author:{'@type':'Organization',name:blogAuthor,url:abs('/roster/how-it-works/')},publisher:{'@id':origin+'/#organization'},mainEntityOfPage:url,citation:post.sources.map(s=>s.url)},...(post.faqs.length?[faqLd(post.faqs)]:[])];
+  forbidSchema(jsonLd);
+  return pageShell({title:post.title,description:post.description,canonicalPath:post.path,current:'',jsonLd,body,bodyClass:'guide-page',shareImage:abs(photo.sizes[1200].src)});
+}
+function renderBlogIndex(posts) {
+  const title='Home Advice Blog: Singapore Home Services | Roster';
+  const description='Practical articles on aircon, plumbing, electrical and cleaning jobs in Singapore homes, with official sources and sourced company prices.';
+  const crumbs=[{href:'/roster/blog/',label:'Blog'}];
+  const label={aircon:'Aircon',plumbing:'Plumbing',electrician:'Electrical',handyman:'Handyman',cleaning:'Cleaning'};
+  const body=renderCrumbs(crumbs)+`<header class="guide-hero guide-hero-method"><div><p class="kicker">THE ROSTER BLOG</p><h1>Home advice, with sources.</h1><p class="guide-dek">Short reads for common jobs around the home. Official guidance is linked, and any price comes from a company's own published rate.</p></div></header><section class="guide-discovery" data-blog-index><p class="kicker">LATEST ARTICLES</p><h2>Read before you book.</h2><div class="guide-card-grid">${posts.map(p=>`<a class="guide-card" href="${p.path}"><span>${label[p.trade]} · Updated ${longDate(p.updated)}</span><h3>${esc(p.label)}</h3><p>${esc(p.description)}</p><b>Read the article <span aria-hidden="true">↗</span></b></a>`).join('')}</div></section>`;
+  const jsonLd=[webPage(title,'/roster/blog/',description),crumbsLd(crumbs),{'@type':'ItemList',name:'Roster blog articles',itemListElement:posts.map((p,i)=>({'@type':'ListItem',position:i+1,name:p.label,url:abs(p.path)}))}];
+  forbidSchema(jsonLd);
+  return pageShell({title,description,canonicalPath:'/roster/blog/',current:'',jsonLd,body,bodyClass:'guide-page',shareImage:abs(heroPhoto('plumbing').sizes[1200].src)});
+}
+
 /* ---------- Build ---------- */
 
 const presentation = JSON.parse(await readFile(path.join(root, "data", "presentation.json"), "utf8"));
@@ -1106,6 +1132,7 @@ const renderProfile = createProfileRenderer({esc,icon,tradeById,profileContent,p
 const publishedCompanies = raw.companies.filter((company) => company.publish !== false);
 // Existing guide and intent pages own their slugs; a town page never replaces one.
 const {pages:areaPages,collisions:areaCollisions}=selectAreaPages(publishedCompanies,trades,new Set([...editorialGuides.map(g=>g.slug),...intents.map(i=>i.slug)]));
+const blogPosts=await loadBlog(root,{renderRates:key=>renderSourcedRates(key)});
 const grouped = {};
 for (const trade of trades) grouped[trade.id] = [];
 for (const company of publishedCompanies) grouped[company.primaryTrade || company.category].push(company);
@@ -1159,6 +1186,8 @@ for (const intent of intents) {
 
 for (const guide of editorialGuides) written.push(await writePage(guide.slug,renderGuidePage(guide)));
 for (const page of areaPages) written.push(await writePage(page.slug,renderAreaPage(page)));
+written.push(await writePage('blog',renderBlogIndex(blogPosts)));
+for (const post of blogPosts) written.push(await writePage(`blog/${post.slug}`,renderBlogPost(post)));
 for (const c of areaCollisions) console.log(`Area page skipped, slug in use: ${c.slug}`);
 
 for (const company of publishedCompanies) {
@@ -1189,12 +1218,19 @@ const currentPaths = written.map(f=>path.relative(root,f));
 let previous = [];
 try { previous = JSON.parse(await readFile(path.join(root,'data/build-manifest.json'),'utf8')); } catch(e) { if(e.code!=='ENOENT') throw e; }
 for (const rel of previous) if(!currentPaths.includes(rel) && /^company\/[a-z0-9-]+\/index\.html$/.test(rel)) await rm(path.join(root,rel),{force:true});
+// Area pages dropped by the selection rule: remove the file and its now-empty folder.
+const tradeDirs=new Set(trades.map(t=>t.slug));
+for (const rel of previous) if(!currentPaths.includes(rel) && /^[a-z-]+\/[a-z0-9-]+\/index\.html$/.test(rel) && tradeDirs.has(rel.split('/')[0])) {
+  const file=path.join(root,rel);let html='';try{html=await readFile(file,'utf8');}catch(e){if(e.code!=='ENOENT')throw e;}
+  if(html.includes('data-area-page="'))await rm(path.dirname(file),{recursive:true,force:true});
+}
 await writeFile(path.join(root,'data/build-manifest.json'),JSON.stringify(currentPaths,null,2)+'\n');
-// Preview pages are intentionally noindex, so none belong in a submitted sitemap.
-// This review manifest is the proposed launch set, pending an approved production domain and indexing review.
-const launchPages=[{path:"/roster/",kind:"home"},{path:"/roster/how-it-works/",kind:"method"},...trades.map(t=>({path:`/roster/${t.slug}/`,kind:"directory"})),...editorialGuides.map(g=>({id:g.id,path:g.path,words:g.words,kind:"guide"})),...areaPages.map(p=>({path:p.path,trade:p.trade,town:p.town,companies:p.count,kind:"area"}))];
+// The sitemap lists the launch set (home, method, hubs, guides, area pages, blog) at the preview
+// origin, as requested for review. Every page still carries noindex, nofollow, noarchive and
+// robots.txt still disallows /roster/; indexing waits for an approved production domain.
+const launchPages=[{path:"/roster/",kind:"home"},{path:"/roster/how-it-works/",kind:"method"},...trades.map(t=>({path:`/roster/${t.slug}/`,kind:"directory"})),...editorialGuides.map(g=>({id:g.id,path:g.path,words:g.words,kind:"guide"})),...areaPages.map(p=>({path:p.path,trade:p.trade,town:p.town,companies:p.count,kind:"area"})),{path:"/roster/blog/",kind:"blog-index"},...blogPosts.map(b=>({path:b.path,words:b.words,kind:"blog"}))];
 await writeFile(path.join(root,'data/seo-launch-pages.json'),JSON.stringify({status:"preview-noindex",canonicalOrigin:origin,updated:"2026-10-12",pages:launchPages},null,2)+'\n');
-await writeFile(path.join(root,'sitemap.xml'),'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"></urlset>\n');
+await writeFile(path.join(root,'sitemap.xml'),`<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${launchPages.map(p=>`<url><loc>${esc(abs(p.path))}</loc></url>`).join('\n')}\n</urlset>\n`);
 await writeFile(path.join(root,'robots.txt'),'# Beta preview. Every HTML page also carries noindex.\nUser-agent: *\nDisallow: /roster/\n');
 console.log(written.length + " pages");
 for (const trade of trades) {

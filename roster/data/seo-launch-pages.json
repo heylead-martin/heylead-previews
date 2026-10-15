@@ -370,13 +370,6 @@
       "kind": "area"
     },
     {
-      "path": "/roster/aircon-servicing/changi/",
-      "trade": "aircon",
-      "town": "Changi",
-      "companies": 5,
-      "kind": "area"
-    },
-    {
       "path": "/roster/aircon-servicing/choa-chu-kang/",
       "trade": "aircon",
       "town": "Choa Chu Kang",
@@ -426,13 +419,6 @@
       "kind": "area"
     },
     {
-      "path": "/roster/aircon-servicing/mandai/",
-      "trade": "aircon",
-      "town": "Mandai",
-      "companies": 7,
-      "kind": "area"
-    },
-    {
       "path": "/roster/aircon-servicing/novena/",
       "trade": "aircon",
       "town": "Novena",
@@ -461,13 +447,6 @@
       "kind": "area"
     },
     {
-      "path": "/roster/aircon-servicing/pioneer/",
-      "trade": "aircon",
-      "town": "Pioneer",
-      "companies": 5,
-      "kind": "area"
-    },
-    {
       "path": "/roster/aircon-servicing/punggol/",
       "trade": "aircon",
       "town": "Punggol",
@@ -479,13 +458,6 @@
       "trade": "aircon",
       "town": "Queenstown",
       "companies": 12,
-      "kind": "area"
-    },
-    {
-      "path": "/roster/aircon-servicing/seletar/",
-      "trade": "aircon",
-      "town": "Seletar",
-      "companies": 6,
       "kind": "area"
     },
     {
@@ -507,13 +479,6 @@
       "trade": "aircon",
       "town": "Serangoon",
       "companies": 11,
-      "kind": "area"
-    },
-    {
-      "path": "/roster/aircon-servicing/sungei-kadut/",
-      "trade": "aircon",
-      "town": "Sungei Kadut",
-      "companies": 5,
       "kind": "area"
     },
     {
@@ -601,13 +566,6 @@
       "kind": "area"
     },
     {
-      "path": "/roster/plumbing/changi/",
-      "trade": "plumbing",
-      "town": "Changi",
-      "companies": 6,
-      "kind": "area"
-    },
-    {
       "path": "/roster/plumbing/choa-chu-kang/",
       "trade": "plumbing",
       "town": "Choa Chu Kang",
@@ -664,20 +622,6 @@
       "kind": "area"
     },
     {
-      "path": "/roster/plumbing/lim-chu-kang/",
-      "trade": "plumbing",
-      "town": "Lim Chu Kang",
-      "companies": 5,
-      "kind": "area"
-    },
-    {
-      "path": "/roster/plumbing/mandai/",
-      "trade": "plumbing",
-      "town": "Mandai",
-      "companies": 6,
-      "kind": "area"
-    },
-    {
       "path": "/roster/plumbing/marine-parade/",
       "trade": "plumbing",
       "town": "Marine Parade",
@@ -727,13 +671,6 @@
       "kind": "area"
     },
     {
-      "path": "/roster/plumbing/pioneer/",
-      "trade": "plumbing",
-      "town": "Pioneer",
-      "companies": 6,
-      "kind": "area"
-    },
-    {
       "path": "/roster/plumbing/punggol/",
       "trade": "plumbing",
       "town": "Punggol",
@@ -752,13 +689,6 @@
       "trade": "plumbing",
       "town": "Rochor",
       "companies": 7,
-      "kind": "area"
-    },
-    {
-      "path": "/roster/plumbing/seletar/",
-      "trade": "plumbing",
-      "town": "Seletar",
-      "companies": 5,
       "kind": "area"
     },
     {
@@ -801,13 +731,6 @@
       "trade": "plumbing",
       "town": "Toa Payoh",
       "companies": 15,
-      "kind": "area"
-    },
-    {
-      "path": "/roster/plumbing/tuas/",
-      "trade": "plumbing",
-      "town": "Tuas",
-      "companies": 6,
       "kind": "area"
     },
     {
@@ -1138,6 +1061,35 @@
       "town": "Woodlands",
       "companies": 5,
       "kind": "area"
+    },
+    {
+      "path": "/roster/blog/",
+      "kind": "blog-index"
+    },
+    {
+      "path": "/roster/blog/aircon-chemical-wash-vs-general-servicing/",
+      "words": 1105,
+      "kind": "blog"
+    },
+    {
+      "path": "/roster/blog/ceiling-leak-what-to-do/",
+      "words": 956,
+      "kind": "blog"
+    },
+    {
+      "path": "/roster/blog/home-cleaning-checklist/",
+      "words": 952,
+      "kind": "blog"
+    },
+    {
+      "path": "/roster/blog/home-electrical-safety-checklist/",
+      "words": 998,
+      "kind": "blog"
+    },
+    {
+      "path": "/roster/blog/signs-you-need-a-plumber/",
+      "words": 1039,
+      "kind": "blog"
     }
   ]
 }

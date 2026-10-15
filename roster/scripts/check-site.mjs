@@ -4,7 +4,7 @@ import { fileURLToPath } from 'node:url';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {decodeCatalogue} from '../assets/catalogue-data.mjs';
-import {selectAreaPages,townCoverage,nearbyTowns,AREA_PAGE_MINIMUM,AREA_MAX_SIMILARITY,AREA_MIN_DISTINCT} from '../lib/area-pages.mjs';
+import {selectAreaPages,townCoverage,nearbyTowns,AREA_PAGE_MINIMUM,AREA_MAX_SIMILARITY,AREA_MIN_DISTINCT,NON_RESIDENTIAL} from '../lib/area-pages.mjs';
 import {areaSlug} from '../assets/service-areas.mjs';
 import {guideEvidence, sourcedRates, rateProblem, isFromPrice, minimumCompanies, maxLabelLength} from '../lib/sourced-rates.mjs';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
@@ -95,11 +95,24 @@ for(const [key,spec] of Object.entries(guideEvidence))if(!rateTables.has(key))as
  const reserved=new Set([...pages].filter(([rel,html])=>!rel.startsWith('company/')&&!html.includes('data-area-page=')).map(([rel])=>rel.replace(/\/?index\.html$/,'')));
  const expected=selectAreaPages(data.companies,Object.entries(tradeSlugs).map(([id,slug])=>({id,slug})),reserved);
  const launch=await load('data/seo-launch-pages.json');
- assert.equal(await readFile(path.join(root,'sitemap.xml'),'utf8'),'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"></urlset>\n','Preview sitemap must stay empty while every page is noindex');
+ // Sitemap: every URL is a built page whose canonical is itself, and every area page is listed.
+ // Pages stay noindex (checked for every page above) until the production domain is approved.
+ const locs=[...(await readFile(path.join(root,'sitemap.xml'),'utf8')).matchAll(/<loc>([^<]+)<\/loc>/g)].map(m=>m[1].replaceAll('&amp;','&'));
+ assert.equal(new Set(locs).size,locs.length,'Duplicate sitemap URL');
+ for(const loc of locs){
+  assert.ok(loc.startsWith('https://previews.heylead.com/roster/'),`Sitemap URL must be absolute preview URL: ${loc}`);
+  const rel=loc.replace('https://previews.heylead.com/roster/','').replace(/\/?$/,'/').replace(/^\/$/,'')+'index.html';
+  const html=pages.get(rel);assert.ok(html,`Sitemap URL is not a built page: ${loc}`);
+  assert.ok(html.includes(`<link rel="canonical" href="${loc}">`),`Sitemap URL is not canonical-self: ${loc}`);
+  assert.ok(!html.includes('data-retired-listing'),`Retired page in sitemap: ${loc}`);
+ }
+ for(const page of launch.pages)assert.ok(locs.includes(`https://previews.heylead.com${page.path}`),`Launch page missing from sitemap: ${page.path}`);
  const text=html=>unescape(html.match(/<main[^>]*>([\s\S]*?)<\/main>/)[1].replace(/<script[\s\S]*?<\/script>/g,' ')).replace(/\s+/g,' ').trim();
  const shingles=s=>{const w=s.toLowerCase().split(/\W+/).filter(Boolean),out=new Set();for(let i=0;i+5<=w.length;i++)out.add(w.slice(i,i+5).join(' '));return out;};
  const intros=new Map(),byTrade={};
  for(const page of expected.pages){
+  assert.ok(locs.includes(`https://previews.heylead.com${page.path}`),`Area page missing from sitemap: ${page.path}`);
+  assert.ok(!NON_RESIDENTIAL.has(page.town),`Non-residential area page: ${page.path}`);
   const rel=`${page.slug}/index.html`,html=pages.get(rel);assert.ok(html,`Missing area page: ${rel}`);
   assert.ok(page.count>=AREA_PAGE_MINIMUM,`Area page under minimum: ${rel}`);
   assert.ok(launch.pages.some(p=>p.kind==='area'&&p.path===page.path),`Area page missing from launch manifest: ${rel}`);

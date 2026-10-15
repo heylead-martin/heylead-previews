@@ -170,9 +170,10 @@ Every new page uses the existing guide pipeline (at least 1,000 words, four FAQs
 ## Static area pages (/roster/<trade>/<town>/), 15 October 2026
 
 - Rule (`lib/area-pages.mjs`): a town is a URA Master Plan 2019 planning area. A page is built when at least 5 published companies whose primary trade is that trade name the town itself in their sourced service locations. `Islandwide` and region names never count; those companies appear only under "Wider coverage".
-- Result: 118 pages (aircon 33, plumbing 40, electrician 22, handyman 20, home cleaning 3). Existing guide and intent slugs are reserved; a clash is skipped and logged by the build. No clashes.
+- Mostly non-residential planning areas get no page whatever the count (`NON_RESIDENTIAL`: Lim Chu Kang, Tuas, Sungei Kadut, Pioneer, Seletar, Mandai, Changi); they keep the `?area=` filter. The build removes area folders that drop out of the rule.
+- Result: 107 pages (aircon 28, plumbing 34, electrician 22, handyman 20, home cleaning 3). Existing guide and intent slugs are reserved; a clash is skipped and logged by the build. No clashes.
 - Intros and FAQs use only counts from the release (companies, listed services, published prices, cited ratings, emergency wording) and sourced rate ranges under `lib/sourced-rates.mjs` rules, including the 3-company minimum. Town rate tables use `data-area-rates` and are checked against the town's own companies.
 - Nearby towns: planning areas that share a boundary, listed as symmetric edges. Links go to the static page when one exists, otherwise to `?area=`.
 - Hubs link every town that has a page; `?area=` still works, and when the town has a page the directory script points the canonical at it and shows a link.
-- `sitemap.xml` stays an empty urlset because every preview page is noindex; area pages are added to `data/seo-launch-pages.json` (kind `area`) for the launch review.
+- `sitemap.xml` lists the launch set from `data/seo-launch-pages.json` (home, method, hubs, guides, area pages, blog) as absolute preview URLs, at Martin's request. Every page stays noindex and robots.txt is unchanged; check-site requires each URL to be a built, canonical-self page and every area page to be listed.
 - check-site: unique intros, at most 0.85 five-word-phrase overlap and at least 40 distinct phrases between any two pages of a trade, company lists equal to stated coverage, visible FAQ text matching FAQPage schema, breadcrumbs, nearby and hub links.

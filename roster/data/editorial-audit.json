@@ -380,5 +380,47 @@
       "sourceReferences": 3,
       "updated": "2026-10-12"
     }
+  ],
+  "blog": [
+    {
+      "slug": "aircon-chemical-wash-vs-general-servicing",
+      "path": "/roster/blog/aircon-chemical-wash-vs-general-servicing/",
+      "words": 1105,
+      "faqs": 3,
+      "ctas": 2,
+      "sources": 2
+    },
+    {
+      "slug": "ceiling-leak-what-to-do",
+      "path": "/roster/blog/ceiling-leak-what-to-do/",
+      "words": 956,
+      "faqs": 3,
+      "ctas": 2,
+      "sources": 2
+    },
+    {
+      "slug": "home-cleaning-checklist",
+      "path": "/roster/blog/home-cleaning-checklist/",
+      "words": 952,
+      "faqs": 3,
+      "ctas": 2,
+      "sources": 1
+    },
+    {
+      "slug": "home-electrical-safety-checklist",
+      "path": "/roster/blog/home-electrical-safety-checklist/",
+      "words": 998,
+      "faqs": 3,
+      "ctas": 2,
+      "sources": 3
+    },
+    {
+      "slug": "signs-you-need-a-plumber",
+      "path": "/roster/blog/signs-you-need-a-plumber/",
+      "words": 1039,
+      "faqs": 3,
+      "ctas": 2,
+      "sources": 2
+    }
   ]
 }
