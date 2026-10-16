@@ -4,7 +4,10 @@ import { fileURLToPath } from 'node:url';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {decodeCatalogue} from '../assets/catalogue-data.mjs';
-import {guideEvidence, sourcedRates, rateProblem, isFromPrice, minimumCompanies, maxLabelLength} from '../lib/sourced-rates.mjs';
+import {serviceCounts,serviceLabel,selectAreaPages,townCoverage,nearbyTowns,AREA_PAGE_MINIMUM,AREA_MAX_SIMILARITY,AREA_MIN_DISTINCT,NON_RESIDENTIAL} from '../lib/area-pages.mjs';
+import {areaSlug} from '../assets/service-areas.mjs';
+import {airconMatrix,unitColumns,sizeColumns} from '../lib/aircon-matrix.mjs';
+import {profileRowProblem,guideEvidence, sourcedRates, rateProblem, isFromPrice, minimumCompanies, maxLabelLength} from '../lib/sourced-rates.mjs';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const load=async f=>JSON.parse(await readFile(path.join(root,f),'utf8'));
 const data=await load('data/companies.json'),manifest=await load('data/build-manifest.json'),report=await load('data/import-report.json');
@@ -29,6 +32,7 @@ for(const rel of manifest) {
  assert.ok(!/\bsort uses\b/i.test(html),`Obsolete sorting note: ${rel}`);
  assert.ok(!/\b1 sourced excerpts\b/.test(html),`Singular review excerpt grammar: ${rel}`);
  assert.ok(!/\b1 units\b/.test(html),`Singular unit grammar: ${rel}`);
+ assert.ok(!/\bfrom 1 reviews\b|\b1 companies\b|\b1 towns\b/.test(html),`Singular count grammar: ${rel}`);
  assert.ok(!/\(\s*(?:as low as|from|at)\s+\)|\b(?:begins at|starts at|from|at)\s+\.(?=[\s<])|,\s*,/.test(html),`Broken price or address text: ${rel}`);
  const ogImage=html.match(/<meta property="og:image" content="([^"]+)"/)?.[1];
  if(ogImage)assert.ok(/^https:\/\//.test(ogImage),`Relative share image: ${rel}`);
@@ -85,6 +89,111 @@ for(const [rel,html] of pages)for(const table of html.matchAll(/<table data-sour
  });
 }
 for(const [key,spec] of Object.entries(guideEvidence))if(!rateTables.has(key))assert.ok(sourcedRates(spec,data.companies).length<minimumCompanies,`Rate table missing: ${key}`);
+// Static area pages: the selection rule, real coverage lists, sourced town rates, visible FAQs,
+// breadcrumbs, nearby links, hub links and distinct copy. Rule and nearby map: lib/area-pages.mjs.
+{
+ const tradeSlugs={aircon:'aircon-servicing',plumbing:'plumbing',electrician:'electrician',handyman:'handyman',cleaning:'home-cleaning'};
+ // Guide and intent pages already built own their slugs; selection must skip them, as the build does.
+ const reserved=new Set([...pages].filter(([rel,html])=>!rel.startsWith('company/')&&!html.includes('data-area-page=')).map(([rel])=>rel.replace(/\/?index\.html$/,'')));
+ const expected=selectAreaPages(data.companies,Object.entries(tradeSlugs).map(([id,slug])=>({id,slug})),reserved);
+ const launch=await load('data/seo-launch-pages.json');
+ // Sitemap: every URL is a built page whose canonical is itself, and every area page is listed.
+ // Pages stay noindex (checked for every page above) until the production domain is approved.
+ const locs=[...(await readFile(path.join(root,'sitemap.xml'),'utf8')).matchAll(/<loc>([^<]+)<\/loc>/g)].map(m=>m[1].replaceAll('&amp;','&'));
+ assert.equal(new Set(locs).size,locs.length,'Duplicate sitemap URL');
+ for(const loc of locs){
+  assert.ok(loc.startsWith('https://previews.heylead.com/roster/'),`Sitemap URL must be absolute preview URL: ${loc}`);
+  const rel=loc.replace('https://previews.heylead.com/roster/','').replace(/\/?$/,'/').replace(/^\/$/,'')+'index.html';
+  const html=pages.get(rel);assert.ok(html,`Sitemap URL is not a built page: ${loc}`);
+  assert.ok(html.includes(`<link rel="canonical" href="${loc}">`),`Sitemap URL is not canonical-self: ${loc}`);
+  assert.ok(!html.includes('data-retired-listing'),`Retired page in sitemap: ${loc}`);
+ }
+ for(const page of launch.pages)assert.ok(locs.includes(`https://previews.heylead.com${page.path}`),`Launch page missing from sitemap: ${page.path}`);
+ const text=html=>unescape(html.match(/<main[^>]*>([\s\S]*?)<\/main>/)[1].replace(/<script[\s\S]*?<\/script>/g,' ')).replace(/\s+/g,' ').trim();
+ const shingles=s=>{const w=s.toLowerCase().split(/\W+/).filter(Boolean),out=new Set();for(let i=0;i+5<=w.length;i++)out.add(w.slice(i,i+5).join(' '));return out;};
+ const intros=new Map(),byTrade={};
+ for(const page of expected.pages){
+  assert.ok(locs.includes(`https://previews.heylead.com${page.path}`),`Area page missing from sitemap: ${page.path}`);
+  assert.ok(!NON_RESIDENTIAL.has(page.town),`Non-residential area page: ${page.path}`);
+  const rel=`${page.slug}/index.html`,html=pages.get(rel);assert.ok(html,`Missing area page: ${rel}`);
+  assert.ok(page.count>=AREA_PAGE_MINIMUM,`Area page under minimum: ${rel}`);
+  assert.ok(launch.pages.some(p=>p.kind==='area'&&p.path===page.path),`Area page missing from launch manifest: ${rel}`);
+  assert.ok(html.includes(`data-area-page="${page.trade}|${page.town}"`),`Area page marker: ${rel}`);
+  const {town:local}=townCoverage(data.companies,page.trade,page.town);assert.equal(local.length,page.count);
+  const listed=[...html.match(/<ul class="area-company-list">([\s\S]*?)<\/ul>/)[1].matchAll(/<li><div><a href="\/roster\/company\/([^/]+)\//g)].map(m=>m[1]);
+  assert.deepEqual(listed,local.map(c=>c.slug),`Area company list differs from stated coverage: ${rel}`);
+  assert.match(html,new RegExp(`<link rel="canonical" href="https://[^"/]+${page.path}">`),`Canonical: ${rel}`);
+  const intro=unescape(html.match(/<p class="guide-dek" data-area-intro>([\s\S]*?)<\/p>/)[1]);
+  assert.ok(intro.startsWith(`${page.count} `)&&intro.includes(page.town),`Area intro must state the town and count: ${rel}`);
+  for(const [name] of serviceCounts(local).filter(([,n])=>n>=2).slice(0,4))assert.ok(serviceLabel(name),`Area intro service needs a display name in lib/area-pages.mjs: ${name}`);
+  assert.ok(!intros.has(intro),`Duplicate area intro: ${rel} and ${intros.get(intro)}`);intros.set(intro,rel);
+  for(const table of html.matchAll(/<table data-area-rates="([^"]+)">([\s\S]*?)<\/table>/g)){
+   const spec=guideEvidence[table[1]],rows=[...table[2].matchAll(/<tr><th scope="row"><a href="\/roster\/company\/([^/]+)\/#pricing">[\s\S]*?<td><a href="([^"]+)"/g)];
+   assert.ok(spec&&spec.trade===page.trade,`Area rate table trade: ${rel}`);assert.ok(rows.length>=minimumCompanies,`Area rate table under ${minimumCompanies} companies: ${rel}`);
+   const want=sourcedRates(spec,local);assert.deepEqual(rows.map(m=>m[1]),want.map(r=>r.company.slug),`Area rate rows differ from the town's companies: ${table[1]} ${rel}`);
+   rows.forEach((m,i)=>assert.equal(unescape(m[2]),want[i].line.sourceUrl,`Area rate source: ${rel}`));
+  }
+  const ld=JSON.parse(html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1])['@graph'];
+  assert.equal(ld.find(x=>x['@type']==='BreadcrumbList')?.itemListElement.length,3,`Area breadcrumbs: ${rel}`);
+  assert.ok(html.includes('<nav class="crumbs" aria-label="Breadcrumb">'),`Visible breadcrumbs: ${rel}`);
+  const faq=ld.find(x=>x['@type']==='FAQPage');
+  if(faq)for(const q of faq.mainEntity){const vis=html.replaceAll('&#39;',"'").replaceAll('&quot;','"').replaceAll('&amp;','&');assert.ok(vis.includes(`<span>${q.name}</span>`)&&vis.includes(`<p>${q.acceptedAnswer.text.replace(/SGD /g,'S$')}</p>`),`FAQ schema not visible on page: ${rel}: ${q.name}`);}
+  const nearby=html.match(/<div class="areas-we-serve-links" data-nearby>([\s\S]*?)<\/div>/)?.[1]||'';
+  assert.ok(nearby.includes(`href="/roster/${tradeSlugs[page.trade]}/"`),`Nearby block must link back to the hub: ${rel}`);
+  for(const town of nearbyTowns(page.town)){const target=expected.pages.find(p=>p.trade===page.trade&&p.town===town);assert.ok(nearby.includes(target?`href="${target.path}"`:`?area=${areaSlug(town)}#company-results`),`Nearby link ${town}: ${rel}`);}
+  (byTrade[page.trade]||=[]).push([rel,shingles(text(html))]);
+ }
+ // Thin or duplicate copy: pages in one trade must not share most of their 5-word phrases.
+ let maxSim=0,minDistinct=Infinity;
+ for(const list of Object.values(byTrade))for(let i=0;i<list.length;i++)for(let j=i+1;j<list.length;j++){
+  const [a,sa]=list[i],[b,sb]=list[j];let both=0;for(const s of sa)if(sb.has(s))both++;
+  const jaccard=both/(sa.size+sb.size-both);maxSim=Math.max(maxSim,jaccard);minDistinct=Math.min(minDistinct,sa.size-both,sb.size-both);assert.ok(Math.min(sa.size,sb.size)-both>=AREA_MIN_DISTINCT,`Area pages lack distinct content: ${a} ${b}`);assert.ok(jaccard<AREA_MAX_SIMILARITY,`Area pages too similar (${jaccard.toFixed(2)}): ${a} ${b}`);
+ }
+ // Hubs link each static page and keep ?area= only for towns without one.
+ for(const [id,slug] of Object.entries(tradeSlugs)){
+  const hub=pages.get(`${slug}/index.html`),section=hub.match(/<section class="areas-we-serve"[\s\S]*?<\/section>/)[0];
+  const map=JSON.parse(unescape(section.match(/data-area-pages="([^"]*)"/)[1]));
+  for(const page of expected.pages.filter(p=>p.trade===id)){assert.ok(section.includes(`href="${page.path}"`),`Hub missing area page link: ${page.path}`);assert.ok(!section.includes(`?area=${areaSlug(page.town)}#`),`Hub still filters a town with a page: ${page.path}`);assert.equal(map[areaSlug(page.town)],page.path);}
+ }
+ console.log(`Area pages: ${expected.pages.length} (${Object.entries(byTrade).map(([t,l])=>`${t} ${l.length}`).join(', ')}); collisions: ${expected.collisions.length}; highest similarity ${maxSim.toFixed(2)}, fewest distinct phrases ${minDistinct}`);
+}
+// Gap features: aircon price matrix cells match the release, quick picks use sourced fields,
+// licence lookups only on electrician and plumbing hubs, symptom finder listed.
+{
+ const priceGuide=pages.get('aircon/servicing-price/index.html');
+ for(const [id,columns] of [['units',unitColumns],['sizes',sizeColumns]]){
+  const rows=airconMatrix(data.companies,columns);
+  const section=priceGuide.match(new RegExp(`<section[^>]+data-aircon-matrix="${id}">([\\s\\S]*?)</section>`))?.[1];assert.ok(section,`Missing aircon matrix ${id}`);
+  let shown=0;
+  for(const r of rows)for(const c of r.cells){
+   const td=section.match(new RegExp(`<td data-matrix-cell="${id}\\|${c.column.id.replace('+','\\+')}" data-count="(\\d+)"[^>]*>([\\s\\S]*?)</td>`,'g'))?.[rows.indexOf(r)];
+   assert.ok(td,`Matrix cell missing: ${id} ${r.service.id} ${c.column.id}`);
+   const [,count,inner]=td.match(/data-count="(\d+)"[^>]*>([\s\S]*?)<\/td>/);
+   assert.equal(Number(count),c.count,`Matrix count differs from release: ${id} ${r.service.id} ${c.column.id}`);
+   if(c.count>=minimumCompanies){shown+=c.count;assert.ok(inner.includes('S$'),`Matrix cell should show a range: ${id} ${r.service.id} ${c.column.id}`);}
+   else assert.ok(!/S\$|\d+\s*to\s/.test(inner),`Matrix cell under ${minimumCompanies} companies shows a price: ${id} ${r.service.id} ${c.column.id}`);
+  }
+  const sources=section.match(new RegExp(`<table data-matrix-sources="${id}">([\\s\\S]*?)</table>`))[1];
+  assert.equal((sources.match(/<tr><th scope="row">/g)||[]).length,shown,`Matrix sources must list every rate behind shown cells: ${id}`);
+ }
+ assert.ok(pages.get('aircon-servicing/index.html').includes('href="/roster/aircon/servicing-price/"'),'Aircon hub links the price guide');
+ for(const [id,slug] of Object.entries({aircon:'aircon-servicing',plumbing:'plumbing',electrician:'electrician',handyman:'handyman',cleaning:'home-cleaning'})){
+  const hub=pages.get(`${slug}/index.html`),section=hub.match(/<section class="guide-discovery quick-picks"[\s\S]*?<\/section>/)?.[0];assert.ok(section,`Quick picks missing: ${slug}`);
+  assert.ok(!/\b(?:best|top|leading|recommended|number one|#1)\b/i.test(unescape(section.replace(/<a href="\/roster\/company\/[^"]+">[^<]*<\/a>|<caption>[\s\S]*?<\/caption>/g,'')).replace(/not rankings or recommendations/,'')),`Quick picks must not make editorial claims: ${slug}`);
+  const rows=data.companies.filter(c=>(c.primaryTrade||c.category)===id);
+  const want={prices:rows.filter(c=>presentation[c.slug]?.published).length,islandwide:rows.filter(c=>c.enrichment.serviceLocations.some(l=>l.name==='Islandwide')).length,emergency:rows.filter(c=>c.enrichment.emergency?.value===true&&c.enrichment.emergency.excerpt).length};
+  for(const [pick,n] of Object.entries(want)){const got=section.match(new RegExp(`data-quick-pick="${pick}" data-count="(\\d+)"`))?.[1];if(n)assert.equal(Number(got),n,`Quick pick ${pick} count: ${slug}`);}
+  const licence=hub.match(/<section[^>]+data-licence-lookup>[\s\S]*?<\/section>/)?.[0];
+  assert.equal(!!licence,['electrician','plumbing'].includes(id),`Licence lookup block only on electrician and plumbing hubs: ${slug}`);
+  if(licence){for(const m of licence.matchAll(/href="(https:[^"]+)"/g))assert.match(new URL(m[1]).host,/(?:^|\.)(?:ema|pub)\.gov\.sg$/,`Licence lookup links must be EMA or PUB: ${m[1]}`);assert.ok(!/data-slug|\/roster\/company\//.test(licence),'No per-company licence status');}
+ }
+ // The /roster/aircon/ guide hub carries the same Areas section as the aircon servicing directory.
+ const airconHub=pages.get('aircon/index.html'),airconAreas=airconHub.match(/<section class="areas-we-serve"[\s\S]*?<\/section>/)?.[0];
+ assert.ok(airconAreas,'Areas section on /roster/aircon/');
+ assert.equal(airconAreas,pages.get('aircon-servicing/index.html').match(/<section class="areas-we-serve"[\s\S]*?<\/section>/)[0],'Aircon hub areas match the aircon servicing directory');
+ const finder=pages.get('what-service-do-i-need/index.html');assert.ok(finder?.includes('data-symptom-finder'),'Symptom finder page');
+ assert.ok((await readFile(path.join(root,'sitemap.xml'),'utf8')).includes('<loc>https://previews.heylead.com/roster/what-service-do-i-need/</loc>'),'Symptom finder in sitemap');
+}
 const claim=pages.get('claim-listing/index.html');
 assert.match(claim, /<input id="claim-company"[^>]+list="claim-companies"/);
 assert.ok(!claim.includes('<select id="claim-company"'));
@@ -95,6 +204,7 @@ for(const [rel,html] of pages)for(const match of html.matchAll(/(?:href|src)="([
  const u=new URL(raw,'https://previews.heylead.com/roster/'+rel);let file=u.pathname.replace(/^\/roster\//,'');if(file.endsWith('/'))file+='index.html';
  await access(path.join(root,file));if(u.hash&&byRel.has(file))assert.ok(byRel.get(file).has(decodeURIComponent(u.hash.slice(1))),`Broken fragment ${rel}: ${raw}`);
 }
+let hiddenRows=0;
 for(const c of data.companies){
  const rel=`company/${c.slug}/index.html`;assert.ok(pages.has(rel),`Missing page: ${c.slug}`);
  const html=pages.get(rel),e=c.enrichment;
@@ -106,7 +216,12 @@ for(const c of data.companies){
  if(c.alternatePhones?.length){assert.ok(html.includes('Also listed:'),`Missing alternate phones: ${rel}`);for(const p of c.alternatePhones)assert.ok(html.includes(p.sourceLabel.replaceAll('&','&amp;')),`Missing alternate phone source: ${rel}`);}
  if(e.faqs?.length) assert.ok(html.includes('Answer from the company website'),`Missing sourced FAQ: ${rel}`);
  if(e.summary?.text) assert.ok(html.includes('class="company-intro"'),`Missing summary: ${rel}`);
- if(c.imported) assert.equal((html.match(/<div class="service-options"/g)||[]).length,current[c.slug].services.filter(s=>s.prices.length).length,`Pricing options: ${rel}`);
+ if(c.imported) assert.equal((html.match(/<div class="service-options"/g)||[]).length,current[c.slug].services.filter(s=>s.prices.some(p=>!profileRowProblem(p))).length,`Pricing options: ${rel}`);
+ // Testimonials, headings and condition fragments captured as price rows stay out of the pricing section.
+ const pricingHtml=html.match(/<section class="profile-section" id="pricing"[\s\S]*?<\/section>/)?.[0]||'';
+ for(const s of current[c.slug]?.services||[])for(const p of s.prices){const why=profileRowProblem(p);if(!why)continue;hiddenRows++;
+  const probe=String(p.excerpt||'').replace(/^[\W\d]*\|\s*/,'').slice(0,40).replaceAll('&','&amp;').replaceAll('"','&quot;').replaceAll("'",'&#39;').replaceAll('<','&lt;').replaceAll('>','&gt;');
+  if(probe.length>=12)assert.ok(!pricingHtml.includes(probe),`Profile price row shown despite guard (${why}): ${rel}: ${probe}`);}
 }
 for(const excluded of report.excluded.filter(c=>c.curated))assert.ok(!pages.has(`company/${excluded.slug}/index.html`)||pages.get(`company/${excluded.slug}/index.html`).includes('data-retired-listing'),`Flagged full profile still published: ${excluded.slug}`);
 const categories={aircon:'aircon-servicing',plumbing:'plumbing',electrician:'electrician',handyman:'handyman',cleaning:'home-cleaning'};
@@ -124,4 +239,5 @@ for(const [id,slug] of Object.entries(categories)){
 }
 assert.equal(Object.values(report.byTrade).reduce((n,t)=>n+t.published,0),report.publishedCount,'Primary-trade totals must not overlap');
 const all=await load('data/index/all.json');assert.equal(all.companies.length,data.companies.length);
+console.log(`Profile price rows hidden by guards: ${hiddenRows}`);
 console.log(`PASS: ${pages.size} pages, all local links/fragments, unique metadata, schema restrictions, publication counts and ${Object.keys(old).length} original write-ups.`);

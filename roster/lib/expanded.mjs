@@ -7,6 +7,7 @@ import {renderAverage} from '../assets/rating-display.mjs';
 import {profileIntro, profileAbout, readerNote, friendlyService} from './profile-copy.mjs';
 import {renderLogo} from '../assets/catalogue-card.mjs';
 import { blockAddress, priceOption } from '../scripts/import-db.mjs';
+import {profileRowProblem} from './sourced-rates.mjs';
 export function dateLabel(value) {
   const match=String(value||'').match(/\d{4}-\d{2}-\d{2}/);
   if(!match) return '10 Oct 2026';
@@ -18,12 +19,12 @@ export function concise(text,max=155) {
   return text.slice(0,max-1).replace(/\s+\S*$/,'').replace(/[,:;.!?]+$/,'')+'.';
 }
 export function ratingFact(c) {
-  if(c.googleRating) {const g=c.googleRating;return {text:`Google Maps: ${g.value.toFixed(1)}${g.count?` from ${g.count.toLocaleString('en-SG')} reviews`:''} (checked ${dateLabel(g.checkedAt)})`,url:g.sourceUrl,value:g.value,count:g.count||0,google:true};}
+  if(c.googleRating) {const g=c.googleRating;return {text:`Google Maps: ${g.value.toFixed(1)}${g.count?` from ${g.count.toLocaleString('en-SG')} ${g.count===1?'review':'reviews'}`:''} (checked ${dateLabel(g.checkedAt)})`,url:g.sourceUrl,value:g.value,count:g.count||0,google:true};}
   const r=c.rating;if(!r||c.selfReportedRating)return null;
   const host=new URL(r.sourceUrl).hostname;
   const google=/(^|\.)(google\.com|maps\.google\.com)$/.test(host);
   const own=c.website?.value&&host.replace(/^www\./,'')===new URL(c.website.value).hostname.replace(/^www\./,'');
-  return {text:`${google?'Google Maps':own?'Company website reports':'Review mirror reports'}: ${r.value.toFixed(1)}${r.count?` from ${r.count.toLocaleString('en-SG')} reviews`:''} (checked 9-10 Oct 2026)`,url:r.sourceUrl,value:google?r.value:null,count:google?r.count||0:0,google};
+  return {text:`${google?'Google Maps':own?'Company website reports':'Review mirror reports'}: ${r.value.toFixed(1)}${r.count?` from ${r.count.toLocaleString('en-SG')} ${r.count===1?'review':'reviews'}`:''} (checked 9-10 Oct 2026)`,url:r.sourceUrl,value:google?r.value:null,count:google?r.count||0:0,google};
 }
 export function structuredHours(hours) {
   if(!hours?.text)return undefined;
@@ -101,10 +102,13 @@ export function createProfileRenderer(ctx) {
     const highlightBody=additionalHighlights.length?`<div class="sourced-highlights"><h3>At a glance</h3><ul>${additionalHighlights.map(h=>`<li><p>${esc(readerNote(h.text))}</p>${source(h.sourceUrl,h.capturedAt,'Company source')}</li>`).join('')}</ul></div>`:'';
     const detailsBody=extraDetails?`<div class="company-detail-grid">${extraDetails}</div><p class="record-label">These details are as published by the company. Confirm conditions and availability before booking.</p>`:'';
     const socials=e.socials?.length?`<div class="company-socials"><h3>Find the company online</h3>${e.socials.map(s=>link(s.url,s.name.replace(/^./,c=>c.toUpperCase()))).join('')}</div>`:'';
-    const serviceViews=content.services.map(s=>({...s}));
-    const additionalPrices=!c.imported && !content.services.some(s=>s.prices.length) && e.priceLines?.length;
+    // Testimonials, page headings and condition fragments captured as price rows are not shown
+    // (lib/sourced-rates.mjs profileRowProblem); the release and the source page keep the text.
+    const keep=p=>!profileRowProblem(p);
+    const serviceViews=content.services.map(s=>{const prices=s.prices.filter(keep);return {...s,prices,...(prices.length<s.prices.length&&prices.length>1?{priceSummary:`${prices.length} pricing entries`}:{})};});
+    const additionalPrices=!c.imported && !content.services.some(s=>s.prices.filter(keep).length) && e.priceLines?.filter(l=>keep(priceOption(l))).length;
     if(additionalPrices) {
-      const options=e.priceLines.map(priceOption);
+      const options=e.priceLines.map(priceOption).filter(keep);
       serviceViews[0]={...serviceViews[0],prices:options,priceSummary:options.every(p=>p.indicative)?'Pricing reference':`${options.length} pricing entries`};
     }
     const pricing=serviceViews.map((s,i)=>renderServiceRow({...s,quoteEvidence:c.quoteEvidence,imported:c.imported,trade:c.category},i)).join('');

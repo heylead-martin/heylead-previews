@@ -99,7 +99,8 @@ export function additionalRates(p) {
   return [...plain(p.price_text).matchAll(re)].filter(m => Number(m[2]) !== p.amount_sgd).map(m => ({from:!!m[1], amount:Number(m[2]), unit:unitName(m[3], true)}));
 }
 
-export const money = n => `S$${Number(n).toLocaleString('en-SG')}`;
+// Cents are shown as printed pairs ("S$163.50"), whole amounts without them.
+export const money = n => `S$${Number(n).toLocaleString('en-SG',{minimumFractionDigits:Number(n)%1?2:0,maximumFractionDigits:2})}`;
 export function rateCell(p) {
   const range = priceRange(p), unit = displayUnit(p);
   const amount = range ? `${money(p.amount_sgd)} to ${money(range.max)}${range.open ? '+' : ''}` : `${isFromPrice(p) ? 'From ' : ''}${money(p.amount_sgd)}`;
@@ -225,4 +226,27 @@ export function rateLabel(p, spec, companyName = '') {
   if (heading) return heading;
   const cut = wordCut(segments[0].split(/(?<=[.!?])\s+/)[0], maxLabelLength);
   return usable(cut) ? cut : plainName();
+}
+
+/* ---------- Profile price rows ---------- */
+
+// Profile pages list display rows ({label, price, excerpt}) rather than release lines, so the
+// same guards run on their text. A row with its own amount is kept unless it is a testimonial;
+// a row with no amount of its own is hidden when its excerpt is a page heading, a condition or
+// surcharge note, or a testimonial. The full source excerpt stays in the release and on the
+// source page. Returns a reason or null.
+const hasAmount = /(?:S?\$|SGD)\s*\d/i;
+const headingLead = /^[^|\d$]{0,70}\b(?:rates?|pric(?:es|ing)|price list|packages?|promotion(?:al)?|our services|ask for this)\b[^|\d$]*:?\s*\|/i;
+const questionLead = /^[^|]{0,90}\?\s*\|/;
+export function profileRowProblem(row) {
+  const price = String(row.price || '').trim(), excerpt = String(row.excerpt || '');
+  if (reviewText.test(`${row.label || ''} | ${price} | ${excerpt}`) || reviewDate.test(excerpt) || /^\W*[“"]\s*\|/.test(excerpt)) return 'review text';
+  if (/^per\b/i.test(price)) return 'condition fragment, not a price';
+  if (hasAmount.test(price) || /quote|request|free|waived/i.test(price) || row.indicative) return null;
+  if (!/\d/.test(excerpt)) return 'no price in the source text';
+  // A company FAQ answer ("How much does it cost? | From $66 ...") is the company's own rate.
+  if (questionLead.test(excerpt)) return null;
+  if (headingLead.test(excerpt)) return 'page heading, not a service price';
+  if (/\badds?\s+(?:S?\$|SGD)\s*\d|\+\s*\$\d/i.test(excerpt)) return 'surcharge note, not a service price';
+  return null;
 }

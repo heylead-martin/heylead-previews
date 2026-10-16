@@ -312,6 +312,888 @@
       "path": "/roster/handyman/door-window-repair/",
       "words": 1216,
       "kind": "guide"
+    },
+    {
+      "path": "/roster/aircon-servicing/ang-mo-kio/",
+      "trade": "aircon",
+      "town": "Ang Mo Kio",
+      "companies": 19,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/aircon-servicing/bedok/",
+      "trade": "aircon",
+      "town": "Bedok",
+      "companies": 20,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/aircon-servicing/bishan/",
+      "trade": "aircon",
+      "town": "Bishan",
+      "companies": 11,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/aircon-servicing/boon-lay/",
+      "trade": "aircon",
+      "town": "Boon Lay",
+      "companies": 8,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/aircon-servicing/bukit-batok/",
+      "trade": "aircon",
+      "town": "Bukit Batok",
+      "companies": 16,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/aircon-servicing/bukit-merah/",
+      "trade": "aircon",
+      "town": "Bukit Merah",
+      "companies": 9,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/aircon-servicing/bukit-panjang/",
+      "trade": "aircon",
+      "town": "Bukit Panjang",
+      "companies": 14,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/aircon-servicing/bukit-timah/",
+      "trade": "aircon",
+      "town": "Bukit Timah",
+      "companies": 9,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/aircon-servicing/choa-chu-kang/",
+      "trade": "aircon",
+      "town": "Choa Chu Kang",
+      "companies": 15,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/aircon-servicing/clementi/",
+      "trade": "aircon",
+      "town": "Clementi",
+      "companies": 10,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/aircon-servicing/geylang/",
+      "trade": "aircon",
+      "town": "Geylang",
+      "companies": 7,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/aircon-servicing/hougang/",
+      "trade": "aircon",
+      "town": "Hougang",
+      "companies": 15,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/aircon-servicing/jurong-east/",
+      "trade": "aircon",
+      "town": "Jurong East",
+      "companies": 9,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/aircon-servicing/jurong-west/",
+      "trade": "aircon",
+      "town": "Jurong West",
+      "companies": 13,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/aircon-servicing/kallang/",
+      "trade": "aircon",
+      "town": "Kallang",
+      "companies": 9,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/aircon-servicing/novena/",
+      "trade": "aircon",
+      "town": "Novena",
+      "companies": 6,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/aircon-servicing/orchard/",
+      "trade": "aircon",
+      "town": "Orchard",
+      "companies": 7,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/aircon-servicing/pasir-ris/",
+      "trade": "aircon",
+      "town": "Pasir Ris",
+      "companies": 15,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/aircon-servicing/paya-lebar/",
+      "trade": "aircon",
+      "town": "Paya Lebar",
+      "companies": 5,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/aircon-servicing/punggol/",
+      "trade": "aircon",
+      "town": "Punggol",
+      "companies": 21,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/aircon-servicing/queenstown/",
+      "trade": "aircon",
+      "town": "Queenstown",
+      "companies": 12,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/aircon-servicing/sembawang/",
+      "trade": "aircon",
+      "town": "Sembawang",
+      "companies": 14,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/aircon-servicing/sengkang/",
+      "trade": "aircon",
+      "town": "Sengkang",
+      "companies": 18,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/aircon-servicing/serangoon/",
+      "trade": "aircon",
+      "town": "Serangoon",
+      "companies": 11,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/aircon-servicing/tampines/",
+      "trade": "aircon",
+      "town": "Tampines",
+      "companies": 22,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/aircon-servicing/toa-payoh/",
+      "trade": "aircon",
+      "town": "Toa Payoh",
+      "companies": 19,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/aircon-servicing/woodlands/",
+      "trade": "aircon",
+      "town": "Woodlands",
+      "companies": 30,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/aircon-servicing/yishun/",
+      "trade": "aircon",
+      "town": "Yishun",
+      "companies": 24,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/plumbing/ang-mo-kio/",
+      "trade": "plumbing",
+      "town": "Ang Mo Kio",
+      "companies": 13,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/plumbing/bedok/",
+      "trade": "plumbing",
+      "town": "Bedok",
+      "companies": 17,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/plumbing/bishan/",
+      "trade": "plumbing",
+      "town": "Bishan",
+      "companies": 13,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/plumbing/boon-lay/",
+      "trade": "plumbing",
+      "town": "Boon Lay",
+      "companies": 6,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/plumbing/bukit-batok/",
+      "trade": "plumbing",
+      "town": "Bukit Batok",
+      "companies": 12,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/plumbing/bukit-merah/",
+      "trade": "plumbing",
+      "town": "Bukit Merah",
+      "companies": 10,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/plumbing/bukit-panjang/",
+      "trade": "plumbing",
+      "town": "Bukit Panjang",
+      "companies": 8,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/plumbing/bukit-timah/",
+      "trade": "plumbing",
+      "town": "Bukit Timah",
+      "companies": 12,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/plumbing/choa-chu-kang/",
+      "trade": "plumbing",
+      "town": "Choa Chu Kang",
+      "companies": 11,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/plumbing/clementi/",
+      "trade": "plumbing",
+      "town": "Clementi",
+      "companies": 12,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/plumbing/downtown-core/",
+      "trade": "plumbing",
+      "town": "Downtown Core",
+      "companies": 8,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/plumbing/geylang/",
+      "trade": "plumbing",
+      "town": "Geylang",
+      "companies": 9,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/plumbing/hougang/",
+      "trade": "plumbing",
+      "town": "Hougang",
+      "companies": 12,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/plumbing/jurong-east/",
+      "trade": "plumbing",
+      "town": "Jurong East",
+      "companies": 10,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/plumbing/jurong-west/",
+      "trade": "plumbing",
+      "town": "Jurong West",
+      "companies": 10,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/plumbing/kallang/",
+      "trade": "plumbing",
+      "town": "Kallang",
+      "companies": 7,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/plumbing/marine-parade/",
+      "trade": "plumbing",
+      "town": "Marine Parade",
+      "companies": 5,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/plumbing/newton/",
+      "trade": "plumbing",
+      "town": "Newton",
+      "companies": 6,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/plumbing/novena/",
+      "trade": "plumbing",
+      "town": "Novena",
+      "companies": 9,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/plumbing/orchard/",
+      "trade": "plumbing",
+      "town": "Orchard",
+      "companies": 7,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/plumbing/outram/",
+      "trade": "plumbing",
+      "town": "Outram",
+      "companies": 7,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/plumbing/pasir-ris/",
+      "trade": "plumbing",
+      "town": "Pasir Ris",
+      "companies": 12,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/plumbing/paya-lebar/",
+      "trade": "plumbing",
+      "town": "Paya Lebar",
+      "companies": 7,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/plumbing/punggol/",
+      "trade": "plumbing",
+      "town": "Punggol",
+      "companies": 17,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/plumbing/queenstown/",
+      "trade": "plumbing",
+      "town": "Queenstown",
+      "companies": 10,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/plumbing/rochor/",
+      "trade": "plumbing",
+      "town": "Rochor",
+      "companies": 7,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/plumbing/sembawang/",
+      "trade": "plumbing",
+      "town": "Sembawang",
+      "companies": 8,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/plumbing/sengkang/",
+      "trade": "plumbing",
+      "town": "Sengkang",
+      "companies": 15,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/plumbing/serangoon/",
+      "trade": "plumbing",
+      "town": "Serangoon",
+      "companies": 9,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/plumbing/tampines/",
+      "trade": "plumbing",
+      "town": "Tampines",
+      "companies": 18,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/plumbing/tengah/",
+      "trade": "plumbing",
+      "town": "Tengah",
+      "companies": 7,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/plumbing/toa-payoh/",
+      "trade": "plumbing",
+      "town": "Toa Payoh",
+      "companies": 15,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/plumbing/woodlands/",
+      "trade": "plumbing",
+      "town": "Woodlands",
+      "companies": 14,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/plumbing/yishun/",
+      "trade": "plumbing",
+      "town": "Yishun",
+      "companies": 14,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/electrician/ang-mo-kio/",
+      "trade": "electrician",
+      "town": "Ang Mo Kio",
+      "companies": 11,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/electrician/bedok/",
+      "trade": "electrician",
+      "town": "Bedok",
+      "companies": 12,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/electrician/bishan/",
+      "trade": "electrician",
+      "town": "Bishan",
+      "companies": 10,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/electrician/bukit-batok/",
+      "trade": "electrician",
+      "town": "Bukit Batok",
+      "companies": 9,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/electrician/choa-chu-kang/",
+      "trade": "electrician",
+      "town": "Choa Chu Kang",
+      "companies": 5,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/electrician/clementi/",
+      "trade": "electrician",
+      "town": "Clementi",
+      "companies": 9,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/electrician/geylang/",
+      "trade": "electrician",
+      "town": "Geylang",
+      "companies": 6,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/electrician/hougang/",
+      "trade": "electrician",
+      "town": "Hougang",
+      "companies": 11,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/electrician/jurong-east/",
+      "trade": "electrician",
+      "town": "Jurong East",
+      "companies": 8,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/electrician/jurong-west/",
+      "trade": "electrician",
+      "town": "Jurong West",
+      "companies": 7,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/electrician/kallang/",
+      "trade": "electrician",
+      "town": "Kallang",
+      "companies": 5,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/electrician/novena/",
+      "trade": "electrician",
+      "town": "Novena",
+      "companies": 7,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/electrician/pasir-ris/",
+      "trade": "electrician",
+      "town": "Pasir Ris",
+      "companies": 10,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/electrician/punggol/",
+      "trade": "electrician",
+      "town": "Punggol",
+      "companies": 11,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/electrician/queenstown/",
+      "trade": "electrician",
+      "town": "Queenstown",
+      "companies": 7,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/electrician/sembawang/",
+      "trade": "electrician",
+      "town": "Sembawang",
+      "companies": 8,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/electrician/sengkang/",
+      "trade": "electrician",
+      "town": "Sengkang",
+      "companies": 9,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/electrician/serangoon/",
+      "trade": "electrician",
+      "town": "Serangoon",
+      "companies": 8,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/electrician/tampines/",
+      "trade": "electrician",
+      "town": "Tampines",
+      "companies": 14,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/electrician/toa-payoh/",
+      "trade": "electrician",
+      "town": "Toa Payoh",
+      "companies": 11,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/electrician/woodlands/",
+      "trade": "electrician",
+      "town": "Woodlands",
+      "companies": 15,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/electrician/yishun/",
+      "trade": "electrician",
+      "town": "Yishun",
+      "companies": 12,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/handyman/ang-mo-kio/",
+      "trade": "handyman",
+      "town": "Ang Mo Kio",
+      "companies": 10,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/handyman/bedok/",
+      "trade": "handyman",
+      "town": "Bedok",
+      "companies": 15,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/handyman/bishan/",
+      "trade": "handyman",
+      "town": "Bishan",
+      "companies": 9,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/handyman/bukit-batok/",
+      "trade": "handyman",
+      "town": "Bukit Batok",
+      "companies": 9,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/handyman/bukit-merah/",
+      "trade": "handyman",
+      "town": "Bukit Merah",
+      "companies": 5,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/handyman/choa-chu-kang/",
+      "trade": "handyman",
+      "town": "Choa Chu Kang",
+      "companies": 5,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/handyman/clementi/",
+      "trade": "handyman",
+      "town": "Clementi",
+      "companies": 8,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/handyman/geylang/",
+      "trade": "handyman",
+      "town": "Geylang",
+      "companies": 7,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/handyman/hougang/",
+      "trade": "handyman",
+      "town": "Hougang",
+      "companies": 9,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/handyman/marine-parade/",
+      "trade": "handyman",
+      "town": "Marine Parade",
+      "companies": 6,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/handyman/orchard/",
+      "trade": "handyman",
+      "town": "Orchard",
+      "companies": 5,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/handyman/pasir-ris/",
+      "trade": "handyman",
+      "town": "Pasir Ris",
+      "companies": 8,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/handyman/punggol/",
+      "trade": "handyman",
+      "town": "Punggol",
+      "companies": 12,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/handyman/queenstown/",
+      "trade": "handyman",
+      "town": "Queenstown",
+      "companies": 7,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/handyman/sengkang/",
+      "trade": "handyman",
+      "town": "Sengkang",
+      "companies": 7,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/handyman/serangoon/",
+      "trade": "handyman",
+      "town": "Serangoon",
+      "companies": 5,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/handyman/tampines/",
+      "trade": "handyman",
+      "town": "Tampines",
+      "companies": 13,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/handyman/toa-payoh/",
+      "trade": "handyman",
+      "town": "Toa Payoh",
+      "companies": 9,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/handyman/woodlands/",
+      "trade": "handyman",
+      "town": "Woodlands",
+      "companies": 13,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/handyman/yishun/",
+      "trade": "handyman",
+      "town": "Yishun",
+      "companies": 11,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/home-cleaning/ang-mo-kio/",
+      "trade": "cleaning",
+      "town": "Ang Mo Kio",
+      "companies": 5,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/home-cleaning/sengkang/",
+      "trade": "cleaning",
+      "town": "Sengkang",
+      "companies": 5,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/home-cleaning/woodlands/",
+      "trade": "cleaning",
+      "town": "Woodlands",
+      "companies": 5,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/what-service-do-i-need/",
+      "kind": "symptom-finder"
+    },
+    {
+      "path": "/roster/blog/",
+      "kind": "blog-index"
+    },
+    {
+      "path": "/roster/blog/home-maintenance-calendar/",
+      "words": 1007,
+      "kind": "blog"
+    },
+    {
+      "path": "/roster/blog/aircon-chemical-wash-vs-general-servicing/",
+      "words": 1105,
+      "kind": "blog"
+    },
+    {
+      "path": "/roster/blog/bathroom-maintenance-to-prevent-leaks-and-chokes/",
+      "words": 1007,
+      "kind": "blog"
+    },
+    {
+      "path": "/roster/blog/ceiling-fan-installation/",
+      "words": 1326,
+      "kind": "blog"
+    },
+    {
+      "path": "/roster/blog/ceiling-leak-what-to-do/",
+      "words": 956,
+      "kind": "blog"
+    },
+    {
+      "path": "/roster/blog/emergency-plumbing-at-night/",
+      "words": 1178,
+      "kind": "blog"
+    },
+    {
+      "path": "/roster/blog/handyman-vs-painting-contractor/",
+      "words": 1036,
+      "kind": "blog"
+    },
+    {
+      "path": "/roster/blog/handyman-or-specialist/",
+      "words": 994,
+      "kind": "blog"
+    },
+    {
+      "path": "/roster/blog/hdb-or-condo-repairs-who-to-ask/",
+      "words": 978,
+      "kind": "blog"
+    },
+    {
+      "path": "/roster/blog/home-cleaning-checklist/",
+      "words": 952,
+      "kind": "blog"
+    },
+    {
+      "path": "/roster/blog/home-electrical-safety-checklist/",
+      "words": 998,
+      "kind": "blog"
+    },
+    {
+      "path": "/roster/blog/hourly-rate-vs-fixed-price-home-jobs/",
+      "words": 1017,
+      "kind": "blog"
+    },
+    {
+      "path": "/roster/blog/how-to-compare-home-service-quotes/",
+      "words": 1055,
+      "kind": "blog"
+    },
+    {
+      "path": "/roster/blog/prepare-home-for-aircon-servicing/",
+      "words": 1137,
+      "kind": "blog"
+    },
+    {
+      "path": "/roster/blog/low-water-pressure-at-home/",
+      "words": 1082,
+      "kind": "blog"
+    },
+    {
+      "path": "/roster/blog/new-home-move-in-checklist/",
+      "words": 947,
+      "kind": "blog"
+    },
+    {
+      "path": "/roster/blog/one-off-aircon-servicing-vs-maintenance-contract/",
+      "words": 1152,
+      "kind": "blog"
+    },
+    {
+      "path": "/roster/blog/part-time-cleaner-vs-deep-cleaning/",
+      "words": 1127,
+      "kind": "blog"
+    },
+    {
+      "path": "/roster/blog/planning-electrical-points-before-renovation/",
+      "words": 1071,
+      "kind": "blog"
+    },
+    {
+      "path": "/roster/blog/questions-to-ask-before-hiring-a-handyman/",
+      "words": 960,
+      "kind": "blog"
+    },
+    {
+      "path": "/roster/blog/repair-or-replace-old-aircon/",
+      "words": 1009,
+      "kind": "blog"
+    },
+    {
+      "path": "/roster/blog/signs-you-need-a-plumber/",
+      "words": 1039,
+      "kind": "blog"
+    },
+    {
+      "path": "/roster/blog/sofa-and-curtain-care-between-cleans/",
+      "words": 1029,
+      "kind": "blog"
+    },
+    {
+      "path": "/roster/blog/supply-your-own-parts-vs-company-supplied/",
+      "words": 1169,
+      "kind": "blog"
+    },
+    {
+      "path": "/roster/blog/water-heater-safety-warning-signs/",
+      "words": 1034,
+      "kind": "blog"
     }
   ]
 }
