@@ -20,6 +20,7 @@ const data=await load('data/companies.json'),manifest=await load('data/build-man
 {const names=displayNames(data.companies);for(const c of data.companies){c.sourceName=c.name;c.name=names.get(c.slug);}}
 const pins=await load('data/map-pins.json');
 const presentation=await load('data/presentation.json');
+const logoVariants=await load('data/logo-variants.json');
 for(const c of data.companies) {
  const logo=presentation[c.slug]?.logoAsset;
  if(!logo)continue;
@@ -49,7 +50,8 @@ for(const rel of manifest) {
  assert.ok(!/\bfrom 1 reviews\b|\b1 companies\b|\b1 towns\b/.test(html),`Singular count grammar: ${rel}`);
  assert.ok(!/\(\s*(?:as low as|from|at)\s+\)|\b(?:begins at|starts at|from|at)\s+\.(?=[\s<])|,\s*,/.test(html),`Broken price or address text: ${rel}`);
  const ogImage=html.match(/<meta property="og:image" content="([^"]+)"/)?.[1];
- if(ogImage)assert.ok(/^https:\/\//.test(ogImage),`Relative share image: ${rel}`);
+ // P1-11: every page has an absolute share image and a large Twitter card.
+ assert.ok(ogImage&&/^https:\/\//.test(ogImage)&&html.includes('<meta name="twitter:card" content="summary_large_image">'),`Share image: ${rel}`);
  const desc=html.match(/<meta name="description" content="([^"]+)"/)[1].replace(/&amp;/g,'&').replace(/&quot;/g,'"').replace(/&lt;/g,'<').replace(/&gt;/g,'>');
  assert.ok(desc.length<=160&&/[.?!)]$/.test(desc),`Description length/ending: ${rel}`);
  assert.ok(!descriptions.has(desc),`Duplicate description: ${rel}`);descriptions.add(desc);
@@ -73,7 +75,12 @@ for(const rel of manifest) {
   assert.ok(intro&&!/Its website mentions|Its site says|Roster found no/.test(intro),`Research wording remains: ${rel}`);
   assert.ok(!JSON.stringify(ld).includes('sample reviews'),`Sample reviews leaked into schema: ${rel}`);
   const business=ld['@graph'].find(x=>String(x['@id']).endsWith('#business'));assert.ok(business?.telephone&&business.sameAs?.length,`Missing business schema: ${rel}`);
-  if(presentation[record.slug]?.logoAsset)assert.ok(html.includes(`src="${presentation[record.slug].logoAsset.src}"`),`Missing bundled logo: ${rel}`);
+  if(presentation[record.slug]?.logoAsset){
+   // P1-14: pages serve the WebP copy (<=256 px, <=30 KB) of the checksummed original.
+   const original=presentation[record.slug].logoAsset.src,copy=logoVariants[original];
+   assert.ok(html.includes(`src="${copy?copy.src:original}"`)&&(!copy||!html.includes(`src="${original}"`)),`Missing bundled logo: ${rel}`);
+   if(copy){const st=await stat(path.join(root,copy.src.replace(/^\/roster\//,'')));assert.ok(st.size<=30*1024&&copy.width<=256&&copy.height<=256,`Logo copy too large: ${copy.src} ${st.size}`);}
+  }
   assert.ok(!html.includes('No dated excerpts')&&!html.includes('rating-value'),`Empty review block or bare score: ${rel}`);
   const ids=[...html.matchAll(/<section class="profile-section" id="([^"]+)"/g)].map(m=>m[1]);assert.equal(ids[0],'pricing');const hasAreas=!!record.enrichment?.serviceLocations?.length;assert.equal(ids.includes('areas-served'),hasAreas);assert.deepEqual(ids.slice(0,hasAreas?4:3),hasAreas?['pricing','areas-served','overview','contact']:['pricing','overview','contact']);if(ids.includes('reviews'))assert.equal(ids.at(-2),'reviews');
   for(const m of html.matchAll(/<iframe[^>]+src="([^"]+)"/g)){const src=m[1].replaceAll('&amp;','&');const u=new URL(src);if(u.searchParams.has('q'))assert.ok(!/#\s*\d|\bUnit\s+\d/i.test(u.searchParams.get('q')),`Unit in map: ${rel}`);}
@@ -318,6 +325,39 @@ for(const c of data.companies)assert.ok(derivedFrom(c.name,c.sourceName),`Displa
   out.push(`${id} ${want.qualifiers.length} qualify, ${rows.length} listed`);
  }
  console.log(`Best-rated pages: ${out.join('; ')}`);
+}
+// P1-12: raster Organization logo (>=112 px) on the home page, referenced by @id from every WebPage;
+// guide Articles carry an image and the single author name.
+{
+ const home=JSON.parse(pages.get('index.html').match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1])['@graph'];
+ const org=home.find(n=>n['@type']==='Organization');
+ assert.ok(org&&/\.png$/.test(org.logo.url)&&org.logo.width>=112,'Organization raster logo');await access(path.join(root,'assets/roster-logo-512.png'));
+ for(const [rel,html] of pages){const g=JSON.parse(html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1])['@graph'];
+  for(const n of g.filter(n=>n['@type']==='WebPage'))assert.equal(n.publisher?.['@id'],org['@id'],`WebPage publisher @id: ${rel}`);
+  for(const n of g.filter(n=>n['@type']==='Article'))assert.ok(n.image&&n.author?.name==='Roster editorial team'&&n.datePublished&&n.dateModified>=n.datePublished,`Article image/author/dates: ${rel}`);}
+}
+// P2-9 / P2-7: areaServed is a place, never the string "islandwide"; company pages link their town
+// pages (max 6) and the trade's hub guide; every blog post links related posts.
+{
+ let townLinked=0,areaServed=0;
+ for(const [rel,html] of pages){
+  if(rel.startsWith('company/')&&!html.includes('data-retired-listing')){
+   const biz=JSON.parse(html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1])['@graph'].find(n=>String(n['@id']).endsWith('#business'));
+   if(biz.areaServed!==undefined){areaServed++;assert.ok(typeof biz.areaServed==='object',`areaServed must be a place: ${rel}`);}
+   const related=html.match(/<section[^>]+data-related-links>([\s\S]*?)<\/section>/)?.[1]||'';
+   const towns=[...related.matchAll(/href="(\/roster\/[a-z-]+\/[a-z0-9-]+\/)"/g)].filter(m=>!/\/guide\/$/.test(m[1]));
+   assert.ok(towns.length<=6,`More than 6 town links: ${rel}`);if(towns.length)townLinked++;
+  }
+  if(/^blog\/[a-z0-9-]+\/index\.html$/.test(rel))assert.ok((html.match(/<section[^>]+data-related-posts>[\s\S]*?<\/section>/)?.[0].match(/href="\/roster\/blog\//g)||[]).length>=2,`Related posts: ${rel}`);
+ }
+ assert.ok(townLinked>100,'Company pages should link their town pages');
+ console.log(`Company pages linking town pages: ${townLinked}; areaServed as places: ${areaServed}`);
+}
+// P1-17: branded 404 under roster/, noindex, no canonical, links to the hubs, search and symptom finder.
+{
+ const nf=await readFile(path.join(root,'404.html'),'utf8');
+ assert.ok(nf.includes('data-not-found')&&/<meta name="robots" content="noindex/.test(nf)&&!nf.includes('rel="canonical"'),'404 page');
+ for(const href of ['/roster/search/','/roster/what-service-do-i-need/','/roster/aircon-servicing/','/roster/plumbing/','/roster/electrician/','/roster/handyman/','/roster/home-cleaning/'])assert.ok(nf.includes(`href="${href}"`),`404 link ${href}`);
 }
 const claim=pages.get('claim-listing/index.html');
 assert.match(claim, /<input id="claim-company"[^>]+list="claim-companies"/);

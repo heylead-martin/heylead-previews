@@ -76,7 +76,16 @@ Not switched by the flag: the AI-crawler policy (strategy section 5.5) is Martin
   `SITE_ORIGIN`. They carry no company contact data. For crawlers that look at the domain root,
   copy or link them there at launch.
 
-## 5. Launch checklist (in order)
+## 5. Not-found page (pending Martin)
+
+The build writes a branded `roster/404.html` (always `noindex`, no canonical) with links to the five
+hubs, search and the symptom finder. **GitHub Pages only serves the 404.html at the repository root**,
+so until a root `404.html` exists (or the site moves to its own host), missing `/roster/...` URLs still
+show the generic GitHub Pages page. The root is Martin's to change: copy or adapt `roster/404.html`
+there (its links are root-relative under `/roster/`). Other hosts (Cloudflare Pages, Netlify) can be
+pointed at `roster/404.html` directly.
+
+## 6. Launch checklist (in order)
 
 1. Martin approves launch and picks the domain.
 2. Rotate the preview passwords and remove `/auth-config.js` and `/auth.js` from the public host.

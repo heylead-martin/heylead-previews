@@ -38,7 +38,10 @@ const editorialByPath = new Map(editorialGuides.map(g=>[g.path,g]));
 const editorialByDirectory = new Map(editorialGuides.filter(g=>g.directoryPath).map(g=>[g.directoryPath,g]));
 const methodGuide = {...parseGuide(await readFile(path.join(root,"content/how-it-works.md"),"utf8"),"method"),id:"method",slug:"how-it-works",trade:"all",h1:"How Roster works",updated:"2026-10-12",path:"/roster/how-it-works/"};
 await import('./scripts/build-accounts.mjs');
+// P1-14: WebP copies (<=256 px, ~30 KB) are what pages serve; originals stay as the import record.
+console.log('Logo copies:', execFileSync('python3', [path.join(root, 'scripts/optimize-logos.py')], {encoding:'utf8'}).trim());
 console.log('Logo framing:', execFileSync('python3', [path.join(root, 'scripts/fit-logos.py')], {encoding:'utf8'}).trim());
+const logoVariants = JSON.parse(await readFile(path.join(root, 'data/logo-variants.json'), 'utf8'));
 const mapPins=JSON.parse(await readFile(path.join(root,"data/map-pins.json"),"utf8"));
 const homeOutline=JSON.parse(await readFile(path.join(root,"data/singapore-outline.json"),"utf8"));
 const indexVersions={};
@@ -626,6 +629,8 @@ function shortlist(companies, service) {
 
 function pageShell({ title, description, canonicalPath, current, jsonLd, body, bodyClass = "", shareImage = "" }) {
   if (!shareImage && editorialByPath.has(canonicalPath)) shareImage = abs(heroPhoto(editorialByPath.get(canonicalPath).trade).sizes[1200].src);
+  // P1-11: every page has a share image; the default is the brand card (scripts/make-brand-images.py).
+  if (!shareImage) shareImage = abs('/roster/assets/og-default.png');
   // Social crawlers ignore relative image URLs.
   if (shareImage) shareImage = new URL(shareImage, origin).href;
   const parked={'sign-in':'Sign in','sign-up':'Account sign-up','forgot-password':'Password reset','reset-password':'New password','account':'Your account','auth/callback':'Account sign-in','saved':'Saved companies','matches':'Job matching'}[canonicalPath.replace(/^\/roster\/|\/$/g,'')];
@@ -666,6 +671,8 @@ ${LAUNCH ? "" : '<script src="/auth-config.js"></script>\n<script src="/auth.js"
 ${shareImage ? `<meta property="og:image" content="${esc(shareImage)}"><meta name="twitter:image" content="${esc(shareImage)}">` : ""}
 <link rel="canonical" href="${canonical}">
 <link rel="icon" href="/roster/assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/roster/assets/roster-logo-512.png" type="image/png" sizes="512x512">
+<link rel="apple-touch-icon" href="/roster/assets/roster-logo-512.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,560;1,9..144,460&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
@@ -713,7 +720,18 @@ ${bodyClass === "directory-page" ? `<script type="module" src="/roster/assets/ca
     throw new Error("Outbound form hook in " + canonicalPath);
   }
   // No visible capture dates (lib/no-dates.mjs); dates stay in the data and the JSON-LD.
-  return stripCaptureDates(html);
+  return stripCaptureDates(oncePerPage(html));
+}
+
+// Review P2-2: the rate-table disclaimer and the long table caption repeat under every table (135
+// times on 62 town pages). Keep the first of each per page; later tables keep a short caption.
+const RATE_DISCLAIMER = "Each figure is one company's own advertised rate with its conditions, not a market average or a quote.";
+const RATE_CAPTION = 'Lowest matching advertised rate per company, in SGD as published. "From" marks a starting price and ranges are shown in full. Check the source for minimums, GST and inclusions.';
+function oncePerPage(html) {
+  let said = false, captioned = false;
+  return html
+    .replace(new RegExp(String.raw`(<p>)?( ?)${RATE_DISCLAIMER.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}(</p>)?`, 'g'), (m, open, space, close) => said ? (open && close ? '' : open || close || '') : (said = true, m))
+    .replace(new RegExp(RATE_CAPTION.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g'), m => captioned ? 'Lowest matching rate per company, in SGD as published.' : (captioned = true, m));
 }
 
 /* ---------- JSON-LD ---------- */
@@ -781,7 +799,10 @@ function webPage(title, canonicalPath, description) {
     "@type": "WebPage",
     name: title,
     url: abs(canonicalPath),
-    description
+    description,
+    // P1-12: the site and its publisher are referenced by @id (defined once, on the home page).
+    isPartOf: { "@id": origin + "/#website" },
+    publisher: { "@id": origin + "/#organization" }
   };
 }
 
@@ -882,7 +903,9 @@ function renderCollection(spec, companies, crumbs) {
     current: spec.service ? "/roster/aircon-servicing/" : canonicalPath,
     jsonLd,
     body,
-    bodyClass: "directory-page"
+    bodyClass: "directory-page",
+    // Trade hubs share the trade's credited Pexels hero (no faces); search uses the brand card.
+    shareImage: tradeId !== "all" && heroPhoto(tradeId) ? abs(heroPhoto(tradeId).sizes[1200].src) : ""
   });
 }
 
@@ -914,29 +937,26 @@ function profileBusinessGraph(company, content, canonicalPath) {
   return [business, ...services];
 }
 
-// Release excerpts are text windows that can start or stop mid-word. Mark them as excerpts and drop a
-// leading fragment that never appears as a whole word elsewhere in the sourced copy.
-let excerptWords;
-function excerptView(value) {
-  let text = String(value || '').trim();
-  if (text.length < 60) return text;
-  if (/^[a-z]/.test(text)) {
-    excerptWords ||= new Set(Object.values(profileContent).flatMap(p => [...(p.about || []), ...(p.services || []).map(s => s.explanation || '')]).flatMap(t => String(t).toLowerCase().match(/(?<=\s)[a-z’']+/g) || []));
-    const first = text.match(/^[a-z’']+/)[0];
-    if (!excerptWords.has(first)) text = text.slice(first.length).replace(/^[^\sA-Za-z0-9]*\s+/, '');
-    text = `…${text}`;
-  }
-  return /[.!?)"”…]$/.test(text) ? text : `${text}…`;
+// Review §2a evidence clutter: each price row keeps its own facts and source link, while notes that
+// repeat on every row move to one page-level note (in the pricing intro, lib/expanded.mjs). The data is unchanged.
+//  - "Calculated per-unit price" only when the published total covers more than one unit
+//  - "Per job (inferred from the job type; confirm with the company)" -> "Per job"
+//  - "GST: not stated" and "Quantity: 1" dropped; a stated GST note stays
+function tidyDetail(detail) {
+  return String(detail || '').split(/\.\s+(?=[A-Z])/).map(s => s.replace(/\.$/, '').trim())
+    .filter(s => s && !/^GST: not stated$/i.test(s) && !/^Quantity: 1$/.test(s) && !/^Calculated per-unit price: .*\(1 unit in the published total\)$/.test(s))
+    .map(s => s.replace(/\s*\(inferred from the job type; confirm with the company\)/, ''))
+    .join('. ').replace(/^(.+)$/, '$1.');
 }
-
 function renderServiceExplanation(service) {
   const guide = service.guide ? serviceGuides[service.guide] : null;
   if (service.guide && !guide?.body) throw new Error(`Missing guide: ${service.guide}`);
   const prices = service.prices.map(priceView);
-  const reference = (p) => `<details class="price-original"><summary>Price reference & conditions</summary>${p.excerpt?`<p>${esc(p.excerpt)}</p>`:''}${p.sourceUrl?`<span class="data-source"><a href="${esc(p.sourceUrl)}">View price on company website</a><span>Checked ${esc(String(p.capturedAt||'2026-10-10').slice(0,10))}</span></span>`:''}</details>`;
-  const options = prices.length ? `<div class="service-options" aria-label="Service price options">${prices.map(p=>`<div class="service-option"><div class="service-option-heading"><h3>${esc(p.label || service.name)}</h3>${prices.length>1?`<strong>${esc(p.price)}</strong>`:''}</div>${p.indicative?'<span class="claim-label">General price guide, not a company quote</span>':''}${p.detail?`<p class="price-conditions">${esc(p.detail)}</p>`:''}${p.excerpt||p.sourceUrl?reference(p):''}</div>`).join('')}</div>` : '';
+  const reference = (p) => `<details class="price-original"><summary>Price reference & conditions</summary>${p.excerpt?`<p>${esc(p.excerpt)}</p>`:''}${p.sourceUrl?`<span class="data-source"><a href="${esc(p.sourceUrl)}">View price on company website</a></span>`:''}</details>`;
+  const options = prices.length ? `<div class="service-options" aria-label="Service price options">${prices.map(p=>{const detail=tidyDetail(p.detail);return `<div class="service-option"><div class="service-option-heading"><h3>${esc(p.label || service.name)}</h3>${prices.length>1?`<strong>${esc(p.price)}</strong>`:''}</div>${p.indicative?'<span class="claim-label">General price guide, not a company quote</span>':''}${detail?`<p class="price-conditions">${esc(detail)}</p>`:''}${p.excerpt||p.sourceUrl?reference(p):''}</div>`;}).join('')}</div>` : '';
   const explanation = guide?.body || (service.imported ? serviceGuide(service.name,service.trade) : service.explanation);
-  return `<div class="service-explanation">${service.description?`<p class="service-context">${esc(service.description)}</p>`:''}${explanation?`<p>${esc(explanation)}</p>`:''}${options}${guide?.ask?`<div class="service-booking-question"><h3>Before you book</h3><p>${esc(guide.ask)}</p></div>`:''}${service.sourceUrl?`<details class="service-reference"><summary>Service reference</summary>${service.explanation?`<p>${esc(excerptView(service.explanation))}</p>`:''}<span class="data-source"><a href="${esc(service.sourceUrl)}">View service on company website</a><span>Checked ${esc(String(service.capturedAt||'2026-10-10').slice(0,10))}</span></span></details>`:''}</div>`;
+  // The service's source is one link named after the service, instead of a "Service reference" block.
+  return `<div class="service-explanation">${service.description?`<p class="service-context">${esc(service.description)}</p>`:''}${explanation?`<p>${esc(explanation)}</p>`:''}${options}${guide?.ask?`<div class="service-booking-question"><h3>Before you book</h3><p>${esc(guide.ask)}</p></div>`:''}${service.sourceUrl?`<p class="data-source service-source"><a href="${esc(service.sourceUrl)}">${esc(service.name)} on the company website</a></p>`:''}</div>`;
 }
 
 function renderServiceRow(service, index) {
@@ -964,7 +984,8 @@ function renderHome(grouped) {
     {
       "@type": "Organization",
       "@id": origin + "/#organization",
-      logo: abs("/roster/assets/favicon.svg"),
+      // P1-12: raster logo (Google needs at least 112 px); every other page refers to this node by @id.
+      logo: { "@type": "ImageObject", url: abs("/roster/assets/roster-logo-512.png"), width: 512, height: 512 },
       name: "Roster",
       url: origin + "/",
       description: "A sourced directory of home-service companies in Singapore."
@@ -1010,7 +1031,7 @@ function renderGuidePage(guide) {
   const crumbs=[{href:`/roster/${trade.slug}/`,label:trade.name},...(hub.id!==guide.id?[{href:hub.path,label:hub.label}]:[]),{href:guide.path,label:guide.directoryPath?'Guide':guide.label}];
   const image=abs(heroPhoto(guide.trade).sizes[1200].src);
   const body=renderCrumbs(crumbs)+`<header class="guide-hero"><div><p class="kicker">THE ROSTER HOME GUIDE</p><h1>${esc(guide.h1)}</h1><p class="guide-dek">${esc(guide.description)}</p><div class="guide-hero-actions"><a class="btn btn-solid" href="/roster/${trade.slug}/">Compare ${esc(trade.name.toLowerCase())} companies ${icon('arrow')}</a><a href="#guide">Read the guide</a></div></div><figure><img src="${heroPhoto(guide.trade).sizes[640].src}" width="600" height="400" alt="" fetchpriority="high"><figcaption><a href="${esc(heroPhoto(guide.trade).url)}">${esc(photoCredit(guide.trade))}</a></figcaption></figure></header>`+renderEditorial(guide,editorialGuides,{extra:(guide.hub?renderBestTeaser(guide.trade):'')+(guide.id==='AC-03'?renderGuidePrices()+renderAirconMatrix():guide.id==='AC-01'?renderAreasWeServe(tradeById('aircon')):renderSourcedRates(guide.id))});
-  const jsonLd=[webPage(guide.title,guide.path,guide.description),crumbsLd(crumbs),...editorialSchema(guide,origin),...(guide.hub?[{"@type":"ItemList",name:`${guide.label}: related guides`,itemListElement:editorialGuides.filter(g=>g.trade===guide.trade&&g.id!==guide.id).map((g,i)=>({"@type":"ListItem",position:i+1,name:g.label,url:abs(g.path)}))}]:[])];
+  const jsonLd=[webPage(guide.title,guide.path,guide.description),crumbsLd(crumbs),...editorialSchema(guide,origin,image),...(guide.hub?[{"@type":"ItemList",name:`${guide.label}: related guides`,itemListElement:editorialGuides.filter(g=>g.trade===guide.trade&&g.id!==guide.id).map((g,i)=>({"@type":"ListItem",position:i+1,name:g.label,url:abs(g.path)}))}]:[])];
   forbidSchema(jsonLd);
   return pageShell({title:guide.title,description:guide.description,canonicalPath:guide.path,current:`/roster/${trade.slug}/`,jsonLd,body,bodyClass:'guide-page',shareImage:image});
 }
@@ -1121,7 +1142,7 @@ ${rateTables}
 </div></section>`+renderFaq(faqs,`Questions about ${words.pro.toLowerCase()} in ${town}`);
   const jsonLd=[webPage(title,canonicalPath,description),crumbsLd(crumbs),faqLd(faqs)];
   forbidSchema(jsonLd);
-  return pageShell({title,description,canonicalPath,current:`/roster/${trade.slug}/`,jsonLd,body,bodyClass:'guide-page'});
+  return pageShell({title,description,canonicalPath,current:`/roster/${trade.slug}/`,jsonLd,body,bodyClass:'guide-page',shareImage:abs(heroPhoto(tradeId).sizes[1200].src)});
 }
 function areaCompanies(trade, town) { return townCoverage(publishedCompanies, trade, town); }
 
@@ -1263,6 +1284,12 @@ function renderBestOf(tradeId){
 /* ---------- Blog ---------- */
 
 const longDate = iso => new Date(iso+'T00:00:00Z').toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric',timeZone:'UTC'});
+// P2-7: each post links 3 related posts, same trade first (posts had only 2 inbound links each).
+function relatedPosts(post) {
+  const others=blogPosts.filter(p=>p.slug!==post.slug);
+  const list=[...others.filter(p=>p.trade===post.trade),...others.filter(p=>p.trade!==post.trade)].slice(0,3);
+  return list.length?`<section class="hub-blog" aria-labelledby="related-reads" data-related-posts><p class="kicker">KEEP READING</p><h2 id="related-reads">Related reads.</h2><ul class="areas-we-serve-links">${list.map(p=>`<li><a href="${p.path}">${esc(p.label)}</a></li>`).join('')}</ul></section>`:'';
+}
 function renderBlogPost(post) {
   // Hero photos are the five reviewed Pexels images; a post may borrow another trade's photo.
   const trade=tradeById(post.trade),hero=post.hero||post.trade,photo=heroPhoto(hero);
@@ -1270,7 +1297,7 @@ function renderBlogPost(post) {
   const crumbs=[{href:'/roster/blog/',label:'Blog'},{href:post.path,label:post.label}];
   const sources=post.sources.length?`<div class="guide-editor-note" data-blog-sources><strong>Sources</strong><ul>${post.sources.map(s=>`<li><a href="${esc(s.url)}">${esc(s.title)}</a></li>`).join('')}</ul><p>Prices come only from the sourced company rates in the Roster directory, shown with each company and capture date.</p></div>`:'';
   const body=renderCrumbs(crumbs)+`<header class="guide-hero"><div><p class="kicker">THE ROSTER BLOG</p><h1>${esc(post.h1)}</h1><p class="guide-dek">${esc(post.description)}</p><div class="guide-hero-actions"><a class="btn btn-solid" href="/roster/${trade.slug}/">Compare ${esc(trade.name.toLowerCase())} companies ${icon('arrow')}</a><a href="#${post.toc[0].id}">Start reading</a></div></div><figure><img src="${photo.sizes[640].src}" width="600" height="400" alt="" fetchpriority="high"><figcaption><a href="${esc(photo.url)}">${esc(photoCredit(hero))}</a></figcaption></figure></header>
-<section class="editorial" aria-label="${esc(post.h1)}"><div class="guide-layout"><aside class="guide-aside"><details open class="guide-toc"><summary>In this article</summary><nav aria-label="On this page">${post.toc.map((t,i)=>`<a href="#${t.id}"><span>${String(i+1).padStart(2,'0')}</span>${esc(t.title)}</a>`).join('')}</nav></details><a class="btn btn-solid" href="/roster/${trade.slug}/">Compare companies <span aria-hidden="true">→</span></a></aside><article class="guide-article" data-blog-post="${post.slug}"><div class="guide-byline"><span>By ${esc(blogAuthor)}</span><span>Updated <time datetime="${post.updated}">${longDate(post.updated)}</time></span><span>${Math.ceil(post.words/220)} min read</span></div><div class="guide-copy">${post.body}</div>${sources}</article></div></section>`;
+<section class="editorial" aria-label="${esc(post.h1)}"><div class="guide-layout"><aside class="guide-aside"><details open class="guide-toc"><summary>In this article</summary><nav aria-label="On this page">${post.toc.map((t,i)=>`<a href="#${t.id}"><span>${String(i+1).padStart(2,'0')}</span>${esc(t.title)}</a>`).join('')}</nav></details><a class="btn btn-solid" href="/roster/${trade.slug}/">Compare companies <span aria-hidden="true">→</span></a></aside><article class="guide-article" data-blog-post="${post.slug}"><div class="guide-byline"><span>By ${esc(blogAuthor)}</span><span>Updated <time datetime="${post.updated}">${longDate(post.updated)}</time></span><span>${Math.ceil(post.words/220)} min read</span></div><div class="guide-copy">${post.body}</div>${sources}</article></div></section>`+relatedPosts(post);
   const url=abs(post.path);
   const jsonLd=[webPage(post.title,post.path,post.description),crumbsLd(crumbs),{'@type':'Article','@id':url+'#article',headline:post.h1,name:post.h1,url,description:post.description,inLanguage:'en-SG',datePublished:post.updated,dateModified:post.updated,image:new URL(photo.sizes[1200].src,origin).href,author:{'@type':'Organization',name:blogAuthor,url:abs('/roster/how-it-works/')},publisher:{'@id':origin+'/#organization'},mainEntityOfPage:url,citation:post.sources.map(s=>s.url)},...(post.faqs.length?[faqLd(post.faqs)]:[])];
   forbidSchema(jsonLd);
@@ -1293,6 +1320,8 @@ function renderBlogIndex(posts) {
 /* ---------- Build ---------- */
 
 const presentation = JSON.parse(await readFile(path.join(root, "data", "presentation.json"), "utf8"));
+// Serve the optimised copy; logoAsset keeps the original's path and checksum.
+for (const entry of Object.values(presentation)) if (entry.logo && logoVariants[entry.logo]) entry.logo = logoVariants[entry.logo].src;
 const profileContent = JSON.parse(await readFile(path.join(root, "data", "profiles.json"), "utf8"));
 const serviceGuides = JSON.parse(await readFile(path.join(root, "data", "service-guides.json"), "utf8"));
 assertNoDashes(serviceGuides, "service-guides.json");
@@ -1371,10 +1400,19 @@ for (const trade of trades) written.push(await writePage(`${trade.slug}/best`,re
 for (const post of blogPosts) written.push(await writePage(`blog/${post.slug}`,renderBlogPost(post)));
 for (const c of areaCollisions) console.log(`Area page skipped, slug in use: ${c.slug}`);
 
+// P2-7: company pages link to the town pages they appear on (up to 6) and their trade's hub guide.
+const companyTowns=new Map();
+for(const p of areaPages)for(const c of areaCompanies(p.trade,p.town).town){if(!companyTowns.has(c.slug))companyTowns.set(c.slug,[]);companyTowns.get(c.slug).push(p);}
+function relatedLinks(company){
+  const towns=(companyTowns.get(company.slug)||[]).slice().sort((a,b)=>a.town.localeCompare(b.town)).slice(0,6);
+  const hubGuide=editorialGuides.find(g=>g.trade===company.category&&g.hub),trade=tradeById(company.category);
+  const links=[...towns.map(p=>`<a href="${p.path}">${esc(trade.name)} in ${esc(p.town)}</a>`),hubGuide?`<a href="${hubGuide.path}">${esc(hubGuide.label)}</a>`:''].filter(Boolean);
+  return links.length?`<section class="hub-blog related-links" aria-labelledby="related-${company.slug}" data-related-links><p class="kicker">MORE TO EXPLORE</p><h2 id="related-${company.slug}">${towns.length?`Where ${esc(company.name)} is listed`:'Before you book'}</h2><ul class="areas-we-serve-links">${links.map(l=>`<li>${l}</li>`).join('')}</ul></section>`:'';
+}
 for (const company of publishedCompanies) {
   written.push(await writePage(
     `company/${company.slug}`,
-    renderProfile(company, grouped[company.category])
+    renderProfile(company, grouped[company.category]).replace('\n</main>', `${relatedLinks(company)}\n</main>`)
   ));
 }
 
@@ -1429,6 +1467,14 @@ const sitemaps=buildSitemaps(sitemapFamilies);
 for(const child of sitemaps.children)await writeFile(path.join(root,child.file),child.xml);
 await writeFile(path.join(root,'sitemap.xml'),sitemaps.index);
 console.log(`Sitemaps: ${sitemaps.children.map(c=>`${c.file} ${c.count}`).join(', ')}`);
+// P1-17: branded 404 at roster/404.html: noindex (always), no canonical, links to hubs, search and the
+// symptom finder. GitHub Pages serves only the repository-root 404.html, which is Martin's (LAUNCH.md).
+{
+  const notFound=pageShell({title:'Page not found | Roster',description:'This Roster page does not exist. Browse home-service companies in Singapore by trade, search by name, or find the service you need.',canonicalPath:'/roster/404/',current:'',jsonLd:[],bodyClass:'guide-page',
+    body:`<header class="guide-hero guide-hero-method" data-not-found><div><p class="kicker">PAGE NOT FOUND</p><h1>We could not find that page.</h1><p class="guide-dek">The link may be old, or the listing may have moved. Start from a trade, search by company name, or describe the problem.</p><div class="guide-hero-actions"><a class="btn btn-solid" href="/roster/search/">Search companies ${icon('arrow')}</a><a href="/roster/what-service-do-i-need/">What service do I need?</a></div></div></header><section class="browse-more"><p class="kicker">BROWSE BY TRADE</p><h2>Home services in Singapore.</h2><div>${trades.map(t=>`<a href="/roster/${t.slug}/">${icon(tradeIcon[t.id])}<span>${esc(t.name)}</span>${icon('arrow')}</a>`).join('')}</div></section>`})
+    .replace(/<link rel="canonical"[^>]*>\n?/,'').replace(/<meta property="og:url"[^>]*>\n?/,'').replace(/<meta name="robots" content="[^"]*">/,`<meta name="robots" content="${LAUNCH?'noindex, follow':'noindex, nofollow, noarchive'}">`);
+  await writeFile(path.join(root,'404.html'),notFound);
+}
 // P1-10: llms.txt and llms-full.txt, from the same data and SITE_ORIGIN.
 const llms=renderLlms({trades,guides:editorialGuides,posts:blogPosts,bestPath,bestLabel,best:BEST_OF,dataDate,counts:Object.fromEntries(trades.map(t=>[t.id,grouped[t.id].length]))});
 await writeFile(path.join(root,'llms.txt'),llms.short);
