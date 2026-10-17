@@ -49,7 +49,7 @@ The table below sums up the differences in plain terms. Neither option is better
 Table: Part-time cleaner or deep clean at a glance
 | | Part-time cleaner | Deep clean |
 |---|---|---|
-| Best suited to | Keeping a home tidy week to week | Resetting a home that needs more than routine care |
+| Suited to | Keeping a home tidy week to week | Resetting a home that needs more than routine care |
 | How often | Regular, on an agreed schedule | Occasional, when the home needs it |
 | Typical scope | Surface tasks across each room | Hidden and built-up areas as well as surfaces |
 | Who usually comes | One cleaner, often the same person | Often a team with heavier equipment; ask |
@@ -60,7 +60,7 @@ Table: Part-time cleaner or deep clean at a glance
 
 The two also combine well. One approach is to book a deep clean first, then start a part-time cleaner to keep that standard, and add another deep clean once or twice a year or before a festive period.
 
-Combining them works best when the two scopes do not overlap. Ask the part-time cleaner to focus on the regular list, and keep deeper tasks such as degreasing the hood, scrubbing grout or cleaning inside the fridge for the deep clean. That way you are not paying a deep-clean team for work your regular cleaner already does, and your regular cleaner is not asked to catch up on tasks that need different equipment.
+Combining them works well when the two scopes do not overlap. Ask the part-time cleaner to focus on the regular list, and keep deeper tasks such as degreasing the hood, scrubbing grout or cleaning inside the fridge for the deep clean. That way you are not paying a deep-clean team for work your regular cleaner already does, and your regular cleaner is not asked to catch up on tasks that need different equipment.
 
 > Tip: Keep one shared checklist that marks which tasks belong to regular visits and which belong to the occasional deep clean. Share it with both companies.
 

@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import {readFile,writeFile} from 'node:fs/promises';
 import {fileURLToPath} from 'node:url';
 import {loadGuides,wordCount} from '../lib/editorial.mjs';
+import {sitemapXml} from '../lib/sitemaps.mjs';
 import {loadBlog,proseChunks,officialHosts} from '../lib/blog.mjs';
 const root=fileURLToPath(new URL('../',import.meta.url));
 const guides=await loadGuides(root),results=[];
@@ -32,9 +33,16 @@ for(const g of guides){
   results.push({id:g.id,path:g.path,words:g.words,faqs:g.faqs.length,sourceReferences:g.sources.length,updated:g.updated});
 }
 const method=await readFile(`${root}/content/how-it-works.md`,'utf8');
+// Roster's own copy never says "best"; that word is kept for the five best-rated pages (built from
+// lib/best-of.mjs) and for company names and quoted company text. check-site applies the page rule.
+{
+ const {readdir}=await import('node:fs/promises');
+ const own=[['content/how-it-works.md',method],...await Promise.all(guides.map(async g=>[`content/guides/${g.id}.md`,g.markdown])),...await Promise.all((await readdir(`${root}/content/blog`)).filter(f=>f.endsWith('.md')).map(async f=>[`content/blog/${f}`,await readFile(`${root}/content/blog/${f}`,'utf8')])),['data/service-guides.json',await readFile(`${root}/data/service-guides.json`,'utf8')]];
+ for(const [file,text] of own)assert.ok(!/\bbest\b/i.test(text.replace(/\]\([^)]*\)/g,']')),`"best" in Roster's own copy: ${file}: ${text.match(/.{0,40}\bbest\b.{0,30}/i)?.[0]}`);
+}
 assert.ok(wordCount(method)>=1000);
 // The sitemap lists the launch set for review; every page in it stays noindex.
-const sitemap=await readFile(`${root}/sitemap.xml`,'utf8');
+const sitemap=await sitemapXml(root);
 for(const g of guides)assert.ok(sitemap.includes(`<loc>https://previews.heylead.com${g.path}</loc>`),`${g.id}: guide missing from sitemap`);
 // Blog posts: length, contents, visible FAQ with matching schema, two to four spread-out CTAs,
 // official sources only, Article schema and no number or price that is not sourced.

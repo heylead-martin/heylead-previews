@@ -11,14 +11,30 @@ const base={slug:'test',name:'Example Company',area:'Bedok',trade:'Plumbing',cat
 test('Full and compact cards preserve explicit quote evidence after catalogue rendering',()=>{
  for(const renderer of [renderCard,renderCompactCard]){
   const html=renderer(base);
-  for(const text of ['Quote on request','Their site: &quot;We quote before work.&quot;','https://example.com/prices','2026-10-11',noRatingText])assert.ok(html.includes(text));
+  for(const text of ['Quote on request','Their site: &quot;We quote before work.&quot;','https://example.com/prices',noRatingText,'Example service price'])assert.ok(html.includes(text),text);
+  // No visible capture dates on cards (Martin, 18 Oct 2026); the date stays in the data.
+  assert.ok(!html.includes('2026-10-11')&&!/Captured/.test(html));
   assert.ok(!html.includes('data-save='));
  }
 });
-test('Initials have no label; every real logo has a removal route',()=>{
+test('Initials have no label; card logos carry no note, the company page logo keeps the removal route',()=>{
  assert.doesNotMatch(renderLogo(base),/LOGO|<img|logo-owner-note/);
- const html=renderLogo({...base,logo:'/roster/assets/logos/example.png'});
- assert.match(html,/Logos belong to their owners/);assert.match(html,/href="\/roster\/logo-removal\/"/);
+ const card=renderLogo({...base,logo:'/roster/assets/logos/example.png'});
+ assert.match(card,/<img/);assert.doesNotMatch(card,/Logos belong to their owners/);
+ const page=renderLogo({...base,logo:'/roster/assets/logos/example.png'},true);
+ assert.match(page,/Logos belong to their owners/);assert.match(page,/href="\/roster\/logo-removal\/"/);
+});
+test('Cards: Google Maps rating without a date, one price label, no self-reported sentence',()=>{
+ const c={...base,average:{value:4.8,count:120,sourceCount:2,sources:[{name:'Google Maps',sourceUrl:'https://maps.google.com/?cid=1',rating:4.9,count:100},{name:'Carousell',sourceUrl:'https://carousell.sg/x'}]},
+  selfReportedRating:{rating:4.9,count:370,source_url:'https://example.com'},quoteEvidence:null,price:'From $19.5',priceDetail:'General service, 1 unit. See service details for inclusions.'};
+ for(const renderer of [renderCard,renderCompactCard]){
+  const html=renderer(c);
+  assert.match(html,/<strong>4\.9<\/strong>[\s\S]*Google Maps[\s\S]*100 reviews/);
+  assert.doesNotMatch(html,/The company says|20\d\d-\d\d-\d\d|Average rating|Published pricing|See published prices/);
+  assert.equal((html.match(/Example service price/g)||[]).length,1);
+  assert.match(html,/From S\$19\.50<\/strong><span class="price-context">General service, 1 unit\.<\/span>/);
+ }
+ assert.match(renderCard({...c,price:'See published prices'}),/Ask for a quote<\/strong><span class="price-context">No published price found yet/);
 });
 test('Self-reported scores stay plain text and never supply sorting values',()=>{
  const selfReportedRating={rating:5,count:9000,source_url:'https://example.com/reviews'};

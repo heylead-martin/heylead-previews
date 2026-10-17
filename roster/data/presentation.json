@@ -431,7 +431,7 @@
   "alpha-omega-trinity-pte-ltd": {
     "published": true,
     "price": "See published prices",
-    "detail": "4 sourced pricing entries. Confirm the job, inclusions and total.",
+    "detail": "3 sourced pricing entries. Confirm the job, inclusions and total.",
     "photos": []
   },
   "alpine-aire-services": {
@@ -491,6 +491,18 @@
       "sourceUrl": "https://www.airconnection.com.sg/",
       "originalUrl": "https://airconnection.com.sg/wp-content/uploads/2025/11/High-Res-logo-Air-Connection-Design-Pte-Ltd.png",
       "capturedAt": "2026-10-11"
+    },
+    "photos": []
+  },
+  "koomax-engineering-pte-ltd": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "logoReview": {
+      "status": "needs-review",
+      "reason": "r10: selected automatically (touch-icon icon); not visually checked",
+      "sourceUrl": "https://koomax.com.sg/",
+      "checkedAt": "2026-10-15T12:58+03:00"
     },
     "photos": []
   },
@@ -728,7 +740,7 @@
   "decom-air-con-engineering-service-pte-ltd": {
     "published": true,
     "price": "See published prices",
-    "detail": "4 sourced pricing entries. Confirm the job, inclusions and total.",
+    "detail": "1 sourced pricing entries. Confirm the job, inclusions and total.",
     "logo": "/roster/assets/logos/200408501G-dde584504ff8.webp",
     "logoAsset": {
       "localPath": "logos/200408501G.webp",
@@ -743,7 +755,7 @@
   "easy-cool-engineering-pte-ltd": {
     "published": true,
     "price": "See published prices",
-    "detail": "7 sourced pricing entries. Confirm the job, inclusions and total.",
+    "detail": "23 sourced pricing entries. Confirm the job, inclusions and total.",
     "logo": "/roster/assets/logos/201617720E-6809fd8bd30a.webp",
     "logoAsset": {
       "localPath": "logos/201617720E.webp",
@@ -758,7 +770,7 @@
   "ec-aircon-services-pte-ltd": {
     "published": true,
     "price": "See published prices",
-    "detail": "12 sourced pricing entries. Confirm the job, inclusions and total.",
+    "detail": "13 sourced pricing entries. Confirm the job, inclusions and total.",
     "logo": "/roster/assets/logos/202133196K-2fcda559e57f.jpg",
     "logoAsset": {
       "localPath": "logos/202133196K.jpg",
@@ -1316,7 +1328,7 @@
   "snowflake-aircon-services": {
     "published": true,
     "price": "See published prices",
-    "detail": "9 sourced pricing entries. Confirm the job, inclusions and total.",
+    "detail": "14 sourced pricing entries. Confirm the job, inclusions and total.",
     "logo": "/roster/assets/logos/T21LL0568D-e765244cb254.png",
     "logoAsset": {
       "localPath": "logos/T21LL0568D.png",
@@ -1466,7 +1478,7 @@
   "xool-aircon-experts-no-1-rated-service-provider": {
     "published": true,
     "price": "See published prices",
-    "detail": "5 sourced pricing entries. Confirm the job, inclusions and total.",
+    "detail": "7 sourced pricing entries. Confirm the job, inclusions and total.",
     "photos": []
   },
   "yl-integrated-pte-ltd": {
@@ -1517,6 +1529,21 @@
       "sourceUrl": "https://avvelectrical.com/",
       "originalUrl": "https://avvelectrical.com/wp-content/uploads/2025/12/Avv-Logo.png",
       "capturedAt": "2026-10-11"
+    },
+    "photos": []
+  },
+  "b-w-integrated-services-b-w-builders-private-limited": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "logo": "/roster/assets/logos/201530148H-73d97182ef0c.png",
+    "logoAsset": {
+      "localPath": "logos/201530148H.png",
+      "sha256": "73d97182ef0c7734cdf273aa0d06a9937007273d770380327da213a16f057979",
+      "src": "/roster/assets/logos/201530148H-73d97182ef0c.png",
+      "sourceUrl": "https://bwis.com.sg/",
+      "originalUrl": "https://bwis.com.sg/wp-content/uploads/2025/02/BWIS-Logo_Version02_FA.png",
+      "capturedAt": "2026-10-15"
     },
     "photos": []
   },
@@ -2031,6 +2058,12 @@
       "originalUrl": "https://ushenge.com/wp-content/uploads/2024/02/U-Sheng-logo.png",
       "capturedAt": "2026-10-11"
     },
+    "photos": []
+  },
+  "united-electricians": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
     "photos": []
   },
   "yong-jin-solutions-engineering-pte-ltd": {
@@ -3305,7 +3338,7 @@
   "same-day-aircon-servicing-repair": {
     "published": true,
     "price": "See published prices",
-    "detail": "3 sourced pricing entries. Confirm the job, inclusions and total.",
+    "detail": "7 sourced pricing entries. Confirm the job, inclusions and total.",
     "logo": "/roster/assets/logos/gm-12171621661658341015-8066338a02c9.jpg",
     "logoAsset": {
       "localPath": "logos/gm-12171621661658341015.jpg",
@@ -3479,7 +3512,7 @@
   "afix-sg": {
     "published": true,
     "price": "See published prices",
-    "detail": "3 sourced pricing entries. Confirm the job, inclusions and total.",
+    "detail": "6 sourced pricing entries. Confirm the job, inclusions and total.",
     "photos": []
   },
   "just-cool-aircon-engineering-pte-ltd": {
@@ -3518,7 +3551,7 @@
   "thetop-aircon-service": {
     "published": true,
     "price": "See published prices",
-    "detail": "11 sourced pricing entries. Confirm the job, inclusions and total.",
+    "detail": "24 sourced pricing entries. Confirm the job, inclusions and total.",
     "logo": "/roster/assets/logos/gm-11600662789321647147-6f4c026a89c9.png",
     "logoAsset": {
       "localPath": "logos/gm-11600662789321647147.png",
@@ -4016,7 +4049,7 @@
   "allhouseworks-renovation-maintenance-pte-ltd": {
     "published": true,
     "price": "See published prices",
-    "detail": "5 sourced pricing entries. Confirm the job, inclusions and total.",
+    "detail": "7 sourced pricing entries. Confirm the job, inclusions and total.",
     "logo": "/roster/assets/logos/gm-15269720484508506428-ad99170e248b.webp",
     "logoAsset": {
       "localPath": "logos/gm-15269720484508506428.webp",
@@ -4154,7 +4187,7 @@
   "sekihiro-aircon": {
     "published": true,
     "price": "See published prices",
-    "detail": "8 sourced pricing entries. Confirm the job, inclusions and total.",
+    "detail": "9 sourced pricing entries. Confirm the job, inclusions and total.",
     "logo": "/roster/assets/logos/gm-9447769784356549271-c98afadfdcde.webp",
     "logoAsset": {
       "localPath": "logos/gm-9447769784356549271.webp",
@@ -4682,7 +4715,7 @@
   "wefix4u": {
     "published": true,
     "price": "See published prices",
-    "detail": "6 sourced pricing entries. Confirm the job, inclusions and total.",
+    "detail": "5 sourced pricing entries. Confirm the job, inclusions and total.",
     "logo": "/roster/assets/logos/gm-17226586840433495699-95d3edddf0b1.png",
     "logoAsset": {
       "localPath": "logos/gm-17226586840433495699.png",
@@ -5714,7 +5747,7 @@
   "repairhome-sg": {
     "published": true,
     "price": "See published prices",
-    "detail": "14 sourced pricing entries. Confirm the job, inclusions and total.",
+    "detail": "11 sourced pricing entries. Confirm the job, inclusions and total.",
     "logo": "/roster/assets/logos/gm-9462731935963745220-95f901a868d8.png",
     "logoAsset": {
       "localPath": "logos/gm-9462731935963745220.png",
@@ -7328,7 +7361,7 @@
   "spower-electrician-services": {
     "published": true,
     "price": "See published prices",
-    "detail": "3 sourced pricing entries. Confirm the job, inclusions and total.",
+    "detail": "5 sourced pricing entries. Confirm the job, inclusions and total.",
     "logo": "/roster/assets/logos/gm-16833537308032613403-78b63e215868.webp",
     "logoAsset": {
       "localPath": "logos/gm-16833537308032613403.webp",
@@ -7373,7 +7406,7 @@
   "aircon-service-chemical-wash-overhaul-yishun": {
     "published": true,
     "price": "See published prices",
-    "detail": "6 sourced pricing entries. Confirm the job, inclusions and total.",
+    "detail": "18 sourced pricing entries. Confirm the job, inclusions and total.",
     "photos": []
   },
   "a-power-electrical": {
@@ -7619,7 +7652,7 @@
   "konnect-aircon-servicing": {
     "published": true,
     "price": "See published prices",
-    "detail": "11 sourced pricing entries. Confirm the job, inclusions and total.",
+    "detail": "13 sourced pricing entries. Confirm the job, inclusions and total.",
     "logo": "/roster/assets/logos/gm-13636943202391171328-6f362a7d0d44.png",
     "logoAsset": {
       "localPath": "logos/gm-13636943202391171328.png",
@@ -7793,7 +7826,7 @@
   "airvice-chapter": {
     "published": true,
     "price": "See published prices",
-    "detail": "12 sourced pricing entries. Confirm the job, inclusions and total.",
+    "detail": "13 sourced pricing entries. Confirm the job, inclusions and total.",
     "photos": []
   },
   "thl-hq-aircon": {
@@ -7814,7 +7847,7 @@
   "city-cooling-pte-ltd-aircon-specialist-singapore": {
     "published": true,
     "price": "See published prices",
-    "detail": "7 sourced pricing entries. Confirm the job, inclusions and total.",
+    "detail": "20 sourced pricing entries. Confirm the job, inclusions and total.",
     "logo": "/roster/assets/logos/gm-3508651125073605305-ed738368a2f8.png",
     "logoAsset": {
       "localPath": "logos/gm-3508651125073605305.png",
@@ -8168,7 +8201,7 @@
   "singapore-carpet-cleaning-pte-ltd": {
     "published": true,
     "price": "See published prices",
-    "detail": "3 sourced pricing entries. Confirm the job, inclusions and total.",
+    "detail": "4 sourced pricing entries. Confirm the job, inclusions and total.",
     "logo": "/roster/assets/logos/gm-2496747766179303008-9e652c6ce18d.png",
     "logoAsset": {
       "localPath": "logos/gm-2496747766179303008.png",
@@ -8645,7 +8678,7 @@
   "smartcool-aircon-servicing-singapore": {
     "published": true,
     "price": "See published prices",
-    "detail": "3 sourced pricing entries. Confirm the job, inclusions and total.",
+    "detail": "36 sourced pricing entries. Confirm the job, inclusions and total.",
     "logo": "/roster/assets/logos/gm-12594718217296756408-c65290801a54.jpg",
     "logoAsset": {
       "localPath": "logos/gm-12594718217296756408.jpg",
@@ -9044,10 +9077,25 @@
     },
     "photos": []
   },
+  "coolbest-aircon-servicing": {
+    "published": true,
+    "price": "See published prices",
+    "detail": "1 sourced pricing entries. Confirm the job, inclusions and total.",
+    "logo": "/roster/assets/logos/web-coolbestaircon-com-884fb3ac2a44.gif",
+    "logoAsset": {
+      "localPath": "logos/web-coolbestaircon-com.gif",
+      "sha256": "884fb3ac2a44abd8d1258587d89383a7b2b95d2e0e30cc03d37c4a8226ecb79d",
+      "src": "/roster/assets/logos/web-coolbestaircon-com-884fb3ac2a44.gif",
+      "sourceUrl": "https://coolbestaircon.com/",
+      "originalUrl": "https://coolbestaircon.com/wp-content/uploads/2017/10/cool-best-logo.gif",
+      "capturedAt": "2026-10-15"
+    },
+    "photos": []
+  },
   "airmaxx-aircon-pte-ltd": {
     "published": true,
     "price": "See published prices",
-    "detail": "2 sourced pricing entries. Confirm the job, inclusions and total.",
+    "detail": "33 sourced pricing entries. Confirm the job, inclusions and total.",
     "logo": "/roster/assets/logos/web-airmaxxaircon-com-27039866e735.png",
     "logoAsset": {
       "localPath": "logos/web-airmaxxaircon-com.png",
@@ -9059,15 +9107,33 @@
     },
     "photos": []
   },
-  "koomax-engineering-pte-ltd": {
+  "cool-world-aircon": {
     "published": false,
     "price": "Ask for a quote",
     "detail": "No company rate captured. Ask for a job-specific quote.",
-    "logoReview": {
-      "status": "needs-review",
-      "reason": "r10: selected automatically (touch-icon icon); not visually checked",
-      "sourceUrl": "https://koomax.com.sg/",
-      "checkedAt": "2026-10-15T12:58+03:00"
+    "logo": "/roster/assets/logos/web-coolworldaircon-com-sg-c517633b3804.png",
+    "logoAsset": {
+      "localPath": "logos/web-coolworldaircon-com-sg.png",
+      "sha256": "c517633b380451a26edd1d74e5921910a050dce312032a347529937af7831879",
+      "src": "/roster/assets/logos/web-coolworldaircon-com-sg-c517633b3804.png",
+      "sourceUrl": "https://www.coolworldaircon.com.sg/",
+      "originalUrl": "https://www.coolworldaircon.com.sg/assets/Cool-World-Aircon-logo.png",
+      "capturedAt": "2026-10-15"
+    },
+    "photos": []
+  },
+  "aircool-pte-ltd": {
+    "published": true,
+    "price": "See published prices",
+    "detail": "1 sourced pricing entries. Confirm the job, inclusions and total.",
+    "logo": "/roster/assets/logos/gm-3186479271670410904-fe9bc5c36bf9.png",
+    "logoAsset": {
+      "localPath": "logos/gm-3186479271670410904.png",
+      "sha256": "fe9bc5c36bf93287180cb0747426db95f58525ee3fb69cc4a056403689e5ac21",
+      "src": "/roster/assets/logos/gm-3186479271670410904-fe9bc5c36bf9.png",
+      "sourceUrl": "https://aircoolsg.sg/",
+      "originalUrl": "https://aircoolsg.sg/wp-content/uploads/2020/06/Web-Logo.png",
+      "capturedAt": "2026-10-15"
     },
     "photos": []
   },
@@ -9150,21 +9216,6 @@
     "published": true,
     "price": "See published prices",
     "detail": "1 sourced pricing entries. Confirm the job, inclusions and total.",
-    "photos": []
-  },
-  "b-w-integrated-services-b-w-builders-private-limited": {
-    "published": false,
-    "price": "Ask for a quote",
-    "detail": "No company rate captured. Ask for a job-specific quote.",
-    "logo": "/roster/assets/logos/web-bwis-com-sg-73d97182ef0c.png",
-    "logoAsset": {
-      "localPath": "logos/web-bwis-com-sg.png",
-      "sha256": "73d97182ef0c7734cdf273aa0d06a9937007273d770380327da213a16f057979",
-      "src": "/roster/assets/logos/web-bwis-com-sg-73d97182ef0c.png",
-      "sourceUrl": "https://bwis.com.sg/",
-      "originalUrl": "https://bwis.com.sg/wp-content/uploads/2025/02/BWIS-Logo_Version02_FA.png",
-      "capturedAt": "2026-10-15"
-    },
     "photos": []
   },
   "home-plumbers-singapore": {

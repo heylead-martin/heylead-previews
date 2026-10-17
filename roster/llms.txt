@@ -1,0 +1,30 @@
+# Roster
+
+> Roster is an unpaid directory of home-service companies in Singapore (aircon servicing, plumbing, electrical, handyman and home cleaning). Every price, rating and service area links to the company website or rating source it came from. Listings are unpaid and there is no commission.
+
+## Trade directories
+- [Aircon servicing](https://previews.heylead.com/roster/aircon-servicing/): 231 companies, with sourced prices, ratings and service areas.
+- [Plumbing](https://previews.heylead.com/roster/plumbing/): 100 companies, with sourced prices, ratings and service areas.
+- [Electrician](https://previews.heylead.com/roster/electrician/): 116 companies, with sourced prices, ratings and service areas.
+- [Handyman](https://previews.heylead.com/roster/handyman/): 99 companies, with sourced prices, ratings and service areas.
+- [Home cleaning](https://previews.heylead.com/roster/home-cleaning/): 192 companies, with sourced prices, ratings and service areas.
+
+## Guides and tools
+- [Aircon servicing prices](https://previews.heylead.com/roster/aircon/servicing-price/): published rates by number of units and unit size, with sources.
+- [What service do I need?](https://previews.heylead.com/roster/what-service-do-i-need/): match a home problem to the service to ask for.
+- [Home advice blog](https://previews.heylead.com/roster/blog/): 25 articles with official sources.
+
+## Ranked lists
+- [Best-rated aircon servicing companies](https://previews.heylead.com/roster/aircon-servicing/best/): ranked on the Google Maps rating with at least 20 reviews; score = (reviews × rating + 50 × 4.5) ÷ (reviews + 50).
+- [Best-rated plumbing companies](https://previews.heylead.com/roster/plumbing/best/): ranked on the Google Maps rating with at least 20 reviews; score = (reviews × rating + 50 × 4.5) ÷ (reviews + 50).
+- [Best-rated electrical companies](https://previews.heylead.com/roster/electrician/best/): ranked on the Google Maps rating with at least 20 reviews; score = (reviews × rating + 50 × 4.5) ÷ (reviews + 50).
+- [Best-rated handyman companies](https://previews.heylead.com/roster/handyman/best/): ranked on the Google Maps rating with at least 20 reviews; score = (reviews × rating + 50 × 4.5) ÷ (reviews + 50).
+- [Best-rated home cleaning companies](https://previews.heylead.com/roster/home-cleaning/best/): ranked on the Google Maps rating with at least 20 reviews; score = (reviews × rating + 50 × 4.5) ÷ (reviews + 50).
+
+## Method
+- [How Roster works](https://previews.heylead.com/roster/how-it-works/): how listings, prices, ratings and coverage are sourced.
+- Ratings: the headline rating is the Google Maps rating. Other sources are shown separately and never averaged in; self-reported scores are plain sentences.
+- Prices: each figure is one company's own published rate with its conditions, not a quote or a market average.
+- Data release: 2026-10-18.
+
+More detail: https://previews.heylead.com/roster/llms-full.txt

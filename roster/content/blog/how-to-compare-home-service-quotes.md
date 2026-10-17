@@ -80,7 +80,7 @@ A few warning signs are worth noticing before you commit.
 
 ## Putting the quotes side by side
 
-When you have your quotes, make a short list for each one: total price, what is included, call-out or inspection charge, minimum charge, warranty terms and whether it is in writing. The lowest total is not always the best value, but once everything is listed the real differences are usually easy to see.
+When you have your quotes, make a short list for each one: total price, what is included, call-out or inspection charge, minimum charge, warranty terms and whether it is in writing. The lowest total is not always the better deal, but once everything is listed the real differences are usually easy to see.
 
 If you are not sure where to start, area pages such as [handyman companies serving Tampines](/roster/handyman/tampines/) list the companies that name your town on their own websites, which is a quick way to build a shortlist.
 

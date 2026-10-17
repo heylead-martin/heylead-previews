@@ -18,7 +18,7 @@ A listing is not a certification of workmanship. Roster does not claim to have b
 
 ## What Recommended means
 
-Recommended ordering helps surface records with more useful information for comparison. It considers the completeness of the available service, pricing and other directory details, with eligible ratings and review counts used in the ordering. It is not a guarantee that the first company is the best choice for every household.
+Recommended ordering helps surface records with more useful information for comparison. It considers the completeness of the available service, pricing and other directory details, with eligible ratings and review counts used in the ordering. It is not a guarantee that the first company is the right choice for every household.
 
 The shortlist highlights companies with fuller details, while additional businesses remain available below it. You can change the sort to highest rated, most reviewed or name. A company cannot pay for a higher position in these directory results.
 

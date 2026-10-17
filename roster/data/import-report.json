@@ -1,6 +1,6 @@
 {
-  "sourceChecked": "2026-10-15",
-  "sourceRows": 6509,
+  "sourceChecked": "2026-10-18T01:23+03:00",
+  "sourceRows": 6494,
   "sourceProfiles": 878,
   "published": [
     {
@@ -172,6 +172,16 @@
       "id": "53208815L",
       "slug": "air-connection",
       "name": "Air Connection",
+      "categories": [
+        "aircon"
+      ],
+      "primaryTrade": "aircon",
+      "curated": false
+    },
+    {
+      "id": "lookup-aircon-koomax-sg",
+      "slug": "koomax-engineering-pte-ltd",
+      "name": "Koomax Engineering Pte Ltd",
       "categories": [
         "aircon"
       ],
@@ -1127,6 +1137,17 @@
       "curated": false
     },
     {
+      "id": "201530148H",
+      "slug": "b-w-integrated-services-b-w-builders-private-limited",
+      "name": "B+W Integrated Services (B+W Builders Private Limited)",
+      "categories": [
+        "handyman",
+        "electrician"
+      ],
+      "primaryTrade": "handyman",
+      "curated": false
+    },
+    {
       "id": "199302272G",
       "slug": "bsh-engineering-ptd-ltd",
       "name": "BAN SOON HENG ENGINEERING PTE LTD",
@@ -1535,6 +1556,16 @@
       "id": "200907466E",
       "slug": "u-sheng-pte-ltd",
       "name": "U SHENG PTE. LTD.",
+      "categories": [
+        "electrician"
+      ],
+      "primaryTrade": "electrician",
+      "curated": false
+    },
+    {
+      "id": "53331827X",
+      "slug": "united-electricians",
+      "name": "United Electrician Singapore",
       "categories": [
         "electrician"
       ],
@@ -5151,7 +5182,8 @@
       "slug": "eunike-living-cleaning-services-singapore",
       "name": "Eunike Living - Cleaning Services Singapore",
       "categories": [
-        "cleaning"
+        "cleaning",
+        "handyman"
       ],
       "primaryTrade": "cleaning",
       "curated": false
@@ -7227,6 +7259,16 @@
       "curated": false
     },
     {
+      "id": "web-coolbestaircon-com",
+      "slug": "coolbest-aircon-servicing",
+      "name": "Coolbest Aircon Servicing",
+      "categories": [
+        "aircon"
+      ],
+      "primaryTrade": "aircon",
+      "curated": false
+    },
+    {
       "id": "web-airmaxxaircon-com",
       "slug": "airmaxx-aircon-pte-ltd",
       "name": "Airmaxx Aircon Pte Ltd",
@@ -7237,9 +7279,19 @@
       "curated": false
     },
     {
-      "id": "gm-17955160989056097423",
-      "slug": "koomax-engineering-pte-ltd",
-      "name": "Koomax Engineering Pte Ltd",
+      "id": "web-coolworldaircon-com-sg",
+      "slug": "cool-world-aircon",
+      "name": "Cool World Aircon",
+      "categories": [
+        "aircon"
+      ],
+      "primaryTrade": "aircon",
+      "curated": false
+    },
+    {
+      "id": "gm-3186479271670410904",
+      "slug": "aircool-pte-ltd",
+      "name": "Aircool Pte Ltd",
       "categories": [
         "aircon"
       ],
@@ -7300,16 +7352,6 @@
       "id": "web-oppaannyeong-com",
       "slug": "oppa-handyman-singapore-oppa-annyeong-pte-ltd",
       "name": "OPPA Handyman Singapore (OPPA Annyeong Pte Ltd)",
-      "categories": [
-        "handyman"
-      ],
-      "primaryTrade": "handyman",
-      "curated": false
-    },
-    {
-      "id": "web-bwis-com-sg",
-      "slug": "b-w-integrated-services-b-w-builders-private-limited",
-      "name": "B+W Integrated Services (B+W Builders Private Limited)",
       "categories": [
         "handyman"
       ],
@@ -10214,19 +10256,6 @@
         "missing-sourced-about",
         "missing-sourced-services",
         "missing-sourced-phone",
-        "missing-company-website"
-      ]
-    },
-    {
-      "id": "lookup-aircon-koomax-sg",
-      "name": "Aircon Koomax SG",
-      "categories": [
-        "aircon"
-      ],
-      "primaryTrade": "aircon",
-      "reasons": [
-        "missing-sourced-about",
-        "missing-sourced-services",
         "missing-company-website"
       ]
     },
@@ -17407,19 +17436,6 @@
       ]
     },
     {
-      "id": "201805308E",
-      "name": "INFINITY AIR PTE. LTD.",
-      "categories": [
-        "aircon"
-      ],
-      "primaryTrade": "aircon",
-      "reasons": [
-        "missing-sourced-about",
-        "missing-sourced-services",
-        "missing-company-website"
-      ]
-    },
-    {
       "id": "201837780E",
       "name": "INFIVIC PTE. LTD.",
       "categories": [
@@ -17936,19 +17952,6 @@
     {
       "id": "201004040Z",
       "name": "JET COOL AIR CONDITIONING PTE LTD",
-      "categories": [
-        "aircon"
-      ],
-      "primaryTrade": "aircon",
-      "reasons": [
-        "missing-sourced-about",
-        "missing-sourced-services",
-        "missing-company-website"
-      ]
-    },
-    {
-      "id": "201735124H",
-      "name": "JETSTYLE AIRCON PTE LTD",
       "categories": [
         "aircon"
       ],
@@ -20130,32 +20133,6 @@
       ]
     },
     {
-      "id": "201709078M",
-      "name": "LK BROTHERS ENGINEERING PTE LTD",
-      "categories": [
-        "aircon"
-      ],
-      "primaryTrade": "aircon",
-      "reasons": [
-        "missing-sourced-about",
-        "missing-sourced-services",
-        "missing-company-website"
-      ]
-    },
-    {
-      "id": "lookup-lk-brothers-aircon-engineering",
-      "name": "LK Brothers Aircon Engineering",
-      "categories": [
-        "aircon"
-      ],
-      "primaryTrade": "aircon",
-      "reasons": [
-        "missing-sourced-about",
-        "missing-sourced-services",
-        "missing-company-website"
-      ]
-    },
-    {
       "id": "202241581K",
       "name": "LLOYD BUILDERZ PTE. LTD.",
       "categories": [
@@ -22023,19 +22000,6 @@
       "primaryTrade": "aircon",
       "reasons": [
         "commercial-only",
-        "missing-sourced-about",
-        "missing-sourced-services",
-        "missing-company-website"
-      ]
-    },
-    {
-      "id": "199408623N",
-      "name": "NEWWAY SYSTEMS PTE LTD",
-      "categories": [
-        "aircon"
-      ],
-      "primaryTrade": "aircon",
-      "reasons": [
         "missing-sourced-about",
         "missing-sourced-services",
         "missing-company-website"
@@ -27803,7 +27767,8 @@
       "id": "201604637M",
       "name": "UNIQOOL ENGINEERING & SERVICES PTE.LTD.",
       "categories": [
-        "aircon"
+        "aircon",
+        "plumbing"
       ],
       "primaryTrade": "aircon",
       "reasons": [
@@ -28033,19 +27998,6 @@
       "categories": [
         "aircon",
         "electrician"
-      ],
-      "primaryTrade": "aircon",
-      "reasons": [
-        "missing-sourced-about",
-        "missing-sourced-services",
-        "missing-company-website"
-      ]
-    },
-    {
-      "id": "lookup-uniqool",
-      "name": "Uniqool",
-      "categories": [
-        "aircon"
       ],
       "primaryTrade": "aircon",
       "reasons": [
@@ -29797,19 +29749,6 @@
     {
       "id": "199606255K",
       "name": "YSP INDUSTRIAL PTE LTD",
-      "categories": [
-        "aircon"
-      ],
-      "primaryTrade": "aircon",
-      "reasons": [
-        "missing-sourced-about",
-        "missing-sourced-services",
-        "missing-company-website"
-      ]
-    },
-    {
-      "id": "lookup-yasoda-evershine-kitchen-exhaust-hood-and-duct-cleaning-kitchen-exhaus",
-      "name": "Yasoda Evershine - Kitchen Exhaust Hood & Duct Cleaning | Kitchen Exhaust Fan Servicing",
       "categories": [
         "aircon"
       ],
@@ -32684,19 +32623,6 @@
       ]
     },
     {
-      "id": "201530148H",
-      "name": "B+W BUILDERS PRIVATE LIMITED",
-      "categories": [
-        "electrician"
-      ],
-      "primaryTrade": "electrician",
-      "reasons": [
-        "missing-sourced-about",
-        "missing-sourced-services",
-        "missing-company-website"
-      ]
-    },
-    {
       "id": "201712329G",
       "name": "B-COOL AIRCON ENGINEERING PTE. LTD.",
       "categories": [
@@ -35441,6 +35367,7 @@
       ],
       "primaryTrade": "cleaning",
       "reasons": [
+        "needs-human-review",
         "missing-sourced-about",
         "missing-sourced-services",
         "missing-company-website"
@@ -53846,19 +53773,6 @@
       ]
     },
     {
-      "id": "53331827X",
-      "name": "UNITED ELECTRICIAN SINGAPORE",
-      "categories": [
-        "electrician"
-      ],
-      "primaryTrade": "electrician",
-      "reasons": [
-        "missing-sourced-about",
-        "missing-sourced-services",
-        "missing-company-website"
-      ]
-    },
-    {
       "id": "200612201K",
       "name": "UNITED ENGINEERING PRIVATE LIMITED",
       "categories": [
@@ -54699,19 +54613,6 @@
     {
       "id": "201815009K",
       "name": "VM CONSTRUCTION PTE. LTD.",
-      "categories": [
-        "electrician"
-      ],
-      "primaryTrade": "electrician",
-      "reasons": [
-        "missing-sourced-about",
-        "missing-sourced-services",
-        "missing-company-website"
-      ]
-    },
-    {
-      "id": "202337390G",
-      "name": "VMG ELECTRICAL SERVICE PTE LTD",
       "categories": [
         "electrician"
       ],
@@ -57458,20 +57359,6 @@
         "missing-sourced-about",
         "missing-sourced-services",
         "missing-sourced-phone",
-        "missing-company-website"
-      ]
-    },
-    {
-      "id": "200808799M",
-      "name": "Eunike Living Pte. Ltd",
-      "categories": [
-        "handyman",
-        "cleaning"
-      ],
-      "primaryTrade": "handyman",
-      "reasons": [
-        "missing-sourced-about",
-        "missing-sourced-services",
         "missing-company-website"
       ]
     },
@@ -63871,20 +63758,6 @@
       ]
     },
     {
-      "id": "lookup-kj-fem-pte-ltd-integrated-building-support-services-provider",
-      "name": "KJ FEM Pte Ltd - Integrated Building Support Services Provider",
-      "categories": [
-        "cleaning"
-      ],
-      "primaryTrade": "cleaning",
-      "reasons": [
-        "commercial-only",
-        "missing-sourced-about",
-        "missing-sourced-services",
-        "missing-company-website"
-      ]
-    },
-    {
       "id": "200512895M",
       "name": "KLEANWORKZ PTE. LTD.",
       "categories": [
@@ -64279,19 +64152,6 @@
         "missing-sourced-about",
         "missing-sourced-services",
         "missing-sourced-phone",
-        "missing-company-website"
-      ]
-    },
-    {
-      "id": "lookup-lumiair-pte-ltd",
-      "name": "Lumiair Pte. Ltd.",
-      "categories": [
-        "cleaning"
-      ],
-      "primaryTrade": "cleaning",
-      "reasons": [
-        "missing-sourced-about",
-        "missing-sourced-services",
         "missing-company-website"
       ]
     },
@@ -71691,18 +71551,6 @@
       "primaryTrade": "aircon",
       "reasons": [
         "missing-sourced-about"
-      ]
-    },
-    {
-      "id": "gm-17033596783586296169",
-      "name": "Uniqool Engineering & Services Pte Ltd - Bathroom and Kitchen Specialised Store",
-      "categories": [
-        "plumbing"
-      ],
-      "primaryTrade": "plumbing",
-      "reasons": [
-        "not-a-trade-business",
-        "profile-rolled-back"
       ]
     },
     {
@@ -84814,41 +84662,6 @@
       ]
     },
     {
-      "id": "web-coolbestaircon-com",
-      "name": "Coolbest Aircon Servicing",
-      "categories": [
-        "aircon"
-      ],
-      "primaryTrade": "aircon",
-      "reasons": [
-        "no-sg-postal-code",
-        "missing-sourced-address"
-      ]
-    },
-    {
-      "id": "web-coolworldaircon-com-sg",
-      "name": "Cool World Aircon",
-      "categories": [
-        "aircon"
-      ],
-      "primaryTrade": "aircon",
-      "reasons": [
-        "no-sg-postal-code",
-        "missing-sourced-address"
-      ]
-    },
-    {
-      "id": "gm-3186479271670410904",
-      "name": "Aircool Pte Ltd",
-      "categories": [
-        "aircon"
-      ],
-      "primaryTrade": "aircon",
-      "reasons": [
-        "missing-sourced-about"
-      ]
-    },
-    {
       "id": "gm-1222669494774184019",
       "name": "COOL LAND ACMV PTE. LTD.",
       "categories": [
@@ -84867,19 +84680,6 @@
         "handyman"
       ],
       "primaryTrade": "handyman",
-      "reasons": [
-        "no-sg-postal-code",
-        "missing-sourced-about",
-        "missing-sourced-address"
-      ]
-    },
-    {
-      "id": "web-unitedelectriciansingapore-com",
-      "name": "United Electricians",
-      "categories": [
-        "electrician"
-      ],
-      "primaryTrade": "electrician",
       "reasons": [
         "no-sg-postal-code",
         "missing-sourced-address"
@@ -84906,7 +84706,6 @@
       "primaryTrade": "handyman",
       "reasons": [
         "no-sg-postal-code",
-        "missing-sourced-about",
         "missing-sourced-address"
       ]
     },
@@ -84950,12 +84749,12 @@
       "id": "web-hedircool-sg-com",
       "name": "HEDIRCOOL Pte. Ltd.",
       "categories": [
-        "plumbing"
+        "plumbing",
+        "aircon"
       ],
       "primaryTrade": "plumbing",
       "reasons": [
-        "no-sg-postal-code",
-        "missing-sourced-address"
+        "needs-human-review"
       ]
     },
     {
@@ -85132,10 +84931,6 @@
       "issue": "Inferred price units labelled for confirmation"
     },
     {
-      "slug": "alpha-omega-trinity-pte-ltd",
-      "issue": "Automatically extracted price text needs editorial review; source wording retained"
-    },
-    {
       "slug": "alpine-aire-services",
       "issue": "Alternate address exists; primary database address retained"
     },
@@ -85157,6 +84952,15 @@
     },
     {
       "slug": "air-connection",
+      "issue": "Alternate address exists; primary database address retained"
+    },
+    {
+      "slug": "koomax-engineering-pte-ltd",
+      "issue": "Uncertain logo withheld; initials shown",
+      "reason": "r10: selected automatically (touch-icon icon); not visually checked"
+    },
+    {
+      "slug": "koomax-engineering-pte-ltd",
       "issue": "Alternate address exists; primary database address retained"
     },
     {
@@ -85297,31 +85101,27 @@
     },
     {
       "slug": "decom-air-con-engineering-service-pte-ltd",
-      "issue": "Inferred price units labelled for confirmation"
+      "issue": "General pricing references labelled separately from company rates"
     },
     {
-      "slug": "decom-air-con-engineering-service-pte-ltd",
+      "slug": "easy-cool-engineering-pte-ltd",
+      "issue": "Alternate phone shown with source label; primary phone remains the main contact"
+    },
+    {
+      "slug": "easy-cool-engineering-pte-ltd",
+      "issue": "Alternate address exists; primary database address retained"
+    },
+    {
+      "slug": "easy-cool-engineering-pte-ltd",
       "issue": "Automatically extracted price text needs editorial review; source wording retained"
     },
     {
-      "slug": "easy-cool-engineering-pte-ltd",
-      "issue": "Alternate phone shown with source label; primary phone remains the main contact"
-    },
-    {
-      "slug": "easy-cool-engineering-pte-ltd",
-      "issue": "Alternate address exists; primary database address retained"
-    },
-    {
       "slug": "ec-aircon-services-pte-ltd",
       "issue": "Alternate phone shown with source label; primary phone remains the main contact"
     },
     {
       "slug": "ec-aircon-services-pte-ltd",
       "issue": "Alternate address exists; primary database address retained"
-    },
-    {
-      "slug": "ec-aircon-services-pte-ltd",
-      "issue": "Inferred price units labelled for confirmation"
     },
     {
       "slug": "euconair-services-pte-ltd",
@@ -85640,10 +85440,6 @@
       "issue": "Alternate address exists; primary database address retained"
     },
     {
-      "slug": "snowflake-aircon-services",
-      "issue": "Automatically extracted price text needs editorial review; source wording retained"
-    },
-    {
       "slug": "solution-aircon-engrg-pte-ltd",
       "issue": "Alternate address exists; primary database address retained"
     },
@@ -85710,10 +85506,6 @@
     {
       "slug": "vois-pte-ltd",
       "issue": "Alternate address exists; primary database address retained"
-    },
-    {
-      "slug": "vois-pte-ltd",
-      "issue": "Inferred price units labelled for confirmation"
     },
     {
       "slug": "xool-aircon-experts-no-1-rated-service-provider",
@@ -86556,14 +86348,6 @@
       "issue": "Automatically extracted price text needs editorial review; source wording retained"
     },
     {
-      "slug": "same-day-aircon-servicing-repair",
-      "issue": "Inferred price units labelled for confirmation"
-    },
-    {
-      "slug": "same-day-aircon-servicing-repair",
-      "issue": "Automatically extracted price text needs editorial review; source wording retained"
-    },
-    {
       "slug": "your-handyman-sg-aircon-gas-top-up-aircon-chemical-wash-hvac",
       "issue": "Uncertain logo withheld; initials shown",
       "reason": "Logo text reads 'IET Smart Solution', not the row name Your handyman sg."
@@ -86582,14 +86366,6 @@
     },
     {
       "slug": "dr-penguin-aircon-engineering-pte-ltd",
-      "issue": "Automatically extracted price text needs editorial review; source wording retained"
-    },
-    {
-      "slug": "afix-sg",
-      "issue": "Inferred price units labelled for confirmation"
-    },
-    {
-      "slug": "afix-sg",
       "issue": "Automatically extracted price text needs editorial review; source wording retained"
     },
     {
@@ -86650,10 +86426,6 @@
       "issue": "Inferred price units labelled for confirmation"
     },
     {
-      "slug": "allhouseworks-renovation-maintenance-pte-ltd",
-      "issue": "Inferred price units labelled for confirmation"
-    },
-    {
       "slug": "prima-technologies-pte-ltd-prima-services",
       "issue": "Inferred price units labelled for confirmation"
     },
@@ -86668,10 +86440,6 @@
     {
       "slug": "handyman-az",
       "issue": "Automatically extracted price text needs editorial review; source wording retained"
-    },
-    {
-      "slug": "sekihiro-aircon",
-      "issue": "Inferred price units labelled for confirmation"
     },
     {
       "slug": "ace-plumbing-specialist",
@@ -86732,14 +86500,6 @@
     {
       "slug": "sr-power-plumber-pte-ltd",
       "issue": "Inferred price units labelled for confirmation"
-    },
-    {
-      "slug": "wefix4u",
-      "issue": "Inferred price units labelled for confirmation"
-    },
-    {
-      "slug": "wefix4u",
-      "issue": "Automatically extracted price text needs editorial review; source wording retained"
     },
     {
       "slug": "cleatra-pte-ltd",
@@ -86884,14 +86644,6 @@
     },
     {
       "slug": "plumber-singapore-plumbing-24hrs",
-      "issue": "Automatically extracted price text needs editorial review; source wording retained"
-    },
-    {
-      "slug": "repairhome-sg",
-      "issue": "Inferred price units labelled for confirmation"
-    },
-    {
-      "slug": "repairhome-sg",
       "issue": "Automatically extracted price text needs editorial review; source wording retained"
     },
     {
@@ -87120,22 +86872,6 @@
       "issue": "Inferred price units labelled for confirmation"
     },
     {
-      "slug": "spower-electrician-services",
-      "issue": "Inferred price units labelled for confirmation"
-    },
-    {
-      "slug": "spower-electrician-services",
-      "issue": "Automatically extracted price text needs editorial review; source wording retained"
-    },
-    {
-      "slug": "aircon-service-chemical-wash-overhaul-yishun",
-      "issue": "Inferred price units labelled for confirmation"
-    },
-    {
-      "slug": "aircon-service-chemical-wash-overhaul-yishun",
-      "issue": "Automatically extracted price text needs editorial review; source wording retained"
-    },
-    {
       "slug": "fix-my-heater",
       "issue": "Inferred price units labelled for confirmation"
     },
@@ -87170,14 +86906,6 @@
     {
       "slug": "beyond-cool-aircon-pte-ltd",
       "issue": "Inferred price units labelled for confirmation"
-    },
-    {
-      "slug": "airvice-chapter",
-      "issue": "Inferred price units labelled for confirmation"
-    },
-    {
-      "slug": "city-cooling-pte-ltd-aircon-specialist-singapore",
-      "issue": "Automatically extracted price text needs editorial review; source wording retained"
     },
     {
       "slug": "siam-engineering-pte-ltd",
@@ -87298,10 +87026,6 @@
       "issue": "Automatically extracted price text needs editorial review; source wording retained"
     },
     {
-      "slug": "smartcool-aircon-servicing-singapore",
-      "issue": "Automatically extracted price text needs editorial review; source wording retained"
-    },
-    {
       "slug": "rm-acelect-engineering-pte-ltd",
       "issue": "Automatically extracted price text needs editorial review; source wording retained"
     },
@@ -87327,21 +87051,16 @@
       "issue": "Automatically extracted price text needs editorial review; source wording retained"
     },
     {
-      "slug": "airmaxx-aircon-pte-ltd",
-      "issue": "Inferred price units labelled for confirmation"
-    },
-    {
-      "slug": "airmaxx-aircon-pte-ltd",
-      "issue": "General pricing references labelled separately from company rates"
+      "slug": "coolbest-aircon-servicing",
+      "issue": "Automatically extracted price text needs editorial review; source wording retained"
     },
     {
       "slug": "airmaxx-aircon-pte-ltd",
       "issue": "Automatically extracted price text needs editorial review; source wording retained"
     },
     {
-      "slug": "koomax-engineering-pte-ltd",
-      "issue": "Uncertain logo withheld; initials shown",
-      "reason": "r10: selected automatically (touch-icon icon); not visually checked"
+      "slug": "aircool-pte-ltd",
+      "issue": "Inferred price units labelled for confirmation"
     },
     {
       "slug": "rsf-waterproofing-contractors-pte-ltd",
@@ -87370,34 +87089,34 @@
   ],
   "byTrade": {
     "aircon": {
-      "published": 228,
-      "excluded": 1840
+      "published": 231,
+      "excluded": 1829
     },
     "plumbing": {
       "published": 100,
-      "excluded": 555
+      "excluded": 554
     },
     "electrician": {
-      "published": 115,
-      "excluded": 2210
+      "published": 116,
+      "excluded": 2206
     },
     "handyman": {
       "published": 99,
-      "excluded": 540
+      "excluded": 539
     },
     "cleaning": {
       "published": 192,
-      "excluded": 630
+      "excluded": 628
     }
   },
-  "publishedCount": 734,
-  "excludedCount": 5775,
-  "sourceSha256": "30556dbfcad2f49a63db8f7884ef045dcd50f720a448774d5457bbe17d7f14ec",
-  "sourceRelease": "companies-20261015-1304.json",
+  "publishedCount": 738,
+  "excludedCount": 5756,
+  "sourceSha256": "f317b17d90fa5eb5512deb570f6fbe844b305b20b38dce3215c8c10f2a046f7a",
+  "sourceRelease": "companies-20261018-0125.json",
   "logos": {
-    "verifiedFiles": 516,
-    "publishedCompanies": 516,
-    "bytes": 41012295,
-    "bundle": "logos-20261015-1304.tar.gz"
+    "verifiedFiles": 519,
+    "publishedCompanies": 519,
+    "bytes": 41104044,
+    "bundle": "logos-20261018-0059.tar.gz"
   }
 }

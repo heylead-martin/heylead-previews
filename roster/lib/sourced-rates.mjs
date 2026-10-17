@@ -29,7 +29,7 @@ export const guideEvidence = {
   'HM-04':{trade:'handyman',match:/\btv\b|television/i,title:'Published TV mounting rates',noun:'TV mounting'},
   'PL-06':{name:'Water heater installation',trade:'plumbing',match:/instant|water heater|storage heater/i,exclude:/repair|servic/i,title:'Published water heater installation rates',noun:'water heater'},
   'chemical-wash':{trade:'aircon',match:/chemical wash/i,exclude:/overhaul|contract|package|annual/i,unit:'per unit',title:'Published chemical wash rates',noun:'chemical wash'},
-  'gas-top-up':{trade:'aircon',match:/gas top|refrigerant|r32|r410|r22/i,exclude:/servic|chemical|install/i,title:'Published gas top-up rates',noun:'gas top-up'}
+  'gas-top-up':{trade:'aircon',match:/gas top|refrigerant|r32|r410|r22/i,exclude:/servic|chemical|install|nitrogen|pressure test/i,title:'Published gas top-up rates',noun:'gas top-up'}
 };
 // A comparison needs at least three companies; smaller samples are not rendered.
 export const minimumCompanies = 3;
@@ -37,14 +37,37 @@ export const minimumCompanies = 3;
 /* ---------- Reading the source wording ---------- */
 
 const CUR = String.raw`(?:S\$|SGD\s*\$?|SG\s*\$|\$)\s*`;
-const FROM = String.raw`(?:\bfrom|\bstarting(?:\s+(?:from|at))?|\bstarts?(?:\s+(?:from|at))?|\bbegins?\s+at|\bas low as)\s*:?\s*(?:just\s+|only\s+)?`;
+const FROM = String.raw`(?:\bfrom|\bfrm\.?|\bstarting(?:\s+(?:from|at|price))?|\bstarts?(?:\s+(?:from|at))?|\bbegins?\s+at|\bas low as)\s*:?\s*(?:just\s+|only\s+|from\s+)?`;
 // Drop thousands separators so "$1,998" can be compared with 1998.
 const plain = text => String(text || '').replace(/(\d),(?=\d{3}(?!\d))/g, '$1').replace(/\s+/g, ' ');
-const amountPattern = n => `${String(n).replace('.', String.raw`\.`)}(?:\\.0+)?(?!\\d|\\.\\d)`;
-const sourceTexts = p => [p.price_text, p.service_raw || p.service];
+// 19.5 also matches "19.50"; 80 also matches "80.00".
+const amountPattern = n => String(n).includes('.') ? `${String(n).replace('.', String.raw`\.`)}0*(?!\\d)` : `${n}(?:\\.0+)?(?!\\d|\\.\\d)`;
+export const printsAmount = (text, n) => new RegExp(CUR + amountPattern(n), 'i').test(plain(text));
+// service_raw sometimes holds the previous tier of a price table ("Normal Servicing - 2 units - $70"
+// on the 3-unit row). It belongs to this row only when it prints this row's amount; when it does
+// not, `service` was derived from it and is not this row's wording either.
+// r15 often stores only the price in service_raw ("From $100"); that carries no service words, so
+// `service` is used instead.
+const hasWords = s => /[a-z]{3,}/i.test(String(s).replace(new RegExp(CUR + String.raw`[\d.,]+`, 'gi'), ' ').replace(/\b(?:from|frm|starting|starts?|at|only|nett|flat|each|per|unit|and|above)\b/gi, ' '));
+export const ownServiceRaw = p => p.service_raw && printsAmount(p.service_raw, p.amount_sgd) && hasWords(p.service_raw) ? p.service_raw : null;
+const foreignRaw = p => !!p.service_raw && hasWords(p.service_raw) && !printsAmount(p.service_raw, p.amount_sgd);
+// The row's own label: its own service text, or, for a foreign service_raw, the table heading from
+// it ("Normal Servicing") plus the tier words of this row's price_text ("3 units").
+export function ownLabelSource(p) {
+  if (!foreignRaw(p)) return p.service || '';
+  const heading = plain(p.service_raw).split(/\s+-\s+|\s*\|\s*/)[0].trim();
+  const tier = plain(p.price_text).replace(new RegExp(CUR + String.raw`\d[\d.]*`, 'gi'), ' ').replace(/…+|\.{2,}|[-–:|→=]+/g, ' ').replace(/\s+/g, ' ').trim();
+  return [heading, tier].filter(s => /[a-z]/i.test(s)).join(', ') || p.service || '';
+}
+const sourceTexts = p => [p.price_text, ownServiceRaw(p) || (foreignRaw(p) ? '' : p.service)];
+export const ownService = p => ownServiceRaw(p) || ownLabelSource(p);
+export const ownTexts = sourceTexts;
 
 // The source calls the amount a starting price: "From $80", "starts from just S$80", "$90 onwards".
 export function isFromPrice(p) {
+  // r15 lines carry from_price, set from each line's own price_text ("$380+" counts). The text rule
+  // below still applies, since it also reads "Frm $17" and "as low as $18" that the flag leaves false.
+  if (p.from_price === true) return true;
   if (/\bfrom\b|starting/i.test(p.unit || '')) return true;
   const amount = amountPattern(p.amount_sgd);
   const before = new RegExp(FROM + CUR + amount, 'i');
@@ -52,10 +75,17 @@ export function isFromPrice(p) {
   return sourceTexts(p).some(t => before.test(plain(t)) || after.test(plain(t)));
 }
 
-// The full printed range: the release's amount_max_sgd, or "$40-$80" printed from the shown amount.
+// "$280.00 and above": the amount is a floor, printed as such.
+export function isAndAbove(p) {
+  return sourceTexts(p).some(t => new RegExp(CUR + amountPattern(p.amount_sgd) + String.raw`\s*(?:nett\s*)?(?:(?:\/\s*|per\s+)[a-z]+\s*)?(?:and|&)\s*above`, 'i').test(plain(t)));
+}
+
+// The full printed range: the release's amount_max_sgd when this row's own text or excerpt prints it
+// (Cool Earth's "from S$80" row carries a maximum from a separate FAQ sentence), or "$40-$80"
+// printed from the shown amount.
 export function priceRange(p) {
   const open = max => sourceTexts(p).some(t => new RegExp(CUR + '?' + amountPattern(max) + String.raw`\s*\+(?!\+)`).test(plain(t)));
-  if (Number.isFinite(p.amount_max_sgd) && p.amount_max_sgd > p.amount_sgd) return {max:p.amount_max_sgd, open:open(p.amount_max_sgd)};
+  if (Number.isFinite(p.amount_max_sgd) && p.amount_max_sgd > p.amount_sgd && [...sourceTexts(p), p.excerpt].some(t => printsAmount(t, p.amount_max_sgd) || new RegExp(String.raw`(?:-|to)\s*${amountPattern(p.amount_max_sgd)}`).test(plain(t)))) return {max:p.amount_max_sgd, open:open(p.amount_max_sgd)};
   const printed = new RegExp(CUR + amountPattern(p.amount_sgd) + String.raw`\s*(?:-|to)\s*(?:${CUR})?(\d+(?:\.\d+)?)`, 'i');
   for (const t of sourceTexts(p)) {
     const max = Number(plain(t).match(printed)?.[1]);
@@ -81,7 +111,7 @@ export function statedUnit(p) {
   const lead = plain(p.price_text).match(new RegExp(String.raw`\b(hour|unit|piece|point|item)\s*:\s*${CUR}${amountPattern(p.amount_sgd)}`, 'i'));
   if (lead) return unitName(lead[1]);
   if ((plain(p.price_text).match(new RegExp(CUR + String.raw`\d`, 'gi')) || []).length > 1) return null;
-  const label = plain(p.service_raw || p.service).match(new RegExp(String.raw`\(\s*per\s+(additional\s+)?${unitWord}\s*\)|\bper\s+(unit|piece|item|point|hour)\b`, 'i'));
+  const label = plain(ownService(p)).match(new RegExp(String.raw`\(\s*per\s+(additional\s+)?${unitWord}\s*\)|\bper\s+(unit|piece|item|point|hour)\b`, 'i'));
   return label ? unitName(label[2] || label[3], label[1]) : null;
 }
 // Release units are kept unless they were inferred or left "as printed" and the source states one.
@@ -103,7 +133,8 @@ export function additionalRates(p) {
 export const money = n => `S$${Number(n).toLocaleString('en-SG',{minimumFractionDigits:Number(n)%1?2:0,maximumFractionDigits:2})}`;
 export function rateCell(p) {
   const range = priceRange(p), unit = displayUnit(p);
-  const amount = range ? `${money(p.amount_sgd)} to ${money(range.max)}${range.open ? '+' : ''}` : `${isFromPrice(p) ? 'From ' : ''}${money(p.amount_sgd)}`;
+  const from = isFromPrice(p) ? 'From ' : '';
+  const amount = range ? `${from}${money(p.amount_sgd)} to ${money(range.max)}${range.open ? '+' : ''}` : isAndAbove(p) ? `${money(p.amount_sgd)} and above` : `${from}${money(p.amount_sgd)}`;
   const extra = additionalRates(p).map(r => `; ${r.from ? 'from ' : ''}${money(r.amount)} ${r.unit}`).join('');
   return `${amount}${unit ? ` ${unit}` : ''}${extra}`;
 }
@@ -133,7 +164,7 @@ const tradeObjects = {
 };
 
 export function rateProblem(p, spec) {
-  const service = plain(p.service_raw || p.service), price = plain(p.price_text), amount = amountPattern(p.amount_sgd);
+  const service = plain(ownService(p)), price = plain(p.price_text), amount = amountPattern(p.amount_sgd);
   if (reviewText.test(service) || reviewText.test(price) || /^\W*[“"]\s*\|/.test(p.excerpt || '') || reviewDate.test(p.excerpt || '')) return 'review text';
   if (marketText.test(service) || marketText.test(price)) return 'market statement, not a company rate';
   if (new RegExp(String.raw`(?:\+\s*|\badds?\s+|\bextra\s+|\bsurcharge\s+(?:of\s+)?)${CUR}${amount}`, 'i').test(price)) return 'surcharge, not a service price';
@@ -145,10 +176,16 @@ export function rateProblem(p, spec) {
   // A list of four or more kinds of work naming two or more guide services.
   const list = own.replace(/\([^)]*\)/g, ' ');
   if ((list.match(/[,/]/g) || []).length >= 3 && serviceFamilies.filter(re => re.test(list)).length >= 2) return 'general rate for several services';
+  // r15 lines may carry job_trade; a line filed under another trade is not this guide's rate.
+  if (p.job_trade && p.job_trade.replace(/^home-/, '') !== spec.trade) return 'work from another trade';
   const ownTrade = tradeObjects[spec.trade];
   if (!ownTrade.test(own) && Object.entries(tradeObjects).some(([trade, re]) => trade !== spec.trade && re.test(own))) return 'work from another trade';
   const siblings = Object.values(guideEvidence).filter(s => s.trade === spec.trade && s !== spec && !s.serviceOnly);
   if (!spec.match.test(own) && siblings.some(s => s.match.test(own) && !s.exclude?.test(own))) return 'priced as a different service';
+  // "$50 for 1 unit, ... Chemical wash: $60 for 1 unit": the first price after the service's own name
+  // is the one for that service; another amount from the same entry is not.
+  const named = price.match(new RegExp(String.raw`(?:${spec.match.source})[^$|]{0,25}?${CUR}(\d+(?:\.\d+)?)`, 'i'));
+  if (named && Number(named[1]) !== p.amount_sgd && price.search(new RegExp(spec.match.source, 'i')) > 0 && !new RegExp(String.raw`^[^$]*(?:${spec.match.source})`, 'i').test(price)) return 'amount belongs to another service in the entry';
   return null;
 }
 
@@ -156,6 +193,12 @@ export function rateProblem(p, spec) {
 
 function eligible(p, spec) {
   const text = spec.serviceOnly ? p.service : `${p.service} ${p.job || ''}`;
+  // r15 splits "From $97 (per additional point)" into its own line; an additional-item rate is
+  // charged on top of a first item, so it is not a company's rate for the job.
+  if (/^per additional\b/i.test(p.unit || '') || /\beach additional\b/i.test(p.service || '')) return false;
+  // r15.1 files outdoor-unit cleaning as job "condenser-cleaning": it belongs only in the condenser
+  // table, never in general servicing or chemical wash (SmartCool's outdoor "Chemical Wash $80-$120").
+  if (p.job === 'condenser-cleaning' && !/condenser/.test(spec.match.source)) return false;
   return spec.match.test(text) && !spec.exclude?.test(text) && Number.isFinite(p.amount_sgd) && p.amount_sgd > 0 && !p.indicative && !p.promo
     && /^https?:\/\//.test(p.sourceUrl || '') && /^\d{4}-\d{2}-\d{2}/.test(p.capturedAt || '') && (!spec.unit || displayUnit(p) === spec.unit);
 }
@@ -197,7 +240,7 @@ const withoutPrices = (parts, keep = s => !hasPrice.test(s)) => parts.some(keep)
 // A label that is only a list of unit tiers ("for 1 unit, for 2 units, ...") says nothing about the job.
 export function rateLabel(p, spec, companyName = '') {
   const plainName = () => spec ? spec.name || spec.noun.replace(/^./, c => c.toUpperCase()) : sentenceCase(p.job || 'Service');
-  let label = tidyPriceLabel(p.service);
+  let label = tidyPriceLabel(ownLabelSource(p));
   // "| each" and other unit fragments, the company's own name, and several headings joined with "|",
   // which start at the one naming the service.
   const company = squash(companyName);
@@ -218,7 +261,8 @@ export function rateLabel(p, spec, companyName = '') {
   const tiers = /^(?:for\s+)?\d+\+?\s*(?:units?|fan coils?|pcs|pieces)\b[^.]*,\s*(?:for\s+)?\d/i.test(label) || /^for\s+\d/i.test(label);
   if (tiers || !label) return p.job ? plainName() : label;
   // Long or descriptive labels carry a heading plus description: keep the plain service name.
-  const usable = s => s.length >= 3 && s.length <= maxLabelLength && !slogan.test(s);
+  // Page headings ("Gas Types", "Price List") are not service names either.
+  const usable = s => s.length >= 3 && s.length <= maxLabelLength && !slogan.test(s) && !/^(?:gas types|price list|pricing|prices|rates|our (?:services|prices))$/i.test(s.trim());
   if (usable(label)) return label;
   // Prefer the "-" segment that names the service: "8 units - Chemical wash (fan coil, no dismantling)."
   const segments = label.split(/\s+-\s+/).map(s => s.trim().replace(/\)\.$/, ')'));

@@ -24,7 +24,7 @@ A handyman is a generalist who handles small fixing, assembling and mounting job
 - **Locks:** changing a door lock or a digital lock where no wiring work is needed.
 - **Small touch-ups:** patching small holes, sealant around a basin or a touch of paint.
 
-A handyman is often the best value when you have several small jobs, since they can be grouped into one visit.
+A handyman is often good value when you have several small jobs, since they can be grouped into one visit.
 
 [[cta /roster/handyman/ | Compare handyman companies | See handyman companies with their published prices, the areas they say they cover and their rating sources.]]
 
@@ -85,4 +85,4 @@ A plumber is the right choice when a tap needs repair or replacement on the supp
 
 ### Should a handyman service my aircon?
 
-No, aircon servicing, gas top-ups, leaks and installation are best left to an aircon specialist, since the work combines electrical, refrigerant and drainage parts.
+No, aircon servicing, gas top-ups, leaks and installation are better left to an aircon specialist, since the work combines electrical, refrigerant and drainage parts.

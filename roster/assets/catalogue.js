@@ -1,5 +1,5 @@
-import {renderCard,renderCompactCard,splitDirectory} from './catalogue-card.mjs?v=20261014-ratings';
-import {filterCatalogue} from './catalogue-filter.mjs?v=20261012-areas';
+import {renderCard,renderCompactCard,splitDirectory} from './catalogue-card.mjs?v=20261018-cards';
+import {filterCatalogue} from './catalogue-filter.mjs?v=20261018-trade-words';
 import {decodeCatalogue} from './catalogue-data.mjs?v=20261012-areas';
 import {setupAreaPicker} from './area-picker.mjs?v=20261012-areas';
 import {setupSortControl} from './sort-control.mjs?v=20261012-menu';

@@ -220,7 +220,7 @@
     {
       "id": "AC-10",
       "path": "/roster/aircon-servicing/how-often-service-aircon/",
-      "words": 1040,
+      "words": 1041,
       "kind": "guide"
     },
     {
@@ -751,76 +751,90 @@
       "path": "/roster/electrician/ang-mo-kio/",
       "trade": "electrician",
       "town": "Ang Mo Kio",
-      "companies": 11,
+      "companies": 12,
       "kind": "area"
     },
     {
       "path": "/roster/electrician/bedok/",
       "trade": "electrician",
       "town": "Bedok",
-      "companies": 12,
+      "companies": 13,
       "kind": "area"
     },
     {
       "path": "/roster/electrician/bishan/",
       "trade": "electrician",
       "town": "Bishan",
-      "companies": 10,
+      "companies": 11,
       "kind": "area"
     },
     {
       "path": "/roster/electrician/bukit-batok/",
       "trade": "electrician",
       "town": "Bukit Batok",
-      "companies": 9,
+      "companies": 10,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/electrician/bukit-panjang/",
+      "trade": "electrician",
+      "town": "Bukit Panjang",
+      "companies": 5,
       "kind": "area"
     },
     {
       "path": "/roster/electrician/choa-chu-kang/",
       "trade": "electrician",
       "town": "Choa Chu Kang",
-      "companies": 5,
+      "companies": 6,
       "kind": "area"
     },
     {
       "path": "/roster/electrician/clementi/",
       "trade": "electrician",
       "town": "Clementi",
-      "companies": 9,
+      "companies": 10,
       "kind": "area"
     },
     {
       "path": "/roster/electrician/geylang/",
       "trade": "electrician",
       "town": "Geylang",
-      "companies": 6,
+      "companies": 7,
       "kind": "area"
     },
     {
       "path": "/roster/electrician/hougang/",
       "trade": "electrician",
       "town": "Hougang",
-      "companies": 11,
+      "companies": 12,
       "kind": "area"
     },
     {
       "path": "/roster/electrician/jurong-east/",
       "trade": "electrician",
       "town": "Jurong East",
-      "companies": 8,
+      "companies": 9,
       "kind": "area"
     },
     {
       "path": "/roster/electrician/jurong-west/",
       "trade": "electrician",
       "town": "Jurong West",
-      "companies": 7,
+      "companies": 8,
       "kind": "area"
     },
     {
       "path": "/roster/electrician/kallang/",
       "trade": "electrician",
       "town": "Kallang",
+      "companies": 6,
+      "kind": "area"
+    },
+    {
+      "path": "/roster/electrician/marine-parade/",
+      "trade": "electrician",
+      "town": "Marine Parade",
       "companies": 5,
       "kind": "area"
     },
@@ -828,77 +842,77 @@
       "path": "/roster/electrician/novena/",
       "trade": "electrician",
       "town": "Novena",
-      "companies": 7,
+      "companies": 8,
       "kind": "area"
     },
     {
       "path": "/roster/electrician/pasir-ris/",
       "trade": "electrician",
       "town": "Pasir Ris",
-      "companies": 10,
+      "companies": 11,
       "kind": "area"
     },
     {
       "path": "/roster/electrician/punggol/",
       "trade": "electrician",
       "town": "Punggol",
-      "companies": 11,
+      "companies": 12,
       "kind": "area"
     },
     {
       "path": "/roster/electrician/queenstown/",
       "trade": "electrician",
       "town": "Queenstown",
-      "companies": 7,
+      "companies": 8,
       "kind": "area"
     },
     {
       "path": "/roster/electrician/sembawang/",
       "trade": "electrician",
       "town": "Sembawang",
-      "companies": 8,
+      "companies": 9,
       "kind": "area"
     },
     {
       "path": "/roster/electrician/sengkang/",
       "trade": "electrician",
       "town": "Sengkang",
-      "companies": 9,
+      "companies": 10,
       "kind": "area"
     },
     {
       "path": "/roster/electrician/serangoon/",
       "trade": "electrician",
       "town": "Serangoon",
-      "companies": 8,
+      "companies": 9,
       "kind": "area"
     },
     {
       "path": "/roster/electrician/tampines/",
       "trade": "electrician",
       "town": "Tampines",
-      "companies": 14,
+      "companies": 15,
       "kind": "area"
     },
     {
       "path": "/roster/electrician/toa-payoh/",
       "trade": "electrician",
       "town": "Toa Payoh",
-      "companies": 11,
+      "companies": 12,
       "kind": "area"
     },
     {
       "path": "/roster/electrician/woodlands/",
       "trade": "electrician",
       "town": "Woodlands",
-      "companies": 15,
+      "companies": 16,
       "kind": "area"
     },
     {
       "path": "/roster/electrician/yishun/",
       "trade": "electrician",
       "town": "Yishun",
-      "companies": 12,
+      "companies": 13,
       "kind": "area"
     },
     {
@@ -1067,6 +1081,31 @@
       "kind": "symptom-finder"
     },
     {
+      "path": "/roster/aircon-servicing/best/",
+      "trade": "aircon",
+      "kind": "best-of"
+    },
+    {
+      "path": "/roster/plumbing/best/",
+      "trade": "plumbing",
+      "kind": "best-of"
+    },
+    {
+      "path": "/roster/electrician/best/",
+      "trade": "electrician",
+      "kind": "best-of"
+    },
+    {
+      "path": "/roster/handyman/best/",
+      "trade": "handyman",
+      "kind": "best-of"
+    },
+    {
+      "path": "/roster/home-cleaning/best/",
+      "trade": "cleaning",
+      "kind": "best-of"
+    },
+    {
       "path": "/roster/blog/",
       "kind": "blog-index"
     },
@@ -1107,7 +1146,7 @@
     },
     {
       "path": "/roster/blog/handyman-or-specialist/",
-      "words": 994,
+      "words": 993,
       "kind": "blog"
     },
     {
@@ -1137,7 +1176,7 @@
     },
     {
       "path": "/roster/blog/prepare-home-for-aircon-servicing/",
-      "words": 1137,
+      "words": 1139,
       "kind": "blog"
     },
     {
@@ -1157,7 +1196,7 @@
     },
     {
       "path": "/roster/blog/part-time-cleaner-vs-deep-cleaning/",
-      "words": 1127,
+      "words": 1126,
       "kind": "blog"
     },
     {
@@ -1177,7 +1216,7 @@
     },
     {
       "path": "/roster/blog/signs-you-need-a-plumber/",
-      "words": 1039,
+      "words": 1038,
       "kind": "blog"
     },
     {

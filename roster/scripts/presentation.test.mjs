@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {profileIntro, priceView, servicePrice, tidyPriceLabel} from '../lib/profile-copy.mjs';
 import {sampleSources, weightedRating} from '../assets/review-model.mjs';
 import {ratingSummary} from '../lib/rating-summary.mjs';
-import {splitDirectory} from '../assets/catalogue-card.mjs';
+import {splitDirectory,rankCompanies} from '../assets/catalogue-card.mjs';
 import {companyMatch} from '../assets/company-match.mjs';
 import {filterCatalogue} from '../assets/catalogue-filter.mjs';
 import {encodeCatalogue,decodeCatalogue} from '../assets/catalogue-data.mjs';
@@ -47,15 +47,13 @@ test('Price formatting removes duplicated job names without losing qualifiers, s
   assert.equal(servicePrice({prices:[{price:'S$80',indicative:true}]}),'Price guide');
 });
 
-test('Real averages use one source as-is and weight independent sources while excluding sample fixtures and mirrors', () => {
+// P1-4 (Martin, 18 Oct 2026): the headline rating is Google Maps alone; nothing is blended in.
+test('The headline rating is the Google Maps rating; Carousell, Yelp, mirrors and Trustpilot never blend in', () => {
   const c={googleRating:{value:3.4,count:34,sourceUrl:'https://maps.google.com/?cid=1',checkedAt:'2026-10-10'}};
-  assert.equal(ratingSummary(c).value,3.4);
-  assert.equal(ratingSummary(c).count,34);
-  assert.equal(ratingSummary(c).sourceCount,1);
-  c.reviewSources=[{name:'Yelp',rating:4.5,count:10,scale:5,sourceUrl:'https://yelp.com/biz/example',checkedAt:'2026-10-11'}, {name:'Mirror',rating:5,count:100,scale:5,sourceUrl:'https://example.com/reviews',checkedAt:'2026-10-11',mirrorsSource:'Google Maps'}];
-  assert.equal(ratingSummary(c).value,(3.4*34+4.5*10)/44);
-  assert.equal(ratingSummary(c).count,44);
-  assert.equal(ratingSummary(c).sourceCount,2);
+  assert.deepEqual([ratingSummary(c).value,ratingSummary(c).count,ratingSummary(c).sourceCount],[3.4,34,1]);
+  c.reviewSources=[{name:'Yelp',rating:4.5,count:10,scale:5,sourceUrl:'https://yelp.com/biz/example',checkedAt:'2026-10-11'},{name:'Carousell',rating:5,count:12,scale:5,sourceUrl:'https://carousell.sg/u/x',checkedAt:'2026-10-11'},{name:'Trustpilot',rating:4.2,count:6,scale:'trustscore',sourceUrl:'https://trustpilot.com/review/x',checkedAt:'2026-10-11'},{name:'Mirror',rating:5,count:100,scale:5,sourceUrl:'https://example.com/reviews',checkedAt:'2026-10-11',mirrorsSource:'Google Maps'}];
+  assert.deepEqual([ratingSummary(c).value,ratingSummary(c).count,ratingSummary(c).sources.map(s=>s.name)],[3.4,34,['Google Maps']]);
+  assert.equal(ratingSummary({reviewSources:c.reviewSources}),null);
   assert.equal(ratingSummary({}),null);
 });
 test('TrustScores never affect the combined average or supply a missing rating',()=>{
@@ -101,6 +99,19 @@ test('Checkbox counts combine search, location and rating filters across the ful
   const result=filterCatalogue(filterRows,{query:'  PLUMBING  ',area:'bedok',rating:'4.8',savedSlugs:['b','d']});
   assert.deepEqual(result.matches.map(c=>c.slug),['a','b']);
   assert.deepEqual(result.counts,{price:1,reviews:1,whatsapp:2,saved:1});
+});
+
+test('A trade word matches the primary trade first, never words inside another trade\'s services', () => {
+  const rows=[
+    {slug:'air',name:'Cool Aircon',category:'aircon',offerings:['condenser cleaning','chemical washes'],description:'Aircon cleaning and chemical wash'},
+    {slug:'handy',name:'Fix It',category:'handyman',offerings:['Cleaning after repairs']},
+    {slug:'clean',name:'Art of Cleaning Pte. Ltd.',category:'cleaning',offerings:['deep cleaning']},
+    {slug:'maid',name:'Maid Co',category:'cleaning',offerings:[]}
+  ];
+  const {matches}=filterCatalogue(rows,{query:'cleaning'});
+  assert.deepEqual(matches.map(c=>c.slug).sort(),['clean','handy','maid']);
+  assert.deepEqual(rankCompanies(matches,'name').map(c=>c.slug),['clean','maid','handy']);
+  assert.deepEqual(filterCatalogue(rows,{query:'chemical wash'}).matches.map(c=>c.slug),['air']);
 });
 
 test('Service selection and multiword search narrow the counts as well as the cards', () => {

@@ -1448,7 +1448,7 @@
     "addressHash": "e462b20ef19e416e80b82d749db06d860430351b3e752df2d1a7e7ffbe7de8bb"
   },
   "b-w-integrated-services-b-w-builders-private-limited": {
-    "checkedAt": "2026-10-15T10:37:30+00:00",
+    "checkedAt": "2026-10-17T22:05:39+00:00",
     "status": "verified",
     "latitude": 1.358773492705951,
     "longitude": 103.8948086054989,
@@ -5450,7 +5450,7 @@
     "addressHash": "ad62eac384e0362b27416ae081c0d170274517627bff3d16b43e633ba05eddb1"
   },
   "koomax-engineering-pte-ltd": {
-    "checkedAt": "2026-10-15T10:38:03+00:00",
+    "checkedAt": "2026-10-17T22:05:40+00:00",
     "status": "verified",
     "latitude": 1.3572297,
     "longitude": 103.8362454,
@@ -9560,5 +9560,58 @@
     "sourceUrl": "https://www.google.com/maps?cid=11096800740973844550&z=17&output=embed",
     "matchedBy": "cited-place-cid-and-postal-code",
     "addressHash": "07b911f0cae490b08f2bf13a5700dcdbeac21c48f8b28683ff68321099396c4f"
+  },
+  "aircool-pte-ltd": {
+    "checkedAt": "2026-10-17T22:05:39+00:00",
+    "status": "verified",
+    "latitude": 1.3341043,
+    "longitude": 103.6988723,
+    "precision": "building",
+    "postal": "627607",
+    "cid": "3186479271670410904",
+    "sourceName": "Aircool Pte Ltd",
+    "sourceUrl": "https://www.google.com/maps?cid=3186479271670410904&z=17&output=embed",
+    "matchedBy": "cited-place-cid-and-postal-code",
+    "addressHash": "905059ff6de7f2934e26b83f302937b6423ae1adabf1f98164e98ca96a4f8d75"
+  },
+  "cool-world-aircon": {
+    "checkedAt": "2026-10-17T22:05:39+00:00",
+    "status": "unresolved",
+    "reason": "A sourced place CID and Singapore postal code are needed.",
+    "addressHash": "cab208790d43f54710b34184965e39a2e26853b1e89d62f599829a9e15494ac2"
+  },
+  "coolbest-aircon-servicing": {
+    "checkedAt": "2026-10-17T22:05:39+00:00",
+    "status": "verified",
+    "latitude": 1.350592139188506,
+    "longitude": 103.7153486432709,
+    "precision": "building",
+    "postal": "640540",
+    "sourceName": "OneMap published-address location",
+    "sourceUrl": "https://www.onemap.gov.sg/api/common/elastic/search?searchVal=640540&returnGeom=Y&getAddrDetails=Y&pageNum=1",
+    "matchedBy": "onemap-postal-and-building",
+    "addressSourceUrl": "https://coolbestaircon.com/contact",
+    "evidenceCapturedAt": "2026-10-18",
+    "addressHash": "2ebc93ff4a89eac516c9ba7ff87a1a8d03548142b74000b4452895930134ed03"
+  },
+  "hedircool-pte-ltd": {
+    "checkedAt": "2026-10-17T22:05:40+00:00",
+    "status": "verified",
+    "latitude": 1.318814870076511,
+    "longitude": 103.8925807785135,
+    "precision": "building",
+    "postal": "409051",
+    "sourceName": "OneMap published-address location",
+    "sourceUrl": "https://www.onemap.gov.sg/api/common/elastic/search?searchVal=409051&returnGeom=Y&getAddrDetails=Y&pageNum=1",
+    "matchedBy": "onemap-postal-and-building",
+    "addressSourceUrl": "https://hedircool-sg.com/",
+    "evidenceCapturedAt": "2026-10-12",
+    "addressHash": "d61f180bcb04714752d351e6c60b4534e69a066565f613bf1d08c05306507c56"
+  },
+  "united-electricians": {
+    "checkedAt": "2026-10-17T22:05:40+00:00",
+    "status": "unresolved",
+    "reason": "A sourced place CID and Singapore postal code are needed.",
+    "addressHash": "242153c3965836dec0e3a7fb8a2ce0d158148f898baeed85803c3cc6035a3beb"
   }
 }

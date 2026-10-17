@@ -81,7 +81,7 @@ These are each company's lowest published chemical wash rate, with the source an
 
 ## When replacement is on the table
 
-If a unit keeps needing repairs, a contract for that unit may not be the best use of money. Ask the company for an honest view of the unit's condition before you sign. When you are choosing a new unit, the [NEA energy label](https://www.nea.gov.sg/our-services/climate-change-energy-efficiency/energy-efficiency/household-sector/the-energy-label) helps you compare how efficient different models are.
+If a unit keeps needing repairs, a contract for that unit may not be a good use of money. Ask the company for an honest view of the unit's condition before you sign. When you are choosing a new unit, the [NEA energy label](https://www.nea.gov.sg/our-services/climate-change-energy-efficiency/energy-efficiency/household-sector/the-energy-label) helps you compare how efficient different models are.
 
 If you live in an HDB flat and the work involves installing or moving units, read [HDB's air-conditioner installation guidance](https://www.hdb.gov.sg/managing-my-home/renovation-and-maintenance/renovation/renovation-guidelines/air-conditioner-installation-works) before you agree the job. Area pages such as [aircon companies serving Tampines](/roster/aircon-servicing/tampines/) list companies that name your town, which helps you build a shortlist to ask about both servicing and replacement.
 
