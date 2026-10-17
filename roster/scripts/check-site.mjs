@@ -10,6 +10,8 @@ import {airconMatrix,unitColumns,sizeColumns,unitRowProblem} from '../lib/aircon
 import {profileRowProblem,guideEvidence, sourcedRates, rateProblem, isFromPrice, minimumCompanies, maxLabelLength} from '../lib/sourced-rates.mjs';
 import {displayNames,derivedFrom,makesClaim} from '../lib/display-name.mjs';
 import {VISIBLE_DATE,stripDateText} from '../lib/no-dates.mjs';
+import {notFetched} from '../lib/expanded.mjs';
+import {sitemapLocs,sitemapXml} from '../lib/sitemaps.mjs';
 import {BEST_OF,rankBestOf,bestOfScore} from '../lib/best-of.mjs';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const load=async f=>JSON.parse(await readFile(path.join(root,f),'utf8'));
@@ -117,7 +119,18 @@ for(const [key,spec] of Object.entries(guideEvidence))if(!rateTables.has(key))as
  const launch=await load('data/seo-launch-pages.json');
  // Sitemap: every URL is a built page whose canonical is itself, and every area page is listed.
  // Pages stay noindex (checked for every page above) until the production domain is approved.
- const locs=[...(await readFile(path.join(root,'sitemap.xml'),'utf8')).matchAll(/<loc>([^<]+)<\/loc>/g)].map(m=>m[1].replaceAll('&amp;','&'));
+ const entries=await sitemapLocs(root),locs=entries.map(u=>u.loc);
+ // P1-9: index + children; company pages and the two aircon intent pages included; no utilities.
+ for(const p of ['/roster/aircon-servicing/chemical-wash/','/roster/aircon-servicing/gas-top-up/'])assert.ok(locs.includes(`https://previews.heylead.com${p}`),`Sitemap missing ${p}`);
+ for(const c of data.companies)assert.ok(locs.includes(`https://previews.heylead.com/roster/company/${c.slug}/`),`Company missing from sitemap: ${c.slug}`);
+ assert.ok(!locs.some(l=>/\/(?:search|claim-listing|logo-removal|matches|saved|account|sign-in|sign-up)\/|\?/.test(l)),'Utility or query URL in sitemap');
+ for(const u of entries)if(u.lastmod)assert.match(u.lastmod,/^\d{4}-\d{2}-\d{2}$/,`Sitemap lastmod: ${u.loc}`);
+ assert.ok(entries.filter(u=>u.lastmod).length>=entries.length-1,'Sitemap entries need lastmod');
+ // P1-10: llms files from the build, absolute URLs at the configured origin, no phone numbers.
+ for(const f of ['llms.txt','llms-full.txt']){const t=await readFile(path.join(root,f),'utf8');assert.ok(t.startsWith('# Roster')&&t.includes('https://previews.heylead.com/roster/plumbing/')&&!/\+65|\b[689]\d{3}\s?\d{4}\b/.test(t),`${f} content`);}
+ // P0-3: LAUNCH is off; the root robots file is only produced under roster/launch/ when it is on.
+ await assert.rejects(access(path.join(root,'launch/robots.txt')),'launch/robots.txt must not exist while LAUNCH is false');
+ assert.equal(await readFile(path.join(root,'robots.txt'),'utf8'),'# Beta preview. Every HTML page also carries noindex.\nUser-agent: *\nDisallow: /roster/\n');
  assert.equal(new Set(locs).size,locs.length,'Duplicate sitemap URL');
  for(const loc of locs){
   assert.ok(loc.startsWith('https://previews.heylead.com/roster/'),`Sitemap URL must be absolute preview URL: ${loc}`);
@@ -214,7 +227,10 @@ for(const [key,spec] of Object.entries(guideEvidence))if(!rateTables.has(key))as
    assert.ok(p.qty==null||p.qty===units,`Matrix row qty ${p.qty} disagrees with cell: ${where}`);
    assert.ok(p.min_units==null||p.min_units<=1,`Matrix row has a minimum of ${p.min_units} units: ${where}`);
    assert.ok(units>1?p.unit===`total for ${units} units`:!/^total for/.test(p.unit),`Matrix row unit "${p.unit}" disagrees with cell: ${where}`);
-   assert.ok(!/\badditional\b/i.test(p.price_text)&&!/(?<![\d.$,])\b\d+\s*(?:units?|fan coil units?)?\s*(?:and|&)\s*above/i.test(`${p.price_text} ${String(p.excerpt||'').split('|').pop()}`),`Additional or minimum-quantity rate in a units cell: ${where}`);
+   // Words between the previous price and this row's amount (r15 excerpts hold the whole tier table).
+   const before=t=>{const s=String(t||'').replace(/(\d),(?=\d{3})/g,'$1'),m=[...s.matchAll(/\$\s*(\d+(?:\.\d+)?)/g)],i=m.findIndex(x=>Number(x[1])===p.amount_sgd);return i<0?(m.length?'':s):s.slice(i?m[i-1].index+m[i-1][0].length:0,m[i].index+m[i][0].length+12);};
+   assert.ok(!/\badditional\b/i.test(p.price_text)&&(p.min_units==null||p.min_units<=1),`Additional-unit or minimum-units rate in a units cell: ${where}`);
+   assert.ok(!/(?<![\d.$,])\b\d+\s*(?:units?|fan coil units?)?\s*(?:and|&)\s*above/i.test(`${before(p.price_text)} ${before(String(p.excerpt||'').split('|').pop())}`),`Additional or minimum-quantity rate in a units cell: ${where}`);
    assert.ok(!/contract|yearly|quarterly|annual|\/\s*year/i.test(`${p.service} ${p.price_text}`),`Contract rate in matrix: ${where}`);
    assert.equal(unitRowProblem(p),null,`Matrix row rule: ${where}`);
   }
@@ -239,7 +255,7 @@ for(const [key,spec] of Object.entries(guideEvidence))if(!rateTables.has(key))as
  assert.ok(airconAreas,'Areas section on /roster/aircon/');
  assert.equal(airconAreas,pages.get('aircon-servicing/index.html').match(/<section class="areas-we-serve"[\s\S]*?<\/section>/)[0],'Aircon hub areas match the aircon servicing directory');
  const finder=pages.get('what-service-do-i-need/index.html');assert.ok(finder?.includes('data-symptom-finder'),'Symptom finder page');
- assert.ok((await readFile(path.join(root,'sitemap.xml'),'utf8')).includes('<loc>https://previews.heylead.com/roster/what-service-do-i-need/</loc>'),'Symptom finder in sitemap');
+ assert.ok((await sitemapXml(root)).includes('<loc>https://previews.heylead.com/roster/what-service-do-i-need/</loc>'),'Symptom finder in sitemap');
 }
 // "best" in Roster's own copy: allowed only in the five best-rated pages' titles, H1s and breadcrumbs,
 // in links to those pages, and inside company names or quoted company text. Quoted text is
@@ -268,7 +284,7 @@ for(const c of data.companies)assert.ok(derivedFrom(c.name,c.sourceName),`Displa
 // Best-rated pages: Google rating only, the 20-review minimum, the printed formula, ties, schema,
 // links from the hub and hub guide, sitemap, and "best" only in the title, H1, breadcrumbs and links.
 {
- const sitemap=await readFile(path.join(root,'sitemap.xml'),'utf8'),out=[];
+ const sitemap=await sitemapXml(root),out=[];
  assert.ok(bestOfScore(5,20)<bestOfScore(4.8,900),'5.0 from 20 must rank below 4.8 from 900');
  for(const [id,slug] of Object.entries({aircon:'aircon-servicing',plumbing:'plumbing',electrician:'electrician',handyman:'handyman',cleaning:'home-cleaning'})){
   const href=`/roster/${slug}/best/`,rel=`${slug}/best/index.html`,html=pages.get(rel);assert.ok(html,`Missing best-rated page: ${rel}`);
@@ -317,7 +333,10 @@ let hiddenRows=0;
 for(const c of data.companies){
  const rel=`company/${c.slug}/index.html`;assert.ok(pages.has(rel),`Missing page: ${c.slug}`);
  const html=pages.get(rel),e=c.enrichment;
- for(const rating of c.reviewSources||[])if(!/^google maps$/i.test(rating.name)&&!rating.mirrorsSource)assert.ok(html.includes(rating.sourceUrl.replaceAll('&','&amp;')),`Missing rating source: ${rel}`);
+ // P1-4: other sources appear as their own sentence; a source whose page was not fetched never appears.
+ for(const rating of c.reviewSources||[])if(!/^google maps$/i.test(rating.name)&&!rating.mirrorsSource)assert.equal(html.includes(rating.sourceUrl.replaceAll('&','&amp;')),!notFetched(rating),`Rating source ${notFetched(rating)?'shown although not fetched':'missing'}: ${rel}`);
+ assert.ok(!/Average rating|Weighted by review count/.test(html),`Blended average wording: ${rel}`);
+ if(!rel.includes('retired'))assert.ok(!JSON.stringify(JSON.parse(html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1])).includes('"FAQPage"'),`FAQPage schema on company page: ${rel}`);
  const frames=[...html.matchAll(/<iframe[^>]+src="([^"]+)"/g)];
  const pin=pins[c.slug];
  assert.equal(frames.length,pin?.status==='verified'?1:0,`Unverified map: ${rel}`);
@@ -338,7 +357,7 @@ for(const [id,slug] of Object.entries(categories)){
  const index={companies:decodeCatalogue(await load(`data/index/${id}.json`))};assert.equal(index.companies.length,report.byTrade[id].published);assert.ok(index.companies.every(c=>c.category===id),`Wrong primary trade in ${id}`);
  for(const c of index.companies){assert.equal(c.ratingValue,c.average?.value??null);assert.equal(c.ratingCount,c.average?.count||0);const company=data.companies.find(row=>row.slug===c.slug);assert.deepEqual(c.serviceAreas,[...new Set(company.enrichment.serviceLocations.map(e=>e.name))],`Coverage index differs from evidence: ${c.slug}`);}
  const directory=pages.get(slug+'/index.html');
- assert.ok(directory.includes('Minimum average rating'));
+ assert.ok(directory.includes('Minimum Google Maps rating')&&!directory.includes('weighted by review count'));
  assert.equal((directory.match(/id="service-area"/g)||[]).length,1,'One service coverage picker per directory');
  assert.ok(!directory.includes('Business location'),'Office-address filter must not duplicate coverage');
  const highlighted=[...directory.matchAll(/class="business-card catalogue-card"[^>]+data-slug="([^"]+)"/g)].map(m=>m[1]);

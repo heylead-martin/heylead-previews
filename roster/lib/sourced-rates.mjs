@@ -46,8 +46,11 @@ export const printsAmount = (text, n) => new RegExp(CUR + amountPattern(n), 'i')
 // service_raw sometimes holds the previous tier of a price table ("Normal Servicing - 2 units - $70"
 // on the 3-unit row). It belongs to this row only when it prints this row's amount; when it does
 // not, `service` was derived from it and is not this row's wording either.
-export const ownServiceRaw = p => p.service_raw && printsAmount(p.service_raw, p.amount_sgd) ? p.service_raw : null;
-const foreignRaw = p => !!p.service_raw && !ownServiceRaw(p);
+// r15 often stores only the price in service_raw ("From $100"); that carries no service words, so
+// `service` is used instead.
+const hasWords = s => /[a-z]{3,}/i.test(String(s).replace(new RegExp(CUR + String.raw`[\d.,]+`, 'gi'), ' ').replace(/\b(?:from|frm|starting|starts?|at|only|nett|flat|each|per|unit|and|above)\b/gi, ' '));
+export const ownServiceRaw = p => p.service_raw && printsAmount(p.service_raw, p.amount_sgd) && hasWords(p.service_raw) ? p.service_raw : null;
+const foreignRaw = p => !!p.service_raw && hasWords(p.service_raw) && !printsAmount(p.service_raw, p.amount_sgd);
 // The row's own label: its own service text, or, for a foreign service_raw, the table heading from
 // it ("Normal Servicing") plus the tier words of this row's price_text ("3 units").
 export function ownLabelSource(p) {
@@ -62,6 +65,9 @@ export const ownTexts = sourceTexts;
 
 // The source calls the amount a starting price: "From $80", "starts from just S$80", "$90 onwards".
 export function isFromPrice(p) {
+  // r15 lines carry from_price, set from each line's own price_text ("$380+" counts). The text rule
+  // below still applies, since it also reads "Frm $17" and "as low as $18" that the flag leaves false.
+  if (p.from_price === true) return true;
   if (/\bfrom\b|starting/i.test(p.unit || '')) return true;
   const amount = amountPattern(p.amount_sgd);
   const before = new RegExp(FROM + CUR + amount, 'i');
@@ -170,6 +176,8 @@ export function rateProblem(p, spec) {
   // A list of four or more kinds of work naming two or more guide services.
   const list = own.replace(/\([^)]*\)/g, ' ');
   if ((list.match(/[,/]/g) || []).length >= 3 && serviceFamilies.filter(re => re.test(list)).length >= 2) return 'general rate for several services';
+  // r15 lines may carry job_trade; a line filed under another trade is not this guide's rate.
+  if (p.job_trade && p.job_trade.replace(/^home-/, '') !== spec.trade) return 'work from another trade';
   const ownTrade = tradeObjects[spec.trade];
   if (!ownTrade.test(own) && Object.entries(tradeObjects).some(([trade, re]) => trade !== spec.trade && re.test(own))) return 'work from another trade';
   const siblings = Object.values(guideEvidence).filter(s => s.trade === spec.trade && s !== spec && !s.serviceOnly);
@@ -185,6 +193,9 @@ export function rateProblem(p, spec) {
 
 function eligible(p, spec) {
   const text = spec.serviceOnly ? p.service : `${p.service} ${p.job || ''}`;
+  // r15 splits "From $97 (per additional point)" into its own line; an additional-item rate is
+  // charged on top of a first item, so it is not a company's rate for the job.
+  if (/^per additional\b/i.test(p.unit || '') || /\beach additional\b/i.test(p.service || '')) return false;
   return spec.match.test(text) && !spec.exclude?.test(text) && Number.isFinite(p.amount_sgd) && p.amount_sgd > 0 && !p.indicative && !p.promo
     && /^https?:\/\//.test(p.sourceUrl || '') && /^\d{4}-\d{2}-\d{2}/.test(p.capturedAt || '') && (!spec.unit || displayUnit(p) === spec.unit);
 }

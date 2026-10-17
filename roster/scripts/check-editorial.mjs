@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import {readFile,writeFile} from 'node:fs/promises';
 import {fileURLToPath} from 'node:url';
 import {loadGuides,wordCount} from '../lib/editorial.mjs';
+import {sitemapXml} from '../lib/sitemaps.mjs';
 import {loadBlog,proseChunks,officialHosts} from '../lib/blog.mjs';
 const root=fileURLToPath(new URL('../',import.meta.url));
 const guides=await loadGuides(root),results=[];
@@ -41,7 +42,7 @@ const method=await readFile(`${root}/content/how-it-works.md`,'utf8');
 }
 assert.ok(wordCount(method)>=1000);
 // The sitemap lists the launch set for review; every page in it stays noindex.
-const sitemap=await readFile(`${root}/sitemap.xml`,'utf8');
+const sitemap=await sitemapXml(root);
 for(const g of guides)assert.ok(sitemap.includes(`<loc>https://previews.heylead.com${g.path}</loc>`),`${g.id}: guide missing from sitemap`);
 // Blog posts: length, contents, visible FAQ with matching schema, two to four spread-out CTAs,
 // official sources only, Article schema and no number or price that is not sourced.

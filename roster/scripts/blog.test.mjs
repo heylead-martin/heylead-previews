@@ -1,6 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
+import {fileURLToPath} from 'node:url';
+import {sitemapXml} from '../lib/sitemaps.mjs';
 import {parseBlog,proseChunks} from '../lib/blog.mjs';
 import {selectAreaPages,NON_RESIDENTIAL} from '../lib/area-pages.mjs';
 
@@ -32,7 +34,7 @@ test('Non-residential planning areas never get a static page',()=>{
 });
 
 test('Sitemap lists absolute preview URLs for area pages and the blog',async()=>{
- const xml=await readFile(new URL('../sitemap.xml',import.meta.url),'utf8');
+ const xml=await sitemapXml(fileURLToPath(new URL('../',import.meta.url)));
  assert.match(xml,/<loc>https:\/\/previews\.heylead\.com\/roster\/plumbing\/bedok\/<\/loc>/);
  assert.match(xml,/<loc>https:\/\/previews\.heylead\.com\/roster\/blog\/<\/loc>/);
  assert.doesNotMatch(xml,/\/roster\/plumbing\/tuas\//);

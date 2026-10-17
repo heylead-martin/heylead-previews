@@ -120,9 +120,11 @@ test('Current release: guide tables hold only genuine, fully worded rates', () =
       const range = priceRange(p);
       if (range) assert.ok(cell.includes(` to S$${range.max.toLocaleString('en-SG')}`), `Range shortened: ${where}: ${cell}`);
       else if (isFromPrice(p)) assert.ok(cell.startsWith('From S$'), `Starting price shown as firm: ${where}: ${cell}`);
-      assert.ok(/^(?:From )?S\$[\d,.]+(?: to S\$[\d,.]+\+?)?(?: per [a-z ]+)?(?:; (?:from )?S\$[\d,.]+ per additional [a-z]+)*$/.test(cell), `Rate wording: ${where}: ${cell}`);
+      assert.ok(/^(?:From )?S\$[\d,.]+(?: to S\$[\d,.]+\+?)?(?: per [a-z ]+(?: \([\w ]+\))?)?(?:; (?:from )?S\$[\d,.]+ per additional [a-z]+)*$/.test(cell), `Rate wording: ${where}: ${cell}`);
     }
   }
   const spower = sourcedRates(spec('EL-07'), companies).find(r => /spower/i.test(r.company.name));
-  assert.match(rateCell(spower.line), /; from S\$67 per additional point$/);
+  // r15 lists Spower's additional-point prices as their own lines; tables show the first-point price.
+  assert.match(rateCell(spower.line), /^From S\$97\b/);
+  for (const s of Object.values(guideEvidence)) for (const {line} of sourcedRates(s, companies)) assert.ok(!/^per additional/.test(line.unit || ''), `Additional-item rate as a table row: ${line.service}`);
 });

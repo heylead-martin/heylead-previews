@@ -47,15 +47,13 @@ test('Price formatting removes duplicated job names without losing qualifiers, s
   assert.equal(servicePrice({prices:[{price:'S$80',indicative:true}]}),'Price guide');
 });
 
-test('Real averages use one source as-is and weight independent sources while excluding sample fixtures and mirrors', () => {
+// P1-4 (Martin, 18 Oct 2026): the headline rating is Google Maps alone; nothing is blended in.
+test('The headline rating is the Google Maps rating; Carousell, Yelp, mirrors and Trustpilot never blend in', () => {
   const c={googleRating:{value:3.4,count:34,sourceUrl:'https://maps.google.com/?cid=1',checkedAt:'2026-10-10'}};
-  assert.equal(ratingSummary(c).value,3.4);
-  assert.equal(ratingSummary(c).count,34);
-  assert.equal(ratingSummary(c).sourceCount,1);
-  c.reviewSources=[{name:'Yelp',rating:4.5,count:10,scale:5,sourceUrl:'https://yelp.com/biz/example',checkedAt:'2026-10-11'}, {name:'Mirror',rating:5,count:100,scale:5,sourceUrl:'https://example.com/reviews',checkedAt:'2026-10-11',mirrorsSource:'Google Maps'}];
-  assert.equal(ratingSummary(c).value,(3.4*34+4.5*10)/44);
-  assert.equal(ratingSummary(c).count,44);
-  assert.equal(ratingSummary(c).sourceCount,2);
+  assert.deepEqual([ratingSummary(c).value,ratingSummary(c).count,ratingSummary(c).sourceCount],[3.4,34,1]);
+  c.reviewSources=[{name:'Yelp',rating:4.5,count:10,scale:5,sourceUrl:'https://yelp.com/biz/example',checkedAt:'2026-10-11'},{name:'Carousell',rating:5,count:12,scale:5,sourceUrl:'https://carousell.sg/u/x',checkedAt:'2026-10-11'},{name:'Trustpilot',rating:4.2,count:6,scale:'trustscore',sourceUrl:'https://trustpilot.com/review/x',checkedAt:'2026-10-11'},{name:'Mirror',rating:5,count:100,scale:5,sourceUrl:'https://example.com/reviews',checkedAt:'2026-10-11',mirrorsSource:'Google Maps'}];
+  assert.deepEqual([ratingSummary(c).value,ratingSummary(c).count,ratingSummary(c).sources.map(s=>s.name)],[3.4,34,['Google Maps']]);
+  assert.equal(ratingSummary({reviewSources:c.reviewSources}),null);
   assert.equal(ratingSummary({}),null);
 });
 test('TrustScores never affect the combined average or supply a missing rating',()=>{
