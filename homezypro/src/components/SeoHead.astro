@@ -1,0 +1,37 @@
+---
+// Title, description, canonical, Open Graph/Twitter, robots (from the indexing switch) and one
+// JSON-LD block. `jsonLdText` is pre-serialised and pre-checked by src/lib/render.mjs (no rating,
+// review or offer schema; "<" escaped).
+import {BRAND, absUrl, robotsFor} from '../config/site.mjs';
+import {activeMarket} from '../config/markets.mjs';
+
+interface Props {
+  title: string;
+  description: string;
+  canonicalPath: string;
+  shareImage?: string;
+  ogType?: string;
+  jsonLdText?: string;
+  noCanonical?: boolean;
+  robots?: string;
+}
+const {title, description, canonicalPath, shareImage = absUrl('/assets/og-default.png'), ogType = 'website', jsonLdText = '', noCanonical = false, robots} = Astro.props;
+const canonical = absUrl(canonicalPath);
+const robotsContent = robots || robotsFor(canonicalPath);
+---
+<meta name="robots" content={robotsContent}>
+<title>{title}</title>
+<meta name="description" content={description}>
+<meta property="og:type" content={ogType}>
+<meta property="og:site_name" content={BRAND}>
+<meta property="og:locale" content={activeMarket.ogLocale}>
+<meta property="og:title" content={title}>
+<meta property="og:description" content={description}>
+{!noCanonical && <meta property="og:url" content={canonical}>}
+<meta property="og:image" content={shareImage}>
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content={title}>
+<meta name="twitter:description" content={description}>
+<meta name="twitter:image" content={shareImage}>
+{!noCanonical && <link rel="canonical" href={canonical}>}
+{jsonLdText && <script type="application/ld+json" set:html={jsonLdText}></script>}

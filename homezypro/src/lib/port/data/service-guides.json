@@ -1,0 +1,186 @@
+{
+  "aircon-general": {
+    "body": "Routine cleaning of the filters, accessible indoor-unit surfaces and drainage. It is maintenance for everyday dust and dirt; a chemical clean, replacement part or repair may be quoted separately.",
+    "ask": "How many units does the price cover, and are the blower, drainage and outdoor unit included?"
+  },
+  "aircon-wash": {
+    "body": "Chemical cleaning targets built-up dirt on the indoor coil and other accessible components. The amount of dismantling varies, so check how this wash differs from the company's full overhaul.",
+    "ask": "Which components are cleaned, and will the indoor unit stay mounted during the work?"
+  },
+  "wall-wash": {
+    "body": "A deeper clean for a wall-mounted indoor aircon unit. With a non-dismantle wash, the unit stays mounted while accessible components are cleaned using a cleaning solution and rinsed.",
+    "ask": "Does the quote cover the coil, blower and drainage, and does unit size change the price?"
+  },
+  "cassette-wash": {
+    "body": "Chemical cleaning for a ceiling-mounted cassette aircon. This is a different unit type from a wall-mounted split system, with different access requirements.",
+    "ask": "Is ceiling access straightforward, and are any access equipment or larger-unit charges included?"
+  },
+  "aircon-overhaul": {
+    "body": "A more extensive clean that involves dismantling components to reach areas a routine service or non-dismantle wash cannot easily reach. The unit is reassembled and checked after cleaning.",
+    "ask": "What will be dismantled, and are drainage testing, reinstallation and any gas work included?"
+  },
+  "wall-overhaul": {
+    "body": "A thorough clean of a wall-mounted indoor unit with components dismantled for better access. Cleaning, reassembly and testing are the main stages.",
+    "ask": "What is included for your unit's size, and are parts or refrigerant charged separately?"
+  },
+  "cassette-overhaul": {
+    "body": "An overhaul for a ceiling cassette, with components dismantled for a more thorough clean. Access above the ceiling can affect the work and the quote.",
+    "ask": "Does the price cover your cassette size, ceiling access, reassembly and testing?"
+  },
+  "aircon-cleaning-options": {
+    "body": "A chemical wash cleans accessible components more deeply than routine servicing. An overhaul involves more dismantling to reach internal areas. Ask the technician to explain which level of cleaning your unit needs.",
+    "ask": "What is the difference between the two quoted scopes, and why is the recommended option needed?"
+  },
+  "aircon-overhaul-package": {
+    "body": "An overhaul is a deeper clean with dismantling. A maintenance package covers scheduled visits over a period. These are different types of booking, so check which work the package actually includes.",
+    "ask": "How many visits and units are covered, and when do the included gas or overhaul benefits apply?"
+  },
+  "aircon-contract": {
+    "body": "A plan for repeat servicing visits instead of booking each visit separately. Compare the number of visits and covered units, as well as the total package price.",
+    "ask": "How many visits are included, when does the plan expire, and what is excluded?"
+  },
+  "aircon-contract-no-gas": {
+    "body": "Scheduled aircon servicing under a contract that does not include gas top-ups. Refrigerant work, repairs or deeper cleaning may require a separate quote.",
+    "ask": "How many visits and units are included, and what happens if a repair is needed?"
+  },
+  "aircon-contract-gas": {
+    "body": "A servicing package advertised with free gas. The allowance and conditions matter, especially whether leak detection or repairs are included alongside the top-up.",
+    "ask": "Are there limits on gas type, quantity or visits, and are leak repairs extra?"
+  },
+  "aircon-gas": {
+    "body": "A refrigerant top-up adds the gas used by the cooling system. The required type and amount depend on the equipment and the diagnosis. Poor cooling alone does not establish that a top-up is needed.",
+    "ask": "How was low refrigerant confirmed, and what checks or repairs are needed before topping up?"
+  },
+  "aircon-diagnosis": {
+    "body": "A technician checks the aircon to identify why it is not working as expected. The diagnostic charge may be separate from the cost of repairing the fault or replacing a part.",
+    "ask": "Is the diagnostic fee credited towards the repair, and will you receive a quote before work starts?"
+  },
+  "aircon-gas-diagnosis": {
+    "body": "Troubleshooting identifies the fault; a refrigerant top-up is a separate possible job. A unit that is not cooling may need cleaning or a repair rather than more refrigerant.",
+    "ask": "What does the diagnostic fee cover, and which additional work would need your approval?"
+  },
+  "aircon-water-leak": {
+    "body": "A visit to investigate water dripping from the aircon and identify the cause. Cleaning a blocked drain and repairing a damaged component are different scopes of work.",
+    "ask": "Does the starting price cover diagnosis only, or the repair as well?"
+  },
+  "aircon-leak-diagnosis": {
+    "body": "An assessment of water leakage or poor cooling to identify the cause before choosing a repair. A troubleshooting price does not automatically include parts, cleaning or a refrigerant top-up.",
+    "ask": "What is covered by the visit fee, and will the technician explain the repair cost first?"
+  },
+  "drain-chokes": {
+    "body": "Clearing a blockage that stops wastewater draining normally. The affected fixture and the location of the blockage determine the tools and access needed.",
+    "ask": "Does the quote cover the affected drain only, and what happens if the blockage is farther along the pipe?"
+  },
+  "sink-choke": {
+    "body": "Clearing a blocked kitchen or bathroom sink so water can drain again. The problem may be in the trap beneath the sink or farther along the waste pipe.",
+    "ask": "Will the price change if pipe removal or access beyond the sink trap is needed?"
+  },
+  "floor-trap": {
+    "body": "Clearing a blockage at the floor drain or its connected waste pipe, typically where shower or bathroom water drains away.",
+    "ask": "Does the quoted price include checking that water drains properly after the blockage is cleared?"
+  },
+  "toilet-choke": {
+    "body": "Clearing a blockage affecting toilet flushing or drainage. The work needed depends on whether the obstruction is in the toilet or the connected pipe.",
+    "ask": "Is toilet removal included if needed, and what would be charged separately?"
+  },
+  "drain-jetting": {
+    "body": "Using pressurised water to clear deposits or a more stubborn drain blockage. The plumber should assess whether jetting is suitable for the pipe and the available access.",
+    "ask": "Which section of drain is covered, and are access, inspection and cleanup included?"
+  },
+  "pipe-leaks": {
+    "body": "Finding and repairing a leak in a pipe, joint or plumbing fitting. A visible leak and a concealed leak can involve very different amounts of access work.",
+    "ask": "Does the quote include replacement materials and making good any opened surfaces?"
+  },
+  "copper-pipe": {
+    "body": "Repair or replacement of a section of copper water pipe and its connections. The length, pipe size and access needed affect the amount of labour and material.",
+    "ask": "What pipe length and fittings are supplied, and are access work and testing included?"
+  },
+  "leak-detection": {
+    "body": "An investigation to locate a leak hidden behind or beneath a surface. Finding the leak and repairing it are separate tasks unless both are included in the quote.",
+    "ask": "What does detection cover, and are repair and reinstatement charged separately?"
+  },
+  "pipes-detection": {
+    "body": "Visible pipe repairs address a known damaged section or connection. Concealed-leak detection investigates a leak whose source cannot yet be seen.",
+    "ask": "Is the quote for locating the fault, repairing it, or both?"
+  },
+  "basin-installation": {
+    "body": "Fitting a basin and connecting it to the water and waste pipes. A replacement may also involve removing the old basin and checking the existing connections.",
+    "ask": "Is the basin supplied, and are taps, waste fittings, removal and disposal included?"
+  },
+  "bottle-trap": {
+    "body": "A bottle trap is the small waste fitting beneath a basin. It connects the basin outlet to the drain and holds water to help prevent drain smells entering the room.",
+    "ask": "Does the price include a replacement trap, compatible fittings and a leak check?"
+  },
+  "plumbing-fittings": {
+    "body": "Installation or replacement of a tap, mixer, sink or hose. These are different fittings, so the listed starting price needs to be matched to the actual item and job.",
+    "ask": "Who supplies the fitting, and does the quote cover removal, installation and testing?"
+  },
+  "basins-traps": {
+    "body": "Work on basin fixtures and the waste fittings beneath them, including traps, taps and connecting hoses. The right scope depends on which part is leaking, blocked or being replaced.",
+    "ask": "Are the fittings supplied, and is disposal of the old item included?"
+  },
+  "fixtures-heaters": {
+    "body": "Installing or replacing plumbing fixtures or a water heater. The work depends on the product, existing connections and whether any plumbing or electrical changes are required.",
+    "ask": "Who supplies the product, and does the quote cover all connections, removal and testing?"
+  },
+  "electrical-fault": {
+    "body": "An electrician investigates power trips, outages or faulty circuits to identify the cause. Fault finding and the resulting repair can be priced separately.",
+    "ask": "What does the call-out cover, and will repair costs be agreed before work starts?"
+  },
+  "lighting-fans": {
+    "body": "Installing or replacing a light fitting, switch or ceiling fan. The work depends on the product and whether suitable mounting and wiring are already in place.",
+    "ask": "Is this installation only, and are brackets, new wiring and old-fitting disposal included?"
+  },
+  "electrical-wiring": {
+    "body": "Work on sockets, fixed wiring or the distribution board that supplies the property's circuits. Adding a new point and replacing an existing fitting can require different work.",
+    "ask": "Does the quote cover new cable runs, testing and any work needed to finish the wall or ceiling?"
+  },
+  "power-points": {
+    "body": "Installing or replacing electrical sockets and switches. Replacing an existing point is different from adding a new one with a new cable route.",
+    "ask": "Does the quote include the fitting, cable run and final testing?"
+  },
+  "wiring-lighting": {
+    "body": "Electrical work for lighting and cable routes, including replacements or rewiring. A quote needs the number of fittings, their locations and the condition of the existing wiring.",
+    "ask": "Which fittings and cable runs are included, and who handles any ceiling or wall repairs?"
+  },
+  "isolator": {
+    "body": "Replacement of an existing isolator switch, which disconnects an appliance from its electricity supply. A new installation that needs a new circuit is a different job.",
+    "ask": "Is the quote for a double-pole replacement, and are transport or higher-rated switches extra?"
+  },
+  "electrical-enquiry": {
+    "body": "Use this enquiry to describe the electrical fault or installation you need. The company should confirm that it handles the work before you arrange a visit.",
+    "ask": "What is the visit fee, what work can the electrician assess, and when will the repair be quoted?"
+  },
+  "plumbing-repairs": {
+    "body": "An enquiry covering plumbing faults such as a leaking tap, blocked drain or damaged fitting. Describe where the problem is and whether it is a repair or replacement.",
+    "ask": "Does the quote include parts, the visit and testing, or labour only?"
+  },
+  "carpentry-repairs": {
+    "body": "Repairing or adjusting household items such as doors, hinges, cabinets and shelving. The material and condition of the existing item affect what can be repaired.",
+    "ask": "Will parts be repaired or replaced, and are hardware, materials and finishing included?"
+  },
+  "painting-flooring": {
+    "body": "Painting refreshes a surface finish; flooring work may involve repairing an area or installing a new covering. Room size, preparation and material choice affect the scope.",
+    "ask": "Does the quote include preparation, materials, moving furniture and removal of old coverings?"
+  },
+  "handyman-enquiry": {
+    "body": "An enquiry for home repair or maintenance work. Send a short job list, dimensions and photos so the company can confirm which tasks it can take on.",
+    "ask": "Can the jobs be handled in one visit, and what materials or specialist work are extra?"
+  },
+  "weekly-cleaning": {
+    "body": "Recurring cleaning to keep up with routine household tasks. The useful comparison is the agreed task list, time per visit and frequency, not just the advertised starting price.",
+    "ask": "How many hours and cleaners are included, and who provides the supplies?"
+  },
+  "cleaning-trial": {
+    "body": "A first cleaning session offered as a way to try the service. Confirm its duration and task list, as a trial offer does not establish the price of future visits.",
+    "ask": "Is it a one-off booking, and what would later sessions cost?"
+  },
+  "cleaning-offer": {
+    "body": "An advertised starting offer for weekly cleaning or a first-session trial. The captured page does not specify whether the amount is per hour or per visit.",
+    "ask": "What does the amount buy, how long is the session, and are supplies and GST included?"
+  },
+  "one-time-cleaning": {
+    "body": "A single cleaning visit with a task list agreed for the property. A routine clean, a move-out clean and a deep clean can have different scopes and prices.",
+    "ask": "Which rooms and tasks are covered, and are inside cupboards, appliances or windows extra?"
+  }
+}

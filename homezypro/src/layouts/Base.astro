@@ -1,0 +1,54 @@
+---
+// Page shell ported from roster's pageShell: stylesheets and scripts per page type, nav and footer.
+// The page object comes from src/lib/render.mjs.
+import SeoHead from '../components/SeoHead.astro';
+import {activeMarket} from '../config/markets.mjs';
+import {renderNav, renderFooter, assetVersions} from '../lib/render.mjs';
+
+interface Props {
+  page: {title: string; description: string; canonicalPath: string; current?: string; bodyClass?: string; shareImage?: string; ogType?: string; jsonLdText?: string; body: string};
+  noCanonical?: boolean;
+  robots?: string;
+}
+const {page, noCanonical = false, robots} = Astro.props;
+const bodyClass = page.bodyClass || '';
+const classes = bodyClass.split(' ');
+const v = (name: string) => `/assets/${name}?v=${assetVersions[name]}`;
+const css = [
+  'site.css', 'directory.css', 'experience.css', 'expanded.css', 'service-areas.css',
+  ...(bodyClass === 'directory-page' ? ['sort-control.css'] : []),
+  'logo-fit.css',
+  ...(bodyClass === 'home-page' ? ['home.css', 'hero-rotation.css'] : []),
+  'editorial.css', 'brand.css'
+];
+---
+<!doctype html>
+<html lang={activeMarket.locale}>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f3f0e9">
+<SeoHead title={page.title} description={page.description} canonicalPath={page.canonicalPath} shareImage={page.shareImage} ogType={page.ogType} jsonLdText={page.jsonLdText} noCanonical={noCanonical} robots={robots} />
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/assets/homezypro-logo-512.png" type="image/png" sizes="512x512">
+<link rel="apple-touch-icon" href="/assets/homezypro-logo-512.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,560;1,9..144,460&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+{css.map(name => <link rel="stylesheet" href={v(name)}>)}
+</head>
+<body class={bodyClass || undefined}>
+<a class="skip" href="#content">Skip to content</a>
+<Fragment set:html={renderNav(page.current || '', bodyClass === 'home-page')} />
+<main id="content" class="wrap">
+<Fragment set:html={page.body} />
+</main>
+<Fragment set:html={renderFooter()} />
+<script is:inline src={v('directory.js')}></script>
+<script is:inline src={v('experience.js')}></script>
+{bodyClass === 'home-page' && <script is:inline type="module" src={v('home.js')}></script>}
+{bodyClass === 'home-page' && <script is:inline type="module" src={v('hero-rotation.js')}></script>}
+{classes.includes('company-page') && <script is:inline type="module" src={v('review-preview.mjs')}></script>}
+{bodyClass === 'directory-page' && <script is:inline type="module" src={v('catalogue.js')}></script>}
+</body>
+</html>

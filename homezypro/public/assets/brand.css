@@ -1,0 +1,9 @@
+/* HomezyPro brand layer over the ported roster design tokens (site.css). Loaded last.
+   Colours, type and spacing tokens stay roster's; only the identity changes here. */
+:root {
+  --brand: var(--green);
+  --brand-ink: var(--green-ink);
+}
+.brand .wordmark { letter-spacing: -0.01em; }
+.brand .wordmark .brand-pro { color: var(--green); font-style: italic; }
+.foot .brand .wordmark .brand-pro { color: inherit; }
