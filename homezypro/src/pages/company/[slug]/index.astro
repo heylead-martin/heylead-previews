@@ -1,0 +1,11 @@
+---
+// One profile per published company (738 for r15.1).
+import Base from '../../../layouts/Base.astro';
+import {publishedCompanies, companyPage} from '../../../lib/render.mjs';
+
+export function getStaticPaths() {
+  return publishedCompanies.map(company => ({params: {slug: company.slug}, props: {company}}));
+}
+const page = companyPage(Astro.props.company);
+---
+<Base page={page} />

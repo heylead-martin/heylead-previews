@@ -1,0 +1,57 @@
+/* Quote entry and contact preview share the existing HomezyPro palette. */
+.quote-composer{min-width:0;padding:22px;border:1px solid #cbd9c4;border-radius:15px;background:var(--white);box-shadow:0 10px 30px -22px #214b3b50}
+.quote-composer-badge{display:flex;align-items:center;gap:7px;font:500 12px var(--sans);color:var(--green);margin-bottom:17px}
+.quote-composer-badge>span{margin-left:auto;border:1px solid #d7e0cb;border-radius:5px;background:var(--green-tint);padding:3px 6px;font-size:10px}
+.quote-composer h2{font:560 29px/1.12 var(--serif);letter-spacing:-.025em;margin:0 0 12px;color:var(--ink)}
+.quote-composer>p{font-size:14px;line-height:1.55;color:var(--muted);margin:0 0 14px}
+.quote-composer fieldset,.quote-dialog fieldset{min-width:0;border:0;padding:0;margin:0}
+.quote-composer label,.quote-dialog form>fieldset>div>label{display:block;font-size:13px;font-weight:600;line-height:1.4;margin-bottom:7px}
+.quote-composer textarea,.quote-composer select,.quote-dialog input:is([type=tel],[type=email]){display:block;width:100%;min-height:46px;padding:11px 12px;border:1px solid var(--rule-strong);border-radius:8px;background:#fbfcfa;color:var(--ink);font:16px/1.5 var(--sans)}
+.quote-composer textarea{resize:vertical;min-height:88px;max-height:240px;margin-bottom:13px}
+.quote-composer select{padding-right:26px;white-space:normal;line-height:1.3;font-size:14px}
+.quote-composer :is(textarea,select):focus-visible,.quote-dialog input:focus-visible{outline:2px solid var(--green);outline-offset:3px}
+.quote-field-hint{font-size:12px;line-height:1.5;color:var(--muted);margin:5px 0 8px}
+.quote-composer .btn{width:100%;min-height:48px;display:flex;align-items:center;justify-content:center;gap:10px;font-size:16px;margin-top:10px}
+.quote-composer .quote-composer-note{font-size:12px;line-height:1.5;text-align:center;margin:10px 0 15px}
+.quote-composer-foot{display:flex;align-items:flex-start;gap:6px;border-top:1px solid var(--rule);padding-top:13px;font-size:12px;line-height:1.5;color:var(--green-ink)}
+.quote-composer-foot .ic{flex:none;margin-top:2px;width:14px;height:14px}
+.quote-service-refine{margin:0;border:0;border-radius:0;background:none;padding:0}
+.quote-service-refine summary{padding:0;min-height:44px;font-size:12px;color:var(--green);display:flex;align-items:center;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.quote-service-refine label{margin-top:7px}
+.match-layout{grid-template-columns:minmax(0,1fr) 320px}
+.match-main{grid-column:1;grid-row:1}.match-sidebar{grid-column:2;grid-row:1;position:static}
+.match-quote-top{display:flex;align-items:center;gap:12px;margin-top:15px}.match-quote-top>span{font-size:12px;color:var(--muted)}
+.quote-dialog{width:min(610px,calc(100% - 28px));padding:28px}
+.quote-dialog-heading{margin-bottom:16px}
+.quote-dialog h2{font-size:32px;line-height:1.12;letter-spacing:-.025em;max-width:22ch}
+.quote-dialog-note{margin:12px 0 20px;font-size:15px;line-height:1.5}
+.quote-dialog .quote-channel{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:21px}
+.quote-channel label{display:flex;align-items:center;gap:9px;padding:13px 10px;border:1px solid var(--rule);border-radius:9px;cursor:pointer;min-height:64px;font-size:15px}
+.quote-channel label:has(:checked){background:#f0f5e9;border-color:var(--green);box-shadow:inset 0 0 0 1px var(--green)}
+.quote-channel input{width:18px;height:18px;margin:0;accent-color:var(--green);flex:none}
+.quote-channel .ic{color:var(--green);width:19px;height:19px;flex:none}
+.quote-channel span{font-weight:600;line-height:1.3}.quote-channel small{display:block;font-size:11px;font-weight:400;color:var(--muted);margin-top:4px}
+.quote-request-summary{background:#f7f9f4;border:1px solid var(--rule);border-radius:9px;padding:13px 15px;margin:18px 0}
+.quote-request-summary .quote-brief-text{background:none;border:0;padding:0;margin:0 0 4px;font-size:14px;line-height:1.5;overflow-wrap:anywhere}
+.quote-request-summary>[data-quote-area]{font-size:12px;color:var(--green)}
+.quote-recipient-review{border:1px solid var(--rule);padding:0 13px;border-radius:9px;margin:16px 0;background:#f7f9f4}
+.quote-recipient-review summary{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:10px 0;min-height:48px;font-size:13px;color:var(--green);cursor:pointer}
+.quote-recipient-review .ic{width:14px;height:14px}.quote-recipient-review[open] summary .ic{transform:rotate(90deg)}
+.quote-dialog .quote-recipient-review ul{gap:7px;margin:9px 0 13px}.quote-dialog li{background:white;padding:8px;font-size:13px}
+.quote-dialog .listing-logo{--logo-size:48px}.quote-dialog .listing-logo>span{font-size:18px}
+.quote-sharing{font-size:13px;line-height:1.6;color:var(--muted);margin:15px 0}
+.quote-consent{display:flex;align-items:center;gap:11px;min-height:44px;font-size:14px;line-height:1.5;cursor:pointer}
+.quote-consent input{width:24px;height:24px;accent-color:var(--green);flex:none;margin:0}
+.quote-preview-assurance{display:flex;align-items:flex-start;gap:8px;background:#f0f5e9;color:var(--green-ink);border-radius:7px;padding:11px 12px;font-size:12px;line-height:1.5;margin:16px 0 0}
+.quote-preview-assurance .ic{flex:none;margin-top:2px}
+.quote-dialog-actions{margin-top:18px;padding-top:17px}.quote-dialog-actions .btn{min-height:46px;font-size:14px}
+.directory-page .discovery-rail{grid-template-columns:1fr}
+.quote-rail-disclosure{padding:0;border:0;background:none;margin:0}
+.quote-rail-disclosure>summary{display:none}
+@media(min-width:1200px){.directory-page .directory-layout{grid-template-columns:200px minmax(0,1fr) 280px;gap:22px}.directory-page .quote-composer{padding:20px}.directory-page .quote-composer h2{font-size:28px}}
+@media(max-width:1199px){.directory-page .discovery-rail{grid-column:1/-1;grid-row:1}.directory-page .rail-note{display:none}.quote-rail-disclosure>summary{display:flex;align-items:center;justify-content:space-between;gap:12px;background:white;border:1px solid #cbd9c4;padding:14px 18px;border-radius:10px;font-size:16px;color:var(--green);cursor:pointer;min-height:50px}.quote-rail-disclosure[open]>summary{margin-bottom:12px}.directory-page .quote-composer{max-width:620px;margin:auto}}
+@media(min-width:801px) and (max-width:1050px){.match-layout{grid-template-columns:minmax(0,1fr) 280px;gap:20px}.match-sidebar .quote-composer{padding:19px}}
+@media(max-width:800px){.match-layout{display:flex;flex-direction:column;gap:25px}.match-sidebar{display:block;position:static;order:-1;width:100%}.match-main{width:100%}.quote-composer h2{font-size:30px}.quote-composer h2 br{display:none}.quote-composer{padding:22px}.quote-composer select{font-size:16px}}
+@media(max-width:480px){.quote-dialog{padding:20px}.quote-dialog h2{font-size:29px}.quote-dialog .quote-channel{gap:8px}.quote-channel label{padding:12px 9px;gap:7px}.quote-channel .ic{display:none}.quote-channel small{font-size:10px}.quote-dialog-actions{flex-direction:row}.quote-dialog-actions .btn{font-size:13px}.quote-dialog-actions .btn-solid{flex:1}.quote-dialog-note{font-size:14px}.quote-composer{padding:19px}.match-quote-top{display:block}.match-quote-top>span{display:block;text-align:center;margin-top:7px}}
+
+@media(min-width:1200px) and (min-height:850px){.directory-page .discovery-rail{position:sticky;top:125px}}

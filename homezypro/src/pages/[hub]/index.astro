@@ -1,0 +1,11 @@
+---
+// The five trade hubs: /aircon-servicing/, /plumbing/, /electrician/, /handyman/, /home-cleaning/.
+import Base from '../../layouts/Base.astro';
+import {trades, hubPage} from '../../lib/render.mjs';
+
+export function getStaticPaths() {
+  return trades.map(trade => ({params: {hub: trade.slug}, props: {trade}}));
+}
+const page = hubPage(Astro.props.trade);
+---
+<Base page={page} />
