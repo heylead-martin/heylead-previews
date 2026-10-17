@@ -214,7 +214,10 @@ for(const [key,spec] of Object.entries(guideEvidence))if(!rateTables.has(key))as
 // licence lookups only on electrician and plumbing hubs, symptom finder listed.
 {
  const priceGuide=pages.get('aircon/servicing-price/index.html');
- for(const [id,columns] of [['units',unitColumns],['sizes',sizeColumns]]){
+ // r15.1: the "by number of units" matrix stays hidden until the N1 fixes are live (the rule and its
+ // tests stay in lib/aircon-matrix.mjs and scripts/aircon-matrix.test.mjs); the BTU matrix is shown.
+ assert.ok(!priceGuide.includes('data-aircon-matrix="units"')&&!priceGuide.includes('data-average-vs-median'),'Units matrix must stay hidden');
+ for(const [id,columns] of [['sizes',sizeColumns]]){
   const rows=airconMatrix(data.companies,columns);
   const section=priceGuide.match(new RegExp(`<section[^>]+data-aircon-matrix="${id}">([\\s\\S]*?)</section>`))?.[1];assert.ok(section,`Missing aircon matrix ${id}`);
   let shown=0;
@@ -353,6 +356,22 @@ for(const c of data.companies)assert.ok(derivedFrom(c.name,c.sourceName),`Displa
  assert.ok(townLinked>100,'Company pages should link their town pages');
  console.log(`Company pages linking town pages: ${townLinked}; areaServed as places: ${areaServed}`);
 }
+// r15.1: indicative lines (market guides) are never shown as a company's price; condenser-cleaning
+// lines appear only in the condenser table; withheld HEDIRCOOL has a retired page and no sitemap entry.
+{
+ let hidden=0;
+ for(const c of data.companies)for(const p of c.enrichment?.priceLines||[])if(p.indicative){
+  hidden++;const html=pages.get(`company/${c.slug}/index.html`),pricing=html.match(/<section class="profile-section" id="pricing"[\s\S]*?<\/section>/)?.[0]||'';
+  const probe=String(p.excerpt||p.price_text||'').slice(0,40).replaceAll('&','&amp;').replaceAll('"','&quot;').replaceAll("'",'&#39;').replaceAll('<','&lt;').replaceAll('>','&gt;');
+  if(probe.length>=12)assert.ok(!pricing.includes(probe),`Indicative price shown on profile: ${c.slug}: ${probe}`);
+ }
+ for(const [rel,html] of pages)assert.ok(!html.includes('General price guide, not a company quote'),`Indicative label on ${rel}`);
+ for(const [key,spec] of Object.entries(guideEvidence))for(const r of sourcedRates(spec,data.companies)){assert.ok(!r.line.indicative,`Indicative line in ${key}`);if(r.line.job==='condenser-cleaning')assert.equal(key,'AC-09',`Condenser cleaning in ${key}`);}
+ for(const r of airconMatrix(data.companies,sizeColumns))for(const cell of r.cells)for(const e of cell.entries)assert.ok(!e.line.indicative&&e.line.job!=='condenser-cleaning',`Matrix row: ${e.company.slug}`);
+ const retired=pages.get('company/hedircool-pte-ltd/index.html');assert.ok(retired?.includes('data-retired-listing'),'HEDIRCOOL retired page');
+ assert.ok(!(await sitemapXml(root)).includes('/company/hedircool-pte-ltd/'),'Withheld listing in sitemap');
+ console.log(`Indicative lines kept off pages: ${hidden}`);
+}
 // P1-17: branded 404 under roster/, noindex, no canonical, links to the hubs, search and symptom finder.
 {
  const nf=await readFile(path.join(root,'404.html'),'utf8');
@@ -384,7 +403,7 @@ for(const c of data.companies){
  if(c.alternatePhones?.length){assert.ok(html.includes('Also listed:'),`Missing alternate phones: ${rel}`);for(const p of c.alternatePhones)assert.ok(html.includes(p.sourceLabel.replaceAll('&','&amp;')),`Missing alternate phone source: ${rel}`);}
  if(e.faqs?.length) assert.ok(html.includes('Answer from the company website'),`Missing sourced FAQ: ${rel}`);
  if(e.summary?.text) assert.ok(html.includes('class="company-intro"'),`Missing summary: ${rel}`);
- if(c.imported) assert.equal((html.match(/<div class="service-options"/g)||[]).length,current[c.slug].services.filter(s=>s.prices.some(p=>!profileRowProblem(p))).length,`Pricing options: ${rel}`);
+ if(c.imported) assert.equal((html.match(/<div class="service-options"/g)||[]).length,current[c.slug].services.filter(s=>s.prices.some(p=>!p.indicative&&!profileRowProblem(p))).length,`Pricing options: ${rel}`);
  // Testimonials, headings and condition fragments captured as price rows stay out of the pricing section.
  const pricingHtml=html.match(/<section class="profile-section" id="pricing"[\s\S]*?<\/section>/)?.[0]||'';
  for(const s of current[c.slug]?.services||[])for(const p of s.prices){const why=profileRowProblem(p);if(!why)continue;hiddenRows++;

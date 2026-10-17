@@ -3551,7 +3551,7 @@
             "excerpt": "Nitrogen pressure test (single system) / $80 to $120 / Gas recovery, nitrogen charge, 24-hour monitoring / Leak repair (minor joint) / $80 to $150 / Joint re-braze or re-flare, re-test / Leak repair (coil replacement) / $300 to $600+ / Coil sourcing, installation, full regas / Full copper pipe replacement / $400 to $900+",
             "sourceUrl": "https://decom-aircon.com.sg/aircon-gas-top-up-prices-singapore-2026/",
             "capturedAt": "2026-10-18",
-            "indicative": false
+            "indicative": true
           },
           {
             "label": "Leak repair, minor joint (re-braze or re-flare, re-test)",
@@ -3560,7 +3560,7 @@
             "excerpt": "Nitrogen pressure test (single system) / $80 to $120 / Gas recovery, nitrogen charge, 24-hour monitoring / Leak repair (minor joint) / $80 to $150 / Joint re-braze or re-flare, re-test / Leak repair (coil replacement) / $300 to $600+ / Coil sourcing, installation, full regas / Full copper pipe replacement / $400 to $900+",
             "sourceUrl": "https://decom-aircon.com.sg/aircon-gas-top-up-prices-singapore-2026/",
             "capturedAt": "2026-10-18",
-            "indicative": false
+            "indicative": true
           },
           {
             "label": "Leak repair, coil replacement (coil sourcing, installation, full regas)",
@@ -3569,7 +3569,7 @@
             "excerpt": "Nitrogen pressure test (single system) / $80 to $120 / Gas recovery, nitrogen charge, 24-hour monitoring / Leak repair (minor joint) / $80 to $150 / Joint re-braze or re-flare, re-test / Leak repair (coil replacement) / $300 to $600+ / Coil sourcing, installation, full regas / Full copper pipe replacement / $400 to $900+",
             "sourceUrl": "https://decom-aircon.com.sg/aircon-gas-top-up-prices-singapore-2026/",
             "capturedAt": "2026-10-18",
-            "indicative": false
+            "indicative": true
           },
           {
             "label": "Full copper pipe replacement (depends on pipe run and trunking)",
@@ -3578,17 +3578,17 @@
             "excerpt": "Nitrogen pressure test (single system) / $80 to $120 / Gas recovery, nitrogen charge, 24-hour monitoring / Leak repair (minor joint) / $80 to $150 / Joint re-braze or re-flare, re-test / Leak repair (coil replacement) / $300 to $600+ / Coil sourcing, installation, full regas / Full copper pipe replacement / $400 to $900+",
             "sourceUrl": "https://decom-aircon.com.sg/aircon-gas-top-up-prices-singapore-2026/",
             "capturedAt": "2026-10-18",
-            "indicative": false
+            "indicative": true
           }
         ],
-        "priceSummary": "4 pricing entries"
+        "priceSummary": "Pricing reference"
       }
     ],
     "highlights": [],
     "sourceUrls": [
       "https://decom-aircon.com.sg/about/"
     ],
-    "updatedAt": "2026-10-18T00:57+03:00"
+    "updatedAt": "2026-10-18T01:23+03:00"
   },
   "easy-cool-engineering-pte-ltd": {
     "headline": "Services published by EASY COOL ENGINEERING PTE LTD.",
@@ -3684,9 +3684,18 @@
             "sourceUrl": "https://easycool.sg/pricing",
             "capturedAt": "2026-10-10",
             "indicative": false
+          },
+          {
+            "label": "FCU chemical wash, dismantle, 18k and 24k",
+            "price": "18k & 24k - $160 per unit",
+            "detail": "Quantity: 1. Calculated per-unit price: S$160 (1 unit in the published total). Per unit. GST: not stated",
+            "excerpt": "FCU Chemical Wash Dismantle / 9k & 12k - $140 per unit / 18k & 24k - $160 per unit / Top Gas / Top up R410 - A Gas / $80 - $150 / Vacuum + Top up R32 Gas / $200 - $250 / Outdoor units Normal wash Service / $50 - $100 per CU (Depend on have Steel Frame or not and Cleaning Difficulty) / Outdoor units Chemical wash Service / $100 - $250 per CU (Depend on have Steel Frame or not and Cleaning Difficulty)",
+            "sourceUrl": "https://easycool.sg/pricing",
+            "capturedAt": "2026-10-10",
+            "indicative": false
           }
         ],
-        "priceSummary": "3 pricing entries"
+        "priceSummary": "4 pricing entries"
       },
       {
         "name": "Installation",
@@ -3811,13 +3820,69 @@
           }
         ],
         "priceSummary": "10 pricing entries"
+      },
+      {
+        "name": "Gas top-up",
+        "description": "",
+        "explanation": "",
+        "sourceUrl": "https://easycool.sg/pricing",
+        "capturedAt": "2026-10-10",
+        "prices": [
+          {
+            "label": "Gas top-up, R410A",
+            "price": "Top up R410 - A Gas / $80 - $150",
+            "detail": "Quantity: 1. Calculated per-unit price: S$80 to S$150 (1 unit in the published total). As printed. GST: not stated",
+            "excerpt": "FCU Chemical Wash Dismantle / 9k & 12k - $140 per unit / 18k & 24k - $160 per unit / Top Gas / Top up R410 - A Gas / $80 - $150 / Vacuum + Top up R32 Gas / $200 - $250 / Outdoor units Normal wash Service / $50 - $100 per CU (Depend on have Steel Frame or not and Cleaning Difficulty) / Outdoor units Chemical wash Service / $100 - $250 per CU (Depend on have Steel Frame or not and Cleaning Difficulty)",
+            "sourceUrl": "https://easycool.sg/pricing",
+            "capturedAt": "2026-10-10",
+            "indicative": false
+          },
+          {
+            "label": "Vacuum and gas top-up, R32",
+            "price": "Vacuum + Top up R32 Gas / $200 - $250",
+            "detail": "Quantity: 1. Calculated per-unit price: S$200 to S$250 (1 unit in the published total). As printed. GST: not stated",
+            "excerpt": "FCU Chemical Wash Dismantle / 9k & 12k - $140 per unit / 18k & 24k - $160 per unit / Top Gas / Top up R410 - A Gas / $80 - $150 / Vacuum + Top up R32 Gas / $200 - $250 / Outdoor units Normal wash Service / $50 - $100 per CU (Depend on have Steel Frame or not and Cleaning Difficulty) / Outdoor units Chemical wash Service / $100 - $250 per CU (Depend on have Steel Frame or not and Cleaning Difficulty)",
+            "sourceUrl": "https://easycool.sg/pricing",
+            "capturedAt": "2026-10-10",
+            "indicative": false
+          }
+        ],
+        "priceSummary": "2 pricing entries"
+      },
+      {
+        "name": "Condenser cleaning",
+        "description": "",
+        "explanation": "",
+        "sourceUrl": "https://easycool.sg/pricing",
+        "capturedAt": "2026-10-10",
+        "prices": [
+          {
+            "label": "Outdoor unit (CU) normal wash",
+            "price": "Outdoor units Normal wash Service / $50 - $100 per CU",
+            "detail": "Quantity: 1. Calculated per-unit price: S$50 to S$100 (1 unit in the published total). Per condensing unit. GST: not stated",
+            "excerpt": "FCU Chemical Wash Dismantle / 9k & 12k - $140 per unit / 18k & 24k - $160 per unit / Top Gas / Top up R410 - A Gas / $80 - $150 / Vacuum + Top up R32 Gas / $200 - $250 / Outdoor units Normal wash Service / $50 - $100 per CU (Depend on have Steel Frame or not and Cleaning Difficulty) / Outdoor units Chemical wash Service / $100 - $250 per CU (Depend on have Steel Frame or not and Cleaning Difficulty)",
+            "sourceUrl": "https://easycool.sg/pricing",
+            "capturedAt": "2026-10-10",
+            "indicative": false
+          },
+          {
+            "label": "Outdoor unit (CU) chemical wash",
+            "price": "Outdoor units Chemical wash Service / $100 - $250 per CU",
+            "detail": "Quantity: 1. Calculated per-unit price: S$100 to S$250 (1 unit in the published total). Per condensing unit. GST: not stated",
+            "excerpt": "FCU Chemical Wash Dismantle / 9k & 12k - $140 per unit / 18k & 24k - $160 per unit / Top Gas / Top up R410 - A Gas / $80 - $150 / Vacuum + Top up R32 Gas / $200 - $250 / Outdoor units Normal wash Service / $50 - $100 per CU (Depend on have Steel Frame or not and Cleaning Difficulty) / Outdoor units Chemical wash Service / $100 - $250 per CU (Depend on have Steel Frame or not and Cleaning Difficulty)",
+            "sourceUrl": "https://easycool.sg/pricing",
+            "capturedAt": "2026-10-10",
+            "indicative": false
+          }
+        ],
+        "priceSummary": "2 pricing entries"
       }
     ],
     "highlights": [],
     "sourceUrls": [
       "https://easycool.sg/about-us"
     ],
-    "updatedAt": "2026-10-18T00:57+03:00"
+    "updatedAt": "2026-10-18T01:23+03:00"
   },
   "ec-aircon-services-pte-ltd": {
     "headline": "Services published by EC AIRCON SERVICES PTE LTD.",
@@ -7002,7 +7067,7 @@
           {
             "label": "Eco-chemical wash, single unit (from)",
             "price": "Eco-Chemical Wash (Single Unit): starts from $80",
-            "detail": "Quantity: 1. Calculated per-unit price: S$80 (1 unit in the published total). Minimum 3 units. Per unit. GST: not stated",
+            "detail": "Quantity: 1. Calculated per-unit price: S$80 (1 unit in the published total). Per unit. GST: not stated",
             "excerpt": "General Aircon Servicing (3 Units): starts from $90 ($30 per unit) | Eco-Chemical Wash (Single Unit): starts from $80",
             "sourceUrl": "https://skyblueaircon.com/pricing",
             "capturedAt": "2026-10-10",
@@ -7075,7 +7140,7 @@
     "sourceUrls": [
       "https://skyblueaircon.com/"
     ],
-    "updatedAt": "2026-10-18T00:57+03:00"
+    "updatedAt": "2026-10-18T01:23+03:00"
   },
   "sky-mac-aircon-engineering-pte-ltd": {
     "headline": "Services published by SKY-MAC AIRCON ENGINEERING PTE. LTD..",
@@ -15117,7 +15182,7 @@
     "sourceUrls": [
       "https://bestairconservicing.com/"
     ],
-    "updatedAt": "2026-10-10"
+    "updatedAt": "2026-10-18T01:23+03:00"
   },
   "dw-aircon-servicing-singapore-sengkang": {
     "headline": "Services published by DW Aircon Servicing Singapore - Sengkang.",
@@ -15403,7 +15468,7 @@
     "sourceUrls": [
       "https://cleanbreezeaircon.com/about/"
     ],
-    "updatedAt": "2026-10-10"
+    "updatedAt": "2026-10-18T01:23+03:00"
   },
   "helperoo-pte-ltd": {
     "headline": "Services published by Helperoo Pte Ltd.",
@@ -16251,7 +16316,7 @@
     "sourceUrls": [
       "https://parttimehomemaid.com/"
     ],
-    "updatedAt": "2026-10-18T00:57+03:00"
+    "updatedAt": "2026-10-18T01:23+03:00"
   },
   "spring-cleaning-services": {
     "headline": "Services published by Spring Cleaning Services.",
@@ -16506,7 +16571,7 @@
     "sourceUrls": [
       "https://goodcoolsg.com/"
     ],
-    "updatedAt": "2026-10-18T00:57+03:00"
+    "updatedAt": "2026-10-18T01:23+03:00"
   },
   "one-heart-cleaning-pte-ltd": {
     "headline": "Services published by One Heart Cleaning Pte Ltd.",
@@ -20198,7 +20263,7 @@
     "sourceUrls": [
       "https://www.airconservicesingapore.co/"
     ],
-    "updatedAt": "2026-10-10"
+    "updatedAt": "2026-10-18T01:23+03:00"
   },
   "thetop-aircon-service": {
     "headline": "Services published by THETOP AIRCON SERVICE.",
@@ -20321,9 +20386,36 @@
             "sourceUrl": "https://thetop.com.sg/aircon-servicing-price-list/",
             "capturedAt": "2026-10-18",
             "indicative": false
+          },
+          {
+            "label": "Chemical wash FCU, 6 units (total)",
+            "price": "6 units…..$410",
+            "detail": "Quantity: 6. Calculated per-unit price: S$68.33 (6 units in the published total). Total for 6 units. GST: excluded (as printed)",
+            "excerpt": "Chemical Wash FCU / 1 unit…….$85 / 2 units…..$160 / 3 units…..$230 / 4 units…..$300 / 5 units…..$350 / 6 units…..$410 / 7 units…..$480 / 8 units…..$540",
+            "sourceUrl": "https://thetop.com.sg/aircon-servicing-price-list/",
+            "capturedAt": "2026-10-18",
+            "indicative": false
+          },
+          {
+            "label": "Chemical wash FCU, 7 units (total)",
+            "price": "7 units…..$480",
+            "detail": "Quantity: 7. Calculated per-unit price: S$68.57 (7 units in the published total). Total for 7 units. GST: excluded (as printed)",
+            "excerpt": "Chemical Wash FCU / 1 unit…….$85 / 2 units…..$160 / 3 units…..$230 / 4 units…..$300 / 5 units…..$350 / 6 units…..$410 / 7 units…..$480 / 8 units…..$540",
+            "sourceUrl": "https://thetop.com.sg/aircon-servicing-price-list/",
+            "capturedAt": "2026-10-18",
+            "indicative": false
+          },
+          {
+            "label": "Chemical wash FCU, 8 units (total)",
+            "price": "8 units…..$540",
+            "detail": "Quantity: 8. Calculated per-unit price: S$67.5 (8 units in the published total). Total for 8 units. GST: excluded (as printed)",
+            "excerpt": "Chemical Wash FCU / 1 unit…….$85 / 2 units…..$160 / 3 units…..$230 / 4 units…..$300 / 5 units…..$350 / 6 units…..$410 / 7 units…..$480 / 8 units…..$540",
+            "sourceUrl": "https://thetop.com.sg/aircon-servicing-price-list/",
+            "capturedAt": "2026-10-18",
+            "indicative": false
           }
         ],
-        "priceSummary": "5 pricing entries"
+        "priceSummary": "8 pricing entries"
       },
       {
         "name": "Chemical overhaul",
@@ -20331,7 +20423,63 @@
         "explanation": "Aircon Chemical Overhaul",
         "sourceUrl": "https://thetop.com.sg/",
         "capturedAt": "2026-10-10",
-        "prices": []
+        "prices": [
+          {
+            "label": "Chemical overhaul 9-12k, 1 unit",
+            "price": "1 unit…….$150",
+            "detail": "Quantity: 1. Calculated per-unit price: S$150 (1 unit in the published total). Per unit. GST: excluded (as printed)",
+            "excerpt": "Aircon Chemical Overhaul 9-12k / 1 unit…….$150 / 2 units…..$280 / 3 units…..$390 / 4 units…..$480 / 5 units…..$600 / 6 units…..$720",
+            "sourceUrl": "https://thetop.com.sg/aircon-servicing-price-list/",
+            "capturedAt": "2026-10-18",
+            "indicative": false
+          },
+          {
+            "label": "Chemical overhaul 9-12k, 2 units (total)",
+            "price": "2 units…..$280",
+            "detail": "Quantity: 2. Calculated per-unit price: S$140 (2 units in the published total). Total for 2 units. GST: excluded (as printed)",
+            "excerpt": "Aircon Chemical Overhaul 9-12k / 1 unit…….$150 / 2 units…..$280 / 3 units…..$390 / 4 units…..$480 / 5 units…..$600 / 6 units…..$720",
+            "sourceUrl": "https://thetop.com.sg/aircon-servicing-price-list/",
+            "capturedAt": "2026-10-18",
+            "indicative": false
+          },
+          {
+            "label": "Chemical overhaul 9-12k, 3 units (total)",
+            "price": "3 units…..$390",
+            "detail": "Quantity: 3. Calculated per-unit price: S$130 (3 units in the published total). Total for 3 units. GST: excluded (as printed)",
+            "excerpt": "Aircon Chemical Overhaul 9-12k / 1 unit…….$150 / 2 units…..$280 / 3 units…..$390 / 4 units…..$480 / 5 units…..$600 / 6 units…..$720",
+            "sourceUrl": "https://thetop.com.sg/aircon-servicing-price-list/",
+            "capturedAt": "2026-10-18",
+            "indicative": false
+          },
+          {
+            "label": "Chemical overhaul 9-12k, 4 units (total)",
+            "price": "4 units…..$480",
+            "detail": "Quantity: 4. Calculated per-unit price: S$120 (4 units in the published total). Total for 4 units. GST: excluded (as printed)",
+            "excerpt": "Aircon Chemical Overhaul 9-12k / 1 unit…….$150 / 2 units…..$280 / 3 units…..$390 / 4 units…..$480 / 5 units…..$600 / 6 units…..$720",
+            "sourceUrl": "https://thetop.com.sg/aircon-servicing-price-list/",
+            "capturedAt": "2026-10-18",
+            "indicative": false
+          },
+          {
+            "label": "Chemical overhaul 9-12k, 5 units (total)",
+            "price": "5 units…..$600",
+            "detail": "Quantity: 5. Calculated per-unit price: S$120 (5 units in the published total). Total for 5 units. GST: excluded (as printed)",
+            "excerpt": "Aircon Chemical Overhaul 9-12k / 1 unit…….$150 / 2 units…..$280 / 3 units…..$390 / 4 units…..$480 / 5 units…..$600 / 6 units…..$720",
+            "sourceUrl": "https://thetop.com.sg/aircon-servicing-price-list/",
+            "capturedAt": "2026-10-18",
+            "indicative": false
+          },
+          {
+            "label": "Chemical overhaul 9-12k, 6 units (total)",
+            "price": "6 units…..$720",
+            "detail": "Quantity: 6. Calculated per-unit price: S$120 (6 units in the published total). Total for 6 units. GST: excluded (as printed)",
+            "excerpt": "Aircon Chemical Overhaul 9-12k / 1 unit…….$150 / 2 units…..$280 / 3 units…..$390 / 4 units…..$480 / 5 units…..$600 / 6 units…..$720",
+            "sourceUrl": "https://thetop.com.sg/aircon-servicing-price-list/",
+            "capturedAt": "2026-10-18",
+            "indicative": false
+          }
+        ],
+        "priceSummary": "6 pricing entries"
       },
       {
         "name": "Gas top-up",
@@ -20372,13 +20520,59 @@
         "sourceUrl": "https://thetop.com.sg/",
         "capturedAt": "2026-10-10",
         "prices": []
+      },
+      {
+        "name": "Condenser cleaning",
+        "description": "",
+        "explanation": "",
+        "sourceUrl": "https://thetop.com.sg/aircon-servicing-price-list/",
+        "capturedAt": "2026-10-18",
+        "prices": [
+          {
+            "label": "Condenser normal cleaning",
+            "price": "Normal cleaning condenser…$50",
+            "detail": "Quantity: 1. Calculated per-unit price: S$50 (1 unit in the published total). Per unit. GST: excluded (as printed)",
+            "excerpt": "Chemical Wash Outdoor Condenser / Normal cleaning condenser…$50 / Dry Cleaning Condenser…$80 / Chemical wash /cu…$100 - $120 / Chemical wash /vrv…$150 - $200",
+            "sourceUrl": "https://thetop.com.sg/aircon-servicing-price-list/",
+            "capturedAt": "2026-10-18",
+            "indicative": false
+          },
+          {
+            "label": "Condenser dry cleaning",
+            "price": "Dry Cleaning Condenser…$80",
+            "detail": "Quantity: 1. Calculated per-unit price: S$80 (1 unit in the published total). Per unit. GST: excluded (as printed)",
+            "excerpt": "Chemical Wash Outdoor Condenser / Normal cleaning condenser…$50 / Dry Cleaning Condenser…$80 / Chemical wash /cu…$100 - $120 / Chemical wash /vrv…$150 - $200",
+            "sourceUrl": "https://thetop.com.sg/aircon-servicing-price-list/",
+            "capturedAt": "2026-10-18",
+            "indicative": false
+          },
+          {
+            "label": "Condenser chemical wash, per condensing unit",
+            "price": "Chemical wash /cu…$100 - $120",
+            "detail": "Quantity: 1. Calculated per-unit price: S$100 to S$120 (1 unit in the published total). Per condensing unit. GST: excluded (as printed)",
+            "excerpt": "Chemical Wash Outdoor Condenser / Normal cleaning condenser…$50 / Dry Cleaning Condenser…$80 / Chemical wash /cu…$100 - $120 / Chemical wash /vrv…$150 - $200",
+            "sourceUrl": "https://thetop.com.sg/aircon-servicing-price-list/",
+            "capturedAt": "2026-10-18",
+            "indicative": false
+          },
+          {
+            "label": "Condenser chemical wash, VRV",
+            "price": "Chemical wash /vrv…$150 - $200",
+            "detail": "Quantity: 1. Calculated per-unit price: S$150 to S$200 (1 unit in the published total). Per VRV condensing unit. GST: excluded (as printed)",
+            "excerpt": "Chemical Wash Outdoor Condenser / Normal cleaning condenser…$50 / Dry Cleaning Condenser…$80 / Chemical wash /cu…$100 - $120 / Chemical wash /vrv…$150 - $200",
+            "sourceUrl": "https://thetop.com.sg/aircon-servicing-price-list/",
+            "capturedAt": "2026-10-18",
+            "indicative": false
+          }
+        ],
+        "priceSummary": "4 pricing entries"
       }
     ],
     "highlights": [],
     "sourceUrls": [
       "https://thetop.com.sg/about-us/"
     ],
-    "updatedAt": "2026-10-18T00:57+03:00"
+    "updatedAt": "2026-10-18T01:23+03:00"
   },
   "jetstyle-aircon-aircon-contractor-singapore": {
     "headline": "Services published by Jetstyle Aircon- Aircon Contractor Singapore.",
@@ -22396,7 +22590,7 @@
     "sourceUrls": [
       "https://ironingmaids.sg/"
     ],
-    "updatedAt": "2026-10-10"
+    "updatedAt": "2026-10-18T01:23+03:00"
   },
   "ps-home-maintenance": {
     "headline": "Services published by PS Home Maintenance.",
@@ -24587,7 +24781,7 @@
     "sourceUrls": [
       "https://www.sekihiroaircon.com.sg/"
     ],
-    "updatedAt": "2026-10-18T00:57+03:00"
+    "updatedAt": "2026-10-18T01:23+03:00"
   },
   "sm-plumbing-service": {
     "headline": "Services published by SM Plumbing Service.",
@@ -26511,7 +26705,7 @@
     "sourceUrls": [
       "https://www.plumbersingapore.org/"
     ],
-    "updatedAt": "2026-10-10"
+    "updatedAt": "2026-10-18T01:23+03:00"
   },
   "winway-home-services": {
     "headline": "Services published by Winway Home Services.",
@@ -27704,7 +27898,7 @@
     "sourceUrls": [
       "https://24hourselectricians.sg/about"
     ],
-    "updatedAt": "2026-10-10"
+    "updatedAt": "2026-10-18T01:23+03:00"
   },
   "rosewood-home-m-e-services-pte-ltd": {
     "headline": "Services published by ROSEWOOD HOME M&E SERVICES PTE. LTD.",
@@ -32409,7 +32603,7 @@
       "https://www.serviceairconsingapore.com/",
       "https://www.serviceairconsingapore.com/about-us/"
     ],
-    "updatedAt": "2026-10-10"
+    "updatedAt": "2026-10-18T01:23+03:00"
   },
   "newcool": {
     "headline": "Services published by Newcool.",
@@ -34654,7 +34848,7 @@
     "sourceUrls": [
       "https://repairhome.sg/"
     ],
-    "updatedAt": "2026-10-18T00:57+03:00"
+    "updatedAt": "2026-10-18T01:23+03:00"
   },
   "handyman-king-singapore-private-limited": {
     "headline": "Services published by Handyman King Singapore private Limited.",
@@ -36074,7 +36268,7 @@
     "sourceUrls": [
       "https://www.acservice.sg/"
     ],
-    "updatedAt": "2026-10-10"
+    "updatedAt": "2026-10-18T01:23+03:00"
   },
   "thong-nian-engineering-pte-ltd": {
     "headline": "Services published by Thong Nian Engineering Pte Ltd.",
@@ -38737,7 +38931,7 @@
     "sourceUrls": [
       "https://vmgelectrical.sg/"
     ],
-    "updatedAt": "2026-10-18T00:57+03:00"
+    "updatedAt": "2026-10-18T01:23+03:00"
   },
   "dr-stain-llp": {
     "headline": "Services published by Dr Stain LLP.",
@@ -44029,7 +44223,7 @@
     "sourceUrls": [
       "https://handytech.sg/"
     ],
-    "updatedAt": "2026-10-18T00:57+03:00"
+    "updatedAt": "2026-10-18T01:23+03:00"
   },
   "sc-electrician": {
     "headline": "Services published by SC Electrician.",
@@ -45113,7 +45307,7 @@
       {
         "name": "Rewiring",
         "description": "",
-        "explanation": "ð Checking and rewiring fan electrical connections for safety",
+        "explanation": "🔌 Checking and rewiring fan electrical connections for safety",
         "sourceUrl": "https://www.360maintenance.sg/",
         "capturedAt": "2026-10-10",
         "prices": []
@@ -45163,7 +45357,7 @@
     "sourceUrls": [
       "https://www.360maintenance.sg/"
     ],
-    "updatedAt": "2026-10-18T00:57+03:00"
+    "updatedAt": "2026-10-18T01:23+03:00"
   },
   "fix-my-heater": {
     "headline": "Services published by Fix My Heater.",
@@ -47590,15 +47784,79 @@
         "capturedAt": "2026-10-10",
         "prices": [
           {
-            "label": "General servicing",
-            "price": "See source details",
-            "detail": "Quantity: 1. Calculated per-unit price: S$35 (1 unit in the published total). Per unit. GST: not stated",
-            "excerpt": "General servicing from $35 per unit with a 90-day workmanship warranty.",
-            "sourceUrl": "https://citycoolingengr.com.sg/",
+            "label": "General servicing, 1 unit",
+            "price": "1 Unit / $35",
+            "detail": "Quantity: 1. Calculated per-unit price: S$35 (1 unit in the published total). Per unit. GST: excluded (page: \"Prices listed are subject to GST\")",
+            "excerpt": "General Servicing / Per-Service Basis / 1 Unit / $35 / 2 Units / $55 / 3 Units / $70 / 4 Units / $85 / 5 Units / $100 / 6 Units / $114 / 7 Units / $133 / 8 Units / $152 / * Prices listed are subject to GST",
+            "sourceUrl": "https://citycoolingengr.com.sg/pricing/",
+            "capturedAt": "2026-10-18",
+            "indicative": false
+          },
+          {
+            "label": "General servicing, 2 units (total)",
+            "price": "2 Units / $55",
+            "detail": "Quantity: 2. Calculated per-unit price: S$27.5 (2 units in the published total). Total for 2 units. GST: excluded (page: \"Prices listed are subject to GST\")",
+            "excerpt": "General Servicing / Per-Service Basis / 1 Unit / $35 / 2 Units / $55 / 3 Units / $70 / 4 Units / $85 / 5 Units / $100 / 6 Units / $114 / 7 Units / $133 / 8 Units / $152 / * Prices listed are subject to GST",
+            "sourceUrl": "https://citycoolingengr.com.sg/pricing/",
+            "capturedAt": "2026-10-18",
+            "indicative": false
+          },
+          {
+            "label": "General servicing, 3 units (total)",
+            "price": "3 Units / $70",
+            "detail": "Quantity: 3. Calculated per-unit price: S$23.33 (3 units in the published total). Total for 3 units. GST: excluded (page: \"Prices listed are subject to GST\")",
+            "excerpt": "General Servicing / Per-Service Basis / 1 Unit / $35 / 2 Units / $55 / 3 Units / $70 / 4 Units / $85 / 5 Units / $100 / 6 Units / $114 / 7 Units / $133 / 8 Units / $152 / * Prices listed are subject to GST",
+            "sourceUrl": "https://citycoolingengr.com.sg/pricing/",
+            "capturedAt": "2026-10-18",
+            "indicative": false
+          },
+          {
+            "label": "General servicing, 4 units (total)",
+            "price": "4 Units / $85",
+            "detail": "Quantity: 4. Calculated per-unit price: S$21.25 (4 units in the published total). Total for 4 units. GST: excluded (page: \"Prices listed are subject to GST\")",
+            "excerpt": "General Servicing / Per-Service Basis / 1 Unit / $35 / 2 Units / $55 / 3 Units / $70 / 4 Units / $85 / 5 Units / $100 / 6 Units / $114 / 7 Units / $133 / 8 Units / $152 / * Prices listed are subject to GST",
+            "sourceUrl": "https://citycoolingengr.com.sg/pricing/",
+            "capturedAt": "2026-10-18",
+            "indicative": false
+          },
+          {
+            "label": "General servicing, 5 units (total)",
+            "price": "5 Units / $100",
+            "detail": "Quantity: 5. Calculated per-unit price: S$20 (5 units in the published total). Total for 5 units. GST: excluded (page: \"Prices listed are subject to GST\")",
+            "excerpt": "General Servicing / Per-Service Basis / 1 Unit / $35 / 2 Units / $55 / 3 Units / $70 / 4 Units / $85 / 5 Units / $100 / 6 Units / $114 / 7 Units / $133 / 8 Units / $152 / * Prices listed are subject to GST",
+            "sourceUrl": "https://citycoolingengr.com.sg/pricing/",
+            "capturedAt": "2026-10-18",
+            "indicative": false
+          },
+          {
+            "label": "General servicing, 6 units (total)",
+            "price": "6 Units / $114",
+            "detail": "Quantity: 6. Calculated per-unit price: S$19 (6 units in the published total). Total for 6 units. GST: excluded (page: \"Prices listed are subject to GST\")",
+            "excerpt": "General Servicing / Per-Service Basis / 1 Unit / $35 / 2 Units / $55 / 3 Units / $70 / 4 Units / $85 / 5 Units / $100 / 6 Units / $114 / 7 Units / $133 / 8 Units / $152 / * Prices listed are subject to GST",
+            "sourceUrl": "https://citycoolingengr.com.sg/pricing/",
+            "capturedAt": "2026-10-18",
+            "indicative": false
+          },
+          {
+            "label": "General servicing, 7 units (total)",
+            "price": "7 Units / $133",
+            "detail": "Quantity: 7. Calculated per-unit price: S$19 (7 units in the published total). Total for 7 units. GST: excluded (page: \"Prices listed are subject to GST\")",
+            "excerpt": "General Servicing / Per-Service Basis / 1 Unit / $35 / 2 Units / $55 / 3 Units / $70 / 4 Units / $85 / 5 Units / $100 / 6 Units / $114 / 7 Units / $133 / 8 Units / $152 / * Prices listed are subject to GST",
+            "sourceUrl": "https://citycoolingengr.com.sg/pricing/",
+            "capturedAt": "2026-10-18",
+            "indicative": false
+          },
+          {
+            "label": "General servicing, 8 units (total)",
+            "price": "8 Units / $152",
+            "detail": "Quantity: 8. Calculated per-unit price: S$19 (8 units in the published total). Total for 8 units. GST: excluded (page: \"Prices listed are subject to GST\")",
+            "excerpt": "General Servicing / Per-Service Basis / 1 Unit / $35 / 2 Units / $55 / 3 Units / $70 / 4 Units / $85 / 5 Units / $100 / 6 Units / $114 / 7 Units / $133 / 8 Units / $152 / * Prices listed are subject to GST",
+            "sourceUrl": "https://citycoolingengr.com.sg/pricing/",
             "capturedAt": "2026-10-18",
             "indicative": false
           }
-        ]
+        ],
+        "priceSummary": "8 pricing entries"
       },
       {
         "name": "Chemical overhaul",
@@ -47608,15 +47866,52 @@
         "capturedAt": "2026-10-10",
         "prices": [
           {
-            "label": "Chemical overhaul, 9,000-12,000 BTU",
-            "price": "from $130 per unit (9,000 to 12,000 BTU).",
-            "detail": "Quantity: 1. Calculated per-unit price: S$130 (1 unit in the published total). Per unit. GST: not stated",
-            "excerpt": "Chemical overhaul / from $130 per unit (9,000 to 12,000 BTU).",
-            "sourceUrl": "https://citycoolingengr.com.sg/",
+            "label": "Chemical overhaul FCU, 9/12K BTU, 1 unit",
+            "price": "1 Unit / $130",
+            "detail": "Quantity: 1. Calculated per-unit price: S$130 (1 unit in the published total). Per unit. GST: excluded (page: \"Prices listed are subject to GST\")",
+            "excerpt": "Chemical Overhaul / FCU (*Price is for 9/12K BTU Only) / 1 Unit / $130 / 2 Units / $260 / 3 Units / $360 / 4 Units / $480 / 5 Units / $550 / * Prices listed are subject to GST",
+            "sourceUrl": "https://citycoolingengr.com.sg/pricing/",
+            "capturedAt": "2026-10-18",
+            "indicative": false
+          },
+          {
+            "label": "Chemical overhaul FCU, 9/12K BTU, 2 units (total)",
+            "price": "2 Units / $260",
+            "detail": "Quantity: 2. Calculated per-unit price: S$130 (2 units in the published total). Total for 2 units. GST: excluded (page: \"Prices listed are subject to GST\")",
+            "excerpt": "Chemical Overhaul / FCU (*Price is for 9/12K BTU Only) / 1 Unit / $130 / 2 Units / $260 / 3 Units / $360 / 4 Units / $480 / 5 Units / $550 / * Prices listed are subject to GST",
+            "sourceUrl": "https://citycoolingengr.com.sg/pricing/",
+            "capturedAt": "2026-10-18",
+            "indicative": false
+          },
+          {
+            "label": "Chemical overhaul FCU, 9/12K BTU, 3 units (total)",
+            "price": "3 Units / $360",
+            "detail": "Quantity: 3. Calculated per-unit price: S$120 (3 units in the published total). Total for 3 units. GST: excluded (page: \"Prices listed are subject to GST\")",
+            "excerpt": "Chemical Overhaul / FCU (*Price is for 9/12K BTU Only) / 1 Unit / $130 / 2 Units / $260 / 3 Units / $360 / 4 Units / $480 / 5 Units / $550 / * Prices listed are subject to GST",
+            "sourceUrl": "https://citycoolingengr.com.sg/pricing/",
+            "capturedAt": "2026-10-18",
+            "indicative": false
+          },
+          {
+            "label": "Chemical overhaul FCU, 9/12K BTU, 4 units (total)",
+            "price": "4 Units / $480",
+            "detail": "Quantity: 4. Calculated per-unit price: S$120 (4 units in the published total). Total for 4 units. GST: excluded (page: \"Prices listed are subject to GST\")",
+            "excerpt": "Chemical Overhaul / FCU (*Price is for 9/12K BTU Only) / 1 Unit / $130 / 2 Units / $260 / 3 Units / $360 / 4 Units / $480 / 5 Units / $550 / * Prices listed are subject to GST",
+            "sourceUrl": "https://citycoolingengr.com.sg/pricing/",
+            "capturedAt": "2026-10-18",
+            "indicative": false
+          },
+          {
+            "label": "Chemical overhaul FCU, 9/12K BTU, 5 units (total)",
+            "price": "5 Units / $550",
+            "detail": "Quantity: 5. Calculated per-unit price: S$110 (5 units in the published total). Total for 5 units. GST: excluded (page: \"Prices listed are subject to GST\")",
+            "excerpt": "Chemical Overhaul / FCU (*Price is for 9/12K BTU Only) / 1 Unit / $130 / 2 Units / $260 / 3 Units / $360 / 4 Units / $480 / 5 Units / $550 / * Prices listed are subject to GST",
+            "sourceUrl": "https://citycoolingengr.com.sg/pricing/",
             "capturedAt": "2026-10-18",
             "indicative": false
           }
-        ]
+        ],
+        "priceSummary": "5 pricing entries"
       },
       {
         "name": "Gas top-up",
@@ -47624,7 +47919,36 @@
         "explanation": "gas top-up",
         "sourceUrl": "https://citycoolingengr.com.sg/",
         "capturedAt": "2026-10-10",
-        "prices": []
+        "prices": [
+          {
+            "label": "Gas top-up, R22",
+            "price": "Top up Gas R22 / SGD 40.00 - 80.00/Unit",
+            "detail": "Quantity: 1. Calculated per-unit price: S$40 to S$80 (1 unit in the published total). Per unit. GST: excluded (page: \"Prices listed are subject to GST\")",
+            "excerpt": "Normal Service Condenser / SGD 80.00/Unit / Chemical Wash Condenser / SGD 120.00/Unit / Chemical Wash Fan Coil (No Dismantle) / SGD 85.00/Unit / Chemical Overhaul (9-12K btu) / SGD 130.00/Unit / Checking / SGD 35.00/ Unit / Top up Gas R22 / SGD 40.00 - 80.00/Unit / Top up Gas R410A / SGD 80.00 - 120.00/Unit / Top up Gas R32 / SGD 100.00 - 150.00/Unit",
+            "sourceUrl": "https://citycoolingengr.com.sg/pricing/",
+            "capturedAt": "2026-10-18",
+            "indicative": false
+          },
+          {
+            "label": "Gas top-up, R410A",
+            "price": "Top up Gas R410A / SGD 80.00 - 120.00/Unit",
+            "detail": "Quantity: 1. Calculated per-unit price: S$80 to S$120 (1 unit in the published total). Per unit. GST: excluded (page: \"Prices listed are subject to GST\")",
+            "excerpt": "Normal Service Condenser / SGD 80.00/Unit / Chemical Wash Condenser / SGD 120.00/Unit / Chemical Wash Fan Coil (No Dismantle) / SGD 85.00/Unit / Chemical Overhaul (9-12K btu) / SGD 130.00/Unit / Checking / SGD 35.00/ Unit / Top up Gas R22 / SGD 40.00 - 80.00/Unit / Top up Gas R410A / SGD 80.00 - 120.00/Unit / Top up Gas R32 / SGD 100.00 - 150.00/Unit",
+            "sourceUrl": "https://citycoolingengr.com.sg/pricing/",
+            "capturedAt": "2026-10-18",
+            "indicative": false
+          },
+          {
+            "label": "Gas top-up, R32",
+            "price": "Top up Gas R32 / SGD 100.00 - 150.00/Unit",
+            "detail": "Quantity: 1. Calculated per-unit price: S$100 to S$150 (1 unit in the published total). Per unit. GST: excluded (page: \"Prices listed are subject to GST\")",
+            "excerpt": "Normal Service Condenser / SGD 80.00/Unit / Chemical Wash Condenser / SGD 120.00/Unit / Chemical Wash Fan Coil (No Dismantle) / SGD 85.00/Unit / Chemical Overhaul (9-12K btu) / SGD 130.00/Unit / Checking / SGD 35.00/ Unit / Top up Gas R22 / SGD 40.00 - 80.00/Unit / Top up Gas R410A / SGD 80.00 - 120.00/Unit / Top up Gas R32 / SGD 100.00 - 150.00/Unit",
+            "sourceUrl": "https://citycoolingengr.com.sg/pricing/",
+            "capturedAt": "2026-10-18",
+            "indicative": false
+          }
+        ],
+        "priceSummary": "3 pricing entries"
       },
       {
         "name": "Installation",
@@ -47648,7 +47972,17 @@
         "explanation": "Expert troubleshooting and genuine parts replacement to fix leaks, noises, and compressor issues.",
         "sourceUrl": "https://citycoolingengr.com.sg/",
         "capturedAt": "2026-10-10",
-        "prices": []
+        "prices": [
+          {
+            "label": "Checking",
+            "price": "Checking / SGD 35.00/ Unit",
+            "detail": "Quantity: 1. Calculated per-unit price: S$35 (1 unit in the published total). Per unit. GST: excluded (page: \"Prices listed are subject to GST\")",
+            "excerpt": "Normal Service Condenser / SGD 80.00/Unit / Chemical Wash Condenser / SGD 120.00/Unit / Chemical Wash Fan Coil (No Dismantle) / SGD 85.00/Unit / Chemical Overhaul (9-12K btu) / SGD 130.00/Unit / Checking / SGD 35.00/ Unit / Top up Gas R22 / SGD 40.00 - 80.00/Unit / Top up Gas R410A / SGD 80.00 - 120.00/Unit / Top up Gas R32 / SGD 100.00 - 150.00/Unit",
+            "sourceUrl": "https://citycoolingengr.com.sg/pricing/",
+            "capturedAt": "2026-10-18",
+            "indicative": false
+          }
+        ]
       },
       {
         "name": "Maintenance contracts",
@@ -47659,36 +47993,46 @@
         "prices": []
       },
       {
+        "name": "Condenser cleaning",
+        "description": "",
+        "explanation": "",
+        "sourceUrl": "https://citycoolingengr.com.sg/pricing/",
+        "capturedAt": "2026-10-18",
+        "prices": [
+          {
+            "label": "Condenser normal service",
+            "price": "Normal Service Condenser / SGD 80.00/Unit",
+            "detail": "Quantity: 1. Calculated per-unit price: S$80 (1 unit in the published total). Per unit. GST: excluded (page: \"Prices listed are subject to GST\")",
+            "excerpt": "Normal Service Condenser / SGD 80.00/Unit / Chemical Wash Condenser / SGD 120.00/Unit / Chemical Wash Fan Coil (No Dismantle) / SGD 85.00/Unit / Chemical Overhaul (9-12K btu) / SGD 130.00/Unit / Checking / SGD 35.00/ Unit / Top up Gas R22 / SGD 40.00 - 80.00/Unit / Top up Gas R410A / SGD 80.00 - 120.00/Unit / Top up Gas R32 / SGD 100.00 - 150.00/Unit",
+            "sourceUrl": "https://citycoolingengr.com.sg/pricing/",
+            "capturedAt": "2026-10-18",
+            "indicative": false
+          },
+          {
+            "label": "Condenser chemical wash",
+            "price": "Chemical Wash Condenser / SGD 120.00/Unit",
+            "detail": "Quantity: 1. Calculated per-unit price: S$120 (1 unit in the published total). Per unit. GST: excluded (page: \"Prices listed are subject to GST\")",
+            "excerpt": "Normal Service Condenser / SGD 80.00/Unit / Chemical Wash Condenser / SGD 120.00/Unit / Chemical Wash Fan Coil (No Dismantle) / SGD 85.00/Unit / Chemical Overhaul (9-12K btu) / SGD 130.00/Unit / Checking / SGD 35.00/ Unit / Top up Gas R22 / SGD 40.00 - 80.00/Unit / Top up Gas R410A / SGD 80.00 - 120.00/Unit / Top up Gas R32 / SGD 100.00 - 150.00/Unit",
+            "sourceUrl": "https://citycoolingengr.com.sg/pricing/",
+            "capturedAt": "2026-10-18",
+            "indicative": false
+          }
+        ],
+        "priceSummary": "2 pricing entries"
+      },
+      {
         "name": "Chemical wash",
         "description": "",
         "explanation": "",
-        "sourceUrl": "https://citycoolingengr.com.sg/",
+        "sourceUrl": "https://citycoolingengr.com.sg/pricing/",
         "capturedAt": "2026-10-18",
         "prices": [
           {
             "label": "Chemical wash, fan coil (no dismantling)",
-            "price": "Chemical wash (fan coil, no dismantling) from $85 per unit.",
-            "detail": "Quantity: 1. Calculated per-unit price: S$85 (1 unit in the published total). Per unit. GST: not stated",
-            "excerpt": "Chemical wash (fan coil, no dismantling) from $85 per unit.",
-            "sourceUrl": "https://citycoolingengr.com.sg/",
-            "capturedAt": "2026-10-18",
-            "indicative": false
-          }
-        ]
-      },
-      {
-        "name": "Condenser cleaning",
-        "description": "",
-        "explanation": "",
-        "sourceUrl": "https://citycoolingengr.com.sg/",
-        "capturedAt": "2026-10-18",
-        "prices": [
-          {
-            "label": "Condenser cleaning",
-            "price": "Condenser cleaning ($80 per unit)",
-            "detail": "Quantity: 1. Calculated per-unit price: S$80 (1 unit in the published total). Per unit. GST: not stated",
-            "excerpt": "Condenser cleaning ($80 per unit) and chemical cleaning are separate services.",
-            "sourceUrl": "https://citycoolingengr.com.sg/",
+            "price": "Chemical Wash Fan Coil (No Dismantle) / SGD 85.00/Unit",
+            "detail": "Quantity: 1. Calculated per-unit price: S$85 (1 unit in the published total). Per unit. GST: excluded (page: \"Prices listed are subject to GST\")",
+            "excerpt": "Normal Service Condenser / SGD 80.00/Unit / Chemical Wash Condenser / SGD 120.00/Unit / Chemical Wash Fan Coil (No Dismantle) / SGD 85.00/Unit / Chemical Overhaul (9-12K btu) / SGD 130.00/Unit / Checking / SGD 35.00/ Unit / Top up Gas R22 / SGD 40.00 - 80.00/Unit / Top up Gas R410A / SGD 80.00 - 120.00/Unit / Top up Gas R32 / SGD 100.00 - 150.00/Unit",
+            "sourceUrl": "https://citycoolingengr.com.sg/pricing/",
             "capturedAt": "2026-10-18",
             "indicative": false
           }
@@ -47699,7 +48043,7 @@
     "sourceUrls": [
       "https://citycoolingengr.com.sg/"
     ],
-    "updatedAt": "2026-10-18T00:57+03:00"
+    "updatedAt": "2026-10-18T01:23+03:00"
   },
   "speed-engineering-services-ptd-ltd": {
     "headline": "Services published by Speed Engineering Services Ptd Ltd.",
@@ -48507,7 +48851,7 @@
     "sourceUrls": [
       "https://www.myplumbersingapore.com/"
     ],
-    "updatedAt": "2026-10-10"
+    "updatedAt": "2026-10-18T01:23+03:00"
   },
   "call-sg-building-services-pte-ltd": {
     "headline": "Services published by Call SG Building Services Pte Ltd.",
@@ -50162,9 +50506,18 @@
             "sourceUrl": "https://www.carpet-cleaning.com.sg/articles/onsite-curtain-cleaning-singapore.html",
             "capturedAt": "2026-10-18",
             "indicative": false
+          },
+          {
+            "label": "Blinds, on-site cleaning",
+            "price": "On-site Blinds Cleaning / $30 - $35",
+            "detail": "Quantity: 1. Calculated per-unit price: S$30 to S$35 (1 unit in the published total). As printed (column \"On-site Rate (Set = 2 Pieces)\"). GST: not stated",
+            "excerpt": "Curtain Type / On-site Rate (Set = 2 Pieces) / Day Curtains / $20 - $25 / Blackout Curtains / $50 Flat / Night Curtains / $30 - $35 / On-site Blinds Cleaning / $30 - $35",
+            "sourceUrl": "https://www.carpet-cleaning.com.sg/articles/onsite-curtain-cleaning-singapore.html",
+            "capturedAt": "2026-10-18",
+            "indicative": false
           }
         ],
-        "priceSummary": "3 pricing entries"
+        "priceSummary": "4 pricing entries"
       },
       {
         "name": "Disinfection",
@@ -50179,7 +50532,7 @@
     "sourceUrls": [
       "https://www.carpet-cleaning.com.sg/"
     ],
-    "updatedAt": "2026-10-18T00:57+03:00"
+    "updatedAt": "2026-10-18T01:23+03:00"
   },
   "go-cleaners-pte-ltd": {
     "headline": "Services published by Go Cleaners Pte Ltd.",
@@ -52827,7 +53180,7 @@
     "sourceUrls": [
       "https://www.absoluteservices.com.sg/"
     ],
-    "updatedAt": "2026-10-10"
+    "updatedAt": "2026-10-18T01:23+03:00"
   },
   "janitorial-services-singapore": {
     "headline": "Services published by Janitorial Services Singapore.",
@@ -53019,15 +53372,61 @@
         "capturedAt": "2026-10-10",
         "prices": [
           {
-            "label": "Normal cleaning",
-            "price": "$50",
-            "detail": "Quantity: 1. Calculated per-unit price: S$50 (1 unit in the published total). Per unit. GST: not stated",
-            "excerpt": "Normal Cleaning / $50 / Chemical Wash / $80-$120",
+            "label": "One-time general servicing, 1 unit",
+            "price": "1 Unit(s) / $40",
+            "detail": "Quantity: 1. Calculated per-unit price: S$40 (1 unit in the published total). Per unit. GST: not stated",
+            "excerpt": "One-Time / One-Time AC maintenance service / 1 Unit(s) / $40 / 2 Unit(s) / $55 / 3 Unit(s) / $70 / 4 Unit(s) / $85 / 5 Unit(s) / $100 / 6 Unit(s) / $115",
+            "sourceUrl": "https://smartcool.sg/pricing",
+            "capturedAt": "2026-10-18",
+            "indicative": false
+          },
+          {
+            "label": "One-time general servicing, 2 units (total)",
+            "price": "2 Unit(s) / $55",
+            "detail": "Quantity: 2. Calculated per-unit price: S$27.5 (2 units in the published total). Total for 2 units. GST: not stated",
+            "excerpt": "One-Time / One-Time AC maintenance service / 1 Unit(s) / $40 / 2 Unit(s) / $55 / 3 Unit(s) / $70 / 4 Unit(s) / $85 / 5 Unit(s) / $100 / 6 Unit(s) / $115",
+            "sourceUrl": "https://smartcool.sg/pricing",
+            "capturedAt": "2026-10-18",
+            "indicative": false
+          },
+          {
+            "label": "One-time general servicing, 3 units (total)",
+            "price": "3 Unit(s) / $70",
+            "detail": "Quantity: 3. Calculated per-unit price: S$23.33 (3 units in the published total). Total for 3 units. GST: not stated",
+            "excerpt": "One-Time / One-Time AC maintenance service / 1 Unit(s) / $40 / 2 Unit(s) / $55 / 3 Unit(s) / $70 / 4 Unit(s) / $85 / 5 Unit(s) / $100 / 6 Unit(s) / $115",
+            "sourceUrl": "https://smartcool.sg/pricing",
+            "capturedAt": "2026-10-18",
+            "indicative": false
+          },
+          {
+            "label": "One-time general servicing, 4 units (total)",
+            "price": "4 Unit(s) / $85",
+            "detail": "Quantity: 4. Calculated per-unit price: S$21.25 (4 units in the published total). Total for 4 units. GST: not stated",
+            "excerpt": "One-Time / One-Time AC maintenance service / 1 Unit(s) / $40 / 2 Unit(s) / $55 / 3 Unit(s) / $70 / 4 Unit(s) / $85 / 5 Unit(s) / $100 / 6 Unit(s) / $115",
+            "sourceUrl": "https://smartcool.sg/pricing",
+            "capturedAt": "2026-10-18",
+            "indicative": false
+          },
+          {
+            "label": "One-time general servicing, 5 units (total)",
+            "price": "5 Unit(s) / $100",
+            "detail": "Quantity: 5. Calculated per-unit price: S$20 (5 units in the published total). Total for 5 units. GST: not stated",
+            "excerpt": "One-Time / One-Time AC maintenance service / 1 Unit(s) / $40 / 2 Unit(s) / $55 / 3 Unit(s) / $70 / 4 Unit(s) / $85 / 5 Unit(s) / $100 / 6 Unit(s) / $115",
+            "sourceUrl": "https://smartcool.sg/pricing",
+            "capturedAt": "2026-10-18",
+            "indicative": false
+          },
+          {
+            "label": "One-time general servicing, 6 units (total)",
+            "price": "6 Unit(s) / $115",
+            "detail": "Quantity: 6. Calculated per-unit price: S$19.17 (6 units in the published total). Total for 6 units. GST: not stated",
+            "excerpt": "One-Time / One-Time AC maintenance service / 1 Unit(s) / $40 / 2 Unit(s) / $55 / 3 Unit(s) / $70 / 4 Unit(s) / $85 / 5 Unit(s) / $100 / 6 Unit(s) / $115",
             "sourceUrl": "https://smartcool.sg/pricing",
             "capturedAt": "2026-10-18",
             "indicative": false
           }
-        ]
+        ],
+        "priceSummary": "6 pricing entries"
       },
       {
         "name": "Chemical wash",
@@ -53037,15 +53436,61 @@
         "capturedAt": "2026-10-10",
         "prices": [
           {
-            "label": "Chemical wash",
-            "price": "$80-$120",
-            "detail": "Quantity: 1. Calculated per-unit price: S$80 to S$120 (1 unit in the published total). Per unit. GST: not stated",
-            "excerpt": "Chemical Wash / $80-$120",
+            "label": "Chemical cleaning, 1 unit",
+            "price": "1 Unit(s) / $85",
+            "detail": "Quantity: 1. Calculated per-unit price: S$85 (1 unit in the published total). Per unit. GST: not stated",
+            "excerpt": "Tightening electrical contacts / 1 Unit(s) / $85 / 2 Unit(s) / $160 / 3 Unit(s) / $230 / 4 Unit(s) / $290 / 5 Unit(s) / $360 / 6 Unit(s) / $390",
+            "sourceUrl": "https://smartcool.sg/pricing",
+            "capturedAt": "2026-10-18",
+            "indicative": false
+          },
+          {
+            "label": "Chemical cleaning, 2 units (total)",
+            "price": "2 Unit(s) / $160",
+            "detail": "Quantity: 2. Calculated per-unit price: S$80 (2 units in the published total). Total for 2 units. GST: not stated",
+            "excerpt": "Tightening electrical contacts / 1 Unit(s) / $85 / 2 Unit(s) / $160 / 3 Unit(s) / $230 / 4 Unit(s) / $290 / 5 Unit(s) / $360 / 6 Unit(s) / $390",
+            "sourceUrl": "https://smartcool.sg/pricing",
+            "capturedAt": "2026-10-18",
+            "indicative": false
+          },
+          {
+            "label": "Chemical cleaning, 3 units (total)",
+            "price": "3 Unit(s) / $230",
+            "detail": "Quantity: 3. Calculated per-unit price: S$76.67 (3 units in the published total). Total for 3 units. GST: not stated",
+            "excerpt": "Tightening electrical contacts / 1 Unit(s) / $85 / 2 Unit(s) / $160 / 3 Unit(s) / $230 / 4 Unit(s) / $290 / 5 Unit(s) / $360 / 6 Unit(s) / $390",
+            "sourceUrl": "https://smartcool.sg/pricing",
+            "capturedAt": "2026-10-18",
+            "indicative": false
+          },
+          {
+            "label": "Chemical cleaning, 4 units (total)",
+            "price": "4 Unit(s) / $290",
+            "detail": "Quantity: 4. Calculated per-unit price: S$72.5 (4 units in the published total). Total for 4 units. GST: not stated",
+            "excerpt": "Tightening electrical contacts / 1 Unit(s) / $85 / 2 Unit(s) / $160 / 3 Unit(s) / $230 / 4 Unit(s) / $290 / 5 Unit(s) / $360 / 6 Unit(s) / $390",
+            "sourceUrl": "https://smartcool.sg/pricing",
+            "capturedAt": "2026-10-18",
+            "indicative": false
+          },
+          {
+            "label": "Chemical cleaning, 5 units (total)",
+            "price": "5 Unit(s) / $360",
+            "detail": "Quantity: 5. Calculated per-unit price: S$72 (5 units in the published total). Total for 5 units. GST: not stated",
+            "excerpt": "Tightening electrical contacts / 1 Unit(s) / $85 / 2 Unit(s) / $160 / 3 Unit(s) / $230 / 4 Unit(s) / $290 / 5 Unit(s) / $360 / 6 Unit(s) / $390",
+            "sourceUrl": "https://smartcool.sg/pricing",
+            "capturedAt": "2026-10-18",
+            "indicative": false
+          },
+          {
+            "label": "Chemical cleaning, 6 units (total)",
+            "price": "6 Unit(s) / $390",
+            "detail": "Quantity: 6. Calculated per-unit price: S$65 (6 units in the published total). Total for 6 units. GST: not stated",
+            "excerpt": "Tightening electrical contacts / 1 Unit(s) / $85 / 2 Unit(s) / $160 / 3 Unit(s) / $230 / 4 Unit(s) / $290 / 5 Unit(s) / $360 / 6 Unit(s) / $390",
             "sourceUrl": "https://smartcool.sg/pricing",
             "capturedAt": "2026-10-18",
             "indicative": false
           }
-        ]
+        ],
+        "priceSummary": "6 pricing entries"
       },
       {
         "name": "Chemical overhaul",
@@ -53053,7 +53498,63 @@
         "explanation": "Aircon Chemical Overhaul",
         "sourceUrl": "https://smartcool.sg/",
         "capturedAt": "2026-10-10",
-        "prices": []
+        "prices": [
+          {
+            "label": "Chemical overhaul, 1 unit",
+            "price": "1 Unit(s) / $150",
+            "detail": "Quantity: 1. Calculated per-unit price: S$150 (1 unit in the published total). Per unit. GST: not stated",
+            "excerpt": "Replaces faulty bearings and eliminates operational noise / 1 Unit(s) / $150 / 2 Unit(s) / $280 / 3 Unit(s) / $390 / 4 Unit(s) / $480 / 5 Unit(s) / $550 / 6 Unit(s) / $600",
+            "sourceUrl": "https://smartcool.sg/pricing",
+            "capturedAt": "2026-10-18",
+            "indicative": false
+          },
+          {
+            "label": "Chemical overhaul, 2 units (total)",
+            "price": "2 Unit(s) / $280",
+            "detail": "Quantity: 2. Calculated per-unit price: S$140 (2 units in the published total). Total for 2 units. GST: not stated",
+            "excerpt": "Replaces faulty bearings and eliminates operational noise / 1 Unit(s) / $150 / 2 Unit(s) / $280 / 3 Unit(s) / $390 / 4 Unit(s) / $480 / 5 Unit(s) / $550 / 6 Unit(s) / $600",
+            "sourceUrl": "https://smartcool.sg/pricing",
+            "capturedAt": "2026-10-18",
+            "indicative": false
+          },
+          {
+            "label": "Chemical overhaul, 3 units (total)",
+            "price": "3 Unit(s) / $390",
+            "detail": "Quantity: 3. Calculated per-unit price: S$130 (3 units in the published total). Total for 3 units. GST: not stated",
+            "excerpt": "Replaces faulty bearings and eliminates operational noise / 1 Unit(s) / $150 / 2 Unit(s) / $280 / 3 Unit(s) / $390 / 4 Unit(s) / $480 / 5 Unit(s) / $550 / 6 Unit(s) / $600",
+            "sourceUrl": "https://smartcool.sg/pricing",
+            "capturedAt": "2026-10-18",
+            "indicative": false
+          },
+          {
+            "label": "Chemical overhaul, 4 units (total)",
+            "price": "4 Unit(s) / $480",
+            "detail": "Quantity: 4. Calculated per-unit price: S$120 (4 units in the published total). Total for 4 units. GST: not stated",
+            "excerpt": "Replaces faulty bearings and eliminates operational noise / 1 Unit(s) / $150 / 2 Unit(s) / $280 / 3 Unit(s) / $390 / 4 Unit(s) / $480 / 5 Unit(s) / $550 / 6 Unit(s) / $600",
+            "sourceUrl": "https://smartcool.sg/pricing",
+            "capturedAt": "2026-10-18",
+            "indicative": false
+          },
+          {
+            "label": "Chemical overhaul, 5 units (total)",
+            "price": "5 Unit(s) / $550",
+            "detail": "Quantity: 5. Calculated per-unit price: S$110 (5 units in the published total). Total for 5 units. GST: not stated",
+            "excerpt": "Replaces faulty bearings and eliminates operational noise / 1 Unit(s) / $150 / 2 Unit(s) / $280 / 3 Unit(s) / $390 / 4 Unit(s) / $480 / 5 Unit(s) / $550 / 6 Unit(s) / $600",
+            "sourceUrl": "https://smartcool.sg/pricing",
+            "capturedAt": "2026-10-18",
+            "indicative": false
+          },
+          {
+            "label": "Chemical overhaul, 6 units (total)",
+            "price": "6 Unit(s) / $600",
+            "detail": "Quantity: 6. Calculated per-unit price: S$100 (6 units in the published total). Total for 6 units. GST: not stated",
+            "excerpt": "Replaces faulty bearings and eliminates operational noise / 1 Unit(s) / $150 / 2 Unit(s) / $280 / 3 Unit(s) / $390 / 4 Unit(s) / $480 / 5 Unit(s) / $550 / 6 Unit(s) / $600",
+            "sourceUrl": "https://smartcool.sg/pricing",
+            "capturedAt": "2026-10-18",
+            "indicative": false
+          }
+        ],
+        "priceSummary": "6 pricing entries"
       },
       {
         "name": "Gas top-up",
@@ -53106,17 +53607,7 @@
         "explanation": "Steam Cleaning",
         "sourceUrl": "https://smartcool.sg/pricing",
         "capturedAt": "2026-10-10",
-        "prices": [
-          {
-            "label": "Steam cleaning",
-            "price": "$80",
-            "detail": "Quantity: 1. Calculated per-unit price: S$80 (1 unit in the published total). Per unit. GST: not stated",
-            "excerpt": "Dry Cleaning / $80 / Steam Cleaning / $80",
-            "sourceUrl": "https://smartcool.sg/pricing",
-            "capturedAt": "2026-10-18",
-            "indicative": false
-          }
-        ]
+        "prices": []
       },
       {
         "name": "Troubleshooting",
@@ -53135,13 +53626,159 @@
             "indicative": false
           }
         ]
+      },
+      {
+        "name": "Condenser cleaning",
+        "description": "",
+        "explanation": "",
+        "sourceUrl": "https://smartcool.sg/pricing",
+        "capturedAt": "2026-10-18",
+        "prices": [
+          {
+            "label": "Condenser (outdoor unit) normal cleaning",
+            "price": "Normal Cleaning / $50",
+            "detail": "Quantity: 1. Calculated per-unit price: S$50 (1 unit in the published total). Per unit. GST: not stated",
+            "excerpt": "Condenser Cleaning / Condenser cleaning improves performance by removing dirt and debris from the unit. / Normal Cleaning / $50 / Chemical Wash / $80-$120 / Dry Cleaning / $80 / Steam Cleaning / $80",
+            "sourceUrl": "https://smartcool.sg/pricing",
+            "capturedAt": "2026-10-18",
+            "indicative": false
+          },
+          {
+            "label": "Condenser (outdoor unit) chemical wash",
+            "price": "Chemical Wash / $80-$120",
+            "detail": "Quantity: 1. Calculated per-unit price: S$80 to S$120 (1 unit in the published total). Per unit. GST: not stated",
+            "excerpt": "Condenser Cleaning / Condenser cleaning improves performance by removing dirt and debris from the unit. / Normal Cleaning / $50 / Chemical Wash / $80-$120 / Dry Cleaning / $80 / Steam Cleaning / $80",
+            "sourceUrl": "https://smartcool.sg/pricing",
+            "capturedAt": "2026-10-18",
+            "indicative": false
+          },
+          {
+            "label": "Condenser (outdoor unit) dry cleaning",
+            "price": "Dry Cleaning / $80",
+            "detail": "Quantity: 1. Calculated per-unit price: S$80 (1 unit in the published total). Per unit. GST: not stated",
+            "excerpt": "Condenser Cleaning / Condenser cleaning improves performance by removing dirt and debris from the unit. / Normal Cleaning / $50 / Chemical Wash / $80-$120 / Dry Cleaning / $80 / Steam Cleaning / $80",
+            "sourceUrl": "https://smartcool.sg/pricing",
+            "capturedAt": "2026-10-18",
+            "indicative": false
+          },
+          {
+            "label": "Condenser (outdoor unit) steam cleaning",
+            "price": "Steam Cleaning / $80",
+            "detail": "Quantity: 1. Calculated per-unit price: S$80 (1 unit in the published total). Per unit. GST: not stated",
+            "excerpt": "Condenser Cleaning / Condenser cleaning improves performance by removing dirt and debris from the unit. / Normal Cleaning / $50 / Chemical Wash / $80-$120 / Dry Cleaning / $80 / Steam Cleaning / $80",
+            "sourceUrl": "https://smartcool.sg/pricing",
+            "capturedAt": "2026-10-18",
+            "indicative": false
+          }
+        ],
+        "priceSummary": "4 pricing entries"
+      },
+      {
+        "name": "Maintenance contracts",
+        "description": "",
+        "explanation": "",
+        "sourceUrl": "https://smartcool.sg/pricing",
+        "capturedAt": "2026-10-18",
+        "prices": [
+          {
+            "label": "Tri-yearly maintenance contract (3 visits a year), 2 units (total)",
+            "price": "2 Unit(s) / $150",
+            "detail": "Quantity: 2. Calculated per-unit price: S$75 (2 units in the published total). Total for 2 units per contract (3 visits). GST: not stated",
+            "excerpt": "Tri-Yearly (3x) / Enjoy a cool environment with our tri-yearly air conditioning service! / 2 Unit(s) / $150 / 3 Unit(s) / $200 / 4 Unit(s) / $230 / 5 Unit(s) / $280 / 6 Unit(s) / $330",
+            "sourceUrl": "https://smartcool.sg/pricing",
+            "capturedAt": "2026-10-18",
+            "indicative": false
+          },
+          {
+            "label": "Tri-yearly maintenance contract (3 visits a year), 3 units (total)",
+            "price": "3 Unit(s) / $200",
+            "detail": "Quantity: 3. Calculated per-unit price: S$66.67 (3 units in the published total). Total for 3 units per contract (3 visits). GST: not stated",
+            "excerpt": "Tri-Yearly (3x) / Enjoy a cool environment with our tri-yearly air conditioning service! / 2 Unit(s) / $150 / 3 Unit(s) / $200 / 4 Unit(s) / $230 / 5 Unit(s) / $280 / 6 Unit(s) / $330",
+            "sourceUrl": "https://smartcool.sg/pricing",
+            "capturedAt": "2026-10-18",
+            "indicative": false
+          },
+          {
+            "label": "Tri-yearly maintenance contract (3 visits a year), 4 units (total)",
+            "price": "4 Unit(s) / $230",
+            "detail": "Quantity: 4. Calculated per-unit price: S$57.5 (4 units in the published total). Total for 4 units per contract (3 visits). GST: not stated",
+            "excerpt": "Tri-Yearly (3x) / Enjoy a cool environment with our tri-yearly air conditioning service! / 2 Unit(s) / $150 / 3 Unit(s) / $200 / 4 Unit(s) / $230 / 5 Unit(s) / $280 / 6 Unit(s) / $330",
+            "sourceUrl": "https://smartcool.sg/pricing",
+            "capturedAt": "2026-10-18",
+            "indicative": false
+          },
+          {
+            "label": "Tri-yearly maintenance contract (3 visits a year), 5 units (total)",
+            "price": "5 Unit(s) / $280",
+            "detail": "Quantity: 5. Calculated per-unit price: S$56 (5 units in the published total). Total for 5 units per contract (3 visits). GST: not stated",
+            "excerpt": "Tri-Yearly (3x) / Enjoy a cool environment with our tri-yearly air conditioning service! / 2 Unit(s) / $150 / 3 Unit(s) / $200 / 4 Unit(s) / $230 / 5 Unit(s) / $280 / 6 Unit(s) / $330",
+            "sourceUrl": "https://smartcool.sg/pricing",
+            "capturedAt": "2026-10-18",
+            "indicative": false
+          },
+          {
+            "label": "Tri-yearly maintenance contract (3 visits a year), 6 units (total)",
+            "price": "6 Unit(s) / $330",
+            "detail": "Quantity: 6. Calculated per-unit price: S$55 (6 units in the published total). Total for 6 units per contract (3 visits). GST: not stated",
+            "excerpt": "Tri-Yearly (3x) / Enjoy a cool environment with our tri-yearly air conditioning service! / 2 Unit(s) / $150 / 3 Unit(s) / $200 / 4 Unit(s) / $230 / 5 Unit(s) / $280 / 6 Unit(s) / $330",
+            "sourceUrl": "https://smartcool.sg/pricing",
+            "capturedAt": "2026-10-18",
+            "indicative": false
+          },
+          {
+            "label": "Quarterly maintenance contract (4 visits a year), 2 units (total)",
+            "price": "2 Unit(s) / $190",
+            "detail": "Quantity: 2. Calculated per-unit price: S$95 (2 units in the published total). Total for 2 units per contract (4 visits). GST: not stated",
+            "excerpt": "Quarterly (x4) / Cost-effective quarterly service for your air conditioning unit - stay cool! / 2 Unit(s) / $190 / 3 Unit(s) / $240 / 4 Unit(s) / $300 / 5 Unit(s) / $350 / 6 Unit(s) / $420",
+            "sourceUrl": "https://smartcool.sg/pricing",
+            "capturedAt": "2026-10-18",
+            "indicative": false
+          },
+          {
+            "label": "Quarterly maintenance contract (4 visits a year), 3 units (total)",
+            "price": "3 Unit(s) / $240",
+            "detail": "Quantity: 3. Calculated per-unit price: S$80 (3 units in the published total). Total for 3 units per contract (4 visits). GST: not stated",
+            "excerpt": "Quarterly (x4) / Cost-effective quarterly service for your air conditioning unit - stay cool! / 2 Unit(s) / $190 / 3 Unit(s) / $240 / 4 Unit(s) / $300 / 5 Unit(s) / $350 / 6 Unit(s) / $420",
+            "sourceUrl": "https://smartcool.sg/pricing",
+            "capturedAt": "2026-10-18",
+            "indicative": false
+          },
+          {
+            "label": "Quarterly maintenance contract (4 visits a year), 4 units (total)",
+            "price": "4 Unit(s) / $300",
+            "detail": "Quantity: 4. Calculated per-unit price: S$75 (4 units in the published total). Total for 4 units per contract (4 visits). GST: not stated",
+            "excerpt": "Quarterly (x4) / Cost-effective quarterly service for your air conditioning unit - stay cool! / 2 Unit(s) / $190 / 3 Unit(s) / $240 / 4 Unit(s) / $300 / 5 Unit(s) / $350 / 6 Unit(s) / $420",
+            "sourceUrl": "https://smartcool.sg/pricing",
+            "capturedAt": "2026-10-18",
+            "indicative": false
+          },
+          {
+            "label": "Quarterly maintenance contract (4 visits a year), 5 units (total)",
+            "price": "5 Unit(s) / $350",
+            "detail": "Quantity: 5. Calculated per-unit price: S$70 (5 units in the published total). Total for 5 units per contract (4 visits). GST: not stated",
+            "excerpt": "Quarterly (x4) / Cost-effective quarterly service for your air conditioning unit - stay cool! / 2 Unit(s) / $190 / 3 Unit(s) / $240 / 4 Unit(s) / $300 / 5 Unit(s) / $350 / 6 Unit(s) / $420",
+            "sourceUrl": "https://smartcool.sg/pricing",
+            "capturedAt": "2026-10-18",
+            "indicative": false
+          },
+          {
+            "label": "Quarterly maintenance contract (4 visits a year), 6 units (total)",
+            "price": "6 Unit(s) / $420",
+            "detail": "Quantity: 6. Calculated per-unit price: S$70 (6 units in the published total). Total for 6 units per contract (4 visits). GST: not stated",
+            "excerpt": "Quarterly (x4) / Cost-effective quarterly service for your air conditioning unit - stay cool! / 2 Unit(s) / $190 / 3 Unit(s) / $240 / 4 Unit(s) / $300 / 5 Unit(s) / $350 / 6 Unit(s) / $420",
+            "sourceUrl": "https://smartcool.sg/pricing",
+            "capturedAt": "2026-10-18",
+            "indicative": false
+          }
+        ],
+        "priceSummary": "10 pricing entries"
       }
     ],
     "highlights": [],
     "sourceUrls": [
       "https://smartcool.sg/"
     ],
-    "updatedAt": "2026-10-18T00:57+03:00"
+    "updatedAt": "2026-10-18T01:23+03:00"
   },
   "ihome-solution-pte-ltd": {
     "headline": "Services published by iHome-Solution Pte Ltd.",
@@ -53614,7 +54251,7 @@
   "fengsheng-electric-co-pte-ltd": {
     "headline": "Services published by Fengsheng Electric Co. Pte. Ltd..",
     "about": [
-      "During these years, we have been awarded various award such as Special Long Service Award for our contribution as a valuable channel partner; Top Distributors awards from our manufacturers and also Best Supporting Suppliers awards from our customers. We are also registered with Building and Construction Authority and are eligible to tender for government related projects such as supply of Electrical & Electronic Materials, Products & Components"
+      "During these years, we have been awarded various award such as Special Long Service Award for our contribution as a valuable channel partner; Top Distributor's awards from our manufacturers and also Best Supporting Suppliers awards from our customers. We are also registered with Building and Construction Authority and are eligible to tender for government related projects such as supply of Electrical & Electronic Materials, Products & Components"
     ],
     "services": [
       {
@@ -53646,7 +54283,7 @@
     "sourceUrls": [
       "https://www.fengshengelectric.com.sg/about%20us.htm"
     ],
-    "updatedAt": "2026-10-10"
+    "updatedAt": "2026-10-18T01:23+03:00"
   },
   "i-electrical-pte-ltd": {
     "headline": "Services published by i.electrical pte ltd.",
@@ -55295,16 +55932,79 @@
         "capturedAt": "2026-10-15",
         "prices": [
           {
-            "label": "General aircon servicing",
-            "price": "typical price for general AC servicing Singapore starts from S$40",
+            "label": "One-time general servicing, 1 unit",
+            "price": "1 / $40",
             "detail": "Quantity: 1. Calculated per-unit price: S$40 (1 unit in the published total). Per unit. GST: not stated",
-            "excerpt": "typical price for general AC servicing Singapore starts from S$40",
-            "sourceUrl": "https://airmaxxaircon.com/",
-            "capturedAt": "2026-10-18",
-            "indicative": true
+            "excerpt": "One Time / SGD / / / A/C Unit / Service Rate / 1 / $40 / 2 / $55 / 3 / $70 / 4 / $85 / 5 / $100 / 6 / $115 / 7 / $130 / 8 / $150",
+            "sourceUrl": "https://airmaxxaircon.com/pricing/",
+            "capturedAt": "2026-10-15",
+            "indicative": false
+          },
+          {
+            "label": "One-time general servicing, 2 units (total)",
+            "price": "2 / $55",
+            "detail": "Quantity: 2. Calculated per-unit price: S$27.5 (2 units in the published total). Total for 2 units. GST: not stated",
+            "excerpt": "One Time / SGD / / / A/C Unit / Service Rate / 1 / $40 / 2 / $55 / 3 / $70 / 4 / $85 / 5 / $100 / 6 / $115 / 7 / $130 / 8 / $150",
+            "sourceUrl": "https://airmaxxaircon.com/pricing/",
+            "capturedAt": "2026-10-15",
+            "indicative": false
+          },
+          {
+            "label": "One-time general servicing, 3 units (total)",
+            "price": "3 / $70",
+            "detail": "Quantity: 3. Calculated per-unit price: S$23.33 (3 units in the published total). Total for 3 units. GST: not stated",
+            "excerpt": "One Time / SGD / / / A/C Unit / Service Rate / 1 / $40 / 2 / $55 / 3 / $70 / 4 / $85 / 5 / $100 / 6 / $115 / 7 / $130 / 8 / $150",
+            "sourceUrl": "https://airmaxxaircon.com/pricing/",
+            "capturedAt": "2026-10-15",
+            "indicative": false
+          },
+          {
+            "label": "One-time general servicing, 4 units (total)",
+            "price": "4 / $85",
+            "detail": "Quantity: 4. Calculated per-unit price: S$21.25 (4 units in the published total). Total for 4 units. GST: not stated",
+            "excerpt": "One Time / SGD / / / A/C Unit / Service Rate / 1 / $40 / 2 / $55 / 3 / $70 / 4 / $85 / 5 / $100 / 6 / $115 / 7 / $130 / 8 / $150",
+            "sourceUrl": "https://airmaxxaircon.com/pricing/",
+            "capturedAt": "2026-10-15",
+            "indicative": false
+          },
+          {
+            "label": "One-time general servicing, 5 units (total)",
+            "price": "5 / $100",
+            "detail": "Quantity: 5. Calculated per-unit price: S$20 (5 units in the published total). Total for 5 units. GST: not stated",
+            "excerpt": "One Time / SGD / / / A/C Unit / Service Rate / 1 / $40 / 2 / $55 / 3 / $70 / 4 / $85 / 5 / $100 / 6 / $115 / 7 / $130 / 8 / $150",
+            "sourceUrl": "https://airmaxxaircon.com/pricing/",
+            "capturedAt": "2026-10-15",
+            "indicative": false
+          },
+          {
+            "label": "One-time general servicing, 6 units (total)",
+            "price": "6 / $115",
+            "detail": "Quantity: 6. Calculated per-unit price: S$19.17 (6 units in the published total). Total for 6 units. GST: not stated",
+            "excerpt": "One Time / SGD / / / A/C Unit / Service Rate / 1 / $40 / 2 / $55 / 3 / $70 / 4 / $85 / 5 / $100 / 6 / $115 / 7 / $130 / 8 / $150",
+            "sourceUrl": "https://airmaxxaircon.com/pricing/",
+            "capturedAt": "2026-10-15",
+            "indicative": false
+          },
+          {
+            "label": "One-time general servicing, 7 units (total)",
+            "price": "7 / $130",
+            "detail": "Quantity: 7. Calculated per-unit price: S$18.57 (7 units in the published total). Total for 7 units. GST: not stated",
+            "excerpt": "One Time / SGD / / / A/C Unit / Service Rate / 1 / $40 / 2 / $55 / 3 / $70 / 4 / $85 / 5 / $100 / 6 / $115 / 7 / $130 / 8 / $150",
+            "sourceUrl": "https://airmaxxaircon.com/pricing/",
+            "capturedAt": "2026-10-15",
+            "indicative": false
+          },
+          {
+            "label": "One-time general servicing, 8 units (total)",
+            "price": "8 / $150",
+            "detail": "Quantity: 8. Calculated per-unit price: S$18.75 (8 units in the published total). Total for 8 units. GST: not stated",
+            "excerpt": "One Time / SGD / / / A/C Unit / Service Rate / 1 / $40 / 2 / $55 / 3 / $70 / 4 / $85 / 5 / $100 / 6 / $115 / 7 / $130 / 8 / $150",
+            "sourceUrl": "https://airmaxxaircon.com/pricing/",
+            "capturedAt": "2026-10-15",
+            "indicative": false
           }
         ],
-        "priceSummary": "Pricing reference"
+        "priceSummary": "8 pricing entries"
       },
       {
         "name": "Chemical wash",
@@ -55314,16 +56014,43 @@
         "capturedAt": "2026-10-15",
         "prices": [
           {
-            "label": "Aircon chemical wash",
-            "price": "See source details",
+            "label": "Chemical wash 9k-12k BTU, 1 unit",
+            "price": "1 / $85",
             "detail": "Quantity: 1. Calculated per-unit price: S$85 (1 unit in the published total). Per unit. GST: not stated",
-            "excerpt": "typical price for aircon chemical wash service in Singapore starts from S$85",
-            "sourceUrl": "https://airmaxxaircon.com/",
-            "capturedAt": "2026-10-18",
-            "indicative": true
+            "excerpt": "Chemical Wash / SGD / / / Aircon Unit / Servicing Rate / 1 / $85 / 2 / $160 / 3 / $225 / 4 / $280 / * Only applicable for 9k to 12k BTU.",
+            "sourceUrl": "https://airmaxxaircon.com/pricing/",
+            "capturedAt": "2026-10-15",
+            "indicative": false
+          },
+          {
+            "label": "Chemical wash 9k-12k BTU, 2 units (total)",
+            "price": "2 / $160",
+            "detail": "Quantity: 2. Calculated per-unit price: S$80 (2 units in the published total). Total for 2 units. GST: not stated",
+            "excerpt": "Chemical Wash / SGD / / / Aircon Unit / Servicing Rate / 1 / $85 / 2 / $160 / 3 / $225 / 4 / $280 / * Only applicable for 9k to 12k BTU.",
+            "sourceUrl": "https://airmaxxaircon.com/pricing/",
+            "capturedAt": "2026-10-15",
+            "indicative": false
+          },
+          {
+            "label": "Chemical wash 9k-12k BTU, 3 units (total)",
+            "price": "3 / $225",
+            "detail": "Quantity: 3. Calculated per-unit price: S$75 (3 units in the published total). Total for 3 units. GST: not stated",
+            "excerpt": "Chemical Wash / SGD / / / Aircon Unit / Servicing Rate / 1 / $85 / 2 / $160 / 3 / $225 / 4 / $280 / * Only applicable for 9k to 12k BTU.",
+            "sourceUrl": "https://airmaxxaircon.com/pricing/",
+            "capturedAt": "2026-10-15",
+            "indicative": false
+          },
+          {
+            "label": "Chemical wash 9k-12k BTU, 4 units (total)",
+            "price": "4 / $280",
+            "detail": "Quantity: 4. Calculated per-unit price: S$70 (4 units in the published total). Total for 4 units. GST: not stated",
+            "excerpt": "Chemical Wash / SGD / / / Aircon Unit / Servicing Rate / 1 / $85 / 2 / $160 / 3 / $225 / 4 / $280 / * Only applicable for 9k to 12k BTU.",
+            "sourceUrl": "https://airmaxxaircon.com/pricing/",
+            "capturedAt": "2026-10-15",
+            "indicative": false
           }
         ],
-        "priceSummary": "Pricing reference"
+        "priceSummary": "4 pricing entries"
       },
       {
         "name": "Chemical overhaul",
@@ -55331,7 +56058,36 @@
         "explanation": "Aircon Chemical Overhaul Service",
         "sourceUrl": "https://airmaxxaircon.com/",
         "capturedAt": "2026-10-15",
-        "prices": []
+        "prices": [
+          {
+            "label": "Chemical overhaul, 9k to 12k BTU",
+            "price": "9k to 12k BTU / $130",
+            "detail": "Quantity: 1. Calculated per-unit price: S$130 (1 unit in the published total). Per unit. GST: not stated",
+            "excerpt": "Chemical Overhaul / SGD / / / Aircon Unit / Servicing Rate / 9k to 12k BTU / $130 / 18k BTU / $160 / 24k BTU / $200",
+            "sourceUrl": "https://airmaxxaircon.com/pricing/",
+            "capturedAt": "2026-10-15",
+            "indicative": false
+          },
+          {
+            "label": "Chemical overhaul, 18k BTU",
+            "price": "18k BTU / $160",
+            "detail": "Quantity: 1. Calculated per-unit price: S$160 (1 unit in the published total). Per unit. GST: not stated",
+            "excerpt": "Chemical Overhaul / SGD / / / Aircon Unit / Servicing Rate / 9k to 12k BTU / $130 / 18k BTU / $160 / 24k BTU / $200",
+            "sourceUrl": "https://airmaxxaircon.com/pricing/",
+            "capturedAt": "2026-10-15",
+            "indicative": false
+          },
+          {
+            "label": "Chemical overhaul, 24k BTU",
+            "price": "24k BTU / $200",
+            "detail": "Quantity: 1. Calculated per-unit price: S$200 (1 unit in the published total). Per unit. GST: not stated",
+            "excerpt": "Chemical Overhaul / SGD / / / Aircon Unit / Servicing Rate / 9k to 12k BTU / $130 / 18k BTU / $160 / 24k BTU / $200",
+            "sourceUrl": "https://airmaxxaircon.com/pricing/",
+            "capturedAt": "2026-10-15",
+            "indicative": false
+          }
+        ],
+        "priceSummary": "3 pricing entries"
       },
       {
         "name": "Gas top-up",
@@ -55339,7 +56095,27 @@
         "explanation": "rvicing, AC repair, air conditioning installation, AC chemical-wash, and aircon gas top-up.",
         "sourceUrl": "https://airmaxxaircon.com/",
         "capturedAt": "2026-10-15",
-        "prices": []
+        "prices": [
+          {
+            "label": "Gas top-up, R410",
+            "price": "Gas Top-Up R410 / $60-$150",
+            "detail": "Quantity: 1. Calculated per-unit price: S$60 to S$150 (1 unit in the published total). As printed. GST: not stated",
+            "excerpt": "Other Services / Rate / Chemical Wash Condenser Unit / $80 / Dry Clean Condenser Unit / $60 / Gas Top-Up R410 / $60-$150 / Gas Top-Up R22 / $40-$120",
+            "sourceUrl": "https://airmaxxaircon.com/pricing/",
+            "capturedAt": "2026-10-15",
+            "indicative": false
+          },
+          {
+            "label": "Gas top-up, R22",
+            "price": "Gas Top-Up R22 / $40-$120",
+            "detail": "Quantity: 1. Calculated per-unit price: S$40 to S$120 (1 unit in the published total). As printed. GST: not stated",
+            "excerpt": "Other Services / Rate / Chemical Wash Condenser Unit / $80 / Dry Clean Condenser Unit / $60 / Gas Top-Up R410 / $60-$150 / Gas Top-Up R22 / $40-$120",
+            "sourceUrl": "https://airmaxxaircon.com/pricing/",
+            "capturedAt": "2026-10-15",
+            "indicative": false
+          }
+        ],
+        "priceSummary": "2 pricing entries"
       },
       {
         "name": "Installation",
@@ -55366,28 +56142,164 @@
         "prices": []
       },
       {
+        "name": "Maintenance contracts",
+        "description": "",
+        "explanation": "",
+        "sourceUrl": "https://airmaxxaircon.com/pricing/",
+        "capturedAt": "2026-10-15",
+        "prices": [
+          {
+            "label": "Tri-yearly maintenance contract (3 visits a year), 2 units (total)",
+            "price": "2 / $150",
+            "detail": "Quantity: 2. Calculated per-unit price: S$75 (2 units in the published total). Total for 2 units per contract (3 visits). GST: not stated",
+            "excerpt": "Tri-Yearly / SGD / / / A/C Unit / Service Rate / 2 / $150 / 3 / $195 / 4 / $240 / 5 / $270 / 6 / $315 / 7 / $360 / 8 / $420",
+            "sourceUrl": "https://airmaxxaircon.com/pricing/",
+            "capturedAt": "2026-10-15",
+            "indicative": false
+          },
+          {
+            "label": "Tri-yearly maintenance contract (3 visits a year), 3 units (total)",
+            "price": "3 / $195",
+            "detail": "Quantity: 3. Calculated per-unit price: S$65 (3 units in the published total). Total for 3 units per contract (3 visits). GST: not stated",
+            "excerpt": "Tri-Yearly / SGD / / / A/C Unit / Service Rate / 2 / $150 / 3 / $195 / 4 / $240 / 5 / $270 / 6 / $315 / 7 / $360 / 8 / $420",
+            "sourceUrl": "https://airmaxxaircon.com/pricing/",
+            "capturedAt": "2026-10-15",
+            "indicative": false
+          },
+          {
+            "label": "Tri-yearly maintenance contract (3 visits a year), 4 units (total)",
+            "price": "4 / $240",
+            "detail": "Quantity: 4. Calculated per-unit price: S$60 (4 units in the published total). Total for 4 units per contract (3 visits). GST: not stated",
+            "excerpt": "Tri-Yearly / SGD / / / A/C Unit / Service Rate / 2 / $150 / 3 / $195 / 4 / $240 / 5 / $270 / 6 / $315 / 7 / $360 / 8 / $420",
+            "sourceUrl": "https://airmaxxaircon.com/pricing/",
+            "capturedAt": "2026-10-15",
+            "indicative": false
+          },
+          {
+            "label": "Tri-yearly maintenance contract (3 visits a year), 5 units (total)",
+            "price": "5 / $270",
+            "detail": "Quantity: 5. Calculated per-unit price: S$54 (5 units in the published total). Total for 5 units per contract (3 visits). GST: not stated",
+            "excerpt": "Tri-Yearly / SGD / / / A/C Unit / Service Rate / 2 / $150 / 3 / $195 / 4 / $240 / 5 / $270 / 6 / $315 / 7 / $360 / 8 / $420",
+            "sourceUrl": "https://airmaxxaircon.com/pricing/",
+            "capturedAt": "2026-10-15",
+            "indicative": false
+          },
+          {
+            "label": "Tri-yearly maintenance contract (3 visits a year), 6 units (total)",
+            "price": "6 / $315",
+            "detail": "Quantity: 6. Calculated per-unit price: S$52.5 (6 units in the published total). Total for 6 units per contract (3 visits). GST: not stated",
+            "excerpt": "Tri-Yearly / SGD / / / A/C Unit / Service Rate / 2 / $150 / 3 / $195 / 4 / $240 / 5 / $270 / 6 / $315 / 7 / $360 / 8 / $420",
+            "sourceUrl": "https://airmaxxaircon.com/pricing/",
+            "capturedAt": "2026-10-15",
+            "indicative": false
+          },
+          {
+            "label": "Tri-yearly maintenance contract (3 visits a year), 7 units (total)",
+            "price": "7 / $360",
+            "detail": "Quantity: 7. Calculated per-unit price: S$51.43 (7 units in the published total). Total for 7 units per contract (3 visits). GST: not stated",
+            "excerpt": "Tri-Yearly / SGD / / / A/C Unit / Service Rate / 2 / $150 / 3 / $195 / 4 / $240 / 5 / $270 / 6 / $315 / 7 / $360 / 8 / $420",
+            "sourceUrl": "https://airmaxxaircon.com/pricing/",
+            "capturedAt": "2026-10-15",
+            "indicative": false
+          },
+          {
+            "label": "Tri-yearly maintenance contract (3 visits a year), 8 units (total)",
+            "price": "8 / $420",
+            "detail": "Quantity: 8. Calculated per-unit price: S$52.5 (8 units in the published total). Total for 8 units per contract (3 visits). GST: not stated",
+            "excerpt": "Tri-Yearly / SGD / / / A/C Unit / Service Rate / 2 / $150 / 3 / $195 / 4 / $240 / 5 / $270 / 6 / $315 / 7 / $360 / 8 / $420",
+            "sourceUrl": "https://airmaxxaircon.com/pricing/",
+            "capturedAt": "2026-10-15",
+            "indicative": false
+          },
+          {
+            "label": "Quarterly maintenance contract (4 visits a year), 2 units (total)",
+            "price": "2 / $190",
+            "detail": "Quantity: 2. Calculated per-unit price: S$95 (2 units in the published total). Total for 2 units per contract (4 visits). GST: not stated",
+            "excerpt": "Quarterly / SGD / / / A/C Unit / Service Rate / 2 / $190 / 3 / $220 / 4 / $280 / 5 / $340 / 6 / $400 / 7 / $460 / 8 / $520",
+            "sourceUrl": "https://airmaxxaircon.com/pricing/",
+            "capturedAt": "2026-10-15",
+            "indicative": false
+          },
+          {
+            "label": "Quarterly maintenance contract (4 visits a year), 3 units (total)",
+            "price": "3 / $220",
+            "detail": "Quantity: 3. Calculated per-unit price: S$73.33 (3 units in the published total). Total for 3 units per contract (4 visits). GST: not stated",
+            "excerpt": "Quarterly / SGD / / / A/C Unit / Service Rate / 2 / $190 / 3 / $220 / 4 / $280 / 5 / $340 / 6 / $400 / 7 / $460 / 8 / $520",
+            "sourceUrl": "https://airmaxxaircon.com/pricing/",
+            "capturedAt": "2026-10-15",
+            "indicative": false
+          },
+          {
+            "label": "Quarterly maintenance contract (4 visits a year), 4 units (total)",
+            "price": "4 / $280",
+            "detail": "Quantity: 4. Calculated per-unit price: S$70 (4 units in the published total). Total for 4 units per contract (4 visits). GST: not stated",
+            "excerpt": "Quarterly / SGD / / / A/C Unit / Service Rate / 2 / $190 / 3 / $220 / 4 / $280 / 5 / $340 / 6 / $400 / 7 / $460 / 8 / $520",
+            "sourceUrl": "https://airmaxxaircon.com/pricing/",
+            "capturedAt": "2026-10-15",
+            "indicative": false
+          },
+          {
+            "label": "Quarterly maintenance contract (4 visits a year), 5 units (total)",
+            "price": "5 / $340",
+            "detail": "Quantity: 5. Calculated per-unit price: S$68 (5 units in the published total). Total for 5 units per contract (4 visits). GST: not stated",
+            "excerpt": "Quarterly / SGD / / / A/C Unit / Service Rate / 2 / $190 / 3 / $220 / 4 / $280 / 5 / $340 / 6 / $400 / 7 / $460 / 8 / $520",
+            "sourceUrl": "https://airmaxxaircon.com/pricing/",
+            "capturedAt": "2026-10-15",
+            "indicative": false
+          },
+          {
+            "label": "Quarterly maintenance contract (4 visits a year), 6 units (total)",
+            "price": "6 / $400",
+            "detail": "Quantity: 6. Calculated per-unit price: S$66.67 (6 units in the published total). Total for 6 units per contract (4 visits). GST: not stated",
+            "excerpt": "Quarterly / SGD / / / A/C Unit / Service Rate / 2 / $190 / 3 / $220 / 4 / $280 / 5 / $340 / 6 / $400 / 7 / $460 / 8 / $520",
+            "sourceUrl": "https://airmaxxaircon.com/pricing/",
+            "capturedAt": "2026-10-15",
+            "indicative": false
+          },
+          {
+            "label": "Quarterly maintenance contract (4 visits a year), 7 units (total)",
+            "price": "7 / $460",
+            "detail": "Quantity: 7. Calculated per-unit price: S$65.71 (7 units in the published total). Total for 7 units per contract (4 visits). GST: not stated",
+            "excerpt": "Quarterly / SGD / / / A/C Unit / Service Rate / 2 / $190 / 3 / $220 / 4 / $280 / 5 / $340 / 6 / $400 / 7 / $460 / 8 / $520",
+            "sourceUrl": "https://airmaxxaircon.com/pricing/",
+            "capturedAt": "2026-10-15",
+            "indicative": false
+          },
+          {
+            "label": "Quarterly maintenance contract (4 visits a year), 8 units (total)",
+            "price": "8 / $520",
+            "detail": "Quantity: 8. Calculated per-unit price: S$65 (8 units in the published total). Total for 8 units per contract (4 visits). GST: not stated",
+            "excerpt": "Quarterly / SGD / / / A/C Unit / Service Rate / 2 / $190 / 3 / $220 / 4 / $280 / 5 / $340 / 6 / $400 / 7 / $460 / 8 / $520",
+            "sourceUrl": "https://airmaxxaircon.com/pricing/",
+            "capturedAt": "2026-10-15",
+            "indicative": false
+          }
+        ],
+        "priceSummary": "14 pricing entries"
+      },
+      {
         "name": "Condenser cleaning",
         "description": "",
         "explanation": "",
-        "sourceUrl": "https://airmaxxaircon.com/",
-        "capturedAt": "2026-10-18",
+        "sourceUrl": "https://airmaxxaircon.com/pricing/",
+        "capturedAt": "2026-10-15",
         "prices": [
           {
             "label": "Chemical wash, condenser unit",
-            "price": "$80",
+            "price": "Chemical Wash Condenser Unit / $80",
             "detail": "Quantity: 1. Calculated per-unit price: S$80 (1 unit in the published total). Per unit. GST: not stated",
-            "excerpt": "Chemical Wash Condenser Unit / $80",
-            "sourceUrl": "https://airmaxxaircon.com/",
-            "capturedAt": "2026-10-18",
+            "excerpt": "Other Services / Rate / Chemical Wash Condenser Unit / $80 / Dry Clean Condenser Unit / $60 / Gas Top-Up R410 / $60-$150 / Gas Top-Up R22 / $40-$120",
+            "sourceUrl": "https://airmaxxaircon.com/pricing/",
+            "capturedAt": "2026-10-15",
             "indicative": false
           },
           {
             "label": "Dry clean, condenser unit",
-            "price": "$60",
+            "price": "Dry Clean Condenser Unit / $60",
             "detail": "Quantity: 1. Calculated per-unit price: S$60 (1 unit in the published total). Per unit. GST: not stated",
-            "excerpt": "Dry Clean Condenser Unit / $60",
-            "sourceUrl": "https://airmaxxaircon.com/",
-            "capturedAt": "2026-10-18",
+            "excerpt": "Other Services / Rate / Chemical Wash Condenser Unit / $80 / Dry Clean Condenser Unit / $60 / Gas Top-Up R410 / $60-$150 / Gas Top-Up R22 / $40-$120",
+            "sourceUrl": "https://airmaxxaircon.com/pricing/",
+            "capturedAt": "2026-10-15",
             "indicative": false
           }
         ],
@@ -55398,7 +56310,7 @@
     "sourceUrls": [
       "https://airmaxxaircon.com/"
     ],
-    "updatedAt": "2026-10-18T00:57+03:00"
+    "updatedAt": "2026-10-18T01:23+03:00"
   },
   "cool-world-aircon": {
     "headline": "Services published by Cool World Aircon.",
@@ -56284,67 +57196,6 @@
       "https://www.syhplumber.com.sg/about-us/"
     ],
     "updatedAt": "2026-10-15"
-  },
-  "hedircool-pte-ltd": {
-    "headline": "Services published by HEDIRCOOL Pte. Ltd..",
-    "about": [
-      "Our team combines technical expertise with on-site discipline - arriving prepared, working carefully, and completing every installation to the standard the system and the client deserve."
-    ],
-    "services": [
-      {
-        "name": "Plumbing installation",
-        "description": "",
-        "explanation": "Plumbing System Installation / Complete plumbing installation for new builds and major renovations - water supply lines, drainage systems, fixtures, and pipework across residential, commercial, and industrial properties.",
-        "sourceUrl": "https://hedircool-sg.com/",
-        "capturedAt": "2026-10-18",
-        "prices": []
-      },
-      {
-        "name": "Pipe replacement",
-        "description": "",
-        "explanation": "Water Supply & Pipework / Hot and cold water supply pipework installation - copper, CPVC, and PEX piping systems pressure-tested to code, routed efficiently through walls, ceilings, and floor voids.",
-        "sourceUrl": "https://hedircool-sg.com/",
-        "capturedAt": "2026-10-18",
-        "prices": []
-      },
-      {
-        "name": "Drainage",
-        "description": "",
-        "explanation": "Drainage & Sanitary Systems / Soil, waste, and vent system installation - correct gradient, durable materials, and BS EN-compliant jointing for effective, long-term drainage performance without odour or blockage risk.",
-        "sourceUrl": "https://hedircool-sg.com/",
-        "capturedAt": "2026-10-18",
-        "prices": []
-      },
-      {
-        "name": "Water heater",
-        "description": "",
-        "explanation": "Heating System Installation / Non-electric heating system installation - solar water heaters, gas-fired boilers, heat pump water heaters, and district cooling connections for residential and commercial buildings.",
-        "sourceUrl": "https://hedircool-sg.com/",
-        "capturedAt": "2026-10-18",
-        "prices": []
-      },
-      {
-        "name": "Aircon installation",
-        "description": "",
-        "explanation": "Aircon System Installation / Split unit, cassette, and ducted aircon installation - from single residential rooms to multi-zone commercial systems.",
-        "sourceUrl": "https://hedircool-sg.com/",
-        "capturedAt": "2026-10-18",
-        "prices": []
-      },
-      {
-        "name": "System upgrade",
-        "description": "",
-        "explanation": "System Upgrades & Replacement / Existing system replacement, capacity upgrades, and retrofitting older pipework or aircon systems.",
-        "sourceUrl": "https://hedircool-sg.com/",
-        "capturedAt": "2026-10-18",
-        "prices": []
-      }
-    ],
-    "highlights": [],
-    "sourceUrls": [
-      "https://hedircool-sg.com/"
-    ],
-    "updatedAt": "2026-10-18T00:57+03:00"
   },
   "gc-werkz": {
     "headline": "Services published by GC Werkz.",

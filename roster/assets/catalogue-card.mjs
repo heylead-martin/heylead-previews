@@ -20,9 +20,12 @@ export function cardRating(c, url) {
 // Card price box: one label, the amount as published (keeping "From" and the unit) and one short line.
 const amountText=p=>/^(?:from\s+)?S?\$\s*\d/i.test(String(p||''));
 const firstLine=s=>String(s||'').replace(/\s*See service details for inclusions\.?/i,'').split(/(?<=\.)\s+/)[0].trim();
+// Shared by cards and the company-page price box: "S$" amounts, "From" and the unit kept, cents paired.
+export const shownPrice=(price,quote)=>amountText(price)?price.replace(/^(from\s+)?\$\s*/i,(m,f)=>`${f||''}S$`).replace(/(S?\$\d[\d,]*)\.(\d)(?!\d)/g,'$1.$20'):quote?'Quote on request':'Ask for a quote';
+export const shownPriceLine=(price,detail,quote)=>amountText(price)?firstLine(detail):quote?'':'No published price found yet';
 export function cardPrice(c) {
-  const shown=amountText(c.price)?c.price.replace(/^(from\s+)?\$\s*/i,(m,f)=>`${f||''}S$`).replace(/(S?\$\d[\d,]*)\.(\d)(?!\d)/g,'$1.$20'):c.quoteEvidence?'Quote on request':'Ask for a quote';
-  const line=amountText(c.price)?firstLine(c.priceDetail):c.quoteEvidence?'':'No published price found yet';
+  const shown=shownPrice(c.price,c.quoteEvidence);
+  const line=shownPriceLine(c.price,c.priceDetail,c.quoteEvidence);
   return `<span class="price-eyebrow">Example service price</span><strong>${esc(shown)}</strong>${c.quoteEvidence&&!amountText(c.price)?renderQuoteEvidence(c.quoteEvidence):''}${line?`<span class="price-context">${esc(line)}</span>`:''}`;
 }
 export function coverageBadges(c) {

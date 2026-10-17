@@ -959,8 +959,16 @@ function renderServiceExplanation(service) {
   return `<div class="service-explanation">${service.description?`<p class="service-context">${esc(service.description)}</p>`:''}${explanation?`<p>${esc(explanation)}</p>`:''}${options}${guide?.ask?`<div class="service-booking-question"><h3>Before you book</h3><p>${esc(guide.ask)}</p></div>`:''}${service.sourceUrl?`<p class="data-source service-source"><a href="${esc(service.sourceUrl)}">${esc(service.name)} on the company website</a></p>`:''}</div>`;
 }
 
+// r15.1: indicative lines are market guides ("typical going rates"), not the company's price, so a
+// profile never shows them. A service left with no company price reads "Ask for a quote".
+const companyPrices = service => {
+  if (!Array.isArray(service.prices) || !service.prices.some(p => p.indicative)) return service;
+  const prices = service.prices.filter(p => !p.indicative);
+  return {...service, prices, priceSummary: prices.length > 1 ? `${prices.length} pricing entries` : undefined};
+};
 function renderServiceRow(service, index) {
   if (!Array.isArray(service.prices)) throw new Error(`Missing pricing state: ${service.name}`);
+  service = companyPrices(service);
   if (service.prices.length > 1 && !service.priceSummary) throw new Error(`Missing price summary: ${service.name}`);
   const price = service.quoteEvidence ? 'Quote on request' : service.imported ? servicePrice(service) : service.priceSummary || service.prices[0]?.price || "Ask for a quote";
   return `<details class="service-rate" id="service-price-${index + 1}"><summary><span class="service-rate-label"><strong>${esc(service.name)}</strong></span><span class="service-rate-price${service.prices.length ? "" : " service-rate-quote"}"><strong><span class="sr-only">${service.prices.some(p=>!p.indicative) ? "Published price: " : "Pricing: "}</span>${esc(price)}</strong></span><span class="service-toggle-icon">${icon("chevron")}</span>${renderQuoteEvidence(service.quoteEvidence)}</summary>${renderServiceExplanation(service)}</details>`;
@@ -1149,7 +1157,7 @@ function areaCompanies(trade, town) { return townCoverage(publishedCompanies, tr
 function renderGuidePrices() {
   const {samples,average}=buildHomeSnapshot(publishedCompanies,mapPins,presentation).prices.aircon;
   if(!average)return '';
-  const oneUnit=airconMatrix(publishedCompanies,unitColumns)[0].cells[0];
+  const oneUnit=SHOW_UNITS_MATRIX?airconMatrix(publishedCompanies,unitColumns)[0].cells[0]:null; // the median sentence refers to the units matrix
   return `<section class="guide-price-sample" aria-labelledby="sample-title"><p class="kicker">FROM THE ROSTER DIRECTORY</p><h2 id="sample-title">Published general-servicing rates</h2><strong class="guide-price-number">S$${average} <small>per unit</small></strong><p>Average advertised starting rate across ${samples.length} companies. One matching rate per company, rounded to the nearest dollar. Minimum bookings and other conditions apply. These are source snapshots, not current quotes.</p>${oneUnit?.shown?`<p data-average-vs-median>Why two figures: this S$${average} is the average of ${samples.length} rates that each company prints as a per-unit price for one unit. The 1-unit general servicing cell in the table below is a median of ${oneUnit.count} companies (${money(oneUnit.median)}) and also counts one-unit prices printed per job or with no unit, so it covers more companies${oneUnit.median>average?' and sits higher':oneUnit.median<average?' and sits lower':''}. A median is the middle rate, so a few very low or high prices move it less than an average.</p>`:''}<details><summary>See all ${samples.length} rates and sources</summary><div class="guide-table-scroll" tabindex="0" role="region" aria-label="Sourced aircon servicing prices"><table><caption>Advertised rates in SGD, each linked to its source.</caption><thead><tr><th scope="col">Company</th><th scope="col">Rate</th><th scope="col">Source</th></tr></thead><tbody>${samples.map(s=>`<tr><th scope="row"><a href="/roster/company/${s.slug}/#pricing">${esc(s.name)}</a></th><td>${esc(s.rate)}</td><td><a href="${esc(s.sourceUrl)}">Conditions</a></td></tr>`).join('')}</tbody></table></div></details></section>`;
 }
 
@@ -1164,8 +1172,11 @@ function renderMatrixTable(id, title, note, columns) {
 // The row's own wording (never the previous tier's service_raw), with the guide label guards:
 // no page titles, slogans or company names, and cut at a word boundary within 90 characters.
 const matrixLabel = (e,service) => rateLabel(e.line,{name:service.label,noun:service.label.toLowerCase(),match:service.match},e.company.sourceName||e.company.name);
+// r15.1 note: keep the "by number of units" matrix hidden until the N1 fixes are live. The code and
+// its tests stay (lib/aircon-matrix.mjs); check-site expects the units matrix to be absent.
+const SHOW_UNITS_MATRIX = false;
 function renderAirconMatrix() {
-  return renderMatrixTable('units','Published aircon rates by number of units','Totals as printed for that many units in one booking.',unitColumns)+renderMatrixTable('sizes','Published single-unit rates by unit size','Single-unit rates where the company names the unit size or a ceiling cassette.',sizeColumns);
+  return (SHOW_UNITS_MATRIX?renderMatrixTable('units','Published aircon rates by number of units','Totals as printed for that many units in one booking.',unitColumns):'')+renderMatrixTable('sizes','Published single-unit rates by unit size','Single-unit rates where the company names the unit size or a ceiling cassette.',sizeColumns);
 }
 
 // Quick picks: groups built only from sourced fields. Not a ranking or a recommendation.
@@ -1425,7 +1436,9 @@ const retired=[
   {slug:'greengarden-integrated-services-pte-ltd',name:'Greengarden Integrated Services Pte Ltd',target:'/roster/home-cleaning/',trade:'home cleaning'},
   {slug:'sq-1-development-pte-ltd',name:'SQ 1 Development Pte Ltd',target:'/roster/home-cleaning/',trade:'home cleaning'},
   {slug:'flash-aircon',name:'Signature Engineering Services Pte Ltd',target:'/roster/aircon-servicing/',trade:'aircon servicing'},
-  {slug:'reliable-electrical-services',name:'Reliable Electrical Services',target:'/roster/electrician/',trade:'electrical'}
+  {slug:'reliable-electrical-services',name:'Reliable Electrical Services',target:'/roster/electrician/',trade:'electrical'},
+  // r15.1: withheld (needs-human-review) after being published under r15.
+  {slug:'hedircool-pte-ltd',name:'HEDIRCOOL Pte. Ltd.',target:'/roster/plumbing/',trade:'plumbing'}
 ];
 for(const old of retired) if(!publishedCompanies.some(c=>c.slug===old.slug)) {
   const canonicalPath=`/roster/company/${old.slug}/`;

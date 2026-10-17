@@ -1,4 +1,17 @@
 {
+  "sg-9448-8108-vmg-lotus": {
+    "label": "VMG Electrical / 24 Hours Electrician - Lotus (shared number +65 9448 8108)",
+    "members": [
+      {
+        "slug": "24-hours-electrician-lotus",
+        "name": "24 Hours Electrician - Lotus"
+      },
+      {
+        "slug": "vmg-electrical-pte-ltd",
+        "name": "VMG ELECTRICAL PTE. LTD."
+      }
+    ]
+  },
   "sg-6432-84xx-local-service-network": {
     "label": "Brand network on +65 6432 84xx landlines (Local Service Pte Ltd and sister brand sites, incl. the 7Days aircon brands)",
     "members": [
@@ -48,6 +61,10 @@
         "name": "Carpenter Cube Singapore"
       },
       {
+        "slug": "cleanbreeze-aircon-chemical-wash-servicing-singapore",
+        "name": "CleanBreeze Aircon Chemical Wash & Servicing Singapore"
+      },
+      {
         "slug": "daylight-electrician",
         "name": "Daylight Electrician Singapore"
       },
@@ -76,8 +93,45 @@
         "name": "Handover Haus Singapore | Post Renovation Cleaning, Move Out Cleaning & End of Tenancy Repair Services"
       },
       {
+        "slug": "ironing-maids-home-ironing-cleaning-service-singapore",
+        "name": "Ironing Maids | Home Ironing & Cleaning Service Singapore"
+      },
+      {
         "slug": "mr-plumber",
         "name": "Mr Plumber Singapore"
+      },
+      {
+        "slug": "part-time-home-maid-service-singapore",
+        "name": "Part Time Home Maid Service Singapore"
+      }
+    ]
+  },
+  "sg-6854-49xx-ls-network": {
+    "label": "Brand network on +65 6854 49xx landlines (Socool, LS Handyman, PS Home Maintenance, LS Aircon & Electrician, Reliable Electrical)",
+    "members": [
+      {
+        "slug": "aircon-service-repair-singapore-by-sc",
+        "name": "Aircon Service & Repair Singapore by SC"
+      },
+      {
+        "slug": "ls-aircon-service-electrician",
+        "name": "LS Aircon Service & Electrician"
+      },
+      {
+        "slug": "ls-handyman-service-s-pte-ltd",
+        "name": "LS Handyman Service ( S ) Pte Ltd"
+      },
+      {
+        "slug": "ps-aircon-service-chemical-wash-repair-singapore",
+        "name": "PS Aircon Service, Chemical Wash & Repair Singapore"
+      },
+      {
+        "slug": "ps-home-maintenance",
+        "name": "PS Home Maintenance"
+      },
+      {
+        "slug": "socool",
+        "name": "SoCool"
       }
     ]
   },
@@ -94,12 +148,38 @@
       }
     ]
   },
+  "sg-8110-0960-goodcool": {
+    "label": "Goodcool (shared number +65 8110 0960)",
+    "members": [
+      {
+        "slug": "best-aircon-servicing-and-installation-by-goodcool",
+        "name": "Best Aircon servicing and installation by Goodcool"
+      },
+      {
+        "slug": "goodcool-aircon-servicing-repair-singapore",
+        "name": "GoodCool Aircon Servicing & Repair Singapore"
+      }
+    ]
+  },
   "bs-integrated-247plumbing": {
     "label": "BS Integrated Engineering / Reliable 24 Hrs Plumbing and Electrical (247plumbingandelectrical.com)",
     "members": [
       {
         "slug": "bs-integrated-engineering",
         "name": "BS INTEGRATED ENGINEERING PTE. LTD."
+      }
+    ]
+  },
+  "sg-8488-8444-absolute": {
+    "label": "@bsolute Services / Singapore Carpet Cleaning (shared number +65 8488 8444)",
+    "members": [
+      {
+        "slug": "bsolute-services",
+        "name": "@bsolute Services"
+      },
+      {
+        "slug": "singapore-carpet-cleaning-pte-ltd",
+        "name": "Singapore Carpet Cleaning Pte Ltd"
       }
     ]
   },
@@ -129,29 +209,21 @@
       }
     ]
   },
-  "sg-6854-49xx-ls-network": {
-    "label": "Brand network on +65 6854 49xx landlines (Socool, LS Handyman, PS Home Maintenance, LS Aircon & Electrician, Reliable Electrical)",
+  "sg-9843-0993-ps-my-plumber": {
+    "label": "PS Plumber / MY Plumber (shared WhatsApp +65 9843 0993)",
     "members": [
       {
-        "slug": "ls-aircon-service-electrician",
-        "name": "LS Aircon Service & Electrician"
+        "slug": "my-plumber-singapore",
+        "name": "MY Plumber Singapore"
       },
       {
-        "slug": "ls-handyman-service-s-pte-ltd",
-        "name": "LS Handyman Service ( S ) Pte Ltd"
-      },
-      {
-        "slug": "ps-home-maintenance",
-        "name": "PS Home Maintenance"
-      },
-      {
-        "slug": "socool",
-        "name": "SoCool"
+        "slug": "ps-plumber-singapore",
+        "name": "PS Plumber Singapore"
       }
     ]
   },
   "sg-9047-3688-united-competent": {
-    "label": "United Electrician Singapore / Competent Electrician (shared phone +65 9047 3688)",
+    "label": "United Electrician Singapore / Competent Electrician (shared phone +65 9047 3688; same Realty Park address)",
     "members": [
       {
         "slug": "united-electricians",

@@ -1,5 +1,5 @@
 {
-  "sourceChecked": "2026-10-18T00:57+03:00",
+  "sourceChecked": "2026-10-18T01:23+03:00",
   "sourceRows": 6494,
   "sourceProfiles": 878,
   "published": [
@@ -7374,17 +7374,6 @@
       "name": "SYH Plumber & Electrical Pte Ltd",
       "categories": [
         "plumbing"
-      ],
-      "primaryTrade": "plumbing",
-      "curated": false
-    },
-    {
-      "id": "web-hedircool-sg-com",
-      "slug": "hedircool-pte-ltd",
-      "name": "HEDIRCOOL Pte. Ltd.",
-      "categories": [
-        "plumbing",
-        "aircon"
       ],
       "primaryTrade": "plumbing",
       "curated": false
@@ -35378,6 +35367,7 @@
       ],
       "primaryTrade": "cleaning",
       "reasons": [
+        "needs-human-review",
         "missing-sourced-about",
         "missing-sourced-services",
         "missing-company-website"
@@ -84756,6 +84746,18 @@
       ]
     },
     {
+      "id": "web-hedircool-sg-com",
+      "name": "HEDIRCOOL Pte. Ltd.",
+      "categories": [
+        "plumbing",
+        "aircon"
+      ],
+      "primaryTrade": "plumbing",
+      "reasons": [
+        "needs-human-review"
+      ]
+    },
+    {
       "id": "web-topplumbing-com-sg",
       "name": "Top Plumbing Services Pte Ltd",
       "categories": [
@@ -85098,12 +85100,20 @@
       "issue": "Alternate address exists; primary database address retained"
     },
     {
+      "slug": "decom-air-con-engineering-service-pte-ltd",
+      "issue": "General pricing references labelled separately from company rates"
+    },
+    {
       "slug": "easy-cool-engineering-pte-ltd",
       "issue": "Alternate phone shown with source label; primary phone remains the main contact"
     },
     {
       "slug": "easy-cool-engineering-pte-ltd",
       "issue": "Alternate address exists; primary database address retained"
+    },
+    {
+      "slug": "easy-cool-engineering-pte-ltd",
+      "issue": "Automatically extracted price text needs editorial review; source wording retained"
     },
     {
       "slug": "ec-aircon-services-pte-ltd",
@@ -86950,6 +86960,10 @@
       "reason": "r10: selected automatically (touch-icon icon); not visually checked"
     },
     {
+      "slug": "singapore-carpet-cleaning-pte-ltd",
+      "issue": "Automatically extracted price text needs editorial review; source wording retained"
+    },
+    {
       "slug": "go-cleaners-pte-ltd",
       "issue": "Automatically extracted price text needs editorial review; source wording retained"
     },
@@ -87042,7 +87056,7 @@
     },
     {
       "slug": "airmaxx-aircon-pte-ltd",
-      "issue": "General pricing references labelled separately from company rates"
+      "issue": "Automatically extracted price text needs editorial review; source wording retained"
     },
     {
       "slug": "aircool-pte-ltd",
@@ -87079,8 +87093,8 @@
       "excluded": 1829
     },
     "plumbing": {
-      "published": 101,
-      "excluded": 553
+      "published": 100,
+      "excluded": 554
     },
     "electrician": {
       "published": 116,
@@ -87095,10 +87109,10 @@
       "excluded": 628
     }
   },
-  "publishedCount": 739,
-  "excludedCount": 5755,
-  "sourceSha256": "3f0bc98d30d2ba404a0f13ed707fb7533abb400e713778fe3c2ec11bf78ad058",
-  "sourceRelease": "companies-20261018-0059.json",
+  "publishedCount": 738,
+  "excludedCount": 5756,
+  "sourceSha256": "f317b17d90fa5eb5512deb570f6fbe844b305b20b38dce3215c8c10f2a046f7a",
+  "sourceRelease": "companies-20261018-0125.json",
   "logos": {
     "verifiedFiles": 519,
     "publishedCompanies": 519,

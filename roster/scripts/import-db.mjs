@@ -6,7 +6,8 @@ import { fileURLToPath } from 'node:url';
 import { createHash } from 'node:crypto';
 import { execFileSync } from 'node:child_process';
 
-export const BLOCKED = new Set(['not-a-trade-business','not-singapore','site-spam-injection','possible-duplicate','no-sg-postal-code','marketplace','possible-platform','google-listing-mismatch','website-not-company-site','thin-profile','site-placeholder-content','website-inactive','lookup-name-looks-unrelated','trade-unclear','closed','commercial-only']);
+// 'needs-human-review' (r15.1): a row a reviewer must clear first (e.g. HEDIRCOOL, 201823211K) is withheld.
+export const BLOCKED = new Set(['needs-human-review','not-a-trade-business','not-singapore','site-spam-injection','possible-duplicate','no-sg-postal-code','marketplace','possible-platform','google-listing-mismatch','website-not-company-site','thin-profile','site-placeholder-content','website-inactive','lookup-name-looks-unrelated','trade-unclear','closed','commercial-only']);
 const types = {aircon:'HVACBusiness',plumbing:'Plumber',electrician:'Electrician',handyman:'HomeAndConstructionBusiness',cleaning:'LocalBusiness'};
 const cat = x => x === 'home-cleaning' ? 'cleaning' : x;
 const text = x => typeof x === 'string' ? x.replace(/[\u2013\u2014]/g,'-').replace(/Â·/g,' · ').replace(/\s+/g,' ').trim() : '';

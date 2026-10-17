@@ -4,7 +4,7 @@
 
 ## Trade directories
 - [Aircon servicing](https://previews.heylead.com/roster/aircon-servicing/): 231 companies, with sourced prices, ratings and service areas.
-- [Plumbing](https://previews.heylead.com/roster/plumbing/): 101 companies, with sourced prices, ratings and service areas.
+- [Plumbing](https://previews.heylead.com/roster/plumbing/): 100 companies, with sourced prices, ratings and service areas.
 - [Electrician](https://previews.heylead.com/roster/electrician/): 116 companies, with sourced prices, ratings and service areas.
 - [Handyman](https://previews.heylead.com/roster/handyman/): 99 companies, with sourced prices, ratings and service areas.
 - [Home cleaning](https://previews.heylead.com/roster/home-cleaning/): 192 companies, with sourced prices, ratings and service areas.
@@ -46,7 +46,7 @@
 
 ## Plumbing
 
-- [Plumbing directory](https://previews.heylead.com/roster/plumbing/): 101 companies.
+- [Plumbing directory](https://previews.heylead.com/roster/plumbing/): 100 companies.
 - [Best-rated plumbing companies](https://previews.heylead.com/roster/plumbing/best/)
 - [Plumbing](https://previews.heylead.com/roster/plumbing/guide/): Compare plumbers in Singapore by services, published prices and sourced reviews. Find help with chokes, toilets, leaks and water heaters.
 - [Choked drains](https://previews.heylead.com/roster/plumbing/choked-drain/): Find help for a choked sink, toilet or floor trap in Singapore. Understand inspection, clearing methods, quote details and recurring blockages.

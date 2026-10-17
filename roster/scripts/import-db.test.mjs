@@ -81,6 +81,7 @@ test('Google sentence names its source, shows no date and omits an absent count'
 test('Hours schema accepts exact day/time facts only',()=>{assert.deepEqual(structuredHours({text:'Monday 9 am-5 pm; Tuesday 9:30 am-6 pm; Sunday Closed'}),['Mo 09:00-17:00','Tu 09:30-18:00']);assert.equal(structuredHours({text:'Call us anytime'}),undefined);});
 test('Long metadata ends on a whole word within the limit',()=>{const s=concise('Example company '.repeat(20));assert.ok(s.length<=155);assert.ok(s.endsWith('.'));assert.ok(!s.endsWith('com.'));});
 
+test('Rows flagged needs-human-review are withheld with that reason (r15.1)',()=>{const held=row('held');held.flags=['needs-human-review'];const result=importDatabase(db([held,row('ok')]),empty);assert.equal(result.report.excludedCount,1);assert.ok(result.report.excluded[0].reasons.includes('needs-human-review'));assert.ok(BLOCKED.has('needs-human-review'));});
 test('Removed slugs remain reserved and placeholder content is excluded',()=>{const first=importDatabase(db([row('old')]),empty);const next=importDatabase(db([row('new')]),empty,first.registry);assert.notEqual(next.registry.old,next.registry.new);const bad=row();bad.about[0].text='Fusce porta euismod magna.';assert.equal(importDatabase(db([bad]),empty).report.excludedCount,1);});
 test('Space-separated and unusual-hyphen units are redacted',()=>{assert.equal(blockAddress('60 Paya Lebar Rd #07 54, Singapore 409051'),'60 Paya Lebar Rd, Singapore 409051');assert.ok(!blockAddress('6A Shenton Way #04\u201101').includes('#'));});
 

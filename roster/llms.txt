@@ -4,7 +4,7 @@
 
 ## Trade directories
 - [Aircon servicing](https://previews.heylead.com/roster/aircon-servicing/): 231 companies, with sourced prices, ratings and service areas.
-- [Plumbing](https://previews.heylead.com/roster/plumbing/): 101 companies, with sourced prices, ratings and service areas.
+- [Plumbing](https://previews.heylead.com/roster/plumbing/): 100 companies, with sourced prices, ratings and service areas.
 - [Electrician](https://previews.heylead.com/roster/electrician/): 116 companies, with sourced prices, ratings and service areas.
 - [Handyman](https://previews.heylead.com/roster/handyman/): 99 companies, with sourced prices, ratings and service areas.
 - [Home cleaning](https://previews.heylead.com/roster/home-cleaning/): 192 companies, with sourced prices, ratings and service areas.

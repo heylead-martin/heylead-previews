@@ -196,6 +196,9 @@ function eligible(p, spec) {
   // r15 splits "From $97 (per additional point)" into its own line; an additional-item rate is
   // charged on top of a first item, so it is not a company's rate for the job.
   if (/^per additional\b/i.test(p.unit || '') || /\beach additional\b/i.test(p.service || '')) return false;
+  // r15.1 files outdoor-unit cleaning as job "condenser-cleaning": it belongs only in the condenser
+  // table, never in general servicing or chemical wash (SmartCool's outdoor "Chemical Wash $80-$120").
+  if (p.job === 'condenser-cleaning' && !/condenser/.test(spec.match.source)) return false;
   return spec.match.test(text) && !spec.exclude?.test(text) && Number.isFinite(p.amount_sgd) && p.amount_sgd > 0 && !p.indicative && !p.promo
     && /^https?:\/\//.test(p.sourceUrl || '') && /^\d{4}-\d{2}-\d{2}/.test(p.capturedAt || '') && (!spec.unit || displayUnit(p) === spec.unit);
 }
