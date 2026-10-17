@@ -56,9 +56,11 @@ const guideTitles = {
  'EL-01':'Electrical Services Guide in Singapore | Roster',
  'HM-01':'Handyman Guide in Singapore | Roster'
 };
+// Last real content change per guide; the rest last changed on 12 October 2026.
+const guideUpdated = {'AC-03':'2026-10-18','AC-05':'2026-10-18','AC-10':'2026-10-18','CL-02':'2026-10-18','CL-12':'2026-10-18','HM-01':'2026-10-18'};
 export const guideCatalogue = rows.map(([id,trade,baseSlug,h1,title,description,label])=>{
  const directoryPath = directoryGuideIds.has(id) ? `/roster/${baseSlug}/` : null;
  const slug = directoryPath ? `${baseSlug}/guide` : baseSlug;
- return {id,trade,slug,h1,title:guideTitles[id]||title,description,label,path:`/roster/${slug}/`,directoryPath,updated:'2026-10-12',hub:['AC-01','CL-01','PL-01','EL-01','HM-01'].includes(id)};
+ return {id,trade,slug,h1,title:guideTitles[id]||title,description,label,path:`/roster/${slug}/`,directoryPath,published:'2026-10-12',updated:guideUpdated[id]||'2026-10-12',hub:['AC-01','CL-01','PL-01','EL-01','HM-01'].includes(id)};
 });
 export const guideByPath = new Map(guideCatalogue.map(g=>[g.path,g]));

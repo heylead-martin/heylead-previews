@@ -1,7 +1,7 @@
 {
   "checked": "2026-10-12",
   "corePages": 47,
-  "totalWords": 53541,
+  "totalWords": 53542,
   "methodPageWords": 1386,
   "pages": [
     {
@@ -26,7 +26,7 @@
       "words": 1259,
       "faqs": 4,
       "sourceReferences": 0,
-      "updated": "2026-10-12"
+      "updated": "2026-10-18"
     },
     {
       "id": "AC-04",
@@ -42,7 +42,7 @@
       "words": 1221,
       "faqs": 4,
       "sourceReferences": 2,
-      "updated": "2026-10-12"
+      "updated": "2026-10-18"
     },
     {
       "id": "CL-01",
@@ -58,7 +58,7 @@
       "words": 1249,
       "faqs": 4,
       "sourceReferences": 0,
-      "updated": "2026-10-12"
+      "updated": "2026-10-18"
     },
     {
       "id": "CL-03",
@@ -154,7 +154,7 @@
       "words": 1258,
       "faqs": 4,
       "sourceReferences": 4,
-      "updated": "2026-10-12"
+      "updated": "2026-10-18"
     },
     {
       "id": "AC-06",
@@ -255,10 +255,10 @@
     {
       "id": "AC-10",
       "path": "/roster/aircon-servicing/how-often-service-aircon/",
-      "words": 1040,
+      "words": 1041,
       "faqs": 4,
       "sourceReferences": 1,
-      "updated": "2026-10-12"
+      "updated": "2026-10-18"
     },
     {
       "id": "CL-10",
@@ -370,7 +370,7 @@
       "words": 1019,
       "faqs": 4,
       "sourceReferences": 1,
-      "updated": "2026-10-12"
+      "updated": "2026-10-18"
     },
     {
       "id": "HM-02",
@@ -449,7 +449,7 @@
       "hero": "electrician",
       "slug": "handyman-or-specialist",
       "path": "/roster/blog/handyman-or-specialist/",
-      "words": 994,
+      "words": 993,
       "faqs": 3,
       "ctas": 2,
       "sources": 2
@@ -503,7 +503,7 @@
       "hero": "aircon",
       "slug": "prepare-home-for-aircon-servicing",
       "path": "/roster/blog/prepare-home-for-aircon-servicing/",
-      "words": 1137,
+      "words": 1139,
       "faqs": 3,
       "ctas": 2,
       "sources": 1
@@ -539,7 +539,7 @@
       "hero": "cleaning",
       "slug": "part-time-cleaner-vs-deep-cleaning",
       "path": "/roster/blog/part-time-cleaner-vs-deep-cleaning/",
-      "words": 1127,
+      "words": 1126,
       "faqs": 3,
       "ctas": 2,
       "sources": 1
@@ -575,7 +575,7 @@
       "hero": "plumbing",
       "slug": "signs-you-need-a-plumber",
       "path": "/roster/blog/signs-you-need-a-plumber/",
-      "words": 1039,
+      "words": 1038,
       "faqs": 3,
       "ctas": 2,
       "sources": 2

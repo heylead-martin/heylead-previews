@@ -22,7 +22,7 @@ test('Starting prices keep their "From" wording', () => {
 test('Printed ranges are shown in full', () => {
   assert.equal(rateCell(line({unit:'as printed', amount_sgd:40, price_text:'Troubleshooting | $40-$80'})), 'S$40 to S$80');
   assert.equal(rateCell(line({unit:'as printed', amount_sgd:20, service:'Day Curtains', price_text:'Day Curtains | $20 - $25'})), 'S$20 to S$25');
-  assert.equal(rateCell(line({unit:'as printed (range)', amount_sgd:60, amount_max_sgd:80, price_text:'Repair troubleshooting starts from $60-$80, with the fix quoted separately'})), 'S$60 to S$80');
+  assert.equal(rateCell(line({unit:'as printed (range)', amount_sgd:60, amount_max_sgd:80, price_text:'Repair troubleshooting starts from $60-$80, with the fix quoted separately'})), 'From S$60 to S$80');
   assert.equal(rateCell(line({amount_sgd:450, amount_max_sgd:850, price_text:'$450 - $850+'})), 'S$450 to S$850+ per job');
   assert.deepEqual(priceRange(line({amount_sgd:1953, price_text:'$1,953.00 - $3,013.00'})), {max:3013, open:false});
   // A range elsewhere in the text does not belong to the shown amount.

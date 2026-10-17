@@ -10,7 +10,7 @@ updated: 2026-10-15
 
 ## Why the first weeks matter
 
-The first weeks in a new home are the best time to learn how it works. Boxes are still being unpacked, furniture is not yet in every corner and you can reach places that will be hard to get to later. It is also when small defects are easiest to spot and raise with the seller, developer or contractor.
+The first weeks in a new home are a good time to learn how it works. Boxes are still being unpacked, furniture is not yet in every corner and you can reach places that will be hard to get to later. It is also when small defects are easiest to spot and raise with the seller, developer or contractor.
 
 This checklist covers the checks that cut across trades: electrical, plumbing, aircon, fire safety and cleaning. It works for a new flat, a resale flat or a condominium. Where a topic has its own guide, this article links to it rather than repeating the detail.
 

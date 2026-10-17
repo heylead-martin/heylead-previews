@@ -2,7 +2,8 @@ import {renderSearchHero} from './job-search.mjs';
 import {createHash} from 'node:crypto';
 import {ratingSummary} from './rating-summary.mjs';
 import {tidyPriceLabel} from './profile-copy.mjs';
-import {isFromPrice, rateCell} from './sourced-rates.mjs';
+import {isFromPrice, rateCell, money} from './sourced-rates.mjs';
+import {unitRowProblem} from './aircon-matrix.mjs';
 
 export const snapshotTrades = [
   {id:'aircon', name:'Aircon', noun:'aircon companies', slug:'aircon-servicing', icon:'aircon', job:'general-service', label:'General aircon service', unit:'per unit', note:'Multi-unit minimums may apply.'},
@@ -27,7 +28,8 @@ export function eligibleHomePrice(price, trade) {
   const name = price.service || '';
   const scope = [name, price.unit, price.excerpt, price.price_text].join(' ');
   if (price.promo || price.indicative || /indicative|cost guide|market rate|industry average|typical (?:cost|price)|annual|yearly|quarterly|trial|first.time|promotion/i.test(scope)) return false;
-  if (trade.id === 'aircon') return price.unit === 'per unit' && (price.units_in_price || 1) === 1 && !/chemical|overhaul|gas|install|cassette|repair|additional/i.test(name);
+  // Same one-unit rule as the units matrix: no additional-unit, minimum-quantity or multi-unit rates.
+  if (trade.id === 'aircon') return price.unit === 'per unit' && (price.units_in_price || 1) === 1 && !/chemical|overhaul|gas|install|cassette|repair|additional/i.test(name) && !unitRowProblem({units_in_price:1,...price});
   if (trade.id === 'cleaning') return price.unit === 'per hour' && !price.unitInferred && !/deep|spring|move.out|move.in|office|post.renovation/i.test(name);
   if (!['per job','per point','as printed'].includes(price.unit) || (price.units_in_price || 1) !== 1 || (price.qty || 1) > 1) return false;
   if (trade.id === 'plumbing') return /toilet.*(?:chok|clog)|(?:chok|clog).*toilet/i.test(name) && !/sink|floor.?trap|pipe/i.test(name);
@@ -76,7 +78,7 @@ export function renderHomeSnapshot({companies,pins,presentation,outline,checked,
     const s=data.stats[t.id],p=data.prices[t.id];
     return `<article class="quick-trade" data-quick-trade="${t.id}"><div class="quick-trade-info"><div class="quick-trade-heading"><span class="quick-trade-icon">${icon(t.icon)}</span><h3>${esc(t.name)}</h3></div><p class="quick-job">${esc(t.label)}</p></div><div class="quick-quote"><p class="quick-price${p.average===null?' quick-price-unknown':''}">${p.average===null?'<strong>Ask for a quote</strong>':`<strong>S$${p.average}</strong><span>/ ${t.unit.replace('per ','')}</span>`}</p><p class="quick-sample">${p.average===null?'No comparable average':`Avg. · ${p.samples.length} companies`}</p></div><div class="quick-trade-footer"><div class="quick-rating" aria-label="${esc(s.average ? `Average company rating: ${s.average} out of 5` : 'No average rating available')}">${icon('star')}<strong>${s.average||'No rating'}</strong>${s.average?'<span>/5 avg.</span>':''}</div><a href="/roster/${t.slug}/" aria-label="Compare ${s.total} ${esc(t.noun)}">Compare ${s.total}${icon('arrow')}</a></div></article>`;
   }).join('');
-  const methodology = snapshotTrades.map(t=>{const p=data.prices[t.id];return `<details class="price-sample"><summary>${esc(t.label)}<span>${p.samples.length} price sources</span></summary><p>${esc(t.note)} For job prices, the unit may be inferred from the named task. Confirm inclusions before booking.</p><ul>${p.samples.map(s=>`<li><div><a href="/roster/company/${s.slug}/#pricing">${esc(s.name)}</a><span>${esc(s.service)}</span></div><div><strong>${s.from ? 'From ' : ''}S$${s.amount}</strong><a href="${esc(s.sourceUrl)}">Source · ${esc(s.checkedAt)}</a></div></li>`).join('')}</ul></details>`;}).join('');
+  const methodology = snapshotTrades.map(t=>{const p=data.prices[t.id];return `<details class="price-sample"><summary>${esc(t.label)}<span>${p.samples.length} price sources</span></summary><p>${esc(t.note)} For job prices, the unit may be inferred from the named task. Confirm inclusions before booking.</p><ul>${p.samples.map(s=>`<li><div><a href="/roster/company/${s.slug}/#pricing">${esc(s.name)}</a><span>${esc(s.service)}</span></div><div><strong>${s.from ? 'From ' : ''}${money(s.amount)}</strong><a href="${esc(s.sourceUrl)}">Source · ${esc(s.checkedAt)}</a></div></li>`).join('')}</ul></details>`;}).join('');
   const clientData = JSON.stringify({stats:data.stats,trades:snapshotTrades.map(({id,name,noun,slug})=>({id,name,noun,slug}))}).replace(/</g,'\\u003c');
   return `${renderSearchHero({esc,icon,count:all.total})}
 <section class="home-explorer" aria-labelledby="explorer-title" data-home-explorer><div class="explorer-heading"><div><p class="kicker">A LITTLE LOCAL KNOWLEDGE</p><h2 id="explorer-title">See where the help is.</h2></div><span class="explorer-checked">${icon('calendar')} Updated ${esc(checked)}</span></div>

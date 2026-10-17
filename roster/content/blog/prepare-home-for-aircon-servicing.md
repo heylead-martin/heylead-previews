@@ -49,7 +49,7 @@ Tell the company about practical details when you book:
 - Where visitors can park and whether there is a parking charge.
 - Whether the lift stops on your floor, and whether there is a service lift.
 - Any security or visitor registration needed at a condominium.
-- The best time window, if your estate restricts noisy work.
+- The time window that suits you, if your estate restricts noisy work.
 
 [[cta /roster/aircon-servicing/punggol/ | See aircon companies serving Punggol | Area pages list the aircon companies that name your town on their own websites.]]
 

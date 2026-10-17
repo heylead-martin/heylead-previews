@@ -51,7 +51,7 @@ For water-supply and sanitary plumbing work, [PUB's requirements for plumbing wo
 
 Not every leak is yours to fix. Problems in shared pipes, such as a common drainage stack or a corridor pipe, are normally handled by the Town Council for HDB estates or the management office for condominiums.
 
-If water is coming through your ceiling from the flat above, read [HDB's ceiling-leak guidance](https://www.hdb.gov.sg/sitecore/content/hdbinfoweb/home/managing-my-home/renovation-and-maintenance/home-maintenance/home-care-guide/ceiling-leaks) to understand how the inspection and repair process works for flats. It is usually best to speak to your neighbour and follow that process before you book any repair yourself.
+If water is coming through your ceiling from the flat above, read [HDB's ceiling-leak guidance](https://www.hdb.gov.sg/sitecore/content/hdbinfoweb/home/managing-my-home/renovation-and-maintenance/home-maintenance/home-care-guide/ceiling-leaks) to understand how the inspection and repair process works for flats. It usually helps to speak to your neighbour and follow that process before you book any repair yourself.
 
 Once the source is confirmed to be inside your own home, a private plumber is the right call.
 

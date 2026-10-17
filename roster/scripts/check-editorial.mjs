@@ -32,6 +32,13 @@ for(const g of guides){
   results.push({id:g.id,path:g.path,words:g.words,faqs:g.faqs.length,sourceReferences:g.sources.length,updated:g.updated});
 }
 const method=await readFile(`${root}/content/how-it-works.md`,'utf8');
+// Roster's own copy never says "best"; that word is kept for the five best-rated pages (built from
+// lib/best-of.mjs) and for company names and quoted company text. check-site applies the page rule.
+{
+ const {readdir}=await import('node:fs/promises');
+ const own=[['content/how-it-works.md',method],...await Promise.all(guides.map(async g=>[`content/guides/${g.id}.md`,g.markdown])),...await Promise.all((await readdir(`${root}/content/blog`)).filter(f=>f.endsWith('.md')).map(async f=>[`content/blog/${f}`,await readFile(`${root}/content/blog/${f}`,'utf8')])),['data/service-guides.json',await readFile(`${root}/data/service-guides.json`,'utf8')]];
+ for(const [file,text] of own)assert.ok(!/\bbest\b/i.test(text.replace(/\]\([^)]*\)/g,']')),`"best" in Roster's own copy: ${file}: ${text.match(/.{0,40}\bbest\b.{0,30}/i)?.[0]}`);
+}
 assert.ok(wordCount(method)>=1000);
 // The sitemap lists the launch set for review; every page in it stays noindex.
 const sitemap=await readFile(`${root}/sitemap.xml`,'utf8');

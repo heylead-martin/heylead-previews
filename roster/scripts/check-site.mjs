@@ -6,7 +6,7 @@ import {createHash} from 'node:crypto';
 import {decodeCatalogue} from '../assets/catalogue-data.mjs';
 import {serviceCounts,serviceLabel,selectAreaPages,townCoverage,nearbyTowns,AREA_PAGE_MINIMUM,AREA_MAX_SIMILARITY,AREA_MIN_DISTINCT,NON_RESIDENTIAL} from '../lib/area-pages.mjs';
 import {areaSlug} from '../assets/service-areas.mjs';
-import {airconMatrix,unitColumns,sizeColumns} from '../lib/aircon-matrix.mjs';
+import {airconMatrix,unitColumns,sizeColumns,unitRowProblem} from '../lib/aircon-matrix.mjs';
 import {profileRowProblem,guideEvidence, sourcedRates, rateProblem, isFromPrice, minimumCompanies, maxLabelLength} from '../lib/sourced-rates.mjs';
 import {displayNames,derivedFrom,makesClaim} from '../lib/display-name.mjs';
 import {BEST_OF,rankBestOf,bestOfScore} from '../lib/best-of.mjs';
@@ -34,6 +34,7 @@ for(const rel of manifest) {
  assert.ok(!/[\u2013\u2014]/.test(html),`Long dash: ${rel}`);
  assert.ok(!/\b(?:undefined|null|NaN|LOGO)\b|â€/.test(html),`Invalid generated text: ${rel}`);
  assert.ok(!/\bsort uses\b/i.test(html),`Obsolete sorting note: ${rel}`);
+ assert.ok(!/S\$[\d,]+\.\d(?!\d)/.test(html.replace(/<script[\s\S]*?<\/script>/g,'')),`Money with one decimal (show S$19.50, not S$19.5): ${rel}`);
  assert.ok(!/\b1 sourced excerpts\b/.test(html),`Singular review excerpt grammar: ${rel}`);
  assert.ok(!/\b1 units\b/.test(html),`Singular unit grammar: ${rel}`);
  assert.ok(!/\bfrom 1 reviews\b|\b1 companies\b|\b1 towns\b/.test(html),`Singular count grammar: ${rel}`);
@@ -86,8 +87,14 @@ for(const [rel,html] of pages)for(const table of html.matchAll(/<table data-sour
   assert.ok(!/as printed/.test(row.cell),`Unit placeholder in rate: ${where}`);
   // Independent of the renderer: read the release fields directly.
   const printedRange=new RegExp(String.raw`\$\s*${p.amount_sgd}(?:\.0+)?\s*(?:-|to)\s*(?:S?\$)?\s*\d`).test(String(p.price_text).replace(/,(?=\d{3})/g,''));
-  if(p.amount_max_sgd>p.amount_sgd||printedRange)assert.ok(/ to S\$/.test(row.cell),`Range shortened to its low end: ${where}: ${row.cell}`);
-  else if(/\bfrom\s*(?:S\$|SGD\s*\$?|SG\s*\$|\$)\s*[\d,.]+/i.test(p.price_text)&&isFromPrice(p))assert.ok(row.cell.startsWith('From S$'),`Starting price shown as firm: ${where}: ${row.cell}`);
+  // A release maximum counts only when this row's own text or excerpt prints it (P1-7: Cool Earth's
+  // "from S$80" row carries S$100 from a separate FAQ sentence).
+  const maxPrinted=p.amount_max_sgd>p.amount_sgd&&[p.price_text,p.excerpt].some(t=>new RegExp(String.raw`(?:\$|-|to)\s*${p.amount_max_sgd}(?:\.0+)?(?!\d)`).test(String(t||'').replace(/,(?=\d{3})/g,'')));
+  const fromText=/\b(?:from|frm|starting|starts?)\b\s*(?:price)?\s*:?\s*(?:from\s*)?(?:S\$|SGD\s*\$?|SG\s*\$|\$)\s*[\d,.]+/i.test(p.price_text);
+  if(maxPrinted||printedRange)assert.ok(/ to S\$/.test(row.cell),`Range shortened to its low end: ${where}: ${row.cell}`);
+  if(fromText)assert.ok(row.cell.startsWith('From S$'),`Starting price shown as firm: ${where}: ${row.cell}`);
+  if(/\$\s*[\d.]+\s*(?:and|&)\s*above/i.test(p.price_text))assert.ok(row.cell.includes(' and above'),`"and above" dropped: ${where}: ${row.cell}`);
+  assert.ok(!/S\$\d+\.\d(?!\d)/.test(row.cell),`Money with one decimal: ${where}: ${row.cell}`);
   if(/\bper (?:unit|piece|hour)\b|\/\s*(?:hour|hr|unit|pc)\b/i.test(p.price_text)&&p.unitInferred)assert.match(row.cell,/ per (?:unit|piece|hour|additional)/,`Source unit dropped: ${where}`);
   assert.ok(!/\bbooked their\b|\bno upsell\b|\bvery good service\b|\bno chemical wash needed\b|\badds \$|\+\$\d/i.test(`${row.label} ${p.price_text}`),`Review, surcharge or negated entry: ${where}`);
  });
@@ -142,6 +149,16 @@ for(const [key,spec] of Object.entries(guideEvidence))if(!rateTables.has(key))as
    const want=sourcedRates(spec,local);assert.deepEqual(rows.map(m=>m[1]),want.map(r=>r.company.slug),`Area rate rows differ from the town's companies: ${table[1]} ${rel}`);
    rows.forEach((m,i)=>assert.equal(unescape(m[2]),want[i].line.sourceUrl,`Area rate source: ${rel}`));
   }
+  // P1-15: aircon town pages lead with one-unit general servicing rates from the matrix rule.
+  if(page.trade==='aircon'){
+   const want=airconMatrix(local,[unitColumns[0]])[0].cells[0].entries,table=html.match(/<table data-area-general="[^"]+">([\s\S]*?)<\/table>/)?.[1];
+   if(want.length>=minimumCompanies){
+    assert.ok(table,`Aircon town page missing general servicing rates: ${rel}`);
+    assert.deepEqual([...table.matchAll(/<tr><th scope="row"><a href="\/roster\/company\/([^/]+)\//g)].map(m=>m[1]),want.map(e=>e.company.slug),`General servicing rows differ from the matrix rule: ${rel}`);
+    const charge=html.match(/<span>What do aircon[^<]*charge\?<\/span>[\s\S]*?<p>([^<]*)<\/p>/)?.[1]||'';
+    assert.ok(charge.startsWith('For general servicing of one unit'),`Town FAQ must answer general servicing first: ${rel}`);
+   }else assert.ok(!table,`General servicing table under ${minimumCompanies} companies: ${rel}`);
+  }
   const ld=JSON.parse(html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1])['@graph'];
   assert.equal(ld.find(x=>x['@type']==='BreadcrumbList')?.itemListElement.length,3,`Area breadcrumbs: ${rel}`);
   assert.ok(html.includes('<nav class="crumbs" aria-label="Breadcrumb">'),`Visible breadcrumbs: ${rel}`);
@@ -182,7 +199,21 @@ for(const [key,spec] of Object.entries(guideEvidence))if(!rateTables.has(key))as
    if(c.count>=minimumCompanies){shown+=c.count;assert.ok(inner.includes('S$'),`Matrix cell should show a range: ${id} ${r.service.id} ${c.column.id}`);}
    else assert.ok(!/S\$|\d+\s*to\s/.test(inner),`Matrix cell under ${minimumCompanies} companies shows a price: ${id} ${r.service.id} ${c.column.id}`);
   }
+  // P0-4: every rate behind a shown cell must agree with the cell on the release's own fields.
+  for(const r of rows)for(const c of r.cells.filter(c=>c.shown))for(const e of c.entries){
+   const p=e.line,where=`${id} ${r.service.id} ${c.column.id} ${e.company.slug} S$${p.amount_sgd}`;
+   const units=p.units_in_price,want=id==='units'?Number(c.column.id.replace('+','')):1;
+   assert.ok(c.column.id.endsWith('+')?units>=want:units===want,`Matrix row units disagree with cell: ${where}`);
+   assert.ok(p.qty==null||p.qty===units,`Matrix row qty ${p.qty} disagrees with cell: ${where}`);
+   assert.ok(p.min_units==null||p.min_units<=1,`Matrix row has a minimum of ${p.min_units} units: ${where}`);
+   assert.ok(units>1?p.unit===`total for ${units} units`:!/^total for/.test(p.unit),`Matrix row unit "${p.unit}" disagrees with cell: ${where}`);
+   assert.ok(!/\badditional\b/i.test(p.price_text)&&!/(?<![\d.$,])\b\d+\s*(?:units?|fan coil units?)?\s*(?:and|&)\s*above/i.test(`${p.price_text} ${String(p.excerpt||'').split('|').pop()}`),`Additional or minimum-quantity rate in a units cell: ${where}`);
+   assert.ok(!/contract|yearly|quarterly|annual|\/\s*year/i.test(`${p.service} ${p.price_text}`),`Contract rate in matrix: ${where}`);
+   assert.equal(unitRowProblem(p),null,`Matrix row rule: ${where}`);
+  }
   const sources=section.match(new RegExp(`<table data-matrix-sources="${id}">([\\s\\S]*?)</table>`))[1];
+  // P0-5 and P1-8: "Service as listed" is the row's own wording, within 90 characters, never a slogan.
+  for(const m of sources.matchAll(/<tr><th scope="row">[\s\S]*?<\/th><td>[^<]*<\/td><td>([^<]*)<\/td>/g)){const label=unescape(m[1]);assert.ok(label.length<=maxLabelLength&&!/\b(?:best|cheapest|affordable)\b|#1|\|\s*[A-Z][\w ]+$/i.test(label)&&!/\$\d/.test(label),`Matrix source label: ${id}: ${label}`);}
   assert.equal((sources.match(/<tr><th scope="row">/g)||[]).length,shown,`Matrix sources must list every rate behind shown cells: ${id}`);
  }
  assert.ok(pages.get('aircon-servicing/index.html').includes('href="/roster/aircon/servicing-price/"'),'Aircon hub links the price guide');
@@ -202,6 +233,28 @@ for(const [key,spec] of Object.entries(guideEvidence))if(!rateTables.has(key))as
  assert.equal(airconAreas,pages.get('aircon-servicing/index.html').match(/<section class="areas-we-serve"[\s\S]*?<\/section>/)[0],'Aircon hub areas match the aircon servicing directory');
  const finder=pages.get('what-service-do-i-need/index.html');assert.ok(finder?.includes('data-symptom-finder'),'Symptom finder page');
  assert.ok((await readFile(path.join(root,'sitemap.xml'),'utf8')).includes('<loc>https://previews.heylead.com/roster/what-service-do-i-need/</loc>'),'Symptom finder in sitemap');
+}
+// "best" in Roster's own copy: allowed only in the five best-rated pages' titles, H1s and breadcrumbs,
+// in links to those pages, and inside company names or quoted company text. Quoted text is
+// recognised by its wording: the word before and after "best" must appear in the company data.
+{
+ const norm=s=>` ${String(s).toLowerCase().replace(/&amp;/g,'&').replace(/&#39;|’/g,"'").replace(/'s\b/g,'').replace(/[^a-z0-9]+/g,' ').trim()} `;
+ const corpus=norm(JSON.stringify([data.companies,current]));
+ // Company names (display and source) are names, not claims; longest first so they are removed whole.
+ const bestNames=[...new Set(data.companies.flatMap(c=>[c.name,c.sourceName]).map(norm).filter(n=>n.includes(' best ')))].sort((a,b)=>b.length-a.length);
+ const hits=[];
+ for(const [rel,html] of pages){
+  if(/^[a-z-]+\/best\/index\.html$/.test(rel))continue;
+  // One text node (or attribute value) at a time, so neighbouring names do not run together.
+  const chunks=html.replace(/<script[\s\S]*?<\/script>/g,'<x>').replace(/<title>[\s\S]*?<\/title>/,'<x>').replace(/<a [^>]*href="\/roster\/[a-z-]+\/best\/"[^>]*>[\s\S]*?<\/a>/g,'<x>').replace(/<[^>]*?(?:content|value|label|aria-label|alt|title)="([^"]*)"[^>]*>/g,'<x>$1<x>').split(/<[^>]*>/);
+  for(const chunk of chunks){
+   let t=norm(unescape(chunk));if(!t.includes(' best '))continue;
+   for(const n of bestNames)t=t.split(n).join(' | ');
+   const w=t.trim().split(' ');
+   w.forEach((x,i)=>{if(x!=='best')return;const win=[w[i-1],x,w[i+1]].filter(v=>v&&v!=='|').join(' ');if(!corpus.includes(` ${win} `))hits.push(`${rel}: …${win}…`);});
+  }
+ }
+ assert.deepEqual(hits,[],`"best" in Roster's own copy:\n${hits.slice(0,20).join('\n')}`);
 }
 // Display names only remove or re-case words from the source name.
 for(const c of data.companies)assert.ok(derivedFrom(c.name,c.sourceName),`Display name adds words: ${c.slug}: ${c.name}`);
