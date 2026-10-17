@@ -40,6 +40,25 @@ function titleCase(s) {
   return s.replace(/[\p{L}\p{N}][\p{L}\p{N}.']*/gu, w => /^(sg|hdb|lew|uen)$/.test(w) ? w.toUpperCase() : w[0].toUpperCase() + w.slice(1));
 }
 
+// ALL-CAPS names ("ART OF CLEANING PTE. LTD.") in title case ("Art of Cleaning Pte. Ltd."). Kept in
+// capitals: acronyms (M&E, LEW, SG, HDB, LLP...), words with digits or no vowels (DJR, BS), and words
+// of one or two letters (WI, LK). Small words go lower case except at the start.
+// Three-letter acronyms with a vowel cannot be told from words by rule, so they are listed.
+const KEEP_CAPS = new Set('sg lew hdb llp acmv hvac uen ac pe pub ema nea bca scdf ikea ifc avv osk rki cje'.split(' '));
+const FIXED = {pte:'Pte',ltd:'Ltd',co:'Co',dr:'Dr',mr:'Mr',an:'An',ye:'Ye'};
+const SMALL = new Set('of and the for in on at by to with or'.split(' '));
+function fromCaps(s) {
+  let first = true;
+  return s.replace(/[^\s()/]+/g, token => {
+    const word = token.replace(/^[^\p{L}\p{N}]+|[^\p{L}\p{N}&+]+$/gu, ''), lower = word.toLowerCase();
+    const isFirst = first; first = false;
+    if (!word) return token;
+    if (SMALL.has(lower) && !isFirst) return token.replace(word, lower);
+    if (FIXED[lower]) return token.replace(word, FIXED[lower]);
+    if (KEEP_CAPS.has(lower) || /[\d&+]/.test(word) || !/[aeiouy]/i.test(word.replace(/\.(?:ltd|pte)$/i, '')) || word.length <= 2) return token.replace(/\.LTD\b/, '.Ltd');
+    return token.replace(word, lower.replace(/(^|[-.])(\p{L})/gu, (m, a, b) => a + b.toUpperCase()).replace(/\.(Sg|Com|Net)$/, m => m.toLowerCase()));
+  });
+}
 export function cleanName(name, slug = '') {
   if (OVERRIDES[slug]) return OVERRIDES[slug];
   let s = String(name).replace(PICTO, '').replace(/\s*@\s*\+?(?:65\s?)?\d{4}\s?\d{4}\b/g, '').replace(/\s+/g, ' ').trim();
@@ -59,6 +78,7 @@ export function cleanName(name, slug = '') {
   // Names that start with "Best" or "Top" are kept: for those firms it is the trading name.
   if (/^cheap\s+\S+\s+\S+/i.test(out)) out = out.replace(/^cheap\s+/i, '');
   if (!/\p{Lu}/u.test(out)) out = titleCase(out);
+  else if (!/\p{Ll}/u.test(out) && (out.match(/\p{L}/gu) || []).length > 4) out = fromCaps(out);
   return out || String(name).trim();
 }
 

@@ -1,7 +1,7 @@
 const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 export function renderQuoteEvidence(evidence) {
   if (!evidence) return '';
-  return `<span class="quote-evidence"><a href="${esc(evidence.sourceUrl)}">Their site: &quot;${esc(evidence.excerpt)}&quot;</a><span>Captured ${esc(evidence.capturedAt)}</span></span>`;
+  return `<span class="quote-evidence"><a href="${esc(evidence.sourceUrl)}">Their site: &quot;${esc(evidence.excerpt)}&quot;</a></span>`;
 }
 export function renderSelfReported(rating) {
   if (!rating || !Number.isFinite(rating.rating) || rating.rating < 0 || rating.rating > 5 || !/^https?:\/\//.test(rating.source_url || rating.sourceUrl || '')) return '';

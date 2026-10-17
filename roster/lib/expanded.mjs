@@ -39,7 +39,8 @@ export function structuredHours(hours) {
 }
 export function directoryRecord(c,display,trade) {
   const average=ratingSummary(c);
-  if(average)average.sources=average.sources.map(({name,sourceUrl,checkedAt})=>({name,sourceUrl,checkedAt}));
+  // Cards name the source and show the Google Maps figure; check dates stay in companies.json.
+  if(average)average.sources=average.sources.map(({name,sourceUrl,rating,count})=>({name,sourceUrl,...(name==='Google Maps'?{rating,count}:{})}));
   return {fullProfile:!!c.listingDepth?.full,evidenceScore:c.listingDepth?.evidenceScore||0,slug:c.slug,name:c.name,category:c.category,categories:c.categories||[c.category],trade:trade.name,area:c.area||'Other Singapore locations',serviceAreas:[...new Set((c.enrichment?.serviceLocations||[]).map(a=>a.name))],description:c.enrichment?.supportedServices?.length?'':concise(profileIntro(c),180),logo:display.logo||'',price:display.price,...(display.quoteEvidence?{quoteEvidence:display.quoteEvidence}:{}),...(c.selfReportedRating?{selfReportedRating:c.selfReportedRating}:{}),examplePrice:!!display.examplePrice,priceDetail:concise(display.detail||'',100),published:!!display.published,average,offerings:(c.enrichment?.supportedServices||[]).map(s=>friendlyService(s.name,c.category)),ratingValue:average?.value??null,ratingCount:average?.count||0,phone:c.phone?.value||'',whatsapp:c.whatsapp?.value||'',hasReviews:!!c.reviews?.length,services:c.services||[]};
 }
 export function createProfileRenderer(ctx) {

@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {profileIntro, priceView, servicePrice, tidyPriceLabel} from '../lib/profile-copy.mjs';
 import {sampleSources, weightedRating} from '../assets/review-model.mjs';
 import {ratingSummary} from '../lib/rating-summary.mjs';
-import {splitDirectory} from '../assets/catalogue-card.mjs';
+import {splitDirectory,rankCompanies} from '../assets/catalogue-card.mjs';
 import {companyMatch} from '../assets/company-match.mjs';
 import {filterCatalogue} from '../assets/catalogue-filter.mjs';
 import {encodeCatalogue,decodeCatalogue} from '../assets/catalogue-data.mjs';
@@ -101,6 +101,19 @@ test('Checkbox counts combine search, location and rating filters across the ful
   const result=filterCatalogue(filterRows,{query:'  PLUMBING  ',area:'bedok',rating:'4.8',savedSlugs:['b','d']});
   assert.deepEqual(result.matches.map(c=>c.slug),['a','b']);
   assert.deepEqual(result.counts,{price:1,reviews:1,whatsapp:2,saved:1});
+});
+
+test('A trade word matches the primary trade first, never words inside another trade\'s services', () => {
+  const rows=[
+    {slug:'air',name:'Cool Aircon',category:'aircon',offerings:['condenser cleaning','chemical washes'],description:'Aircon cleaning and chemical wash'},
+    {slug:'handy',name:'Fix It',category:'handyman',offerings:['Cleaning after repairs']},
+    {slug:'clean',name:'Art of Cleaning Pte. Ltd.',category:'cleaning',offerings:['deep cleaning']},
+    {slug:'maid',name:'Maid Co',category:'cleaning',offerings:[]}
+  ];
+  const {matches}=filterCatalogue(rows,{query:'cleaning'});
+  assert.deepEqual(matches.map(c=>c.slug).sort(),['clean','handy','maid']);
+  assert.deepEqual(rankCompanies(matches,'name').map(c=>c.slug),['clean','maid','handy']);
+  assert.deepEqual(filterCatalogue(rows,{query:'chemical wash'}).matches.map(c=>c.slug),['air']);
 });
 
 test('Service selection and multiword search narrow the counts as well as the cards', () => {

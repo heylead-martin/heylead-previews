@@ -9,6 +9,7 @@ import {areaSlug} from '../assets/service-areas.mjs';
 import {airconMatrix,unitColumns,sizeColumns,unitRowProblem} from '../lib/aircon-matrix.mjs';
 import {profileRowProblem,guideEvidence, sourcedRates, rateProblem, isFromPrice, minimumCompanies, maxLabelLength} from '../lib/sourced-rates.mjs';
 import {displayNames,derivedFrom,makesClaim} from '../lib/display-name.mjs';
+import {VISIBLE_DATE,stripDateText} from '../lib/no-dates.mjs';
 import {BEST_OF,rankBestOf,bestOfScore} from '../lib/best-of.mjs';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const load=async f=>JSON.parse(await readFile(path.join(root,f),'utf8'));
@@ -34,6 +35,12 @@ for(const rel of manifest) {
  assert.ok(!/[\u2013\u2014]/.test(html),`Long dash: ${rel}`);
  assert.ok(!/\b(?:undefined|null|NaN|LOGO)\b|â€/.test(html),`Invalid generated text: ${rel}`);
  assert.ok(!/\bsort uses\b/i.test(html),`Obsolete sorting note: ${rel}`);
+ // No visible capture dates (Martin, 18 Oct). Article bylines in <time> are publication dates.
+ // Company pages may quote dates the source itself prints (review dates, offers, GST notes), so there
+ // only Roster's own capture-date phrasing is checked.
+ {const visible=html.replace(/<(script|style|time)\b[\s\S]*?<\/\1>/g,' ').replace(/<head>[\s\S]*?<\/head>/,' ').split(/<[^>]*>/);
+  if(rel.startsWith('company/'))for(const t of visible)assert.equal(stripDateText(t),t,`Capture date shown: ${rel}: ${t.trim().slice(0,80)}`);
+  else{const hit=visible.join(' ').match(VISIBLE_DATE);assert.ok(!hit,`Visible date "${hit?.[0]}": ${rel}`);}}
  assert.ok(!/S\$[\d,]+\.\d(?!\d)/.test(html.replace(/<script[\s\S]*?<\/script>/g,'')),`Money with one decimal (show S$19.50, not S$19.5): ${rel}`);
  assert.ok(!/\b1 sourced excerpts\b/.test(html),`Singular review excerpt grammar: ${rel}`);
  assert.ok(!/\b1 units\b/.test(html),`Singular unit grammar: ${rel}`);
@@ -273,7 +280,8 @@ for(const c of data.companies)assert.ok(derivedFrom(c.name,c.sourceName),`Displa
   for(const [, ,slugRow,inner] of rows){
    const c=data.companies.find(x=>x.slug===slugRow),g=c.googleRating;
    assert.ok((c.primaryTrade||c.category)===id&&Number.isInteger(g.count)&&g.count>=BEST_OF.minReviews&&g.checkedAt&&g.sourceUrl,`Best-rated qualifier: ${slugRow}`);
-   assert.ok(inner.includes(`${g.value.toFixed(1)} on Google Maps · ${g.count.toLocaleString('en-SG')} reviews · checked `)&&inner.includes(`href="${g.sourceUrl.replaceAll('&','&amp;')}"`),`Best-rated row must show the Google figure and link: ${slugRow}`);
+   // Source link, no capture date (Martin, 18 Oct): the date stays in googleRating.checkedAt.
+   assert.ok(inner.includes(`${g.value.toFixed(1)} on Google Maps · ${g.count.toLocaleString('en-SG')} reviews · <a href="${g.sourceUrl.replaceAll('&','&amp;')}">Google Maps source</a>`)&&!/checked/i.test(inner),`Best-rated row must show the Google figure and source link, without a date: ${slugRow}`);
   }
   assert.ok(!/[★☆]/.test(html),`Star glyph: ${rel}`);
   assert.ok(html.includes(`m = ${BEST_OF.m} and K = ${BEST_OF.K}`)&&html.includes(`Minimum: ${BEST_OF.minReviews} Google reviews.`),`Method box must print the settings: ${rel}`);

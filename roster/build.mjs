@@ -12,6 +12,7 @@ import {airconMatrix,unitColumns,sizeColumns} from './lib/aircon-matrix.mjs';
 import {selectAreaPages,townCoverage,townRegion,nearbyTowns,serviceCounts,serviceLabel} from './lib/area-pages.mjs';
 import {priceOption} from './scripts/import-db.mjs';
 import {displayNames} from './lib/display-name.mjs';
+import {stripCaptureDates} from './lib/no-dates.mjs';
 import {BEST_OF,rankBestOf,bestOfScore} from './lib/best-of.mjs';
 import { readFile, writeFile, mkdir, rm } from "node:fs/promises";
 import path from "node:path";
@@ -25,7 +26,7 @@ import {loadGuides, parseGuide, renderEditorial, renderGuideTeaser, guideCards, 
 import {encodeCatalogue} from './assets/catalogue-data.mjs';
 import {priceView, servicePrice, serviceGuide} from "./lib/profile-copy.mjs";
 import {renderClaimPage} from "./lib/claim-page.mjs";
-import {guideEvidence, sourcedRates, rateLabel, rateCell, displayUnit, isFromPrice, minimumCompanies, money} from "./lib/sourced-rates.mjs";
+import {guideEvidence, sourcedRates, rateLabel, rateCell, displayUnit, isFromPrice, minimumCompanies, money, profileRowProblem} from "./lib/sourced-rates.mjs";
 import { renderCard, renderCompactCard, splitDirectory } from "./assets/catalogue-card.mjs";
 
 const root = path.dirname(fileURLToPath(import.meta.url));
@@ -533,7 +534,7 @@ function renderCrumbs(items) {
 function renderFooter() {
   const jobs = trades.map((trade) => `<li><a href="/roster/${trade.slug}/">${esc(trade.name)}</a></li>`).join("");
   return `<footer class="foot"><div class="wrap foot-inner">
-<div class="foot-brand"><a class="brand" href="/roster/">${brandMark()}<span class="wordmark">Roster</span></a><p>Find the right help for your home. Compare services, prices and reviews from companies across Singapore.</p><p class="foot-note">Business details and reviews link to their original sources. Last checked ${checked}.</p></div>
+<div class="foot-brand"><a class="brand" href="/roster/">${brandMark()}<span class="wordmark">Roster</span></a><p>Find the right help for your home. Compare services, prices and reviews from companies across Singapore.</p><p class="foot-note">Business details and reviews link to their original sources.</p></div>
 <div class="foot-col"><h2>Jobs</h2><ul>${jobs}</ul></div>
 <div class="foot-col"><h2>About</h2><ul><li><a href="/roster/how-it-works/">How the list is made</a></li><li><a href="/roster/blog/">Home advice blog</a></li><li><a href="/roster/what-service-do-i-need/">What service do I need?</a></li><li><a href="/roster/claim-listing/">Claim your listing</a></li><li><a href="/roster/aircon-servicing/chemical-wash/">Aircon chemical wash</a></li><li><a href="/roster/aircon-servicing/gas-top-up/">Aircon gas top-up</a></li></ul></div>
 <div class="footer-guides" aria-label="Home-service guides">${trades.map(t=>`<details><summary>${esc(t.name)} guides</summary><ul>${editorialGuides.filter(g=>g.trade===t.id).map(g=>`<li><a href="${g.path}">${esc(g.label)}</a></li>`).join('')}</ul></details>`).join('')}</div>
@@ -596,7 +597,19 @@ function priceSummary(company, service) {
   const example = company.imported ? sourcePrices.map(priceOption).map(priceView).find(p=>!p.indicative && /^(?:from\s+)?S?\$\s*\d/i.test(p.price) && p.price.length<=40 && p.label) : null;
   const cleanDisplay = example ? {...display,price:example.price,detail:`${example.label}. See service details for inclusions.`,examplePrice:true} : company.imported ? {...display, detail:display.published ? "Explore service prices and confirm your final quote with the team." : "Contact the team for a quote tailored to your job."} : display;
   if(service&&company.imported&&example)return {...cleanDisplay,published:true};
-  return service ? { ...cleanDisplay, examplePrice:false, ...(display.services?.[service] || { price: "Ask for a quote", detail: "Ask the company for a quote for this service.", published: false }) } : cleanDisplay;
+  const result = service ? { ...cleanDisplay, examplePrice:false, ...(display.services?.[service] || { price: "Ask for a quote", detail: "Ask the company for a quote for this service.", published: false }) } : cleanDisplay;
+  // Cards show one example service price. "See published prices" is not a price, so use a real
+  // sourced rate from the release when one passes the guards; otherwise the card uses the no-price layout.
+  if(isAmount(result.price))return result;
+  const line=exampleLine(company,service);
+  return line ? {...result,price:rateCell(line),detail:rateLabel(line,null,company.sourceName||company.name),examplePrice:true,published:true} : result;
+}
+const isAmount = price => /^(?:from\s+)?S?\$\s*\d/i.test(String(price||''));
+// First usable published rate, preferring the trade's everyday job (general servicing for aircon).
+function exampleLine(company, service) {
+  const lines=(company.enrichment?.priceLines||[]).filter(p=>(!service||p.job===service)&&Number.isFinite(p.amount_sgd)&&p.amount_sgd>0&&!p.promo&&!p.indicative&&/^https?:\/\//.test(p.sourceUrl||'')
+    &&!/as printed/.test(rateCell(p))&&!profileRowProblem({label:rateLabel(p,null,company.name),price:rateCell(p),excerpt:p.excerpt})&&!(company.category==='aircon'&&p.job==='general-service'&&p.units_in_price>1));
+  return (company.category==='aircon'&&lines.find(p=>p.job==='general-service'))||lines[0]||null;
 }
 
 function indexName(spec) { return spec.service || spec.id; }
@@ -697,7 +710,8 @@ ${bodyClass === "directory-page" ? `<script type="module" src="/roster/assets/ca
   if (/mailto:|formspree|fetch\(/i.test(html)) {
     throw new Error("Outbound form hook in " + canonicalPath);
   }
-  return html;
+  // No visible capture dates (lib/no-dates.mjs); dates stay in the data and the JSON-LD.
+  return stripCaptureDates(html);
 }
 
 /* ---------- JSON-LD ---------- */
@@ -833,8 +847,8 @@ function renderCollection(spec, companies, crumbs) {
     `<div class="directory-layout${previewFeatures?'':' directory-browse-only'}" id="company-results" data-catalogue data-index="${indexPath(spec)}"><aside class="filters" aria-label="Filter companies"><div class="filters-head"><h2>${icon("sliders")}Refine your list</h2><button type="button" class="filter-toggle" data-toggle-filters aria-controls="company-filters" aria-expanded="true">${icon("sliders")}Filters <span data-active-filters></span>${icon("chevron")}</button><button type="button" data-reset>Reset</button></div><div class="filter-content" id="company-filters"><label class="filter-search">Search this list<input type="search" placeholder="Company or keyword" data-filter-search></label>${renderAreaFilter(esc)}<label class="filter-select">Average rating<select data-rating aria-label="Minimum average rating"><option value="">Any rating</option><option value="4">4.0 and above</option><option value="4.5">4.5 and above</option><option value="4.8">4.8 and above</option></select></label>${tradeId === "all" ? `<label class="filter-select">Service<select data-category-filter><option value="">All services</option>${trades.map(t=>`<option value="${t.id}">${esc(t.name)}</option>`).join("")}</select></label>` : ""}<fieldset><legend>What matters to you?</legend>${filter("price", "Published pricing", companies.filter(c => priceSummary(c, spec.service).published).length)}${filter("reviews", "Dated reviews", companies.filter(c => c.reviews.length).length)}${filter("whatsapp", "WhatsApp contact", companies.filter(c => c.whatsapp?.value).length)}${previewFeatures?filter("saved", "Saved companies", 0):""}</fieldset><details class="filter-categories"><summary>Explore services${icon("chevron")}</summary>${trades.map(t => `<a href="/roster/${t.slug}/"${t.id === tradeId ? ' aria-current="page"' : ""}>${icon(tradeIcon[t.id])}${esc(t.name)}${icon("chevron")}</a>`).join("")}<div class="filter-foot">${icon("shield")}<p>A place on Roster is unpaid.<br>Always your choice.</p></div></details></div></aside><div class="directory-results">`,
     isAircon ? airconSubnav(canonicalPath) : "",
     shortlist(companies, spec.service),
-    `<details class="list-explainer"><summary>About this ${esc(categoryLabel.toLowerCase())} shortlist${icon("chevron")}</summary><p>${esc(spec.intro[0])}</p>${notes}<p><a href="/roster/how-it-works/">How the list is made</a>. Checked ${checked}.</p></details>`,
-    `</div><aside class="discovery-rail" aria-label="Directory information">${previewFeatures?`<details class="quote-rail-disclosure" open><summary>Get quotes for your job ${icon("sparkle")}</summary>${renderQuoteComposer({icon})}</details>`:''}<div class="rail-note">${icon("calendar")}<p>Facts last checked<br><strong>${esc(checked)}</strong><br>Each figure links to its source.</p></div></aside></div>`,
+    `<details class="list-explainer"><summary>About this ${esc(categoryLabel.toLowerCase())} shortlist${icon("chevron")}</summary><p>${esc(spec.intro[0])}</p>${notes}<p><a href="/roster/how-it-works/">How the list is made</a>.</p></details>`,
+    `</div><aside class="discovery-rail" aria-label="Directory information">${previewFeatures?`<details class="quote-rail-disclosure" open><summary>Get quotes for your job ${icon("sparkle")}</summary>${renderQuoteComposer({icon})}</details>`:''}<div class="rail-note">${icon("calendar")}<p>Each figure links to its source.</p></div></aside></div>`,
     previewFeatures && tradeId !== "all" ? `<div id="quote-request">${renderForm(spec.jobs, companies.filter(c => !c.imported), "ask")}</div>` : previewFeatures ? `<div id="quote-request" class="search-end"><h2>Start with the service you need</h2><p>Choose a service above to explore its shortlist and preview a quote request.</p></div>` : "",
     spec.service ? renderSourcedRates(spec.service) : "",
     tradeId !== "all" && !spec.service ? renderBestTeaser(tradeId) : "",
@@ -1112,7 +1126,7 @@ function renderGuidePrices() {
   const {samples,average}=buildHomeSnapshot(publishedCompanies,mapPins,presentation).prices.aircon;
   if(!average)return '';
   const oneUnit=airconMatrix(publishedCompanies,unitColumns)[0].cells[0];
-  return `<section class="guide-price-sample" aria-labelledby="sample-title"><p class="kicker">FROM THE ROSTER DIRECTORY</p><h2 id="sample-title">Published general-servicing rates</h2><strong class="guide-price-number">S$${average} <small>per unit</small></strong><p>Average advertised starting rate across ${samples.length} companies. One matching rate per company, rounded to the nearest dollar. Minimum bookings and other conditions apply. These are source snapshots, not current quotes.</p>${oneUnit?.shown?`<p data-average-vs-median>Why two figures: this S$${average} is the average of ${samples.length} rates that each company prints as a per-unit price for one unit. The 1-unit general servicing cell in the table below is a median of ${oneUnit.count} companies (${money(oneUnit.median)}) and also counts one-unit prices printed per job or with no unit, so it covers more companies${oneUnit.median>average?' and sits higher':oneUnit.median<average?' and sits lower':''}. A median is the middle rate, so a few very low or high prices move it less than an average.</p>`:''}<details><summary>See all ${samples.length} rates and sources</summary><div class="guide-table-scroll" tabindex="0" role="region" aria-label="Sourced aircon servicing prices"><table><caption>Advertised rates in SGD. Capture dates are shown per source.</caption><thead><tr><th scope="col">Company</th><th scope="col">Rate</th><th scope="col">Source checked</th></tr></thead><tbody>${samples.map(s=>`<tr><th scope="row"><a href="/roster/company/${s.slug}/#pricing">${esc(s.name)}</a></th><td>${esc(s.rate)}</td><td><a href="${esc(s.sourceUrl)}">${esc(s.checkedAt.slice(0,10))} · Conditions</a></td></tr>`).join('')}</tbody></table></div></details></section>`;
+  return `<section class="guide-price-sample" aria-labelledby="sample-title"><p class="kicker">FROM THE ROSTER DIRECTORY</p><h2 id="sample-title">Published general-servicing rates</h2><strong class="guide-price-number">S$${average} <small>per unit</small></strong><p>Average advertised starting rate across ${samples.length} companies. One matching rate per company, rounded to the nearest dollar. Minimum bookings and other conditions apply. These are source snapshots, not current quotes.</p>${oneUnit?.shown?`<p data-average-vs-median>Why two figures: this S$${average} is the average of ${samples.length} rates that each company prints as a per-unit price for one unit. The 1-unit general servicing cell in the table below is a median of ${oneUnit.count} companies (${money(oneUnit.median)}) and also counts one-unit prices printed per job or with no unit, so it covers more companies${oneUnit.median>average?' and sits higher':oneUnit.median<average?' and sits lower':''}. A median is the middle rate, so a few very low or high prices move it less than an average.</p>`:''}<details><summary>See all ${samples.length} rates and sources</summary><div class="guide-table-scroll" tabindex="0" role="region" aria-label="Sourced aircon servicing prices"><table><caption>Advertised rates in SGD, each linked to its source.</caption><thead><tr><th scope="col">Company</th><th scope="col">Rate</th><th scope="col">Source</th></tr></thead><tbody>${samples.map(s=>`<tr><th scope="row"><a href="/roster/company/${s.slug}/#pricing">${esc(s.name)}</a></th><td>${esc(s.rate)}</td><td><a href="${esc(s.sourceUrl)}">Conditions</a></td></tr>`).join('')}</tbody></table></div></details></section>`;
 }
 
 /* ---------- Gap features: aircon price matrix, quick picks, licence lookups, symptom finder ---------- */
@@ -1207,7 +1221,6 @@ function renderSymptomFinder() {
 const bestWords={aircon:'aircon servicing',plumbing:'plumbing',electrician:'electrical',handyman:'handyman',cleaning:'home cleaning'};
 const bestPath=tradeId=>`/roster/${tradeById(tradeId).slug}/best/`;
 const bestLabel=tradeId=>`Best-rated ${bestWords[tradeId]} companies`;
-const shortDate=iso=>new Date(iso.slice(0,10)+'T00:00:00Z').toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric',timeZone:'UTC'});
 function renderBestTeaser(tradeId){
   return `<section class="directory-guide-card best-of-teaser" aria-labelledby="best-of-teaser-${tradeId}" data-best-of-link><div><p class="kicker">RANKED ON GOOGLE RATINGS</p><h2 id="best-of-teaser-${tradeId}">Highest Google ratings, weighted by review count.</h2><p>A ranked list of ${esc(bestWords[tradeId])} companies on Roster with at least ${BEST_OF.minReviews} Google reviews. Small review counts are pulled toward ${BEST_OF.m}, and no company pays to appear.</p></div><a class="btn btn-solid" href="${bestPath(tradeId)}">${esc(bestLabel(tradeId))} <span aria-hidden="true">→</span></a></section>`;
 }
@@ -1216,7 +1229,8 @@ function renderBestOf(tradeId){
   const r=rankBestOf(publishedCompanies,tradeId);
   // Build check: a ranking needs at least `top` qualifiers; fewer means the data changed and needs review.
   if(r.qualifiers.length<BEST_OF.top)throw new Error(`Best-rated ${tradeId}: only ${r.qualifiers.length} companies have ${BEST_OF.minReviews}+ Google reviews`);
-  const n=r.ranked.length,span=dateSpan(r.firstChecked,r.lastChecked);
+  // Check dates stay in the data (googleRating.checkedAt); pages show no capture dates.
+  const n=r.ranked.length;
   const title=`Best ${words.replace(/\b\w/g,m=>m.toUpperCase())} Companies in Singapore | Roster`;
   const h1=`Best ${words} companies in Singapore`;
   const description=concise(`${n} ${words} companies in Singapore ranked on their Google rating and review count, with at least ${BEST_OF.minReviews} reviews each. No paid placement.`);
@@ -1229,12 +1243,12 @@ function renderBestOf(tradeId){
     ['Why is a 5.0 rating sometimes ranked below a 4.9?',`A 5.0 from a few dozen reviews says less than a 4.9 from thousands. With these settings, 5.0 from 20 reviews scores ${bestOfScore(5,20).toFixed(2)} and 4.8 from 900 reviews scores ${bestOfScore(4.8,900).toFixed(2)}, so the larger record ranks higher.`],
     ['Can a company pay to be on this list?','No. Roster listings are unpaid, nobody can pay for a position, and Roster does not move companies up or down by hand.'],
     ['Which ratings are not used?',`Only the Google Maps rating counts. Ratings on Trustpilot, Carousell, Yelp, Facebook or a company's own website are not used, and companies with fewer than ${BEST_OF.minReviews} Google reviews or no dated Google rating are left out.`],
-    ['Is this a recommendation?',`No. It is a ranking of public Google ratings checked ${span}, not a recommendation or a quote. Ratings change, so check the current rating and ask for a written quote before you book.`]
+    ['Is this a recommendation?',`No. It is a ranking of public Google Maps ratings as Roster recorded them, not a recommendation or a quote. Ratings change, so check the current rating and ask for a written quote before you book.`]
   ];
-  const row=x=>{const g=x.rating;return `<li data-best-of-rank="${x.rank}" data-slug="${x.company.slug}"><span class="best-of-rank">${x.tied?'=':''}${x.rank}</span><div><a href="/roster/company/${x.company.slug}/">${esc(x.company.name)}</a><span>${g.value.toFixed(1)} on Google Maps · ${g.count.toLocaleString('en-SG')} ${g.count===1?'review':'reviews'} · checked ${shortDate(g.checkedAt)} · <a href="${esc(g.sourceUrl)}">Google Maps source</a></span></div></li>`;};
+  const row=x=>{const g=x.rating;return `<li data-best-of-rank="${x.rank}" data-slug="${x.company.slug}"><span class="best-of-rank">${x.tied?'=':''}${x.rank}</span><div><a href="/roster/company/${x.company.slug}/">${esc(x.company.name)}</a><span>${g.value.toFixed(1)} on Google Maps · ${g.count.toLocaleString('en-SG')} ${g.count===1?'review':'reviews'} · <a href="${esc(g.sourceUrl)}">Google Maps source</a></span></div></li>`;};
   const body=renderCrumbs(crumbs)+`<header class="guide-hero guide-hero-method"><div><p class="kicker">RANKED ON GOOGLE RATINGS</p><h1>${esc(h1)}</h1><p class="guide-dek">The ${n} ${esc(words)} companies on Roster with the highest Google ratings, weighted by how many reviews each has. ${r.qualifiers.length} of ${r.candidates} companies qualify with at least ${BEST_OF.minReviews} Google reviews.</p><div class="guide-hero-actions"><a class="btn btn-solid" href="/roster/${trade.slug}/">Compare all ${esc(trade.name.toLowerCase())} companies ${icon('arrow')}</a><a href="#method">How the ranking works</a></div></div></header>
 <section class="editorial best-of-page" data-best-of="${tradeId}" data-qualifiers="${r.qualifiers.length}"><div class="guide-copy">
-<aside class="guide-editor-note best-of-method" id="method"><strong>How this list is made</strong><ul><li>Who qualifies: companies on Roster whose main trade is ${esc(words)}, with a Google Maps rating recorded with its review count, link and check date. ${r.qualifiers.length} of ${r.candidates} qualify.</li><li>Minimum: ${BEST_OF.minReviews} Google reviews.</li><li>Score: we pull small review counts toward ${BEST_OF.m} so a few perfect reviews don't outrank hundreds of strong ones. In full: ${esc(formula)}, with m = ${BEST_OF.m} and K = ${BEST_OF.K}.</li><li>Google only. Trustpilot, Carousell, Yelp and company-website ratings are not used or averaged in.</li><li>Ratings checked ${esc(span)}.</li><li>No paid placement and no manual changes. Tied scores share a rank; a tie that runs past position ${BEST_OF.top} is left out whole.${esc(cut)}</li><li>Not a recommendation or a quote.</li></ul>${excluded?`<p>${esc(excluded)}</p>`:''}</aside>
+<aside class="guide-editor-note best-of-method" id="method"><strong>How this list is made</strong><ul><li>Who qualifies: companies on Roster whose main trade is ${esc(words)}, with a Google Maps rating recorded with its review count, link and check date. ${r.qualifiers.length} of ${r.candidates} qualify.</li><li>Minimum: ${BEST_OF.minReviews} Google reviews.</li><li>Score: we pull small review counts toward ${BEST_OF.m} so a few perfect reviews don't outrank hundreds of strong ones. In full: ${esc(formula)}, with m = ${BEST_OF.m} and K = ${BEST_OF.K}.</li><li>Google only. Trustpilot, Carousell, Yelp and company-website ratings are not used or averaged in.</li><li>Ratings are from Google Maps, as Roster recorded them; the live figures may have changed since.</li><li>No paid placement and no manual changes. Tied scores share a rank; a tie that runs past position ${BEST_OF.top} is left out whole.${esc(cut)}</li><li>Not a recommendation or a quote.</li></ul>${excluded?`<p>${esc(excluded)}</p>`:''}</aside>
 <h2 id="ranking">The top ${n}</h2><ol class="best-of-list">${r.ranked.map(row).join('')}</ol>
 <p>Each company page shows its services, published prices and contact details with their sources. <a href="/roster/how-it-works/">How Roster works</a>.</p>
 </div></section>`+renderFaq(faqs,'Questions about this ranking');
@@ -1267,7 +1281,7 @@ function renderBlogIndex(posts) {
   const groupTitle={aircon:'Aircon servicing and repairs',plumbing:'Plumbing problems and fixes',electrician:'Electrical work and safety',handyman:'Handyman jobs, quotes and home upkeep',cleaning:'Cleaning your home'};
   // Grouped by trade in hub order; newest first, then by title, within each group.
   const groups=trades.map(t=>[t.id,posts.filter(p=>p.trade===t.id).sort((a,b)=>b.updated.localeCompare(a.updated)||a.label.localeCompare(b.label))]).filter(([,list])=>list.length);
-  const body=renderCrumbs(crumbs)+`<header class="guide-hero guide-hero-method"><div><p class="kicker">THE ROSTER BLOG</p><h1>Home advice, with sources.</h1><p class="guide-dek">Short reads for common jobs around the home. Official guidance is linked, and any price comes from a company's own published rate.</p></div></header><nav class="blog-index-jump" aria-label="Articles by trade">${groups.map(([t,list])=>`<a href="#blog-${t}">${label[t]} <small>${list.length}</small></a>`).join('')}</nav>${groups.map(([t,list])=>`<section class="guide-discovery" data-blog-index data-blog-trade="${t}" aria-labelledby="blog-${t}"><p class="kicker">${label[t].toUpperCase()}</p><h2 id="blog-${t}">${esc(groupTitle[t])}</h2><div class="guide-card-grid">${list.map(p=>`<a class="guide-card" href="${p.path}"><span>Updated ${longDate(p.updated)} · ${Math.ceil(p.words/220)} min read</span><h3>${esc(p.label)}</h3><p>${esc(p.description)}</p><b>Read the article <span aria-hidden="true">↗</span></b></a>`).join('')}</div></section>`).join('')}`;
+  const body=renderCrumbs(crumbs)+`<header class="guide-hero guide-hero-method"><div><p class="kicker">THE ROSTER BLOG</p><h1>Home advice, with sources.</h1><p class="guide-dek">Short reads for common jobs around the home. Official guidance is linked, and any price comes from a company's own published rate.</p></div></header><nav class="blog-index-jump" aria-label="Articles by trade">${groups.map(([t,list])=>`<a href="#blog-${t}">${label[t]} <small>${list.length}</small></a>`).join('')}</nav>${groups.map(([t,list])=>`<section class="guide-discovery" data-blog-index data-blog-trade="${t}" aria-labelledby="blog-${t}"><p class="kicker">${label[t].toUpperCase()}</p><h2 id="blog-${t}">${esc(groupTitle[t])}</h2><div class="guide-card-grid">${list.map(p=>`<a class="guide-card" href="${p.path}"><span>Updated <time datetime="${p.updated}">${longDate(p.updated)}</time> · ${Math.ceil(p.words/220)} min read</span><h3>${esc(p.label)}</h3><p>${esc(p.description)}</p><b>Read the article <span aria-hidden="true">↗</span></b></a>`).join('')}</div></section>`).join('')}`;
   const jsonLd=[webPage(title,'/roster/blog/',description),crumbsLd(crumbs),{'@type':'ItemList',name:'Roster blog articles',itemListElement:posts.map((p,i)=>({'@type':'ListItem',position:i+1,name:p.label,url:abs(p.path)}))}];
   forbidSchema(jsonLd);
   return pageShell({title,description,canonicalPath:'/roster/blog/',current:'',jsonLd,body,bodyClass:'guide-page',shareImage:abs(heroPhoto('plumbing').sizes[1200].src)});
