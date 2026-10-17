@@ -94,6 +94,15 @@
       }
     ]
   },
+  "bs-integrated-247plumbing": {
+    "label": "BS Integrated Engineering / Reliable 24 Hrs Plumbing and Electrical (247plumbingandelectrical.com)",
+    "members": [
+      {
+        "slug": "bs-integrated-engineering",
+        "name": "BS INTEGRATED ENGINEERING PTE. LTD."
+      }
+    ]
+  },
   "sg-city-21-woodlands-cl": {
     "label": "SG City Air-Con and City Cooling: shared phone +65 6362 2720 and 21 Woodlands Close #05-45",
     "members": [
@@ -138,6 +147,15 @@
       {
         "slug": "socool",
         "name": "SoCool"
+      }
+    ]
+  },
+  "sg-9047-3688-united-competent": {
+    "label": "United Electrician Singapore / Competent Electrician (shared phone +65 9047 3688)",
+    "members": [
+      {
+        "slug": "united-electricians",
+        "name": "United Electrician Singapore"
       }
     ]
   }
