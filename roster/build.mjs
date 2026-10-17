@@ -11,6 +11,8 @@ import {loadBlog,blogAuthor} from './lib/blog.mjs';
 import {airconMatrix,unitColumns,sizeColumns} from './lib/aircon-matrix.mjs';
 import {selectAreaPages,townCoverage,townRegion,nearbyTowns,serviceCounts,serviceLabel} from './lib/area-pages.mjs';
 import {priceOption} from './scripts/import-db.mjs';
+import {displayNames} from './lib/display-name.mjs';
+import {BEST_OF,rankBestOf,bestOfScore} from './lib/best-of.mjs';
 import { readFile, writeFile, mkdir, rm } from "node:fs/promises";
 import path from "node:path";
 import { createHash } from "node:crypto";
@@ -835,6 +837,7 @@ function renderCollection(spec, companies, crumbs) {
     `</div><aside class="discovery-rail" aria-label="Directory information">${previewFeatures?`<details class="quote-rail-disclosure" open><summary>Get quotes for your job ${icon("sparkle")}</summary>${renderQuoteComposer({icon})}</details>`:''}<div class="rail-note">${icon("calendar")}<p>Facts last checked<br><strong>${esc(checked)}</strong><br>Each figure links to its source.</p></div></aside></div>`,
     previewFeatures && tradeId !== "all" ? `<div id="quote-request">${renderForm(spec.jobs, companies.filter(c => !c.imported), "ask")}</div>` : previewFeatures ? `<div id="quote-request" class="search-end"><h2>Start with the service you need</h2><p>Choose a service above to explore its shortlist and preview a quote request.</p></div>` : "",
     spec.service ? renderSourcedRates(spec.service) : "",
+    tradeId !== "all" && !spec.service ? renderBestTeaser(tradeId) : "",
     tradeId !== "all" && !spec.service ? renderQuickPicks(spec, companies) : "",
     tradeId !== "all" && !spec.service ? renderLicenceLookup(tradeId) : "",
     tradeId !== "all" && !spec.service ? renderHubBlog(spec, tradeId) : "",
@@ -990,7 +993,7 @@ function renderGuidePage(guide) {
   const trade=tradeById(guide.trade);
   const crumbs=[{href:`/roster/${trade.slug}/`,label:trade.name},...(hub.id!==guide.id?[{href:hub.path,label:hub.label}]:[]),{href:guide.path,label:guide.directoryPath?'Guide':guide.label}];
   const image=abs(heroPhoto(guide.trade).sizes[1200].src);
-  const body=renderCrumbs(crumbs)+`<header class="guide-hero"><div><p class="kicker">THE ROSTER HOME GUIDE</p><h1>${esc(guide.h1)}</h1><p class="guide-dek">${esc(guide.description)}</p><div class="guide-hero-actions"><a class="btn btn-solid" href="/roster/${trade.slug}/">Compare ${esc(trade.name.toLowerCase())} companies ${icon('arrow')}</a><a href="#guide">Read the guide</a></div></div><figure><img src="${heroPhoto(guide.trade).sizes[640].src}" width="600" height="400" alt="" fetchpriority="high"><figcaption><a href="${esc(heroPhoto(guide.trade).url)}">${esc(photoCredit(guide.trade))}</a></figcaption></figure></header>`+renderEditorial(guide,editorialGuides,{extra:guide.id==='AC-03'?renderGuidePrices()+renderAirconMatrix():guide.id==='AC-01'?renderAreasWeServe(tradeById('aircon')):renderSourcedRates(guide.id)});
+  const body=renderCrumbs(crumbs)+`<header class="guide-hero"><div><p class="kicker">THE ROSTER HOME GUIDE</p><h1>${esc(guide.h1)}</h1><p class="guide-dek">${esc(guide.description)}</p><div class="guide-hero-actions"><a class="btn btn-solid" href="/roster/${trade.slug}/">Compare ${esc(trade.name.toLowerCase())} companies ${icon('arrow')}</a><a href="#guide">Read the guide</a></div></div><figure><img src="${heroPhoto(guide.trade).sizes[640].src}" width="600" height="400" alt="" fetchpriority="high"><figcaption><a href="${esc(heroPhoto(guide.trade).url)}">${esc(photoCredit(guide.trade))}</a></figcaption></figure></header>`+renderEditorial(guide,editorialGuides,{extra:(guide.hub?renderBestTeaser(guide.trade):'')+(guide.id==='AC-03'?renderGuidePrices()+renderAirconMatrix():guide.id==='AC-01'?renderAreasWeServe(tradeById('aircon')):renderSourcedRates(guide.id))});
   const jsonLd=[webPage(guide.title,guide.path,guide.description),crumbsLd(crumbs),...editorialSchema(guide,origin),...(guide.hub?[{"@type":"ItemList",name:`${guide.label}: related guides`,itemListElement:editorialGuides.filter(g=>g.trade===guide.trade&&g.id!==guide.id).map((g,i)=>({"@type":"ListItem",position:i+1,name:g.label,url:abs(g.path)}))}]:[])];
   forbidSchema(jsonLd);
   return pageShell({title:guide.title,description:guide.description,canonicalPath:guide.path,current:`/roster/${trade.slug}/`,jsonLd,body,bodyClass:'guide-page',shareImage:image});
@@ -1067,18 +1070,14 @@ function renderAreaPage(page) {
     `${priced?`${priced} ${priced===1?'publishes prices on its site':'publish prices on their sites'}`:'None publishes prices on its site'}, ${rated?countText(rated,'has','have'):'none has'} a cited rating${emergency?`, and ${countText(emergency,'describes','describe')} emergency or after-hours work`:''}.`,
     lead?`For ${lead.spec.noun} work, the lowest published rates from ${lead.count} of these companies run from ${money(lead.low.line.amount_sgd)} ${lead.unit} at ${lead.low.company.name} to ${money(lead.high.line.amount_sgd)} at ${lead.high.company.name}, as each company advertises it.`:rates.length?`Published ${rates.map(r=>r.spec.noun).join(' and ')} rates from these companies are listed below; they use different units, so no single range is shown.`:`Fewer than ${minimumCompanies} of these companies publish a comparable rate for the same job, so no price range is shown for ${town}.`
   ].filter(Boolean).join(' ');
-  const coverage=c=>(c.enrichment.serviceLocations||[]).find(l=>l.name===town);
-  const item=c=>{const e=coverage(c),r=ratingSummary(c);return `<li><div><a href="/roster/company/${c.slug}/">${esc(c.name)}</a><span>${r?`${r.value.toFixed(1)} / 5 from ${r.count?r.count.toLocaleString('en-SG')+(r.count===1?' review':' reviews'):'cited sources'}`:'No ratings found yet'}${presentation[c.slug]?.published?' · Publishes prices':''}</span></div>${e?`<a href="${esc(e.sourceUrl)}">Coverage stated on ${esc(new URL(e.sourceUrl).hostname.replace(/^www\./,''))} · ${esc(e.capturedAt)}</a>`:''}</li>`;};
+  // Coverage evidence (source URL, capture date, excerpt) stays in the data and on each company page.
+  const item=c=>{const r=ratingSummary(c);return `<li><div><a href="/roster/company/${c.slug}/">${esc(c.name)}</a><span>${r?`${r.value.toFixed(1)} / 5 from ${r.count?r.count.toLocaleString('en-SG')+(r.count===1?' review':' reviews'):'cited sources'}`:'No ratings found yet'}${presentation[c.slug]?.published?' · Publishes prices':''}</span></div></li>`;};
   const rateTables=rates.map(r=>renderSourcedRates(r.key,local,{attr:'data-area-rates',scope:` from companies serving ${town}`})).join('');
   const nearby=nearbyTowns(town).filter(t=>planningAreas.some(a=>a.name===t));
   const nearbyLinks=nearby.map(t=>`<a href="${areaHref(trade,t)}">${esc(t)}</a>`).join('');
-  // Data-driven copy so area pages differ by more than the town name.
-  const names=c=>new Set((c.enrichment.serviceLocations||[]).map(l=>l.name));
-  const overlap=nearby.map(t=>[t,local.filter(c=>names(c).has(t)).length]).filter(([,n])=>n>0).sort((a,b)=>b[1]-a[1]||a[0].localeCompare(b[0])).slice(0,2);
-  const dates=local.map(c=>coverage(c)?.capturedAt).filter(Boolean).sort();
   const unstated=publishedCompanies.filter(c=>c.category===tradeId&&!(c.enrichment.serviceLocations||[]).length).length;
   const withPages=nearby.filter(t=>areaPagePath(tradeId,t));
-  const listNote=`${overlap.length?`${listText(overlap.map(([t,n],i)=>i?`${n===1?'one':n} ${n===1?'names':'name'} ${t}`:`Of the companies below, ${n===1?'one':n} also ${n===1?'names':'name'} ${t}`))}. `:''}${dates.length?`Coverage was captured ${dateSpan(dates[0],dates.at(-1))}, so confirm your postal code when you call. `:''}Listed alphabetically.`;
+  const listNote=`${local.length===1?'This company says on its own website that it serves':'These companies say on their own websites that they serve'} ${town}. Confirm your address when you call. Listed alphabetically.`;
   const nearbyNote=withPages.length===nearby.length?`All ${nearby.length} have their own ${words.noun} page.`:withPages.length?`${listText(withPages)} ${withPages.length===1?'has its':'have their'} own ${words.noun} page; the others open the area filter.`:`None has its own ${words.noun} page yet, so each opens the area filter.`;
   const faqs=[
     [`How many ${words.noun} companies serve ${town}?`,`${local.length===1?`1 company names ${town} on its own website and is`:`${local.length} companies name ${town} on their own websites and are`} listed on this page. ${countText(region.length,'more company states','more companies state')} the ${regionName} region, and ${islandwide.length===1?'1 says it covers':`${islandwide.length} say they cover`} all of Singapore without naming ${town}.`],
@@ -1189,6 +1188,48 @@ function renderSymptomFinder() {
   return pageShell({title,description,canonicalPath,current:'',jsonLd,body,bodyClass:'guide-page'});
 }
 
+/* ---------- Best-rated pages (ranked on the Google rating only; rules in lib/best-of.mjs) ---------- */
+
+// "Best" appears only in these pages' titles, H1s and breadcrumbs, and in links to them.
+const bestWords={aircon:'aircon servicing',plumbing:'plumbing',electrician:'electrical',handyman:'handyman',cleaning:'home cleaning'};
+const bestPath=tradeId=>`/roster/${tradeById(tradeId).slug}/best/`;
+const bestLabel=tradeId=>`Best-rated ${bestWords[tradeId]} companies`;
+const shortDate=iso=>new Date(iso.slice(0,10)+'T00:00:00Z').toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric',timeZone:'UTC'});
+function renderBestTeaser(tradeId){
+  return `<section class="directory-guide-card best-of-teaser" aria-labelledby="best-of-teaser-${tradeId}" data-best-of-link><div><p class="kicker">RANKED ON GOOGLE RATINGS</p><h2 id="best-of-teaser-${tradeId}">Highest Google ratings, weighted by review count.</h2><p>A ranked list of ${esc(bestWords[tradeId])} companies on Roster with at least ${BEST_OF.minReviews} Google reviews. Small review counts are pulled toward ${BEST_OF.m}, and no company pays to appear.</p></div><a class="btn btn-solid" href="${bestPath(tradeId)}">${esc(bestLabel(tradeId))} <span aria-hidden="true">→</span></a></section>`;
+}
+function renderBestOf(tradeId){
+  const trade=tradeById(tradeId),words=bestWords[tradeId],canonicalPath=bestPath(tradeId);
+  const r=rankBestOf(publishedCompanies,tradeId);
+  // Build check: a ranking needs at least `top` qualifiers; fewer means the data changed and needs review.
+  if(r.qualifiers.length<BEST_OF.top)throw new Error(`Best-rated ${tradeId}: only ${r.qualifiers.length} companies have ${BEST_OF.minReviews}+ Google reviews`);
+  const n=r.ranked.length,span=dateSpan(r.firstChecked,r.lastChecked);
+  const title=`Best ${words.replace(/\b\w/g,m=>m.toUpperCase())} Companies in Singapore | Roster`;
+  const h1=`Best ${words} companies in Singapore`;
+  const description=concise(`${n} ${words} companies in Singapore ranked on their Google rating and review count, with at least ${BEST_OF.minReviews} reviews each. No paid placement.`);
+  const crumbs=[{href:`/roster/${trade.slug}/`,label:trade.name},{href:canonicalPath,label:`Best ${words} companies`}];
+  const formula=`score = (reviews × rating + ${BEST_OF.K} × ${BEST_OF.m}) ÷ (reviews + ${BEST_OF.K})`;
+  const excluded=r.excluded.map(e=>`${e.company.name} is left out because it is ${e.reason}.`).join(' ');
+  const cut=r.cut?` ${r.cut.length} companies tie at position ${n+1}; the tie runs past ${BEST_OF.top}, so the whole group is left out and this list shows ${n}.`:'';
+  const faqs=[
+    ['How is this list ranked?',`By Google Maps rating and review count only. Each company's score is (reviews × rating + ${BEST_OF.K} × ${BEST_OF.m}) ÷ (reviews + ${BEST_OF.K}), so small review counts are pulled toward ${BEST_OF.m}. A company needs at least ${BEST_OF.minReviews} Google reviews to qualify.`],
+    ['Why is a 5.0 rating sometimes ranked below a 4.9?',`A 5.0 from a few dozen reviews says less than a 4.9 from thousands. With these settings, 5.0 from 20 reviews scores ${bestOfScore(5,20).toFixed(2)} and 4.8 from 900 reviews scores ${bestOfScore(4.8,900).toFixed(2)}, so the larger record ranks higher.`],
+    ['Can a company pay to be on this list?','No. Roster listings are unpaid, nobody can pay for a position, and Roster does not move companies up or down by hand.'],
+    ['Which ratings are not used?',`Only the Google Maps rating counts. Ratings on Trustpilot, Carousell, Yelp, Facebook or a company's own website are not used, and companies with fewer than ${BEST_OF.minReviews} Google reviews or no dated Google rating are left out.`],
+    ['Is this a recommendation?',`No. It is a ranking of public Google ratings checked ${span}, not a recommendation or a quote. Ratings change, so check the current rating and ask for a written quote before you book.`]
+  ];
+  const row=x=>{const g=x.rating;return `<li data-best-of-rank="${x.rank}" data-slug="${x.company.slug}"><span class="best-of-rank">${x.tied?'=':''}${x.rank}</span><div><a href="/roster/company/${x.company.slug}/">${esc(x.company.name)}</a><span>${g.value.toFixed(1)} on Google Maps · ${g.count.toLocaleString('en-SG')} ${g.count===1?'review':'reviews'} · checked ${shortDate(g.checkedAt)} · <a href="${esc(g.sourceUrl)}">Google Maps source</a></span></div></li>`;};
+  const body=renderCrumbs(crumbs)+`<header class="guide-hero guide-hero-method"><div><p class="kicker">RANKED ON GOOGLE RATINGS</p><h1>${esc(h1)}</h1><p class="guide-dek">The ${n} ${esc(words)} companies on Roster with the highest Google ratings, weighted by how many reviews each has. ${r.qualifiers.length} of ${r.candidates} companies qualify with at least ${BEST_OF.minReviews} Google reviews.</p><div class="guide-hero-actions"><a class="btn btn-solid" href="/roster/${trade.slug}/">Compare all ${esc(trade.name.toLowerCase())} companies ${icon('arrow')}</a><a href="#method">How the ranking works</a></div></div></header>
+<section class="editorial best-of-page" data-best-of="${tradeId}" data-qualifiers="${r.qualifiers.length}"><div class="guide-copy">
+<aside class="guide-editor-note best-of-method" id="method"><strong>How this list is made</strong><ul><li>Who qualifies: companies on Roster whose main trade is ${esc(words)}, with a Google Maps rating recorded with its review count, link and check date. ${r.qualifiers.length} of ${r.candidates} qualify.</li><li>Minimum: ${BEST_OF.minReviews} Google reviews.</li><li>Score: we pull small review counts toward ${BEST_OF.m} so a few perfect reviews don't outrank hundreds of strong ones. In full: ${esc(formula)}, with m = ${BEST_OF.m} and K = ${BEST_OF.K}.</li><li>Google only. Trustpilot, Carousell, Yelp and company-website ratings are not used or averaged in.</li><li>Ratings checked ${esc(span)}.</li><li>No paid placement and no manual changes. Tied scores share a rank; a tie that runs past position ${BEST_OF.top} is left out whole.${esc(cut)}</li><li>Not a recommendation or a quote.</li></ul>${excluded?`<p>${esc(excluded)}</p>`:''}</aside>
+<h2 id="ranking">The top ${n}</h2><ol class="best-of-list">${r.ranked.map(row).join('')}</ol>
+<p>Each company page shows its services, published prices and contact details with their sources. <a href="/roster/how-it-works/">How Roster works</a>.</p>
+</div></section>`+renderFaq(faqs,'Questions about this ranking');
+  const jsonLd=[webPage(title,canonicalPath,description),crumbsLd(crumbs),listLd(h1,r.ranked.map(x=>x.company)),faqLd(faqs)];
+  forbidSchema(jsonLd);
+  return pageShell({title,description,canonicalPath,current:`/roster/${trade.slug}/`,jsonLd,body,bodyClass:'guide-page'});
+}
+
 /* ---------- Blog ---------- */
 
 const longDate = iso => new Date(iso+'T00:00:00Z').toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric',timeZone:'UTC'});
@@ -1232,6 +1273,8 @@ checked = raw.capturedLabel || checked;
 assertNoDashes(raw, "companies.json");
 assertNoDashes({ trades, intents, howFaqs }, "templates");
 validate(raw.companies);
+// Display names (lib/display-name.mjs) for every page; the source name stays as sourceName.
+{const names=displayNames(raw.companies);for(const c of raw.companies){c.sourceName=c.name;c.name=names.get(c.slug);}}
 
 const operatorGroups = JSON.parse(await readFile(path.join(root, "data", "operator-groups.json"), "utf8"));
 const renderProfile = createProfileRenderer({esc,icon,tradeById,profileContent,priceSummary,renderCrumbs,pageShell,webPage,crumbsLd,faqLd,profileBusinessGraph,forbidSchema,renderServiceRow,renderForm,operatorGroups,mapPins});
@@ -1294,6 +1337,7 @@ for (const guide of editorialGuides) written.push(await writePage(guide.slug,ren
 for (const page of areaPages) written.push(await writePage(page.slug,renderAreaPage(page)));
 written.push(await writePage('blog',renderBlogIndex(blogPosts)));
 written.push(await writePage('what-service-do-i-need',renderSymptomFinder()));
+for (const trade of trades) written.push(await writePage(`${trade.slug}/best`,renderBestOf(trade.id)));
 for (const post of blogPosts) written.push(await writePage(`blog/${post.slug}`,renderBlogPost(post)));
 for (const c of areaCollisions) console.log(`Area page skipped, slug in use: ${c.slug}`);
 
@@ -1337,7 +1381,7 @@ await writeFile(path.join(root,'data/build-manifest.json'),JSON.stringify(curren
 // The sitemap lists the launch set (home, method, hubs, guides, area pages, blog) at the preview
 // origin, as requested for review. Every page still carries noindex, nofollow, noarchive and
 // robots.txt still disallows /roster/; indexing waits for an approved production domain.
-const launchPages=[{path:"/roster/",kind:"home"},{path:"/roster/how-it-works/",kind:"method"},...trades.map(t=>({path:`/roster/${t.slug}/`,kind:"directory"})),...editorialGuides.map(g=>({id:g.id,path:g.path,words:g.words,kind:"guide"})),...areaPages.map(p=>({path:p.path,trade:p.trade,town:p.town,companies:p.count,kind:"area"})),{path:"/roster/what-service-do-i-need/",kind:"symptom-finder"},{path:"/roster/blog/",kind:"blog-index"},...blogPosts.map(b=>({path:b.path,words:b.words,kind:"blog"}))];
+const launchPages=[{path:"/roster/",kind:"home"},{path:"/roster/how-it-works/",kind:"method"},...trades.map(t=>({path:`/roster/${t.slug}/`,kind:"directory"})),...editorialGuides.map(g=>({id:g.id,path:g.path,words:g.words,kind:"guide"})),...areaPages.map(p=>({path:p.path,trade:p.trade,town:p.town,companies:p.count,kind:"area"})),{path:"/roster/what-service-do-i-need/",kind:"symptom-finder"},...trades.map(t=>({path:bestPath(t.id),trade:t.id,kind:"best-of"})),{path:"/roster/blog/",kind:"blog-index"},...blogPosts.map(b=>({path:b.path,words:b.words,kind:"blog"}))];
 await writeFile(path.join(root,'data/seo-launch-pages.json'),JSON.stringify({status:"preview-noindex",canonicalOrigin:origin,updated:"2026-10-12",pages:launchPages},null,2)+'\n');
 await writeFile(path.join(root,'sitemap.xml'),`<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${launchPages.map(p=>`<url><loc>${esc(abs(p.path))}</loc></url>`).join('\n')}\n</urlset>\n`);
 await writeFile(path.join(root,'robots.txt'),'# Beta preview. Every HTML page also carries noindex.\nUser-agent: *\nDisallow: /roster/\n');

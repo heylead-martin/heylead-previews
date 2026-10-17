@@ -62,3 +62,12 @@
 .blog-index-jump{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}.blog-index-jump a{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0 14px;border:1px solid var(--rule);border-radius:8px;background:#fff;font-size:14px;text-decoration:none;color:var(--ink)}.blog-index-jump small{color:var(--muted)}
 .hub-blog{margin:40px 0;padding-top:28px;border-top:1px solid var(--rule)}.hub-blog h2{font:500 30px/1.2 var(--serif);color:var(--green-ink);margin:8px 0 10px}.hub-blog ul{list-style:none;padding:0;margin:16px 0}.hub-blog>p a{display:inline-flex;align-items:center;min-height:44px;color:var(--green)}
 .guide-hero>div{min-width:0}.guide-hero-actions .btn{white-space:normal;max-width:100%;text-align:left}.crumbs a{min-width:24px;justify-content:center}
+/* Best-rated pages: ranked rows, no stars. */
+.best-of-list{list-style:none;padding:0!important;display:grid;gap:10px}
+.best-of-list li{display:flex;gap:14px;align-items:flex-start;padding:14px 16px!important;margin:0!important;border:1px solid var(--rule);border-radius:10px;background:#fff;font-size:15px!important}
+.best-of-list li>div{display:grid;gap:2px;min-width:0}
+.best-of-list li>div>a{display:inline-flex;align-items:center;min-height:24px;font-weight:600;overflow-wrap:anywhere}
+.best-of-list li span{font-size:13px;color:var(--muted)}
+.best-of-list li span a{display:inline-flex;align-items:center;min-height:24px}
+.best-of-list .best-of-rank{flex:0 0 auto;min-width:2.4em;font-size:18px;font-weight:700;color:var(--ink,#1d2b22);font-variant-numeric:tabular-nums}
+.best-of-method ul{margin:8px 0 0}

@@ -1067,6 +1067,31 @@
       "kind": "symptom-finder"
     },
     {
+      "path": "/roster/aircon-servicing/best/",
+      "trade": "aircon",
+      "kind": "best-of"
+    },
+    {
+      "path": "/roster/plumbing/best/",
+      "trade": "plumbing",
+      "kind": "best-of"
+    },
+    {
+      "path": "/roster/electrician/best/",
+      "trade": "electrician",
+      "kind": "best-of"
+    },
+    {
+      "path": "/roster/handyman/best/",
+      "trade": "handyman",
+      "kind": "best-of"
+    },
+    {
+      "path": "/roster/home-cleaning/best/",
+      "trade": "cleaning",
+      "kind": "best-of"
+    },
+    {
       "path": "/roster/blog/",
       "kind": "blog-index"
     },
