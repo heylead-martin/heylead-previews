@@ -1,8 +1,7 @@
 import {renderSearchHero} from './job-search.mjs';
 import {createHash} from 'node:crypto';
 import {ratingSummary} from './rating-summary.mjs';
-import {tidyPriceLabel} from './profile-copy.mjs';
-import {isFromPrice, rateCell, money} from './sourced-rates.mjs';
+import {isFromPrice, rateCell, rateLabel, money} from './sourced-rates.mjs';
 import {unitRowProblem} from './aircon-matrix.mjs';
 
 export const snapshotTrades = [
@@ -53,7 +52,7 @@ export function buildHomeSnapshot(companies, pins, presentation) {
       const candidates = (c.enrichment?.priceLines || []).filter(p => eligibleHomePrice(p, trade)).sort((a,b) => a.amount_sgd-b.amount_sgd);
       if (!candidates.length) return [];
       const p = candidates[0];
-      return [{slug:c.slug,name:c.name,amount:p.amount_sgd,service:tidyPriceLabel(p.service),sourceUrl:p.sourceUrl,checkedAt:p.capturedAt,
+      return [{slug:c.slug,name:c.name,amount:p.amount_sgd,service:rateLabel(p,null,c.sourceName||c.name) /* same slogan/page-title guard as the rate tables */,sourceUrl:p.sourceUrl,checkedAt:p.capturedAt,
         unit:p.unit,unitInferred:!!p.unitInferred,condition:p.price_text || p.excerpt || '',gst:p.gst || 'not stated',from:isFromPrice(p),rate:rateCell(p)}];
     });
     return [trade.id,{samples, average:samples.length >= 3 ? Math.round(samples.reduce((sum,s)=>sum+s.amount,0)/samples.length) : null}];
