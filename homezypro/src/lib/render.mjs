@@ -2,6 +2,7 @@
 // Each render function returns a page object {title, description, canonicalPath, jsonLd, body,
 // bodyClass, shareImage}; src/layouts/Base.astro renders the shell (SEO head, nav, footer).
 import {heroPhoto,photoCredit} from "./port/lib/hero-professions.mjs";
+import {applyContactSafety} from './contact-safety.mjs';
 import {previewFeatures} from "./port/assets/features.mjs";
 import {renderQuoteEvidence,logoOwnerNote} from "./port/assets/evidence-display.mjs";
 import {renderQuoteComposer} from "./port/lib/quote-flow.mjs";
@@ -49,7 +50,7 @@ const origin = SITE_URL;
 let checked = "9 Oct 2026 and 10 Oct 2026";
 // Content hashes keep cached assets in sync with each generated page.
 export const assetVersions = Object.fromEntries(await Promise.all(
-  ["editorial.css", "sort-control.css", "hero-rotation.css", "hero-rotation.js", "service-areas.css", "home.css", "home.js", "site.css", "directory.css", "experience.css", "directory.js", "experience.js", "expanded.css", "logo-fit.css", "catalogue.js", "brand.css", "review-preview.mjs"].map(async (name) => [
+  ["fonts.css", "editorial.css", "job-search.css", "sort-control.css", "hero-rotation.css", "hero-rotation.js", "service-areas.css", "home.css", "home.js", "site.css", "directory.css", "experience.css", "directory.js", "experience.js", "expanded.css", "logo-fit.css", "catalogue.js", "brand.css", "review-preview.mjs"].map(async (name) => [
     name,
     createHash("sha256").update(await readFile(path.join(publicDir, "assets", name))).digest("hex").slice(0, 12)
   ])
@@ -547,7 +548,7 @@ function renderFooter() {
 <div class="foot-col"><h2>Jobs</h2><ul>${jobs}</ul></div>
 <div class="foot-col"><h2>About</h2><ul><li><a href="/how-it-works/">How the list is made</a></li><li><a href="/blog/">Home advice blog</a></li><li><a href="/what-service-do-i-need/">What service do I need?</a></li><li><a href="/claim-listing/">Claim your listing</a></li><li><a href="/aircon-servicing/chemical-wash/">Aircon chemical wash</a></li><li><a href="/aircon-servicing/gas-top-up/">Aircon gas top-up</a></li></ul></div>
 <div class="footer-guides" aria-label="Home-service guides">${trades.map(t=>`<details><summary>${esc(t.name)} guides</summary><ul>${editorialGuides.filter(g=>g.trade===t.id).map(g=>`<li><a href="${g.path}">${esc(g.label)}</a></li>`).join('')}</ul></details>`).join('')}</div>
-<p class="footer-logo-ownership">${logoOwnerNote}</p><p class="foot-line">Singapore beta. Unpaid listings. No commission on your job.${previewFeatures?" Quote requests are a preview and do not send.":""}</p>
+<p class="footer-logo-ownership">${logoOwnerNote}</p><p class="foot-line">Singapore home-services directory. Unpaid listings. No commission on your job.${previewFeatures?" Quote requests are a preview and do not send.":""}</p>
 </div></footer>`;
 }
 
@@ -1039,7 +1040,7 @@ function renderAreaPage(page) {
   const {town:local,region,islandwide}=areaCompanies(tradeId,town);
   const regionName=townRegion(town);
   const hub=editorialGuides.find(g=>g.trade===tradeId&&g.hub);
-  const title=`${words.pro} Serving ${town}, Singapore | HomezyPro`;
+  let title=`${words.pro} Serving ${town}, Singapore | HomezyPro`;if(title.length>65)title=`${words.pro} Serving ${town} | HomezyPro`;
   const description=concise(`Compare ${local.length} ${words.noun} companies that state they serve ${town}, with coverage sources, published prices and direct contact details.`);
   const crumbs=[{href:`/${trade.slug}/`,label:trade.name},{href:canonicalPath,label:town}];
   const services=serviceCounts(local).filter(([,n])=>n>=2).slice(0,4);
@@ -1270,11 +1271,14 @@ const raw = await readData("companies.json");
 checked = raw.capturedLabel || checked;
 assertNoDashes(raw, "companies.json");
 assertNoDashes({ trades, intents, howFaqs }, "templates");
+for (const c of raw.companies) applyContactSafety(c, line => console.warn('[contact-safety] ' + line));
 validate(raw.companies);
 // Display names (lib/display-name.mjs) for every page; the source name stays as sourceName.
 {const names=displayNames(raw.companies);for(const c of raw.companies){c.sourceName=c.name;c.name=names.get(c.slug);}}
 
 const operatorGroups = await readData("operator-groups.json");
+// Related-brand links use the same display names as every other page (not register capitals).
+{const bySlug=new Map(raw.companies.map(c=>[c.slug,c.name]));for(const g of Object.values(operatorGroups))for(const m of g.members||[])if(bySlug.has(m.slug))m.name=bySlug.get(m.slug);}
 const renderProfileHtml = createProfileRenderer({esc,icon,tradeById,profileContent,priceSummary,renderCrumbs,pageShell,webPage,crumbsLd,faqLd,profileBusinessGraph,forbidSchema,renderServiceRow,renderForm,operatorGroups,mapPins});
 export const publishedCompanies = raw.companies.filter((company) => company.publish !== false);
 // Existing guide and intent pages own their slugs; a town page never replaces one.

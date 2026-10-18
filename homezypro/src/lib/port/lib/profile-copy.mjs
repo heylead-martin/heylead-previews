@@ -85,7 +85,7 @@ export const markSic = value => String(value).replace(/\b([b-df-hj-km-np-tv-z])\
 export function priceView(p) {
   const suffix = /\s*\|\s*((?:(?:from|starting at)\s+)?(?:S?\$|SGD)\s*\d[\d,.]*(?:\s*(?:-|to)\s*(?:S?\$|SGD)?\s*\d[\d,.]*)?(?:\s*(?:\+|\+\+|onwards|nett))?)\s*$/i;
   const match = String(p.price).match(suffix);
-  const price = (match ? match[1] : p.price).replace(/\bSGD\s*/gi, 'S$');
+  const price = (match ? match[1] : p.price).replace(/\bSGD\s*\$?\s*/gi, () => 'S$').replace(/S\$\s*\$/g, () => 'S$');
   const label = tidyPriceLabel(String(p.label || '').replace(suffix, ''));
   return {...p, price, label};
 }

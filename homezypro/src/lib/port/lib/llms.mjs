@@ -16,7 +16,7 @@ export function renderLlms({trades, guides, posts, bestPath, bestLabel, best, da
     ...hubs,
     '',
     '## Guides and tools',
-    line('Aircon servicing prices', '/aircon/servicing-price/', 'published rates by number of units and unit size, with sources.'),
+    line('Aircon servicing prices', '/aircon/servicing-price/', 'published rates by unit size (BTU), with sources.'),
     line('What service do I need?', '/what-service-do-i-need/', 'match a home problem to the service to ask for.'),
     line('Home advice blog', '/blog/', `${posts.length} articles with official sources.`),
     '',

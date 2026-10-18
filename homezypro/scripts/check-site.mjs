@@ -379,6 +379,27 @@ for (const r of retiredPaths) if (companiesMap.includes(`${SITE_URL}${r}<`)) fai
 const llmsTxt = await readFile(path.join(dist, 'llms.txt'), 'utf8');
 if (!llmsTxt.startsWith('# HomezyPro') || !llmsTxt.includes(`${SITE_URL}/plumbing/`)) fail('/llms.txt', 'brand or URLs');
 
+// ---- Live QA 18 Oct 2026 ----
+{
+  const {placeholderNumbersIn} = await import('../src/lib/contact-safety.mjs');
+  // P1-2: no placeholder phone/WhatsApp numbers anywhere in the built HTML (contact card, FAQ, JSON-LD) or the search index.
+  for (const f of files.filter(f => /\.(?:html|json|txt)$/.test(f))) {
+    const bad = placeholderNumbersIn(await readFile(f, 'utf8'));
+    if (bad.length) fail(rel(f), `placeholder phone number(s) ${[...new Set(bad)].join(', ')}`);
+  }
+  // P2-3: no doubled currency.
+  for (const f of htmlFiles) if ((await readFile(f, 'utf8')).includes('S$$')) fail(pagePath(f), '"S$$" in the page');
+  // P1-1: the home hero search is styled by job-search.css, which must be linked from the home page.
+  const homeHtml = await readFile(path.join(dist, 'index.html'), 'utf8');
+  if (homeHtml.includes('hero-search-card') && !/<link rel="stylesheet" href="\/assets\/job-search\.css\?v=/.test(homeHtml)) fail('/', 'hero search used but /assets/job-search.css not linked');
+  // P1-3: a registered (ACRA) address is never the card location.
+  const allIndex = await readFile(path.join(dist, 'data/index/all.json'), 'utf8');
+  for (const c of published.filter(c => c.address?.kind === 'registered' || c.address?.registeredAddress === true)) {
+    const town = (c.address.value.match(/\b(Woodlands|Gul|Rivervale|Pemimpin|Gambas)\b/) || [])[1];
+    if (town && new RegExp(`"${c.slug}"[^{}]*?"${town}"`).test(allIndex)) fail('/data/index/all.json', `${c.slug} shows its registered-address town ${town}`);
+  }
+}
+
 if (failures.length) {
   console.error(failures.slice(0, 60).join('\n'));
   console.error(`FAIL: ${failures.length} problems`);

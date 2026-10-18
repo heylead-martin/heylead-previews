@@ -200,7 +200,7 @@ export function importDatabase(db, seeds, registry={}, {withhold={}, reservedSlu
     company.primaryTrade=category;company.category=category;company.schemaType=types[category];
     company.alternatePhones=alternatePhones(row.phone,company.phone?.value);
     company.categories=[...new Set([category,...categories])];
-    company.area=district(company.address?.value||'');
+    company.area=(company.address?.kind==='registered'||company.address?.registeredAddress===true)?'Other Singapore locations':district(company.address?.value||'');
     company.googleRating=Number.isFinite(row.google_rating)&&row.google_rating>0&&row.google_rating<=5&&http(row.google_maps_url)&&row.google_read_at?{value:row.google_rating,count:Number.isInteger(row.google_review_count)&&row.google_review_count>0?row.google_review_count:null,sourceUrl:http(row.google_maps_url),checkedAt:row.google_read_at,sourceType:'google-maps-search'}:null;
     if(!original) {
       const services=serviceRows(row,category);

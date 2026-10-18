@@ -117542,7 +117542,7 @@
       },
       "website": {
         "value": "https://isoteamhomecare.com/",
-        "note": "Listed on ThreeBestRated. The site was not opened for this beta.",
+        "note": "Listed on ThreeBestRated. The site was not opened by HomezyPro.",
         "sourceUrl": "https://threebestrated.sg/painters/isohomecare-changi-206252323"
       },
       "address": {
@@ -133824,7 +133824,7 @@
         },
         {
           "label": "BizSafe",
-          "value": "The site says BizSafe Level 3. This beta did not open the BizSafe register.",
+          "value": "The site says BizSafe Level 3. HomezyPro did not check the BizSafe register.",
           "sourceUrl": "https://lioncityaircon.sg/aircon-chemical-wash-singapore/"
         }
       ],
@@ -193525,7 +193525,7 @@
       },
       "phone": {
         "value": "+65 6854 4956",
-        "note": "Phone, address, and hours from the Google Maps listing opened for this beta.",
+        "note": "Phone, address, and hours from the Google Maps listing opened by HomezyPro.",
         "sourceUrl": "https://maps.app.goo.gl/bDzizUGYoLk2SoRHA"
       },
       "website": {
@@ -193547,7 +193547,7 @@
       "facts": [
         {
           "label": "Hours on the Maps listing",
-          "value": "Saturday 8am to 10pm was on the Maps listing opened for this beta. The full week was not copied.",
+          "value": "Saturday 8am to 10pm was on the Maps listing opened by HomezyPro. The full week was not copied.",
           "sourceUrl": "https://maps.app.goo.gl/bDzizUGYoLk2SoRHA"
         }
       ],

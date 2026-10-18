@@ -21,7 +21,7 @@ export function cardRating(c, url) {
 const amountText=p=>/^(?:from\s+)?S?\$\s*\d/i.test(String(p||''));
 const firstLine=s=>String(s||'').replace(/\s*See service details for inclusions\.?/i,'').split(/(?<=\.)\s+/)[0].trim();
 // Shared by cards and the company-page price box: "S$" amounts, "From" and the unit kept, cents paired.
-export const shownPrice=(price,quote)=>amountText(price)?price.replace(/^(from\s+)?\$\s*/i,(m,f)=>`${f||''}S$`).replace(/(S?\$\d[\d,]*)\.(\d)(?!\d)/g,'$1.$20'):quote?'Quote on request':'Ask for a quote';
+export const shownPrice=(price,quote)=>amountText(price)?price.replace(/S\$\s*\$(?=\s*\d)/g,()=>'S$').replace(/^(from\s+)?\$\s*/i,(m,f)=>`${f||''}S$`).replace(/(S?\$\d[\d,]*)\.(\d)(?!\d)/g,'$1.$20'):quote?'Quote on request':'Ask for a quote';
 export const shownPriceLine=(price,detail,quote)=>amountText(price)?firstLine(detail):quote?'':'No published price found yet';
 export function cardPrice(c) {
   const shown=shownPrice(c.price,c.quoteEvidence);
