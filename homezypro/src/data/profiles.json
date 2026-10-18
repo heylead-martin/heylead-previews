@@ -20331,9 +20331,45 @@
             "sourceUrl": "https://thetop.com.sg/aircon-servicing-price-list/",
             "capturedAt": "2026-10-18",
             "indicative": false
+          },
+          {
+            "label": "Aircon general servicing, 7 units (total)",
+            "price": "7 units…$140",
+            "detail": "Quantity: 7. Calculated per-unit price: S$20 (7 units in the published total). Total for 7 units. GST: excluded (as printed)",
+            "excerpt": "Aircon General Servicing / 1 unit…$45 / 2 units…$60 / 3 units…$75 / 4 units…$90 / 5 units…$105 / 6 units…$120 / 7 units…$140 / 8 units…$160 / 9 units…$180 / 10 units…$200",
+            "sourceUrl": "https://thetop.com.sg/aircon-servicing-price-list/",
+            "capturedAt": "2026-10-18",
+            "indicative": false
+          },
+          {
+            "label": "Aircon general servicing, 8 units (total)",
+            "price": "8 units…$160",
+            "detail": "Quantity: 8. Calculated per-unit price: S$20 (8 units in the published total). Total for 8 units. GST: excluded (as printed)",
+            "excerpt": "Aircon General Servicing / 1 unit…$45 / 2 units…$60 / 3 units…$75 / 4 units…$90 / 5 units…$105 / 6 units…$120 / 7 units…$140 / 8 units…$160 / 9 units…$180 / 10 units…$200",
+            "sourceUrl": "https://thetop.com.sg/aircon-servicing-price-list/",
+            "capturedAt": "2026-10-18",
+            "indicative": false
+          },
+          {
+            "label": "Aircon general servicing, 9 units (total)",
+            "price": "9 units…$180",
+            "detail": "Quantity: 9. Calculated per-unit price: S$20 (9 units in the published total). Total for 9 units. GST: excluded (as printed)",
+            "excerpt": "Aircon General Servicing / 1 unit…$45 / 2 units…$60 / 3 units…$75 / 4 units…$90 / 5 units…$105 / 6 units…$120 / 7 units…$140 / 8 units…$160 / 9 units…$180 / 10 units…$200",
+            "sourceUrl": "https://thetop.com.sg/aircon-servicing-price-list/",
+            "capturedAt": "2026-10-18",
+            "indicative": false
+          },
+          {
+            "label": "Aircon general servicing, 10 units (total)",
+            "price": "10 units…$200",
+            "detail": "Quantity: 10. Calculated per-unit price: S$20 (10 units in the published total). Total for 10 units. GST: excluded (as printed)",
+            "excerpt": "Aircon General Servicing / 1 unit…$45 / 2 units…$60 / 3 units…$75 / 4 units…$90 / 5 units…$105 / 6 units…$120 / 7 units…$140 / 8 units…$160 / 9 units…$180 / 10 units…$200",
+            "sourceUrl": "https://thetop.com.sg/aircon-servicing-price-list/",
+            "capturedAt": "2026-10-18",
+            "indicative": false
           }
         ],
-        "priceSummary": "6 pricing entries"
+        "priceSummary": "10 pricing entries"
       },
       {
         "name": "Chemical wash",
@@ -20487,7 +20523,36 @@
         "explanation": "Aircon Gas Top Up",
         "sourceUrl": "https://thetop.com.sg/",
         "capturedAt": "2026-10-10",
-        "prices": []
+        "prices": [
+          {
+            "label": "Gas top-up, R22",
+            "price": "R22…$60 - $140",
+            "detail": "Quantity: 1. Calculated per-unit price: S$60 to S$140 (1 unit in the published total). Per unit. GST: excluded (as printed)",
+            "excerpt": "Aircon Gas Top Up / R22…$60 - $140 / R410…$80 - $150 / R32…$100 - $200",
+            "sourceUrl": "https://thetop.com.sg/aircon-servicing-price-list/",
+            "capturedAt": "2026-10-18",
+            "indicative": false
+          },
+          {
+            "label": "Gas top-up, R410",
+            "price": "R410…$80 - $150",
+            "detail": "Quantity: 1. Calculated per-unit price: S$80 to S$150 (1 unit in the published total). Per unit. GST: excluded (as printed)",
+            "excerpt": "Aircon Gas Top Up / R22…$60 - $140 / R410…$80 - $150 / R32…$100 - $200",
+            "sourceUrl": "https://thetop.com.sg/aircon-servicing-price-list/",
+            "capturedAt": "2026-10-18",
+            "indicative": false
+          },
+          {
+            "label": "Gas top-up, R32",
+            "price": "R32…$100 - $200",
+            "detail": "Quantity: 1. Calculated per-unit price: S$100 to S$200 (1 unit in the published total). Per unit. GST: excluded (as printed)",
+            "excerpt": "Aircon Gas Top Up / R22…$60 - $140 / R410…$80 - $150 / R32…$100 - $200",
+            "sourceUrl": "https://thetop.com.sg/aircon-servicing-price-list/",
+            "capturedAt": "2026-10-18",
+            "indicative": false
+          }
+        ],
+        "priceSummary": "3 pricing entries"
       },
       {
         "name": "Installation",
@@ -20503,7 +20568,17 @@
         "explanation": "Aircon Troubleshooting Repair",
         "sourceUrl": "https://thetop.com.sg/",
         "capturedAt": "2026-10-10",
-        "prices": []
+        "prices": [
+          {
+            "label": "Aircon troubleshooting repair",
+            "price": "From $40",
+            "detail": "Quantity: 1. Calculated per-unit price: S$40 (1 unit in the published total). Per job. GST: excluded (as printed)",
+            "excerpt": "Aircon Troubleshooting Repair / From $40",
+            "sourceUrl": "https://thetop.com.sg/aircon-servicing-price-list/",
+            "capturedAt": "2026-10-18",
+            "indicative": false
+          }
+        ]
       },
       {
         "name": "Maintenance contracts",
@@ -20511,7 +20586,153 @@
         "explanation": "Aircon Servicing Contract",
         "sourceUrl": "https://thetop.com.sg/",
         "capturedAt": "2026-10-10",
-        "prices": []
+        "prices": [
+          {
+            "label": "Yearly contract, tri-yearly (3 visits), 2 units (total per year)",
+            "price": "2 units…$170",
+            "detail": "Quantity: 2. Calculated per-unit price: S$85 (2 units in the published total). Total per year for 2 units (3 visits). GST: excluded (as printed)",
+            "excerpt": "Tri-yearly / 2 units…$170 / 3 units…$205 / 4 units…$250 / 5 units…$290 / 6 units…$330 / 7 units…$380 / 8 units…$420",
+            "sourceUrl": "https://thetop.com.sg/aircon-servicing-price-list/",
+            "capturedAt": "2026-10-18",
+            "indicative": false
+          },
+          {
+            "label": "Yearly contract, tri-yearly (3 visits), 3 units (total per year)",
+            "price": "3 units…$205",
+            "detail": "Quantity: 3. Calculated per-unit price: S$68.33 (3 units in the published total). Total per year for 3 units (3 visits). GST: excluded (as printed)",
+            "excerpt": "Tri-yearly / 2 units…$170 / 3 units…$205 / 4 units…$250 / 5 units…$290 / 6 units…$330 / 7 units…$380 / 8 units…$420",
+            "sourceUrl": "https://thetop.com.sg/aircon-servicing-price-list/",
+            "capturedAt": "2026-10-18",
+            "indicative": false
+          },
+          {
+            "label": "Yearly contract, tri-yearly (3 visits), 4 units (total per year)",
+            "price": "4 units…$250",
+            "detail": "Quantity: 4. Calculated per-unit price: S$62.5 (4 units in the published total). Total per year for 4 units (3 visits). GST: excluded (as printed)",
+            "excerpt": "Tri-yearly / 2 units…$170 / 3 units…$205 / 4 units…$250 / 5 units…$290 / 6 units…$330 / 7 units…$380 / 8 units…$420",
+            "sourceUrl": "https://thetop.com.sg/aircon-servicing-price-list/",
+            "capturedAt": "2026-10-18",
+            "indicative": false
+          },
+          {
+            "label": "Yearly contract, tri-yearly (3 visits), 5 units (total per year)",
+            "price": "5 units…$290",
+            "detail": "Quantity: 5. Calculated per-unit price: S$58 (5 units in the published total). Total per year for 5 units (3 visits). GST: excluded (as printed)",
+            "excerpt": "Tri-yearly / 2 units…$170 / 3 units…$205 / 4 units…$250 / 5 units…$290 / 6 units…$330 / 7 units…$380 / 8 units…$420",
+            "sourceUrl": "https://thetop.com.sg/aircon-servicing-price-list/",
+            "capturedAt": "2026-10-18",
+            "indicative": false
+          },
+          {
+            "label": "Yearly contract, tri-yearly (3 visits), 6 units (total per year)",
+            "price": "6 units…$330",
+            "detail": "Quantity: 6. Calculated per-unit price: S$55 (6 units in the published total). Total per year for 6 units (3 visits). GST: excluded (as printed)",
+            "excerpt": "Tri-yearly / 2 units…$170 / 3 units…$205 / 4 units…$250 / 5 units…$290 / 6 units…$330 / 7 units…$380 / 8 units…$420",
+            "sourceUrl": "https://thetop.com.sg/aircon-servicing-price-list/",
+            "capturedAt": "2026-10-18",
+            "indicative": false
+          },
+          {
+            "label": "Yearly contract, tri-yearly (3 visits), 7 units (total per year)",
+            "price": "7 units…$380",
+            "detail": "Quantity: 7. Calculated per-unit price: S$54.29 (7 units in the published total). Total per year for 7 units (3 visits). GST: excluded (as printed)",
+            "excerpt": "Tri-yearly / 2 units…$170 / 3 units…$205 / 4 units…$250 / 5 units…$290 / 6 units…$330 / 7 units…$380 / 8 units…$420",
+            "sourceUrl": "https://thetop.com.sg/aircon-servicing-price-list/",
+            "capturedAt": "2026-10-18",
+            "indicative": false
+          },
+          {
+            "label": "Yearly contract, tri-yearly (3 visits), 8 units (total per year)",
+            "price": "8 units…$420",
+            "detail": "Quantity: 8. Calculated per-unit price: S$52.5 (8 units in the published total). Total per year for 8 units (3 visits). GST: excluded (as printed)",
+            "excerpt": "Tri-yearly / 2 units…$170 / 3 units…$205 / 4 units…$250 / 5 units…$290 / 6 units…$330 / 7 units…$380 / 8 units…$420",
+            "sourceUrl": "https://thetop.com.sg/aircon-servicing-price-list/",
+            "capturedAt": "2026-10-18",
+            "indicative": false
+          },
+          {
+            "label": "Yearly contract, quarterly (4 visits), 2 units (total per year)",
+            "price": "2 units…$200",
+            "detail": "Quantity: 2. Calculated per-unit price: S$100 (2 units in the published total). Total per year for 2 units (4 visits). GST: excluded (as printed)",
+            "excerpt": "Quarterly / 2 units…$200 / 3 units…$240 / 4 units…$300 / 5 units…$360 / 6 units…$440 / 7 units…$500 / 8 units…$560 / 9 units…$640 / 10 units…$720",
+            "sourceUrl": "https://thetop.com.sg/aircon-servicing-price-list/",
+            "capturedAt": "2026-10-18",
+            "indicative": false
+          },
+          {
+            "label": "Yearly contract, quarterly (4 visits), 3 units (total per year)",
+            "price": "3 units…$240",
+            "detail": "Quantity: 3. Calculated per-unit price: S$80 (3 units in the published total). Total per year for 3 units (4 visits). GST: excluded (as printed)",
+            "excerpt": "Quarterly / 2 units…$200 / 3 units…$240 / 4 units…$300 / 5 units…$360 / 6 units…$440 / 7 units…$500 / 8 units…$560 / 9 units…$640 / 10 units…$720",
+            "sourceUrl": "https://thetop.com.sg/aircon-servicing-price-list/",
+            "capturedAt": "2026-10-18",
+            "indicative": false
+          },
+          {
+            "label": "Yearly contract, quarterly (4 visits), 4 units (total per year)",
+            "price": "4 units…$300",
+            "detail": "Quantity: 4. Calculated per-unit price: S$75 (4 units in the published total). Total per year for 4 units (4 visits). GST: excluded (as printed)",
+            "excerpt": "Quarterly / 2 units…$200 / 3 units…$240 / 4 units…$300 / 5 units…$360 / 6 units…$440 / 7 units…$500 / 8 units…$560 / 9 units…$640 / 10 units…$720",
+            "sourceUrl": "https://thetop.com.sg/aircon-servicing-price-list/",
+            "capturedAt": "2026-10-18",
+            "indicative": false
+          },
+          {
+            "label": "Yearly contract, quarterly (4 visits), 5 units (total per year)",
+            "price": "5 units…$360",
+            "detail": "Quantity: 5. Calculated per-unit price: S$72 (5 units in the published total). Total per year for 5 units (4 visits). GST: excluded (as printed)",
+            "excerpt": "Quarterly / 2 units…$200 / 3 units…$240 / 4 units…$300 / 5 units…$360 / 6 units…$440 / 7 units…$500 / 8 units…$560 / 9 units…$640 / 10 units…$720",
+            "sourceUrl": "https://thetop.com.sg/aircon-servicing-price-list/",
+            "capturedAt": "2026-10-18",
+            "indicative": false
+          },
+          {
+            "label": "Yearly contract, quarterly (4 visits), 6 units (total per year)",
+            "price": "6 units…$440",
+            "detail": "Quantity: 6. Calculated per-unit price: S$73.33 (6 units in the published total). Total per year for 6 units (4 visits). GST: excluded (as printed)",
+            "excerpt": "Quarterly / 2 units…$200 / 3 units…$240 / 4 units…$300 / 5 units…$360 / 6 units…$440 / 7 units…$500 / 8 units…$560 / 9 units…$640 / 10 units…$720",
+            "sourceUrl": "https://thetop.com.sg/aircon-servicing-price-list/",
+            "capturedAt": "2026-10-18",
+            "indicative": false
+          },
+          {
+            "label": "Yearly contract, quarterly (4 visits), 7 units (total per year)",
+            "price": "7 units…$500",
+            "detail": "Quantity: 7. Calculated per-unit price: S$71.43 (7 units in the published total). Total per year for 7 units (4 visits). GST: excluded (as printed)",
+            "excerpt": "Quarterly / 2 units…$200 / 3 units…$240 / 4 units…$300 / 5 units…$360 / 6 units…$440 / 7 units…$500 / 8 units…$560 / 9 units…$640 / 10 units…$720",
+            "sourceUrl": "https://thetop.com.sg/aircon-servicing-price-list/",
+            "capturedAt": "2026-10-18",
+            "indicative": false
+          },
+          {
+            "label": "Yearly contract, quarterly (4 visits), 8 units (total per year)",
+            "price": "8 units…$560",
+            "detail": "Quantity: 8. Calculated per-unit price: S$70 (8 units in the published total). Total per year for 8 units (4 visits). GST: excluded (as printed)",
+            "excerpt": "Quarterly / 2 units…$200 / 3 units…$240 / 4 units…$300 / 5 units…$360 / 6 units…$440 / 7 units…$500 / 8 units…$560 / 9 units…$640 / 10 units…$720",
+            "sourceUrl": "https://thetop.com.sg/aircon-servicing-price-list/",
+            "capturedAt": "2026-10-18",
+            "indicative": false
+          },
+          {
+            "label": "Yearly contract, quarterly (4 visits), 9 units (total per year)",
+            "price": "9 units…$640",
+            "detail": "Quantity: 9. Calculated per-unit price: S$71.11 (9 units in the published total). Total per year for 9 units (4 visits). GST: excluded (as printed)",
+            "excerpt": "Quarterly / 2 units…$200 / 3 units…$240 / 4 units…$300 / 5 units…$360 / 6 units…$440 / 7 units…$500 / 8 units…$560 / 9 units…$640 / 10 units…$720",
+            "sourceUrl": "https://thetop.com.sg/aircon-servicing-price-list/",
+            "capturedAt": "2026-10-18",
+            "indicative": false
+          },
+          {
+            "label": "Yearly contract, quarterly (4 visits), 10 units (total per year)",
+            "price": "10 units…$720",
+            "detail": "Quantity: 10. Calculated per-unit price: S$72 (10 units in the published total). Total per year for 10 units (4 visits). GST: excluded (as printed)",
+            "excerpt": "Quarterly / 2 units…$200 / 3 units…$240 / 4 units…$300 / 5 units…$360 / 6 units…$440 / 7 units…$500 / 8 units…$560 / 9 units…$640 / 10 units…$720",
+            "sourceUrl": "https://thetop.com.sg/aircon-servicing-price-list/",
+            "capturedAt": "2026-10-18",
+            "indicative": false
+          }
+        ],
+        "priceSummary": "16 pricing entries"
       },
       {
         "name": "Dismantle replacement",
@@ -20572,7 +20793,7 @@
     "sourceUrls": [
       "https://thetop.com.sg/about-us/"
     ],
-    "updatedAt": "2026-10-18T01:23+03:00"
+    "updatedAt": "2026-10-18T10:03+03:00"
   },
   "jetstyle-aircon-aircon-contractor-singapore": {
     "headline": "Services published by Jetstyle Aircon- Aircon Contractor Singapore.",
@@ -47990,7 +48211,117 @@
         "explanation": "CONTRACT SERVICING",
         "sourceUrl": "https://citycoolingengr.com.sg/pricing/",
         "capturedAt": "2026-10-10",
-        "prices": []
+        "prices": [
+          {
+            "label": "Contract servicing, 3 visits a year, 2 units (total per year)",
+            "price": "2 / Units / $155 / $195 (3X Yearly column)",
+            "detail": "Quantity: 2. Calculated per-unit price: S$77.5 (2 units in the published total). Total per year for 2 units (3 visits). GST: excluded (page: \"Prices listed are subject to GST\")",
+            "excerpt": "Years / 3X Yearly + / 4X Yearly + / 2 / Units / $155 / $195 / Units / $185 / $220 / 4 / Units / $230 / $275 / 5 / Units / $280 / $335 / 6 / Units / $320 / $395 / 7 / Units / $370 / $455 / 8 / Units / $415 / $515 / *Not Inclusive of Condenser Service",
+            "sourceUrl": "https://citycoolingengr.com.sg/pricing/",
+            "capturedAt": "2026-10-18",
+            "indicative": false
+          },
+          {
+            "label": "Contract servicing, 4 visits a year, 2 units (total per year)",
+            "price": "2 / Units / $155 / $195 (4X Yearly column)",
+            "detail": "Quantity: 2. Calculated per-unit price: S$97.5 (2 units in the published total). Total per year for 2 units (4 visits). GST: excluded (page: \"Prices listed are subject to GST\")",
+            "excerpt": "Years / 3X Yearly + / 4X Yearly + / 2 / Units / $155 / $195 / Units / $185 / $220 / 4 / Units / $230 / $275 / 5 / Units / $280 / $335 / 6 / Units / $320 / $395 / 7 / Units / $370 / $455 / 8 / Units / $415 / $515 / *Not Inclusive of Condenser Service",
+            "sourceUrl": "https://citycoolingengr.com.sg/pricing/",
+            "capturedAt": "2026-10-18",
+            "indicative": false
+          },
+          {
+            "label": "Contract servicing, 3 visits a year, 4 units (total per year)",
+            "price": "4 / Units / $230 / $275 (3X Yearly column)",
+            "detail": "Quantity: 4. Calculated per-unit price: S$57.5 (4 units in the published total). Total per year for 4 units (3 visits). GST: excluded (page: \"Prices listed are subject to GST\")",
+            "excerpt": "Years / 3X Yearly + / 4X Yearly + / 2 / Units / $155 / $195 / Units / $185 / $220 / 4 / Units / $230 / $275 / 5 / Units / $280 / $335 / 6 / Units / $320 / $395 / 7 / Units / $370 / $455 / 8 / Units / $415 / $515 / *Not Inclusive of Condenser Service",
+            "sourceUrl": "https://citycoolingengr.com.sg/pricing/",
+            "capturedAt": "2026-10-18",
+            "indicative": false
+          },
+          {
+            "label": "Contract servicing, 4 visits a year, 4 units (total per year)",
+            "price": "4 / Units / $230 / $275 (4X Yearly column)",
+            "detail": "Quantity: 4. Calculated per-unit price: S$68.75 (4 units in the published total). Total per year for 4 units (4 visits). GST: excluded (page: \"Prices listed are subject to GST\")",
+            "excerpt": "Years / 3X Yearly + / 4X Yearly + / 2 / Units / $155 / $195 / Units / $185 / $220 / 4 / Units / $230 / $275 / 5 / Units / $280 / $335 / 6 / Units / $320 / $395 / 7 / Units / $370 / $455 / 8 / Units / $415 / $515 / *Not Inclusive of Condenser Service",
+            "sourceUrl": "https://citycoolingengr.com.sg/pricing/",
+            "capturedAt": "2026-10-18",
+            "indicative": false
+          },
+          {
+            "label": "Contract servicing, 3 visits a year, 5 units (total per year)",
+            "price": "5 / Units / $280 / $335 (3X Yearly column)",
+            "detail": "Quantity: 5. Calculated per-unit price: S$56 (5 units in the published total). Total per year for 5 units (3 visits). GST: excluded (page: \"Prices listed are subject to GST\")",
+            "excerpt": "Years / 3X Yearly + / 4X Yearly + / 2 / Units / $155 / $195 / Units / $185 / $220 / 4 / Units / $230 / $275 / 5 / Units / $280 / $335 / 6 / Units / $320 / $395 / 7 / Units / $370 / $455 / 8 / Units / $415 / $515 / *Not Inclusive of Condenser Service",
+            "sourceUrl": "https://citycoolingengr.com.sg/pricing/",
+            "capturedAt": "2026-10-18",
+            "indicative": false
+          },
+          {
+            "label": "Contract servicing, 4 visits a year, 5 units (total per year)",
+            "price": "5 / Units / $280 / $335 (4X Yearly column)",
+            "detail": "Quantity: 5. Calculated per-unit price: S$67 (5 units in the published total). Total per year for 5 units (4 visits). GST: excluded (page: \"Prices listed are subject to GST\")",
+            "excerpt": "Years / 3X Yearly + / 4X Yearly + / 2 / Units / $155 / $195 / Units / $185 / $220 / 4 / Units / $230 / $275 / 5 / Units / $280 / $335 / 6 / Units / $320 / $395 / 7 / Units / $370 / $455 / 8 / Units / $415 / $515 / *Not Inclusive of Condenser Service",
+            "sourceUrl": "https://citycoolingengr.com.sg/pricing/",
+            "capturedAt": "2026-10-18",
+            "indicative": false
+          },
+          {
+            "label": "Contract servicing, 3 visits a year, 6 units (total per year)",
+            "price": "6 / Units / $320 / $395 (3X Yearly column)",
+            "detail": "Quantity: 6. Calculated per-unit price: S$53.33 (6 units in the published total). Total per year for 6 units (3 visits). GST: excluded (page: \"Prices listed are subject to GST\")",
+            "excerpt": "Years / 3X Yearly + / 4X Yearly + / 2 / Units / $155 / $195 / Units / $185 / $220 / 4 / Units / $230 / $275 / 5 / Units / $280 / $335 / 6 / Units / $320 / $395 / 7 / Units / $370 / $455 / 8 / Units / $415 / $515 / *Not Inclusive of Condenser Service",
+            "sourceUrl": "https://citycoolingengr.com.sg/pricing/",
+            "capturedAt": "2026-10-18",
+            "indicative": false
+          },
+          {
+            "label": "Contract servicing, 4 visits a year, 6 units (total per year)",
+            "price": "6 / Units / $320 / $395 (4X Yearly column)",
+            "detail": "Quantity: 6. Calculated per-unit price: S$65.83 (6 units in the published total). Total per year for 6 units (4 visits). GST: excluded (page: \"Prices listed are subject to GST\")",
+            "excerpt": "Years / 3X Yearly + / 4X Yearly + / 2 / Units / $155 / $195 / Units / $185 / $220 / 4 / Units / $230 / $275 / 5 / Units / $280 / $335 / 6 / Units / $320 / $395 / 7 / Units / $370 / $455 / 8 / Units / $415 / $515 / *Not Inclusive of Condenser Service",
+            "sourceUrl": "https://citycoolingengr.com.sg/pricing/",
+            "capturedAt": "2026-10-18",
+            "indicative": false
+          },
+          {
+            "label": "Contract servicing, 3 visits a year, 7 units (total per year)",
+            "price": "7 / Units / $370 / $455 (3X Yearly column)",
+            "detail": "Quantity: 7. Calculated per-unit price: S$52.86 (7 units in the published total). Total per year for 7 units (3 visits). GST: excluded (page: \"Prices listed are subject to GST\")",
+            "excerpt": "Years / 3X Yearly + / 4X Yearly + / 2 / Units / $155 / $195 / Units / $185 / $220 / 4 / Units / $230 / $275 / 5 / Units / $280 / $335 / 6 / Units / $320 / $395 / 7 / Units / $370 / $455 / 8 / Units / $415 / $515 / *Not Inclusive of Condenser Service",
+            "sourceUrl": "https://citycoolingengr.com.sg/pricing/",
+            "capturedAt": "2026-10-18",
+            "indicative": false
+          },
+          {
+            "label": "Contract servicing, 4 visits a year, 7 units (total per year)",
+            "price": "7 / Units / $370 / $455 (4X Yearly column)",
+            "detail": "Quantity: 7. Calculated per-unit price: S$65 (7 units in the published total). Total per year for 7 units (4 visits). GST: excluded (page: \"Prices listed are subject to GST\")",
+            "excerpt": "Years / 3X Yearly + / 4X Yearly + / 2 / Units / $155 / $195 / Units / $185 / $220 / 4 / Units / $230 / $275 / 5 / Units / $280 / $335 / 6 / Units / $320 / $395 / 7 / Units / $370 / $455 / 8 / Units / $415 / $515 / *Not Inclusive of Condenser Service",
+            "sourceUrl": "https://citycoolingengr.com.sg/pricing/",
+            "capturedAt": "2026-10-18",
+            "indicative": false
+          },
+          {
+            "label": "Contract servicing, 3 visits a year, 8 units (total per year)",
+            "price": "8 / Units / $415 / $515 (3X Yearly column)",
+            "detail": "Quantity: 8. Calculated per-unit price: S$51.88 (8 units in the published total). Total per year for 8 units (3 visits). GST: excluded (page: \"Prices listed are subject to GST\")",
+            "excerpt": "Years / 3X Yearly + / 4X Yearly + / 2 / Units / $155 / $195 / Units / $185 / $220 / 4 / Units / $230 / $275 / 5 / Units / $280 / $335 / 6 / Units / $320 / $395 / 7 / Units / $370 / $455 / 8 / Units / $415 / $515 / *Not Inclusive of Condenser Service",
+            "sourceUrl": "https://citycoolingengr.com.sg/pricing/",
+            "capturedAt": "2026-10-18",
+            "indicative": false
+          },
+          {
+            "label": "Contract servicing, 4 visits a year, 8 units (total per year)",
+            "price": "8 / Units / $415 / $515 (4X Yearly column)",
+            "detail": "Quantity: 8. Calculated per-unit price: S$64.38 (8 units in the published total). Total per year for 8 units (4 visits). GST: excluded (page: \"Prices listed are subject to GST\")",
+            "excerpt": "Years / 3X Yearly + / 4X Yearly + / 2 / Units / $155 / $195 / Units / $185 / $220 / 4 / Units / $230 / $275 / 5 / Units / $280 / $335 / 6 / Units / $320 / $395 / 7 / Units / $370 / $455 / 8 / Units / $415 / $515 / *Not Inclusive of Condenser Service",
+            "sourceUrl": "https://citycoolingengr.com.sg/pricing/",
+            "capturedAt": "2026-10-18",
+            "indicative": false
+          }
+        ],
+        "priceSummary": "12 pricing entries"
       },
       {
         "name": "Condenser cleaning",
@@ -48043,7 +48374,7 @@
     "sourceUrls": [
       "https://citycoolingengr.com.sg/"
     ],
-    "updatedAt": "2026-10-18T01:23+03:00"
+    "updatedAt": "2026-10-18T10:03+03:00"
   },
   "speed-engineering-services-ptd-ltd": {
     "headline": "Services published by Speed Engineering Services Ptd Ltd.",
@@ -48853,6 +49184,59 @@
     ],
     "updatedAt": "2026-10-18T01:23+03:00"
   },
+  "primehome-plumbing-electrical-engineering-pte-ltd": {
+    "headline": "Services published by Primehome Plumbing & Electrical Engineering Pte Ltd.",
+    "about": [
+      "We provide fast and reliable plumbing and basic electrical services for residential homes across Singapore. Whether you're dealing with a choked toilet, leaking pipe, or faulty light switch, we respond quickly and get the job done properly. Our technicians are fluent in English, Malay and Mandarin (华语)"
+    ],
+    "services": [
+      {
+        "name": "Choke clearing",
+        "description": "",
+        "explanation": "Choked Toilet & Drain",
+        "sourceUrl": "https://www.primehomesg.com/",
+        "capturedAt": "2026-10-10",
+        "prices": []
+      },
+      {
+        "name": "Leak repair",
+        "description": "",
+        "explanation": "Leaking Pipe",
+        "sourceUrl": "https://www.primehomesg.com/",
+        "capturedAt": "2026-10-10",
+        "prices": []
+      },
+      {
+        "name": "Pipe replacement",
+        "description": "",
+        "explanation": "Leaking Pipe Repair",
+        "sourceUrl": "https://www.primehomesg.com/",
+        "capturedAt": "2026-10-10",
+        "prices": []
+      },
+      {
+        "name": "Floor trap",
+        "description": "",
+        "explanation": "Fast clearing of blocked toilets, floor traps, and drainage pipes using professional equipment.",
+        "sourceUrl": "https://www.primehomesg.com/",
+        "capturedAt": "2026-10-10",
+        "prices": []
+      },
+      {
+        "name": "Plumbing repair",
+        "description": "",
+        "explanation": "Prime Home SG | plumbing services Singapore | Singapore",
+        "sourceUrl": "https://www.primehomesg.com/",
+        "capturedAt": "2026-10-10",
+        "prices": []
+      }
+    ],
+    "highlights": [],
+    "sourceUrls": [
+      "https://www.primehomesg.com/"
+    ],
+    "updatedAt": "2026-10-18T10:03+03:00"
+  },
   "call-sg-building-services-pte-ltd": {
     "headline": "Services published by Call SG Building Services Pte Ltd.",
     "about": [
@@ -49590,6 +49974,99 @@
     ],
     "updatedAt": "2026-10-18T00:57+03:00"
   },
+  "vs-handyman-s-pte-ltd": {
+    "headline": "Services published by VS Handyman (S) Pte Ltd.",
+    "about": [
+      "Our handyman professionals average more than 10 years of experience in repair trades and take time to investigate each project for a long-lasting solution."
+    ],
+    "services": [
+      {
+        "name": "Plumbing",
+        "description": "",
+        "explanation": "Plumbing Services",
+        "sourceUrl": "https://vshandymansg.com/",
+        "capturedAt": "2026-10-10",
+        "prices": []
+      },
+      {
+        "name": "Electrical",
+        "description": "",
+        "explanation": "Electrical Services",
+        "sourceUrl": "https://vshandymansg.com/",
+        "capturedAt": "2026-10-10",
+        "prices": []
+      },
+      {
+        "name": "Carpentry",
+        "description": "",
+        "explanation": "Carpentry Services",
+        "sourceUrl": "https://vshandymansg.com/",
+        "capturedAt": "2026-10-10",
+        "prices": []
+      },
+      {
+        "name": "Painting",
+        "description": "",
+        "explanation": "Painting Services",
+        "sourceUrl": "https://vshandymansg.com/",
+        "capturedAt": "2026-10-10",
+        "prices": []
+      },
+      {
+        "name": "Drilling & mounting",
+        "description": "",
+        "explanation": "TV Bracket Installation",
+        "sourceUrl": "https://vshandymansg.com/",
+        "capturedAt": "2026-10-10",
+        "prices": []
+      },
+      {
+        "name": "Furniture assembly",
+        "description": "",
+        "explanation": "ces such as plumbing repair, electrical work, mounting TVs, installing shelves, furniture assembly, door and lock fixing, minor renovation, and general home mai",
+        "sourceUrl": "https://vshandymansg.com/",
+        "capturedAt": "2026-10-10",
+        "prices": []
+      },
+      {
+        "name": "Door lock",
+        "description": "",
+        "explanation": "Window Lock and Restrictor Replacement",
+        "sourceUrl": "https://vshandymansg.com/",
+        "capturedAt": "2026-10-10",
+        "prices": []
+      },
+      {
+        "name": "Curtain blinds",
+        "description": "",
+        "explanation": "Curtain Rod & Track installation",
+        "sourceUrl": "https://vshandymansg.com/",
+        "capturedAt": "2026-10-10",
+        "prices": []
+      },
+      {
+        "name": "Tiling flooring",
+        "description": "",
+        "explanation": "Flooring Installation",
+        "sourceUrl": "https://vshandymansg.com/",
+        "capturedAt": "2026-10-10",
+        "prices": []
+      },
+      {
+        "name": "Wallpaper",
+        "description": "",
+        "explanation": "Painting Services Singapore | Cabinet, Room & Wallpaper Painting | VS Handyman Singapore",
+        "sourceUrl": "https://vshandymansg.com/painting-services-singapore/",
+        "capturedAt": "2026-10-10",
+        "prices": []
+      }
+    ],
+    "highlights": [],
+    "sourceUrls": [
+      "https://vshandymansg.com/"
+    ],
+    "updatedAt": "2026-10-18T10:03+03:00"
+  },
   "fnf-handyman": {
     "headline": "Services published by FNF Handyman.",
     "about": [
@@ -50136,6 +50613,51 @@
     ],
     "updatedAt": "2026-10-10"
   },
+  "emilio-s-solutions": {
+    "headline": "Services published by EMILIO'S SOLUTIONS.",
+    "about": [
+      "At Emilio’s Solutions , we don't just clean; we restore. With a specialized focus on residential and condo cleaning across Singapore, we combine years of field experience with high-grade industrial equipment to deliver results that standard services simply can't match."
+    ],
+    "services": [
+      {
+        "name": "Move-in & move-out cleaning",
+        "description": "",
+        "explanation": "popular package for new homeowners. Comprehensive cleaning that makes your BTO move-in ready instantly.",
+        "sourceUrl": "https://www.emiliossolutions.com/",
+        "capturedAt": "2026-10-10",
+        "prices": []
+      },
+      {
+        "name": "Post renovation",
+        "description": "",
+        "explanation": "\"The post-renovation cleaning for our 5-room BTO was impeccable. They even cleaned the inside of the",
+        "sourceUrl": "https://www.emiliossolutions.com/",
+        "capturedAt": "2026-10-10",
+        "prices": []
+      },
+      {
+        "name": "Office cleaning",
+        "description": "",
+        "explanation": "Premium residential and commercial cleaning services tailored for the Singapore lifestyle. From luxury condos to fresh B",
+        "sourceUrl": "https://www.emiliossolutions.com/",
+        "capturedAt": "2026-10-10",
+        "prices": []
+      },
+      {
+        "name": "Window",
+        "description": "",
+        "explanation": "Steam window cleaning",
+        "sourceUrl": "https://www.emiliossolutions.com/",
+        "capturedAt": "2026-10-10",
+        "prices": []
+      }
+    ],
+    "highlights": [],
+    "sourceUrls": [
+      "https://www.emiliossolutions.com/"
+    ],
+    "updatedAt": "2026-10-18T10:03+03:00"
+  },
   "hiremop-pte-ltd": {
     "headline": "Services published by Hiremop Pte Ltd.",
     "about": [
@@ -50215,6 +50737,103 @@
       "https://www.hiremop.com/service/office-cleaning"
     ],
     "updatedAt": "2026-10-18T00:57+03:00"
+  },
+  "sparkle-cleaning-pte-ltd": {
+    "headline": "Services published by Sparkle Cleaning Pte Ltd.",
+    "about": [
+      "At Sparkle Cleaning Pte Ltd, our cleaning services company known for its professionalism, affordable pricing and strong customer satisfaction ratings.",
+      "Our Clany Eco team members are friendly and professional, and you can count on them to take good care of your place."
+    ],
+    "services": [
+      {
+        "name": "Regular cleaning",
+        "description": "",
+        "explanation": "How is deep cleaning different from regular cleaning?",
+        "sourceUrl": "https://sparklecleaning.com.sg/",
+        "capturedAt": "2026-10-10",
+        "prices": []
+      },
+      {
+        "name": "Deep cleaning",
+        "description": "",
+        "explanation": "Here's are Our Professional Deep Cleaning Services in Singapore.",
+        "sourceUrl": "https://sparklecleaning.com.sg/",
+        "capturedAt": "2026-10-10",
+        "prices": []
+      },
+      {
+        "name": "Move-in & move-out cleaning",
+        "description": "",
+        "explanation": "Looking for Trusted Move-Out & Deep Cleaning Experts Team in Singapore?",
+        "sourceUrl": "https://sparklecleaning.com.sg/",
+        "capturedAt": "2026-10-10",
+        "prices": []
+      },
+      {
+        "name": "Post renovation",
+        "description": "",
+        "explanation": "il and reliable communication, making them a trusted choice for residential and post-renovation cleaning.",
+        "sourceUrl": "https://sparklecleaning.com.sg/",
+        "capturedAt": "2026-10-10",
+        "prices": []
+      },
+      {
+        "name": "Office cleaning",
+        "description": "",
+        "explanation": "Commercial Cleaning",
+        "sourceUrl": "https://sparklecleaning.com.sg/",
+        "capturedAt": "2026-10-10",
+        "prices": []
+      },
+      {
+        "name": "Sofa & upholstery cleaning",
+        "description": "",
+        "explanation": "Upholstery",
+        "sourceUrl": "https://sparklecleaning.com.sg/",
+        "capturedAt": "2026-10-10",
+        "prices": []
+      },
+      {
+        "name": "Carpet",
+        "description": "",
+        "explanation": "Carpet & Curtain Cleaning",
+        "sourceUrl": "https://sparklecleaning.com.sg/",
+        "capturedAt": "2026-10-10",
+        "prices": []
+      },
+      {
+        "name": "Curtain",
+        "description": "",
+        "explanation": "Carpet & Curtain Cleaning",
+        "sourceUrl": "https://sparklecleaning.com.sg/",
+        "capturedAt": "2026-10-10",
+        "prices": []
+      },
+      {
+        "name": "Window",
+        "description": "",
+        "explanation": "Interior window cleaning",
+        "sourceUrl": "https://sparklecleaning.com.sg/services/",
+        "capturedAt": "2026-10-10",
+        "prices": [
+          {
+            "label": "Interior window cleaning | $35 extra",
+            "price": "Interior window cleaning | $35 extra",
+            "detail": "Calculated per-unit price: S$35 (1 unit in the published total). As printed. GST: not stated",
+            "excerpt": "Interior window cleaning | $35 extra",
+            "sourceUrl": "https://sparklecleaning.com.sg/services/",
+            "capturedAt": "2026-10-10",
+            "indicative": false
+          }
+        ]
+      }
+    ],
+    "highlights": [],
+    "sourceUrls": [
+      "https://sparklecleaning.com.sg/",
+      "https://sparklecleaning.com.sg/about-us/"
+    ],
+    "updatedAt": "2026-10-18T10:03+03:00"
   },
   "the-good-husband-laundromats-drycleaners-serangoon": {
     "headline": "Services published by The Good Husband Laundromats & Drycleaners (Serangoon).",
@@ -51770,6 +52389,67 @@
       "https://hvacengineering.com.sg/"
     ],
     "updatedAt": "2026-10-18T00:57+03:00"
+  },
+  "the-cleaning-lab": {
+    "headline": "Services published by The Cleaning Lab.",
+    "about": [
+      "At The Cleaning Lab, we are dedicated to delivering top-notch cleaning solutions tailored to our clients' requirements. With years of experience, we have mastered the art of rejuvenating spaces and ensuring a pristine environment for all. Our mission is to exceed expectations and provide exceptional cleaning services that make a difference in the cleanliness and hygiene standards of homes and businesses."
+    ],
+    "services": [
+      {
+        "name": "Deep cleaning",
+        "description": "",
+        "explanation": "Upholstery Deep Cleaning",
+        "sourceUrl": "https://www.thecleaninglabsg.com/",
+        "capturedAt": "2026-10-10",
+        "prices": []
+      },
+      {
+        "name": "Move-in & move-out cleaning",
+        "description": "",
+        "explanation": "ces across Singapore. We ensure every corner is cleaned and ready for immediate move-in.",
+        "sourceUrl": "https://www.thecleaninglabsg.com/",
+        "capturedAt": "2026-10-10",
+        "prices": []
+      },
+      {
+        "name": "Post renovation",
+        "description": "",
+        "explanation": "The Cleaning Lab | post renovation cleaning | Singapore",
+        "sourceUrl": "https://www.thecleaninglabsg.com/",
+        "capturedAt": "2026-10-10",
+        "prices": []
+      },
+      {
+        "name": "Spring cleaning",
+        "description": "",
+        "explanation": "Will engage them again for CNY spring cleaning. And will introduce to my family and friends 👍🏻",
+        "sourceUrl": "https://www.thecleaninglabsg.com/",
+        "capturedAt": "2026-10-10",
+        "prices": []
+      },
+      {
+        "name": "Sofa & upholstery cleaning",
+        "description": "",
+        "explanation": "Upholstery Deep Cleaning",
+        "sourceUrl": "https://www.thecleaninglabsg.com/",
+        "capturedAt": "2026-10-10",
+        "prices": []
+      },
+      {
+        "name": "Mattress",
+        "description": "",
+        "explanation": "Keep your sofa, mattress, dining chairs, and fabric furniture fresh and hygienic with our professional u",
+        "sourceUrl": "https://www.thecleaninglabsg.com/",
+        "capturedAt": "2026-10-10",
+        "prices": []
+      }
+    ],
+    "highlights": [],
+    "sourceUrls": [
+      "https://www.thecleaninglabsg.com/"
+    ],
+    "updatedAt": "2026-10-18T10:03+03:00"
   },
   "cleanworks-sg": {
     "headline": "Services published by Cleanworks.SG.",
@@ -54460,6 +55140,147 @@
     ],
     "updatedAt": "2026-10-10"
   },
+  "gjourney-services": {
+    "headline": "Services published by GJourney Services.",
+    "about": [
+      "Every cleaning appointment is an opportunity to earn your trust through reliable service, attentive care and consistently high standards. From regular home cleaning to one-off sessions, our team is committed to delivering a cleaner, more comfortable space for every customer."
+    ],
+    "services": [
+      {
+        "name": "Regular cleaning",
+        "description": "",
+        "explanation": "through reliable service, attentive care and consistently high standards. From regular home cleaning to one-off sessions, our team is committed to delivering a",
+        "sourceUrl": "https://g-journey.com/",
+        "capturedAt": "2026-10-10",
+        "prices": [
+          {
+            "label": "Regular cleaning",
+            "price": "See source details",
+            "detail": "Calculated per-unit price: S$22 (1 unit in the published total). Per hour. GST: not stated",
+            "excerpt": "Transparent Pricing and Service Standards | We believe in honesty and clarity, which is why our pricing and service commitments are shared upfront. Regular home cleaning service sessions start from S$22 per hour, with a",
+            "sourceUrl": "https://g-journey.com/",
+            "capturedAt": "2026-10-10",
+            "indicative": false
+          },
+          {
+            "label": "Regular cleaning",
+            "price": "See source details",
+            "detail": "Calculated per-unit price: S$22 (1 unit in the published total). Per hour. GST: not stated",
+            "excerpt": "A convenient option for quick touch-ups or targeted tasks. Simply choose the number of hours you need, and our team will focus on the areas that matter most to you. | Hourly cleaning starts from S$22 per hour, with add-o",
+            "sourceUrl": "https://g-journey.com/",
+            "capturedAt": "2026-10-10",
+            "indicative": false
+          }
+        ],
+        "priceSummary": "2 pricing entries"
+      },
+      {
+        "name": "Deep cleaning",
+        "description": "",
+        "explanation": "Upholstery Deep Cleaning",
+        "sourceUrl": "https://g-journey.com/",
+        "capturedAt": "2026-10-10",
+        "prices": [
+          {
+            "label": "Deep cleaning",
+            "price": "See source details",
+            "detail": "Calculated per-unit price: S$60 (1 unit in the published total). Per piece. GST: not stated",
+            "excerpt": "Our upholstery care removes dirt, stains, and allergens from sofas, carpets, curtains, and more, restoring comfort and freshness to your soft furnishings. | Upholstery deep cleaning starts from S$60 per item, depending o",
+            "sourceUrl": "https://g-journey.com/",
+            "capturedAt": "2026-10-10",
+            "indicative": false
+          }
+        ]
+      },
+      {
+        "name": "Move-in & move-out cleaning",
+        "description": "",
+        "explanation": "Move In-Out Cleaning",
+        "sourceUrl": "https://g-journey.com/",
+        "capturedAt": "2026-10-10",
+        "prices": []
+      },
+      {
+        "name": "Post renovation",
+        "description": "",
+        "explanation": "Post Renovation Cleaning",
+        "sourceUrl": "https://g-journey.com/",
+        "capturedAt": "2026-10-10",
+        "prices": []
+      },
+      {
+        "name": "Spring cleaning",
+        "description": "",
+        "explanation": "Spring Cleaning Services",
+        "sourceUrl": "https://g-journey.com/",
+        "capturedAt": "2026-10-10",
+        "prices": []
+      },
+      {
+        "name": "Office cleaning",
+        "description": "",
+        "explanation": "Commercial Cleaning Services",
+        "sourceUrl": "https://g-journey.com/",
+        "capturedAt": "2026-10-10",
+        "prices": [
+          {
+            "label": "Office cleaning",
+            "price": "See source details",
+            "detail": "Calculated per-unit price: S$24 (1 unit in the published total). Per hour. GST: not stated",
+            "excerpt": "From offices to business spaces, we help maintain a tidy, hygienic environment that supports daily operations and leaves a positive impression on staff and visitors. | Commercial cleaning is available from S$24 per hour",
+            "sourceUrl": "https://g-journey.com/",
+            "capturedAt": "2026-10-10",
+            "indicative": false
+          }
+        ]
+      },
+      {
+        "name": "Sofa & upholstery cleaning",
+        "description": "",
+        "explanation": "Upholstery Deep Cleaning",
+        "sourceUrl": "https://g-journey.com/",
+        "capturedAt": "2026-10-10",
+        "prices": []
+      },
+      {
+        "name": "Mattress",
+        "description": "",
+        "explanation": "are very satisfied with their service. We needed to clean our sofas, rugs, and mattresses. Responses are fast and professionally handled. Cleaner was friendly.",
+        "sourceUrl": "https://g-journey.com/",
+        "capturedAt": "2026-10-10",
+        "prices": []
+      },
+      {
+        "name": "Carpet",
+        "description": "",
+        "explanation": "Our upholstery care removes dirt, stains, and allergens from sofas, carpets, curtains, and more, restoring comfort and freshness to your soft furnishings.",
+        "sourceUrl": "https://g-journey.com/",
+        "capturedAt": "2026-10-10",
+        "prices": []
+      },
+      {
+        "name": "Curtain",
+        "description": "",
+        "explanation": "Curtain Cleaning",
+        "sourceUrl": "https://g-journey.com/",
+        "capturedAt": "2026-10-10",
+        "prices": []
+      },
+      {
+        "name": "Window",
+        "description": "",
+        "explanation": "ing, such as deep cleaning, post-renovation cleaning, balcony washing, interior window cleaning, oven or fridge cleaning, pet-related cleaning and urgent or las",
+        "sourceUrl": "https://g-journey.com/",
+        "capturedAt": "2026-10-10",
+        "prices": []
+      }
+    ],
+    "highlights": [],
+    "sourceUrls": [
+      "https://g-journey.com/"
+    ],
+    "updatedAt": "2026-10-18T10:03+03:00"
+  },
   "green-star-aircon-pte-ltd": {
     "headline": "Services published by GREEN STAR AIRCON PTE. LTD..",
     "about": [
@@ -55465,6 +56286,164 @@
       "https://www.aircareplus.sg/"
     ],
     "updatedAt": "2026-10-10"
+  },
+  "upward-cleaning-services": {
+    "headline": "Services published by Upward Cleaning Services.",
+    "about": [
+      "In-home curtain steaming from S$18 per piece. No take-down, no rehang, done while we're cleaning your sofa."
+    ],
+    "services": [
+      {
+        "name": "Deep cleaning",
+        "description": "",
+        "explanation": "Specialist deep cleaning for every soft furnishing in your Singapore home. Fixed prices, zero residue",
+        "sourceUrl": "https://upwardcleaning.sg/",
+        "capturedAt": "2026-10-10",
+        "prices": [
+          {
+            "label": "Deep cleaning",
+            "price": "See source details",
+            "detail": "As printed. GST: not stated",
+            "excerpt": "Rug & Carpet Cleaning Singapore | Rugs from S$90. Full deep clean with clear rinse pass, no chemical stiffness left behind.",
+            "sourceUrl": "https://upwardcleaning.sg/",
+            "capturedAt": "2026-10-10",
+            "indicative": false
+          },
+          {
+            "label": "3-Seater Sofa + Large Pet Bed. Pet-safe deep clean.",
+            "price": "S$120",
+            "detail": "As printed. GST: not stated",
+            "excerpt": "3-Seater Sofa + Large Pet Bed. Pet-safe deep clean. | S$120",
+            "sourceUrl": "https://upwardcleaning.sg/",
+            "capturedAt": "2026-10-10",
+            "indicative": false
+          }
+        ],
+        "priceSummary": "2 pricing entries"
+      },
+      {
+        "name": "Sofa & upholstery cleaning",
+        "description": "",
+        "explanation": "Sofa, Mattress & Upholstery Cleaning Singapore | Upward",
+        "sourceUrl": "https://upwardcleaning.sg/",
+        "capturedAt": "2026-10-10",
+        "prices": [
+          {
+            "label": "Upholstery sofa",
+            "price": "500 Points when a clean comes to $100 or more.",
+            "detail": "Quantity: 500. Per point. GST: not stated",
+            "excerpt": "New: earn yuu Points with Upward. | 500 Points when a clean comes to $100 or more.",
+            "sourceUrl": "https://upwardcleaning.sg/",
+            "capturedAt": "2026-10-10",
+            "indicative": false
+          },
+          {
+            "label": "3-Seater Sofa",
+            "price": "S$105",
+            "detail": "As printed. GST: not stated",
+            "excerpt": "3-Seater Sofa | S$105",
+            "sourceUrl": "https://upwardcleaning.sg/",
+            "capturedAt": "2026-10-10",
+            "indicative": false
+          },
+          {
+            "label": "Upholstery sofa",
+            "price": "See source details",
+            "detail": "As printed. GST: not stated",
+            "excerpt": "Sofa Cleaning Singapore | Fabric sofas from S$90. Our 6-step deep extraction with a clear rinse pass leaves zero detergent residue.",
+            "sourceUrl": "https://upwardcleaning.sg/",
+            "capturedAt": "2026-10-10",
+            "indicative": false
+          },
+          {
+            "label": "Upholstery sofa",
+            "price": "See source details",
+            "detail": "As printed. GST: not stated",
+            "excerpt": "Leather Sofa Cleaning Singapore | 3-seater leather S$160. Gentle pH-balanced clean and moisturize that keeps the leather supple.",
+            "sourceUrl": "https://upwardcleaning.sg/",
+            "capturedAt": "2026-10-10",
+            "indicative": false
+          },
+          {
+            "label": "Upholstery sofa",
+            "price": "3-Seater Fabric Sofa - S$105",
+            "detail": "As printed. GST: not stated",
+            "excerpt": "Select a service... | 3-Seater Fabric Sofa - S$105",
+            "sourceUrl": "https://upwardcleaning.sg/contact.html",
+            "capturedAt": "2026-10-10",
+            "indicative": false
+          },
+          {
+            "label": "Upholstery sofa",
+            "price": "2-Seater Fabric Sofa - S$90",
+            "detail": "As printed. GST: not stated",
+            "excerpt": "3-Seater Fabric Sofa - S$105 | 2-Seater Fabric Sofa - S$90",
+            "sourceUrl": "https://upwardcleaning.sg/contact.html",
+            "capturedAt": "2026-10-10",
+            "indicative": false
+          },
+          {
+            "label": "Upholstery sofa",
+            "price": "3-Seater L-Shaped Fabric Sofa - S$120",
+            "detail": "As printed. GST: not stated",
+            "excerpt": "1-Seater Armchair - S$58 | 3-Seater L-Shaped Fabric Sofa - S$120",
+            "sourceUrl": "https://upwardcleaning.sg/contact.html",
+            "capturedAt": "2026-10-10",
+            "indicative": false
+          }
+        ],
+        "priceSummary": "7 pricing entries"
+      },
+      {
+        "name": "Mattress",
+        "description": "",
+        "explanation": "Sofa, Mattress & Upholstery Cleaning Singapore | Upward",
+        "sourceUrl": "https://upwardcleaning.sg/",
+        "capturedAt": "2026-10-10",
+        "prices": [
+          {
+            "label": "Queen Mattress",
+            "price": "S$100",
+            "detail": "As printed. GST: not stated",
+            "excerpt": "Queen Mattress | S$100",
+            "sourceUrl": "https://upwardcleaning.sg/",
+            "capturedAt": "2026-10-10",
+            "indicative": false
+          }
+        ]
+      },
+      {
+        "name": "Carpet",
+        "description": "",
+        "explanation": "Rug & Carpet Cleaning Singapore",
+        "sourceUrl": "https://upwardcleaning.sg/",
+        "capturedAt": "2026-10-10",
+        "prices": []
+      },
+      {
+        "name": "Curtain",
+        "description": "",
+        "explanation": "Curtain Cleaning Singapore",
+        "sourceUrl": "https://upwardcleaning.sg/",
+        "capturedAt": "2026-10-10",
+        "prices": [
+          {
+            "label": "Curtain",
+            "price": "See source details",
+            "detail": "As printed. GST: not stated",
+            "excerpt": "Curtain Cleaning Singapore | In-home curtain steaming from S$18 per piece. No take-down, no rehang, done while we're cleaning your sofa.",
+            "sourceUrl": "https://upwardcleaning.sg/",
+            "capturedAt": "2026-10-10",
+            "indicative": false
+          }
+        ]
+      }
+    ],
+    "highlights": [],
+    "sourceUrls": [
+      "https://upwardcleaning.sg/"
+    ],
+    "updatedAt": "2026-10-18T10:03+03:00"
   },
   "cleanox": {
     "headline": "Services published by Cleanox.",

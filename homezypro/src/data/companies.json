@@ -1,5 +1,5 @@
 {
-  "capturedAt": "2026-10-18T01:23+03:00",
+  "capturedAt": "2026-10-18T10:03+03:00",
   "capturedLabel": "18 Oct 2026",
   "companies": [
     {
@@ -47198,7 +47198,7 @@
       "imported": true,
       "databaseId": "gm-3508651125073605305",
       "enrichment": {
-        "checkedAt": "2026-10-18T01:23+03:00",
+        "checkedAt": "2026-10-18T10:03+03:00",
         "supportedServices": [
           {
             "name": "General service",
@@ -47832,6 +47832,366 @@
             "unitBasis": "unit as printed on the page",
             "unitInferred": false,
             "addedBy": "r15.1 QA follow-up: built from the cached company page (https://citycoolingengr.com.sg/pricing/, captured 2026-10-18)"
+          },
+          {
+            "job": "maintenance-contract",
+            "job_trade": "aircon",
+            "service": "Contract servicing, 3 visits a year, 2 units (total per year)",
+            "service_raw": "2 / Units / $155 / $195",
+            "qty": 2,
+            "unit": "total per year for 2 units (3 visits)",
+            "amount_sgd": 155,
+            "amount_max_sgd": null,
+            "from_price": false,
+            "min_units": null,
+            "max_units": null,
+            "units_in_price": 2,
+            "unit_price_sgd": 77.5,
+            "unit_price_max_sgd": null,
+            "unit_price_basis": "total printed for 2 units; per-unit price = amount / 2",
+            "was_amount_sgd": null,
+            "promo": false,
+            "gst": "excluded (page: \"Prices listed are subject to GST\")",
+            "price_text": "2 / Units / $155 / $195 (3X Yearly column)",
+            "excerpt": "Years / 3X Yearly + / 4X Yearly + / 2 / Units / $155 / $195 / Units / $185 / $220 / 4 / Units / $230 / $275 / 5 / Units / $280 / $335 / 6 / Units / $320 / $395 / 7 / Units / $370 / $455 / 8 / Units / $415 / $515 / *Not Inclusive of Condenser Service",
+            "sourceUrl": "https://citycoolingengr.com.sg/pricing/",
+            "capturedAt": "2026-10-18",
+            "unitBasis": "unit as printed on the page",
+            "unitInferred": false,
+            "addedBy": "r15.2: from the company page fetched 2026-10-18 (cached)",
+            "visits_per_year": 3,
+            "columns": "3X Yearly / 4X Yearly",
+            "exclusions": "Not inclusive of condenser service"
+          },
+          {
+            "job": "maintenance-contract",
+            "job_trade": "aircon",
+            "service": "Contract servicing, 4 visits a year, 2 units (total per year)",
+            "service_raw": "2 / Units / $155 / $195",
+            "qty": 2,
+            "unit": "total per year for 2 units (4 visits)",
+            "amount_sgd": 195,
+            "amount_max_sgd": null,
+            "from_price": false,
+            "min_units": null,
+            "max_units": null,
+            "units_in_price": 2,
+            "unit_price_sgd": 97.5,
+            "unit_price_max_sgd": null,
+            "unit_price_basis": "total printed for 2 units; per-unit price = amount / 2",
+            "was_amount_sgd": null,
+            "promo": false,
+            "gst": "excluded (page: \"Prices listed are subject to GST\")",
+            "price_text": "2 / Units / $155 / $195 (4X Yearly column)",
+            "excerpt": "Years / 3X Yearly + / 4X Yearly + / 2 / Units / $155 / $195 / Units / $185 / $220 / 4 / Units / $230 / $275 / 5 / Units / $280 / $335 / 6 / Units / $320 / $395 / 7 / Units / $370 / $455 / 8 / Units / $415 / $515 / *Not Inclusive of Condenser Service",
+            "sourceUrl": "https://citycoolingengr.com.sg/pricing/",
+            "capturedAt": "2026-10-18",
+            "unitBasis": "unit as printed on the page",
+            "unitInferred": false,
+            "addedBy": "r15.2: from the company page fetched 2026-10-18 (cached)",
+            "visits_per_year": 4,
+            "columns": "3X Yearly / 4X Yearly",
+            "exclusions": "Not inclusive of condenser service"
+          },
+          {
+            "job": "maintenance-contract",
+            "job_trade": "aircon",
+            "service": "Contract servicing, 3 visits a year, 4 units (total per year)",
+            "service_raw": "4 / Units / $230 / $275",
+            "qty": 4,
+            "unit": "total per year for 4 units (3 visits)",
+            "amount_sgd": 230,
+            "amount_max_sgd": null,
+            "from_price": false,
+            "min_units": null,
+            "max_units": null,
+            "units_in_price": 4,
+            "unit_price_sgd": 57.5,
+            "unit_price_max_sgd": null,
+            "unit_price_basis": "total printed for 4 units; per-unit price = amount / 4",
+            "was_amount_sgd": null,
+            "promo": false,
+            "gst": "excluded (page: \"Prices listed are subject to GST\")",
+            "price_text": "4 / Units / $230 / $275 (3X Yearly column)",
+            "excerpt": "Years / 3X Yearly + / 4X Yearly + / 2 / Units / $155 / $195 / Units / $185 / $220 / 4 / Units / $230 / $275 / 5 / Units / $280 / $335 / 6 / Units / $320 / $395 / 7 / Units / $370 / $455 / 8 / Units / $415 / $515 / *Not Inclusive of Condenser Service",
+            "sourceUrl": "https://citycoolingengr.com.sg/pricing/",
+            "capturedAt": "2026-10-18",
+            "unitBasis": "unit as printed on the page",
+            "unitInferred": false,
+            "addedBy": "r15.2: from the company page fetched 2026-10-18 (cached)",
+            "visits_per_year": 3,
+            "columns": "3X Yearly / 4X Yearly",
+            "exclusions": "Not inclusive of condenser service"
+          },
+          {
+            "job": "maintenance-contract",
+            "job_trade": "aircon",
+            "service": "Contract servicing, 4 visits a year, 4 units (total per year)",
+            "service_raw": "4 / Units / $230 / $275",
+            "qty": 4,
+            "unit": "total per year for 4 units (4 visits)",
+            "amount_sgd": 275,
+            "amount_max_sgd": null,
+            "from_price": false,
+            "min_units": null,
+            "max_units": null,
+            "units_in_price": 4,
+            "unit_price_sgd": 68.75,
+            "unit_price_max_sgd": null,
+            "unit_price_basis": "total printed for 4 units; per-unit price = amount / 4",
+            "was_amount_sgd": null,
+            "promo": false,
+            "gst": "excluded (page: \"Prices listed are subject to GST\")",
+            "price_text": "4 / Units / $230 / $275 (4X Yearly column)",
+            "excerpt": "Years / 3X Yearly + / 4X Yearly + / 2 / Units / $155 / $195 / Units / $185 / $220 / 4 / Units / $230 / $275 / 5 / Units / $280 / $335 / 6 / Units / $320 / $395 / 7 / Units / $370 / $455 / 8 / Units / $415 / $515 / *Not Inclusive of Condenser Service",
+            "sourceUrl": "https://citycoolingengr.com.sg/pricing/",
+            "capturedAt": "2026-10-18",
+            "unitBasis": "unit as printed on the page",
+            "unitInferred": false,
+            "addedBy": "r15.2: from the company page fetched 2026-10-18 (cached)",
+            "visits_per_year": 4,
+            "columns": "3X Yearly / 4X Yearly",
+            "exclusions": "Not inclusive of condenser service"
+          },
+          {
+            "job": "maintenance-contract",
+            "job_trade": "aircon",
+            "service": "Contract servicing, 3 visits a year, 5 units (total per year)",
+            "service_raw": "5 / Units / $280 / $335",
+            "qty": 5,
+            "unit": "total per year for 5 units (3 visits)",
+            "amount_sgd": 280,
+            "amount_max_sgd": null,
+            "from_price": false,
+            "min_units": null,
+            "max_units": null,
+            "units_in_price": 5,
+            "unit_price_sgd": 56,
+            "unit_price_max_sgd": null,
+            "unit_price_basis": "total printed for 5 units; per-unit price = amount / 5",
+            "was_amount_sgd": null,
+            "promo": false,
+            "gst": "excluded (page: \"Prices listed are subject to GST\")",
+            "price_text": "5 / Units / $280 / $335 (3X Yearly column)",
+            "excerpt": "Years / 3X Yearly + / 4X Yearly + / 2 / Units / $155 / $195 / Units / $185 / $220 / 4 / Units / $230 / $275 / 5 / Units / $280 / $335 / 6 / Units / $320 / $395 / 7 / Units / $370 / $455 / 8 / Units / $415 / $515 / *Not Inclusive of Condenser Service",
+            "sourceUrl": "https://citycoolingengr.com.sg/pricing/",
+            "capturedAt": "2026-10-18",
+            "unitBasis": "unit as printed on the page",
+            "unitInferred": false,
+            "addedBy": "r15.2: from the company page fetched 2026-10-18 (cached)",
+            "visits_per_year": 3,
+            "columns": "3X Yearly / 4X Yearly",
+            "exclusions": "Not inclusive of condenser service"
+          },
+          {
+            "job": "maintenance-contract",
+            "job_trade": "aircon",
+            "service": "Contract servicing, 4 visits a year, 5 units (total per year)",
+            "service_raw": "5 / Units / $280 / $335",
+            "qty": 5,
+            "unit": "total per year for 5 units (4 visits)",
+            "amount_sgd": 335,
+            "amount_max_sgd": null,
+            "from_price": false,
+            "min_units": null,
+            "max_units": null,
+            "units_in_price": 5,
+            "unit_price_sgd": 67,
+            "unit_price_max_sgd": null,
+            "unit_price_basis": "total printed for 5 units; per-unit price = amount / 5",
+            "was_amount_sgd": null,
+            "promo": false,
+            "gst": "excluded (page: \"Prices listed are subject to GST\")",
+            "price_text": "5 / Units / $280 / $335 (4X Yearly column)",
+            "excerpt": "Years / 3X Yearly + / 4X Yearly + / 2 / Units / $155 / $195 / Units / $185 / $220 / 4 / Units / $230 / $275 / 5 / Units / $280 / $335 / 6 / Units / $320 / $395 / 7 / Units / $370 / $455 / 8 / Units / $415 / $515 / *Not Inclusive of Condenser Service",
+            "sourceUrl": "https://citycoolingengr.com.sg/pricing/",
+            "capturedAt": "2026-10-18",
+            "unitBasis": "unit as printed on the page",
+            "unitInferred": false,
+            "addedBy": "r15.2: from the company page fetched 2026-10-18 (cached)",
+            "visits_per_year": 4,
+            "columns": "3X Yearly / 4X Yearly",
+            "exclusions": "Not inclusive of condenser service"
+          },
+          {
+            "job": "maintenance-contract",
+            "job_trade": "aircon",
+            "service": "Contract servicing, 3 visits a year, 6 units (total per year)",
+            "service_raw": "6 / Units / $320 / $395",
+            "qty": 6,
+            "unit": "total per year for 6 units (3 visits)",
+            "amount_sgd": 320,
+            "amount_max_sgd": null,
+            "from_price": false,
+            "min_units": null,
+            "max_units": null,
+            "units_in_price": 6,
+            "unit_price_sgd": 53.33,
+            "unit_price_max_sgd": null,
+            "unit_price_basis": "total printed for 6 units; per-unit price = amount / 6",
+            "was_amount_sgd": null,
+            "promo": false,
+            "gst": "excluded (page: \"Prices listed are subject to GST\")",
+            "price_text": "6 / Units / $320 / $395 (3X Yearly column)",
+            "excerpt": "Years / 3X Yearly + / 4X Yearly + / 2 / Units / $155 / $195 / Units / $185 / $220 / 4 / Units / $230 / $275 / 5 / Units / $280 / $335 / 6 / Units / $320 / $395 / 7 / Units / $370 / $455 / 8 / Units / $415 / $515 / *Not Inclusive of Condenser Service",
+            "sourceUrl": "https://citycoolingengr.com.sg/pricing/",
+            "capturedAt": "2026-10-18",
+            "unitBasis": "unit as printed on the page",
+            "unitInferred": false,
+            "addedBy": "r15.2: from the company page fetched 2026-10-18 (cached)",
+            "visits_per_year": 3,
+            "columns": "3X Yearly / 4X Yearly",
+            "exclusions": "Not inclusive of condenser service"
+          },
+          {
+            "job": "maintenance-contract",
+            "job_trade": "aircon",
+            "service": "Contract servicing, 4 visits a year, 6 units (total per year)",
+            "service_raw": "6 / Units / $320 / $395",
+            "qty": 6,
+            "unit": "total per year for 6 units (4 visits)",
+            "amount_sgd": 395,
+            "amount_max_sgd": null,
+            "from_price": false,
+            "min_units": null,
+            "max_units": null,
+            "units_in_price": 6,
+            "unit_price_sgd": 65.83,
+            "unit_price_max_sgd": null,
+            "unit_price_basis": "total printed for 6 units; per-unit price = amount / 6",
+            "was_amount_sgd": null,
+            "promo": false,
+            "gst": "excluded (page: \"Prices listed are subject to GST\")",
+            "price_text": "6 / Units / $320 / $395 (4X Yearly column)",
+            "excerpt": "Years / 3X Yearly + / 4X Yearly + / 2 / Units / $155 / $195 / Units / $185 / $220 / 4 / Units / $230 / $275 / 5 / Units / $280 / $335 / 6 / Units / $320 / $395 / 7 / Units / $370 / $455 / 8 / Units / $415 / $515 / *Not Inclusive of Condenser Service",
+            "sourceUrl": "https://citycoolingengr.com.sg/pricing/",
+            "capturedAt": "2026-10-18",
+            "unitBasis": "unit as printed on the page",
+            "unitInferred": false,
+            "addedBy": "r15.2: from the company page fetched 2026-10-18 (cached)",
+            "visits_per_year": 4,
+            "columns": "3X Yearly / 4X Yearly",
+            "exclusions": "Not inclusive of condenser service"
+          },
+          {
+            "job": "maintenance-contract",
+            "job_trade": "aircon",
+            "service": "Contract servicing, 3 visits a year, 7 units (total per year)",
+            "service_raw": "7 / Units / $370 / $455",
+            "qty": 7,
+            "unit": "total per year for 7 units (3 visits)",
+            "amount_sgd": 370,
+            "amount_max_sgd": null,
+            "from_price": false,
+            "min_units": null,
+            "max_units": null,
+            "units_in_price": 7,
+            "unit_price_sgd": 52.86,
+            "unit_price_max_sgd": null,
+            "unit_price_basis": "total printed for 7 units; per-unit price = amount / 7",
+            "was_amount_sgd": null,
+            "promo": false,
+            "gst": "excluded (page: \"Prices listed are subject to GST\")",
+            "price_text": "7 / Units / $370 / $455 (3X Yearly column)",
+            "excerpt": "Years / 3X Yearly + / 4X Yearly + / 2 / Units / $155 / $195 / Units / $185 / $220 / 4 / Units / $230 / $275 / 5 / Units / $280 / $335 / 6 / Units / $320 / $395 / 7 / Units / $370 / $455 / 8 / Units / $415 / $515 / *Not Inclusive of Condenser Service",
+            "sourceUrl": "https://citycoolingengr.com.sg/pricing/",
+            "capturedAt": "2026-10-18",
+            "unitBasis": "unit as printed on the page",
+            "unitInferred": false,
+            "addedBy": "r15.2: from the company page fetched 2026-10-18 (cached)",
+            "visits_per_year": 3,
+            "columns": "3X Yearly / 4X Yearly",
+            "exclusions": "Not inclusive of condenser service"
+          },
+          {
+            "job": "maintenance-contract",
+            "job_trade": "aircon",
+            "service": "Contract servicing, 4 visits a year, 7 units (total per year)",
+            "service_raw": "7 / Units / $370 / $455",
+            "qty": 7,
+            "unit": "total per year for 7 units (4 visits)",
+            "amount_sgd": 455,
+            "amount_max_sgd": null,
+            "from_price": false,
+            "min_units": null,
+            "max_units": null,
+            "units_in_price": 7,
+            "unit_price_sgd": 65,
+            "unit_price_max_sgd": null,
+            "unit_price_basis": "total printed for 7 units; per-unit price = amount / 7",
+            "was_amount_sgd": null,
+            "promo": false,
+            "gst": "excluded (page: \"Prices listed are subject to GST\")",
+            "price_text": "7 / Units / $370 / $455 (4X Yearly column)",
+            "excerpt": "Years / 3X Yearly + / 4X Yearly + / 2 / Units / $155 / $195 / Units / $185 / $220 / 4 / Units / $230 / $275 / 5 / Units / $280 / $335 / 6 / Units / $320 / $395 / 7 / Units / $370 / $455 / 8 / Units / $415 / $515 / *Not Inclusive of Condenser Service",
+            "sourceUrl": "https://citycoolingengr.com.sg/pricing/",
+            "capturedAt": "2026-10-18",
+            "unitBasis": "unit as printed on the page",
+            "unitInferred": false,
+            "addedBy": "r15.2: from the company page fetched 2026-10-18 (cached)",
+            "visits_per_year": 4,
+            "columns": "3X Yearly / 4X Yearly",
+            "exclusions": "Not inclusive of condenser service"
+          },
+          {
+            "job": "maintenance-contract",
+            "job_trade": "aircon",
+            "service": "Contract servicing, 3 visits a year, 8 units (total per year)",
+            "service_raw": "8 / Units / $415 / $515",
+            "qty": 8,
+            "unit": "total per year for 8 units (3 visits)",
+            "amount_sgd": 415,
+            "amount_max_sgd": null,
+            "from_price": false,
+            "min_units": null,
+            "max_units": null,
+            "units_in_price": 8,
+            "unit_price_sgd": 51.88,
+            "unit_price_max_sgd": null,
+            "unit_price_basis": "total printed for 8 units; per-unit price = amount / 8",
+            "was_amount_sgd": null,
+            "promo": false,
+            "gst": "excluded (page: \"Prices listed are subject to GST\")",
+            "price_text": "8 / Units / $415 / $515 (3X Yearly column)",
+            "excerpt": "Years / 3X Yearly + / 4X Yearly + / 2 / Units / $155 / $195 / Units / $185 / $220 / 4 / Units / $230 / $275 / 5 / Units / $280 / $335 / 6 / Units / $320 / $395 / 7 / Units / $370 / $455 / 8 / Units / $415 / $515 / *Not Inclusive of Condenser Service",
+            "sourceUrl": "https://citycoolingengr.com.sg/pricing/",
+            "capturedAt": "2026-10-18",
+            "unitBasis": "unit as printed on the page",
+            "unitInferred": false,
+            "addedBy": "r15.2: from the company page fetched 2026-10-18 (cached)",
+            "visits_per_year": 3,
+            "columns": "3X Yearly / 4X Yearly",
+            "exclusions": "Not inclusive of condenser service"
+          },
+          {
+            "job": "maintenance-contract",
+            "job_trade": "aircon",
+            "service": "Contract servicing, 4 visits a year, 8 units (total per year)",
+            "service_raw": "8 / Units / $415 / $515",
+            "qty": 8,
+            "unit": "total per year for 8 units (4 visits)",
+            "amount_sgd": 515,
+            "amount_max_sgd": null,
+            "from_price": false,
+            "min_units": null,
+            "max_units": null,
+            "units_in_price": 8,
+            "unit_price_sgd": 64.38,
+            "unit_price_max_sgd": null,
+            "unit_price_basis": "total printed for 8 units; per-unit price = amount / 8",
+            "was_amount_sgd": null,
+            "promo": false,
+            "gst": "excluded (page: \"Prices listed are subject to GST\")",
+            "price_text": "8 / Units / $415 / $515 (4X Yearly column)",
+            "excerpt": "Years / 3X Yearly + / 4X Yearly + / 2 / Units / $155 / $195 / Units / $185 / $220 / 4 / Units / $230 / $275 / 5 / Units / $280 / $335 / 6 / Units / $320 / $395 / 7 / Units / $370 / $455 / 8 / Units / $415 / $515 / *Not Inclusive of Condenser Service",
+            "sourceUrl": "https://citycoolingengr.com.sg/pricing/",
+            "capturedAt": "2026-10-18",
+            "unitBasis": "unit as printed on the page",
+            "unitInferred": false,
+            "addedBy": "r15.2: from the company page fetched 2026-10-18 (cached)",
+            "visits_per_year": 4,
+            "columns": "3X Yearly / 4X Yearly",
+            "exclusions": "Not inclusive of condenser service"
           }
         ],
         "websiteCheck": {
@@ -47881,26 +48241,26 @@
             "https://citycoolingengr.com.sg/",
             "https://citycoolingengr.com.sg/pricing/"
           ],
-          "capturedAt": "2026-10-18T01:23+03:00"
+          "capturedAt": "2026-10-18T10:03+03:00"
         },
         "faqs": [
           {
             "q": "Do you offer same-day aircon servicing?",
             "a": "Often, yes. Appointments run 7 days a week, and same-day slots are available subject to availability, first come, first served.",
             "sourceUrl": "https://citycoolingengr.com.sg/",
-            "capturedAt": "2026-10-18T01:23+03:00"
+            "capturedAt": "2026-10-18T10:03+03:00"
           },
           {
             "q": "Is there a warranty after servicing?",
             "a": "Yes. General servicing comes with a 90-day workmanship warranty, and water leaking is covered for 3 months after a general service or chemical overhaul. Spare parts we replace carry a 3 to 6 month warranty, depending on the part.",
             "sourceUrl": "https://citycoolingengr.com.sg/",
-            "capturedAt": "2026-10-18T01:23+03:00"
+            "capturedAt": "2026-10-18T10:03+03:00"
           },
           {
             "q": "Which aircon brands do you service?",
             "a": "All major brands, including Daikin, Mitsubishi Electric, Mitsubishi Heavy Industries (Starmex), Panasonic, LG, Samsung, Fujitsu, Toshiba, Midea and Carrier. See our Mitsubishi Daikin servicing pages.",
             "sourceUrl": "https://citycoolingengr.com.sg/",
-            "capturedAt": "2026-10-18T01:23+03:00"
+            "capturedAt": "2026-10-18T10:03+03:00"
           }
         ],
         "highlights": [
@@ -48081,7 +48441,7 @@
       "listingDepth": {
         "full": true,
         "evidenceScore": 6,
-        "checkedAt": "2026-10-18T01:23+03:00"
+        "checkedAt": "2026-10-18T10:03+03:00"
       },
       "primaryTrade": "aircon",
       "alternatePhones": [],
@@ -78402,6 +78762,221 @@
       }
     },
     {
+      "slug": "emilio-s-solutions",
+      "name": "EMILIO'S SOLUTIONS",
+      "category": "cleaning",
+      "categories": [
+        "cleaning"
+      ],
+      "schemaType": "LocalBusiness",
+      "phone": {
+        "value": "+65 8416 2604",
+        "sourceUrl": "https://maps.google.com/?cid=12882958279108325625"
+      },
+      "address": {
+        "value": "2 Gambas Crescent #08-22 Nordcom Two, Singapore 757044",
+        "sourceUrl": "https://data.gov.sg/datasets/d_124a9bd407c7a25f8335b93b86e50fdd/view",
+        "street": "2 Gambas Crescent #08-22 Nordcom Two, Singapore 757044",
+        "postal": "757044",
+        "kind": "registered",
+        "registeredAddress": true
+      },
+      "website": {
+        "value": "https://www.emiliossolutions.com/",
+        "sourceUrl": "https://www.emiliossolutions.com/"
+      },
+      "email": null,
+      "whatsapp": {
+        "value": "+65 8416 2604",
+        "sourceUrl": "https://www.emiliossolutions.com/"
+      },
+      "mapsUrl": "https://maps.google.com/?cid=12882958279108325625",
+      "rating": null,
+      "reviews": [],
+      "services": [],
+      "bestFor": "",
+      "poorFit": "",
+      "priceNote": "Contact the company to confirm the scope, total price and GST.",
+      "priceSourceUrl": "https://www.emiliossolutions.com/",
+      "facts": [],
+      "imported": true,
+      "databaseId": "gm-12882958279108325625",
+      "enrichment": {
+        "checkedAt": "2026-10-18T10:03+03:00",
+        "supportedServices": [
+          {
+            "name": "Move in out",
+            "sourceUrl": "https://www.emiliossolutions.com/",
+            "capturedAt": "2026-10-10"
+          },
+          {
+            "name": "Post renovation",
+            "sourceUrl": "https://www.emiliossolutions.com/",
+            "capturedAt": "2026-10-10"
+          },
+          {
+            "name": "Office cleaning",
+            "sourceUrl": "https://www.emiliossolutions.com/",
+            "capturedAt": "2026-10-10"
+          },
+          {
+            "name": "Window",
+            "sourceUrl": "https://www.emiliossolutions.com/",
+            "capturedAt": "2026-10-10"
+          }
+        ],
+        "about": [
+          {
+            "text": "At Emilio’s Solutions , we don't just clean; we restore. With a specialized focus on residential and condo cleaning across Singapore, we combine years of field experience with high-grade industrial equipment to deliver results that standard services simply can't match.",
+            "sourceUrl": "https://www.emiliossolutions.com/",
+            "capturedAt": "2026-10-10"
+          }
+        ],
+        "hours": null,
+        "serviceArea": {
+          "value": "islandwide",
+          "excerpt": "With a specialized focus on residential and condo cleaning across Singapore, we combine years of field experience with high-grade industrial equipment to deliver results that standard services simply can't match.",
+          "sourceUrl": "https://www.emiliossolutions.com/",
+          "capturedAt": "2026-10-10",
+          "validatedAt": "2026-10-12T00:16+03:00",
+          "validation": "full sentence from the source page; coverage statement (review3 rules)",
+          "previousExcerpt": "With a specialized focus on residential and condo cleaning across Singapore, we combine years of field experience with high-grade indus"
+        },
+        "residential": {
+          "value": "yes",
+          "excerpt": "With a specialized focus on residential and condo cleaning across Singapore, we combine years of field experience with high-grade industrial equipment to deliver results that standard services simply can't match.",
+          "sourceUrl": "https://www.emiliossolutions.com/",
+          "fullSentence": true,
+          "pageFetchedAt": "2026-10-10T18:14:21+03:00",
+          "capturedAt": "2026-10-10",
+          "previousExcerpt": "Premium residential and commercial cleaning services tailored for the Singapore",
+          "previousSourceUrl": "https://www.emiliossolutions.com/"
+        },
+        "licences": [
+          {
+            "type": "NEA cleaning business licence (claimed)",
+            "number": null,
+            "verifiedOn": null,
+            "claimedOn": "https://www.emiliossolutions.com/",
+            "excerpt": "NEA250531/7871L/NO1",
+            "capturedAt": "2026-10-10"
+          }
+        ],
+        "management": [],
+        "uen": "53467871L",
+        "uenSource": "https://www.emiliossolutions.com/",
+        "operatorGroup": null,
+        "priceLines": [],
+        "websiteCheck": {
+          "url": "https://www.emiliossolutions.com/",
+          "finalUrl": "https://www.emiliossolutions.com/",
+          "httpStatus": 200,
+          "checkedAt": "2026-10-11T23:48+03:00",
+          "result": "active"
+        },
+        "serviceLocations": [
+          {
+            "name": "Islandwide",
+            "kind": "stated",
+            "excerpt": "With a specialized focus on residential and condo cleaning across Singapore, we combine years of field experience with high-grade industrial equipment to deliver results that standard services simply can't match.",
+            "sourceUrl": "https://www.emiliossolutions.com/",
+            "capturedAt": "2026-10-10"
+          }
+        ],
+        "bestFor": [],
+        "poorFit": [],
+        "summary": {
+          "text": "EMILIO'S SOLUTIONS is a home cleaning business in Singapore. Its website mentions move in out, post renovation, office cleaning, window. HomezyPro found no published prices on the pages it checked. It says it serves customers islandwide. Its site says it takes residential jobs. Google Maps search data showed 4.9 stars from 115 reviews on 2026-10-11.",
+          "sources": [
+            "https://maps.google.com/?cid=12882958279108325625",
+            "https://www.emiliossolutions.com/"
+          ],
+          "capturedAt": "2026-10-12T00:16+03:00"
+        },
+        "faqs": [],
+        "highlights": [
+          {
+            "text": "Google rating 4.9 from 115 reviews (Google Maps, read 2026-10-11)",
+            "source_url": "https://maps.google.com/?cid=12882958279108325625",
+            "capturedAt": "2026-10-10",
+            "sourceUrl": "https://maps.google.com/?cid=12882958279108325625"
+          },
+          {
+            "text": "Serves customers islandwide",
+            "source_url": "https://www.emiliossolutions.com/",
+            "capturedAt": "2026-10-11",
+            "sourceUrl": "https://www.emiliossolutions.com/"
+          }
+        ],
+        "warranty": null,
+        "foundedYear": null,
+        "emergency": null,
+        "responseTime": null,
+        "brands": [],
+        "payments": [],
+        "socials": [
+          {
+            "name": "instagram",
+            "url": "https://www.instagram.com/emilios_solutions/",
+            "sourceUrl": "https://www.emiliossolutions.com/",
+            "capturedAt": "2026-10-10"
+          }
+        ]
+      },
+      "quoteEvidence": null,
+      "mapEvidence": {
+        "status": "unresolved",
+        "precision": null,
+        "postal": "757044",
+        "addressValue": "2 Gambas Crescent #08-22 Nordcom Two, Singapore 757044",
+        "addressSourceUrl": "https://data.gov.sg/datasets/d_124a9bd407c7a25f8335b93b86e50fdd/view",
+        "place": {
+          "name": "EMILIO'S SOLUTIONS",
+          "cid": "12882958279108325625",
+          "place_id": "ChIJ7-ejLd-NfqkR-fBtSkx2ybI",
+          "url": "https://maps.google.com/?cid=12882958279108325625",
+          "address": null,
+          "postal": null,
+          "phone": "+65 8416 2604",
+          "website": "https://www.emiliossolutions.com/",
+          "readVia": "https://www.google.com/search?tbm=map&hl=en&gl=sg&q=EMILIO%27S+SOLUTIONS+Singapore",
+          "readAt": "2026-10-11T23:48+03:00"
+        },
+        "geocode": null,
+        "latitude": null,
+        "longitude": null
+      },
+      "selfReportedRating": null,
+      "reviewSources": [
+        {
+          "name": "Google Maps",
+          "rating": 4.9,
+          "count": 115,
+          "scale": 5,
+          "sourceUrl": "https://maps.google.com/?cid=12882958279108325625",
+          "checkedAt": "2026-10-11",
+          "method": "Google Maps place (cid 12882958279108325625) read via www.google.com/search?tbm=map at 2026-10-11T23:48+03:00",
+          "note": "",
+          "mirrorsSource": ""
+        }
+      ],
+      "listingDepth": {
+        "full": false,
+        "evidenceScore": 4,
+        "checkedAt": "2026-10-18T10:03+03:00"
+      },
+      "primaryTrade": "cleaning",
+      "alternatePhones": [],
+      "area": "Other Singapore locations",
+      "googleRating": {
+        "value": 4.9,
+        "count": 115,
+        "sourceUrl": "https://maps.google.com/?cid=12882958279108325625",
+        "checkedAt": "2026-10-11T23:48+03:00",
+        "sourceType": "google-maps-search"
+      }
+    },
+    {
       "slug": "eminence-cleaning-group",
       "name": "Eminence Cleaning Group",
       "category": "cleaning",
@@ -91415,6 +91990,360 @@
         "count": 16,
         "sourceUrl": "https://maps.google.com/?cid=16061097621133706975",
         "checkedAt": "2026-10-11T23:17+03:00",
+        "sourceType": "google-maps-search"
+      }
+    },
+    {
+      "slug": "gjourney-services",
+      "name": "GJourney Services",
+      "category": "cleaning",
+      "categories": [
+        "cleaning"
+      ],
+      "schemaType": "LocalBusiness",
+      "phone": {
+        "value": "+65 8309 8589",
+        "sourceUrl": "https://maps.google.com/?cid=15675126981369056052"
+      },
+      "address": {
+        "value": "373B Woodlands Avenue 1, Singapore 732373",
+        "sourceUrl": "https://data.gov.sg/datasets/d_b58303c68e9cf0d2ae93b73ffdbfbfa1/view",
+        "street": "373B Woodlands Avenue 1, Singapore 732373",
+        "postal": "732373",
+        "kind": "registered",
+        "registeredAddress": true
+      },
+      "website": {
+        "value": "https://g-journey.com/",
+        "sourceUrl": "https://g-journey.com/"
+      },
+      "email": {
+        "value": "hello@g-journey.com",
+        "sourceUrl": "https://g-journey.com/"
+      },
+      "whatsapp": {
+        "value": "+65 8309 8589",
+        "sourceUrl": "https://g-journey.com/"
+      },
+      "mapsUrl": "https://maps.google.com/?cid=15675126981369056052",
+      "rating": null,
+      "reviews": [],
+      "services": [],
+      "bestFor": "",
+      "poorFit": "",
+      "priceNote": "Contact the company to confirm the scope, total price and GST.",
+      "priceSourceUrl": "https://g-journey.com/",
+      "facts": [],
+      "imported": true,
+      "databaseId": "gm-15675126981369056052",
+      "enrichment": {
+        "checkedAt": "2026-10-18T10:03+03:00",
+        "supportedServices": [
+          {
+            "name": "Regular cleaning",
+            "sourceUrl": "https://g-journey.com/",
+            "capturedAt": "2026-10-10"
+          },
+          {
+            "name": "Deep cleaning",
+            "sourceUrl": "https://g-journey.com/",
+            "capturedAt": "2026-10-10"
+          },
+          {
+            "name": "Move in out",
+            "sourceUrl": "https://g-journey.com/",
+            "capturedAt": "2026-10-10"
+          },
+          {
+            "name": "Post renovation",
+            "sourceUrl": "https://g-journey.com/",
+            "capturedAt": "2026-10-10"
+          },
+          {
+            "name": "Spring cleaning",
+            "sourceUrl": "https://g-journey.com/",
+            "capturedAt": "2026-10-10"
+          },
+          {
+            "name": "Office cleaning",
+            "sourceUrl": "https://g-journey.com/",
+            "capturedAt": "2026-10-10"
+          },
+          {
+            "name": "Upholstery sofa",
+            "sourceUrl": "https://g-journey.com/",
+            "capturedAt": "2026-10-10"
+          },
+          {
+            "name": "Mattress",
+            "sourceUrl": "https://g-journey.com/",
+            "capturedAt": "2026-10-10"
+          },
+          {
+            "name": "Carpet",
+            "sourceUrl": "https://g-journey.com/",
+            "capturedAt": "2026-10-10"
+          },
+          {
+            "name": "Curtain",
+            "sourceUrl": "https://g-journey.com/",
+            "capturedAt": "2026-10-10"
+          },
+          {
+            "name": "Window",
+            "sourceUrl": "https://g-journey.com/",
+            "capturedAt": "2026-10-10"
+          }
+        ],
+        "about": [
+          {
+            "text": "Every cleaning appointment is an opportunity to earn your trust through reliable service, attentive care and consistently high standards. From regular home cleaning to one-off sessions, our team is committed to delivering a cleaner, more comfortable space for every customer.",
+            "sourceUrl": "https://g-journey.com/",
+            "capturedAt": "2026-10-10"
+          }
+        ],
+        "hours": null,
+        "serviceArea": {
+          "value": "islandwide",
+          "excerpt": "Bringing hands-on cleaning knowledge and practical experience to homes across Singapore.",
+          "sourceUrl": "https://g-journey.com/",
+          "capturedAt": "2026-10-10",
+          "validatedAt": "2026-10-12T00:57+03:00",
+          "validation": "full sentence from the source page; coverage statement (review3 rules)",
+          "previousExcerpt": "nds-on cleaning knowledge and practical experience to homes across Singapore."
+        },
+        "residential": {
+          "value": "yes",
+          "excerpt": "From HDB flats and condominiums to landed homes, our trained and vetted team provides reliable care tailored to the way Singapore households live.",
+          "sourceUrl": "https://g-journey.com/",
+          "fullSentence": true,
+          "pageFetchedAt": "2026-10-10T18:14:26+03:00",
+          "capturedAt": "2026-10-10",
+          "previousExcerpt": "Trusted by homeowners who value dependable service, clear communication and a job",
+          "previousSourceUrl": "https://g-journey.com/"
+        },
+        "licences": [],
+        "management": [],
+        "uen": "202128581E",
+        "uenSource": "https://data.gov.sg/datasets/d_b58303c68e9cf0d2ae93b73ffdbfbfa1/view",
+        "operatorGroup": null,
+        "priceLines": [
+          {
+            "job": "regular-cleaning",
+            "service": "Support for HDBs, Condos and Landed Homes - We believe in honesty and clarity, which is why our pricing and service commitments are shared u",
+            "qty": null,
+            "unit": "per hour",
+            "amount_sgd": 22,
+            "was_amount_sgd": null,
+            "promo": false,
+            "gst": "not stated",
+            "price_text": "We believe in honesty and clarity, which is why our pricing and service commitments are shared upfront. Regular home cle",
+            "sourceUrl": "https://g-journey.com/",
+            "excerpt": "Transparent Pricing and Service Standards | We believe in honesty and clarity, which is why our pricing and service commitments are shared upfront. Regular home cleaning service sessions start from S$22 per hour, with a",
+            "capturedAt": "2026-10-10",
+            "unitBasis": "hourly wording printed next to the price",
+            "unitInferred": false,
+            "min_hours": null,
+            "unit_price_basis": "price is for one hour as printed",
+            "units_in_price": 1,
+            "unit_price_sgd": 22,
+            "from_price": false
+          },
+          {
+            "job": "regular-cleaning",
+            "service": "Hourly Cleaning - Hourly cleaning starts from S$22 per hour, with add-on services priced separately based on the task, cleaning area and lev",
+            "qty": null,
+            "unit": "per hour",
+            "amount_sgd": 22,
+            "was_amount_sgd": null,
+            "promo": false,
+            "gst": "not stated",
+            "price_text": "Hourly cleaning starts from S$22 per hour, with add-on services priced separately based on the task, cleaning area and l",
+            "sourceUrl": "https://g-journey.com/",
+            "excerpt": "A convenient option for quick touch-ups or targeted tasks. Simply choose the number of hours you need, and our team will focus on the areas that matter most to you. | Hourly cleaning starts from S$22 per hour, with add-o",
+            "capturedAt": "2026-10-10",
+            "unitBasis": "hourly wording printed next to the price",
+            "unitInferred": false,
+            "min_hours": null,
+            "unit_price_basis": "price is for one hour as printed",
+            "units_in_price": 1,
+            "unit_price_sgd": 22,
+            "from_price": true
+          },
+          {
+            "job": "office-cleaning",
+            "service": "Commercial Cleaning - Commercial cleaning is available from S$24 per hour for routine visits, or from S$250 per project for one-time deep cl",
+            "qty": null,
+            "unit": "per hour",
+            "amount_sgd": 24,
+            "was_amount_sgd": null,
+            "promo": false,
+            "gst": "not stated",
+            "price_text": "Commercial cleaning is available from S$24 per hour for routine visits, or from S$250 per project for one-time deep clea",
+            "sourceUrl": "https://g-journey.com/",
+            "excerpt": "From offices to business spaces, we help maintain a tidy, hygienic environment that supports daily operations and leaves a positive impression on staff and visitors. | Commercial cleaning is available from S$24 per hour",
+            "capturedAt": "2026-10-10",
+            "unitBasis": "hourly wording printed next to the price",
+            "unitInferred": false,
+            "min_hours": null,
+            "unit_price_basis": "price is for one hour as printed",
+            "units_in_price": 1,
+            "unit_price_sgd": 24,
+            "from_price": true
+          },
+          {
+            "job": "deep-cleaning",
+            "service": "Upholstery Deep Cleaning - Upholstery deep cleaning starts from S$60 per item, depending on the material, size and condition of the furnishi",
+            "qty": null,
+            "unit": "per piece",
+            "amount_sgd": 60,
+            "was_amount_sgd": null,
+            "promo": false,
+            "gst": "not stated",
+            "price_text": "Upholstery deep cleaning starts from S$60 per item, depending on the material, size and condition of the furnishing.",
+            "sourceUrl": "https://g-journey.com/",
+            "excerpt": "Our upholstery care removes dirt, stains, and allergens from sofas, carpets, curtains, and more, restoring comfort and freshness to your soft furnishings. | Upholstery deep cleaning starts from S$60 per item, depending o",
+            "capturedAt": "2026-10-10",
+            "unitBasis": "per piece printed next to the price",
+            "unitInferred": false,
+            "unit_price_basis": "price is for one piece as printed",
+            "units_in_price": 1,
+            "unit_price_sgd": 60,
+            "from_price": true
+          }
+        ],
+        "websiteCheck": {
+          "url": "https://www.g-journey.com/",
+          "finalUrl": "https://g-journey.com/",
+          "httpStatus": 200,
+          "checkedAt": "2026-10-12T00:48+03:00",
+          "result": "active"
+        },
+        "serviceLocations": [
+          {
+            "name": "Islandwide",
+            "kind": "stated",
+            "excerpt": "Bringing hands-on cleaning knowledge and practical experience to homes across Singapore.",
+            "sourceUrl": "https://g-journey.com/",
+            "capturedAt": "2026-10-12"
+          }
+        ],
+        "bestFor": [
+          {
+            "text": "Prints a regular cleaning price on its site: S$22 per hour (GST not stated)",
+            "excerpt": "Transparent Pricing and Service Standards | We believe in honesty and clarity, which is why our pricing and service commitments are shared upfront. Regular home cleaning service sessions start from S$22 per hour, with a",
+            "source_url": "https://g-journey.com/",
+            "capturedAt": "2026-10-10",
+            "sourceUrl": "https://g-journey.com/"
+          }
+        ],
+        "poorFit": [],
+        "summary": {
+          "text": "GJourney Services is a home cleaning business in Singapore. Its website mentions regular cleaning, deep cleaning, move in out, post renovation and other services. It publishes prices for deep cleaning, office cleaning and regular cleaning. It says it serves customers islandwide. Its site says it takes residential jobs. Google Maps search data showed 4.8 stars from 187 reviews on 2026-10-12.",
+          "sources": [
+            "https://maps.google.com/?cid=15675126981369056052",
+            "https://g-journey.com/"
+          ],
+          "capturedAt": "2026-10-12T00:57+03:00"
+        },
+        "faqs": [],
+        "highlights": [
+          {
+            "text": "Publishes prices on its website",
+            "source_url": "https://g-journey.com/",
+            "capturedAt": "2026-10-10",
+            "sourceUrl": "https://g-journey.com/"
+          },
+          {
+            "text": "Google rating 4.8 from 187 reviews (Google Maps, read 2026-10-12)",
+            "source_url": "https://maps.google.com/?cid=15675126981369056052",
+            "capturedAt": "2026-10-10",
+            "sourceUrl": "https://maps.google.com/?cid=15675126981369056052"
+          },
+          {
+            "text": "Serves customers islandwide",
+            "source_url": "https://g-journey.com/",
+            "capturedAt": "2026-10-11",
+            "sourceUrl": "https://g-journey.com/"
+          }
+        ],
+        "warranty": null,
+        "foundedYear": null,
+        "emergency": null,
+        "responseTime": null,
+        "brands": [],
+        "payments": [],
+        "socials": [
+          {
+            "name": "instagram",
+            "url": "https://www.instagram.com/gjourneyservices",
+            "sourceUrl": "https://g-journey.com/",
+            "capturedAt": "2026-10-10"
+          },
+          {
+            "name": "facebook",
+            "url": "https://www.facebook.com/gjourneyservices",
+            "sourceUrl": "https://g-journey.com/",
+            "capturedAt": "2026-10-10"
+          },
+          {
+            "name": "tiktok",
+            "url": "https://www.tiktok.com/@gjourneyservices",
+            "sourceUrl": "https://g-journey.com/",
+            "capturedAt": "2026-10-10"
+          }
+        ]
+      },
+      "quoteEvidence": null,
+      "mapEvidence": {
+        "status": "unresolved",
+        "precision": null,
+        "postal": "732373",
+        "addressValue": "373B Woodlands Avenue 1, Singapore 732373",
+        "addressSourceUrl": "https://data.gov.sg/datasets/d_b58303c68e9cf0d2ae93b73ffdbfbfa1/view",
+        "place": {
+          "name": "GJourney Services",
+          "cid": "15675126981369056052",
+          "place_id": "ChIJjfouFfcCuE0RNMukbfA8idk",
+          "url": "https://maps.google.com/?cid=15675126981369056052",
+          "address": null,
+          "postal": null,
+          "phone": "+65 8309 8589",
+          "website": "https://www.g-journey.com/",
+          "readVia": "https://www.google.com/search?tbm=map&hl=en&gl=sg&q=GJourney+Services+Singapore",
+          "readAt": "2026-10-12T00:48+03:00"
+        },
+        "geocode": null,
+        "latitude": null,
+        "longitude": null
+      },
+      "selfReportedRating": null,
+      "reviewSources": [
+        {
+          "name": "Google Maps",
+          "rating": 4.8,
+          "count": 187,
+          "scale": 5,
+          "sourceUrl": "https://maps.google.com/?cid=15675126981369056052",
+          "checkedAt": "2026-10-12",
+          "method": "Google Maps place (cid 15675126981369056052) read via www.google.com/search?tbm=map at 2026-10-12T00:48+03:00",
+          "note": "",
+          "mirrorsSource": ""
+        }
+      ],
+      "listingDepth": {
+        "full": true,
+        "evidenceScore": 5,
+        "checkedAt": "2026-10-18T10:03+03:00"
+      },
+      "primaryTrade": "cleaning",
+      "alternatePhones": [],
+      "area": "Woodlands",
+      "googleRating": {
+        "value": 4.8,
+        "count": 187,
+        "sourceUrl": "https://maps.google.com/?cid=15675126981369056052",
+        "checkedAt": "2026-10-12T00:48+03:00",
         "sourceType": "google-maps-search"
       }
     },
@@ -160209,6 +161138,268 @@
       }
     },
     {
+      "slug": "primehome-plumbing-electrical-engineering-pte-ltd",
+      "name": "Primehome Plumbing & Electrical Engineering Pte Ltd",
+      "category": "plumbing",
+      "categories": [
+        "plumbing"
+      ],
+      "schemaType": "Plumber",
+      "phone": {
+        "value": "+65 8810 4924",
+        "sourceUrl": "https://maps.google.com/?cid=18365506591458775577"
+      },
+      "address": {
+        "value": "104 Gul Circle, Singapore 629590",
+        "sourceUrl": "https://data.gov.sg/datasets/d_181005ca270b45408b4cdfc954980ca2/view",
+        "street": "104 Gul Circle, Singapore 629590",
+        "postal": "629590",
+        "kind": "registered",
+        "registeredAddress": true
+      },
+      "website": {
+        "value": "https://www.primehomesg.com/",
+        "sourceUrl": "https://www.primehomesg.com/"
+      },
+      "email": null,
+      "whatsapp": {
+        "value": "+65 9123 4567",
+        "sourceUrl": "https://www.primehomesg.com/contact"
+      },
+      "mapsUrl": "https://maps.google.com/?cid=18365506591458775577",
+      "rating": null,
+      "reviews": [],
+      "services": [],
+      "bestFor": "",
+      "poorFit": "",
+      "priceNote": "Contact the company to confirm the scope, total price and GST.",
+      "priceSourceUrl": "https://www.primehomesg.com/",
+      "facts": [],
+      "imported": true,
+      "databaseId": "gm-18365506591458775577",
+      "enrichment": {
+        "checkedAt": "2026-10-18T10:03+03:00",
+        "supportedServices": [
+          {
+            "name": "Choke clearing",
+            "sourceUrl": "https://www.primehomesg.com/",
+            "capturedAt": "2026-10-10"
+          },
+          {
+            "name": "Leak repair",
+            "sourceUrl": "https://www.primehomesg.com/",
+            "capturedAt": "2026-10-10"
+          },
+          {
+            "name": "Pipe replacement",
+            "sourceUrl": "https://www.primehomesg.com/",
+            "capturedAt": "2026-10-10"
+          },
+          {
+            "name": "Floor trap",
+            "sourceUrl": "https://www.primehomesg.com/",
+            "capturedAt": "2026-10-10"
+          },
+          {
+            "name": "Plumbing repair",
+            "sourceUrl": "https://www.primehomesg.com/",
+            "capturedAt": "2026-10-10"
+          }
+        ],
+        "about": [
+          {
+            "text": "We provide fast and reliable plumbing and basic electrical services for residential homes across Singapore. Whether you're dealing with a choked toilet, leaking pipe, or faulty light switch, we respond quickly and get the job done properly. Our technicians are fluent in English, Malay and Mandarin (华语)",
+            "sourceUrl": "https://www.primehomesg.com/",
+            "capturedAt": "2026-10-10"
+          }
+        ],
+        "hours": null,
+        "serviceArea": {
+          "value": "islandwide",
+          "excerpt": "We provide fast and reliable plumbing and basic electrical services for residential homes across Singapore.",
+          "sourceUrl": "https://www.primehomesg.com/",
+          "capturedAt": "2026-10-10",
+          "validatedAt": "2026-10-11T23:23+03:00",
+          "validation": "full sentence from the source page; coverage statement (review3 rules)",
+          "previousExcerpt": "lumbing and basic electrical services for residential homes across Singapore. Whether you're dealing with a choked toilet, leaking pipe,"
+        },
+        "residential": {
+          "value": "yes",
+          "excerpt": "We provide fast and reliable plumbing and basic electrical services for residential homes across Singapore.",
+          "sourceUrl": "https://www.primehomesg.com/",
+          "fullSentence": true,
+          "pageFetchedAt": "2026-10-10T18:25:18+03:00",
+          "capturedAt": "2026-10-10",
+          "previousExcerpt": "ast and reliable plumbing and basic electrical services for residential homes across Singapore. Whether you're dealing with a choke",
+          "previousSourceUrl": "https://www.primehomesg.com/"
+        },
+        "licences": [],
+        "management": [],
+        "uen": "202604125K",
+        "uenSource": "https://data.gov.sg/datasets/d_181005ca270b45408b4cdfc954980ca2/view",
+        "operatorGroup": null,
+        "priceLines": [],
+        "websiteCheck": {
+          "url": "https://www.primehomesg.com/",
+          "finalUrl": "https://www.primehomesg.com/",
+          "httpStatus": 200,
+          "checkedAt": "2026-10-11T23:06+03:00",
+          "result": "active"
+        },
+        "serviceLocations": [
+          {
+            "name": "Islandwide",
+            "kind": "stated",
+            "excerpt": "We provide fast and reliable plumbing and basic electrical services for residential homes across Singapore.",
+            "sourceUrl": "https://www.primehomesg.com/",
+            "capturedAt": "2026-10-10"
+          },
+          {
+            "name": "Yishun",
+            "kind": "stated",
+            "excerpt": "PrimeHome serves HDB and condo homes across Singapore - including Yishun, Woodlands, Tampines, Jurong West, Punggol, Clementi, Bedok, Ang Mo Kio and more.",
+            "sourceUrl": "https://www.primehomesg.com/electrical-services",
+            "capturedAt": "2026-10-10"
+          },
+          {
+            "name": "Woodlands",
+            "kind": "stated",
+            "excerpt": "PrimeHome serves HDB and condo homes across Singapore - including Yishun, Woodlands, Tampines, Jurong West, Punggol, Clementi, Bedok, Ang Mo Kio and more.",
+            "sourceUrl": "https://www.primehomesg.com/electrical-services",
+            "capturedAt": "2026-10-10"
+          },
+          {
+            "name": "Tampines",
+            "kind": "stated",
+            "excerpt": "PrimeHome serves HDB and condo homes across Singapore - including Yishun, Woodlands, Tampines, Jurong West, Punggol, Clementi, Bedok, Ang Mo Kio and more.",
+            "sourceUrl": "https://www.primehomesg.com/electrical-services",
+            "capturedAt": "2026-10-10"
+          },
+          {
+            "name": "Jurong West",
+            "kind": "stated",
+            "excerpt": "PrimeHome serves HDB and condo homes across Singapore - including Yishun, Woodlands, Tampines, Jurong West, Punggol, Clementi, Bedok, Ang Mo Kio and more.",
+            "sourceUrl": "https://www.primehomesg.com/electrical-services",
+            "capturedAt": "2026-10-10"
+          },
+          {
+            "name": "Punggol",
+            "kind": "stated",
+            "excerpt": "PrimeHome serves HDB and condo homes across Singapore - including Yishun, Woodlands, Tampines, Jurong West, Punggol, Clementi, Bedok, Ang Mo Kio and more.",
+            "sourceUrl": "https://www.primehomesg.com/electrical-services",
+            "capturedAt": "2026-10-10"
+          },
+          {
+            "name": "Clementi",
+            "kind": "stated",
+            "excerpt": "PrimeHome serves HDB and condo homes across Singapore - including Yishun, Woodlands, Tampines, Jurong West, Punggol, Clementi, Bedok, Ang Mo Kio and more.",
+            "sourceUrl": "https://www.primehomesg.com/electrical-services",
+            "capturedAt": "2026-10-10"
+          },
+          {
+            "name": "Bedok",
+            "kind": "stated",
+            "excerpt": "PrimeHome serves HDB and condo homes across Singapore - including Yishun, Woodlands, Tampines, Jurong West, Punggol, Clementi, Bedok, Ang Mo Kio and more.",
+            "sourceUrl": "https://www.primehomesg.com/electrical-services",
+            "capturedAt": "2026-10-10"
+          },
+          {
+            "name": "Ang Mo Kio",
+            "kind": "stated",
+            "excerpt": "PrimeHome serves HDB and condo homes across Singapore - including Yishun, Woodlands, Tampines, Jurong West, Punggol, Clementi, Bedok, Ang Mo Kio and more.",
+            "sourceUrl": "https://www.primehomesg.com/electrical-services",
+            "capturedAt": "2026-10-10"
+          }
+        ],
+        "bestFor": [
+          {
+            "text": "Says it offers same-day service",
+            "excerpt": "Available for emergency electrician calls - same day service for power trips, circuit breaker faults, light installation, and socket repairs",
+            "source_url": "https://www.primehomesg.com/electrical-services",
+            "capturedAt": "2026-10-10",
+            "sourceUrl": "https://www.primehomesg.com/electrical-services"
+          }
+        ],
+        "poorFit": [],
+        "summary": {
+          "text": "Primehome Plumbing & Electrical Engineering Pte Ltd is a plumbing business in Singapore. Its website mentions choke clearing, leak repair, pipe replacement, floor trap and other services. HomezyPro found no published prices on the pages it checked. It says it serves customers islandwide. Its site says it takes residential jobs. Google Maps search data showed 5 stars from 76 reviews on 2026-10-11.",
+          "sources": [
+            "https://maps.google.com/?cid=18365506591458775577",
+            "https://www.primehomesg.com/"
+          ],
+          "capturedAt": "2026-10-11T23:23+03:00"
+        },
+        "faqs": [],
+        "highlights": [
+          {
+            "text": "Serves customers islandwide",
+            "source_url": "https://www.primehomesg.com/",
+            "capturedAt": "2026-10-11",
+            "sourceUrl": "https://www.primehomesg.com/"
+          }
+        ],
+        "warranty": null,
+        "foundedYear": null,
+        "emergency": null,
+        "responseTime": null,
+        "brands": [],
+        "payments": [],
+        "socials": []
+      },
+      "quoteEvidence": null,
+      "mapEvidence": {
+        "status": "unresolved",
+        "precision": null,
+        "postal": "629590",
+        "addressValue": "104 Gul Circle, Singapore 629590",
+        "addressSourceUrl": "https://data.gov.sg/datasets/d_181005ca270b45408b4cdfc954980ca2/view",
+        "place": {
+          "name": "Primehome Plumbing & Electrical Engineering Pte Ltd",
+          "cid": "18365506591458775577",
+          "place_id": "ChIJf3eEpyFWDIwRGdL-t_Bi3_4",
+          "url": "https://maps.google.com/?cid=18365506591458775577",
+          "address": null,
+          "postal": null,
+          "phone": "+65 8810 4924",
+          "website": "https://www.primehomesg.com/",
+          "readVia": "https://www.google.com/search?tbm=map&hl=en&gl=sg&q=Primehome+Plumbing+%26+Electrical+Engineering+Pte+Ltd+Singapore",
+          "readAt": "2026-10-11T22:39+03:00"
+        },
+        "geocode": null,
+        "latitude": null,
+        "longitude": null
+      },
+      "selfReportedRating": null,
+      "reviewSources": [
+        {
+          "name": "Google Maps",
+          "rating": 5,
+          "count": 76,
+          "scale": 5,
+          "sourceUrl": "https://maps.google.com/?cid=18365506591458775577",
+          "checkedAt": "2026-10-11",
+          "method": "Google Maps place (cid 18365506591458775577) read via www.google.com/search?tbm=map at 2026-10-11T23:06+03:00",
+          "note": "",
+          "mirrorsSource": ""
+        }
+      ],
+      "listingDepth": {
+        "full": false,
+        "evidenceScore": 4,
+        "checkedAt": "2026-10-18T10:03+03:00"
+      },
+      "primaryTrade": "plumbing",
+      "alternatePhones": [],
+      "area": "Other Singapore locations",
+      "googleRating": {
+        "value": 5,
+        "count": 76,
+        "sourceUrl": "https://maps.google.com/?cid=18365506591458775577",
+        "checkedAt": "2026-10-11T23:06+03:00",
+        "sourceType": "google-maps-search"
+      }
+    },
+    {
       "slug": "profix-handyman-services-singapore-pte-ltd",
       "name": "Profix Handyman services Singapore pte.ltd.",
       "category": "handyman",
@@ -194262,6 +195453,304 @@
       }
     },
     {
+      "slug": "sparkle-cleaning-pte-ltd",
+      "name": "Sparkle Cleaning Pte Ltd",
+      "category": "cleaning",
+      "categories": [
+        "cleaning"
+      ],
+      "schemaType": "LocalBusiness",
+      "phone": {
+        "value": "+65 9424 0524",
+        "sourceUrl": "https://maps.google.com/?cid=17733517444303586357"
+      },
+      "address": {
+        "value": "39 Jalan Pemimpin #03-04 Tailee Industrial Building, Singapore 577182",
+        "sourceUrl": "https://data.gov.sg/datasets/d_df7d2d661c0c11a7c367c9ee4bf896c1/view",
+        "street": "39 Jalan Pemimpin #03-04 Tailee Industrial Building, Singapore 577182",
+        "postal": "577182",
+        "kind": "registered",
+        "registeredAddress": true
+      },
+      "website": {
+        "value": "https://sparklecleaning.com.sg/",
+        "sourceUrl": "https://sparklecleaning.com.sg/"
+      },
+      "email": {
+        "value": "sparklegroupsg@gmail.com",
+        "sourceUrl": "https://sparklecleaning.com.sg/"
+      },
+      "whatsapp": null,
+      "mapsUrl": "https://maps.google.com/?cid=17733517444303586357",
+      "rating": null,
+      "reviews": [],
+      "services": [],
+      "bestFor": "",
+      "poorFit": "",
+      "priceNote": "Contact the company to confirm the scope, total price and GST.",
+      "priceSourceUrl": "https://sparklecleaning.com.sg/services/",
+      "facts": [],
+      "imported": true,
+      "databaseId": "gm-17733517444303586357",
+      "enrichment": {
+        "checkedAt": "2026-10-18T10:03+03:00",
+        "supportedServices": [
+          {
+            "name": "Regular cleaning",
+            "sourceUrl": "https://sparklecleaning.com.sg/",
+            "capturedAt": "2026-10-10"
+          },
+          {
+            "name": "Deep cleaning",
+            "sourceUrl": "https://sparklecleaning.com.sg/",
+            "capturedAt": "2026-10-10"
+          },
+          {
+            "name": "Move in out",
+            "sourceUrl": "https://sparklecleaning.com.sg/",
+            "capturedAt": "2026-10-10"
+          },
+          {
+            "name": "Post renovation",
+            "sourceUrl": "https://sparklecleaning.com.sg/",
+            "capturedAt": "2026-10-10"
+          },
+          {
+            "name": "Office cleaning",
+            "sourceUrl": "https://sparklecleaning.com.sg/",
+            "capturedAt": "2026-10-10"
+          },
+          {
+            "name": "Upholstery sofa",
+            "sourceUrl": "https://sparklecleaning.com.sg/",
+            "capturedAt": "2026-10-10"
+          },
+          {
+            "name": "Carpet",
+            "sourceUrl": "https://sparklecleaning.com.sg/",
+            "capturedAt": "2026-10-10"
+          },
+          {
+            "name": "Curtain",
+            "sourceUrl": "https://sparklecleaning.com.sg/",
+            "capturedAt": "2026-10-10"
+          },
+          {
+            "name": "Window",
+            "sourceUrl": "https://sparklecleaning.com.sg/services/",
+            "capturedAt": "2026-10-10"
+          }
+        ],
+        "about": [
+          {
+            "text": "At Sparkle Cleaning Pte Ltd, our cleaning services company known for its professionalism, affordable pricing and strong customer satisfaction ratings.",
+            "sourceUrl": "https://sparklecleaning.com.sg/",
+            "capturedAt": "2026-10-10"
+          },
+          {
+            "text": "Our Clany Eco team members are friendly and professional, and you can count on them to take good care of your place.",
+            "sourceUrl": "https://sparklecleaning.com.sg/about-us/",
+            "capturedAt": "2026-10-10"
+          }
+        ],
+        "hours": {
+          "text": "Monday Open 24 hours; Tuesday Open 24 hours; Wednesday Open 24 hours; Thursday Open 24 hours; Friday Open 24 hours; Saturday Open 24 hours; Sunday Closed",
+          "sourceUrl": "https://maps.google.com/?cid=17733517444303586357",
+          "sourceLabel": "Google Maps place data",
+          "capturedAt": "2026-10-11T23:48+03:00"
+        },
+        "serviceArea": {
+          "value": "named areas: East, North, South, West",
+          "excerpt": "From North to South, East to West - We Serve All Singapore",
+          "sourceUrl": "https://sparklecleaning.com.sg/services/",
+          "sourceLabel": "company site, other page body text",
+          "capturedAt": "2026-10-10",
+          "validatedAt": "2026-10-12T00:16+03:00",
+          "method": "review3 coverage-statement match"
+        },
+        "residential": {
+          "value": "yes",
+          "excerpt": "From residential spaces to post-renovation cleaning, Sparkle Cleaning Pte Ltd focuses on every corner and surface to create cleaner, healthier and more comfortable environments for our clients.",
+          "sourceUrl": "https://sparklecleaning.com.sg/about-us/",
+          "fullSentence": true,
+          "pageFetchedAt": "2026-10-10T18:26:48+03:00",
+          "capturedAt": "2026-10-10",
+          "previousExcerpt": "nd reliable communication, making them a trusted choice for residential and post-renovation cleaning.",
+          "previousSourceUrl": "https://sparklecleaning.com.sg/"
+        },
+        "licences": [],
+        "management": [],
+        "uen": "",
+        "uenSource": "",
+        "operatorGroup": null,
+        "priceLines": [
+          {
+            "job": "window",
+            "service": "Interior window cleaning | $35 extra",
+            "qty": null,
+            "unit": "as printed",
+            "amount_sgd": 35,
+            "was_amount_sgd": null,
+            "promo": false,
+            "gst": "not stated",
+            "price_text": "Interior window cleaning | $35 extra",
+            "sourceUrl": "https://sparklecleaning.com.sg/services/",
+            "excerpt": "Interior window cleaning | $35 extra",
+            "capturedAt": "2026-10-10",
+            "addedBy": "review3 cached-page price scan (11 Oct 2026)",
+            "unitBasis": "ambiguous: no unit wording and job not inherently per unit/per job",
+            "unitInferred": false,
+            "unit_price_basis": "price is for one job/item (unit as printed) as printed",
+            "units_in_price": 1,
+            "unit_price_sgd": 35,
+            "from_price": false
+          }
+        ],
+        "websiteCheck": {
+          "url": "https://www.sparklecleaning.com.sg/",
+          "finalUrl": "https://sparklecleaning.com.sg/",
+          "httpStatus": 200,
+          "checkedAt": "2026-10-11T23:48+03:00",
+          "result": "active"
+        },
+        "serviceLocations": [
+          {
+            "name": "Islandwide",
+            "kind": "stated",
+            "excerpt": "Our professional curtain cleaning service is dedicated to delivering exceptional cleanliness, hygiene, and care for your curtains and drapes across Singapore.",
+            "sourceUrl": "https://sparklecleaning.com.sg/services/curtain-cleaning/",
+            "capturedAt": "2026-10-12"
+          }
+        ],
+        "bestFor": [
+          {
+            "text": "Prints a window price on its site: S$35 (GST not stated)",
+            "excerpt": "Interior window cleaning | $35 extra",
+            "source_url": "https://sparklecleaning.com.sg/services/",
+            "capturedAt": "2026-10-10",
+            "sourceUrl": "https://sparklecleaning.com.sg/services/"
+          }
+        ],
+        "poorFit": [],
+        "summary": {
+          "text": "Sparkle Cleaning Pte Ltd is a home cleaning business in Singapore. Its website mentions regular cleaning, deep cleaning, move in out, post renovation and other services. It publishes prices for window. It says it serves East, North, South, West. Its site says it takes residential jobs. Google Maps search data showed 5 stars from 59 reviews on 2026-10-11.",
+          "sources": [
+            "https://maps.google.com/?cid=17733517444303586357",
+            "https://sparklecleaning.com.sg/",
+            "https://sparklecleaning.com.sg/services/",
+            "https://sparklecleaning.com.sg/about-us/"
+          ],
+          "capturedAt": "2026-10-12T00:16+03:00"
+        },
+        "faqs": [
+          {
+            "q": "How do I book a deep cleaning service?",
+            "a": "Simply contact Sparkle Cleaning Pte Ltd through WhatsApp, phone call, or the booking form to schedule your appointment. from our blog Cleaning Tips From Pros More Tips Our Goal is to Wow You With Every Clean",
+            "sourceUrl": "https://sparklecleaning.com.sg/",
+            "capturedAt": "2026-10-18T10:03+03:00"
+          }
+        ],
+        "highlights": [
+          {
+            "text": "Mentions a satisfaction guarantee",
+            "source_url": "https://sparklecleaning.com.sg/",
+            "capturedAt": "2026-10-10",
+            "sourceUrl": "https://sparklecleaning.com.sg/"
+          },
+          {
+            "text": "Publishes prices on its website",
+            "source_url": "https://sparklecleaning.com.sg/services/",
+            "capturedAt": "2026-10-10",
+            "sourceUrl": "https://sparklecleaning.com.sg/services/"
+          },
+          {
+            "text": "Google rating 5 from 59 reviews (Google Maps, read 2026-10-11)",
+            "source_url": "https://maps.google.com/?cid=17733517444303586357",
+            "capturedAt": "2026-10-10",
+            "sourceUrl": "https://maps.google.com/?cid=17733517444303586357"
+          }
+        ],
+        "warranty": {
+          "value": "Satisfaction Guarantee",
+          "excerpt": "& Supplies Provided Our cleaners provide all the essential equipment & supplies. 100% Satisfaction Guarantee If you’re not happy with your cleaning, we’ll be back to fix the missed areas for free. Vetted & Background",
+          "source_url": "https://sparklecleaning.com.sg/",
+          "capturedAt": "2026-10-10",
+          "sourceUrl": "https://sparklecleaning.com.sg/"
+        },
+        "foundedYear": null,
+        "emergency": null,
+        "responseTime": null,
+        "brands": [],
+        "payments": [],
+        "socials": [
+          {
+            "name": "facebook",
+            "url": "https://www.facebook.com/SparkleCleaning.sg/",
+            "sourceUrl": "https://sparklecleaning.com.sg/",
+            "capturedAt": "2026-10-10"
+          },
+          {
+            "name": "instagram",
+            "url": "https://www.instagram.com/sparklecleaningsg/",
+            "sourceUrl": "https://sparklecleaning.com.sg/",
+            "capturedAt": "2026-10-10"
+          }
+        ]
+      },
+      "quoteEvidence": null,
+      "mapEvidence": {
+        "status": "unresolved",
+        "precision": null,
+        "postal": "577182",
+        "addressValue": "39 Jalan Pemimpin #03-04 Tailee Industrial Building, Singapore 577182",
+        "addressSourceUrl": "https://data.gov.sg/datasets/d_df7d2d661c0c11a7c367c9ee4bf896c1/view",
+        "place": {
+          "name": "Sparkle Cleaning Pte Ltd",
+          "cid": "17733517444303586357",
+          "place_id": "ChIJ9_q3KjJ_uAYRNYTozSgcGvY",
+          "url": "https://maps.google.com/?cid=17733517444303586357",
+          "address": null,
+          "postal": null,
+          "phone": "+65 9424 0524",
+          "website": "http://www.sparklecleaning.com.sg/",
+          "readVia": "https://www.google.com/search?tbm=map&hl=en&gl=sg&q=home+cleaning+Bedok&pb=!4m12!1m3!1d6000!2d103.9273!3d1.3236!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!7i20!8i40!10b1!12m6!2m3!5m1!6e2!20e3!10b1!16b1",
+          "readAt": "2026-10-11T23:09+03:00"
+        },
+        "geocode": null,
+        "latitude": null,
+        "longitude": null
+      },
+      "selfReportedRating": null,
+      "reviewSources": [
+        {
+          "name": "Google Maps",
+          "rating": 5,
+          "count": 59,
+          "scale": 5,
+          "sourceUrl": "https://maps.google.com/?cid=17733517444303586357",
+          "checkedAt": "2026-10-11",
+          "method": "Google Maps place (cid 17733517444303586357) read via www.google.com/search?tbm=map at 2026-10-11T23:48+03:00",
+          "note": "",
+          "mirrorsSource": ""
+        }
+      ],
+      "listingDepth": {
+        "full": true,
+        "evidenceScore": 6,
+        "checkedAt": "2026-10-18T10:03+03:00"
+      },
+      "primaryTrade": "cleaning",
+      "alternatePhones": [],
+      "area": "Other Singapore locations",
+      "googleRating": {
+        "value": 5,
+        "count": 59,
+        "sourceUrl": "https://maps.google.com/?cid=17733517444303586357",
+        "checkedAt": "2026-10-11T23:48+03:00",
+        "sourceType": "google-maps-search"
+      }
+    },
+    {
       "slug": "sparkle-pro-cleaning-pte-ltd",
       "name": "Sparkle Pro Cleaning Pte Ltd",
       "category": "cleaning",
@@ -205054,6 +206543,240 @@
       }
     },
     {
+      "slug": "the-cleaning-lab",
+      "name": "The Cleaning Lab",
+      "category": "cleaning",
+      "categories": [
+        "cleaning"
+      ],
+      "schemaType": "LocalBusiness",
+      "phone": {
+        "value": "+65 8950 8951",
+        "sourceUrl": "https://maps.google.com/?cid=7897436129245739792"
+      },
+      "address": {
+        "value": "1 Tampines North Drive 1, #06-08 T-Space, Singapore 528559",
+        "sourceUrl": "https://www.thecleaninglabsg.com/",
+        "street": "1 Tampines North Drive 1, #06-08 T-Space, Singapore 528559",
+        "postal": "528559",
+        "kind": "premises"
+      },
+      "website": {
+        "value": "https://www.thecleaninglabsg.com/",
+        "sourceUrl": "https://www.thecleaninglabsg.com/"
+      },
+      "email": null,
+      "whatsapp": {
+        "value": "+65 8950 8951",
+        "sourceUrl": "https://www.thecleaninglabsg.com/"
+      },
+      "mapsUrl": "https://maps.google.com/?cid=7897436129245739792",
+      "rating": null,
+      "reviews": [],
+      "services": [],
+      "bestFor": "",
+      "poorFit": "",
+      "priceNote": "Contact the company to confirm the scope, total price and GST.",
+      "priceSourceUrl": "https://www.thecleaninglabsg.com/",
+      "facts": [],
+      "imported": true,
+      "databaseId": "gm-7897436129245739792",
+      "enrichment": {
+        "checkedAt": "2026-10-18T10:03+03:00",
+        "supportedServices": [
+          {
+            "name": "Deep cleaning",
+            "sourceUrl": "https://www.thecleaninglabsg.com/",
+            "capturedAt": "2026-10-10"
+          },
+          {
+            "name": "Move in out",
+            "sourceUrl": "https://www.thecleaninglabsg.com/",
+            "capturedAt": "2026-10-10"
+          },
+          {
+            "name": "Post renovation",
+            "sourceUrl": "https://www.thecleaninglabsg.com/",
+            "capturedAt": "2026-10-10"
+          },
+          {
+            "name": "Spring cleaning",
+            "sourceUrl": "https://www.thecleaninglabsg.com/",
+            "capturedAt": "2026-10-10"
+          },
+          {
+            "name": "Upholstery sofa",
+            "sourceUrl": "https://www.thecleaninglabsg.com/",
+            "capturedAt": "2026-10-10"
+          },
+          {
+            "name": "Mattress",
+            "sourceUrl": "https://www.thecleaninglabsg.com/",
+            "capturedAt": "2026-10-10"
+          }
+        ],
+        "about": [
+          {
+            "text": "At The Cleaning Lab, we are dedicated to delivering top-notch cleaning solutions tailored to our clients' requirements. With years of experience, we have mastered the art of rejuvenating spaces and ensuring a pristine environment for all. Our mission is to exceed expectations and provide exceptional cleaning services that make a difference in the cleanliness and hygiene standards of homes and businesses.",
+            "sourceUrl": "https://www.thecleaninglabsg.com/",
+            "capturedAt": "2026-10-10"
+          }
+        ],
+        "hours": null,
+        "serviceArea": {
+          "value": "islandwide",
+          "excerpt": "Our post-renovation cleaning service provides thorough cleaning for newly renovated homes, offices, shops, and commercial spaces across Singapore.",
+          "sourceUrl": "https://www.thecleaninglabsg.com/",
+          "capturedAt": "2026-10-10",
+          "validatedAt": "2026-10-12T00:16+03:00",
+          "validation": "full sentence from the source page; coverage statement (review3 rules)",
+          "previousExcerpt": "ewly renovated homes, offices, shops, and commercial spaces across Singapore. We ensure every corner is cleaned and ready for immediate"
+        },
+        "residential": {
+          "value": "yes",
+          "excerpt": "We effectively remove dust mites, stains, bacteria, allergens, and unpleasant odours using safe and NEA-friendly cleaning methods, helping to create a cleaner and healthier indoor environment for Singapore homes and offices.",
+          "sourceUrl": "https://www.thecleaninglabsg.com/",
+          "fullSentence": true,
+          "pageFetchedAt": "2026-10-12T00:05:33+03:00",
+          "capturedAt": "2026-10-12"
+        },
+        "licences": [
+          {
+            "type": "NEA cleaning business licence (claimed)",
+            "number": null,
+            "verifiedOn": null,
+            "claimedOn": "https://www.thecleaninglabsg.com/",
+            "excerpt": "NEA260641/0123J/C3/N01",
+            "capturedAt": "2026-10-10"
+          }
+        ],
+        "management": [],
+        "uen": "53440123J",
+        "uenSource": "https://data.gov.sg/datasets/d_72f37e5c5d192951ddc5513c2b134482/view",
+        "operatorGroup": null,
+        "priceLines": [],
+        "websiteCheck": {
+          "url": "https://www.thecleaninglabsg.com/",
+          "finalUrl": "https://www.thecleaninglabsg.com/",
+          "httpStatus": 200,
+          "checkedAt": "2026-10-11T23:57+03:00",
+          "result": "active"
+        },
+        "serviceLocations": [
+          {
+            "name": "Islandwide",
+            "kind": "stated",
+            "excerpt": "Our post-renovation cleaning service provides thorough cleaning for newly renovated homes, offices, shops, and commercial spaces across Singapore.",
+            "sourceUrl": "https://www.thecleaninglabsg.com/",
+            "capturedAt": "2026-10-12"
+          }
+        ],
+        "bestFor": [],
+        "poorFit": [],
+        "summary": {
+          "text": "The Cleaning Lab is a home cleaning business in Singapore. Its website mentions deep cleaning, move in out, post renovation, spring cleaning and other services. HomezyPro found no published prices on the pages it checked. It says it serves customers islandwide. Its site says it takes residential jobs. Google Maps search data showed 4.9 stars from 67 reviews on 2026-10-11.",
+          "sources": [
+            "https://maps.google.com/?cid=7897436129245739792",
+            "https://www.thecleaninglabsg.com/"
+          ],
+          "capturedAt": "2026-10-12T00:16+03:00"
+        },
+        "faqs": [],
+        "highlights": [
+          {
+            "text": "Google rating 4.9 from 67 reviews (Google Maps search data, read 2026-10-11)",
+            "source_url": "https://maps.google.com/?cid=7897436129245739792",
+            "capturedAt": "2026-10-11",
+            "sourceUrl": "https://maps.google.com/?cid=7897436129245739792"
+          },
+          {
+            "text": "Serves customers islandwide",
+            "source_url": "https://www.thecleaninglabsg.com/",
+            "capturedAt": "2026-10-11",
+            "sourceUrl": "https://www.thecleaninglabsg.com/"
+          }
+        ],
+        "warranty": null,
+        "foundedYear": null,
+        "emergency": null,
+        "responseTime": null,
+        "brands": [],
+        "payments": [],
+        "socials": [
+          {
+            "name": "facebook",
+            "url": "https://www.facebook.com/thecleaninglabsg/reviews",
+            "sourceUrl": "https://www.thecleaninglabsg.com/",
+            "capturedAt": "2026-10-10"
+          },
+          {
+            "name": "instagram",
+            "url": "https://www.instagram.com/thecleaninglab.sg",
+            "sourceUrl": "https://www.thecleaninglabsg.com/",
+            "capturedAt": "2026-10-10"
+          },
+          {
+            "name": "tiktok",
+            "url": "https://www.tiktok.com/@thecleaninglab.sg",
+            "sourceUrl": "https://www.thecleaninglabsg.com/",
+            "capturedAt": "2026-10-10"
+          }
+        ]
+      },
+      "quoteEvidence": null,
+      "mapEvidence": {
+        "status": "unresolved",
+        "precision": null,
+        "postal": "528559",
+        "addressValue": "1 Tampines North Drive 1, #06-08 T-Space, Singapore 528559",
+        "addressSourceUrl": "https://www.thecleaninglabsg.com/",
+        "place": {
+          "name": "The Cleaning Lab",
+          "cid": "7897436129245739792",
+          "place_id": "ChIJH5wijAA_FI4REDsHMFFUmW0",
+          "url": "https://maps.google.com/?cid=7897436129245739792",
+          "address": null,
+          "postal": null,
+          "phone": "+65 8950 8951",
+          "website": "http://www.thecleaninglabsg.com/",
+          "readVia": "https://www.google.com/search?tbm=map&hl=en&gl=sg&q=home+cleaning+service&pb=!4m12!1m3!1d6000!2d103.9!3d1.4!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!7i20!8i20!10b1!12m6!2m3!5m1!6e2!20e3!10b1!16b1",
+          "readAt": "2026-10-11T22:39+03:00"
+        },
+        "geocode": null,
+        "latitude": null,
+        "longitude": null
+      },
+      "selfReportedRating": null,
+      "reviewSources": [
+        {
+          "name": "Google Maps",
+          "rating": 4.9,
+          "count": 67,
+          "scale": 5,
+          "sourceUrl": "https://maps.google.com/?cid=7897436129245739792",
+          "checkedAt": "2026-10-11",
+          "method": "Google Maps place (cid 7897436129245739792) read via www.google.com/search?tbm=map at 2026-10-11T22:39+03:00",
+          "note": "",
+          "mirrorsSource": ""
+        }
+      ],
+      "listingDepth": {
+        "full": false,
+        "evidenceScore": 4,
+        "checkedAt": "2026-10-18T10:03+03:00"
+      },
+      "primaryTrade": "cleaning",
+      "alternatePhones": [],
+      "area": "Tampines",
+      "googleRating": {
+        "value": 4.9,
+        "count": 67,
+        "sourceUrl": "https://maps.google.com/?cid=7897436129245739792",
+        "checkedAt": "2026-10-11T23:57+03:00",
+        "sourceType": "google-maps-search"
+      }
+    },
+    {
       "slug": "the-good-husband-laundromats-drycleaners-serangoon",
       "name": "The Good Husband Laundromats & Drycleaners (Serangoon)",
       "category": "cleaning",
@@ -205281,7 +207004,7 @@
       "imported": true,
       "databaseId": "gm-11600662789321647147",
       "enrichment": {
-        "checkedAt": "2026-10-18T01:23+03:00",
+        "checkedAt": "2026-10-18T10:03+03:00",
         "supportedServices": [
           {
             "name": "General service",
@@ -206017,6 +207740,670 @@
             "unitBasis": "unit as printed on the page",
             "unitInferred": false,
             "addedBy": "r15.1 QA follow-up: built from the cached company page (https://thetop.com.sg/aircon-servicing-price-list/, captured 2026-10-18)"
+          },
+          {
+            "job": "general-service",
+            "job_trade": "aircon",
+            "service": "Aircon general servicing, 7 units (total)",
+            "service_raw": "7 units…$140",
+            "qty": 7,
+            "unit": "total for 7 units",
+            "amount_sgd": 140,
+            "amount_max_sgd": null,
+            "from_price": false,
+            "min_units": null,
+            "max_units": null,
+            "units_in_price": 7,
+            "unit_price_sgd": 20,
+            "unit_price_max_sgd": null,
+            "unit_price_basis": "total printed for 7 units; per-unit price = amount / 7",
+            "was_amount_sgd": null,
+            "promo": false,
+            "gst": "excluded (as printed)",
+            "price_text": "7 units…$140",
+            "excerpt": "Aircon General Servicing / 1 unit…$45 / 2 units…$60 / 3 units…$75 / 4 units…$90 / 5 units…$105 / 6 units…$120 / 7 units…$140 / 8 units…$160 / 9 units…$180 / 10 units…$200",
+            "sourceUrl": "https://thetop.com.sg/aircon-servicing-price-list/",
+            "capturedAt": "2026-10-18",
+            "unitBasis": "unit as printed on the page",
+            "unitInferred": false,
+            "addedBy": "r15.2: from the company page fetched 2026-10-18 (cached)"
+          },
+          {
+            "job": "general-service",
+            "job_trade": "aircon",
+            "service": "Aircon general servicing, 8 units (total)",
+            "service_raw": "8 units…$160",
+            "qty": 8,
+            "unit": "total for 8 units",
+            "amount_sgd": 160,
+            "amount_max_sgd": null,
+            "from_price": false,
+            "min_units": null,
+            "max_units": null,
+            "units_in_price": 8,
+            "unit_price_sgd": 20,
+            "unit_price_max_sgd": null,
+            "unit_price_basis": "total printed for 8 units; per-unit price = amount / 8",
+            "was_amount_sgd": null,
+            "promo": false,
+            "gst": "excluded (as printed)",
+            "price_text": "8 units…$160",
+            "excerpt": "Aircon General Servicing / 1 unit…$45 / 2 units…$60 / 3 units…$75 / 4 units…$90 / 5 units…$105 / 6 units…$120 / 7 units…$140 / 8 units…$160 / 9 units…$180 / 10 units…$200",
+            "sourceUrl": "https://thetop.com.sg/aircon-servicing-price-list/",
+            "capturedAt": "2026-10-18",
+            "unitBasis": "unit as printed on the page",
+            "unitInferred": false,
+            "addedBy": "r15.2: from the company page fetched 2026-10-18 (cached)"
+          },
+          {
+            "job": "general-service",
+            "job_trade": "aircon",
+            "service": "Aircon general servicing, 9 units (total)",
+            "service_raw": "9 units…$180",
+            "qty": 9,
+            "unit": "total for 9 units",
+            "amount_sgd": 180,
+            "amount_max_sgd": null,
+            "from_price": false,
+            "min_units": null,
+            "max_units": null,
+            "units_in_price": 9,
+            "unit_price_sgd": 20,
+            "unit_price_max_sgd": null,
+            "unit_price_basis": "total printed for 9 units; per-unit price = amount / 9",
+            "was_amount_sgd": null,
+            "promo": false,
+            "gst": "excluded (as printed)",
+            "price_text": "9 units…$180",
+            "excerpt": "Aircon General Servicing / 1 unit…$45 / 2 units…$60 / 3 units…$75 / 4 units…$90 / 5 units…$105 / 6 units…$120 / 7 units…$140 / 8 units…$160 / 9 units…$180 / 10 units…$200",
+            "sourceUrl": "https://thetop.com.sg/aircon-servicing-price-list/",
+            "capturedAt": "2026-10-18",
+            "unitBasis": "unit as printed on the page",
+            "unitInferred": false,
+            "addedBy": "r15.2: from the company page fetched 2026-10-18 (cached)"
+          },
+          {
+            "job": "general-service",
+            "job_trade": "aircon",
+            "service": "Aircon general servicing, 10 units (total)",
+            "service_raw": "10 units…$200",
+            "qty": 10,
+            "unit": "total for 10 units",
+            "amount_sgd": 200,
+            "amount_max_sgd": null,
+            "from_price": false,
+            "min_units": null,
+            "max_units": null,
+            "units_in_price": 10,
+            "unit_price_sgd": 20,
+            "unit_price_max_sgd": null,
+            "unit_price_basis": "total printed for 10 units; per-unit price = amount / 10",
+            "was_amount_sgd": null,
+            "promo": false,
+            "gst": "excluded (as printed)",
+            "price_text": "10 units…$200",
+            "excerpt": "Aircon General Servicing / 1 unit…$45 / 2 units…$60 / 3 units…$75 / 4 units…$90 / 5 units…$105 / 6 units…$120 / 7 units…$140 / 8 units…$160 / 9 units…$180 / 10 units…$200",
+            "sourceUrl": "https://thetop.com.sg/aircon-servicing-price-list/",
+            "capturedAt": "2026-10-18",
+            "unitBasis": "unit as printed on the page",
+            "unitInferred": false,
+            "addedBy": "r15.2: from the company page fetched 2026-10-18 (cached)"
+          },
+          {
+            "job": "troubleshooting",
+            "job_trade": "aircon",
+            "service": "Aircon troubleshooting repair",
+            "service_raw": "From $40",
+            "qty": 1,
+            "unit": "per job",
+            "amount_sgd": 40,
+            "amount_max_sgd": null,
+            "from_price": true,
+            "min_units": null,
+            "max_units": null,
+            "units_in_price": 1,
+            "unit_price_sgd": 40,
+            "unit_price_max_sgd": null,
+            "unit_price_basis": "price is for one job as printed",
+            "was_amount_sgd": null,
+            "promo": false,
+            "gst": "excluded (as printed)",
+            "price_text": "From $40",
+            "excerpt": "Aircon Troubleshooting Repair / From $40",
+            "sourceUrl": "https://thetop.com.sg/aircon-servicing-price-list/",
+            "capturedAt": "2026-10-18",
+            "unitBasis": "unit as printed on the page",
+            "unitInferred": false,
+            "addedBy": "r15.2: from the company page fetched 2026-10-18 (cached)"
+          },
+          {
+            "job": "gas-top-up",
+            "job_trade": "aircon",
+            "service": "Gas top-up, R22",
+            "service_raw": "R22…$60 - $140",
+            "qty": 1,
+            "unit": "per unit",
+            "amount_sgd": 60,
+            "amount_max_sgd": 140,
+            "from_price": false,
+            "min_units": null,
+            "max_units": null,
+            "units_in_price": 1,
+            "unit_price_sgd": 60,
+            "unit_price_max_sgd": 140,
+            "unit_price_basis": "price is for one unit as printed",
+            "was_amount_sgd": null,
+            "promo": false,
+            "gst": "excluded (as printed)",
+            "price_text": "R22…$60 - $140",
+            "excerpt": "Aircon Gas Top Up / R22…$60 - $140 / R410…$80 - $150 / R32…$100 - $200",
+            "sourceUrl": "https://thetop.com.sg/aircon-servicing-price-list/",
+            "capturedAt": "2026-10-18",
+            "unitBasis": "unit as printed on the page",
+            "unitInferred": false,
+            "addedBy": "r15.2: from the company page fetched 2026-10-18 (cached)"
+          },
+          {
+            "job": "gas-top-up",
+            "job_trade": "aircon",
+            "service": "Gas top-up, R410",
+            "service_raw": "R410…$80 - $150",
+            "qty": 1,
+            "unit": "per unit",
+            "amount_sgd": 80,
+            "amount_max_sgd": 150,
+            "from_price": false,
+            "min_units": null,
+            "max_units": null,
+            "units_in_price": 1,
+            "unit_price_sgd": 80,
+            "unit_price_max_sgd": 150,
+            "unit_price_basis": "price is for one unit as printed",
+            "was_amount_sgd": null,
+            "promo": false,
+            "gst": "excluded (as printed)",
+            "price_text": "R410…$80 - $150",
+            "excerpt": "Aircon Gas Top Up / R22…$60 - $140 / R410…$80 - $150 / R32…$100 - $200",
+            "sourceUrl": "https://thetop.com.sg/aircon-servicing-price-list/",
+            "capturedAt": "2026-10-18",
+            "unitBasis": "unit as printed on the page",
+            "unitInferred": false,
+            "addedBy": "r15.2: from the company page fetched 2026-10-18 (cached)"
+          },
+          {
+            "job": "gas-top-up",
+            "job_trade": "aircon",
+            "service": "Gas top-up, R32",
+            "service_raw": "R32…$100 - $200",
+            "qty": 1,
+            "unit": "per unit",
+            "amount_sgd": 100,
+            "amount_max_sgd": 200,
+            "from_price": false,
+            "min_units": null,
+            "max_units": null,
+            "units_in_price": 1,
+            "unit_price_sgd": 100,
+            "unit_price_max_sgd": 200,
+            "unit_price_basis": "price is for one unit as printed",
+            "was_amount_sgd": null,
+            "promo": false,
+            "gst": "excluded (as printed)",
+            "price_text": "R32…$100 - $200",
+            "excerpt": "Aircon Gas Top Up / R22…$60 - $140 / R410…$80 - $150 / R32…$100 - $200",
+            "sourceUrl": "https://thetop.com.sg/aircon-servicing-price-list/",
+            "capturedAt": "2026-10-18",
+            "unitBasis": "unit as printed on the page",
+            "unitInferred": false,
+            "addedBy": "r15.2: from the company page fetched 2026-10-18 (cached)"
+          },
+          {
+            "job": "maintenance-contract",
+            "job_trade": "aircon",
+            "service": "Yearly contract, tri-yearly (3 visits), 2 units (total per year)",
+            "service_raw": "2 units…$170",
+            "qty": 2,
+            "unit": "total per year for 2 units (3 visits)",
+            "amount_sgd": 170,
+            "amount_max_sgd": null,
+            "from_price": false,
+            "min_units": null,
+            "max_units": null,
+            "units_in_price": 2,
+            "unit_price_sgd": 85,
+            "unit_price_max_sgd": null,
+            "unit_price_basis": "total printed for 2 units; per-unit price = amount / 2",
+            "was_amount_sgd": null,
+            "promo": false,
+            "gst": "excluded (as printed)",
+            "price_text": "2 units…$170",
+            "excerpt": "Tri-yearly / 2 units…$170 / 3 units…$205 / 4 units…$250 / 5 units…$290 / 6 units…$330 / 7 units…$380 / 8 units…$420",
+            "sourceUrl": "https://thetop.com.sg/aircon-servicing-price-list/",
+            "capturedAt": "2026-10-18",
+            "unitBasis": "unit as printed on the page",
+            "unitInferred": false,
+            "addedBy": "r15.2: from the company page fetched 2026-10-18 (cached)",
+            "visits_per_year": 3
+          },
+          {
+            "job": "maintenance-contract",
+            "job_trade": "aircon",
+            "service": "Yearly contract, tri-yearly (3 visits), 3 units (total per year)",
+            "service_raw": "3 units…$205",
+            "qty": 3,
+            "unit": "total per year for 3 units (3 visits)",
+            "amount_sgd": 205,
+            "amount_max_sgd": null,
+            "from_price": false,
+            "min_units": null,
+            "max_units": null,
+            "units_in_price": 3,
+            "unit_price_sgd": 68.33,
+            "unit_price_max_sgd": null,
+            "unit_price_basis": "total printed for 3 units; per-unit price = amount / 3",
+            "was_amount_sgd": null,
+            "promo": false,
+            "gst": "excluded (as printed)",
+            "price_text": "3 units…$205",
+            "excerpt": "Tri-yearly / 2 units…$170 / 3 units…$205 / 4 units…$250 / 5 units…$290 / 6 units…$330 / 7 units…$380 / 8 units…$420",
+            "sourceUrl": "https://thetop.com.sg/aircon-servicing-price-list/",
+            "capturedAt": "2026-10-18",
+            "unitBasis": "unit as printed on the page",
+            "unitInferred": false,
+            "addedBy": "r15.2: from the company page fetched 2026-10-18 (cached)",
+            "visits_per_year": 3
+          },
+          {
+            "job": "maintenance-contract",
+            "job_trade": "aircon",
+            "service": "Yearly contract, tri-yearly (3 visits), 4 units (total per year)",
+            "service_raw": "4 units…$250",
+            "qty": 4,
+            "unit": "total per year for 4 units (3 visits)",
+            "amount_sgd": 250,
+            "amount_max_sgd": null,
+            "from_price": false,
+            "min_units": null,
+            "max_units": null,
+            "units_in_price": 4,
+            "unit_price_sgd": 62.5,
+            "unit_price_max_sgd": null,
+            "unit_price_basis": "total printed for 4 units; per-unit price = amount / 4",
+            "was_amount_sgd": null,
+            "promo": false,
+            "gst": "excluded (as printed)",
+            "price_text": "4 units…$250",
+            "excerpt": "Tri-yearly / 2 units…$170 / 3 units…$205 / 4 units…$250 / 5 units…$290 / 6 units…$330 / 7 units…$380 / 8 units…$420",
+            "sourceUrl": "https://thetop.com.sg/aircon-servicing-price-list/",
+            "capturedAt": "2026-10-18",
+            "unitBasis": "unit as printed on the page",
+            "unitInferred": false,
+            "addedBy": "r15.2: from the company page fetched 2026-10-18 (cached)",
+            "visits_per_year": 3
+          },
+          {
+            "job": "maintenance-contract",
+            "job_trade": "aircon",
+            "service": "Yearly contract, tri-yearly (3 visits), 5 units (total per year)",
+            "service_raw": "5 units…$290",
+            "qty": 5,
+            "unit": "total per year for 5 units (3 visits)",
+            "amount_sgd": 290,
+            "amount_max_sgd": null,
+            "from_price": false,
+            "min_units": null,
+            "max_units": null,
+            "units_in_price": 5,
+            "unit_price_sgd": 58,
+            "unit_price_max_sgd": null,
+            "unit_price_basis": "total printed for 5 units; per-unit price = amount / 5",
+            "was_amount_sgd": null,
+            "promo": false,
+            "gst": "excluded (as printed)",
+            "price_text": "5 units…$290",
+            "excerpt": "Tri-yearly / 2 units…$170 / 3 units…$205 / 4 units…$250 / 5 units…$290 / 6 units…$330 / 7 units…$380 / 8 units…$420",
+            "sourceUrl": "https://thetop.com.sg/aircon-servicing-price-list/",
+            "capturedAt": "2026-10-18",
+            "unitBasis": "unit as printed on the page",
+            "unitInferred": false,
+            "addedBy": "r15.2: from the company page fetched 2026-10-18 (cached)",
+            "visits_per_year": 3
+          },
+          {
+            "job": "maintenance-contract",
+            "job_trade": "aircon",
+            "service": "Yearly contract, tri-yearly (3 visits), 6 units (total per year)",
+            "service_raw": "6 units…$330",
+            "qty": 6,
+            "unit": "total per year for 6 units (3 visits)",
+            "amount_sgd": 330,
+            "amount_max_sgd": null,
+            "from_price": false,
+            "min_units": null,
+            "max_units": null,
+            "units_in_price": 6,
+            "unit_price_sgd": 55,
+            "unit_price_max_sgd": null,
+            "unit_price_basis": "total printed for 6 units; per-unit price = amount / 6",
+            "was_amount_sgd": null,
+            "promo": false,
+            "gst": "excluded (as printed)",
+            "price_text": "6 units…$330",
+            "excerpt": "Tri-yearly / 2 units…$170 / 3 units…$205 / 4 units…$250 / 5 units…$290 / 6 units…$330 / 7 units…$380 / 8 units…$420",
+            "sourceUrl": "https://thetop.com.sg/aircon-servicing-price-list/",
+            "capturedAt": "2026-10-18",
+            "unitBasis": "unit as printed on the page",
+            "unitInferred": false,
+            "addedBy": "r15.2: from the company page fetched 2026-10-18 (cached)",
+            "visits_per_year": 3
+          },
+          {
+            "job": "maintenance-contract",
+            "job_trade": "aircon",
+            "service": "Yearly contract, tri-yearly (3 visits), 7 units (total per year)",
+            "service_raw": "7 units…$380",
+            "qty": 7,
+            "unit": "total per year for 7 units (3 visits)",
+            "amount_sgd": 380,
+            "amount_max_sgd": null,
+            "from_price": false,
+            "min_units": null,
+            "max_units": null,
+            "units_in_price": 7,
+            "unit_price_sgd": 54.29,
+            "unit_price_max_sgd": null,
+            "unit_price_basis": "total printed for 7 units; per-unit price = amount / 7",
+            "was_amount_sgd": null,
+            "promo": false,
+            "gst": "excluded (as printed)",
+            "price_text": "7 units…$380",
+            "excerpt": "Tri-yearly / 2 units…$170 / 3 units…$205 / 4 units…$250 / 5 units…$290 / 6 units…$330 / 7 units…$380 / 8 units…$420",
+            "sourceUrl": "https://thetop.com.sg/aircon-servicing-price-list/",
+            "capturedAt": "2026-10-18",
+            "unitBasis": "unit as printed on the page",
+            "unitInferred": false,
+            "addedBy": "r15.2: from the company page fetched 2026-10-18 (cached)",
+            "visits_per_year": 3
+          },
+          {
+            "job": "maintenance-contract",
+            "job_trade": "aircon",
+            "service": "Yearly contract, tri-yearly (3 visits), 8 units (total per year)",
+            "service_raw": "8 units…$420",
+            "qty": 8,
+            "unit": "total per year for 8 units (3 visits)",
+            "amount_sgd": 420,
+            "amount_max_sgd": null,
+            "from_price": false,
+            "min_units": null,
+            "max_units": null,
+            "units_in_price": 8,
+            "unit_price_sgd": 52.5,
+            "unit_price_max_sgd": null,
+            "unit_price_basis": "total printed for 8 units; per-unit price = amount / 8",
+            "was_amount_sgd": null,
+            "promo": false,
+            "gst": "excluded (as printed)",
+            "price_text": "8 units…$420",
+            "excerpt": "Tri-yearly / 2 units…$170 / 3 units…$205 / 4 units…$250 / 5 units…$290 / 6 units…$330 / 7 units…$380 / 8 units…$420",
+            "sourceUrl": "https://thetop.com.sg/aircon-servicing-price-list/",
+            "capturedAt": "2026-10-18",
+            "unitBasis": "unit as printed on the page",
+            "unitInferred": false,
+            "addedBy": "r15.2: from the company page fetched 2026-10-18 (cached)",
+            "visits_per_year": 3
+          },
+          {
+            "job": "maintenance-contract",
+            "job_trade": "aircon",
+            "service": "Yearly contract, quarterly (4 visits), 2 units (total per year)",
+            "service_raw": "2 units…$200",
+            "qty": 2,
+            "unit": "total per year for 2 units (4 visits)",
+            "amount_sgd": 200,
+            "amount_max_sgd": null,
+            "from_price": false,
+            "min_units": null,
+            "max_units": null,
+            "units_in_price": 2,
+            "unit_price_sgd": 100,
+            "unit_price_max_sgd": null,
+            "unit_price_basis": "total printed for 2 units; per-unit price = amount / 2",
+            "was_amount_sgd": null,
+            "promo": false,
+            "gst": "excluded (as printed)",
+            "price_text": "2 units…$200",
+            "excerpt": "Quarterly / 2 units…$200 / 3 units…$240 / 4 units…$300 / 5 units…$360 / 6 units…$440 / 7 units…$500 / 8 units…$560 / 9 units…$640 / 10 units…$720",
+            "sourceUrl": "https://thetop.com.sg/aircon-servicing-price-list/",
+            "capturedAt": "2026-10-18",
+            "unitBasis": "unit as printed on the page",
+            "unitInferred": false,
+            "addedBy": "r15.2: from the company page fetched 2026-10-18 (cached)",
+            "visits_per_year": 4
+          },
+          {
+            "job": "maintenance-contract",
+            "job_trade": "aircon",
+            "service": "Yearly contract, quarterly (4 visits), 3 units (total per year)",
+            "service_raw": "3 units…$240",
+            "qty": 3,
+            "unit": "total per year for 3 units (4 visits)",
+            "amount_sgd": 240,
+            "amount_max_sgd": null,
+            "from_price": false,
+            "min_units": null,
+            "max_units": null,
+            "units_in_price": 3,
+            "unit_price_sgd": 80,
+            "unit_price_max_sgd": null,
+            "unit_price_basis": "total printed for 3 units; per-unit price = amount / 3",
+            "was_amount_sgd": null,
+            "promo": false,
+            "gst": "excluded (as printed)",
+            "price_text": "3 units…$240",
+            "excerpt": "Quarterly / 2 units…$200 / 3 units…$240 / 4 units…$300 / 5 units…$360 / 6 units…$440 / 7 units…$500 / 8 units…$560 / 9 units…$640 / 10 units…$720",
+            "sourceUrl": "https://thetop.com.sg/aircon-servicing-price-list/",
+            "capturedAt": "2026-10-18",
+            "unitBasis": "unit as printed on the page",
+            "unitInferred": false,
+            "addedBy": "r15.2: from the company page fetched 2026-10-18 (cached)",
+            "visits_per_year": 4
+          },
+          {
+            "job": "maintenance-contract",
+            "job_trade": "aircon",
+            "service": "Yearly contract, quarterly (4 visits), 4 units (total per year)",
+            "service_raw": "4 units…$300",
+            "qty": 4,
+            "unit": "total per year for 4 units (4 visits)",
+            "amount_sgd": 300,
+            "amount_max_sgd": null,
+            "from_price": false,
+            "min_units": null,
+            "max_units": null,
+            "units_in_price": 4,
+            "unit_price_sgd": 75,
+            "unit_price_max_sgd": null,
+            "unit_price_basis": "total printed for 4 units; per-unit price = amount / 4",
+            "was_amount_sgd": null,
+            "promo": false,
+            "gst": "excluded (as printed)",
+            "price_text": "4 units…$300",
+            "excerpt": "Quarterly / 2 units…$200 / 3 units…$240 / 4 units…$300 / 5 units…$360 / 6 units…$440 / 7 units…$500 / 8 units…$560 / 9 units…$640 / 10 units…$720",
+            "sourceUrl": "https://thetop.com.sg/aircon-servicing-price-list/",
+            "capturedAt": "2026-10-18",
+            "unitBasis": "unit as printed on the page",
+            "unitInferred": false,
+            "addedBy": "r15.2: from the company page fetched 2026-10-18 (cached)",
+            "visits_per_year": 4
+          },
+          {
+            "job": "maintenance-contract",
+            "job_trade": "aircon",
+            "service": "Yearly contract, quarterly (4 visits), 5 units (total per year)",
+            "service_raw": "5 units…$360",
+            "qty": 5,
+            "unit": "total per year for 5 units (4 visits)",
+            "amount_sgd": 360,
+            "amount_max_sgd": null,
+            "from_price": false,
+            "min_units": null,
+            "max_units": null,
+            "units_in_price": 5,
+            "unit_price_sgd": 72,
+            "unit_price_max_sgd": null,
+            "unit_price_basis": "total printed for 5 units; per-unit price = amount / 5",
+            "was_amount_sgd": null,
+            "promo": false,
+            "gst": "excluded (as printed)",
+            "price_text": "5 units…$360",
+            "excerpt": "Quarterly / 2 units…$200 / 3 units…$240 / 4 units…$300 / 5 units…$360 / 6 units…$440 / 7 units…$500 / 8 units…$560 / 9 units…$640 / 10 units…$720",
+            "sourceUrl": "https://thetop.com.sg/aircon-servicing-price-list/",
+            "capturedAt": "2026-10-18",
+            "unitBasis": "unit as printed on the page",
+            "unitInferred": false,
+            "addedBy": "r15.2: from the company page fetched 2026-10-18 (cached)",
+            "visits_per_year": 4
+          },
+          {
+            "job": "maintenance-contract",
+            "job_trade": "aircon",
+            "service": "Yearly contract, quarterly (4 visits), 6 units (total per year)",
+            "service_raw": "6 units…$440",
+            "qty": 6,
+            "unit": "total per year for 6 units (4 visits)",
+            "amount_sgd": 440,
+            "amount_max_sgd": null,
+            "from_price": false,
+            "min_units": null,
+            "max_units": null,
+            "units_in_price": 6,
+            "unit_price_sgd": 73.33,
+            "unit_price_max_sgd": null,
+            "unit_price_basis": "total printed for 6 units; per-unit price = amount / 6",
+            "was_amount_sgd": null,
+            "promo": false,
+            "gst": "excluded (as printed)",
+            "price_text": "6 units…$440",
+            "excerpt": "Quarterly / 2 units…$200 / 3 units…$240 / 4 units…$300 / 5 units…$360 / 6 units…$440 / 7 units…$500 / 8 units…$560 / 9 units…$640 / 10 units…$720",
+            "sourceUrl": "https://thetop.com.sg/aircon-servicing-price-list/",
+            "capturedAt": "2026-10-18",
+            "unitBasis": "unit as printed on the page",
+            "unitInferred": false,
+            "addedBy": "r15.2: from the company page fetched 2026-10-18 (cached)",
+            "visits_per_year": 4
+          },
+          {
+            "job": "maintenance-contract",
+            "job_trade": "aircon",
+            "service": "Yearly contract, quarterly (4 visits), 7 units (total per year)",
+            "service_raw": "7 units…$500",
+            "qty": 7,
+            "unit": "total per year for 7 units (4 visits)",
+            "amount_sgd": 500,
+            "amount_max_sgd": null,
+            "from_price": false,
+            "min_units": null,
+            "max_units": null,
+            "units_in_price": 7,
+            "unit_price_sgd": 71.43,
+            "unit_price_max_sgd": null,
+            "unit_price_basis": "total printed for 7 units; per-unit price = amount / 7",
+            "was_amount_sgd": null,
+            "promo": false,
+            "gst": "excluded (as printed)",
+            "price_text": "7 units…$500",
+            "excerpt": "Quarterly / 2 units…$200 / 3 units…$240 / 4 units…$300 / 5 units…$360 / 6 units…$440 / 7 units…$500 / 8 units…$560 / 9 units…$640 / 10 units…$720",
+            "sourceUrl": "https://thetop.com.sg/aircon-servicing-price-list/",
+            "capturedAt": "2026-10-18",
+            "unitBasis": "unit as printed on the page",
+            "unitInferred": false,
+            "addedBy": "r15.2: from the company page fetched 2026-10-18 (cached)",
+            "visits_per_year": 4
+          },
+          {
+            "job": "maintenance-contract",
+            "job_trade": "aircon",
+            "service": "Yearly contract, quarterly (4 visits), 8 units (total per year)",
+            "service_raw": "8 units…$560",
+            "qty": 8,
+            "unit": "total per year for 8 units (4 visits)",
+            "amount_sgd": 560,
+            "amount_max_sgd": null,
+            "from_price": false,
+            "min_units": null,
+            "max_units": null,
+            "units_in_price": 8,
+            "unit_price_sgd": 70,
+            "unit_price_max_sgd": null,
+            "unit_price_basis": "total printed for 8 units; per-unit price = amount / 8",
+            "was_amount_sgd": null,
+            "promo": false,
+            "gst": "excluded (as printed)",
+            "price_text": "8 units…$560",
+            "excerpt": "Quarterly / 2 units…$200 / 3 units…$240 / 4 units…$300 / 5 units…$360 / 6 units…$440 / 7 units…$500 / 8 units…$560 / 9 units…$640 / 10 units…$720",
+            "sourceUrl": "https://thetop.com.sg/aircon-servicing-price-list/",
+            "capturedAt": "2026-10-18",
+            "unitBasis": "unit as printed on the page",
+            "unitInferred": false,
+            "addedBy": "r15.2: from the company page fetched 2026-10-18 (cached)",
+            "visits_per_year": 4
+          },
+          {
+            "job": "maintenance-contract",
+            "job_trade": "aircon",
+            "service": "Yearly contract, quarterly (4 visits), 9 units (total per year)",
+            "service_raw": "9 units…$640",
+            "qty": 9,
+            "unit": "total per year for 9 units (4 visits)",
+            "amount_sgd": 640,
+            "amount_max_sgd": null,
+            "from_price": false,
+            "min_units": null,
+            "max_units": null,
+            "units_in_price": 9,
+            "unit_price_sgd": 71.11,
+            "unit_price_max_sgd": null,
+            "unit_price_basis": "total printed for 9 units; per-unit price = amount / 9",
+            "was_amount_sgd": null,
+            "promo": false,
+            "gst": "excluded (as printed)",
+            "price_text": "9 units…$640",
+            "excerpt": "Quarterly / 2 units…$200 / 3 units…$240 / 4 units…$300 / 5 units…$360 / 6 units…$440 / 7 units…$500 / 8 units…$560 / 9 units…$640 / 10 units…$720",
+            "sourceUrl": "https://thetop.com.sg/aircon-servicing-price-list/",
+            "capturedAt": "2026-10-18",
+            "unitBasis": "unit as printed on the page",
+            "unitInferred": false,
+            "addedBy": "r15.2: from the company page fetched 2026-10-18 (cached)",
+            "visits_per_year": 4
+          },
+          {
+            "job": "maintenance-contract",
+            "job_trade": "aircon",
+            "service": "Yearly contract, quarterly (4 visits), 10 units (total per year)",
+            "service_raw": "10 units…$720",
+            "qty": 10,
+            "unit": "total per year for 10 units (4 visits)",
+            "amount_sgd": 720,
+            "amount_max_sgd": null,
+            "from_price": false,
+            "min_units": null,
+            "max_units": null,
+            "units_in_price": 10,
+            "unit_price_sgd": 72,
+            "unit_price_max_sgd": null,
+            "unit_price_basis": "total printed for 10 units; per-unit price = amount / 10",
+            "was_amount_sgd": null,
+            "promo": false,
+            "gst": "excluded (as printed)",
+            "price_text": "10 units…$720",
+            "excerpt": "Quarterly / 2 units…$200 / 3 units…$240 / 4 units…$300 / 5 units…$360 / 6 units…$440 / 7 units…$500 / 8 units…$560 / 9 units…$640 / 10 units…$720",
+            "sourceUrl": "https://thetop.com.sg/aircon-servicing-price-list/",
+            "capturedAt": "2026-10-18",
+            "unitBasis": "unit as printed on the page",
+            "unitInferred": false,
+            "addedBy": "r15.2: from the company page fetched 2026-10-18 (cached)",
+            "visits_per_year": 4
           }
         ],
         "websiteCheck": {
@@ -206046,14 +208433,14 @@
         ],
         "poorFit": [],
         "summary": {
-          "text": "THETOP AIRCON SERVICE is an aircon servicing business in Singapore. Its website mentions general service, chemical wash, chemical overhaul, gas top up and other services. It publishes prices for chemical overhaul, chemical wash, condenser cleaning and general service. It says it serves customers islandwide. Its site says it takes residential jobs. Google Maps search data showed 4.9 stars from 62 reviews on 2026-10-10.",
+          "text": "THETOP AIRCON SERVICE is an aircon servicing business in Singapore. Its website mentions general service, chemical wash, chemical overhaul, gas top up and other services. It publishes prices for chemical overhaul, chemical wash, condenser cleaning and other jobs. It says it serves customers islandwide. Its site says it takes residential jobs. Google Maps search data showed 4.9 stars from 62 reviews on 2026-10-10.",
           "sources": [
             "https://maps.google.com/?cid=11600662789321647147",
             "https://thetop.com.sg/",
             "https://thetop.com.sg/aircon-servicing-price-list/",
             "https://thetop.com.sg/about-us/"
           ],
-          "capturedAt": "2026-10-18T01:23+03:00"
+          "capturedAt": "2026-10-18T10:03+03:00"
         },
         "faqs": [],
         "highlights": [
@@ -206145,7 +208532,7 @@
       "listingDepth": {
         "full": true,
         "evidenceScore": 6,
-        "checkedAt": "2026-10-18T01:23+03:00"
+        "checkedAt": "2026-10-18T10:03+03:00"
       },
       "primaryTrade": "aircon",
       "alternatePhones": [],
@@ -212946,6 +215333,402 @@
       }
     },
     {
+      "slug": "upward-cleaning-services",
+      "name": "Upward Cleaning Services",
+      "category": "cleaning",
+      "categories": [
+        "cleaning"
+      ],
+      "schemaType": "LocalBusiness",
+      "phone": {
+        "value": "+65 8334 4337",
+        "sourceUrl": "https://maps.google.com/?cid=15467307147916803139"
+      },
+      "address": {
+        "value": "129 Rivervale Street, Singapore 540129",
+        "sourceUrl": "https://data.gov.sg/datasets/d_0cc5f52a1f298b916f317800251057f3/view",
+        "street": "129 Rivervale Street, Singapore 540129",
+        "postal": "540129",
+        "kind": "registered",
+        "registeredAddress": true
+      },
+      "website": {
+        "value": "https://upwardcleaning.sg/",
+        "sourceUrl": "https://upwardcleaning.sg/"
+      },
+      "email": {
+        "value": "enquire@upwardcleaning.sg",
+        "sourceUrl": "https://upwardcleaning.sg/"
+      },
+      "whatsapp": {
+        "value": "+65 8334 4337",
+        "sourceUrl": "https://upwardcleaning.sg/"
+      },
+      "mapsUrl": "https://maps.google.com/?cid=15467307147916803139",
+      "rating": null,
+      "reviews": [],
+      "services": [],
+      "bestFor": "",
+      "poorFit": "",
+      "priceNote": "Contact the company to confirm the scope, total price and GST.",
+      "priceSourceUrl": "https://upwardcleaning.sg/",
+      "facts": [],
+      "imported": true,
+      "databaseId": "gm-15467307147916803139",
+      "enrichment": {
+        "checkedAt": "2026-10-18T10:03+03:00",
+        "supportedServices": [
+          {
+            "name": "Deep cleaning",
+            "sourceUrl": "https://upwardcleaning.sg/",
+            "capturedAt": "2026-10-10"
+          },
+          {
+            "name": "Upholstery sofa",
+            "sourceUrl": "https://upwardcleaning.sg/",
+            "capturedAt": "2026-10-10"
+          },
+          {
+            "name": "Mattress",
+            "sourceUrl": "https://upwardcleaning.sg/",
+            "capturedAt": "2026-10-10"
+          },
+          {
+            "name": "Carpet",
+            "sourceUrl": "https://upwardcleaning.sg/",
+            "capturedAt": "2026-10-10"
+          },
+          {
+            "name": "Curtain",
+            "sourceUrl": "https://upwardcleaning.sg/",
+            "capturedAt": "2026-10-10"
+          }
+        ],
+        "about": [
+          {
+            "text": "In-home curtain steaming from S$18 per piece. No take-down, no rehang, done while we're cleaning your sofa.",
+            "sourceUrl": "https://upwardcleaning.sg/",
+            "capturedAt": "2026-10-10"
+          }
+        ],
+        "hours": {
+          "text": "Monday 7 am-11 pm; Tuesday 7 am-11 pm; Wednesday 7 am-11 pm; Thursday 7 am-11 pm; Friday 7 am-11 pm; Saturday 7 am-11 pm; Sunday 7 am-11 pm",
+          "sourceUrl": "https://maps.google.com/?cid=15467307147916803139",
+          "sourceLabel": "Google Maps place data",
+          "capturedAt": "2026-10-12T02:49+03:00"
+        },
+        "serviceArea": {
+          "value": "islandwide",
+          "excerpt": "Book Online View All Prices ✓ Zero-Residue Guarantee ● Baby & Pet Safe ● Island-wide Singapore 3-Seater Sofa S$105 Queen Mattress S$100 Rug (1m × 1.5m) from S$90 Living Room Bundle S$125 Save S$30 View full price list → You can now earn Points with Upward Earn 500 Points when one clean comes to $100",
+          "sourceUrl": "https://upwardcleaning.sg/",
+          "capturedAt": "2026-10-10",
+          "validatedAt": "2026-10-12T03:01+03:00",
+          "validation": "full sentence from the source page; coverage statement (review3 rules)",
+          "previousExcerpt": "Island-wide Singapore"
+        },
+        "residential": {
+          "value": "yes",
+          "excerpt": "Specialist deep cleaning for every soft furnishing in your Singapore home.",
+          "sourceUrl": "https://upwardcleaning.sg/",
+          "fullSentence": true,
+          "pageFetchedAt": "2026-10-10T18:31:46+03:00",
+          "capturedAt": "2026-10-10"
+        },
+        "licences": [],
+        "management": [],
+        "uen": "",
+        "uenSource": "",
+        "operatorGroup": null,
+        "priceLines": [
+          {
+            "job": "upholstery-sofa",
+            "service": "Sofa, Mattress & Upholstery Cleaning Singapore | Upward - 500 Points when a clean comes to $100 or more.",
+            "qty": 500,
+            "unit": "per point",
+            "amount_sgd": 100,
+            "was_amount_sgd": null,
+            "promo": false,
+            "gst": "not stated",
+            "price_text": "500 Points when a clean comes to $100 or more.",
+            "sourceUrl": "https://upwardcleaning.sg/",
+            "excerpt": "New: earn yuu Points with Upward. | 500 Points when a clean comes to $100 or more.",
+            "capturedAt": "2026-10-10",
+            "from_price": false
+          },
+          {
+            "job": "upholstery-sofa",
+            "service": "3-Seater Sofa",
+            "qty": null,
+            "unit": "as printed",
+            "amount_sgd": 105,
+            "was_amount_sgd": null,
+            "promo": false,
+            "gst": "not stated",
+            "price_text": "S$105",
+            "sourceUrl": "https://upwardcleaning.sg/",
+            "excerpt": "3-Seater Sofa | S$105",
+            "capturedAt": "2026-10-10",
+            "from_price": false
+          },
+          {
+            "job": "mattress",
+            "service": "Queen Mattress",
+            "qty": null,
+            "unit": "as printed",
+            "amount_sgd": 100,
+            "was_amount_sgd": null,
+            "promo": false,
+            "gst": "not stated",
+            "price_text": "S$100",
+            "sourceUrl": "https://upwardcleaning.sg/",
+            "excerpt": "Queen Mattress | S$100",
+            "capturedAt": "2026-10-10",
+            "from_price": false
+          },
+          {
+            "job": "upholstery-sofa",
+            "service": "Sofa Cleaning Singapore - Fabric sofas from S$90. Our 6-step deep extraction with a clear rinse pass leaves zero detergent residue.",
+            "qty": null,
+            "unit": "as printed",
+            "amount_sgd": 90,
+            "was_amount_sgd": null,
+            "promo": false,
+            "gst": "not stated",
+            "price_text": "Fabric sofas from S$90. Our 6-step deep extraction with a clear rinse pass leaves zero detergent residue.",
+            "sourceUrl": "https://upwardcleaning.sg/",
+            "excerpt": "Sofa Cleaning Singapore | Fabric sofas from S$90. Our 6-step deep extraction with a clear rinse pass leaves zero detergent residue.",
+            "capturedAt": "2026-10-10",
+            "from_price": true
+          },
+          {
+            "job": "deep-cleaning",
+            "service": "Rug & Carpet Cleaning Singapore - Rugs from S$90. Full deep clean with clear rinse pass, no chemical stiffness left behind.",
+            "qty": null,
+            "unit": "as printed",
+            "amount_sgd": 90,
+            "was_amount_sgd": null,
+            "promo": false,
+            "gst": "not stated",
+            "price_text": "Rugs from S$90. Full deep clean with clear rinse pass, no chemical stiffness left behind.",
+            "sourceUrl": "https://upwardcleaning.sg/",
+            "excerpt": "Rug & Carpet Cleaning Singapore | Rugs from S$90. Full deep clean with clear rinse pass, no chemical stiffness left behind.",
+            "capturedAt": "2026-10-10",
+            "from_price": true
+          },
+          {
+            "job": "upholstery-sofa",
+            "service": "Leather Sofa Cleaning Singapore - 3-seater leather S$160. Gentle pH-balanced clean and moisturize that keeps the leather supple.",
+            "qty": null,
+            "unit": "as printed",
+            "amount_sgd": 160,
+            "was_amount_sgd": null,
+            "promo": false,
+            "gst": "not stated",
+            "price_text": "3-seater leather S$160. Gentle pH-balanced clean and moisturize that keeps the leather supple.",
+            "sourceUrl": "https://upwardcleaning.sg/",
+            "excerpt": "Leather Sofa Cleaning Singapore | 3-seater leather S$160. Gentle pH-balanced clean and moisturize that keeps the leather supple.",
+            "capturedAt": "2026-10-10",
+            "from_price": false
+          },
+          {
+            "job": "curtain",
+            "service": "Curtain Cleaning Singapore - In-home curtain steaming from S$18 per piece. No take-down, no rehang, done while we're cleaning your sofa.",
+            "qty": null,
+            "unit": "as printed",
+            "amount_sgd": 18,
+            "was_amount_sgd": null,
+            "promo": false,
+            "gst": "not stated",
+            "price_text": "In-home curtain steaming from S$18 per piece. No take-down, no rehang, done while we're cleaning your sofa.",
+            "sourceUrl": "https://upwardcleaning.sg/",
+            "excerpt": "Curtain Cleaning Singapore | In-home curtain steaming from S$18 per piece. No take-down, no rehang, done while we're cleaning your sofa.",
+            "capturedAt": "2026-10-10",
+            "from_price": true
+          },
+          {
+            "job": "deep-cleaning",
+            "service": "3-Seater Sofa + Large Pet Bed. Pet-safe deep clean.",
+            "qty": null,
+            "unit": "as printed",
+            "amount_sgd": 120,
+            "was_amount_sgd": null,
+            "promo": false,
+            "gst": "not stated",
+            "price_text": "S$120",
+            "sourceUrl": "https://upwardcleaning.sg/",
+            "excerpt": "3-Seater Sofa + Large Pet Bed. Pet-safe deep clean. | S$120",
+            "capturedAt": "2026-10-10",
+            "from_price": false
+          },
+          {
+            "job": "upholstery-sofa",
+            "service": "What do you need cleaned? - 3-Seater Fabric Sofa - S$105",
+            "qty": null,
+            "unit": "as printed",
+            "amount_sgd": 105,
+            "was_amount_sgd": null,
+            "promo": false,
+            "gst": "not stated",
+            "price_text": "3-Seater Fabric Sofa - S$105",
+            "sourceUrl": "https://upwardcleaning.sg/contact.html",
+            "excerpt": "Select a service... | 3-Seater Fabric Sofa - S$105",
+            "capturedAt": "2026-10-10",
+            "from_price": false
+          },
+          {
+            "job": "upholstery-sofa",
+            "service": "What do you need cleaned? - 2-Seater Fabric Sofa - S$90",
+            "qty": null,
+            "unit": "as printed",
+            "amount_sgd": 90,
+            "was_amount_sgd": null,
+            "promo": false,
+            "gst": "not stated",
+            "price_text": "2-Seater Fabric Sofa - S$90",
+            "sourceUrl": "https://upwardcleaning.sg/contact.html",
+            "excerpt": "3-Seater Fabric Sofa - S$105 | 2-Seater Fabric Sofa - S$90",
+            "capturedAt": "2026-10-10",
+            "from_price": false
+          },
+          {
+            "job": "upholstery-sofa",
+            "service": "What do you need cleaned? - 3-Seater L-Shaped Fabric Sofa - S$120",
+            "qty": null,
+            "unit": "as printed",
+            "amount_sgd": 120,
+            "was_amount_sgd": null,
+            "promo": false,
+            "gst": "not stated",
+            "price_text": "3-Seater L-Shaped Fabric Sofa - S$120",
+            "sourceUrl": "https://upwardcleaning.sg/contact.html",
+            "excerpt": "1-Seater Armchair - S$58 | 3-Seater L-Shaped Fabric Sofa - S$120",
+            "capturedAt": "2026-10-10",
+            "from_price": false
+          }
+        ],
+        "websiteCheck": {
+          "url": "https://upwardcleaning.sg/",
+          "finalUrl": "https://upwardcleaning.sg/",
+          "httpStatus": 200,
+          "checkedAt": "2026-10-12T02:49+03:00",
+          "result": "active"
+        },
+        "serviceLocations": [],
+        "bestFor": [
+          {
+            "text": "Prints an upholstery sofa price on its site: S$100 per point (GST not stated)",
+            "excerpt": "New: earn yuu Points with Upward. | 500 Points when a clean comes to $100 or more.",
+            "source_url": "https://upwardcleaning.sg/",
+            "capturedAt": "2026-10-10",
+            "sourceUrl": "https://upwardcleaning.sg/"
+          }
+        ],
+        "poorFit": [],
+        "summary": {
+          "text": "Upward Cleaning Services is a home cleaning business in Singapore. Its website mentions deep cleaning, upholstery sofa, mattress, carpet and other services. It publishes prices for curtain, deep cleaning, mattress and upholstery/sofa. It says it serves customers islandwide. Its site says it takes residential jobs. Google Maps search data showed 5 stars from 56 reviews on 2026-10-12.",
+          "sources": [
+            "https://maps.google.com/?cid=15467307147916803139",
+            "https://upwardcleaning.sg/"
+          ],
+          "capturedAt": "2026-10-12T03:05+03:00"
+        },
+        "faqs": [
+          {
+            "q": "Do you bring your own equipment?",
+            "a": "Yes, we bring our own industrial-grade deep extraction machines and eco-friendly solutions. All we need is access to a power point and a water source. Ready for a deeper",
+            "sourceUrl": "https://upwardcleaning.sg/",
+            "capturedAt": "2026-10-18T10:03+03:00"
+          }
+        ],
+        "highlights": [
+          {
+            "text": "Publishes prices on its website",
+            "source_url": "https://upwardcleaning.sg/",
+            "capturedAt": "2026-10-10",
+            "sourceUrl": "https://upwardcleaning.sg/"
+          },
+          {
+            "text": "Serves customers islandwide",
+            "source_url": "https://upwardcleaning.sg/",
+            "capturedAt": "2026-10-10",
+            "sourceUrl": "https://upwardcleaning.sg/"
+          },
+          {
+            "text": "Google rating 5 from 56 reviews (Google Maps, read 2026-10-12)",
+            "source_url": "https://maps.google.com/?cid=15467307147916803139",
+            "capturedAt": "2026-10-10",
+            "sourceUrl": "https://maps.google.com/?cid=15467307147916803139"
+          }
+        ],
+        "warranty": null,
+        "foundedYear": null,
+        "emergency": null,
+        "responseTime": null,
+        "brands": [],
+        "payments": [],
+        "socials": [
+          {
+            "name": "instagram",
+            "url": "https://www.instagram.com/upwardcleaningservices.sg/",
+            "sourceUrl": "https://upwardcleaning.sg/",
+            "capturedAt": "2026-10-10"
+          }
+        ]
+      },
+      "quoteEvidence": null,
+      "mapEvidence": {
+        "status": "unresolved",
+        "precision": null,
+        "postal": "540129",
+        "addressValue": "129 Rivervale Street, Singapore 540129",
+        "addressSourceUrl": "https://data.gov.sg/datasets/d_0cc5f52a1f298b916f317800251057f3/view",
+        "place": {
+          "name": "Upward Cleaning Services",
+          "cid": "15467307147916803139",
+          "place_id": "ChIJmQHbxZY8x60RQ_xw1-bpptY",
+          "url": "https://maps.google.com/?cid=15467307147916803139",
+          "address": null,
+          "postal": null,
+          "phone": "+65 8334 4337",
+          "website": "https://upwardcleaning.sg/",
+          "readVia": "https://www.google.com/search?tbm=map&hl=en&gl=sg&q=Upward+Cleaning+Services+Singapore",
+          "readAt": "2026-10-12T02:49+03:00"
+        },
+        "geocode": null,
+        "latitude": null,
+        "longitude": null
+      },
+      "selfReportedRating": null,
+      "reviewSources": [
+        {
+          "name": "Google Maps",
+          "rating": 5,
+          "count": 56,
+          "scale": 5,
+          "sourceUrl": "https://maps.google.com/?cid=15467307147916803139",
+          "checkedAt": "2026-10-12",
+          "method": "Google Maps place (cid 15467307147916803139) read via www.google.com/search?tbm=map at 2026-10-12T02:49+03:00",
+          "note": "",
+          "mirrorsSource": ""
+        }
+      ],
+      "listingDepth": {
+        "full": true,
+        "evidenceScore": 6,
+        "checkedAt": "2026-10-18T10:03+03:00"
+      },
+      "primaryTrade": "cleaning",
+      "alternatePhones": [],
+      "area": "Other Singapore locations",
+      "googleRating": {
+        "value": 5,
+        "count": 56,
+        "sourceUrl": "https://maps.google.com/?cid=15467307147916803139",
+        "checkedAt": "2026-10-12T02:49+03:00",
+        "sourceType": "google-maps-search"
+      }
+    },
+    {
       "slug": "urban-handyman-sg",
       "name": "Urban Handyman SG",
       "category": "handyman",
@@ -216278,6 +219061,445 @@
         "count": 8,
         "sourceUrl": "https://maps.google.com/?cid=16048238446821529432",
         "checkedAt": "2026-10-10T18:31+03:00",
+        "sourceType": "google-maps-search"
+      }
+    },
+    {
+      "slug": "vs-handyman-s-pte-ltd",
+      "name": "VS Handyman (S) Pte Ltd",
+      "category": "handyman",
+      "categories": [
+        "handyman"
+      ],
+      "schemaType": "HomeAndConstructionBusiness",
+      "phone": {
+        "value": "+65 8099 5335",
+        "sourceUrl": "https://maps.google.com/?cid=10660651129198698701"
+      },
+      "address": {
+        "value": "776 Woodlands Crescent, Singapore 730776",
+        "sourceUrl": "https://data.gov.sg/datasets/d_e97e8e7fc55b85a38babf66b0fa46b73/view",
+        "street": "776 Woodlands Crescent, Singapore 730776",
+        "postal": "730776",
+        "kind": "registered",
+        "registeredAddress": true
+      },
+      "website": {
+        "value": "https://vshandymansg.com/",
+        "sourceUrl": "https://vshandymansg.com/"
+      },
+      "email": null,
+      "whatsapp": {
+        "value": "+65 8099 5335",
+        "sourceUrl": "https://vshandymansg.com/"
+      },
+      "mapsUrl": "https://maps.google.com/?cid=10660651129198698701",
+      "rating": null,
+      "reviews": [],
+      "services": [],
+      "bestFor": "",
+      "poorFit": "",
+      "priceNote": "Contact the company to confirm the scope, total price and GST.",
+      "priceSourceUrl": "https://vshandymansg.com/",
+      "facts": [],
+      "imported": true,
+      "databaseId": "gm-10660651129198698701",
+      "enrichment": {
+        "checkedAt": "2026-10-18T10:03+03:00",
+        "supportedServices": [
+          {
+            "name": "Plumbing",
+            "sourceUrl": "https://vshandymansg.com/",
+            "capturedAt": "2026-10-10"
+          },
+          {
+            "name": "Electrical",
+            "sourceUrl": "https://vshandymansg.com/",
+            "capturedAt": "2026-10-10"
+          },
+          {
+            "name": "Carpentry",
+            "sourceUrl": "https://vshandymansg.com/",
+            "capturedAt": "2026-10-10"
+          },
+          {
+            "name": "Painting",
+            "sourceUrl": "https://vshandymansg.com/",
+            "capturedAt": "2026-10-10"
+          },
+          {
+            "name": "Drilling mounting",
+            "sourceUrl": "https://vshandymansg.com/",
+            "capturedAt": "2026-10-10"
+          },
+          {
+            "name": "Furniture assembly",
+            "sourceUrl": "https://vshandymansg.com/",
+            "capturedAt": "2026-10-10"
+          },
+          {
+            "name": "Door lock",
+            "sourceUrl": "https://vshandymansg.com/",
+            "capturedAt": "2026-10-10"
+          },
+          {
+            "name": "Curtain blinds",
+            "sourceUrl": "https://vshandymansg.com/",
+            "capturedAt": "2026-10-10"
+          },
+          {
+            "name": "Tiling flooring",
+            "sourceUrl": "https://vshandymansg.com/",
+            "capturedAt": "2026-10-10"
+          },
+          {
+            "name": "Wallpaper",
+            "sourceUrl": "https://vshandymansg.com/painting-services-singapore/",
+            "capturedAt": "2026-10-10"
+          }
+        ],
+        "about": [
+          {
+            "text": "Our handyman professionals average more than 10 years of experience in repair trades and take time to investigate each project for a long-lasting solution.",
+            "sourceUrl": "https://vshandymansg.com/",
+            "capturedAt": "2026-10-10"
+          }
+        ],
+        "hours": {
+          "text": "Monday 7:30 am-8 pm; Tuesday 7:30 am-8 pm; Wednesday 7:30 am-8 pm; Thursday 7:30 am-8 pm; Friday 7:30 am-8 pm; Saturday 7:30 am-8 pm; Sunday 7:30 am-8 pm",
+          "sourceUrl": "https://maps.google.com/?cid=10660651129198698701",
+          "sourceLabel": "Google Maps place data",
+          "capturedAt": "2026-10-11T23:12+03:00"
+        },
+        "serviceArea": {
+          "value": "islandwide",
+          "excerpt": "VS Handyman Singapore provides professional plumbing, electrical, painting and handyman services across Singapore including Ang Mo Kio, Bishan, Toa Payoh, Tampines, and CBD.",
+          "sourceUrl": "https://vshandymansg.com/about-us/",
+          "sourceLabel": "company site, about page body text",
+          "capturedAt": "2026-10-10",
+          "validatedAt": "2026-10-11T23:23+03:00",
+          "method": "review3 coverage-statement match",
+          "previousExcerpt": "Across Singapore",
+          "previousRejectedAs": "not a coverage statement or fragment"
+        },
+        "residential": {
+          "value": "yes",
+          "excerpt": "Yes, we work in all property types including HDB flats, condominiums, office units, and landed houses.",
+          "sourceUrl": "https://vshandymansg.com/",
+          "fullSentence": true,
+          "pageFetchedAt": "2026-10-10T21:19:58+03:00",
+          "capturedAt": "2026-10-10",
+          "previousExcerpt": "Residential",
+          "previousSourceUrl": "https://vshandymansg.com/"
+        },
+        "licences": [],
+        "management": [],
+        "uen": "202603470G",
+        "uenSource": "https://data.gov.sg/datasets/d_e97e8e7fc55b85a38babf66b0fa46b73/view",
+        "operatorGroup": null,
+        "priceLines": [],
+        "websiteCheck": {
+          "url": "https://vshandymansg.com/",
+          "finalUrl": "https://vshandymansg.com/",
+          "httpStatus": 200,
+          "checkedAt": "2026-10-11T23:12+03:00",
+          "result": "active"
+        },
+        "serviceLocations": [
+          {
+            "name": "Islandwide",
+            "kind": "stated",
+            "excerpt": "✅ IKEA beds ✅ IKEA wardrobes (PAX, BRIMNES, etc.) ✅ IKEA cabinets & shelves ✅ IKEA tables & storage units ### Areas We Serve in Singapore We provide **wall and ceiling services islandwide**, including: - Central: Orchard, Novena, Toa Payoh - East: Bedok, Tampines, Pasir Ris - West: Jurong, Clementi, Bukit Batok - North: Woodlands, Yishun, Sembawang - South: Bukit Merah, Queenstown No matter where",
+            "sourceUrl": "https://vshandymansg.com/assembly-services-singapore/",
+            "capturedAt": "2026-10-12"
+          },
+          {
+            "name": "Central",
+            "kind": "stated",
+            "excerpt": "We cover most areas in Singapore, including Central, North, South, East, and West regions.",
+            "sourceUrl": "https://vshandymansg.com/",
+            "capturedAt": "2026-10-10"
+          },
+          {
+            "name": "North",
+            "kind": "stated",
+            "excerpt": "We cover most areas in Singapore, including Central, North, South, East, and West regions.",
+            "sourceUrl": "https://vshandymansg.com/",
+            "capturedAt": "2026-10-10"
+          },
+          {
+            "name": "East",
+            "kind": "stated",
+            "excerpt": "We cover most areas in Singapore, including Central, North, South, East, and West regions.",
+            "sourceUrl": "https://vshandymansg.com/",
+            "capturedAt": "2026-10-10"
+          },
+          {
+            "name": "West",
+            "kind": "stated",
+            "excerpt": "We cover most areas in Singapore, including Central, North, South, East, and West regions.",
+            "sourceUrl": "https://vshandymansg.com/",
+            "capturedAt": "2026-10-10"
+          },
+          {
+            "name": "Orchard",
+            "kind": "stated",
+            "excerpt": "✅ IKEA beds ✅ IKEA wardrobes (PAX, BRIMNES, etc.) ✅ IKEA cabinets & shelves ✅ IKEA tables & storage units ### Areas We Serve in Singapore We provide **wall and ceiling services islandwide**, including: - Central: Orchard, Novena, Toa Payoh - East: Bedok, Tampines, Pasir Ris - West: Jurong, Clementi, Bukit Batok - North: Woodlands, Yishun, Sembawang - South: Bukit Merah, Queenstown No matter where",
+            "sourceUrl": "https://vshandymansg.com/assembly-services-singapore/",
+            "capturedAt": "2026-10-12"
+          },
+          {
+            "name": "Novena",
+            "kind": "stated",
+            "excerpt": "✅ IKEA beds ✅ IKEA wardrobes (PAX, BRIMNES, etc.) ✅ IKEA cabinets & shelves ✅ IKEA tables & storage units ### Areas We Serve in Singapore We provide **wall and ceiling services islandwide**, including: - Central: Orchard, Novena, Toa Payoh - East: Bedok, Tampines, Pasir Ris - West: Jurong, Clementi, Bukit Batok - North: Woodlands, Yishun, Sembawang - South: Bukit Merah, Queenstown No matter where",
+            "sourceUrl": "https://vshandymansg.com/assembly-services-singapore/",
+            "capturedAt": "2026-10-12"
+          },
+          {
+            "name": "Toa Payoh",
+            "kind": "stated",
+            "excerpt": "✅ IKEA beds ✅ IKEA wardrobes (PAX, BRIMNES, etc.) ✅ IKEA cabinets & shelves ✅ IKEA tables & storage units ### Areas We Serve in Singapore We provide **wall and ceiling services islandwide**, including: - Central: Orchard, Novena, Toa Payoh - East: Bedok, Tampines, Pasir Ris - West: Jurong, Clementi, Bukit Batok - North: Woodlands, Yishun, Sembawang - South: Bukit Merah, Queenstown No matter where",
+            "sourceUrl": "https://vshandymansg.com/assembly-services-singapore/",
+            "capturedAt": "2026-10-12"
+          },
+          {
+            "name": "Bedok",
+            "kind": "stated",
+            "excerpt": "✅ IKEA beds ✅ IKEA wardrobes (PAX, BRIMNES, etc.) ✅ IKEA cabinets & shelves ✅ IKEA tables & storage units ### Areas We Serve in Singapore We provide **wall and ceiling services islandwide**, including: - Central: Orchard, Novena, Toa Payoh - East: Bedok, Tampines, Pasir Ris - West: Jurong, Clementi, Bukit Batok - North: Woodlands, Yishun, Sembawang - South: Bukit Merah, Queenstown No matter where",
+            "sourceUrl": "https://vshandymansg.com/assembly-services-singapore/",
+            "capturedAt": "2026-10-12"
+          },
+          {
+            "name": "Tampines",
+            "kind": "stated",
+            "excerpt": "✅ IKEA beds ✅ IKEA wardrobes (PAX, BRIMNES, etc.) ✅ IKEA cabinets & shelves ✅ IKEA tables & storage units ### Areas We Serve in Singapore We provide **wall and ceiling services islandwide**, including: - Central: Orchard, Novena, Toa Payoh - East: Bedok, Tampines, Pasir Ris - West: Jurong, Clementi, Bukit Batok - North: Woodlands, Yishun, Sembawang - South: Bukit Merah, Queenstown No matter where",
+            "sourceUrl": "https://vshandymansg.com/assembly-services-singapore/",
+            "capturedAt": "2026-10-12"
+          },
+          {
+            "name": "Pasir Ris",
+            "kind": "stated",
+            "excerpt": "✅ IKEA beds ✅ IKEA wardrobes (PAX, BRIMNES, etc.) ✅ IKEA cabinets & shelves ✅ IKEA tables & storage units ### Areas We Serve in Singapore We provide **wall and ceiling services islandwide**, including: - Central: Orchard, Novena, Toa Payoh - East: Bedok, Tampines, Pasir Ris - West: Jurong, Clementi, Bukit Batok - North: Woodlands, Yishun, Sembawang - South: Bukit Merah, Queenstown No matter where",
+            "sourceUrl": "https://vshandymansg.com/assembly-services-singapore/",
+            "capturedAt": "2026-10-12"
+          },
+          {
+            "name": "Clementi",
+            "kind": "stated",
+            "excerpt": "✅ IKEA beds ✅ IKEA wardrobes (PAX, BRIMNES, etc.) ✅ IKEA cabinets & shelves ✅ IKEA tables & storage units ### Areas We Serve in Singapore We provide **wall and ceiling services islandwide**, including: - Central: Orchard, Novena, Toa Payoh - East: Bedok, Tampines, Pasir Ris - West: Jurong, Clementi, Bukit Batok - North: Woodlands, Yishun, Sembawang - South: Bukit Merah, Queenstown No matter where",
+            "sourceUrl": "https://vshandymansg.com/assembly-services-singapore/",
+            "capturedAt": "2026-10-12"
+          },
+          {
+            "name": "Bukit Batok",
+            "kind": "stated",
+            "excerpt": "✅ IKEA beds ✅ IKEA wardrobes (PAX, BRIMNES, etc.) ✅ IKEA cabinets & shelves ✅ IKEA tables & storage units ### Areas We Serve in Singapore We provide **wall and ceiling services islandwide**, including: - Central: Orchard, Novena, Toa Payoh - East: Bedok, Tampines, Pasir Ris - West: Jurong, Clementi, Bukit Batok - North: Woodlands, Yishun, Sembawang - South: Bukit Merah, Queenstown No matter where",
+            "sourceUrl": "https://vshandymansg.com/assembly-services-singapore/",
+            "capturedAt": "2026-10-12"
+          },
+          {
+            "name": "Woodlands",
+            "kind": "stated",
+            "excerpt": "✅ IKEA beds ✅ IKEA wardrobes (PAX, BRIMNES, etc.) ✅ IKEA cabinets & shelves ✅ IKEA tables & storage units ### Areas We Serve in Singapore We provide **wall and ceiling services islandwide**, including: - Central: Orchard, Novena, Toa Payoh - East: Bedok, Tampines, Pasir Ris - West: Jurong, Clementi, Bukit Batok - North: Woodlands, Yishun, Sembawang - South: Bukit Merah, Queenstown No matter where",
+            "sourceUrl": "https://vshandymansg.com/assembly-services-singapore/",
+            "capturedAt": "2026-10-12"
+          },
+          {
+            "name": "Yishun",
+            "kind": "stated",
+            "excerpt": "✅ IKEA beds ✅ IKEA wardrobes (PAX, BRIMNES, etc.) ✅ IKEA cabinets & shelves ✅ IKEA tables & storage units ### Areas We Serve in Singapore We provide **wall and ceiling services islandwide**, including: - Central: Orchard, Novena, Toa Payoh - East: Bedok, Tampines, Pasir Ris - West: Jurong, Clementi, Bukit Batok - North: Woodlands, Yishun, Sembawang - South: Bukit Merah, Queenstown No matter where",
+            "sourceUrl": "https://vshandymansg.com/assembly-services-singapore/",
+            "capturedAt": "2026-10-12"
+          },
+          {
+            "name": "Sembawang",
+            "kind": "stated",
+            "excerpt": "✅ IKEA beds ✅ IKEA wardrobes (PAX, BRIMNES, etc.) ✅ IKEA cabinets & shelves ✅ IKEA tables & storage units ### Areas We Serve in Singapore We provide **wall and ceiling services islandwide**, including: - Central: Orchard, Novena, Toa Payoh - East: Bedok, Tampines, Pasir Ris - West: Jurong, Clementi, Bukit Batok - North: Woodlands, Yishun, Sembawang - South: Bukit Merah, Queenstown No matter where",
+            "sourceUrl": "https://vshandymansg.com/assembly-services-singapore/",
+            "capturedAt": "2026-10-12"
+          },
+          {
+            "name": "Bukit Merah",
+            "kind": "stated",
+            "excerpt": "✅ IKEA beds ✅ IKEA wardrobes (PAX, BRIMNES, etc.) ✅ IKEA cabinets & shelves ✅ IKEA tables & storage units ### Areas We Serve in Singapore We provide **wall and ceiling services islandwide**, including: - Central: Orchard, Novena, Toa Payoh - East: Bedok, Tampines, Pasir Ris - West: Jurong, Clementi, Bukit Batok - North: Woodlands, Yishun, Sembawang - South: Bukit Merah, Queenstown No matter where",
+            "sourceUrl": "https://vshandymansg.com/assembly-services-singapore/",
+            "capturedAt": "2026-10-12"
+          },
+          {
+            "name": "Queenstown",
+            "kind": "stated",
+            "excerpt": "✅ IKEA beds ✅ IKEA wardrobes (PAX, BRIMNES, etc.) ✅ IKEA cabinets & shelves ✅ IKEA tables & storage units ### Areas We Serve in Singapore We provide **wall and ceiling services islandwide**, including: - Central: Orchard, Novena, Toa Payoh - East: Bedok, Tampines, Pasir Ris - West: Jurong, Clementi, Bukit Batok - North: Woodlands, Yishun, Sembawang - South: Bukit Merah, Queenstown No matter where",
+            "sourceUrl": "https://vshandymansg.com/assembly-services-singapore/",
+            "capturedAt": "2026-10-12"
+          }
+        ],
+        "bestFor": [
+          {
+            "text": "Says it offers same-day service",
+            "excerpt": "Yes, we do offer same-day and emergency services depending on availability.",
+            "source_url": "https://vshandymansg.com/",
+            "capturedAt": "2026-10-10",
+            "sourceUrl": "https://vshandymansg.com/"
+          }
+        ],
+        "poorFit": [],
+        "summary": {
+          "text": "VS Handyman (S) Pte Ltd is a handyman business in Singapore. Its website mentions plumbing, electrical, carpentry, painting and other services. Its site says it quotes on request. It says it serves customers islandwide. Its site says it takes residential jobs. Google Maps search data showed 4.9 stars from 60 reviews on 2026-10-11.",
+          "sources": [
+            "https://maps.google.com/?cid=10660651129198698701",
+            "https://vshandymansg.com/",
+            "https://vshandymansg.com/about-us/"
+          ],
+          "capturedAt": "2026-10-11T23:23+03:00"
+        },
+        "faqs": [
+          {
+            "q": "What areas in Singapore do you cover?",
+            "a": "We cover most areas in Singapore, including Central, North, South, East, and West regions. If you’re unsure whether your location is within our service area, feel free to message us.",
+            "sourceUrl": "https://vshandymansg.com/",
+            "capturedAt": "2026-10-18T10:03+03:00"
+          },
+          {
+            "q": "Do you provide same-day or emergency services?",
+            "a": "Yes, we do offer same-day and emergency services depending on availability.",
+            "sourceUrl": "https://vshandymansg.com/",
+            "capturedAt": "2026-10-18T10:03+03:00"
+          },
+          {
+            "q": "Do I need to provide the tools or materials?",
+            "a": "No, our handymen come fully equipped with the necessary tools. If special materials are needed, we can either supply them or install items that you have purchased.",
+            "sourceUrl": "https://vshandymansg.com/",
+            "capturedAt": "2026-10-18T10:03+03:00"
+          },
+          {
+            "q": "How can I make an appointment?",
+            "a": "You can book an appointment via WhatsApp, phone call, or our website booking form. Simply share your location, problem, and preferred timing.",
+            "sourceUrl": "https://vshandymansg.com/",
+            "capturedAt": "2026-10-18T10:03+03:00"
+          },
+          {
+            "q": "What information should I provide to get an accurate quote?",
+            "a": "Please send us clear photos or videos of the issue, your location, property type, and any special requirements so we can provide a more accurate quotation.",
+            "sourceUrl": "https://vshandymansg.com/",
+            "capturedAt": "2026-10-18T10:03+03:00"
+          },
+          {
+            "q": "What payment methods do you accept?",
+            "a": "We accept cash, PayNow, bank transfer, and selected e-wallets. For larger jobs, a deposit may be required before work begins, with the balance payable upon completion.",
+            "sourceUrl": "https://vshandymansg.com/",
+            "capturedAt": "2026-10-18T10:03+03:00"
+          }
+        ],
+        "highlights": [
+          {
+            "text": "Mentions a satisfaction guarantee",
+            "source_url": "https://vshandymansg.com/about-us/",
+            "capturedAt": "2026-10-10",
+            "sourceUrl": "https://vshandymansg.com/about-us/"
+          },
+          {
+            "text": "Google rating 4.9 from 60 reviews (Google Maps, read 2026-10-11)",
+            "source_url": "https://maps.google.com/?cid=10660651129198698701",
+            "capturedAt": "2026-10-10",
+            "sourceUrl": "https://maps.google.com/?cid=10660651129198698701"
+          },
+          {
+            "text": "Serves customers islandwide",
+            "source_url": "https://vshandymansg.com/about-us/",
+            "capturedAt": "2026-10-11",
+            "sourceUrl": "https://vshandymansg.com/about-us/"
+          }
+        ],
+        "warranty": {
+          "value": "Satisfaction Guarantee",
+          "excerpt": "Across Singapore 4.9 Google Rating ★★★★★ 10+ Years Experience Combined Team 100% Satisfaction Guaranteed Why Choose Us ### The VS Difference ⚡ #### Same-Day Service Most jobs are completed within hours of your",
+          "source_url": "https://vshandymansg.com/about-us/",
+          "capturedAt": "2026-10-10",
+          "sourceUrl": "https://vshandymansg.com/about-us/"
+        },
+        "foundedYear": null,
+        "emergency": null,
+        "responseTime": null,
+        "brands": [],
+        "payments": [
+          {
+            "value": "PayNow",
+            "excerpt": "requirements so we can provide a more accurate quotation. What payment methods do you accept? We accept cash, PayNow, bank transfer, and selected e-wallets. For larger jobs, a deposit may be required before work begins, with the",
+            "source_url": "https://vshandymansg.com/",
+            "capturedAt": "2026-10-10",
+            "sourceUrl": "https://vshandymansg.com/"
+          },
+          {
+            "value": "Cash",
+            "excerpt": "any special requirements so we can provide a more accurate quotation. What payment methods do you accept? We accept cash, PayNow, bank transfer, and selected e-wallets. For larger jobs, a deposit may be required before work begins, with",
+            "source_url": "https://vshandymansg.com/",
+            "capturedAt": "2026-10-10",
+            "sourceUrl": "https://vshandymansg.com/"
+          },
+          {
+            "value": "Bank transfer",
+            "excerpt": "so we can provide a more accurate quotation. What payment methods do you accept? We accept cash, PayNow, bank transfer, and selected e-wallets. For larger jobs, a deposit may be required before work begins, with the balance payable upon",
+            "source_url": "https://vshandymansg.com/",
+            "capturedAt": "2026-10-10",
+            "sourceUrl": "https://vshandymansg.com/"
+          }
+        ],
+        "socials": []
+      },
+      "quoteEvidence": {
+        "excerpt": "We provide transparent quotes before starting any job, with no hidden charges.",
+        "sourceUrl": "https://vshandymansg.com/",
+        "capturedAt": "2026-10-10"
+      },
+      "mapEvidence": {
+        "status": "unresolved",
+        "precision": null,
+        "postal": "730776",
+        "addressValue": "776 Woodlands Crescent, Singapore 730776",
+        "addressSourceUrl": "https://data.gov.sg/datasets/d_e97e8e7fc55b85a38babf66b0fa46b73/view",
+        "place": {
+          "name": "VS Handyman (S) Pte Ltd",
+          "cid": "10660651129198698701",
+          "place_id": "ChIJmW0chVFy4GYRzWBBLrg98pM",
+          "url": "https://maps.google.com/?cid=10660651129198698701",
+          "address": null,
+          "postal": null,
+          "phone": "+65 8099 5335",
+          "website": "https://vshandymansg.com/",
+          "readVia": "https://www.google.com/search?tbm=map&hl=en&gl=sg&q=handyman+Punggol&pb=!4m12!1m3!1d6000!2d103.9072!3d1.3984!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!7i20!8i40!10b1!12m6!2m3!5m1!6e2!20e3!10b1!16b1",
+          "readAt": "2026-10-11T22:59+03:00"
+        },
+        "geocode": null,
+        "latitude": null,
+        "longitude": null
+      },
+      "selfReportedRating": null,
+      "reviewSources": [
+        {
+          "name": "Google Maps",
+          "rating": 4.9,
+          "count": 60,
+          "scale": 5,
+          "sourceUrl": "https://maps.google.com/?cid=10660651129198698701",
+          "checkedAt": "2026-10-11",
+          "method": "Google Maps place (cid 10660651129198698701) read via www.google.com/search?tbm=map at 2026-10-11T23:12+03:00",
+          "note": "",
+          "mirrorsSource": ""
+        }
+      ],
+      "listingDepth": {
+        "full": true,
+        "evidenceScore": 5,
+        "checkedAt": "2026-10-18T10:03+03:00"
+      },
+      "primaryTrade": "handyman",
+      "alternatePhones": [],
+      "area": "Woodlands",
+      "googleRating": {
+        "value": 4.9,
+        "count": 60,
+        "sourceUrl": "https://maps.google.com/?cid=10660651129198698701",
+        "checkedAt": "2026-10-11T23:12+03:00",
         "sourceType": "google-maps-search"
       }
     },

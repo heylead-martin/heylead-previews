@@ -9613,5 +9613,54 @@
     "status": "unresolved",
     "reason": "A sourced place CID and Singapore postal code are needed.",
     "addressHash": "242153c3965836dec0e3a7fb8a2ce0d158148f898baeed85803c3cc6035a3beb"
+  },
+  "emilio-s-solutions": {
+    "checkedAt": "2026-10-18T07:10:30+00:00",
+    "status": "unresolved",
+    "reason": "The place postal code does not match the published address",
+    "sourceUrl": "https://www.google.com/maps?cid=12882958279108325625&z=17&output=embed",
+    "addressHash": "d674079a1812fe993bae8a75cb6ea8bf6c3de39970f19e682a29d0e27482aabb"
+  },
+  "gjourney-services": {
+    "checkedAt": "2026-10-18T07:10:30+00:00",
+    "status": "unresolved",
+    "reason": "The place postal code does not match the published address",
+    "sourceUrl": "https://www.google.com/maps?cid=15675126981369056052&z=17&output=embed",
+    "addressHash": "b97813d2583ef965317652ebc151da5cb7b1c02b380981424bd03c1a9e18c79b"
+  },
+  "primehome-plumbing-electrical-engineering-pte-ltd": {
+    "checkedAt": "2026-10-18T07:10:30+00:00",
+    "status": "unresolved",
+    "reason": "The place postal code does not match the published address",
+    "sourceUrl": "https://www.google.com/maps?cid=18365506591458775577&z=17&output=embed",
+    "addressHash": "1492580325b969c0e014d7b5447709cebf51e35f8c4716717e0365fac9a3c238"
+  },
+  "sparkle-cleaning-pte-ltd": {
+    "checkedAt": "2026-10-18T07:10:30+00:00",
+    "status": "unresolved",
+    "reason": "The place postal code does not match the published address",
+    "sourceUrl": "https://www.google.com/maps?cid=17733517444303586357&z=17&output=embed",
+    "addressHash": "de52a0615dd966795caba727b4d71f74eb38628ca23cdb1f06a6eeffccdcc96f"
+  },
+  "the-cleaning-lab": {
+    "checkedAt": "2026-10-18T07:10:30+00:00",
+    "status": "unresolved",
+    "reason": "The place postal code does not match the published address",
+    "sourceUrl": "https://www.google.com/maps?cid=7897436129245739792&z=17&output=embed",
+    "addressHash": "9d4f17f0c8af3c4131ee234fab5d5874b6d3e1266f7bf216a8f7eabca9373768"
+  },
+  "upward-cleaning-services": {
+    "checkedAt": "2026-10-18T07:10:30+00:00",
+    "status": "unresolved",
+    "reason": "The place postal code does not match the published address",
+    "sourceUrl": "https://www.google.com/maps?cid=15467307147916803139&z=17&output=embed",
+    "addressHash": "b403c0cef6b12de7cfb55b9a90bd00f04122221876a4dc1867df342ad77e7136"
+  },
+  "vs-handyman-s-pte-ltd": {
+    "checkedAt": "2026-10-18T07:10:31+00:00",
+    "status": "unresolved",
+    "reason": "The place postal code does not match the published address",
+    "sourceUrl": "https://www.google.com/maps?cid=10660651129198698701&z=17&output=embed",
+    "addressHash": "938404365e96c6629e8a9fef0413bb938b91ab45a7b6a92dcc16391ef37c52e2"
   }
 }

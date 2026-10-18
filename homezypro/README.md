@@ -7,15 +7,15 @@ market. Ported from `roster/` (the reference implementation): see [docs/PORTING-
 
 ```sh
 npm ci
-npm run import:data      # verify + import the pinned r15.1 release (only when the data changes)
-npm run build            # dist/ (948 HTML pages, sitemaps, llms.txt, _headers, _redirects)
+npm run import:data      # verify + import the pinned r15.2 release (only when the data changes)
+npm run build            # dist/ (956 HTML pages, sitemaps, llms.txt, _headers, _redirects)
 npm test                 # HomezyPro tests + roster's ported unit tests (some read dist/: build first)
 npm run check:site       # HomezyPro checks + roster's ported check-site, on dist/
 npm run check:editorial  # our own copy + guide and blog page checks, on dist/
 npm run dev | preview
 ```
 
-`import:data` reads `companies-20261018-0125.json` and `logos-20261018-0059.tar.gz` from
+`import:data` reads `companies-20261018-1004.json` (r15.2) and `logos-20261018-0059.tar.gz` from
 `HOMEZYPRO_RELEASE_DIR` (default `/workspace/roster-release`, read only), checks both against their
 `.sha256` files and the checksums pinned in `scripts/import-data.mjs`, applies roster's publication rules
 (including the `needs-human-review` withhold) and writes `src/data/*.json` and `public/logos/`. It needs

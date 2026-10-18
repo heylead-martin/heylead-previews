@@ -78,6 +78,8 @@ export function createProfileRenderer(ctx) {
   function map(c,content) {
     if(!c.address?.value)return '';
     const address=blockAddress(c.address.value),redacted=address!==c.address.value;
+    // r15.2: an ACRA registered address is labelled as such, with no visiting wording, no map and no look-up link.
+    if(c.address.kind==='registered')return `<div class="company-map company-map-unresolved" data-registered-address><div class="map-address"><span class="map-pin">${icon('pin')}</span><div><p class="kicker">Registered address</p><h3>${esc(address)}</h3><p>The business address in the ACRA register. It is not shown as a shop or office.</p></div></div></div>`;
     const stored=mapPins[c.slug];
     const pin=stored?.status==='verified'&&stored.addressHash===createHash('sha256').update(c.address.value).digest('hex')&&stored.precision==='building'&&stored.latitude>1.15&&stored.latitude<1.48&&stored.longitude>103.59&&stored.longitude<104.1?stored:null;
     const target=pin?`${pin.latitude},${pin.longitude}`:address;

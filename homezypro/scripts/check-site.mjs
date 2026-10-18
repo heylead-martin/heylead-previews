@@ -9,7 +9,7 @@ import {existsSync} from 'node:fs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {SITE_URL, INDEXABLE, robotsTxt, robotsFor} from '../src/config/site.mjs';
-import {EXPECTED, WITHHELD_FOR_REVIEW} from './import-data.mjs';
+import {EXPECTED, WITHHELD_FOR_REVIEW, KEEP_RETIRED, NEVER_PUBLISH_SLUGS} from './import-data.mjs';
 import {DANGLING} from '../src/lib/port/lib/expanded.mjs';
 import {retiredListings, redirectsFile, validateRedirects} from '../src/config/retired.mjs';
 
@@ -51,7 +51,9 @@ const retiredPaths = new Set(retiredListings.filter(r => !publishedSlugs.has(r.s
 const companyPages = [...built].filter(p => /^\/company\/[a-z0-9-]+\/$/.test(p) && !retiredPaths.has(p));
 // Page counts per type equal roster's built pages (roster/: 955 index.html, of which 8 parked account
 // pages are omitted here), plus dist/404.html.
-const ROSTER_COUNTS = {home: 1, hub: 5, company: 738, 'retired listing': 9, search: 1, 'intent directory': 2, guide: 47, 'how-it-works': 1, 'what-service-do-i-need': 1, 'town page': 109, 'best-of': 5, 'blog index': 1, 'blog post': 25, 'claim-listing': 1, 'logo-removal': 1, '404': 1};
+// r15.2: companies follow the import (EXPECTED.total); city-cleaning is no longer a retired stub (404);
+// two handyman town pages (Novena, Sembawang) are new from VS Handyman's sourced coverage.
+const ROSTER_COUNTS = {home: 1, hub: 5, company: EXPECTED.total, 'retired listing': 8, search: 1, 'intent directory': 2, guide: 47, 'how-it-works': 1, 'what-service-do-i-need': 1, 'town page': 111, 'best-of': 5, 'blog index': 1, 'blog post': 25, 'claim-listing': 1, 'logo-removal': 1, '404': 1};
 const kindOf = (p, html) => p === '/' ? 'home' : p === '/404.html' ? '404' : retiredPaths.has(p) ? 'retired listing' : p.startsWith('/company/') ? 'company'
   : p === '/blog/' ? 'blog index' : p.startsWith('/blog/') ? 'blog post' : /^\/[a-z-]+\/best\/$/.test(p) ? 'best-of' : html.includes('data-area-page=') ? 'town page'
   : p === '/search/' ? 'search' : html.includes('directory-page') ? (p.split('/').length === 3 ? 'hub' : 'intent directory')
@@ -70,6 +72,41 @@ for (const r of withheld) {
   assert.ok(!published.some(c => c.databaseId === r.id), `${r.id} not published`);
 }
 assert.ok(retiredPaths.has('/company/hedircool-pte-ltd/'), 'HEDIRCOOL is retired, not published');
+// Kept retired (Billy Aircon): excluded by the importer, still a 301 + noindex fallback.
+for (const [id, slug] of Object.entries(KEEP_RETIRED)) {
+  assert.ok(report.excluded.some(r => r.id === id && r.reasons.includes('kept-retired')), `${id} kept retired`);
+  assert.ok(retiredPaths.has(`/company/${slug}/`) && !publishedSlugs.has(slug), `${slug} stays retired`);
+}
+// 201823211K's slugs (city-cleaning, direct-painters-plastering): plain 404. No page, no stub, no redirect,
+// no sitemap/llms/search-index entry and the names appear nowhere in dist/.
+for (const slug of NEVER_PUBLISH_SLUGS) {
+  assert.ok(!publishedSlugs.has(slug) && !retiredListings.some(r => r.slug === slug), `${slug} is neither published nor retired`);
+  assert.ok(!existsSync(path.join(dist, 'company', slug)), `no dist/company/${slug}/`);
+}
+{
+  const gone = new RegExp(`${NEVER_PUBLISH_SLUGS.join('|')}|City Cleaning|Direct Painters`, 'i');
+  for (const f of files.filter(f => /\.(?:html|xml|txt|json|js)$/.test(f) || /_redirects$|_headers$/.test(f))) {
+    const t = await readFile(f, 'utf8');
+    if (gone.test(t)) fail(rel(f), `names a 404-only listing: ${t.match(new RegExp(`.{0,40}(?:${gone.source}).{0,40}`, 'i'))?.[0]}`);
+  }
+}
+
+// ---- Registered (ACRA) addresses: labelled "Registered address", no visiting wording, no look-up link or
+// map, and never in structured data (they may be home addresses). Premises addresses are unchanged.
+const registered = published.filter(c => c.address?.kind === 'registered');
+for (const c of registered) {
+  const html = await readFile(path.join(dist, 'company', c.slug, 'index.html'), 'utf8');
+  const block = html.match(/<div class="company-map[^"]*" data-registered-address>[\s\S]*?<\/div><\/div><\/div>/)?.[0] || '';
+  if (!block.includes('<p class="kicker">Registered address</p>')) fail(`/company/${c.slug}/`, 'registered address without the "Registered address" label');
+  if (/before visiting|Look up this address|Get directions|<iframe/i.test(html.replace(/<script[\s\S]*?<\/script>/g, ''))) fail(`/company/${c.slug}/`, 'registered address shown as a place to visit or look up');
+  const graph = JSON.parse(html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1])['@graph'];
+  if (JSON.stringify(graph).includes('PostalAddress') || graph.some(n => n.hasMap)) fail(`/company/${c.slug}/`, 'registered address in structured data');
+}
+for (const f of htmlFiles) {
+  const html = await readFile(f, 'utf8');
+  for (const c of registered) if (html.includes(`"streetAddress":${JSON.stringify(c.address.street)}`)) fail(rel(f), `registered address of ${c.slug} marked up`);
+  if (html.includes('data-registered-address') && !registered.some(c => rel(f) === `/company/${c.slug}/index.html`)) fail(rel(f), '"Registered address" on a company without a registered address');
+}
 
 // ---- _redirects: generated retired 301s + public/_redirects, valid syntax, within limits ----
 const redirectsText = await readFile(path.join(dist, '_redirects'), 'utf8');
@@ -347,4 +384,4 @@ if (failures.length) {
   console.error(`FAIL: ${failures.length} problems`);
   process.exit(1);
 }
-console.log(`PASS: ${htmlFiles.length} pages, counts per type equal roster's (${Object.entries(kinds).map(([k, n]) => `${k} ${n}`).join(', ')}); all internal links resolve; ${cards} cards with "Example service price"; robots ${INDEXABLE ? 'index' : 'noindex'}; ${retiredPaths.size} retired listings as 301s + noindex fallbacks; _redirects ${redirectCheck.staticCount} static + ${redirectCheck.dynamicCount} dynamic rules; ${sitemapSummary}; icons, manifest, _headers and JSON-LD structure valid; ${webp} WebP logos <= 256 px / 30 KB, ${svg} SVG logos.`);
+console.log(`PASS: ${htmlFiles.length} pages, ${registered.length} registered addresses labelled and kept out of structured data, counts per type equal roster's (${Object.entries(kinds).map(([k, n]) => `${k} ${n}`).join(', ')}); all internal links resolve; ${cards} cards with "Example service price"; robots ${INDEXABLE ? 'index' : 'noindex'}; ${retiredPaths.size} retired listings as 301s + noindex fallbacks; _redirects ${redirectCheck.staticCount} static + ${redirectCheck.dynamicCount} dynamic rules; ${sitemapSummary}; icons, manifest, _headers and JSON-LD structure valid; ${webp} WebP logos <= 256 px / 30 KB, ${svg} SVG logos.`);

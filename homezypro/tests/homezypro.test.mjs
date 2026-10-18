@@ -4,7 +4,7 @@ import test from 'node:test';
 import {readFile} from 'node:fs/promises';
 import {isIndexable, robotsFor, robotsTxt} from '../src/config/site.mjs';
 import {markets, activeMarket} from '../src/config/markets.mjs';
-import {guardPublication, compareCounts, rebrandSummaries, EXPECTED, WITHHELD_FOR_REVIEW, PINNED} from '../scripts/import-data.mjs';
+import {guardPublication, compareCounts, rebrandSummaries, EXPECTED, WITHHELD_FOR_REVIEW, PINNED, KEEP_RETIRED, NEVER_PUBLISH_SLUGS, INFORMATIONAL_FLAGS} from '../scripts/import-data.mjs';
 import {BLOCKED} from '../src/lib/port/scripts/import-db.mjs';
 import {guideEvidence, sourcedRates} from '../src/lib/port/lib/sourced-rates.mjs';
 
@@ -41,7 +41,7 @@ test('markets: Singapore is the only active market; brand carries no market suff
   assert.equal(markets.au.status, 'placeholder');
 });
 
-test('import: pinned r15.1 release, roster counts, needs-human-review withheld', () => {
+test('import: pinned r15.2 release, expected counts, needs-human-review withheld', () => {
   assert.equal(report.sourceRelease, PINNED.companies.file);
   assert.equal(report.sourceSha256, PINNED.companies.sha256);
   assert.equal(report.logos.bundleSha256, PINNED.logos.sha256);
@@ -60,6 +60,57 @@ test('import guard stops when a needs-human-review row would be published', () =
   assert.throws(() => guardPublication(db, {report: {published: [{id: 'x1'}]}}), /blocking flags/);
   assert.throws(() => guardPublication({companies: []}, {report: {published: [{id: WITHHELD_FOR_REVIEW[0]}]}}), /needs-human-review/);
   assert.doesNotThrow(() => guardPublication(db, {report: {published: []}}));
+});
+
+test('r15.2: Billy Aircon kept retired, 201823211K slugs never published, lead-gen flag informational', async () => {
+  for (const [id, slug] of Object.entries(KEEP_RETIRED)) {
+    assert.ok(report.excluded.find(r => r.id === id)?.reasons.includes('kept-retired'), `${id} kept retired`);
+    assert.ok(!companies.some(c => c.slug === slug));
+  }
+  assert.throws(() => guardPublication({companies: []}, {report: {published: [{id: 'roster-billy-aircon', slug: 'billy-aircon'}]}}), /kept retired/);
+  for (const slug of NEVER_PUBLISH_SLUGS) {
+    assert.ok(!companies.some(c => c.slug === slug), slug);
+    assert.throws(() => guardPublication({companies: []}, {report: {published: [{id: 'x', slug}]}}), /never be published/);
+  }
+  const registry = await json('src/data/slug-registry.json');
+  assert.equal(registry['201823211K'], 'direct-painters-plastering');
+  assert.ok(!Object.values(registry).includes('city-cleaning'));
+  const {retiredListings, retiredRedirects} = await import('../src/config/retired.mjs');
+  assert.ok(!retiredListings.some(r => NEVER_PUBLISH_SLUGS.includes(r.slug)), 'no stub page or redirect for 201823211K slugs');
+  assert.ok(!retiredRedirects().some(r => /city-cleaning|direct-painters/.test(r)));
+  for (const f of INFORMATIONAL_FLAGS) assert.ok(!BLOCKED.has(f), `${f} must not withhold`);
+  // The six lead-gen network sites are withheld by no-sg-postal-code, never by the new flag.
+  const leadGen = report.excluded.filter(r => r.reasons.includes('lead-gen-network-site'));
+  assert.deepEqual(leadGen, []);
+});
+
+test('r15.2: address.kind is carried; a registered (ACRA) address is labelled and kept out of structured data', async () => {
+  const {importDatabase} = await import('../src/lib/port/scripts/import-db.mjs');
+  const src = 'https://example.sg/';
+  const row = kind => ({id: 'k-' + kind, name: 'Kind Test ' + kind, primary_trade: 'handyman', categories: ['handyman'], segment: 'profiled', website: src,
+    about: [{text: 'We fix things.', sourceUrl: src}], services: [{name: 'drilling-mounting', sourceUrl: src}], phone: {value: '+65 6000 0000', sourceUrl: src},
+    address: {value: '1 Test Road, Singapore 123456', postal: '123456', kind, ...(kind === 'registered' ? {registeredAddress: true, premises: false} : {}), sourceUrl: 'https://data.gov.sg/x'}});
+  const seeds = {companies: {companies: []}, profiles: {}, presentation: {}};
+  const out = importDatabase({checked: '2026-10-18', companies: [row('registered'), row('premises')]}, seeds, {});
+  const bySlug = Object.fromEntries(out.companies.companies.map(c => [c.databaseId, c]));
+  assert.equal(bySlug['k-registered'].address.kind, 'registered');
+  assert.equal(bySlug['k-registered'].address.registeredAddress, true);
+  assert.equal(bySlug['k-premises'].address.kind, 'premises');
+  assert.throws(() => importDatabase({checked: '2026-10-18', companies: [{...row('premises'), address: {...row('premises').address, kind: 'office'}}]}, seeds, {}), /Unknown address.kind/);
+
+  const registered = companies.filter(c => c.address?.kind === 'registered');
+  assert.equal(registered.length, 6, 'six r15.2 profiles show an ACRA registered address');
+  const render = await import('../src/lib/render.mjs');
+  for (const c of registered) {
+    const page = render.companyPage(c);
+    assert.match(page.body, /data-registered-address><div class="map-address">[\s\S]*?<p class="kicker">Registered address<\/p>/, c.slug);
+    assert.doesNotMatch(page.body, /before visiting|Look up this address|Get directions|<iframe/, c.slug);
+    assert.doesNotMatch(page.jsonLdText, /PostalAddress|streetAddress|hasMap/, c.slug);
+  }
+  const premises = companies.find(c => c.address?.kind === 'premises');
+  const page = render.companyPage(premises);
+  assert.doesNotMatch(page.body, /data-registered-address/);
+  assert.match(page.jsonLdText, /"@type":"PostalAddress"/);
 });
 
 test('directory-generated summaries carry the HomezyPro name; company text is untouched', () => {
@@ -139,7 +190,8 @@ test('rendered pages: no rating schema, business types, card label, indicative p
     assert.ok(types.includes('ItemList') && types.includes('FAQPage'), `${t.id} best-of schema`);
     assert.doesNotMatch(best.jsonLdText, /ratingValue|reviewCount|aggregateRating/i);
   }
-  assert.deepEqual(render.counts, {guides: 47, areaPages: 109, blogPosts: 25, intents: 2});
+  // r15.2: VS Handyman's sourced coverage adds /handyman/novena/ and /handyman/sembawang/ (109 -> 111).
+  assert.deepEqual(render.counts, {guides: 47, areaPages: 111, blogPosts: 25, intents: 2});
   const home = render.homePage();
   assert.match(home.jsonLdText, /"@type":"Organization"/);
   assert.match(home.jsonLdText, /"logo":\{"@type":"ImageObject","url":"https:\/\/homezypro\.com\/brand\/logo-512\.png","width":512,"height":512\}/);

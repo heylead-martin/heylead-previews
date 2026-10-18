@@ -2,14 +2,16 @@
 //
 //   npm run import:data [-- <companies-release.json> <logos-release.tar.gz>]
 //
-// Inputs default to the pinned r15.1 release in HOMEZYPRO_RELEASE_DIR (default /workspace/roster-release),
+// Inputs default to the pinned r15.2 release in HOMEZYPRO_RELEASE_DIR (default /workspace/roster-release),
 // which is read only. Both files are checked against their adjacent .sha256 files AND the pinned
 // checksums below; any mismatch stops the import before anything is written.
 //
 // Publication rules are roster's own (src/lib/port/scripts/import-db.mjs, copied from
 // roster/scripts/import-db.mjs): blocking flags, including needs-human-review, exclude a row.
-// This script adds explicit guards for the r15.1 import note: the two needs-human-review rows
-// are withheld and no published row carries a blocking flag.
+// This script adds explicit guards for the r15.1/r15.2 import notes: the two needs-human-review rows
+// are withheld, no published row carries a blocking flag, listings kept retired stay unpublished, the
+// slugs in NEVER_PUBLISH_SLUGS are never assigned, and the informational lead-gen-network-site flag
+// withholds nothing by itself.
 //
 // Writes src/data/{companies,profiles,presentation,operator-groups,import-report,slug-registry}.json
 // and the served logos in public/logos/ (+ public/assets/logo-fit.css) via scripts/logos.py.
@@ -23,12 +25,21 @@ import {importDatabase, verifyRelease, BLOCKED} from '../src/lib/port/scripts/im
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const releaseDir = process.env.HOMEZYPRO_RELEASE_DIR || '/workspace/roster-release';
 export const PINNED = {
-  companies: {file: 'companies-20261018-0125.json', sha256: 'f317b17d90fa5eb5512deb570f6fbe844b305b20b38dce3215c8c10f2a046f7a'},
+  companies: {file: 'companies-20261018-1004.json', sha256: 'd8c388bf6d0232905fe8f781a2ec1f3b4adc198382fda732876172290bec2bcb'},
   logos: {file: 'logos-20261018-0059.tar.gz', sha256: '2df3c41423ca0385412ff3abc75f8dcbfef5c08b449b043cfa7d2b880143cfc3'}
 };
-// Roster's current published counts for r15.1 (roster/data/import-report.json).
-export const EXPECTED = {total: 738, byTrade: {aircon: 231, plumbing: 100, electrician: 116, handyman: 99, cleaning: 192}};
+// Published counts for r15.2 (this importer, with the rules below). r15.1 published 738.
+export const EXPECTED = {total: 745, byTrade: {aircon: 231, plumbing: 101, electrician: 116, handyman: 100, cleaning: 197}};
+export const PREVIOUS = {release: 'r15.1', total: 738, byTrade: {aircon: 231, plumbing: 100, electrician: 116, handyman: 99, cleaning: 192}};
 export const WITHHELD_FOR_REVIEW = ['web-hedircool-sg-com', '201823211K'];
+// Listings that stay retired even when their release data passes the bar (r15.2: Billy Aircon meets the
+// full bar; un-retiring it is an editorial decision). Excluded with the reason 'kept-retired'.
+export const KEEP_RETIRED = {'roster-billy-aircon': 'billy-aircon'};
+// Slugs that must never be published or named on the site: 201823211K's old slug city-cleaning (tied to
+// scam reports, never live) and its r15.2 slug direct-painters-plastering (row withheld). Both 404.
+export const NEVER_PUBLISH_SLUGS = ['city-cleaning', 'direct-painters-plastering'];
+// Informational flags: must not be in the importer's blocking set.
+export const INFORMATIONAL_FLAGS = ['lead-gen-network-site'];
 
 async function verified(file, pinned) {
   const bytes = await readFile(file);
@@ -42,6 +53,9 @@ export function guardPublication(db, data) {
   if (!BLOCKED.has('needs-human-review')) throw new Error('Importer does not withhold needs-human-review. Import stopped.');
   const published = new Set(data.report.published.map(p => p.id));
   for (const id of WITHHELD_FOR_REVIEW) if (published.has(id)) throw new Error(`${id} is flagged needs-human-review but would be published. Import stopped.`);
+  for (const id of Object.keys(KEEP_RETIRED)) if (published.has(id)) throw new Error(`${id} is kept retired but would be published. Import stopped.`);
+  for (const p of data.report.published) if (NEVER_PUBLISH_SLUGS.includes(p.slug)) throw new Error(`Slug ${p.slug} must never be published (${p.id}). Import stopped.`);
+  for (const f of INFORMATIONAL_FLAGS) if (BLOCKED.has(f)) throw new Error(`${f} is informational but the importer treats it as blocking. Import stopped.`);
   for (const row of db.companies) {
     if (!published.has(row.id)) continue;
     const blocking = (row.flags || []).filter(f => BLOCKED.has(f));
@@ -62,8 +76,8 @@ export function rebrandSummaries(companies) {
 
 export function compareCounts(report, expected = EXPECTED) {
   const diffs = [];
-  if (report.publishedCount !== expected.total) diffs.push(`total ${report.publishedCount} vs roster ${expected.total}`);
-  for (const [trade, n] of Object.entries(expected.byTrade)) if (report.byTrade[trade]?.published !== n) diffs.push(`${trade} ${report.byTrade[trade]?.published} vs roster ${n}`);
+  if (report.publishedCount !== expected.total) diffs.push(`total ${report.publishedCount} vs ${expected.total}`);
+  for (const [trade, n] of Object.entries(expected.byTrade)) if (report.byTrade[trade]?.published !== n) diffs.push(`${trade} ${report.byTrade[trade]?.published} vs ${n}`);
   return diffs;
 }
 
@@ -81,7 +95,15 @@ if (process.argv[1] && path.resolve(process.argv[1]) === script) {
   const seeds = {};
   for (const f of ['companies', 'profiles', 'presentation']) seeds[f] = JSON.parse(await readFile(path.join(dataDir, 'curated', f + '.json'), 'utf8'));
   const registry = JSON.parse(await readFile(path.join(dataDir, 'slug-registry.json'), 'utf8'));
-  const data = importDatabase(db, seeds, registry);
+  // r15.2: profile.retiredSlugs are reserved for good; a row whose registry slug was retired moves to its
+  // new profile slug (201823211K: city-cleaning -> direct-painters-plastering, no redirect).
+  const reservedSlugs = new Set(NEVER_PUBLISH_SLUGS);
+  for (const row of db.companies) for (const r of row.profile?.retiredSlugs || []) {
+    reservedSlugs.add(r.slug);
+    if (registry[row.id] === r.slug && row.profile?.slug) registry[row.id] = row.profile.slug;
+  }
+  const withhold = Object.fromEntries(Object.keys(KEEP_RETIRED).map(id => [id, 'kept-retired']));
+  const data = importDatabase(db, seeds, registry, {withhold, reservedSlugs: [...reservedSlugs]});
   guardPublication(db, data);
   data.report.rebrandedSummaries = rebrandSummaries(data.companies.companies);
   data.report.sourceSha256 = companies.sha256;
@@ -110,7 +132,7 @@ if (process.argv[1] && path.resolve(process.argv[1]) === script) {
   console.table(data.report.byTrade);
   console.log('Logos:', JSON.stringify(result.stats));
   const diffs = compareCounts(data.report);
-  console.log(diffs.length ? `Counts differ from roster: ${diffs.join('; ')}` : `Counts match roster: ${EXPECTED.total} (${Object.entries(EXPECTED.byTrade).map(([t, n]) => `${t} ${n}`).join(', ')})`);
+  console.log(diffs.length ? `Counts differ from expected: ${diffs.join('; ')}` : `Counts match expected: ${EXPECTED.total} (${Object.entries(EXPECTED.byTrade).map(([t, n]) => `${t} ${n}`).join(', ')})`);
   if (diffs.length) process.exitCode = 1;
   // Content hash of the generated data, so a re-import can be compared quickly.
   console.log('companies.json sha256', createHash('sha256').update(JSON.stringify(data.companies, null, 2) + '\n').digest('hex').slice(0, 16));

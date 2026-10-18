@@ -61,7 +61,7 @@ export const serviceLabels = {
   'chemical overhaul':'chemical overhaul','chemical wash':'chemical wash','gas top up':'gas top-up','general service':'general servicing','installation':'aircon installation','repair':'aircon repair',
   'carpet':'carpet cleaning','curtain':'curtain cleaning','deep cleaning':'deep cleaning','disinfection':'disinfection','mattress':'mattress cleaning','upholstery sofa':'sofa and upholstery cleaning',
   'ceiling fan':'ceiling fan installation','db box':'DB box work','light installation':'light installation','power point':'power points','power trip':'power trip repair','rewiring':'rewiring','water heater point':'water heater points',
-  'door lock':'door locks','drilling mounting':'drilling and mounting','electrical':'electrical jobs','furniture assembly':'furniture assembly','painting':'painting',
+  'carpentry':'carpentry','door lock':'door locks','drilling mounting':'drilling and mounting','electrical':'electrical jobs','furniture assembly':'furniture assembly','painting':'painting',
   'choke clearing':'choke clearing','floor trap':'floor traps','leak repair':'leak repair','pipe replacement':'pipe replacement','sink':'sinks','tap mixer':'taps and mixers','toilet bowl':'toilet bowls','water heater':'water heaters'
 };
 export const serviceLabel = name => serviceLabels[String(name).toLowerCase()];

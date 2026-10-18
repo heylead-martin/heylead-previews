@@ -700,7 +700,8 @@ function businessNode(company) {
     telephone: company.phone.value,
     url: companyUrl(company)
   };
-  if (company.address?.street) {
+  // A register (ACRA) address may be a home: it is never marked up as the business's PostalAddress.
+  if (company.address?.street && company.address.kind !== "registered") {
     node.address = {
       "@type": "PostalAddress",
       streetAddress: company.address.street,
@@ -858,7 +859,7 @@ function profileBusinessGraph(company, content, canonicalPath) {
   business.sameAs = [company.website.value];
   if (company.email?.value) business.email = company.email.value;
   if (company.legalName) business.legalName = company.legalName;
-  if (company.address) business.hasMap = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(mapAddress(company))}`;
+  if (company.address && company.address.kind !== "registered") business.hasMap = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(mapAddress(company))}`;
   const media = priceSummary(company);
   if (media.logo) business.logo = new URL(media.logo, origin).href;
   if (media.photos?.length) business.image = media.photos.map(photo => new URL(photo.src, origin).href);

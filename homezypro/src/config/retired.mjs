@@ -1,10 +1,12 @@
 // Withdrawn listings (from roster build.mjs `retired`). Each gets a 301 to its hub in dist/_redirects
 // and a noindex HTML fallback, unless the company is published again.
+// city-cleaning is deliberately NOT here (r15.2, QA): it was never live and the name is tied to scam
+// reports, so /company/city-cleaning/ is a plain 404 with no stub page and no redirect. The same holds for
+// 201823211K's new slug (see NEVER_PUBLISH_SLUGS in scripts/import-data.mjs).
 export const retiredListings = [
   {slug: 'skywave-solutions-pte-ltd', name: 'Skywave Solutions Pte. Ltd.', target: '/electrician/', trade: 'electrical'},
   {slug: 'billy-aircon', name: 'Billy Aircon', target: '/aircon-servicing/', trade: 'aircon servicing'},
   {slug: 'aeon-environmental-services', name: 'Aeon Environmental Services', target: '/home-cleaning/', trade: 'home cleaning'},
-  {slug: 'city-cleaning', name: 'City Cleaning', target: '/home-cleaning/', trade: 'home cleaning'},
   {slug: 'greengarden-integrated-services-pte-ltd', name: 'Greengarden Integrated Services Pte Ltd', target: '/home-cleaning/', trade: 'home cleaning'},
   {slug: 'sq-1-development-pte-ltd', name: 'SQ 1 Development Pte Ltd', target: '/home-cleaning/', trade: 'home cleaning'},
   {slug: 'flash-aircon', name: 'Signature Engineering Services Pte Ltd', target: '/aircon-servicing/', trade: 'aircon servicing'},

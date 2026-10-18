@@ -117,12 +117,15 @@ export function alternatePhones(phone, primary) {
 function reviewRows(row, mapsUrl) {
   return (row.reviews||[]).filter(r=>r.excerpt && (r.author||r.author_initials_or_handle) && (r.date||r.relativeTime) && cited(r)).slice(0,5).map(r=>({excerpt:text(r.excerpt),author:text(r.author||r.author_initials_or_handle),relativeTime:text(r.date||r.relativeTime),sourceUrl:http(r.source_url||r.sourceUrl),sourceLabel:text(r.source||r.sourceLabel),mapsUrl:http(r.maps_url)||mapsUrl,capturedAt:r.capturedAt||row.checked}));
 }
-export function importDatabase(db, seeds, registry={}) {
+// HomezyPro options: `withhold` maps a row id to an editorial exclusion reason (e.g. a listing kept
+// retired although its data now passes); `reservedSlugs` can never be assigned to another company
+// (retired slugs, profile.retiredSlugs from the release).
+export function importDatabase(db, seeds, registry={}, {withhold={}, reservedSlugs=[]}={}) {
   const report={sourceChecked:db.checked,sourceRows:db.companies.length,sourceProfiles:db.companies.filter(c=>c.segment==='profiled').length,published:[],excluded:[],warnings:[],byTrade:{}};
   for(const t of Object.keys(types)) report.byTrade[t]={published:0,excluded:0};
   const curated=new Map(seeds.companies.companies.filter(c=>c.publish!==false).map(c=>[c.slug,c]));
   const profiles=structuredClone(seeds.profiles), presentation=structuredClone(seeds.presentation);
-  const companies=[]; const used=new Set([...curated.keys(),...Object.values(registry)]); const registryOut={...registry};
+  const companies=[]; const used=new Set([...curated.keys(),...Object.values(registry),...reservedSlugs]); const registryOut={...registry};
   for(const raw of db.companies) {
     const row=clean(raw); if(row.flags?.includes('price-indicative-only')) for(const p of row.price_lines||[]) p.indicative=true; const original=curated.get(row.rosterProfile?.slug);
     const categories=[...new Set((row.categories||[]).map(cat).filter(t=>types[t]))];
@@ -130,6 +133,7 @@ export function importDatabase(db, seeds, registry={}) {
     if(row.primary_trade&&!types[category])throw new Error(`Invalid primary trade for ${row.id}`);
     const reasons=(row.flags||[]).filter(f=>BLOCKED.has(f));
     if(row.profile_rolled_back) reasons.push('profile-rolled-back');
+    if(withhold[row.id]) reasons.push(withhold[row.id]);
     const website=http(value(row.website)||original?.website?.value);
     if(!original) {
       if(/lorem ipsum|fusce porta|dolor sit amet|just another wordpress|your company name/i.test((row.about||[]).map(a=>a.text).join(' '))) reasons.push('site-placeholder-content-detected');
@@ -182,6 +186,12 @@ export function importDatabase(db, seeds, registry={}) {
     const quote=row.pricing_model_source;
     company.quoteEvidence=row.pricing_model==='quote_on_request' && quote?.wording==='statement' && text(quote.excerpt) && cited(quote) && /^\d{4}-\d{2}-\d{2}/.test(quote.capturedAt||'') ? {excerpt:text(quote.excerpt),sourceUrl:cited(quote),capturedAt:quote.capturedAt.slice(0,10)} : null;
     company.address=supplementPostalAddress(company.address,row.address);
+    // r15.2: address.kind says what the address is. 'premises' = printed by the company site; 'registered' =
+    // the ACRA registered address (shown as "Registered address", never as a place to visit, and kept out of
+    // structured data). Carried only when the shown address is the release's own address.
+    const addressKind=text(row.address?.kind);
+    if(addressKind&&!['premises','registered'].includes(addressKind))throw new Error(`Unknown address.kind ${addressKind} for ${row.id}`);
+    if(addressKind&&company.address?.value&&company.address.value===value(row.address)) company.address={...company.address,kind:addressKind,...(addressKind==='registered'?{registeredAddress:true}:{})};
     company.mapEvidence=row.map ? {status:row.map.status,precision:row.map.precision,postal:text(row.address?.postal),addressValue:value(row.address),addressSourceUrl:cited(row.address),place:row.map.place||null,geocode:row.map.geocode||null,latitude:row.map.lat,longitude:row.map.lng} : null;
     if(row.self_reported_rating||row.rosterProfile?.rating_moved_to) company.rating=null;
     company.selfReportedRating=row.self_reported_rating&&cited(row.self_reported_rating)?row.self_reported_rating:null;

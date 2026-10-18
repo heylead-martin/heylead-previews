@@ -42,18 +42,18 @@ difference is intended:
 |---|---|---:|---:|---|
 | Home | `/` | 1 | 1 | `src/pages/index.astro` |
 | Trade hubs | `/{aircon-servicing,plumbing,electrician,handyman,home-cleaning}/` | 5 | 5 | `src/pages/[hub]/index.astro` |
-| Company profiles | `/company/{slug}/` | 738 | 738 | `src/pages/company/[slug]/index.astro` |
+| Company profiles | `/company/{slug}/` | 738 (r15.1) | 745 (r15.2) | `src/pages/company/[slug]/index.astro` |
 | Search (all companies, client JSON, trade-aware ranking) | `/search/` | 1 | 1 | `src/pages/[...path].astro` |
 | Aircon intent directories | `/aircon-servicing/{chemical-wash,gas-top-up}/` | 2 | 2 | `[...path]` |
 | Editorial guides (sourced rate tables, BTU matrix; units matrix hidden) | `/{trade}/guide/`, `/{topic}/{guide}/` | 47 | 47 | `[...path]` |
 | How it works | `/how-it-works/` | 1 | 1 | `[...path]` |
 | Symptom finder | `/what-service-do-i-need/` | 1 | 1 | `[...path]` |
-| Town pages (URA adjacency for nearby towns) | `/{hub}/{town}/` | 109 | 109 | `[...path]` |
+| Town pages (URA adjacency for nearby towns) | `/{hub}/{town}/` | 109 | 111 (r15.2) | `[...path]` |
 | Best-of rankings (formula, method box, ItemList + FAQPage) | `/{hub}/best/` | 5 | 5 | `[...path]` |
 | Blog index + posts | `/blog/`, `/blog/{slug}/` | 26 | 26 | `[...path]` |
 | Claim listing (static, no form) | `/claim-listing/` | 1 | 1 | `[...path]` |
 | Logo removal (static, contact route pending) | `/logo-removal/` | 1 | 1 | `[...path]` |
-| Retired listings | `/company/{old-slug}/` | 9 | 9 | 301 in `dist/_redirects` + noindex fallback via `[...path]` |
+| Retired listings | `/company/{old-slug}/` | 9 | 8 (city-cleaning is a plain 404 since r15.2) | 301 in `dist/_redirects` + noindex fallback via `[...path]` |
 | 404 | `/404.html` | 1 file | 1 file | `src/pages/404.astro` (noindex, no canonical) |
 | Directory indexes | `/data/index/{all,trade,intent}.json` | 8 | 8 | `src/pages/data/index/[name].json.ts` |
 | Launch manifest | `/data/seo-launch-pages.json` | 1 | 1 | `src/pages/data/seo-launch-pages.json.ts` |
@@ -62,7 +62,16 @@ difference is intended:
 | robots.txt | `/robots.txt` | 1 | 1 | `src/pages/robots.txt.ts` (switch-driven) |
 | Parked account pages | sign-in, sign-up, forgot/reset password, account, auth/callback, saved, matches | 8 | 0 | **Omitted** |
 
-Totals: roster 955 `index.html`; HomezyPro 947 `index.html` + `404.html` = 948 HTML pages.
+Totals: roster 955 `index.html` (r15.1); HomezyPro 955 `index.html` + `404.html` = 956 HTML pages (r15.2).
+
+r15.2 (`companies-20261018-1004.json`): 745 published (aircon 231, plumbing 101, electrician 116, handyman 100,
+home-cleaning 197). Billy Aircon passes the full bar but stays retired (`KEEP_RETIRED`, reason `kept-retired`).
+201823211K stays withheld (needs-human-review); its slugs `city-cleaning` and `direct-painters-plastering` are
+reserved, never published, and 404 with no stub page or redirect (`NEVER_PUBLISH_SLUGS`). The new
+`lead-gen-network-site` flag is informational; those six rows stay withheld by `no-sg-postal-code`.
+`address.kind` is carried through the import: an ACRA registered address (`registered`, 6 profiles) is
+labelled "Registered address" with no visiting wording, map or look-up link, and is left out of the
+PostalAddress/hasMap structured data; `premises` addresses render as before.
 
 One catch-all route serves every family except home, hubs and profiles, because guides and town pages
 share the `/{hub}/{x}/` shape; `otherPages` in `render.mjs` maps each path to its renderer.

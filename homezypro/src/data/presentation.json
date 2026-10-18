@@ -3551,7 +3551,7 @@
   "thetop-aircon-service": {
     "published": true,
     "price": "See published prices",
-    "detail": "24 sourced pricing entries. Confirm the job, inclusions and total.",
+    "detail": "48 sourced pricing entries. Confirm the job, inclusions and total.",
     "logo": "/logos/gm-11600662789321647147-6f4c026a89c9.webp",
     "logoAsset": {
       "localPath": "logos/gm-11600662789321647147.png",
@@ -7847,7 +7847,7 @@
   "city-cooling-pte-ltd-aircon-specialist-singapore": {
     "published": true,
     "price": "See published prices",
-    "detail": "20 sourced pricing entries. Confirm the job, inclusions and total.",
+    "detail": "32 sourced pricing entries. Confirm the job, inclusions and total.",
     "logo": "/logos/gm-3508651125073605305-ed738368a2f8.webp",
     "logoAsset": {
       "localPath": "logos/gm-3508651125073605305.png",
@@ -7979,6 +7979,12 @@
     "detail": "No company rate captured. Ask for a job-specific quote.",
     "photos": []
   },
+  "primehome-plumbing-electrical-engineering-pte-ltd": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "photos": []
+  },
   "call-sg-building-services-pte-ltd": {
     "published": false,
     "price": "Ask for a quote",
@@ -8064,6 +8070,21 @@
     "published": true,
     "price": "See published prices",
     "detail": "2 sourced pricing entries. Confirm the job, inclusions and total.",
+    "photos": []
+  },
+  "vs-handyman-s-pte-ltd": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "logo": "/logos/gm-10660651129198698701-0932d0b01b4e.svg",
+    "logoAsset": {
+      "localPath": "logos/gm-10660651129198698701.svg",
+      "sha256": "0932d0b01b4ea37f50098d8107fce7b20f07f1f26c37ed08341769175448b30d",
+      "src": "/logos/gm-10660651129198698701-0932d0b01b4e.svg",
+      "sourceUrl": "https://vshandymansg.com/",
+      "originalUrl": "https://vshandymansg.com/wp-content/uploads/2025/12/Logo-black.svg",
+      "capturedAt": "2026-10-11"
+    },
     "photos": []
   },
   "fnf-handyman": {
@@ -8156,10 +8177,31 @@
     },
     "photos": []
   },
+  "emilio-s-solutions": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "photos": []
+  },
   "hiremop-pte-ltd": {
     "published": true,
     "price": "See published prices",
     "detail": "1 sourced pricing entries. Confirm the job, inclusions and total.",
+    "photos": []
+  },
+  "sparkle-cleaning-pte-ltd": {
+    "published": true,
+    "price": "See published prices",
+    "detail": "1 sourced pricing entries. Confirm the job, inclusions and total.",
+    "logo": "/logos/gm-17733517444303586357-a3df65010bf9.webp",
+    "logoAsset": {
+      "localPath": "logos/gm-17733517444303586357.png",
+      "sha256": "a3df65010bf9ed0ef42cb9c8f6e538838237738b01b824b8ef0953144776fcc4",
+      "src": "/logos/gm-17733517444303586357-a3df65010bf9.png",
+      "sourceUrl": "https://sparklecleaning.com.sg/",
+      "originalUrl": "https://sparklecleaning.com.sg/wp-content/uploads/2024/12/sparkle-logo-300x97.png",
+      "capturedAt": "2026-10-12"
+    },
     "photos": []
   },
   "the-good-husband-laundromats-drycleaners-serangoon": {
@@ -8403,6 +8445,12 @@
       "originalUrl": "https://hvacengineering.com.sg/wp-content/uploads/2022/07/hvac-logo.jpg",
       "capturedAt": "2026-10-12"
     },
+    "photos": []
+  },
+  "the-cleaning-lab": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
     "photos": []
   },
   "cleanworks-sg": {
@@ -8795,6 +8843,21 @@
     },
     "photos": []
   },
+  "gjourney-services": {
+    "published": true,
+    "price": "See published prices",
+    "detail": "4 sourced pricing entries. Confirm the job, inclusions and total.",
+    "logo": "/logos/gm-15675126981369056052-b074d6fb054b.webp",
+    "logoAsset": {
+      "localPath": "logos/gm-15675126981369056052.png",
+      "sha256": "b074d6fb054b5d6485eae87b63ef9fd81b14b6879a7171ee182756ac57a28550",
+      "src": "/logos/gm-15675126981369056052-b074d6fb054b.png",
+      "sourceUrl": "https://g-journey.com/",
+      "originalUrl": "https://g-journey.com/wp-content/uploads/2024/08/gj-logo.png",
+      "capturedAt": "2026-10-12"
+    },
+    "photos": []
+  },
   "green-star-aircon-pte-ltd": {
     "published": false,
     "price": "Ask for a quote",
@@ -9009,6 +9072,21 @@
     "published": true,
     "price": "See published prices",
     "detail": "1 sourced pricing entries. Confirm the job, inclusions and total.",
+    "photos": []
+  },
+  "upward-cleaning-services": {
+    "published": true,
+    "price": "See published prices",
+    "detail": "11 sourced pricing entries. Confirm the job, inclusions and total.",
+    "logo": "/logos/gm-15467307147916803139-a12baee0edfb.webp",
+    "logoAsset": {
+      "localPath": "logos/gm-15467307147916803139.png",
+      "sha256": "a12baee0edfb97282e845012a99a898cffa69e306490a061c0a7212105d2b8fb",
+      "src": "/logos/gm-15467307147916803139-a12baee0edfb.png",
+      "sourceUrl": "https://upwardcleaning.sg/",
+      "originalUrl": "https://upwardcleaning.sg/logo.png",
+      "capturedAt": "2026-10-12"
+    },
     "photos": []
   },
   "cleanox": {

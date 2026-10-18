@@ -1,5 +1,5 @@
 {
-  "sourceChecked": "2026-10-18T01:23+03:00",
+  "sourceChecked": "2026-10-18T10:03+03:00",
   "sourceRows": 6494,
   "sourceProfiles": 878,
   "published": [
@@ -6359,6 +6359,16 @@
       "curated": false
     },
     {
+      "id": "gm-18365506591458775577",
+      "slug": "primehome-plumbing-electrical-engineering-pte-ltd",
+      "name": "Primehome Plumbing & Electrical Engineering Pte Ltd",
+      "categories": [
+        "plumbing"
+      ],
+      "primaryTrade": "plumbing",
+      "curated": false
+    },
+    {
       "id": "gm-2790167341524828418",
       "slug": "call-sg-building-services-pte-ltd",
       "name": "Call SG Building Services Pte Ltd",
@@ -6432,6 +6442,16 @@
       "id": "gm-16920723518905756668",
       "slug": "flexi-home-services",
       "name": "Flexi Home Services",
+      "categories": [
+        "handyman"
+      ],
+      "primaryTrade": "handyman",
+      "curated": false
+    },
+    {
+      "id": "gm-10660651129198698701",
+      "slug": "vs-handyman-s-pte-ltd",
+      "name": "VS Handyman (S) Pte Ltd",
       "categories": [
         "handyman"
       ],
@@ -6519,9 +6539,29 @@
       "curated": false
     },
     {
+      "id": "gm-12882958279108325625",
+      "slug": "emilio-s-solutions",
+      "name": "EMILIO'S SOLUTIONS",
+      "categories": [
+        "cleaning"
+      ],
+      "primaryTrade": "cleaning",
+      "curated": false
+    },
+    {
       "id": "gm-6788453654994900519",
       "slug": "hiremop-pte-ltd",
       "name": "Hiremop Pte Ltd",
+      "categories": [
+        "cleaning"
+      ],
+      "primaryTrade": "cleaning",
+      "curated": false
+    },
+    {
+      "id": "gm-17733517444303586357",
+      "slug": "sparkle-cleaning-pte-ltd",
+      "name": "Sparkle Cleaning Pte Ltd",
       "categories": [
         "cleaning"
       ],
@@ -6712,6 +6752,16 @@
       "id": "gm-3997265546334033718",
       "slug": "hvac",
       "name": "HVAC",
+      "categories": [
+        "cleaning"
+      ],
+      "primaryTrade": "cleaning",
+      "curated": false
+    },
+    {
+      "id": "gm-7897436129245739792",
+      "slug": "the-cleaning-lab",
+      "name": "The Cleaning Lab",
       "categories": [
         "cleaning"
       ],
@@ -7039,6 +7089,16 @@
       "curated": false
     },
     {
+      "id": "gm-15675126981369056052",
+      "slug": "gjourney-services",
+      "name": "GJourney Services",
+      "categories": [
+        "cleaning"
+      ],
+      "primaryTrade": "cleaning",
+      "curated": false
+    },
+    {
       "id": "gm-15785867691258950474",
       "slug": "green-star-aircon-pte-ltd",
       "name": "GREEN STAR AIRCON PTE. LTD.",
@@ -7202,6 +7262,16 @@
       "id": "gm-12391635837135248409",
       "slug": "aircare",
       "name": "AirCare+",
+      "categories": [
+        "cleaning"
+      ],
+      "primaryTrade": "cleaning",
+      "curated": false
+    },
+    {
+      "id": "gm-15467307147916803139",
+      "slug": "upward-cleaning-services",
+      "name": "Upward Cleaning Services",
       "categories": [
         "cleaning"
       ],
@@ -11038,7 +11108,7 @@
       ],
       "primaryTrade": "aircon",
       "reasons": [
-        "no-sg-postal-code"
+        "kept-retired"
       ],
       "curated": true,
       "slug": "billy-aircon"
@@ -35362,10 +35432,9 @@
       "id": "201823211K",
       "name": "DIRECT PAINTERS & PLASTERING PTE. LTD.",
       "categories": [
-        "electrician",
-        "cleaning"
+        "electrician"
       ],
-      "primaryTrade": "cleaning",
+      "primaryTrade": "electrician",
       "reasons": [
         "needs-human-review",
         "missing-sourced-about",
@@ -74992,18 +75061,6 @@
       ]
     },
     {
-      "id": "gm-18365506591458775577",
-      "name": "Primehome Plumbing & Electrical Engineering Pte Ltd",
-      "categories": [
-        "plumbing"
-      ],
-      "primaryTrade": "plumbing",
-      "reasons": [
-        "no-sg-postal-code",
-        "missing-sourced-address"
-      ]
-    },
-    {
       "id": "gm-273953957662217335",
       "name": "SG HomeFix Plumbing Services",
       "categories": [
@@ -75018,18 +75075,6 @@
     {
       "id": "gm-14916273714291421212",
       "name": "Pro Handyman",
-      "categories": [
-        "handyman"
-      ],
-      "primaryTrade": "handyman",
-      "reasons": [
-        "no-sg-postal-code",
-        "missing-sourced-address"
-      ]
-    },
-    {
-      "id": "gm-10660651129198698701",
-      "name": "VS Handyman (S) Pte Ltd",
       "categories": [
         "handyman"
       ],
@@ -75113,30 +75158,6 @@
       ]
     },
     {
-      "id": "gm-12882958279108325625",
-      "name": "EMILIO'S SOLUTIONS",
-      "categories": [
-        "cleaning"
-      ],
-      "primaryTrade": "cleaning",
-      "reasons": [
-        "no-sg-postal-code",
-        "missing-sourced-address"
-      ]
-    },
-    {
-      "id": "gm-17733517444303586357",
-      "name": "Sparkle Cleaning Pte Ltd",
-      "categories": [
-        "cleaning"
-      ],
-      "primaryTrade": "cleaning",
-      "reasons": [
-        "no-sg-postal-code",
-        "missing-sourced-address"
-      ]
-    },
-    {
       "id": "gm-13955369787455697907",
       "name": "OCD Cleaning Pte Ltd - Obsessive Cleaning Disorder | Professional Deep Cleaning Services Singapore",
       "categories": [
@@ -75144,9 +75165,7 @@
       ],
       "primaryTrade": "cleaning",
       "reasons": [
-        "no-sg-postal-code",
-        "missing-sourced-about",
-        "missing-sourced-address"
+        "missing-sourced-about"
       ]
     },
     {
@@ -75220,18 +75239,6 @@
     {
       "id": "gm-7400736840863890264",
       "name": "Enhance Cleaning Pte Ltd",
-      "categories": [
-        "cleaning"
-      ],
-      "primaryTrade": "cleaning",
-      "reasons": [
-        "no-sg-postal-code",
-        "missing-sourced-address"
-      ]
-    },
-    {
-      "id": "gm-7897436129245739792",
-      "name": "The Cleaning Lab",
       "categories": [
         "cleaning"
       ],
@@ -79752,9 +79759,7 @@
       ],
       "primaryTrade": "aircon",
       "reasons": [
-        "no-sg-postal-code",
-        "missing-sourced-about",
-        "missing-sourced-address"
+        "missing-sourced-about"
       ]
     },
     {
@@ -80725,18 +80730,6 @@
         "missing-sourced-about",
         "missing-sourced-services",
         "missing-company-website"
-      ]
-    },
-    {
-      "id": "gm-15675126981369056052",
-      "name": "GJourney Services",
-      "categories": [
-        "cleaning"
-      ],
-      "primaryTrade": "cleaning",
-      "reasons": [
-        "no-sg-postal-code",
-        "missing-sourced-address"
       ]
     },
     {
@@ -83899,18 +83892,6 @@
       ]
     },
     {
-      "id": "gm-15467307147916803139",
-      "name": "Upward Cleaning Services",
-      "categories": [
-        "cleaning"
-      ],
-      "primaryTrade": "cleaning",
-      "reasons": [
-        "no-sg-postal-code",
-        "missing-sourced-address"
-      ]
-    },
-    {
       "id": "gm-3551612195242330848",
       "name": "Eco Home Care (SG)",
       "categories": [
@@ -86960,6 +86941,10 @@
       "reason": "r10: selected automatically (touch-icon icon); not visually checked"
     },
     {
+      "slug": "sparkle-cleaning-pte-ltd",
+      "issue": "Automatically extracted price text needs editorial review; source wording retained"
+    },
+    {
       "slug": "singapore-carpet-cleaning-pte-ltd",
       "issue": "Automatically extracted price text needs editorial review; source wording retained"
     },
@@ -87034,6 +87019,10 @@
       "issue": "Automatically extracted price text needs editorial review; source wording retained"
     },
     {
+      "slug": "gjourney-services",
+      "issue": "Automatically extracted price text needs editorial review; source wording retained"
+    },
+    {
       "slug": "seven-seas-electrical-rig-services",
       "issue": "Uncertain logo withheld; initials shown",
       "reason": "r10: selected automatically (touch-icon icon); not visually checked"
@@ -87044,6 +87033,10 @@
     },
     {
       "slug": "ar-contractor-pte-ltd-best-painting-aircon-service-provider",
+      "issue": "Automatically extracted price text needs editorial review; source wording retained"
+    },
+    {
+      "slug": "upward-cleaning-services",
       "issue": "Automatically extracted price text needs editorial review; source wording retained"
     },
     {
@@ -87093,37 +87086,37 @@
       "excluded": 1829
     },
     "plumbing": {
-      "published": 100,
-      "excluded": 554
+      "published": 101,
+      "excluded": 553
     },
     "electrician": {
       "published": 116,
-      "excluded": 2206
+      "excluded": 2207
     },
     "handyman": {
-      "published": 99,
-      "excluded": 539
+      "published": 100,
+      "excluded": 538
     },
     "cleaning": {
-      "published": 192,
-      "excluded": 628
+      "published": 197,
+      "excluded": 622
     }
   },
-  "publishedCount": 738,
-  "excludedCount": 5756,
-  "rebrandedSummaries": 305,
-  "sourceSha256": "f317b17d90fa5eb5512deb570f6fbe844b305b20b38dce3215c8c10f2a046f7a",
-  "sourceRelease": "companies-20261018-0125.json",
+  "publishedCount": 745,
+  "excludedCount": 5749,
+  "rebrandedSummaries": 308,
+  "sourceSha256": "d8c388bf6d0232905fe8f781a2ec1f3b4adc198382fda732876172290bec2bcb",
+  "sourceRelease": "companies-20261018-1004.json",
   "logos": {
-    "logos": 519,
-    "webp": 499,
-    "svg": 14,
+    "logos": 523,
+    "webp": 502,
+    "svg": 15,
     "rasterisedSvg": 6,
     "over30k": 0,
     "maxBytes": 30454,
-    "servedBytes": 6430984,
-    "originalBytes": 41104044,
-    "framed": 430,
+    "servedBytes": 6480043,
+    "originalBytes": 41274711,
+    "framed": 432,
     "bundle": "logos-20261018-0059.tar.gz",
     "bundleSha256": "2df3c41423ca0385412ff3abc75f8dcbfef5c08b449b043cfa7d2b880143cfc3"
   }
