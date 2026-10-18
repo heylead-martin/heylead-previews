@@ -1,5 +1,5 @@
 {
-  "capturedAt": "2026-10-18T10:03+03:00",
+  "capturedAt": "2026-10-18T11:39+03:00",
   "capturedLabel": "18 Oct 2026",
   "companies": [
     {
@@ -38,7 +38,7 @@
         "value": "Carros Centre, 60 Jalan Lam Huat, #03-42",
         "sourceUrl": "https://sg-electrician.com/",
         "postal": "737869",
-        "postalSourceUrl": "https://data.gov.sg/datasets/d_dcda79be4aded5f9e769b8e23ff69b47/view"
+        "postalSourceUrl": "https://sg-electrician.com/contact-us/"
       },
       "mapsUrl": "https://www.google.com/maps/search/?api=1&query=1st%20Electrical%20Services%20Singapore&query_place_id=ChIJDfA_bY0Z2jERXWp4t2Vu-jw",
       "mapsNote": "Place id from the homepage write-a-review button. The Maps listing itself was not opened.",
@@ -79,7 +79,7 @@
       "imported": false,
       "databaseId": "53206423B",
       "enrichment": {
-        "checkedAt": "2026-10-18T00:57+03:00",
+        "checkedAt": "2026-10-18T11:39+03:00",
         "supportedServices": [
           {
             "name": "Power trip repair",
@@ -230,19 +230,19 @@
             "q": "Do you offer emergency electrical services?",
             "a": "Yes, we provide 24/7 emergency electrical services, including nights, weekends, and holidays.",
             "sourceUrl": "https://sg-electrician.com/",
-            "capturedAt": "2026-10-18T00:57+03:00"
+            "capturedAt": "2026-10-18T11:39+03:00"
           },
           {
             "q": "What Are Your Operating Hours?",
             "a": "We are available from Monday to Sunday including public holidays. If you are in an emergency, contact us and we will arrive within 30-40 minutes (subject to availability).",
             "sourceUrl": "https://sg-electrician.com/",
-            "capturedAt": "2026-10-18T00:57+03:00"
+            "capturedAt": "2026-10-18T11:39+03:00"
           },
           {
             "q": "Is There A Warranty?",
             "a": "This applies only to parts replaced by us, which are covered by a 3-month warranty.",
             "sourceUrl": "https://sg-electrician.com/",
-            "capturedAt": "2026-10-18T00:57+03:00"
+            "capturedAt": "2026-10-18T11:39+03:00"
           }
         ],
         "highlights": [
@@ -332,8 +332,8 @@
         "status": "verified",
         "precision": "building",
         "postal": "737869",
-        "addressValue": "60 JALAN LAM HUAT #03-42, CARROS CENTRE, Singapore 737869",
-        "addressSourceUrl": "https://data.gov.sg/datasets/d_dcda79be4aded5f9e769b8e23ff69b47/view",
+        "addressValue": "60 Jalan Lam Huat, #03-42 Carros Centre, Singapore 737869",
+        "addressSourceUrl": "https://sg-electrician.com/contact-us/",
         "place": {
           "name": "1st Electrical Services - Woodlands",
           "cid": "14985675630398845617",
@@ -367,10 +367,17 @@
       "listingDepth": {
         "full": true,
         "evidenceScore": 7,
-        "checkedAt": "2026-10-12T10:44+03:00"
+        "checkedAt": "2026-10-18T11:39+03:00"
       },
       "primaryTrade": "electrician",
-      "alternatePhones": [],
+      "alternatePhones": [
+        {
+          "value": "+65 8777 0811",
+          "sourceUrl": "https://data.gov.sg/datasets/d_dcda79be4aded5f9e769b8e23ff69b47/view",
+          "sourceLabel": "BCA register",
+          "capturedAt": "2026-10-18"
+        }
+      ],
       "categories": [
         "electrician"
       ],
@@ -92338,7 +92345,7 @@
       },
       "primaryTrade": "cleaning",
       "alternatePhones": [],
-      "area": "Woodlands",
+      "area": "Other Singapore locations",
       "googleRating": {
         "value": 4.8,
         "count": 187,
@@ -108194,7 +108201,7 @@
       "imported": true,
       "databaseId": "gm-7246879022007285428",
       "enrichment": {
-        "checkedAt": "2026-10-10",
+        "checkedAt": "2026-10-18T11:39+03:00",
         "supportedServices": [
           {
             "name": "Deep cleaning",
@@ -108213,11 +108220,6 @@
           }
         ],
         "about": [
-          {
-            "text": "🌷 Mom’s Day Off Deluxe Clean: Treat Mom to a luxurious break by letting us handle the cleaning from top to bottom. Our expert team will leave her home sparkling and smelling fresh. - Complimentary: A fragrant bouquet of flowers for Mother’s Day for Deep Cleaning packages above $300",
-            "sourceUrl": "https://www.hms.com.sg/",
-            "capturedAt": "2026-10-10"
-          },
           {
             "text": "HMS Housekeepers is a Singapore based cleaning agency focused on offering Sincere Service through their Honest and Meticulous cleaners. At our agency, we know that our service offers our clients more than a clean office or home, we offer a peace of mind and respite from work at home after work at office.",
             "sourceUrl": "https://www.hms.com.sg/about/",
@@ -108246,49 +108248,7 @@
         "uen": "",
         "uenSource": "",
         "operatorGroup": null,
-        "priceLines": [
-          {
-            "job": "regular-cleaning",
-            "service": "Limited time offer 25 and 27 Apr 2024: 4 hours @ only",
-            "qty": 4,
-            "unit": "as printed",
-            "amount_sgd": 98,
-            "was_amount_sgd": null,
-            "promo": true,
-            "gst": "not stated",
-            "price_text": "Limited time offer 25 and 27 Apr 2024: 4 hours @ $98 only",
-            "sourceUrl": "https://www.hms.com.sg/",
-            "excerpt": "💐 Customizable Cleaning Packages: Tailor the cleaning service to match Mom’s preferences. | Limited time offer 25 and 27 Apr 2024: 4 hours @ $98 only",
-            "capturedAt": "2026-10-10",
-            "unitBasis": "previous \"per hour\" had no hourly wording; left as printed",
-            "unitInferred": false,
-            "service_raw": "Limited time offer 25 and 27 Apr 2024: 4 hours @ $98 only",
-            "unit_price_basis": "price is for one job/item (unit as printed) as printed",
-            "units_in_price": 1,
-            "unit_price_sgd": 98,
-            "from_price": false
-          },
-          {
-            "job": "deep-cleaning",
-            "service": "💌 Gift that lasts a whole year: Send Mom a gift certificate for our team to upkeep her house every week so that she can rest and relax whole",
-            "qty": null,
-            "unit": "per job",
-            "amount_sgd": 100,
-            "was_amount_sgd": null,
-            "promo": false,
-            "gst": "not stated",
-            "price_text": "💌 Gift that lasts a whole year: Send Mom a gift certificate for our team to upkeep her house every week so that she can",
-            "sourceUrl": "https://www.hms.com.sg/",
-            "excerpt": "- Complimentary: A fragrant bouquet of flowers for Mother’s Day for Deep Cleaning packages above $300 | 💌 Gift that lasts a whole year: Send Mom a gift certificate for our team to upkeep her house every week so that she",
-            "capturedAt": "2026-10-10",
-            "unitBasis": "deep-cleaning priced as one job; no other unit printed",
-            "unitInferred": true,
-            "unit_price_basis": "price is for one job as printed",
-            "units_in_price": 1,
-            "unit_price_sgd": 100,
-            "from_price": false
-          }
-        ],
+        "priceLines": [],
         "websiteCheck": {
           "url": "https://www.hms.com.sg/",
           "finalUrl": "https://www.hms.com.sg/",
@@ -108297,35 +108257,21 @@
           "result": "active"
         },
         "serviceLocations": [],
-        "bestFor": [
-          {
-            "text": "Prints a deep cleaning price on its site: S$100 (GST not stated)",
-            "excerpt": "- Complimentary: A fragrant bouquet of flowers for Mother’s Day for Deep Cleaning packages above $300 | 💌 Gift that lasts a whole year: Send Mom a gift certificate for our team to upkeep her house every week so that she",
-            "source_url": "https://www.hms.com.sg/",
-            "capturedAt": "2026-10-10",
-            "sourceUrl": "https://www.hms.com.sg/"
-          }
-        ],
+        "bestFor": [],
         "poorFit": [],
         "summary": {
-          "text": "HMS Housekeepers Pte Ltd is a home cleaning business in Singapore. Its website mentions deep cleaning, office cleaning, mattress. It publishes prices for deep cleaning and regular cleaning. Its site says it takes residential jobs. Google Maps search data showed 5 stars from 104 reviews on 2026-10-10.",
+          "text": "HMS Housekeepers Pte Ltd is a home cleaning business in Singapore. Its website mentions deep cleaning, office cleaning, mattress. HomezyPro found no published prices on the pages it checked. Its site says it takes residential jobs. Google Maps search data showed 5 stars from 104 reviews on 2026-10-10.",
           "sources": [
             "https://maps.google.com/?cid=7246879022007285428",
             "https://www.hms.com.sg/",
             "https://www.hms.com.sg/about/"
           ],
-          "capturedAt": "2026-10-11T22:26+03:00"
+          "capturedAt": "2026-10-18T11:39+03:00"
         },
         "faqs": [],
         "highlights": [
           {
             "text": "In business since 2005",
-            "source_url": "https://www.hms.com.sg/",
-            "capturedAt": "2026-10-10",
-            "sourceUrl": "https://www.hms.com.sg/"
-          },
-          {
-            "text": "Publishes prices on its website",
             "source_url": "https://www.hms.com.sg/",
             "capturedAt": "2026-10-10",
             "sourceUrl": "https://www.hms.com.sg/"
@@ -108390,8 +108336,8 @@
       ],
       "listingDepth": {
         "full": false,
-        "evidenceScore": 5,
-        "checkedAt": "2026-10-12T10:44+03:00"
+        "evidenceScore": 4,
+        "checkedAt": "2026-10-18T11:39+03:00"
       },
       "primaryTrade": "cleaning",
       "alternatePhones": [],
@@ -115751,6 +115697,244 @@
         "count": 26,
         "sourceUrl": "https://maps.google.com/?cid=461141837578364332",
         "checkedAt": "2026-10-10T18:36+03:00",
+        "sourceType": "google-maps-search"
+      }
+    },
+    {
+      "slug": "iaircon-singapore-aircon-services",
+      "name": "iAircon Singapore Aircon Services",
+      "category": "aircon",
+      "categories": [
+        "aircon"
+      ],
+      "schemaType": "HVACBusiness",
+      "phone": {
+        "value": "+65 9187 4498",
+        "sourceUrl": "https://maps.google.com/?cid=13401153252324094024"
+      },
+      "address": {
+        "value": "266C Compassvale Bow, Singapore 543266",
+        "sourceUrl": "https://data.gov.sg/datasets/d_85518d970b8178975850457f60f1e738/view",
+        "street": "266C Compassvale Bow, Singapore 543266",
+        "postal": "543266",
+        "kind": "registered",
+        "registeredAddress": true
+      },
+      "website": {
+        "value": "https://www.iaircon.repair/",
+        "sourceUrl": "https://www.iaircon.repair/"
+      },
+      "email": null,
+      "whatsapp": {
+        "value": "+65 9187 4498",
+        "sourceUrl": "https://www.iaircon.repair/"
+      },
+      "mapsUrl": "https://maps.google.com/?cid=13401153252324094024",
+      "rating": null,
+      "reviews": [],
+      "services": [
+        "chemical-wash",
+        "gas-top-up"
+      ],
+      "bestFor": "",
+      "poorFit": "",
+      "priceNote": "Contact the company to confirm the scope, total price and GST.",
+      "priceSourceUrl": "https://www.iaircon.repair/",
+      "facts": [],
+      "imported": true,
+      "databaseId": "gm-13401153252324094024",
+      "enrichment": {
+        "checkedAt": "2026-10-18T11:39+03:00",
+        "supportedServices": [
+          {
+            "name": "Chemical wash",
+            "sourceUrl": "https://www.iaircon.repair/",
+            "capturedAt": "2026-10-10"
+          },
+          {
+            "name": "Chemical overhaul",
+            "sourceUrl": "https://www.iaircon.repair/",
+            "capturedAt": "2026-10-10"
+          },
+          {
+            "name": "Gas top up",
+            "sourceUrl": "https://www.iaircon.repair/",
+            "capturedAt": "2026-10-10"
+          },
+          {
+            "name": "Repair",
+            "sourceUrl": "https://www.iaircon.repair/",
+            "capturedAt": "2026-10-10"
+          },
+          {
+            "name": "Aircon servicing",
+            "sourceUrl": "https://www.iaircon.repair/",
+            "capturedAt": "2026-10-10"
+          },
+          {
+            "name": "Aircon cleaning",
+            "sourceUrl": "https://www.iaircon.repair/",
+            "capturedAt": "2026-10-10"
+          }
+        ],
+        "about": [
+          {
+            "text": "iAircon.sg is a leading aircon service provider in Singapore, offering a wide range of professional and trustworthy aircon services to keep your air conditioner running smoothly and efficiently.",
+            "sourceUrl": "https://www.iaircon.repair/about-us/",
+            "sourceLabel": "company site About page, quoted verbatim",
+            "capturedAt": "2026-10-18",
+            "fetchedAt": "2026-10-18T11:35:03+03:00",
+            "quoted": true,
+            "method": "verbatim quote from the About page"
+          }
+        ],
+        "hours": null,
+        "serviceArea": null,
+        "residential": {
+          "value": "yes",
+          "excerpt": "conditioning is not a luxury - it’s a daily necessity. From HDB flats and condominiums to office spaces, aircons work hard",
+          "sourceUrl": "https://www.iaircon.repair/",
+          "capturedAt": "2026-10-10"
+        },
+        "licences": [],
+        "management": [],
+        "uen": "53347073X",
+        "uenSource": "https://data.gov.sg/datasets/d_85518d970b8178975850457f60f1e738/view",
+        "operatorGroup": null,
+        "priceLines": [],
+        "websiteCheck": {
+          "url": "https://iaircon.repair/",
+          "finalUrl": "https://www.iaircon.repair/",
+          "httpStatus": 200,
+          "checkedAt": "2026-10-12T00:32+03:00",
+          "result": "active"
+        },
+        "serviceLocations": [],
+        "bestFor": [
+          {
+            "text": "States a 90-day warranty",
+            "excerpt": "We stand behind the quality of our PowerJet chemical wash service by offering a 90 Days warranty on our work, giving you peace of mind knowing that your aircon unit is protected in case of any issues that may arise after the service.",
+            "source_url": "https://www.iaircon.repair/powerjet-aircon-chemical-wash",
+            "capturedAt": "2026-10-12",
+            "sourceUrl": "https://www.iaircon.repair/powerjet-aircon-chemical-wash"
+          },
+          {
+            "text": "Says it takes jobs 24 hours a day",
+            "excerpt": "iAircon is excited to introduce Luna, our new AI assistant available 24/7 via phone and WhatsApp.",
+            "source_url": "https://www.iaircon.repair/",
+            "capturedAt": "2026-10-10",
+            "sourceUrl": "https://www.iaircon.repair/"
+          }
+        ],
+        "poorFit": [],
+        "summary": {
+          "text": "iAircon Singapore Aircon Services is an aircon servicing business in Singapore. Its website mentions chemical wash, chemical overhaul, gas top up, repair and other services. HomezyPro found no published prices on the pages it checked. Its site says it takes jobs 24 hours a day. Google Maps search data showed 4.6 stars from 316 reviews on 2026-10-11.",
+          "sources": [
+            "https://maps.google.com/?cid=13401153252324094024",
+            "https://www.iaircon.repair/"
+          ],
+          "capturedAt": "2026-10-12T00:53+03:00"
+        },
+        "faqs": [],
+        "highlights": [],
+        "warranty": null,
+        "foundedYear": null,
+        "emergency": {
+          "value": true,
+          "excerpt": "Luna! 18/11/2024 iAircon is excited to introduce Luna, our new AI assistant available 24/7 via phone and WhatsApp. Developed by our founder, Mr. Eric Lim, Luna provides reliable support for bookings",
+          "source_url": "https://www.iaircon.repair/",
+          "capturedAt": "2026-10-10",
+          "sourceUrl": "https://www.iaircon.repair/"
+        },
+        "responseTime": null,
+        "brands": [
+          {
+            "value": "Daikin",
+            "excerpt": "| iAircon.sg Uncle Eric 😎 Posted on 21/07/2026 #POV - Daikin Aircon Gas Leak Found! 👍😍 #airconservicing",
+            "source_url": "https://www.iaircon.repair/",
+            "capturedAt": "2026-10-10",
+            "sourceUrl": "https://www.iaircon.repair/"
+          },
+          {
+            "value": "Mitsubishi Electric",
+            "excerpt": "(134 East Coast Road) faced a blinking LED issue on their Mitsubishi Electric Starmex system, they called us immediately. The Importance",
+            "source_url": "https://www.iaircon.repair/",
+            "capturedAt": "2026-10-10",
+            "sourceUrl": "https://www.iaircon.repair/"
+          }
+        ],
+        "payments": [],
+        "socials": [
+          {
+            "name": "facebook",
+            "url": "https://www.facebook.com/iAircon",
+            "sourceUrl": "https://www.iaircon.repair/",
+            "capturedAt": "2026-10-10"
+          },
+          {
+            "name": "instagram",
+            "url": "https://www.instagram.com/iaircon",
+            "sourceUrl": "https://www.iaircon.repair/",
+            "capturedAt": "2026-10-10"
+          },
+          {
+            "name": "tiktok",
+            "url": "https://tiktok.com/@iaircon",
+            "sourceUrl": "https://www.iaircon.repair/",
+            "capturedAt": "2026-10-10"
+          }
+        ]
+      },
+      "quoteEvidence": null,
+      "mapEvidence": {
+        "status": "unresolved",
+        "precision": null,
+        "postal": "543266",
+        "addressValue": "266C Compassvale Bow, Singapore 543266",
+        "addressSourceUrl": "https://data.gov.sg/datasets/d_85518d970b8178975850457f60f1e738/view",
+        "place": {
+          "name": "iAircon Singapore Aircon Services",
+          "cid": "13401153252324094024",
+          "place_id": "ChIJDeW5ihgY2jERSDBZceF1-rk",
+          "url": "https://maps.google.com/?cid=13401153252324094024",
+          "address": null,
+          "postal": null,
+          "phone": "+65 9187 4498",
+          "website": "https://iaircon.repair/",
+          "readVia": "https://www.google.com/search?tbm=map&hl=en&gl=sg&q=aircon+servicing&pb=!4m12!1m3!1d6000!2d103.89!3d1.37!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!7i20!8i20!10b1!12m6!2m3!5m1!6e2!20e3!10b1!16b1",
+          "readAt": "2026-10-11T22:39+03:00"
+        },
+        "geocode": null,
+        "latitude": null,
+        "longitude": null
+      },
+      "selfReportedRating": null,
+      "reviewSources": [
+        {
+          "name": "Google Maps",
+          "rating": 4.6,
+          "count": 316,
+          "scale": 5,
+          "sourceUrl": "https://maps.google.com/?cid=13401153252324094024",
+          "checkedAt": "2026-10-11",
+          "method": "Google Maps place (cid 13401153252324094024) read via www.google.com/search?tbm=map at 2026-10-11T22:39+03:00",
+          "note": "",
+          "mirrorsSource": ""
+        }
+      ],
+      "listingDepth": {
+        "full": false,
+        "evidenceScore": 2,
+        "checkedAt": "2026-10-18T11:39+03:00"
+      },
+      "primaryTrade": "aircon",
+      "alternatePhones": [],
+      "area": "Other Singapore locations",
+      "googleRating": {
+        "value": 4.6,
+        "count": 316,
+        "sourceUrl": "https://maps.google.com/?cid=13401153252324094024",
+        "checkedAt": "2026-10-12T00:32+03:00",
         "sourceType": "google-maps-search"
       }
     },
@@ -150952,6 +151136,364 @@
       }
     },
     {
+      "slug": "ocd-cleaning-pte-ltd-obsessive-cleaning-disorder-professiona",
+      "name": "OCD Cleaning Pte Ltd - Obsessive Cleaning Disorder | Professional Deep Cleaning Services Singapore",
+      "category": "cleaning",
+      "categories": [
+        "cleaning"
+      ],
+      "schemaType": "LocalBusiness",
+      "phone": {
+        "value": "+65 8181 3086",
+        "sourceUrl": "https://maps.google.com/?cid=13955369787455697907"
+      },
+      "address": {
+        "value": "3 Soon Lee Street, #02-25 Pioneer Junction, Singapore 627606",
+        "sourceUrl": "https://www.ocd.com.sg/",
+        "street": "3 Soon Lee Street, #02-25 Pioneer Junction, Singapore 627606",
+        "postal": "627606",
+        "kind": "premises"
+      },
+      "website": {
+        "value": "https://www.ocd.com.sg/",
+        "sourceUrl": "https://www.ocd.com.sg/"
+      },
+      "email": {
+        "value": "info@ocd.com.sg",
+        "sourceUrl": "https://www.ocd.com.sg/contact"
+      },
+      "whatsapp": {
+        "value": "+65 8181 3086",
+        "sourceUrl": "https://www.ocd.com.sg/"
+      },
+      "mapsUrl": "https://maps.google.com/?cid=13955369787455697907",
+      "rating": null,
+      "reviews": [],
+      "services": [],
+      "bestFor": "",
+      "poorFit": "",
+      "priceNote": "Contact the company to confirm the scope, total price and GST.",
+      "priceSourceUrl": "https://www.ocd.com.sg/",
+      "facts": [],
+      "imported": true,
+      "databaseId": "gm-13955369787455697907",
+      "enrichment": {
+        "checkedAt": "2026-10-18T11:39+03:00",
+        "supportedServices": [
+          {
+            "name": "Regular cleaning",
+            "sourceUrl": "https://www.ocd.com.sg/",
+            "capturedAt": "2026-10-10"
+          },
+          {
+            "name": "Deep cleaning",
+            "sourceUrl": "https://www.ocd.com.sg/",
+            "capturedAt": "2026-10-10"
+          },
+          {
+            "name": "Move in out",
+            "sourceUrl": "https://www.ocd.com.sg/",
+            "capturedAt": "2026-10-10"
+          },
+          {
+            "name": "Post renovation",
+            "sourceUrl": "https://www.ocd.com.sg/",
+            "capturedAt": "2026-10-10"
+          },
+          {
+            "name": "Spring cleaning",
+            "sourceUrl": "https://www.ocd.com.sg/",
+            "capturedAt": "2026-10-10"
+          },
+          {
+            "name": "Office cleaning",
+            "sourceUrl": "https://www.ocd.com.sg/",
+            "capturedAt": "2026-10-10"
+          },
+          {
+            "name": "Upholstery sofa",
+            "sourceUrl": "https://www.ocd.com.sg/",
+            "capturedAt": "2026-10-10"
+          },
+          {
+            "name": "Carpet",
+            "sourceUrl": "https://www.ocd.com.sg/faq",
+            "capturedAt": "2026-10-10"
+          },
+          {
+            "name": "Window",
+            "sourceUrl": "https://www.ocd.com.sg/faq",
+            "capturedAt": "2026-10-10"
+          },
+          {
+            "name": "Disinfection",
+            "sourceUrl": "https://www.ocd.com.sg/",
+            "capturedAt": "2026-10-10"
+          }
+        ],
+        "about": [
+          {
+            "text": "We started OCD to fix the same three problems every Singapore homeowner kept hitting: surprise charges on the day, swap-out crews who didn't know the job, and scope that “wasn't included”. One in-house crew. One fixed price. Every service in scope.",
+            "sourceUrl": "https://www.ocd.com.sg/about",
+            "sourceLabel": "company site About page, quoted verbatim",
+            "capturedAt": "2026-10-18",
+            "fetchedAt": "2026-10-18T11:34:57+03:00",
+            "quoted": true,
+            "method": "verbatim quote from the About page"
+          }
+        ],
+        "hours": {
+          "text": "Sunday Open 24 hours; Monday Open 24 hours; Tuesday Open 24 hours; Wednesday Open 24 hours; Thursday Open 24 hours; Friday Open 24 hours; Saturday Open 24 hours",
+          "sourceUrl": "https://maps.google.com/?cid=13955369787455697907",
+          "sourceLabel": "Google Maps place data",
+          "capturedAt": "2026-10-11T23:48+03:00"
+        },
+        "serviceArea": null,
+        "residential": {
+          "value": "yes",
+          "excerpt": "For residential, most clients prefer quarterly deep cleans rather than monthly - we can do either.",
+          "sourceUrl": "https://www.ocd.com.sg/",
+          "fullSentence": true,
+          "pageFetchedAt": "2026-10-10T18:14:23+03:00",
+          "capturedAt": "2026-10-10",
+          "previousExcerpt": "Yes - Cleaning Services hub covers both residential and commercial. Office cleaning runs daytime or after-hours",
+          "previousSourceUrl": "https://www.ocd.com.sg/"
+        },
+        "licences": [
+          {
+            "type": "BCA registration (claimed)",
+            "number": null,
+            "verifiedOn": null,
+            "claimedOn": "https://www.ocd.com.sg/",
+            "excerpt": "BCA Licensed",
+            "capturedAt": "2026-10-10"
+          }
+        ],
+        "management": [],
+        "uen": "201813825R",
+        "uenSource": "https://data.gov.sg/datasets/d_5c4ef48b025fdfbc80056401f06e3df9/view",
+        "operatorGroup": null,
+        "priceLines": [],
+        "websiteCheck": {
+          "url": "https://www.ocd.com.sg/",
+          "finalUrl": "https://www.ocd.com.sg/",
+          "httpStatus": 200,
+          "checkedAt": "2026-10-11T23:48+03:00",
+          "result": "active"
+        },
+        "serviceLocations": [],
+        "bestFor": [
+          {
+            "text": "Says it takes jobs 24 hours a day",
+            "excerpt": "Open 24 hours",
+            "source_url": "https://www.ocd.com.sg/contact",
+            "capturedAt": "2026-10-10",
+            "sourceUrl": "https://www.ocd.com.sg/contact"
+          }
+        ],
+        "poorFit": [],
+        "summary": {
+          "text": "OCD Cleaning Pte Ltd - Obsessive Cleaning Disorder | Professional Deep Cleaning Services Singapore is a home cleaning business in Singapore. Its website mentions regular cleaning, deep cleaning, move in out, post renovation and other services. HomezyPro found no published prices on the pages it checked. Its site says it takes residential jobs. Its site says it takes jobs 24 hours a day. Google Maps search data showed 4.8 stars from 2495 reviews on 2026-10-11.",
+          "sources": [
+            "https://maps.google.com/?cid=13955369787455697907",
+            "https://www.ocd.com.sg/",
+            "https://www.ocd.com.sg/contact"
+          ],
+          "capturedAt": "2026-10-12T00:16+03:00"
+        },
+        "faqs": [
+          {
+            "q": "What is included in your post renovation cleaning service?",
+            "a": "Our post renovation cleaning service in Singapore includes the removal of renovation dust and fine particles from all accessible surfaces throughout the property. Typical cleaning areas include: Floors and skirting Windows and window tracks Kitchen cabinets (interior and exterior)",
+            "sourceUrl": "https://www.ocd.com.sg/faq",
+            "capturedAt": "2026-10-18T11:39+03:00"
+          },
+          {
+            "q": "What happens if my renovation is not completed on the scheduled cleaning date?",
+            "a": "If renovation works are still ongoing when our team arrives, the cleaning quality may be affected due to continued dust generation and contractor activities. We recommend informing us as early as possible if there are delays so that we can discuss rescheduling options. This helps ensure that the cleaning is carried out under optimal conditions and prevents unnecessary costs.",
+            "sourceUrl": "https://www.ocd.com.sg/faq",
+            "capturedAt": "2026-10-18T11:39+03:00"
+          },
+          {
+            "q": "Do you provide cleaning equipment and chemicals?",
+            "a": "Yes. Our professional cleaning team arrives fully equipped with the necessary cleaning tools, equipment, and cleaning solutions required for post renovation cleaning. Homeowners do not need to prepare any cleaning chemicals, pails, brushes, or vacuum cleaners unless otherwise requested.",
+            "sourceUrl": "https://www.ocd.com.sg/faq",
+            "capturedAt": "2026-10-18T11:39+03:00"
+          },
+          {
+            "q": "Do you provide a cleaning warranty or workmanship guarantee?",
+            "a": "Customer satisfaction is important to us. If there are areas within the agreed cleaning scope that have been unintentionally missed, customers should notify us within the stipulated feedback period so that we can review the issue and arrange rectification where applicable. Terms and conditions may apply depending on the service provided.",
+            "sourceUrl": "https://www.ocd.com.sg/faq",
+            "capturedAt": "2026-10-18T11:39+03:00"
+          },
+          {
+            "q": "How soon should I book my post renovation cleaning appointment?",
+            "a": "We recommend booking as early as possible, especially during peak renovation periods. Early booking helps secure your preferred date and allows sufficient time for coordination with your renovation schedule. Formaldehyde (VOC) Treatment",
+            "sourceUrl": "https://www.ocd.com.sg/faq",
+            "capturedAt": "2026-10-18T11:39+03:00"
+          },
+          {
+            "q": "Can you regrout shower areas?",
+            "a": "Yes. Shower areas are among the most common locations for regrouting due to constant exposure to water, soap residue, and humidity. Professional regrouting can improve both appearance and cleanliness in shower areas.",
+            "sourceUrl": "https://www.ocd.com.sg/faq",
+            "capturedAt": "2026-10-18T11:39+03:00"
+          },
+          {
+            "q": "Are your cleaners trained and insured?",
+            "a": "Our cleaning personnel are trained in professional cleaning procedures and workplace cleaning standards. Specific certifications and insurance coverage may vary depending on the project requirements and service arrangements.",
+            "sourceUrl": "https://www.ocd.com.sg/faq",
+            "capturedAt": "2026-10-18T11:39+03:00"
+          },
+          {
+            "q": "Can you customise a cleaning schedule for my business?",
+            "a": "Yes. Every business has different operating hours and cleaning requirements. We can customise cleaning frequencies, cleaning scopes, and manpower allocation to suit your business needs.",
+            "sourceUrl": "https://www.ocd.com.sg/faq",
+            "capturedAt": "2026-10-18T11:39+03:00"
+          },
+          {
+            "q": "Do you charge extra for window tracks, skirting and cabinet edges?",
+            "a": "No. Window tracks, skirting, cabinet edges, exhaust hood and oven trays are included in every deep-clean quote. This is the single biggest difference between us and most SG cleaners - they quote a base price, then add charges on the day.",
+            "sourceUrl": "https://www.ocd.com.sg/",
+            "capturedAt": "2026-10-18T11:39+03:00"
+          }
+        ],
+        "highlights": [
+          {
+            "text": "In business since 2018",
+            "source_url": "https://www.ocd.com.sg/about",
+            "capturedAt": "2026-10-10",
+            "sourceUrl": "https://www.ocd.com.sg/about"
+          },
+          {
+            "text": "Mentions a workmanship guarantee",
+            "source_url": "https://www.ocd.com.sg/faq",
+            "capturedAt": "2026-10-10",
+            "sourceUrl": "https://www.ocd.com.sg/faq"
+          },
+          {
+            "text": "Google rating 4.8 from 2495 reviews (Google Maps, read 2026-10-11)",
+            "source_url": "https://maps.google.com/?cid=13955369787455697907",
+            "capturedAt": "2026-10-10",
+            "sourceUrl": "https://maps.google.com/?cid=13955369787455697907"
+          },
+          {
+            "text": "Advertises 24/7 service",
+            "source_url": "https://www.ocd.com.sg/contact",
+            "capturedAt": "2026-10-11",
+            "sourceUrl": "https://www.ocd.com.sg/contact"
+          }
+        ],
+        "warranty": {
+          "value": "workmanship guarantee",
+          "excerpt": "providing your floor plan and renovation details. Do you provide a cleaning warranty or workmanship guarantee? Customer satisfaction is important to us. If there are areas within the agreed cleaning scope that have",
+          "source_url": "https://www.ocd.com.sg/faq",
+          "capturedAt": "2026-10-10",
+          "sourceUrl": "https://www.ocd.com.sg/faq"
+        },
+        "foundedYear": {
+          "value": 2018,
+          "excerpt": "Singapore How we started Built from the customer complaints we kept hearing. OCD was founded in 2018 after running into the same SG cleaning industry pattern: phone-quote one price, on-the-day charge another.",
+          "source_url": "https://www.ocd.com.sg/about",
+          "capturedAt": "2026-10-10",
+          "sourceUrl": "https://www.ocd.com.sg/about"
+        },
+        "emergency": {
+          "value": true,
+          "excerpt": "Open 24 hours",
+          "source_url": "https://www.ocd.com.sg/contact",
+          "evidenceType": "page body text (title and meta tags excluded)",
+          "capturedAt": "2026-10-10",
+          "derivedAt": "2026-10-12T00:13+03:00",
+          "sourceUrl": "https://www.ocd.com.sg/contact"
+        },
+        "responseTime": null,
+        "brands": [],
+        "payments": [
+          {
+            "value": "PayNow",
+            "excerpt": "methods do you accept? Atome (BNPL - split into instalments), Shopee PayLater, PayLater by Grab, bank transfer / PayNow. Is there a deposit required to book? Any booking or deposit terms are confirmed upfront in your written quote -",
+            "source_url": "https://www.ocd.com.sg/",
+            "capturedAt": "2026-10-10",
+            "sourceUrl": "https://www.ocd.com.sg/"
+          },
+          {
+            "value": "Bank transfer",
+            "excerpt": "door. What payment methods do you accept? Atome (BNPL - split into instalments), Shopee PayLater, PayLater by Grab, bank transfer / PayNow. Is there a deposit required to book? Any booking or deposit terms are confirmed upfront in your written",
+            "source_url": "https://www.ocd.com.sg/",
+            "capturedAt": "2026-10-10",
+            "sourceUrl": "https://www.ocd.com.sg/"
+          },
+          {
+            "value": "Atome",
+            "excerpt": "out, fixed price quoted. Sent to your WhatsApp. No follow-up sales call. Confirm + schedule Pick a date that works. Atome / wallet / bank transfer. Booking locked. Crew arrives, job done Skilled, trained cleaners, own equipment + chemicals,",
+            "source_url": "https://www.ocd.com.sg/",
+            "capturedAt": "2026-10-10",
+            "sourceUrl": "https://www.ocd.com.sg/"
+          },
+          {
+            "value": "Instalments",
+            "excerpt": "This is how we guarantee no add-on charges at the door. What payment methods do you accept? Atome (BNPL - split into instalments), Shopee PayLater, PayLater by Grab, bank transfer / PayNow. Is there a deposit required to book? Any booking or",
+            "source_url": "https://www.ocd.com.sg/",
+            "capturedAt": "2026-10-10",
+            "sourceUrl": "https://www.ocd.com.sg/"
+          }
+        ],
+        "socials": []
+      },
+      "quoteEvidence": null,
+      "mapEvidence": {
+        "status": "unresolved",
+        "precision": null,
+        "postal": "627606",
+        "addressValue": "3 Soon Lee Street, #02-25 Pioneer Junction, Singapore 627606",
+        "addressSourceUrl": "https://www.ocd.com.sg/",
+        "place": {
+          "name": "OCD Cleaning Pte Ltd - Obsessive Cleaning Disorder | Professional Deep Cleaning Services Singapore",
+          "cid": "13955369787455697907",
+          "place_id": "ChIJE5FMhSwZ2jER8_ODCuJuq8E",
+          "url": "https://maps.google.com/?cid=13955369787455697907",
+          "address": null,
+          "postal": null,
+          "phone": "+65 8181 3086",
+          "website": "http://www.ocd.com.sg/",
+          "readVia": "https://www.google.com/search?tbm=map&hl=en&gl=sg&q=OCD+Cleaning+Pte+Ltd+-+Obsessive+Cleaning+Disorder+%7C+Professional+Deep+Cleaning+Services+Singapore+Singapore",
+          "readAt": "2026-10-11T22:39+03:00"
+        },
+        "geocode": null,
+        "latitude": null,
+        "longitude": null
+      },
+      "selfReportedRating": null,
+      "reviewSources": [
+        {
+          "name": "Google Maps",
+          "rating": 4.8,
+          "count": 2495,
+          "scale": 5,
+          "sourceUrl": "https://maps.google.com/?cid=13955369787455697907",
+          "checkedAt": "2026-10-11",
+          "method": "Google Maps place (cid 13955369787455697907) read via www.google.com/search?tbm=map at 2026-10-11T23:48+03:00",
+          "note": "",
+          "mirrorsSource": ""
+        }
+      ],
+      "listingDepth": {
+        "full": false,
+        "evidenceScore": 4,
+        "checkedAt": "2026-10-18T11:39+03:00"
+      },
+      "primaryTrade": "cleaning",
+      "alternatePhones": [],
+      "area": "Other Singapore locations",
+      "googleRating": {
+        "value": 4.8,
+        "count": 2495,
+        "sourceUrl": "https://maps.google.com/?cid=13955369787455697907",
+        "checkedAt": "2026-10-11T23:48+03:00",
+        "sourceType": "google-maps-search"
+      }
+    },
+    {
       "slug": "office-cleaning-services-carpet-cleaning-services-and-house",
       "name": "Office Cleaning Services, Carpet Cleaning Services and House Cleaning Services",
       "category": "cleaning",
@@ -156098,7 +156640,7 @@
       "imported": true,
       "databaseId": "201307222E",
       "enrichment": {
-        "checkedAt": "2026-10-10",
+        "checkedAt": "2026-10-18T11:39+03:00",
         "supportedServices": [
           {
             "name": "One off clean",
@@ -156180,21 +156722,23 @@
             "job": "ad-hoc",
             "service": "Hourly cleaning (residential / ad-hoc)",
             "qty": null,
-            "unit": "as printed",
+            "unit": "per hour",
             "amount_sgd": null,
             "was_amount_sgd": null,
             "promo": false,
             "gst": "not stated",
-            "price_text": "$18 - $35 (indicative)",
+            "price_text": "$18 - $35 per hour (indicative)",
             "sourceUrl": "https://www.penielcleaning.com.sg/cleaning-services-pricing-singapore/",
-            "excerpt": "Hourly cleaning (residential / ad-hoc) $18 - $35 per hour",
-            "capturedAt": "2026-10-10",
-            "unitBasis": "ambiguous: no unit wording and job not inherently per unit/per job",
+            "excerpt": "Hourly cleaning (residential / ad-hoc) / $18 - $35 / per hour",
+            "capturedAt": "2026-10-18",
+            "unitBasis": "per hour, printed in the Basis column of the price table",
             "unitInferred": false,
             "units_in_price": null,
             "unit_price_sgd": null,
             "unit_price_basis": "no amount",
             "from_price": false,
+            "fetchedAt": "2026-10-18T11:32:45+03:00",
+            "excerptNote": "table cells joined with \" / \"; en dashes shown as hyphens",
             "indicative": true
           },
           {
@@ -156223,73 +156767,78 @@
             "job": "carpet",
             "service": "Carpet cleaning (residential)",
             "qty": null,
-            "unit": "as printed",
+            "unit": "per job",
             "amount_sgd": null,
             "was_amount_sgd": null,
             "promo": false,
             "gst": "not stated",
             "price_text": "$80 - $250 (indicative)",
             "sourceUrl": "https://www.penielcleaning.com.sg/cleaning-services-pricing-singapore/",
-            "excerpt": "Carpet cleaning (residential) $80 - $250 per job, by size and condition",
-            "capturedAt": "2026-10-10",
-            "unitBasis": "ambiguous: no unit wording and job not inherently per unit/per job",
+            "excerpt": "Carpet cleaning (residential) / $80 - $250 / per job, by size and condition",
+            "capturedAt": "2026-10-18",
+            "unitBasis": "per job, by size and condition (Basis column)",
             "unitInferred": false,
             "amount_max_sgd": 250,
             "units_in_price": null,
             "unit_price_sgd": null,
             "unit_price_basis": "no amount",
             "from_price": false,
+            "fetchedAt": "2026-10-18T11:32:45+03:00",
+            "excerptNote": "table cells joined with \" / \"; en dashes shown as hyphens",
             "indicative": true
           },
           {
             "job": "ad-hoc",
             "service": "Hourly cleaning (residential / ad-hoc)",
             "qty": null,
-            "unit": "per visit",
+            "unit": "per hour",
             "amount_sgd": 18,
             "was_amount_sgd": null,
             "promo": false,
             "gst": "not stated",
-            "price_text": "Hourly cleaning (residential / ad-hoc) | $18 - $35",
+            "price_text": "$18 - $35 per hour",
             "sourceUrl": "https://www.penielcleaning.com.sg/cleaning-services-pricing-singapore/",
-            "excerpt": "Hourly cleaning (residential / ad-hoc) | $18 - $35",
-            "capturedAt": "2026-10-10",
+            "excerpt": "Hourly cleaning (residential / ad-hoc) / $18 - $35 / per hour",
+            "capturedAt": "2026-10-18",
             "addedBy": "review3 cached-page price scan (11 Oct 2026)",
-            "unitBasis": "session price for 35 hours (hours are the session length, not the unit)",
+            "unitBasis": "per hour, printed in the Basis column of the price table",
             "unitInferred": false,
-            "hours_per_session": 35,
             "amount_max_sgd": 35,
             "service_raw": "Hourly cleaning (residential / ad-hoc) | $18 - $35",
-            "unit_price_basis": "price is for one visit as printed",
-            "units_in_price": 1,
+            "unit_price_basis": "price is per hour as printed",
+            "units_in_price": null,
             "unit_price_sgd": 18,
             "unit_price_max_sgd": 35,
             "from_price": false,
+            "fetchedAt": "2026-10-18T11:32:45+03:00",
+            "excerptNote": "table cells joined with \" / \"; en dashes shown as hyphens",
             "indicative": true
           },
           {
             "job": "office-cleaning",
             "service": "Small office cleaning (weekly schedule)",
             "qty": null,
-            "unit": "as printed",
+            "unit": "per month",
             "amount_sgd": 300,
             "was_amount_sgd": null,
             "promo": false,
             "gst": "not stated",
             "price_text": "Small office cleaning (weekly schedule) | $300 - $800",
             "sourceUrl": "https://www.penielcleaning.com.sg/cleaning-services-pricing-singapore/",
-            "excerpt": "Small office cleaning (weekly schedule) | $300 - $800",
-            "capturedAt": "2026-10-10",
+            "excerpt": "Small office cleaning (weekly schedule) / $300 - $800 / per month",
+            "capturedAt": "2026-10-18",
             "addedBy": "review3 cached-page price scan (11 Oct 2026)",
-            "unitBasis": "ambiguous: no unit wording and job not inherently per unit/per job",
+            "unitBasis": "per month, printed in the Basis column",
             "unitInferred": false,
             "amount_max_sgd": 800,
             "service_raw": "Small office cleaning (weekly schedule) | $300 - $800",
-            "unit_price_basis": "price is for one job/item (unit as printed) as printed",
-            "units_in_price": 1,
+            "unit_price_basis": "price is per month as printed",
+            "units_in_price": null,
             "unit_price_sgd": 300,
             "unit_price_max_sgd": 800,
             "from_price": false,
+            "fetchedAt": "2026-10-18T11:32:45+03:00",
+            "excerptNote": "table cells joined with \" / \"; en dashes shown as hyphens",
             "indicative": true
           },
           {
@@ -156321,17 +156870,17 @@
             "job": "carpet",
             "service": "Carpet cleaning (residential)",
             "qty": null,
-            "unit": "as printed",
+            "unit": "per job",
             "amount_sgd": 80,
             "was_amount_sgd": null,
             "promo": false,
             "gst": "not stated",
             "price_text": "Carpet cleaning (residential) | $80 - $250",
             "sourceUrl": "https://www.penielcleaning.com.sg/cleaning-services-pricing-singapore/",
-            "excerpt": "Carpet cleaning (residential) | $80 - $250",
-            "capturedAt": "2026-10-10",
+            "excerpt": "Carpet cleaning (residential) / $80 - $250 / per job, by size and condition",
+            "capturedAt": "2026-10-18",
             "addedBy": "review3 cached-page price scan (11 Oct 2026)",
-            "unitBasis": "ambiguous: no unit wording and job not inherently per unit/per job",
+            "unitBasis": "per job, by size and condition (Basis column)",
             "unitInferred": false,
             "amount_max_sgd": 250,
             "service_raw": "Carpet cleaning (residential) | $80 - $250",
@@ -156340,6 +156889,8 @@
             "unit_price_sgd": 80,
             "unit_price_max_sgd": 250,
             "from_price": false,
+            "fetchedAt": "2026-10-18T11:32:45+03:00",
+            "excerptNote": "table cells joined with \" / \"; en dashes shown as hyphens",
             "indicative": true
           }
         ],
@@ -156353,10 +156904,11 @@
         "serviceLocations": [],
         "bestFor": [
           {
-            "text": "Prints an ad hoc price on its site: S$18-35 per 35-hour session (GST not stated)",
-            "excerpt": "Hourly cleaning (residential / ad-hoc) | $18 - $35",
+            "text": "Prints an ad hoc price on its site: S$18-35 per hour (GST not stated)",
+            "excerpt": "Hourly cleaning (residential / ad-hoc) / $18 - $35 / per hour",
             "source_url": "https://www.penielcleaning.com.sg/cleaning-services-pricing-singapore/",
-            "capturedAt": "2026-10-10",
+            "capturedAt": "2026-10-18",
+            "previousText": "Prints an ad hoc price on its site: S$18-35 per 35-hour session (GST not stated)",
             "sourceUrl": "https://www.penielcleaning.com.sg/cleaning-services-pricing-singapore/"
           }
         ],
@@ -156374,7 +156926,7 @@
             "q": "What are your payment terms?",
             "a": "Credit terms are 30 days for monthly contracts, and immediate payment (COD) on completion for ad-hoc engagements.",
             "sourceUrl": "https://www.penielcleaning.com.sg/cleaning-services-pricing-singapore/",
-            "capturedAt": "2026-10-10"
+            "capturedAt": "2026-10-18T11:39+03:00"
           }
         ],
         "highlights": [
@@ -156448,7 +157000,7 @@
       "listingDepth": {
         "full": false,
         "evidenceScore": 4,
-        "checkedAt": "2026-10-12T10:44+03:00"
+        "checkedAt": "2026-10-18T11:39+03:00"
       },
       "primaryTrade": "cleaning",
       "alternatePhones": [],
@@ -161163,7 +161715,7 @@
       },
       "email": null,
       "whatsapp": {
-        "value": "+65 9123 4567",
+        "value": "+65 8810 4924",
         "sourceUrl": "https://www.primehomesg.com/contact"
       },
       "mapsUrl": "https://maps.google.com/?cid=18365506591458775577",
@@ -161178,7 +161730,7 @@
       "imported": true,
       "databaseId": "gm-18365506591458775577",
       "enrichment": {
-        "checkedAt": "2026-10-18T10:03+03:00",
+        "checkedAt": "2026-10-18T11:39+03:00",
         "supportedServices": [
           {
             "name": "Choke clearing",
@@ -161386,7 +161938,7 @@
       "listingDepth": {
         "full": false,
         "evidenceScore": 4,
-        "checkedAt": "2026-10-18T10:03+03:00"
+        "checkedAt": "2026-10-18T11:39+03:00"
       },
       "primaryTrade": "plumbing",
       "alternatePhones": [],
@@ -181849,10 +182401,7 @@
         "value": "contact@sghandyman.com",
         "sourceUrl": "https://sgphandyman.services/"
       },
-      "whatsapp": {
-        "value": "+65 1234 5678",
-        "sourceUrl": "https://sgphandyman.services/"
-      },
+      "whatsapp": null,
       "mapsUrl": "https://maps.google.com/?cid=13896014869745537863",
       "rating": null,
       "reviews": [],
@@ -181865,7 +182414,7 @@
       "imported": true,
       "databaseId": "gm-13896014869745537863",
       "enrichment": {
-        "checkedAt": "2026-10-10",
+        "checkedAt": "2026-10-18T11:39+03:00",
         "supportedServices": [
           {
             "name": "Plumbing",
@@ -182043,7 +182592,7 @@
       "listingDepth": {
         "full": true,
         "evidenceScore": 5,
-        "checkedAt": "2026-10-12T10:44+03:00"
+        "checkedAt": "2026-10-18T11:39+03:00"
       },
       "primaryTrade": "handyman",
       "alternatePhones": [],
@@ -186556,11 +187105,11 @@
         "sourceUrl": "https://maps.google.com/?cid=16486700627576440283"
       },
       "address": {
-        "street": "675C Yishun Ave 4, #03-808",
-        "value": "675C Yishun Ave 4, #03-808, Singapore",
-        "sourceUrl": "https://maps.google.com/?cid=16486700627576440283",
+        "street": "675C Yishun Ave 4",
+        "value": "675C Yishun Ave 4, Singapore 763675",
         "postal": "763675",
-        "postalSourceUrl": "https://data.gov.sg/datasets/d_dcda79be4aded5f9e769b8e23ff69b47/view"
+        "sourceUrl": "https://skelectrical.com.sg/contact",
+        "note": "HDB block: block, street and postal code only (no unit)."
       },
       "mapsUrl": "https://maps.google.com/?cid=16486700627576440283",
       "mapsNote": "Google Maps listing opened 9 Oct 2026.",
@@ -186583,7 +187132,7 @@
       },
       "databaseId": "202126936C",
       "enrichment": {
-        "checkedAt": "2026-10-10",
+        "checkedAt": "2026-10-18T11:39+03:00",
         "supportedServices": [
           {
             "name": "Rewiring",
@@ -186715,13 +187264,13 @@
             "q": "Do you provide emergency electrical services in Singapore?",
             "a": "Yes, SK Electrical provides 24-hour emergency electrical services in Singapore for urgent electrical problems and electrical faults.",
             "sourceUrl": "https://skelectrical.com.sg/",
-            "capturedAt": "2026-10-10"
+            "capturedAt": "2026-10-18T11:39+03:00"
           },
           {
             "q": "Do you provide 24 hours electrician services?",
             "a": "Our home electrician services are available 24/7 during emergencies in Singapore. You can call us anytime, any day.",
             "sourceUrl": "https://skelectrical.com.sg/electrical-services",
-            "capturedAt": "2026-10-10"
+            "capturedAt": "2026-10-18T11:39+03:00"
           }
         ],
         "highlights": [
@@ -186782,8 +187331,8 @@
         "status": "verified",
         "precision": "building",
         "postal": "763675",
-        "addressValue": "675C YISHUN AVENUE 4 #03-808, Singapore 763675",
-        "addressSourceUrl": "https://data.gov.sg/datasets/d_dcda79be4aded5f9e769b8e23ff69b47/view",
+        "addressValue": "675C Yishun Ave 4, #03-808 Fern Grove, Singapore 763675",
+        "addressSourceUrl": "https://skelectrical.com.sg/contact",
         "place": {
           "name": "SK ELECTRICAL Pte Ltd",
           "cid": "16486700627576440283",
@@ -186817,7 +187366,7 @@
       "listingDepth": {
         "full": true,
         "evidenceScore": 5,
-        "checkedAt": "2026-10-12T10:44+03:00"
+        "checkedAt": "2026-10-18T11:39+03:00"
       },
       "primaryTrade": "electrician",
       "alternatePhones": [
@@ -219494,7 +220043,7 @@
       },
       "primaryTrade": "handyman",
       "alternatePhones": [],
-      "area": "Woodlands",
+      "area": "Other Singapore locations",
       "googleRating": {
         "value": 4.9,
         "count": 60,

@@ -8,6 +8,7 @@
   },
   "scripts": {
     "dev": "astro dev",
+    "prebuild": "node scripts/version-imports.mjs",
     "build": "astro build",
     "preview": "astro preview",
     "test": "node --test tests/*.test.mjs src/lib/port/scripts/*.test.mjs",

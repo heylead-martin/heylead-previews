@@ -6108,9 +6108,9 @@
     "photos": []
   },
   "hms-housekeepers-pte-ltd": {
-    "published": true,
-    "price": "See published prices",
-    "detail": "2 sourced pricing entries. Confirm the job, inclusions and total.",
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
     "logo": "/logos/gm-7246879022007285428-d020a5775971.webp",
     "logoAsset": {
       "localPath": "logos/gm-7246879022007285428.png",
@@ -8204,6 +8204,21 @@
     },
     "photos": []
   },
+  "ocd-cleaning-pte-ltd-obsessive-cleaning-disorder-professiona": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
+    "logo": "/logos/gm-13955369787455697907-6c36646d2d44.webp",
+    "logoAsset": {
+      "localPath": "logos/gm-13955369787455697907.png",
+      "sha256": "6c36646d2d449ba69ee4b3eac78ca14c3cc34f0d86277e5f253a9371101b7e50",
+      "src": "/logos/gm-13955369787455697907-6c36646d2d44.png",
+      "sourceUrl": "https://www.ocd.com.sg/",
+      "originalUrl": "https://www.ocd.com.sg/assets/logos/ocd-logo-r17.png",
+      "capturedAt": "2026-10-12"
+    },
+    "photos": []
+  },
   "the-good-husband-laundromats-drycleaners-serangoon": {
     "published": false,
     "price": "Ask for a quote",
@@ -8721,6 +8736,12 @@
       "originalUrl": "https://coolfix.com.sg/wp-content/uploads/2023/08/logo_FA-02.png",
       "capturedAt": "2026-10-12"
     },
+    "photos": []
+  },
+  "iaircon-singapore-aircon-services": {
+    "published": false,
+    "price": "Ask for a quote",
+    "detail": "No company rate captured. Ask for a job-specific quote.",
     "photos": []
   },
   "smartcool-aircon-servicing-singapore": {

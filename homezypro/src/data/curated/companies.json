@@ -470,9 +470,11 @@
         "sourceUrl": "https://maps.google.com/?cid=16486700627576440283"
       },
       "address": {
-        "street": "675C Yishun Ave 4, #03-808",
-        "value": "675C Yishun Ave 4, #03-808, Singapore",
-        "sourceUrl": "https://maps.google.com/?cid=16486700627576440283"
+        "street": "675C Yishun Ave 4",
+        "value": "675C Yishun Ave 4, Singapore 763675",
+        "postal": "763675",
+        "sourceUrl": "https://skelectrical.com.sg/contact",
+        "note": "HDB block: block, street and postal code only (no unit)."
       },
       "mapsUrl": "https://maps.google.com/?cid=16486700627576440283",
       "mapsNote": "Google Maps listing opened 9 Oct 2026.",

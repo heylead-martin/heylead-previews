@@ -13260,19 +13260,19 @@
           {
             "label": "Carpet cleaning (residential)",
             "price": "$80 - $250 (indicative)",
-            "detail": "As printed. GST: not stated",
-            "excerpt": "Carpet cleaning (residential) $80 - $250 per job, by size and condition",
+            "detail": "Per job. GST: not stated",
+            "excerpt": "Carpet cleaning (residential) / $80 - $250 / per job, by size and condition",
             "sourceUrl": "https://www.penielcleaning.com.sg/cleaning-services-pricing-singapore/",
-            "capturedAt": "2026-10-10",
+            "capturedAt": "2026-10-18",
             "indicative": true
           },
           {
             "label": "Carpet cleaning (residential)",
             "price": "Carpet cleaning (residential) | $80 - $250",
-            "detail": "Calculated per-unit price: S$80 to S$250 (1 unit in the published total). As printed. GST: not stated",
-            "excerpt": "Carpet cleaning (residential) | $80 - $250",
+            "detail": "Calculated per-unit price: S$80 to S$250 (1 unit in the published total). Per job. GST: not stated",
+            "excerpt": "Carpet cleaning (residential) / $80 - $250 / per job, by size and condition",
             "sourceUrl": "https://www.penielcleaning.com.sg/cleaning-services-pricing-singapore/",
-            "capturedAt": "2026-10-10",
+            "capturedAt": "2026-10-18",
             "indicative": true
           }
         ],
@@ -13304,10 +13304,10 @@
           {
             "label": "Small office cleaning (weekly schedule)",
             "price": "Small office cleaning (weekly schedule) | $300 - $800",
-            "detail": "Calculated per-unit price: S$300 to S$800 (1 unit in the published total). As printed. GST: not stated",
-            "excerpt": "Small office cleaning (weekly schedule) | $300 - $800",
+            "detail": "Calculated per-unit price: S$300 to S$800. Per month. GST: not stated",
+            "excerpt": "Small office cleaning (weekly schedule) / $300 - $800 / per month",
             "sourceUrl": "https://www.penielcleaning.com.sg/cleaning-services-pricing-singapore/",
-            "capturedAt": "2026-10-10",
+            "capturedAt": "2026-10-18",
             "indicative": true
           }
         ],
@@ -13318,24 +13318,24 @@
         "description": "",
         "explanation": "",
         "sourceUrl": "https://www.penielcleaning.com.sg/cleaning-services-pricing-singapore/",
-        "capturedAt": "2026-10-10",
+        "capturedAt": "2026-10-18",
         "prices": [
           {
             "label": "Hourly cleaning (residential / ad-hoc)",
-            "price": "$18 - $35 (indicative)",
-            "detail": "As printed. GST: not stated",
-            "excerpt": "Hourly cleaning (residential / ad-hoc) $18 - $35 per hour",
+            "price": "$18 - $35 per hour (indicative)",
+            "detail": "Per hour. GST: not stated",
+            "excerpt": "Hourly cleaning (residential / ad-hoc) / $18 - $35 / per hour",
             "sourceUrl": "https://www.penielcleaning.com.sg/cleaning-services-pricing-singapore/",
-            "capturedAt": "2026-10-10",
+            "capturedAt": "2026-10-18",
             "indicative": true
           },
           {
             "label": "Hourly cleaning (residential / ad-hoc)",
-            "price": "Hourly cleaning (residential / ad-hoc) | $18 - $35",
-            "detail": "Calculated per-unit price: S$18 to S$35 (1 unit in the published total). Per visit. 35 hours per session. GST: not stated",
-            "excerpt": "Hourly cleaning (residential / ad-hoc) | $18 - $35",
+            "price": "$18 - $35 per hour",
+            "detail": "Calculated per-unit price: S$18 to S$35. Per hour. GST: not stated",
+            "excerpt": "Hourly cleaning (residential / ad-hoc) / $18 - $35 / per hour",
             "sourceUrl": "https://www.penielcleaning.com.sg/cleaning-services-pricing-singapore/",
-            "capturedAt": "2026-10-10",
+            "capturedAt": "2026-10-18",
             "indicative": true
           }
         ],
@@ -13347,7 +13347,7 @@
       "https://www.penielcleaning.com.sg/about-us/",
       "https://www.penielcleaning.com.sg/cleaning-services-pricing-singapore/"
     ],
-    "updatedAt": "2026-10-10"
+    "updatedAt": "2026-10-18T11:39+03:00"
   },
   "s-m-c-engineering-landscape-pte-ltd": {
     "headline": "Services published by S.M.C ENGINEERING & LANDSCAPE (PTE. LTD.).",
@@ -37245,7 +37245,6 @@
   "hms-housekeepers-pte-ltd": {
     "headline": "Services published by HMS Housekeepers Pte Ltd.",
     "about": [
-      "🌷 Mom’s Day Off Deluxe Clean: Treat Mom to a luxurious break by letting us handle the cleaning from top to bottom. Our expert team will leave her home sparkling and smelling fresh. - Complimentary: A fragrant bouquet of flowers for Mother’s Day for Deep Cleaning packages above $300",
       "HMS Housekeepers is a Singapore based cleaning agency focused on offering Sincere Service through their Honest and Meticulous cleaners. At our agency, we know that our service offers our clients more than a clean office or home, we offer a peace of mind and respite from work at home after work at office."
     ],
     "services": [
@@ -37255,17 +37254,7 @@
         "explanation": "- Complimentary: A fragrant bouquet of flowers for Mother’s Day for Deep Cleaning packages above $300",
         "sourceUrl": "https://www.hms.com.sg/",
         "capturedAt": "2026-10-10",
-        "prices": [
-          {
-            "label": "Deep cleaning",
-            "price": "See source details",
-            "detail": "Calculated per-unit price: S$100 (1 unit in the published total). Per job (inferred from the job type; confirm with the company). GST: not stated",
-            "excerpt": "- Complimentary: A fragrant bouquet of flowers for Mother’s Day for Deep Cleaning packages above $300 | 💌 Gift that lasts a whole year: Send Mom a gift certificate for our team to upkeep her house every week so that she",
-            "sourceUrl": "https://www.hms.com.sg/",
-            "capturedAt": "2026-10-10",
-            "indicative": false
-          }
-        ]
+        "prices": []
       },
       {
         "name": "Office cleaning",
@@ -37282,32 +37271,13 @@
         "sourceUrl": "https://www.hms.com.sg/",
         "capturedAt": "2026-10-10",
         "prices": []
-      },
-      {
-        "name": "Regular cleaning",
-        "description": "",
-        "explanation": "",
-        "sourceUrl": "https://www.hms.com.sg/",
-        "capturedAt": "2026-10-10",
-        "prices": [
-          {
-            "label": "Limited time offer 25 and 27 Apr 2024: 4 hours @ only",
-            "price": "Limited time offer 25 and 27 Apr 2024: 4 hours @ $98 only",
-            "detail": "Quantity: 4. Calculated per-unit price: S$98 (1 unit in the published total). As printed. GST: not stated. Promotional rate; confirm availability",
-            "excerpt": "💐 Customizable Cleaning Packages: Tailor the cleaning service to match Mom’s preferences. | Limited time offer 25 and 27 Apr 2024: 4 hours @ $98 only",
-            "sourceUrl": "https://www.hms.com.sg/",
-            "capturedAt": "2026-10-10",
-            "indicative": false
-          }
-        ]
       }
     ],
     "highlights": [],
     "sourceUrls": [
-      "https://www.hms.com.sg/",
       "https://www.hms.com.sg/about/"
     ],
-    "updatedAt": "2026-10-10"
+    "updatedAt": "2026-10-18T11:39+03:00"
   },
   "metrocleaners": {
     "headline": "Services published by Metrocleaners.",
@@ -43935,7 +43905,7 @@
     "sourceUrls": [
       "https://sgphandyman.services/"
     ],
-    "updatedAt": "2026-10-10"
+    "updatedAt": "2026-10-18T11:39+03:00"
   },
   "plumbing-electrical-sg-pte-ltd": {
     "headline": "Services published by Plumbing & Electrical (SG) Pte. Ltd..",
@@ -49235,7 +49205,7 @@
     "sourceUrls": [
       "https://www.primehomesg.com/"
     ],
-    "updatedAt": "2026-10-18T10:03+03:00"
+    "updatedAt": "2026-10-18T11:39+03:00"
   },
   "call-sg-building-services-pte-ltd": {
     "headline": "Services published by Call SG Building Services Pte Ltd.",
@@ -50834,6 +50804,99 @@
       "https://sparklecleaning.com.sg/about-us/"
     ],
     "updatedAt": "2026-10-18T10:03+03:00"
+  },
+  "ocd-cleaning-pte-ltd-obsessive-cleaning-disorder-professiona": {
+    "headline": "Services published by OCD Cleaning Pte Ltd - Obsessive Cleaning Disorder | Professional Deep Cleaning Services Singapore.",
+    "about": [
+      "We started OCD to fix the same three problems every Singapore homeowner kept hitting: surprise charges on the day, swap-out crews who didn't know the job, and scope that “wasn't included”. One in-house crew. One fixed price. Every service in scope."
+    ],
+    "services": [
+      {
+        "name": "Regular cleaning",
+        "description": "",
+        "explanation": "How are you different from a typical part-time cleaner?",
+        "sourceUrl": "https://www.ocd.com.sg/",
+        "capturedAt": "2026-10-10",
+        "prices": []
+      },
+      {
+        "name": "Deep cleaning",
+        "description": "",
+        "explanation": "Deep Cleaning Singapore - In-House Crew, Fixed Price | OCD",
+        "sourceUrl": "https://www.ocd.com.sg/",
+        "capturedAt": "2026-10-10",
+        "prices": []
+      },
+      {
+        "name": "Move-in & move-out cleaning",
+        "description": "",
+        "explanation": "Move-in / Move-out",
+        "sourceUrl": "https://www.ocd.com.sg/",
+        "capturedAt": "2026-10-10",
+        "prices": []
+      },
+      {
+        "name": "Post renovation",
+        "description": "",
+        "explanation": "Post-Renovation",
+        "sourceUrl": "https://www.ocd.com.sg/",
+        "capturedAt": "2026-10-10",
+        "prices": []
+      },
+      {
+        "name": "Spring cleaning",
+        "description": "",
+        "explanation": "Spring Cleaning",
+        "sourceUrl": "https://www.ocd.com.sg/",
+        "capturedAt": "2026-10-10",
+        "prices": []
+      },
+      {
+        "name": "Office cleaning",
+        "description": "",
+        "explanation": "Yes - Cleaning Services hub covers both residential and commercial. Office cleaning runs daytime or after-hours; we configure crew size to the floor area and fr",
+        "sourceUrl": "https://www.ocd.com.sg/",
+        "capturedAt": "2026-10-10",
+        "prices": []
+      },
+      {
+        "name": "Sofa & upholstery cleaning",
+        "description": "",
+        "explanation": "Upholstery & Sofa",
+        "sourceUrl": "https://www.ocd.com.sg/",
+        "capturedAt": "2026-10-10",
+        "prices": []
+      },
+      {
+        "name": "Carpet",
+        "description": "",
+        "explanation": "Carpets",
+        "sourceUrl": "https://www.ocd.com.sg/faq",
+        "capturedAt": "2026-10-10",
+        "prices": []
+      },
+      {
+        "name": "Window",
+        "description": "",
+        "explanation": "Accessible interior window cleaning is typically included within the service scope.",
+        "sourceUrl": "https://www.ocd.com.sg/faq",
+        "capturedAt": "2026-10-10",
+        "prices": []
+      },
+      {
+        "name": "Disinfection",
+        "description": "",
+        "explanation": "Disinfection",
+        "sourceUrl": "https://www.ocd.com.sg/",
+        "capturedAt": "2026-10-10",
+        "prices": []
+      }
+    ],
+    "highlights": [],
+    "sourceUrls": [
+      "https://www.ocd.com.sg/about"
+    ],
+    "updatedAt": "2026-10-18T11:39+03:00"
   },
   "the-good-husband-laundromats-drycleaners-serangoon": {
     "headline": "Services published by The Good Husband Laundromats & Drycleaners (Serangoon).",
@@ -54037,6 +54100,67 @@
       "https://coolfix.com.sg/"
     ],
     "updatedAt": "2026-10-18T00:57+03:00"
+  },
+  "iaircon-singapore-aircon-services": {
+    "headline": "Services published by iAircon Singapore Aircon Services.",
+    "about": [
+      "iAircon.sg is a leading aircon service provider in Singapore, offering a wide range of professional and trustworthy aircon services to keep your air conditioner running smoothly and efficiently."
+    ],
+    "services": [
+      {
+        "name": "Chemical wash",
+        "description": "",
+        "explanation": "Aircon Chemical Wash",
+        "sourceUrl": "https://www.iaircon.repair/",
+        "capturedAt": "2026-10-10",
+        "prices": []
+      },
+      {
+        "name": "Chemical overhaul",
+        "description": "",
+        "explanation": "PowerJet Chemical Overhaul",
+        "sourceUrl": "https://www.iaircon.repair/",
+        "capturedAt": "2026-10-10",
+        "prices": []
+      },
+      {
+        "name": "Gas top-up",
+        "description": "",
+        "explanation": "Aircon Gas Top-Up",
+        "sourceUrl": "https://www.iaircon.repair/",
+        "capturedAt": "2026-10-10",
+        "prices": []
+      },
+      {
+        "name": "Repair",
+        "description": "",
+        "explanation": "✅ Repair Aircon Service Valve with Gas Leakage #airconservicing #airconditioning #hvac #hvactec",
+        "sourceUrl": "https://www.iaircon.repair/",
+        "capturedAt": "2026-10-10",
+        "prices": []
+      },
+      {
+        "name": "General servicing",
+        "description": "",
+        "explanation": "iAircon Singapore Aircon Servicing",
+        "sourceUrl": "https://www.iaircon.repair/",
+        "capturedAt": "2026-10-10",
+        "prices": []
+      },
+      {
+        "name": "Aircon cleaning",
+        "description": "",
+        "explanation": "Why Singaporeans Prefer Powerjet Aircon Cleaning for Peak Performance",
+        "sourceUrl": "https://www.iaircon.repair/",
+        "capturedAt": "2026-10-10",
+        "prices": []
+      }
+    ],
+    "highlights": [],
+    "sourceUrls": [
+      "https://www.iaircon.repair/about-us/"
+    ],
+    "updatedAt": "2026-10-18T11:39+03:00"
   },
   "smartcool-aircon-servicing-singapore": {
     "headline": "Services published by SmartCool Aircon Servicing Singapore.",

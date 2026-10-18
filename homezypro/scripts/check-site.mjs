@@ -400,6 +400,28 @@ if (!llmsTxt.startsWith('# HomezyPro') || !llmsTxt.includes(`${SITE_URL}/plumbin
   }
 }
 
+// ---- QA follow-ups, 18 Oct 2026 (r15.3 import) ----
+{
+  for (const f of htmlFiles) if (!retiredPaths.has(pagePath(f)) && (await readFile(f, 'utf8')).includes('Reliable Electrical')) fail(pagePath(f), 'names the withheld brand Reliable Electrical');
+  const how = await readFile(path.join(dist, 'how-it-works/index.html'), 'utf8');
+  const head = how.slice(0, how.indexOf('</head>'));
+  if (/\bbeta\b/i.test(head)) fail('/how-it-works/', '"beta" in the meta, og, twitter or JSON-LD description');
+  for (const h of Object.keys(HUBS)) {
+    const best = visibleText(await readFile(path.join(dist, h, 'best/index.html'), 'utf8'));
+    const m = best.match(/\b(?:pte\.ltd|Pte ltd|llp)\b|\bHANDYMAN German/);
+    if (m) fail(`/${h}/best/`, `register casing in a name: ${m[0]}`);
+  }
+  const {moduleHash, IMPORTERS} = await import('./version-imports.mjs');
+  for (const [mod, importers] of Object.entries(IMPORTERS)) {
+    const v = await moduleHash(mod);
+    for (const f of importers) if (!(await readFile(path.join(dist, 'assets', f), 'utf8')).includes(`./${mod}?v=${v}`)) fail(`/assets/${f}`, `${mod} import not cache-busted with ?v=${v}`);
+  }
+  const catalogueJs = await readFile(path.join(dist, 'assets/catalogue.js'), 'utf8');
+  if (!catalogueJs.includes("'noindex, follow'")) fail('/assets/catalogue.js', 'filtered hub views (?area=) are not set to noindex, follow');
+  const sk = await readFile(path.join(dist, 'company/sk-electrical/index.html'), 'utf8');
+  if (/#03-808/.test(sk)) fail('/company/sk-electrical/', 'HDB unit number shown');
+}
+
 if (failures.length) {
   console.error(failures.slice(0, 60).join('\n'));
   console.error(`FAIL: ${failures.length} problems`);

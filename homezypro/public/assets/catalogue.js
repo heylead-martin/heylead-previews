@@ -1,4 +1,4 @@
-import {renderCard,renderCompactCard,splitDirectory} from './catalogue-card.mjs?v=20261018-cards';
+import {renderCard,renderCompactCard,splitDirectory} from './catalogue-card.mjs?v=9a3492e3a325';
 import {filterCatalogue} from './catalogue-filter.mjs?v=20261018-trade-words';
 import {decodeCatalogue} from './catalogue-data.mjs?v=20261012-areas';
 import {setupAreaPicker} from './area-picker.mjs?v=20261012-areas';
@@ -34,9 +34,12 @@ if(root) {
   const canonical=document.querySelector('link[rel="canonical"]'),hubCanonical=canonical?.href;
   const areaNote=document.createElement('p');areaNote.className='area-unstated';areaNote.dataset.areaPageNote='';areaNote.hidden=true;
   root.querySelector('[data-area-unstated]').before(areaNote);
+  // Filtered hub views (?area=, ?rating=, ...) are noindex, follow; the canonical stays on the hub.
+  const robotsMeta=document.querySelector('meta[name="robots"]'),hubRobots=robotsMeta?.content||'';
   function syncAreaPage(){
     const page=areaPages[area.value];
-    if(canonical)canonical.href=page?new URL(page,hubCanonical).href:hubCanonical;
+    if(canonical)canonical.href=hubCanonical;
+    if(robotsMeta&&/^index/.test(hubRobots))robotsMeta.content=new URLSearchParams(location.search).toString()||area.value?'noindex, follow':hubRobots;
     areaNote.hidden=!page;areaNote.textContent='';
     if(page){const link=document.createElement('a');link.href=page;link.textContent=`See the ${document.getElementById('area-'+area.value)?.textContent||'town'} page, with coverage sources and published prices`;areaNote.append(link);}
   }

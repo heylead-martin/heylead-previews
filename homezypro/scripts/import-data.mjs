@@ -2,7 +2,7 @@
 //
 //   npm run import:data [-- <companies-release.json> <logos-release.tar.gz>]
 //
-// Inputs default to the pinned r15.2 release in HOMEZYPRO_RELEASE_DIR (default /workspace/roster-release),
+// Inputs default to the pinned r15.3 release in HOMEZYPRO_RELEASE_DIR (default /workspace/roster-release),
 // which is read only. Both files are checked against their adjacent .sha256 files AND the pinned
 // checksums below; any mismatch stops the import before anything is written.
 //
@@ -25,12 +25,12 @@ import {importDatabase, verifyRelease, BLOCKED} from '../src/lib/port/scripts/im
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const releaseDir = process.env.HOMEZYPRO_RELEASE_DIR || '/workspace/roster-release';
 export const PINNED = {
-  companies: {file: 'companies-20261018-1004.json', sha256: 'd8c388bf6d0232905fe8f781a2ec1f3b4adc198382fda732876172290bec2bcb'},
+  companies: {file: 'companies-20261018-1140.json', sha256: '378dda86d324e9c265595f4e7f500932b91fd4a78aa6689dea19f1af9ebde1fe'},
   logos: {file: 'logos-20261018-0059.tar.gz', sha256: '2df3c41423ca0385412ff3abc75f8dcbfef5c08b449b043cfa7d2b880143cfc3'}
 };
-// Published counts for r15.2 (this importer, with the rules below). r15.1 published 738.
-export const EXPECTED = {total: 745, byTrade: {aircon: 231, plumbing: 101, electrician: 116, handyman: 100, cleaning: 197}};
-export const PREVIOUS = {release: 'r15.1', total: 738, byTrade: {aircon: 231, plumbing: 100, electrician: 116, handyman: 99, cleaning: 192}};
+// Published counts for r15.3 (this importer, with the rules below): OCD Cleaning and iAircon now publish. r15.2 published 745.
+export const EXPECTED = {total: 747, byTrade: {aircon: 232, plumbing: 101, electrician: 116, handyman: 100, cleaning: 198}};
+export const PREVIOUS = {release: 'r15.2', total: 745, byTrade: {aircon: 231, plumbing: 101, electrician: 116, handyman: 100, cleaning: 197}};
 export const WITHHELD_FOR_REVIEW = ['web-hedircool-sg-com', '201823211K'];
 // Listings that stay retired even when their release data passes the bar (r15.2: Billy Aircon meets the
 // full bar; un-retiring it is an editorial decision). Excluded with the reason 'kept-retired'.

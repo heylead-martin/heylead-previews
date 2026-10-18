@@ -1,6 +1,6 @@
 {
   "1st-electrical": {
-    "checkedAt": "2026-10-15T10:37:18+00:00",
+    "checkedAt": "2026-10-18T08:45:42+00:00",
     "status": "verified",
     "latitude": 1.4310105,
     "longitude": 103.7529932,
@@ -7969,7 +7969,7 @@
     "addressHash": "c3349f19e51fa8afa3a069c37437f5e9b638e6399823548c2c9569f2beb73ed3"
   },
   "sk-electrical": {
-    "checkedAt": "2026-10-15T10:38:22+00:00",
+    "checkedAt": "2026-10-18T08:45:43+00:00",
     "status": "verified",
     "latitude": 1.4193743,
     "longitude": 103.8423643,
@@ -7979,7 +7979,7 @@
     "sourceName": "SK ELECTRICAL Pte Ltd",
     "sourceUrl": "https://www.google.com/maps?cid=16486700627576440283&z=17&output=embed",
     "matchedBy": "cited-place-cid-and-postal-code",
-    "addressHash": "2f7051ecd884fcb22dc09ee66d1b5d9cf21d2994f1cb472020894c384762911e"
+    "addressHash": "1a56d77015a73a8f944dadbe30cb1ba83b10aa77cc2f6cda0b0e2e453188e0c2"
   },
   "sk-plumber": {
     "checkedAt": "2026-10-15T10:38:22+00:00",
@@ -9662,5 +9662,19 @@
     "reason": "The place postal code does not match the published address",
     "sourceUrl": "https://www.google.com/maps?cid=10660651129198698701&z=17&output=embed",
     "addressHash": "938404365e96c6629e8a9fef0413bb938b91ab45a7b6a92dcc16391ef37c52e2"
+  },
+  "iaircon-singapore-aircon-services": {
+    "checkedAt": "2026-10-18T08:45:42+00:00",
+    "status": "unresolved",
+    "reason": "The place postal code does not match the published address",
+    "sourceUrl": "https://www.google.com/maps?cid=13401153252324094024&z=17&output=embed",
+    "addressHash": "674223a2dcd96a571811a96bdfd98071b1e02cf0cee9810473841c4b86f1d06d"
+  },
+  "ocd-cleaning-pte-ltd-obsessive-cleaning-disorder-professiona": {
+    "checkedAt": "2026-10-18T08:45:42+00:00",
+    "status": "unresolved",
+    "reason": "The place postal code does not match the published address",
+    "sourceUrl": "https://www.google.com/maps?cid=13955369787455697907&z=17&output=embed",
+    "addressHash": "020f1c813e4071c6361dfd594f3ca28266d5f6d137614735b005ca8c7462cf37"
   }
 }

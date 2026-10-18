@@ -29,7 +29,14 @@ export const OVERRIDES = {
   'best-aircon-servicing-and-installation-by-goodcool': 'Goodcool',
   '5-star-aircon-pte-ltd-aircon-specialist-singapore': '5 Star Aircon Pte Ltd',
   'plumbing-electrical-works-singapore-arrow-electrical-enginee': 'Arrow Electrical Engineering Pte Ltd',
-  'electrical-contactor-bsm-engineering-and-construction-pte-lt': 'Bsm Engineering and Construction Pte Ltd'
+  'electrical-contactor-bsm-engineering-and-construction-pte-lt': 'Bsm Engineering and Construction Pte Ltd',
+  // Register casing on the Best-of pages (QA 18 Oct 2026).
+  'sr-power-plumber-pte-ltd': 'SR Power Plumber Pte. Ltd.',
+  'ta-solutions-pte-ltd': 'Ta Solutions Pte Ltd',
+  'electrolatif-llp': 'Electrolatif LLP',
+  'handyman-german-maintenance-workshop-services': 'Handyman German Maintenance Workshop & Services',
+  'profix-handyman-services-singapore-pte-ltd': 'Profix Handyman Services Singapore Pte. Ltd.',
+  'mcaas-solutions-pte-ltd': 'MCAAS Solutions Pte Ltd'
 };
 
 const words = s => s.toLowerCase().split(/[^\p{L}\p{N}&]+/u).filter(Boolean);

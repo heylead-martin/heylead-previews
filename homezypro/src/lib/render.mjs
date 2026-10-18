@@ -957,7 +957,7 @@ function renderHome(grouped) {
 
 function renderHow() {
   const title="How HomezyPro Works: Listings, Reviews & Prices | HomezyPro";
-  const description="Understand HomezyPro's unpaid listings, weighted ratings, sourced prices and coverage filters. Learn what the beta quote and claim tools do.";
+  const description="Understand HomezyPro's unpaid listings, weighted ratings, sourced prices and coverage filters. Learn what the quote and claim tools do.";
   const canonicalPath="/how-it-works/";
   const body=renderCrumbs([{label:"How it works"}])+`<header class="guide-hero guide-hero-method"><div><p class="kicker">A LITTLE CLARITY</p><h1>How HomezyPro works.</h1><p class="guide-dek">The details behind a more considered choice.</p></div></header>`+renderEditorial(methodGuide,editorialGuides,{utility:true});
   return pageShell({title,description,canonicalPath,current:canonicalPath,jsonLd:[webPage(title,canonicalPath,description),crumbsLd([{href:canonicalPath,label:"How it works"}]),faqLd(methodGuide.faqs)],body,bodyClass:"guide-page",shareImage:abs(heroPhoto('plumbing').sizes[1200].src)});
@@ -1278,6 +1278,9 @@ validate(raw.companies);
 
 const operatorGroups = await readData("operator-groups.json");
 // Related-brand links use the same display names as every other page (not register capitals).
+// Withheld brands are never named, including in a network label (QA 18 Oct 2026).
+const WITHHELD_BRAND_NAMES=['Reliable Electrical'];
+for(const g of Object.values(operatorGroups))for(const n of WITHHELD_BRAND_NAMES)g.label=g.label.replace(new RegExp(`(?:,\\s*${n}\\b|\\b${n},\\s*)`,'g'),'');
 {const bySlug=new Map(raw.companies.map(c=>[c.slug,c.name]));for(const g of Object.values(operatorGroups))for(const m of g.members||[])if(bySlug.has(m.slug))m.name=bySlug.get(m.slug);}
 const renderProfileHtml = createProfileRenderer({esc,icon,tradeById,profileContent,priceSummary,renderCrumbs,pageShell,webPage,crumbsLd,faqLd,profileBusinessGraph,forbidSchema,renderServiceRow,renderForm,operatorGroups,mapPins});
 export const publishedCompanies = raw.companies.filter((company) => company.publish !== false);

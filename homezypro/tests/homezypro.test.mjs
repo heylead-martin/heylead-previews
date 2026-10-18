@@ -99,7 +99,7 @@ test('r15.2: address.kind is carried; a registered (ACRA) address is labelled an
   assert.throws(() => importDatabase({checked: '2026-10-18', companies: [{...row('premises'), address: {...row('premises').address, kind: 'office'}}]}, seeds, {}), /Unknown address.kind/);
 
   const registered = companies.filter(c => c.address?.kind === 'registered');
-  assert.equal(registered.length, 6, 'six r15.2 profiles show an ACRA registered address');
+  assert.equal(registered.length, 7, 'seven r15.3 profiles show an ACRA registered address (r15.2: six, plus iAircon)');
   const render = await import('../src/lib/render.mjs');
   for (const c of registered) {
     const page = render.companyPage(c);

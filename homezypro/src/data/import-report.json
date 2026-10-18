@@ -1,5 +1,5 @@
 {
-  "sourceChecked": "2026-10-18T10:03+03:00",
+  "sourceChecked": "2026-10-18T11:39+03:00",
   "sourceRows": 6494,
   "sourceProfiles": 878,
   "published": [
@@ -6569,6 +6569,16 @@
       "curated": false
     },
     {
+      "id": "gm-13955369787455697907",
+      "slug": "ocd-cleaning-pte-ltd-obsessive-cleaning-disorder-professiona",
+      "name": "OCD Cleaning Pte Ltd - Obsessive Cleaning Disorder | Professional Deep Cleaning Services Singapore",
+      "categories": [
+        "cleaning"
+      ],
+      "primaryTrade": "cleaning",
+      "curated": false
+    },
+    {
       "id": "gm-2809716446088941101",
       "slug": "the-good-husband-laundromats-drycleaners-serangoon",
       "name": "The Good Husband Laundromats & Drycleaners (Serangoon)",
@@ -6972,6 +6982,16 @@
       "id": "gm-17643730321458878230",
       "slug": "coolfix-by-natural-cool",
       "name": "Coolfix By Natural Cool",
+      "categories": [
+        "aircon"
+      ],
+      "primaryTrade": "aircon",
+      "curated": false
+    },
+    {
+      "id": "gm-13401153252324094024",
+      "slug": "iaircon-singapore-aircon-services",
+      "name": "iAircon Singapore Aircon Services",
       "categories": [
         "aircon"
       ],
@@ -47118,6 +47138,7 @@
       "reasons": [
         "missing-sourced-about",
         "missing-sourced-services",
+        "missing-sourced-phone",
         "missing-company-website"
       ]
     },
@@ -47316,6 +47337,7 @@
       "reasons": [
         "missing-sourced-about",
         "missing-sourced-services",
+        "missing-sourced-phone",
         "missing-company-website"
       ]
     },
@@ -73792,6 +73814,7 @@
         "thin-profile",
         "missing-sourced-about",
         "missing-sourced-services",
+        "missing-sourced-phone",
         "missing-company-website"
       ]
     },
@@ -75155,17 +75178,6 @@
       "primaryTrade": "cleaning",
       "reasons": [
         "commercial-only"
-      ]
-    },
-    {
-      "id": "gm-13955369787455697907",
-      "name": "OCD Cleaning Pte Ltd - Obsessive Cleaning Disorder | Professional Deep Cleaning Services Singapore",
-      "categories": [
-        "cleaning"
-      ],
-      "primaryTrade": "cleaning",
-      "reasons": [
-        "missing-sourced-about"
       ]
     },
     {
@@ -79749,17 +79761,6 @@
       "reasons": [
         "no-sg-postal-code",
         "missing-sourced-address"
-      ]
-    },
-    {
-      "id": "gm-13401153252324094024",
-      "name": "iAircon Singapore Aircon Services",
-      "categories": [
-        "aircon"
-      ],
-      "primaryTrade": "aircon",
-      "reasons": [
-        "missing-sourced-about"
       ]
     },
     {
@@ -85510,6 +85511,10 @@
     },
     {
       "slug": "1st-electrical",
+      "issue": "Alternate phone shown with source label; primary phone remains the main contact"
+    },
+    {
+      "slug": "1st-electrical",
       "issue": "Alternate address exists; primary database address retained"
     },
     {
@@ -86027,10 +86032,6 @@
     {
       "slug": "peniel-cleaning",
       "issue": "General pricing references labelled separately from company rates"
-    },
-    {
-      "slug": "peniel-cleaning",
-      "issue": "Automatically extracted price text needs editorial review; source wording retained"
     },
     {
       "slug": "s-m-c-engineering-landscape-pte-ltd",
@@ -86677,14 +86678,6 @@
       "issue": "Inferred price units labelled for confirmation"
     },
     {
-      "slug": "hms-housekeepers-pte-ltd",
-      "issue": "Inferred price units labelled for confirmation"
-    },
-    {
-      "slug": "hms-housekeepers-pte-ltd",
-      "issue": "Automatically extracted price text needs editorial review; source wording retained"
-    },
-    {
       "slug": "brisc-services-pte-ltd",
       "issue": "Inferred price units labelled for confirmation"
     },
@@ -87082,8 +87075,8 @@
   ],
   "byTrade": {
     "aircon": {
-      "published": 231,
-      "excluded": 1829
+      "published": 232,
+      "excluded": 1828
     },
     "plumbing": {
       "published": 101,
@@ -87098,25 +87091,25 @@
       "excluded": 538
     },
     "cleaning": {
-      "published": 197,
-      "excluded": 622
+      "published": 198,
+      "excluded": 621
     }
   },
-  "publishedCount": 745,
-  "excludedCount": 5749,
-  "rebrandedSummaries": 308,
-  "sourceSha256": "d8c388bf6d0232905fe8f781a2ec1f3b4adc198382fda732876172290bec2bcb",
-  "sourceRelease": "companies-20261018-1004.json",
+  "publishedCount": 747,
+  "excludedCount": 5747,
+  "rebrandedSummaries": 311,
+  "sourceSha256": "378dda86d324e9c265595f4e7f500932b91fd4a78aa6689dea19f1af9ebde1fe",
+  "sourceRelease": "companies-20261018-1140.json",
   "logos": {
-    "logos": 523,
-    "webp": 502,
+    "logos": 524,
+    "webp": 503,
     "svg": 15,
     "rasterisedSvg": 6,
     "over30k": 0,
     "maxBytes": 30454,
-    "servedBytes": 6480043,
-    "originalBytes": 41274711,
-    "framed": 432,
+    "servedBytes": 6484767,
+    "originalBytes": 41471036,
+    "framed": 433,
     "bundle": "logos-20261018-0059.tar.gz",
     "bundleSha256": "2df3c41423ca0385412ff3abc75f8dcbfef5c08b449b043cfa7d2b880143cfc3"
   }

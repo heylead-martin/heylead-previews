@@ -61,9 +61,9 @@ test('Service counts merge case and count each company once',()=>{
  assert.deepEqual(serviceCounts(rows),[['Leak repair',2],['Sink',1]]);
 });
 
-test('Directory script moves the canonical to a static area page for ?area=',async()=>{
+test('Directory script keeps the canonical on the hub and sets noindex, follow for ?area= (QA 18 Oct 2026)',async()=>{
  const js=await readFile(new URL('../../../../public/assets/catalogue.js',import.meta.url),'utf8');
- assert.match(js,/\[data-area-pages\]/);assert.match(js,/canonical\.href=page\?new URL\(page,hubCanonical\)\.href:hubCanonical/);
+ assert.match(js,/\[data-area-pages\]/);assert.match(js,/canonical\.href=hubCanonical;/);assert.match(js,/'noindex, follow'/);
  const hub=await readFile(new URL('../../../../dist/plumbing/index.html',import.meta.url),'utf8');
  assert.match(hub,/data-area-pages="\{[^"]*&quot;bedok&quot;:&quot;\/plumbing\/bedok\/&quot;/);
  assert.match(hub,/<link rel="canonical" href="[^"]+\/plumbing\/">/);

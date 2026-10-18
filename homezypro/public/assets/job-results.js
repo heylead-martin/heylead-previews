@@ -2,7 +2,7 @@ import {renderQuoteEvidence,noRatingText} from './evidence-display.mjs?v=2026101
 import {decodeCatalogue} from './catalogue-data.mjs?v=20261012-areas';
 import {matchJob,selectedVisible} from './job-match.mjs?v=20261012-quotes';
 import {validWhatsAppNumber} from './quote-contact.mjs?v=20261012-quotes';
-import {renderLogo} from './catalogue-card.mjs?v=20261018-cards';
+import {renderLogo} from './catalogue-card.mjs?v=9a3492e3a325';
 const esc=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const root=document.querySelector('[data-job-matches]');
 if(root){
