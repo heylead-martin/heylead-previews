@@ -95,7 +95,7 @@ for (const t of ['import-db', 'aircon-matrix', 'best-of', 'presentation', 'displ
   t = t.slice(0, a) + "const logoVariants=Object.fromEntries(Object.values(presentation).filter(e=>e.logoAsset&&e.logo&&e.logo!==e.logoAsset.src).map(e=>[e.logoAsset.src,{src:e.logo,width:0,height:0}]));\n" + t.slice(b);
   // The robots value is checked against the indexing switch in scripts/check-site.mjs.
   swap(`assert.ok(html.includes('content="noindex, nofollow, noarchive"'),rel);`, `assert.ok(/<meta name="robots" content="[^"]+">/.test(html),rel);`);
-  swap("assets/roster-logo-512.png", "assets/homezypro-logo-512.png");
+  swap("assets/roster-logo-512.png", "brand/logo-512.png");
   swap(`'# Beta preview. Every HTML page also carries noindex.\\nUser-agent: *\\nDisallow: /\\n')`, `(await import('../src/config/site.mjs')).robotsTxt())`);
   // HomezyPro's claim page is a static explanation: no form, no datalist, no claim script.
   swap(`assert.match(claim, /<input id="claim-company"[^>]+list="claim-companies"/);`, `assert.ok(claim.includes('data-claim-static')&&!/<form|<input|<datalist/.test(claim.match(/<main[\\s\\S]*<\\/main>/)[0])&&!claim.includes('claim.js'),'Static claim page without a form');`);

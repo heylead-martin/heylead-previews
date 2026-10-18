@@ -1,9 +1,13 @@
 /* HomezyPro brand layer over the ported roster design tokens (site.css). Loaded last.
-   Colours, type and spacing tokens stay roster's; only the identity changes here. */
+   Colours, type and spacing tokens stay roster's; the logo is public/brand/logo.svg, inlined in the
+   header and footer (scripts/brand/make-brand.py writes src/lib/brand-logo.svg.txt). */
 :root {
   --brand: var(--green);
   --brand-ink: var(--green-ink);
 }
-.brand .wordmark { letter-spacing: -0.01em; }
-.brand .wordmark .brand-pro { color: var(--green); font-style: italic; }
-.foot .brand .wordmark .brand-pro { color: inherit; }
+.brand-logo { display: block; height: 30px; width: auto; flex: none; }
+.brand-logo .hz-mark, .brand-logo .hz-pro { fill: var(--green); }
+.brand-logo .hz-homezy { fill: var(--ink); }
+.brand:hover .brand-logo .hz-homezy { fill: var(--green-ink); }
+.brand-logo-foot { height: 26px; }
+@media (max-width: 640px) { .brand-logo { height: 26px; } }

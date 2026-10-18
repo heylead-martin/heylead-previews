@@ -1,0 +1,8 @@
+# Cloudflare Pages redirects (https://developers.cloudflare.com/pages/configuration/redirects/).
+# The build writes dist/_redirects as: generated retired-listing 301s (src/config/retired.mjs, incl. their
+# old /roster/ URLs, so no redirect chains), then this file. Static rules before dynamic ones; the
+# first match wins; limits 2,000 static + 100 dynamic, 1,000 characters per line.
+
+# Roster preview URLs moved to the site root.
+/roster / 301
+/roster/* /:splat 301

@@ -89,6 +89,17 @@ share the `/{hub}/{x}/` shape; `otherPages` in `render.mjs` maps each path to it
 - Retired listings: Cloudflare `_redirects` 301s (both `/company/x/` and `/company/x`), with a noindex,
   meta-refresh HTML fallback for hosts without redirect support. Not in the sitemap.
 
+## Round 3: brand, SEO/AEO and Cloudflare
+
+- New brand (house + check mark, Fraunces wordmark as outlines) replaces roster's mark; assets and
+  generator documented in the README. Header and footer inline the logo.
+- JSON-LD additions over roster: WebSite SearchAction, BreadcrumbList + WebPage on claim-listing and
+  logo-removal (roster had none there). check-site now validates JSON-LD structure per page type.
+- Image sitemap (`sitemap-images.xml`) added to the index.
+- Indexing switch also requires the production branch on Cloudflare builds; `_headers` noindexes
+  `*.pages.dev`. `_headers` carries security headers, a strict CSP (verified in Chrome with
+  `scripts/dev/browser-smoke.py`) and cache rules; `_redirects` adds `/roster/*` → `/:splat`.
+
 ## Open items
 
 1. The ported `check-site-roster.mjs` is regenerated from roster; if HomezyPro's templates diverge on

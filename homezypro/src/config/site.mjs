@@ -4,13 +4,21 @@
 //   SITE_URL         public origin, default https://homezypro.com
 //   SITE_INDEXABLE   "true" to allow indexing; takes effect only when SITE_URL's host is the
 //                    production host. Everything else (previews, staging, local) stays noindex.
+//
+// Cloudflare Pages sets CF_PAGES=1 and CF_PAGES_BRANCH on every build. Set SITE_INDEXABLE=true only
+// in the Production environment's variables. As a second guard, a Cloudflare build of any branch other
+// than the production branch (HOMEZYPRO_PRODUCTION_BRANCH, default "main") is never indexable, even if
+// SITE_INDEXABLE=true leaks into the Preview environment. public/_headers also sends
+// X-Robots-Tag: noindex on every *.pages.dev host.
 export const BRAND = 'HomezyPro';
 export const PRODUCTION_HOST = 'homezypro.com';
 export const SITE_URL = (process.env.SITE_URL || 'https://homezypro.com').replace(/\/+$/, '');
 
 export function isIndexable(env = process.env) {
   const url = (env.SITE_URL || 'https://homezypro.com').replace(/\/+$/, '');
-  return env.SITE_INDEXABLE === 'true' && new URL(url).hostname === PRODUCTION_HOST;
+  if (env.SITE_INDEXABLE !== 'true' || new URL(url).hostname !== PRODUCTION_HOST) return false;
+  if (env.CF_PAGES === '1' && env.CF_PAGES_BRANCH !== (env.HOMEZYPRO_PRODUCTION_BRANCH || 'main')) return false;
+  return true;
 }
 export const INDEXABLE = isIndexable();
 

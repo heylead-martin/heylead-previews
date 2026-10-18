@@ -1,0 +1,40 @@
+# Cloudflare Pages headers (https://developers.cloudflare.com/pages/configuration/headers/).
+# Rules that match the same request are combined, and a header set twice is comma-joined, so each
+# Cache-Control below is set on exactly one path family. HTML keeps the Pages default
+# (public, max-age=0, must-revalidate). Limit: 100 rules, 2,000 characters per line.
+
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Frame-Options: DENY
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()
+  Strict-Transport-Security: max-age=31536000
+  Cross-Origin-Opener-Policy: same-origin
+  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; frame-src https://www.google.com; connect-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests
+
+# Preview and branch deployments (*.pages.dev, *.*.pages.dev) are never indexed, whatever the build.
+https://:project.pages.dev/*
+  X-Robots-Tag: noindex, nofollow
+https://:version.:project.pages.dev/*
+  X-Robots-Tag: noindex, nofollow
+
+# Content-hashed files: logos carry their sha256 prefix; Astro's /_astro/ bundles are hashed.
+# Some company SVG logos and the favicon style themselves with <style>; images carry no CSP.
+/logos/*
+  ! Content-Security-Policy
+  Cache-Control: public, max-age=31536000, immutable
+/favicon.svg
+  ! Content-Security-Policy
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# CSS and JS are referenced with ?v=<content hash>; hero photos are pinned by Pexels id. One day.
+/assets/*
+  Cache-Control: public, max-age=86400
+/brand/*
+  ! Content-Security-Policy
+  Cache-Control: public, max-age=86400
+
+# Directory indexes are versioned with ?v=, but the launch manifest is not: one hour.
+/data/*
+  Cache-Control: public, max-age=3600

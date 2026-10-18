@@ -15,7 +15,7 @@ interface Props {
   noCanonical?: boolean;
   robots?: string;
 }
-const {title, description, canonicalPath, shareImage = absUrl('/assets/og-default.png'), ogType = 'website', jsonLdText = '', noCanonical = false, robots} = Astro.props;
+const {title, description, canonicalPath, shareImage = absUrl('/brand/og-default.png'), ogType = 'website', jsonLdText = '', noCanonical = false, robots} = Astro.props;
 const canonical = absUrl(canonicalPath);
 const robotsContent = robots || robotsFor(canonicalPath);
 ---

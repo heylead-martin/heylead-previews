@@ -331,7 +331,7 @@ for(const c of data.companies)assert.ok(derivedFrom(c.name,c.sourceName),`Displa
 {
  const home=JSON.parse(pages.get('index.html').match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1])['@graph'];
  const org=home.find(n=>n['@type']==='Organization');
- assert.ok(org&&/\.png$/.test(org.logo.url)&&org.logo.width>=112,'Organization raster logo');await access(path.join(root,'assets/homezypro-logo-512.png'));
+ assert.ok(org&&/\.png$/.test(org.logo.url)&&org.logo.width>=112,'Organization raster logo');await access(path.join(root,'brand/logo-512.png'));
  for(const [rel,html] of pages){const g=JSON.parse(html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1])['@graph'];
   for(const n of g.filter(n=>n['@type']==='WebPage'))assert.equal(n.publisher?.['@id'],org['@id'],`WebPage publisher @id: ${rel}`);
   for(const n of g.filter(n=>n['@type']==='Article'))assert.ok(n.image&&n.author?.name==='HomezyPro editorial team'&&n.datePublished&&n.dateModified>=n.datePublished,`Article image/author/dates: ${rel}`);}

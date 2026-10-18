@@ -20,6 +20,10 @@ test('indexing switch: only SITE_INDEXABLE=true on homezypro.com is indexable', 
   assert.equal(isIndexable({SITE_INDEXABLE: 'true', SITE_URL: 'https://www.homezypro.com'}), false);
   assert.equal(isIndexable({SITE_INDEXABLE: '1', SITE_URL: 'https://homezypro.com'}), false);
   assert.equal(isIndexable({SITE_URL: 'https://homezypro.com'}), false);
+  // Cloudflare builds: only the production branch can be indexable.
+  assert.equal(isIndexable({SITE_INDEXABLE: 'true', CF_PAGES: '1', CF_PAGES_BRANCH: 'main'}), true);
+  assert.equal(isIndexable({SITE_INDEXABLE: 'true', CF_PAGES: '1', CF_PAGES_BRANCH: 'feature-x'}), false);
+  assert.equal(isIndexable({SITE_INDEXABLE: 'true', CF_PAGES: '1', CF_PAGES_BRANCH: 'release', HOMEZYPRO_PRODUCTION_BRANCH: 'release'}), true);
 });
 
 test('robots meta and robots.txt follow the switch', () => {
@@ -76,11 +80,15 @@ test('condenser-cleaning lines never count as general servicing or chemical wash
 });
 
 test('retired listings: 301 per URL form, skipped once a company is published again', async () => {
-  const {retiredListings, redirectsFile} = await import('../src/config/retired.mjs');
-  const all = redirectsFile();
-  assert.equal(all.trim().split('\n').length, retiredListings.length * 2);
-  assert.match(all, /^\/company\/hedircool-pte-ltd\/ \/plumbing\/ 301$/m);
-  assert.ok(!redirectsFile(new Set(['billy-aircon'])).includes('billy-aircon'));
+  const {retiredListings, retiredRedirects, redirectsFile, validateRedirects} = await import('../src/config/retired.mjs');
+  const rules = retiredRedirects();
+  assert.equal(rules.length, retiredListings.length * 4);
+  assert.ok(rules.includes('/company/hedircool-pte-ltd/ /plumbing/ 301') && rules.includes('/roster/company/hedircool-pte-ltd/ /plumbing/ 301'));
+  assert.ok(!retiredRedirects(new Set(['billy-aircon'])).some(r => r.includes('billy-aircon')));
+  const file = redirectsFile(new Set(), '/roster / 301\n/roster/* /:splat 301\n');
+  assert.deepEqual(validateRedirects(file).problems, []);
+  assert.match(validateRedirects('/a/* /b 301\n/c /d 301').problems.join(), /static rule after a dynamic rule/);
+  assert.match(validateRedirects('/a /b 404\nexample.com/* /x 301').problems.join(), /unsupported status 404.*source must be a path/);
 });
 
 test('capture dates go with their separator', async () => {
@@ -134,5 +142,5 @@ test('rendered pages: no rating schema, business types, card label, indicative p
   assert.deepEqual(render.counts, {guides: 47, areaPages: 109, blogPosts: 25, intents: 2});
   const home = render.homePage();
   assert.match(home.jsonLdText, /"@type":"Organization"/);
-  assert.match(home.jsonLdText, /homezypro-logo-512\.png/);
+  assert.match(home.jsonLdText, /"logo":\{"@type":"ImageObject","url":"https:\/\/homezypro\.com\/brand\/logo-512\.png","width":512,"height":512\}/);
 });
