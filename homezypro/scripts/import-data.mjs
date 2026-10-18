@@ -89,8 +89,11 @@ if (process.argv[1] && path.resolve(process.argv[1]) === script) {
 
   // Logos: verify every published logo against its release sha256, then serve optimised copies.
   const wanted = data.report.published.map(c => data.presentation[c.slug]?.logoAsset).filter(Boolean);
+  // Chrome-rendered copies of large SVGs (scripts/dev/rasterize-svg-logos.py), keyed by SVG sha256.
+  let rasters = {};
+  try { rasters = JSON.parse(await readFile(path.join(dataDir, 'svg-rasters.json'), 'utf8')); } catch (e) { if (e.code !== 'ENOENT') throw e; }
   const result = JSON.parse(execFileSync('python3', [path.join(root, 'scripts/logos.py')], {
-    input: JSON.stringify({bundle: logosFile, publicDir: path.join(root, 'public'), logos: wanted}), encoding: 'utf8', maxBuffer: 64 * 1024 * 1024
+    input: JSON.stringify({bundle: logosFile, publicDir: path.join(root, 'public'), logos: wanted, rasters}), encoding: 'utf8', maxBuffer: 64 * 1024 * 1024
   }));
   for (const entry of Object.values(data.presentation)) {
     if (!entry.logo) continue;

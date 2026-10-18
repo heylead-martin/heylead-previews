@@ -8,12 +8,20 @@ market. Ported from `roster/` (the reference implementation): see [docs/PORTING-
 ```sh
 npm ci
 npm run import:data      # verify + import the pinned r15.1 release (only when the data changes)
-npm run build            # dist/
-npm test                 # HomezyPro tests + roster's ported unit tests
-npm run check:site       # checks dist/ (run after build)
-npm run check:editorial  # checks our own copy (and built guide pages, once ported)
+npm run build            # dist/ (948 HTML pages, sitemaps, llms.txt, _redirects)
+npm test                 # HomezyPro tests + roster's ported unit tests (some read dist/: build first)
+npm run check:site       # HomezyPro checks + roster's ported check-site, on dist/
+npm run check:editorial  # our own copy + guide and blog page checks, on dist/
 npm run dev | preview
 ```
+
+Dev scripts (not part of the build): `python3 scripts/dev/rasterize-svg-logos.py` renders SVG logos
+over 30 KB to WebP with Python Playwright and /usr/bin/google-chrome (commit `public/logos/` and
+`src/data/svg-rasters.json`); `node scripts/dev/compare-roster.mjs` compares page counts and output
+with roster's built pages; `node scripts/dev/port-from-roster.mjs` re-copies roster modules and
+regenerates `scripts/check-site-roster.mjs`.
+
+Retired listings are 301s in `dist/_redirects` (Cloudflare Pages), with noindex HTML fallbacks.
 
 `import:data` reads `companies-20261018-0125.json` and `logos-20261018-0059.tar.gz` from
 `HOMEZYPRO_RELEASE_DIR` (default `/workspace/roster-release`, read only), checks both against their

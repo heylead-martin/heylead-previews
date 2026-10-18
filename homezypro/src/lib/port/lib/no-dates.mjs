@@ -10,7 +10,11 @@ const DATE = String.raw`(?:20\d\d-\d\d-\d\d(?:T[\d:+]+)?|${DAY_DATE})`;
 export const VISIBLE_DATE = new RegExp(String.raw`\b20\d\d-\d\d-\d\d\b|\b${DAY_DATE}\b|\b(?:January|February|March|April|May|June|July|August|September|October|November|December)\s+20\d\d\b`);
 
 // HomezyPro's own capture-date phrasing, removed from visible text only.
+const CHECKED = String.raw`(?:Last checked|Facts last checked|Prices and services checked|Checked|Captured|Check date:?|Source checked)`;
 const PATTERNS = [
+  // HomezyPro: a separator before the date phrase goes with it ("About the business · Checked
+  // 10 Oct 2026" -> "About the business"), so no stray "·" is left behind.
+  [new RegExp(String.raw`\s*[·|]\s*${CHECKED}\s+(?:on\s+)?${DATE}\.?`, 'gi'), ''],
   [new RegExp(String.raw`\s*\((?:checked|captured|as of)\s+${DATE}\)`, 'gi'), ''],
   [new RegExp(String.raw`\s*(?:Last checked|Facts last checked|Prices and services checked|Checked|Captured|Check date:?|Source checked)\s+(?:on\s+)?${DATE}\.?`, 'gi'), ''],
   [new RegExp(String.raw`\s*[·|]\s*${DATE}`, 'g'), ''],

@@ -17,6 +17,10 @@ import {stripCaptureDates} from "./port/lib/no-dates.mjs";
 import {SITE_URL, absUrl} from "../config/site.mjs";
 import {activeMarket} from "../config/markets.mjs";
 import {BEST_OF,rankBestOf,bestOfScore} from "./port/lib/best-of.mjs";
+import {buildSitemaps, companyLastmod, day} from "./port/lib/sitemaps.mjs";
+import {renderLlms} from "./port/lib/llms.mjs";
+import {renderStaticClaimPage} from "./claim-page.mjs";
+import {retiredListings} from "../config/retired.mjs";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { createHash } from "node:crypto";
@@ -1314,3 +1318,60 @@ export function companyPage(company) {
   return {...page, body: page.body + relatedLinks(company)};
 }
 export const market = activeMarket;
+
+/* ---------- Round 2: every other page family, keyed by path ---------- */
+
+export const searchPage = () => renderCollection({ id: "all", slug: "search", name: "Home services", h1: "Home services in Singapore", intro: ["Explore the sourced companies on HomezyPro. Use search and filters to narrow your list."], jobs: [], faqs: howFaqs.slice(0, 3) }, sortCompanies(publishedCompanies), [{ label: "Find a company" }]);
+function intentPage(intent) {
+  const parent = tradeById(intent.parent);
+  const companies = grouped[intent.parent].filter((company) => company.services.includes(intent.service));
+  return renderCollection(intent, sortCompanies(companies), [{ href: `/${parent.slug}/`, label: parent.name }, { label: intent.name }]);
+}
+
+const logoRemovalPage = () => pageShell({title:'Logo removal requests | HomezyPro',description:'Information for business owners who would like a company logo removed from HomezyPro. The public removal contact route is awaiting confirmation.',canonicalPath:'/logo-removal/',current:'',jsonLd:[],body:`<section class="pending-feature"><p class="kicker">FOR BUSINESS OWNERS</p><h1>Logo removal requests</h1><p>Logos belong to their owners. We can remove a logo without removing the business listing.</p><h2>Contact route pending</h2><p>The removal contact route is not connected yet, so this page cannot receive a request.</p><p>When the contact route is available, include the company name, its HomezyPro page URL and your relationship to the logo owner. Do not send passwords or identity documents.</p><a href="/">Back to HomezyPro</a></section>`});
+
+// Previously published listings that are withdrawn: Cloudflare serves a 301 from dist/_redirects
+// (astro.config.mjs); the HTML page is a noindex fallback for hosts without redirect support.
+export {retiredListings};
+function retiredPage(old) {
+  const canonicalPath = `/company/${old.slug}/`;
+  const page = pageShell({title:`${old.name}: listing unavailable | HomezyPro`,description:concise(`The ${old.name} listing is currently unavailable. Browse other ${old.trade} companies in Singapore on HomezyPro.`),canonicalPath,current:old.target,jsonLd:[webPage(`${old.name}: listing unavailable`,canonicalPath,'This listing is currently unavailable.')],body:`<section class="claim-hero" data-retired-listing><div><h1>This listing is currently unavailable.</h1><p>Explore other ${old.trade} companies, compare prices and get in touch directly.</p><a class="btn btn-solid" href="${old.target}">Browse ${old.trade} companies</a></div></section>`});
+  return {...page, robots: 'noindex, follow', refresh: old.target, retired: true};
+}
+
+export function notFoundPage() {
+  const page = pageShell({title:'Page not found | HomezyPro',description:'This HomezyPro page does not exist. Browse home-service companies in Singapore by trade, search by name, or find the service you need.',canonicalPath:'/404/',current:'',jsonLd:[],bodyClass:'guide-page',
+    body:`<header class="guide-hero guide-hero-method" data-not-found><div><p class="kicker">PAGE NOT FOUND</p><h1>We could not find that page.</h1><p class="guide-dek">The link may be old, or the listing may have moved. Start from a trade, search by company name, or describe the problem.</p><div class="guide-hero-actions"><a class="btn btn-solid" href="/search/">Search companies ${icon('arrow')}</a><a href="/what-service-do-i-need/">What service do I need?</a></div></div></header><section class="browse-more"><p class="kicker">BROWSE BY TRADE</p><h2>Home services in Singapore.</h2><div>${trades.map(t=>`<a href="/${t.slug}/">${icon(tradeIcon[t.id])}<span>${esc(t.name)}</span>${icon('arrow')}</a>`).join('')}</div></section>`});
+  return {...page, robots: 'noindex, follow', noCanonical: true};
+}
+
+// Every page except home, hubs and company profiles (their own routes): path (no slashes) -> page().
+export const otherPages = new Map([
+  ['search', searchPage],
+  ...intents.map(i => [i.slug, () => intentPage(i)]),
+  ['how-it-works', renderHow],
+  ['what-service-do-i-need', renderSymptomFinder],
+  ['claim-listing', () => renderStaticClaimPage({esc, icon, pageShell, renderCrumbs})],
+  ['logo-removal', logoRemovalPage],
+  ...editorialGuides.map(g => [g.slug, () => renderGuidePage(g)]),
+  ...areaPages.map(p => [p.slug, () => renderAreaPage(p)]),
+  ...trades.map(t => [`${t.slug}/best`, () => renderBestOf(t.id)]),
+  ['blog', () => renderBlogIndex(blogPosts)],
+  ...blogPosts.map(p => [`blog/${p.slug}`, () => renderBlogPost(p)]),
+  ...retiredListings.filter(old => !publishedCompanies.some(c => c.slug === old.slug)).map(old => [`company/${old.slug}`, () => retiredPage(old)])
+]);
+export const counts = {guides: editorialGuides.length, areaPages: areaPages.length, blogPosts: blogPosts.length, intents: intents.length};
+
+// Launch set (roster data/seo-launch-pages.json) and sitemaps: canonical pages only; no utilities,
+// query URLs or retired listings.
+const dataDate = day(raw.capturedAt);
+export const launchManifest = {status: "preview-noindex", canonicalOrigin: origin, updated: "2026-10-12", pages: [{path:"/",kind:"home"},{path:"/how-it-works/",kind:"method"},...trades.map(t=>({path:`/${t.slug}/`,kind:"directory"})),...editorialGuides.map(g=>({id:g.id,path:g.path,words:g.words,kind:"guide"})),...areaPages.map(p=>({path:p.path,trade:p.trade,town:p.town,companies:p.count,kind:"area"})),{path:"/what-service-do-i-need/",kind:"symptom-finder"},...trades.map(t=>({path:bestPath(t.id),trade:t.id,kind:"best-of"})),{path:"/blog/",kind:"blog-index"},...blogPosts.map(b=>({path:b.path,words:b.words,kind:"blog"}))]};
+export const sitemaps = buildSitemaps([
+  {name:'core',urls:[{path:'/',lastmod:dataDate},{path:'/how-it-works/',lastmod:methodGuide.updated},...trades.map(t=>({path:`/${t.slug}/`,lastmod:dataDate})),...intents.map(i=>({path:`/${i.slug}/`,lastmod:dataDate})),{path:'/what-service-do-i-need/'}]},
+  {name:'best',urls:trades.map(t=>({path:bestPath(t.id),lastmod:dataDate}))},
+  {name:'guides',urls:editorialGuides.map(g=>({path:g.path,lastmod:g.updated}))},
+  {name:'towns',urls:areaPages.map(p=>({path:p.path,lastmod:dataDate}))},
+  {name:'blog',urls:[{path:'/blog/',lastmod:blogPosts.map(b=>b.updated).sort().at(-1)},...blogPosts.map(b=>({path:b.path,lastmod:b.updated}))]},
+  {name:'companies',urls:publishedCompanies.map(c=>({path:`/company/${c.slug}/`,lastmod:companyLastmod(c,dataDate)}))}
+]);
+export const llms = renderLlms({trades,guides:editorialGuides,posts:blogPosts,bestPath,bestLabel,best:BEST_OF,dataDate,counts:Object.fromEntries(trades.map(t=>[t.id,grouped[t.id].length]))});

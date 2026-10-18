@@ -1,0 +1,44 @@
+{
+ "/logos/201227204N-a37877648a4c.svg": {
+  "bytes": 2380,
+  "height": 103,
+  "src": "/logos/201227204N-a37877648a4c.webp",
+  "svgSha256": "a37877648a4c8ea0b8e1af311b92af1315f08b4faf7a46ed100be3e57c2f3ed6",
+  "width": 97
+ },
+ "/logos/gm-11937319132592910048-1421e1df28c6.svg": {
+  "bytes": 8794,
+  "height": 50,
+  "src": "/logos/gm-11937319132592910048-1421e1df28c6.webp",
+  "svgSha256": "1421e1df28c6aa80db5fe749096659a7d0c0b72f7a0f591de5da7c0c9f741916",
+  "width": 244
+ },
+ "/logos/gm-2864108435581152114-a4496c7c2f80.svg": {
+  "bytes": 6486,
+  "height": 49,
+  "src": "/logos/gm-2864108435581152114-a4496c7c2f80.webp",
+  "svgSha256": "a4496c7c2f80496104677cb99e4540e239dffdcd03c78ffd7bdbf9438eb8a6e8",
+  "width": 256
+ },
+ "/logos/gm-363540992589109877-3e2b928ea6ff.svg": {
+  "bytes": 6668,
+  "height": 81,
+  "src": "/logos/gm-363540992589109877-3e2b928ea6ff.webp",
+  "svgSha256": "3e2b928ea6ff6967d0e87ce7e6f5392ec4032b7fff1b559696a1cd62baef2e69",
+  "width": 256
+ },
+ "/logos/gm-7110607090072832176-b43c79e08895.svg": {
+  "bytes": 11748,
+  "height": 178,
+  "src": "/logos/gm-7110607090072832176-b43c79e08895.webp",
+  "svgSha256": "b43c79e08895de2bcb657f46ff57d33fdf43a24a732e9b81691cd71f6025d2ba",
+  "width": 256
+ },
+ "/logos/gm-8903969957562303393-1abe9a623af2.svg": {
+  "bytes": 16772,
+  "height": 178,
+  "src": "/logos/gm-8903969957562303393-1abe9a623af2.webp",
+  "svgSha256": "1abe9a623af230f788462f83b8eb357b38533df1b095d3bf633dbabcd286d7d2",
+  "width": 256
+ }
+}

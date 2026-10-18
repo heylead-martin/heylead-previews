@@ -75,6 +75,34 @@ test('condenser-cleaning lines never count as general servicing or chemical wash
   }
 });
 
+test('retired listings: 301 per URL form, skipped once a company is published again', async () => {
+  const {retiredListings, redirectsFile} = await import('../src/config/retired.mjs');
+  const all = redirectsFile();
+  assert.equal(all.trim().split('\n').length, retiredListings.length * 2);
+  assert.match(all, /^\/company\/hedircool-pte-ltd\/ \/plumbing\/ 301$/m);
+  assert.ok(!redirectsFile(new Set(['billy-aircon'])).includes('billy-aircon'));
+});
+
+test('capture dates go with their separator', async () => {
+  const {stripCaptureDates} = await import('../src/lib/port/lib/no-dates.mjs');
+  assert.equal(stripCaptureDates('<p class="record-label">About the business · Checked 10 Oct 2026</p>'), '<p class="record-label">About the business</p>');
+  assert.equal(stripCaptureDates('<p>Google Maps · 2026-10-10</p>'), '<p>Google Maps</p>');
+});
+
+test('search ranks primary-trade matches first for a trade word', async () => {
+  const {filterCatalogue} = await import('../src/lib/port/assets/catalogue-filter.mjs');
+  const {rankCompanies} = await import('../src/lib/port/assets/catalogue-card.mjs');
+  const rows = [
+    {slug: 'air', name: 'Cool Aircon', category: 'aircon', categories: ['aircon', 'cleaning'], offerings: ['condenser cleaning'], serviceAreas: [], ratingCount: 900, ratingValue: 4.9, evidenceScore: 7},
+    {slug: 'clean', name: 'Art of Cleaning Pte. Ltd.', category: 'cleaning', categories: ['cleaning'], offerings: ['deep cleaning'], serviceAreas: [], ratingCount: 10, ratingValue: 4.5, evidenceScore: 1}
+  ];
+  // An aircon firm offering "condenser cleaning" is not a cleaning company for the query "cleaning".
+  assert.deepEqual(rankCompanies(filterCatalogue(rows, {query: 'cleaning'}).matches).map(c => c.slug), ['clean']);
+  // Name and service matches stay, ranked after primary-trade matches.
+  rows[0].name = 'Cool Aircon and Cleaning';
+  assert.deepEqual(rankCompanies(filterCatalogue(rows, {query: 'cleaning'}).matches).map(c => c.slug), ['clean', 'air']);
+});
+
 test('rendered pages: no rating schema, business types, card label, indicative prices hidden', async () => {
   const render = await import('../src/lib/render.mjs');
   const allowed = new Set(['LocalBusiness', 'HomeAndConstructionBusiness', 'HVACBusiness', 'Plumber', 'Electrician']);
@@ -95,6 +123,15 @@ test('rendered pages: no rating schema, business types, card label, indicative p
     assert.equal((hub.body.match(/<span class="price-eyebrow">Example service price<\/span>/g) || []).length, cards.length, `${trade.id}: one price label per card`);
     assert.ok(!hub.body.includes('data-aircon-matrix="units"'));
   }
+  const claim = render.otherPages.get('claim-listing')();
+  assert.ok(claim.body.includes('data-claim-static') && !/<form|<input|mailto:/.test(claim.body), 'claim page is static');
+  for (const t of render.trades) {
+    const best = render.otherPages.get(`${t.slug}/best`)();
+    const types = JSON.parse(best.jsonLdText)['@graph'].map(n => n['@type']);
+    assert.ok(types.includes('ItemList') && types.includes('FAQPage'), `${t.id} best-of schema`);
+    assert.doesNotMatch(best.jsonLdText, /ratingValue|reviewCount|aggregateRating/i);
+  }
+  assert.deepEqual(render.counts, {guides: 47, areaPages: 109, blogPosts: 25, intents: 2});
   const home = render.homePage();
   assert.match(home.jsonLdText, /"@type":"Organization"/);
   assert.match(home.jsonLdText, /homezypro-logo-512\.png/);

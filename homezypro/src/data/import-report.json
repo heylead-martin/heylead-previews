@@ -87117,12 +87117,13 @@
   "logos": {
     "logos": 519,
     "webp": 499,
-    "svg": 20,
+    "svg": 14,
+    "rasterisedSvg": 6,
     "over30k": 0,
-    "maxBytes": 477635,
-    "servedBytes": 7304808,
+    "maxBytes": 30454,
+    "servedBytes": 6430984,
     "originalBytes": 41104044,
-    "framed": 426,
+    "framed": 430,
     "bundle": "logos-20261018-0059.tar.gz",
     "bundleSha256": "2df3c41423ca0385412ff3abc75f8dcbfef5c08b449b043cfa7d2b880143cfc3"
   }

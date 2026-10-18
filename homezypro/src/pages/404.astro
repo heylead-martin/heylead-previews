@@ -1,0 +1,7 @@
+---
+// Branded 404 (dist/404.html, served by Cloudflare Pages): always noindex, no canonical.
+import Base from '../layouts/Base.astro';
+import {notFoundPage} from '../lib/render.mjs';
+const page = notFoundPage();
+---
+<Base page={page} robots={page.robots} noCanonical={true} />

@@ -558,7 +558,7 @@
     "published": false,
     "price": "Ask for a quote",
     "detail": "No company rate captured. Ask for a job-specific quote.",
-    "logo": "/logos/201227204N-a37877648a4c.svg",
+    "logo": "/logos/201227204N-a37877648a4c.webp",
     "logoAsset": {
       "localPath": "logos/201227204N.svg",
       "sha256": "a37877648a4c8ea0b8e1af311b92af1315f08b4faf7a46ed100be3e57c2f3ed6",
@@ -3672,7 +3672,7 @@
     "published": false,
     "price": "Ask for a quote",
     "detail": "No company rate captured. Ask for a job-specific quote.",
-    "logo": "/logos/gm-7110607090072832176-b43c79e08895.svg",
+    "logo": "/logos/gm-7110607090072832176-b43c79e08895.webp",
     "logoAsset": {
       "localPath": "logos/gm-7110607090072832176.svg",
       "sha256": "b43c79e08895de2bcb657f46ff57d33fdf43a24a732e9b81691cd71f6025d2ba",
@@ -5199,7 +5199,7 @@
     "published": false,
     "price": "Ask for a quote",
     "detail": "No company rate captured. Ask for a job-specific quote.",
-    "logo": "/logos/gm-11937319132592910048-1421e1df28c6.svg",
+    "logo": "/logos/gm-11937319132592910048-1421e1df28c6.webp",
     "logoAsset": {
       "localPath": "logos/gm-11937319132592910048.svg",
       "sha256": "1421e1df28c6aa80db5fe749096659a7d0c0b72f7a0f591de5da7c0c9f741916",
@@ -5526,7 +5526,7 @@
     "published": true,
     "price": "See published prices",
     "detail": "1 sourced pricing entries. Confirm the job, inclusions and total.",
-    "logo": "/logos/gm-363540992589109877-3e2b928ea6ff.svg",
+    "logo": "/logos/gm-363540992589109877-3e2b928ea6ff.webp",
     "logoAsset": {
       "localPath": "logos/gm-363540992589109877.svg",
       "sha256": "3e2b928ea6ff6967d0e87ce7e6f5392ec4032b7fff1b559696a1cd62baef2e69",
@@ -5943,7 +5943,7 @@
     "published": true,
     "price": "See published prices",
     "detail": "6 sourced pricing entries. Confirm the job, inclusions and total.",
-    "logo": "/logos/gm-2864108435581152114-a4496c7c2f80.svg",
+    "logo": "/logos/gm-2864108435581152114-a4496c7c2f80.webp",
     "logoAsset": {
       "localPath": "logos/gm-2864108435581152114.svg",
       "sha256": "a4496c7c2f80496104677cb99e4540e239dffdcd03c78ffd7bdbf9438eb8a6e8",
@@ -8988,7 +8988,7 @@
     "published": false,
     "price": "Ask for a quote",
     "detail": "No company rate captured. Ask for a job-specific quote.",
-    "logo": "/logos/gm-8903969957562303393-1abe9a623af2.svg",
+    "logo": "/logos/gm-8903969957562303393-1abe9a623af2.webp",
     "logoAsset": {
       "localPath": "logos/gm-8903969957562303393.svg",
       "sha256": "1abe9a623af230f788462f83b8eb357b38533df1b095d3bf633dbabcd286d7d2",

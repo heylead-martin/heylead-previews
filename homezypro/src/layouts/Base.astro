@@ -9,8 +9,9 @@ interface Props {
   page: {title: string; description: string; canonicalPath: string; current?: string; bodyClass?: string; shareImage?: string; ogType?: string; jsonLdText?: string; body: string};
   noCanonical?: boolean;
   robots?: string;
+  refresh?: string;
 }
-const {page, noCanonical = false, robots} = Astro.props;
+const {page, noCanonical = false, robots, refresh} = Astro.props;
 const bodyClass = page.bodyClass || '';
 const classes = bodyClass.split(' ');
 const v = (name: string) => `/assets/${name}?v=${assetVersions[name]}`;
@@ -26,6 +27,7 @@ const css = [
 <html lang={activeMarket.locale}>
 <head>
 <meta charset="utf-8">
+{refresh && <meta http-equiv="refresh" content={`0;url=${refresh}`}>}
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#f3f0e9">
 <SeoHead title={page.title} description={page.description} canonicalPath={page.canonicalPath} shareImage={page.shareImage} ogType={page.ogType} jsonLdText={page.jsonLdText} noCanonical={noCanonical} robots={robots} />

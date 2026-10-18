@@ -4,6 +4,9 @@ Source of truth: `roster/` on main 61c0b7e (read only). Target: `homezypro/`, an
 (no adapter, Cloudflare Pages). Paths are roster's minus the `/roster` prefix. Brand is HomezyPro;
 Singapore is the active market (`src/config/markets.mjs`, `us`/`au` are unbuilt placeholders).
 
+Status after round 2: every public roster page family is built. The only roster pages not built are the
+8 parked account pages (omitted: no Supabase/auth in HomezyPro).
+
 ## Approach
 
 Roster is one generator (`build.mjs`, 1,500 lines) over ~40 small modules. Rather than rewrite them,
@@ -11,93 +14,83 @@ HomezyPro reuses them:
 
 - `scripts/dev/port-from-roster.mjs` copies roster's `lib/`, `assets/*.mjs|js|css`, `content/`,
   reference data and unit tests into `src/lib/port/` and `public/assets/`, rewriting `/roster/` paths to
-  root paths and "Roster" to "HomezyPro". Account/Supabase code is not copied.
+  root paths and "Roster" to "HomezyPro". It also generates `scripts/check-site-roster.mjs` from
+  roster's `scripts/check-site.mjs`. Account/Supabase code is not copied.
 - `src/lib/render.mjs` is roster's `build.mjs` turned into a module: same page renderers and guards, but
   `pageShell` returns a page object and `src/layouts/Base.astro` + `src/components/SeoHead.astro` render
-  the document head, nav and footer. Astro routes call `homePage()`, `hubPage(trade)`, `companyPage(c)`.
-- Rendered `<main>` output is byte-identical to roster for 734 of 742 comparable pages after the
-  path/brand rewrite. The 8 differences: 6 profiles whose SVG logo roster rasterised by hand with
-  Playwright (HomezyPro serves the sanitised SVG), and the two hubs that list them (index hash).
+  the document head, nav and footer.
+- HomezyPro-owned files that a re-port never overwrites: `lib/site-config.mjs` (shim over
+  `src/config/site.mjs`), `lib/no-dates.mjs` (separator fix), and all of `content/` once copied (two
+  guide titles/descriptions were shortened after the rebrand). `render.mjs` is seeded once.
+- `scripts/dev/compare-roster.mjs` diffs page counts per type and rendered `<main>` against roster.
 
-Once all route families are ported, `src/lib/port/` becomes HomezyPro's own code (the port script is
-for the initial copy; re-running it overwrites ported files, except `lib/site-config.mjs`).
+### Parity with roster (round 2)
 
-## Inventory of roster's built pages (955 `index.html`)
+`<main>` is byte-identical to roster (after the path/brand rewrite) for 195 pages. Every other
+difference is intended:
 
-Counted from roster's built `index.html` files, classified by template.
+| Difference | Pages |
+|---|---|
+| "About the business ·" no longer leaves a stray separator after the date is stripped | 738 profiles |
+| Directory index hashes (the 6 rasterised SVG logos now come from HomezyPro's own import) | 5 hubs, search, 2 intents |
+| Heading anchors follow the brand (`#el-06-comparing-electricians-on-homezypro`) | 4 guides incl. how it works |
+| Claim page is a static explanation (no demo form); logo-removal copy says "contact route" | 2 |
 
-| Page type | Roster URL pattern | Count | Template (roster) | HomezyPro route | Round |
-|---|---|---:|---|---|---|
-| Home | `/roster/` | 1 | `renderHome` + `lib/home-snapshot.mjs` (map, trade filters, price samples), `guideCards` | `src/pages/index.astro` → `/` | **1 (built)** |
-| Trade hubs | `/roster/{aircon-servicing,plumbing,electrician,handyman,home-cleaning}/` | 5 | `renderCollection` (shortlist cards, compact list, filters, quick picks, licence lookups, best-of teaser, areas we serve, hub blog) | `src/pages/[hub]/index.astro` | **1 (built)** |
-| Company profiles | `/roster/company/{slug}/` | 738 | `lib/expanded.mjs` `createProfileRenderer` (full and compact layouts) + related links | `src/pages/company/[slug]/index.astro` | **1 (built)** |
-| Directory indexes (JSON) | `/roster/data/index/{all,aircon,…,chemical-wash,gas-top-up}.json` | 8 files | `encodeCatalogue` | `src/pages/data/index/[name].json.ts` | **1 (built)** |
-| robots.txt | `/roster/robots.txt` | 1 file | build.mjs | `src/pages/robots.txt.ts` (switch-driven) | **1 (built)** |
-| Search (all companies) | `/roster/search/` | 1 | `renderCollection` (`id: all`) | `src/pages/search/index.astro` | 2 |
-| Aircon intent directories | `/roster/aircon-servicing/{chemical-wash,gas-top-up}/` | 2 | `renderCollection` + `renderSourcedRates` | `src/pages/aircon-servicing/[intent]/` | 2 |
-| Editorial guides | `/roster/{trade}/guide/`, `/roster/{trade-or-topic}/{topic}/` (e.g. `/aircon/leaking-water/`) | 47 | `renderGuidePage` + `lib/editorial.mjs`, `content/guides/*.md`, aircon size matrix (units matrix hidden) | `src/pages/[...guide].astro` from `loadGuides` | 2 |
-| How it works | `/roster/how-it-works/` | 1 | `renderHow` + `content/how-it-works.md` | `src/pages/how-it-works/` | 2 |
-| Symptom finder | `/roster/what-service-do-i-need/` | 1 | `renderSymptomFinder` | `src/pages/what-service-do-i-need/` | 2 |
-| Town (area) pages | `/roster/{trade-slug}/{town}/` | 109 | `renderAreaPage` + `lib/area-pages.mjs` selection rule | `src/pages/[hub]/[town]/` from `selectAreaPages` | 3 |
-| Best-of rankings | `/roster/{trade-slug}/best/` | 5 | `renderBestOf` + `lib/best-of.mjs` (Google rating only; only pages allowed to say "best") | `src/pages/[hub]/best/` | 3 |
-| Blog index | `/roster/blog/` | 1 | `renderBlogIndex` | `src/pages/blog/index.astro` | 3 |
-| Blog posts | `/roster/blog/{slug}/` | 25 | `renderBlogPost` + `lib/blog.mjs`, `content/blog/*.md` | `src/pages/blog/[slug].astro` | 3 |
-| Claim listing (demo) | `/roster/claim-listing/` | 1 | `lib/claim-page.mjs` + `assets/claim.js` (inert demo form) | `src/pages/claim-listing/` (no form submission) | 3 |
-| Logo removal | `/roster/logo-removal/` | 1 | inline in build.mjs (inbox pending) | `src/pages/logo-removal/` | 3 |
-| Retired listings | `/roster/company/{old-slug}/` (meta refresh to hub) | 9 | inline `retired` list in build.mjs (incl. HEDIRCOOL, withheld in r15.1) | `src/pages/company/[slug]` retired variant, or Cloudflare `_redirects` 301s | 3 |
-| 404 | `/roster/404.html` | 1 file | inline in build.mjs | `src/pages/404.astro` | 3 |
-| Sitemaps | `/roster/sitemap.xml` + `sitemap-{core,best,guides,towns,blog,companies}.xml` | 7 files | `lib/sitemaps.mjs` | `src/pages/sitemap*.xml.ts` (from `SITE_URL`) | 3 |
-| llms.txt / llms-full.txt | `/roster/llms*.txt` | 2 files | `lib/llms.mjs` | `src/pages/llms*.txt.ts` | 3 |
-| Parked account pages | `/roster/{sign-in,sign-up,forgot-password,reset-password,account,auth/callback,saved,matches}/` | 8 | "connection pending" shells | **Omitted** (no Supabase/auth in HomezyPro) | n/a |
+## Routes
 
-Check: 1 + 5 + 738 + 1 + 2 + 47 + 1 + 1 + 109 + 5 + 1 + 25 + 1 + 1 + 9 + 8 = 955.
+| Page type | URL pattern | Roster | HomezyPro | Route |
+|---|---|---:|---:|---|
+| Home | `/` | 1 | 1 | `src/pages/index.astro` |
+| Trade hubs | `/{aircon-servicing,plumbing,electrician,handyman,home-cleaning}/` | 5 | 5 | `src/pages/[hub]/index.astro` |
+| Company profiles | `/company/{slug}/` | 738 | 738 | `src/pages/company/[slug]/index.astro` |
+| Search (all companies, client JSON, trade-aware ranking) | `/search/` | 1 | 1 | `src/pages/[...path].astro` |
+| Aircon intent directories | `/aircon-servicing/{chemical-wash,gas-top-up}/` | 2 | 2 | `[...path]` |
+| Editorial guides (sourced rate tables, BTU matrix; units matrix hidden) | `/{trade}/guide/`, `/{topic}/{guide}/` | 47 | 47 | `[...path]` |
+| How it works | `/how-it-works/` | 1 | 1 | `[...path]` |
+| Symptom finder | `/what-service-do-i-need/` | 1 | 1 | `[...path]` |
+| Town pages (URA adjacency for nearby towns) | `/{hub}/{town}/` | 109 | 109 | `[...path]` |
+| Best-of rankings (formula, method box, ItemList + FAQPage) | `/{hub}/best/` | 5 | 5 | `[...path]` |
+| Blog index + posts | `/blog/`, `/blog/{slug}/` | 26 | 26 | `[...path]` |
+| Claim listing (static, no form) | `/claim-listing/` | 1 | 1 | `[...path]` |
+| Logo removal (static, contact route pending) | `/logo-removal/` | 1 | 1 | `[...path]` |
+| Retired listings | `/company/{old-slug}/` | 9 | 9 | 301 in `dist/_redirects` + noindex fallback via `[...path]` |
+| 404 | `/404.html` | 1 file | 1 file | `src/pages/404.astro` (noindex, no canonical) |
+| Directory indexes | `/data/index/{all,trade,intent}.json` | 8 | 8 | `src/pages/data/index/[name].json.ts` |
+| Launch manifest | `/data/seo-launch-pages.json` | 1 | 1 | `src/pages/data/seo-launch-pages.json.ts` |
+| Sitemaps | `/sitemap.xml` + `sitemap-{core,best,guides,towns,blog,companies}.xml` | 7 | 7 | `src/pages/sitemap*.xml.ts` |
+| llms.txt / llms-full.txt | `/llms*.txt` | 2 | 2 | `src/pages/llms*.txt.ts` |
+| robots.txt | `/robots.txt` | 1 | 1 | `src/pages/robots.txt.ts` (switch-driven) |
+| Parked account pages | sign-in, sign-up, forgot/reset password, account, auth/callback, saved, matches | 8 | 0 | **Omitted** |
 
-Current HomezyPro build: 744 HTML pages (1 home, 5 hubs, 738 profiles) + 8 index JSON + robots.txt.
-Links from built pages into not-yet-ported families are reported by `npm run check:site` as
-"pending route families"; any broken link to a built family (company, hub, asset, logo) fails the check.
+Totals: roster 955 `index.html`; HomezyPro 947 `index.html` + `404.html` = 948 HTML pages.
 
-## Features and rules carried over (and where they live)
+One catch-all route serves every family except home, hubs and profiles, because guides and town pages
+share the `/{hub}/{x}/` shape; `otherPages` in `render.mjs` maps each path to its renderer.
 
-- Publication: roster's `import-db.mjs` unchanged (`src/lib/port/scripts/import-db.mjs`): blocking flags
-  incl. `needs-human-review`, sourced phone/address/services/about/website required, slug registry.
-  `scripts/import-data.mjs` adds pinned checksums and explicit needs-human-review guards.
-- Ratings: Google-only headline (`assets/catalogue-card.mjs` `cardRating`, `lib/rating-summary.mjs`);
-  other sources as separate sentences; no rating/review/offer schema (`forbidSchema`, pageShell guard,
-  check-site, tests).
-- Prices: card label "Example service price"; indicative lines never shown as company prices
-  (`companyPrices` in render.mjs, `exampleLine` guard); condenser-cleaning excluded from general/chemical
-  wash (`lib/sourced-rates.mjs` `eligible`); aircon units matrix hidden (`SHOW_UNITS_MATRIX = false`).
-- Names: title-case display names (`lib/display-name.mjs`), source name kept as `sourceName`.
-- Cards: ART OF CLEANING standard (`assets/editorial.css` card section, `catalogue-card.mjs`).
-- No visible capture dates (`lib/no-dates.mjs`, applied in pageShell); dates stay in data/JSON-LD.
-- "best" only on the five best-of pages (check-editorial on our copy, check-site on titles/H1s).
-- Company JSON-LD: `HVACBusiness` / `Plumber` / `Electrician` / `HomeAndConstructionBusiness` /
-  `LocalBusiness` (all LocalBusiness subtypes), name, telephone, url, address, sameAs, logo, UEN
-  identifier, openingHours, areaServed. No FAQPage on company pages.
-- Map pins: verified building pins only (`data/map-pins.json`, address hash check).
+## Checks
 
-## Differences from roster (deliberate)
+- `npm test`: HomezyPro tests (`tests/`) + 13 of roster's unit test files (`src/lib/port/scripts/`).
+  Not ported: account-*, quote-contact, job-match (parked features), pages-artifact (GitHub Pages);
+  roster's built-page description test moved into check-site. Some ported tests read `dist/`, so
+  run `npm run build` first.
+- `npm run check:site`: `scripts/check-site.mjs` (switch, brand, per-type counts vs roster, redirects,
+  links, cards, schema, logos) and `scripts/check-site-roster.mjs` (roster's full page-family checks:
+  rate tables vs release, area page rule and nearby links, best-of ranking and method box, matrices,
+  sitemaps, llms, fragments, profiles, indexes and budgets).
+- `npm run check:editorial`: own-copy rules plus roster's guide and blog page checks.
 
-- Brand HomezyPro, new mark (`public/assets/favicon.svg`, `scripts/make-brand-images.py`); design
-  tokens unchanged, brand layer in `public/assets/brand.css`.
-- One config for URL and indexing (`src/config/site.mjs`): `SITE_URL` (default https://homezypro.com);
-  indexable only when `SITE_INDEXABLE=true` and the host is homezypro.com. Otherwise every page is
-  `noindex, nofollow, noarchive` and robots.txt is `Disallow: /`. Production robots: `Allow: /` +
-  `Sitemap: https://homezypro.com/sitemap.xml` (the sitemap itself lands in round 3).
-- No account, saved-list, quote or matching code (parked in roster; omitted here, not hidden).
-- Release summaries are directory-generated sentences; "Roster found…" becomes "HomezyPro found…"
-  at import (305 rows). Company excerpts are never edited.
-- Logos are processed at import, not at build: WebP <= 256 px, <= 30 KB in `public/logos/` (499), and 20
-  sanitised SVGs served as-is. Roster had rasterised 6 large SVGs with a one-off Playwright script;
-  that step is not ported (see open items).
-- Imported data lives in `src/data/`; originals of the logo bundle are not kept in the repo (the
-  checksummed release bundle is the record).
+## Decisions carried out
+
+- SVG logos over 30 KB: `scripts/dev/rasterize-svg-logos.py` (Python Playwright + /usr/bin/google-chrome)
+  renders WebP copies; `src/data/svg-rasters.json` records each SVG's sha256 and the import keeps the
+  raster only while that matches. Same 6 logos as roster.
+- Stray separator fixed in `lib/no-dates.mjs`; check-site fails on any `· </p>`-style leftover.
+- Company contact emails are shown exactly where roster shows them publicly (profile contact facts).
+- Retired listings: Cloudflare `_redirects` 301s (both `/company/x/` and `/company/x`), with a noindex,
+  meta-refresh HTML fallback for hosts without redirect support. Not in the sitemap.
 
 ## Open items
 
-1. Six large SVG logos (largest 477 KB) are served as SVG; roster served Playwright-rasterised WebP.
-   Options: port `rasterize-svg-logos.py` (needs Chromium) or rasterise with `resvg`.
-2. Hub/footer/profile links into guides, towns, best-of, blog, search, how-it-works etc. resolve only
-   once rounds 2–3 land (tracked by check-site as pending).
-3. "About the business ·" leaves a trailing separator after the capture date is stripped (same on roster).
-4. Retired-listing URLs: decide between meta-refresh pages (roster) and Cloudflare `_redirects` 301s.
+1. The ported `check-site-roster.mjs` is regenerated from roster; if HomezyPro's templates diverge on
+   purpose, move the affected assertions into `scripts/check-site.mjs` and stop regenerating it.
+2. Logo removal and claims have no contact route yet (by design; no inbox or mailto).

@@ -1,0 +1,13 @@
+---
+// Every page family other than home, hubs and company profiles: search, intents, guides, town pages,
+// best-of, blog, how it works, symptom finder, claim, logo removal and retired-listing fallbacks.
+// One catch-all because guides and town pages share the /{hub}/{x}/ shape.
+import Base from '../layouts/Base.astro';
+import {otherPages} from '../lib/render.mjs';
+
+export function getStaticPaths() {
+  return [...otherPages.keys()].map(path => ({params: {path}}));
+}
+const page = otherPages.get(Astro.params.path as string)();
+---
+<Base page={page} robots={page.robots} refresh={page.refresh} />
