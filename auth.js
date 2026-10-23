@@ -24,6 +24,14 @@
   if (/login\.html$/i.test(path) || path.endsWith("/login") || path.endsWith("/login/")) return;
   if (/logout\.html$/i.test(path) || path.endsWith("/logout") || path.endsWith("/logout/")) return;
 
+  // Open for a client review. Delete the entry to put the page back behind login.
+  // /snap/lp does not match /snap/lp-v2. The page stays noindex either way.
+  var publicPaths = ["/snap/lp"];
+  for (var p = 0; p < publicPaths.length; p++) {
+    var openPrefix = publicPaths[p];
+    if (path === openPrefix || path.indexOf(openPrefix + "/") === 0) return;
+  }
+
   function users() {
     return cfg.users || [];
   }
