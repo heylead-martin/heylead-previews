@@ -24,9 +24,9 @@
   if (/login\.html$/i.test(path) || path.endsWith("/login") || path.endsWith("/login/")) return;
   if (/logout\.html$/i.test(path) || path.endsWith("/logout") || path.endsWith("/logout/")) return;
 
-  // Open for a client review. Delete these entries to put SNAP previews back behind login.
-  // /snap does not match /snap-v2, so both are listed. Pages stay noindex.
-  var publicPaths = ["/snap", "/snap-v2"];
+  // Empty after Rosina approved /lp on 24 Oct 2026. Add "/snap" and "/snap-v2"
+  // here to open those previews again. Pages stay noindex.
+  var publicPaths = [];
   for (var p = 0; p < publicPaths.length; p++) {
     var openPrefix = publicPaths[p];
     if (path === openPrefix || path.indexOf(openPrefix + "/") === 0) return;
