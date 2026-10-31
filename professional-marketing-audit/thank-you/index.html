@@ -32,7 +32,7 @@
 </div></section></main>
 <script>
 var q=new URLSearchParams(location.search),C=window.HL_AUDIT||{},id=q.get('pkg')||'',p=(C.packages||{})[id];
-if(p)document.getElementById('pk').textContent=p.name;
+if(p)document.getElementById('pk').textContent=p.name+' ($'+p.price+')';
 document.getElementById('pkg').value=id;document.getElementById('sid').value=q.get('session_id')||'';
 if(q.get('preview'))document.getElementById('pv').hidden=false;
 document.getElementById('f').addEventListener('submit',function(ev){ev.preventDefault();

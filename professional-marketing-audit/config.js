@@ -7,8 +7,8 @@
 window.HL_AUDIT = {
   packages: {
     channel: { name: "Channel Audit", price: 100, paymentLink: "" },
-    growth:  { name: "Growth Audit", price: 450, paymentLink: "" },
-    full:    { name: "Full-Funnel Audit", price: 1200, paymentLink: "" }
+    growth:  { name: "Growth Audit", price: 250, paymentLink: "" },
+    full:    { name: "Full-Funnel Audit", price: 500, paymentLink: "" }
   },
   intakeEndpoint: "",
   intakeEmail: "hello@heylead.com" // PLACEHOLDER - confirm inbox
