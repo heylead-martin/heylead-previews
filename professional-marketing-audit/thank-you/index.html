@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="/auth-config.js"></script>
+<script src="/auth.js"></script>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Payment received: start your audit | HeyLead</title>
+<meta name="description" content="Thanks for your order. Tell us about your site and channels so we can start your HeyLead marketing audit.">
+<link rel="icon" href="https://heylead.com/favicon.svg" type="image/svg+xml">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css"><script src="../config.js"></script>
+</head><body>
+<header class="top"><div class="wrap"><a href="../" aria-label="Back to audit page"><svg width="140" height="43" viewBox="0 0 160 49" role="img" aria-label="HeyLead"><rect x="0" y="6" width="37" height="37" rx="10" fill="#0055ff"/><text x="18.5" y="32" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-weight="800" font-size="24" fill="#fff">H</text><text x="46" y="32" font-family="'Plus Jakarta Sans',sans-serif" font-weight="800" font-size="25" fill="#0f172a">Hey<tspan fill="#0055ff">Lead</tspan></text></svg></a></div></header>
+<main id="main"><section><div class="wrap" style="max-width:760px">
+ <p id="pv" class="preview-bar" hidden>Preview: no payment was taken. This is the page Stripe redirects to after checkout.</p>
+ <span class="eyebrow">Payment received</span>
+ <h1 style="font-size:clamp(32px,4vw,44px)">Thanks. Let's get your <em id="pk">audit</em> started.</h1>
+ <p class="lead">A receipt is on its way from Stripe. Fill this in now and we start as soon as access works. About 10 minutes.</p>
+ <form class="intake" id="f">
+  <input type="hidden" name="package" id="pkg"><input type="hidden" name="session_id" id="sid">
+  <div><label for="n">Your name</label><input id="n" name="name" required autocomplete="name"></div>
+  <div><label for="e">Email for the report</label><input id="e" name="email" type="email" required autocomplete="email"></div>
+  <div><label for="w">Website</label><input id="w" name="website" type="url" required placeholder="https://"></div>
+  <fieldset style="border:0;padding:0;margin:0"><legend style="font-weight:700;margin-bottom:8px">Channels to audit</legend><div class="chk">
+   <label><input type="checkbox" name="channels" value="SEO">SEO</label><label><input type="checkbox" name="channels" value="Google Ads">Google Ads</label><label><input type="checkbox" name="channels" value="Meta Ads">Meta Ads</label><label><input type="checkbox" name="channels" value="Email">Email</label><label><input type="checkbox" name="channels" value="Analytics">Analytics / tracking</label><label><input type="checkbox" name="channels" value="Landing pages">Landing pages</label></div></fieldset>
+  <div><label for="a">Account access notes <span class="hint">Account IDs, which invites you have sent, platform names. Never send passwords.</span></label><textarea id="a" name="access" placeholder="Google Ads ID 123-456-7890, invite sent to... / Meta ad account ID... / GA4 property..."></textarea></div>
+  <div><label for="g">Goals and context <span class="hint">What a good lead or sale looks like, monthly budget, what you have tried.</span></label><textarea id="g" name="goals"></textarea></div>
+  <button class="btn" type="submit">Send intake details</button>
+  <p id="msg" role="status" class="note"></p>
+ </form>
+ <div class="card" style="margin-top:30px"><h3>Granting read-only access</h3><p>Google Ads: Admin, Access and security, add user with Read only. Meta: Business settings, Ad accounts, assign partner Analyst. GA4: Admin, Property access, Viewer. Search Console: Settings, Users, Restricted. Use the email we confirm in your receipt.</p></div>
+</div></section></main>
+<script>
+var q=new URLSearchParams(location.search),C=window.HL_AUDIT||{},id=q.get('pkg')||'',p=(C.packages||{})[id];
+if(p)document.getElementById('pk').textContent=p.name;
+document.getElementById('pkg').value=id;document.getElementById('sid').value=q.get('session_id')||'';
+if(q.get('preview'))document.getElementById('pv').hidden=false;
+document.getElementById('f').addEventListener('submit',function(ev){ev.preventDefault();
+ var fd=new FormData(this),d={};fd.forEach(function(v,k){d[k]=d[k]?d[k]+', '+v:v});var m=document.getElementById('msg');
+ if(C.intakeEndpoint){fetch(C.intakeEndpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(d)}).then(function(r){if(!r.ok)throw 0;m.textContent='Got it. We will confirm by email within one business day.'}).catch(function(){m.textContent='Could not send. Please email '+C.intakeEmail+'.'});return}
+ var body=Object.keys(d).map(function(k){return k+': '+d[k]}).join('\n');
+ location.href='mailto:'+C.intakeEmail+'?subject='+encodeURIComponent('Audit intake: '+(p?p.name:id)+' - '+(d.website||''))+'&body='+encodeURIComponent(body);
+ m.textContent='Your email app should open with the details filled in. Press send to finish.';});
+</script>
+</body></html>

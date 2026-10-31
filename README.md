@@ -26,6 +26,7 @@ builds move to WordPress after the client approves.
 | `/tickerlab/` | Internal lab - AI CIO morning note. Grok reads live tape, web, and X, then says what to own (paper book). API: `~/applylab-api` `GET /desk/brief`. Not advice. |
 | `/lp-sg/` | HeyLead's own Singapore paid-lander **hub** (the folder index). Public `heylead.com/lp-sg/` 302s here. Individual landers (`/lp-sg/leads/` and the other slugs) stay public on heylead.com. Refresh the hub with `node scripts/sync-lp-sg.mjs /path/to/heylead/static-build/site/dist/lp-sg`. Source: `heylead-theme` `static-build/site/src/pages/lp-sg/`. |
 | `/roster/` | Retired 18 Oct 2026: moved to HomezyPro (https://homezypro.com, private repo `heylead-martin/homezypro`). Only static redirect stubs remain (`noindex`, canonical, meta refresh and `location.replace`), one per old page, each pointing at the same path on homezypro.com without `/roster` (account pages go to the home page; withdrawn listings go to their hub). |
+| `/professional-marketing-audit/` | HeyLead paid marketing audit sales page draft + `/thank-you/` intake. Stripe Payment Links set in `config.js`. Source: `/workspace/heylead-audit-page`. Target: heylead.com/professional-marketing-audit/. |
 
 ## Adding a new client preview
 
