@@ -1,0 +1,21 @@
+/*
+  X-Content-Type-Options: nosniff
+
+/*.html
+  Cache-Control: no-store, no-cache, must-revalidate, max-age=0
+  CDN-Cache-Control: no-store
+  Cloudflare-CDN-Cache-Control: no-store
+
+/sgrada/*
+  Cache-Control: no-store, no-cache, must-revalidate, max-age=0
+  CDN-Cache-Control: no-store
+  Cloudflare-CDN-Cache-Control: no-store
+
+/sgrada-shell
+  Cache-Control: no-store, no-cache, must-revalidate, max-age=0
+
+/sgrada-shell.html
+  Cache-Control: no-store, no-cache, must-revalidate, max-age=0
+
+/entities/*
+  Cache-Control: public, max-age=300, must-revalidate

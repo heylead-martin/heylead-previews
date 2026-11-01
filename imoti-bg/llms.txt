@@ -36,6 +36,19 @@ Contact: hello@imotitrend.com
 - Сравнения на градове: https://imotitrend.com/sravni/{град}-ili-{град}/ (например https://imotitrend.com/sravni/sofia-ili-plovdiv/)
 - [Какво е ImotiTrend](https://imotitrend.com/blog/kakvo-e-imotitrend/)
 
+## Покупка, продажба и кредит
+
+- [Разходи при покупка на имот](https://imotitrend.com/razhodi-pri-pokupka-na-imot/): местен данък по общини, нотариална такса, вписване и пример с числа
+- [Местен данък при покупка на имот](https://imotitrend.com/mesten-danak-pri-pokupka/): ставки по общини за 2026, кой плаща, кога и върху каква сума се смята
+- [Местен данък при покупка на имот в София](https://imotitrend.com/mesten-danak-pri-pokupka/sofia/): ставка 3% по наредбата на Столичния общински съвет, пример за 65 м² и срокове
+- [Местен данък при покупка на имот в Пловдив](https://imotitrend.com/mesten-danak-pri-pokupka/plovdiv/): ставка 3% по наредбата на Общински съвет - Пловдив, пример за 65 м² и срокове
+- [Местен данък при покупка на имот във Варна](https://imotitrend.com/mesten-danak-pri-pokupka/varna/): ставка 3% по наредбата на Общински съвет - Варна, пример за 65 м² и срокове
+- [Местен данък при покупка на имот в Бургас](https://imotitrend.com/mesten-danak-pri-pokupka/burgas/): ставка 3% по наредбата на Общински съвет - Бургас, пример за 65 м² и срокове
+- [Калкулатор нотариални такси](https://imotitrend.com/kalkulator/notarialni-taksi/): нотариална такса, ДДС, такса вписване и местен данък при покупка, в евро
+- [Данък при продажба на имот](https://imotitrend.com/danak-pri-prodazhba-na-imot/): кога продажбата е освободена от данък и как се смята данъкът от 10%
+- [Данък върху наем: декларация и срокове](https://imotitrend.com/danak-varhu-naem-deklaratsiya/): авансов данък по тримесечия, годишна декларация, срокове 2026-2027 и пример в евро
+- [Колко ипотечен кредит можете да вземете](https://imotitrend.com/ipoteka/kolko-mozhe-da-vzema/): максимален кредит според дохода по правилата на БНБ, с калкулатор
+
 ## Цени на жилища по градове (продажби)
 
 - [София](https://imotitrend.com/grad/sofia/prodazhbi/)
@@ -48,23 +61,9 @@ Contact: hello@imotitrend.com
 - [Сливен](https://imotitrend.com/grad/sliven/prodazhbi/)
 - [Добрич](https://imotitrend.com/grad/dobrich/prodazhbi/)
 - [Шумен](https://imotitrend.com/grad/shumen/prodazhbi/)
+- [Велико Търново](https://imotitrend.com/grad/veliko-tarnovo/prodazhbi/)
 
 Наемите по град са на адрес /grad/{град}/naemi/, а кварталите - на /grad/{град}/{квартал}/prodazhbi/ и /grad/{град}/{квартал}/naemi/ (например https://imotitrend.com/grad/sofia/lozenets/prodazhbi/).
-
-Класация на кварталите в един град е на /grad/{град}/kvartali/ (например https://imotitrend.com/grad/plovdiv/kvartali/), а примерна цена, самоучастие и вноска за жилище по ориентир - на /grad/{град}/byudzhet/ (например https://imotitrend.com/grad/varna/byudzhet/).
-
-## Класации (ориентири, не цени от обяви)
-
-- [Класации на кварталите в България](https://imotitrend.com/klasacii/): квартали по цена, наем и ръст, градове по доходност от наем
-- [Най-евтините квартали в България](https://imotitrend.com/klasacii/nai-evtini-kvartali/)
-- [Най-скъпите квартали в България](https://imotitrend.com/klasacii/nai-skapi-kvartali/)
-- [Кварталите с най-евтини наеми](https://imotitrend.com/klasacii/nai-evtini-naemi/)
-- [Кварталите с най-скъпи наеми](https://imotitrend.com/klasacii/nai-skapi-naemi/)
-- [Кварталите с най-голям ръст на цените](https://imotitrend.com/klasacii/nai-golyam-rast/)
-- [Брутна доходност от наем по градове](https://imotitrend.com/klasacii/dohodnost-ot-naem/)
-- [Райони на София](https://imotitrend.com/grad/sofia/rayoni/): административните райони с ориентир €/м² и кварталите във всеки район
-- [Колко квадрата за вашия бюджет](https://imotitrend.com/byudzhet/): колко м² се купуват с 50 000, 80 000, 100 000, 150 000 и 200 000 € по ориентир във всеки град и квартал
-- [Какво жилище мога да наема с 500 € на месец](https://imotitrend.com/byudzhet/naem/500-evro/): колко м² се наемат с 300, 400, 500, 700 и 1000 € на месец по ориентир за наем във всеки град и квартал (на /byudzhet/naem/{сума}-evro/), само наемът, без сметки, депозит и комисиона
 
 ## Профили на банки (ориентири, не оферти)
 

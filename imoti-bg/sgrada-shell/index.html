@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5773NVGJ');</script>
+<!-- End Google Tag Manager -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Сграда | ImotiTrend</title>
+  <meta name="robots" content="index,follow" />
+  <style>
+    :root {
+      --blue: #1657e2;
+      --navy: #12224d;
+      --muted: #5b6579;
+      --line: #e7e1d4;
+      --bg: #fbfaf6;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      color: #1e293b;
+      background: var(--bg);
+      line-height: 1.5;
+    }
+    a { color: var(--blue); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .wrap { max-width: 900px; margin: 0 auto; padding: 2.5rem 1.25rem; }
+    .muted { color: var(--muted); font-size: 0.875rem; }
+    .nav { display: flex; flex-wrap: wrap; gap: 0.35rem; align-items: center; font-size: 0.875rem; color: #6b7690; }
+    .eyebrow {
+      margin-top: 1rem;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--blue);
+    }
+    h1 {
+      margin: 0.5rem 0 0;
+      font-size: clamp(1.6rem, 3vw, 2.25rem);
+      color: var(--navy);
+      font-weight: 600;
+      line-height: 1.2;
+    }
+    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.75rem; color: #6b7690; margin-top: 0.5rem; }
+    .grid {
+      display: grid;
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    }
+    .card {
+      border: 1px solid var(--line);
+      background: #fff;
+      border-radius: 1rem;
+      padding: 0.85rem 1rem;
+      box-shadow: 0 1px 2px rgba(18, 34, 77, 0.04);
+    }
+    .card .l { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; color: #6b7690; }
+    .card .v { margin-top: 0.25rem; font-size: 1.25rem; font-weight: 700; color: var(--blue); }
+    .panel {
+      margin-top: 2rem;
+      border: 1px solid var(--line);
+      background: #fff;
+      border-radius: 1rem;
+      padding: 1.25rem 1.5rem;
+    }
+    .actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.5rem; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      padding: 0.55rem 1.15rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--navy);
+    }
+    .btn-primary { background: var(--blue); color: #fff; border-color: var(--blue); }
+    .btn-primary:hover { text-decoration: none; filter: brightness(0.95); }
+    .center { text-align: center; padding: 4rem 1rem; }
+    .err h1 { color: var(--navy); }
+    body { display: flex; flex-direction: column; min-height: 100vh; }
+    main { flex: 1; }
+    /* Site chrome - mirrors Header / Footer */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      border-bottom: 1px solid #ece7db;
+      background: rgba(255,255,255,0.95);
+      box-shadow: 0 1px 0 rgba(18,34,77,0.04);
+      backdrop-filter: blur(10px);
+    }
+    .site-header .bar {
+      max-width: 1200px;
+      margin: 0 auto;
+      height: 60px;
+      padding: 0 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    @media (min-width: 640px) {
+      .site-header .bar { padding: 0 2rem; gap: 0.85rem; }
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.65rem;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+    .brand:hover { text-decoration: none; }
+    .brand-mark {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+    }
+    .brand-mark i {
+      display: block;
+      width: 6px;
+      height: 6px;
+      background: var(--blue);
+    }
+    .brand-mark i:nth-child(1),
+    .brand-mark i:nth-child(4) { border-radius: 2px; }
+    .brand-mark i:nth-child(2),
+    .brand-mark i:nth-child(3) { border-radius: 999px; }
+    .brand-name {
+      font-size: 19px;
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1;
+      letter-spacing: -0.01em;
+    }
+    .site-nav {
+      display: none;
+      align-items: center;
+      gap: 2px;
+      margin-left: 0.25rem;
+      min-width: 0;
+    }
+    @media (min-width: 1280px) {
+      .site-nav { display: flex; }
+    }
+    .site-nav a {
+      border-radius: 999px;
+      padding: 0.4rem 0.65rem;
+      font-size: 13.5px;
+      font-weight: 500;
+      color: #1c2a4a;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .site-nav a:hover {
+      background: #f0ecdf;
+      color: var(--blue);
+      text-decoration: none;
+    }
+    .header-actions {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .icon-btn {
+      display: inline-flex;
+      width: 36px;
+      height: 36px;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      color: #1c2a4a;
+      background: transparent;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .icon-btn:hover {
+      background: #f0ecdf;
+      color: var(--blue);
+      text-decoration: none;
+    }
+    .icon-btn.menu {
+      border-color: var(--line);
+    }
+    @media (min-width: 1280px) {
+      .icon-btn.menu { display: none; }
+    }
+    .mobile-nav {
+      display: none;
+      flex-direction: column;
+      gap: 2px;
+      max-height: 75vh;
+      overflow: auto;
+      border-top: 1px solid #ece7db;
+      background: #fff;
+      padding: 0.75rem 1rem 1rem;
+      box-shadow: 0 10px 24px rgba(18,34,77,0.08);
+    }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav a {
+      border-radius: 0.75rem;
+      padding: 0.65rem 0.75rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: #1c2a4a;
+      text-decoration: none;
+    }
+    .mobile-nav a:hover {
+      background: #f0ecdf;
+      text-decoration: none;
+    }
+    .site-footer {
+      margin-top: auto;
+      background: var(--navy);
+      color: #d7dff2;
+    }
+    .site-footer .inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 3rem 1.25rem;
+    }
+    @media (min-width: 640px) {
+      .site-footer .inner { padding: 3rem 2rem; }
+    }
+    .footer-grid {
+      display: grid;
+      gap: 2.5rem;
+    }
+    @media (min-width: 640px) {
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (min-width: 1024px) {
+      .footer-grid { grid-template-columns: 1.4fr 1fr 1fr 1fr; }
+    }
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+    }
+    .footer-brand .brand-mark i { background: #14b8a6; }
+    .footer-brand .brand-name { color: #fff; font-size: 22px; }
+    .footer-blurb {
+      margin-top: 1rem;
+      max-width: 18rem;
+      font-size: 12.5px;
+      line-height: 1.55;
+      color: #94a3b8;
+    }
+    .footer-col {
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+      font-size: 13px;
+    }
+    .footer-col .label {
+      margin-bottom: 0.15rem;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #6d7ba1;
+    }
+    .footer-col a {
+      color: #fff;
+      text-decoration: none;
+    }
+    .footer-col a:hover { color: #d7dff2; text-decoration: none; }
+    .footer-bottom {
+      margin-top: 2.5rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid #1e293b;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      font-size: 12px;
+      color: #64748b;
+    }
+    @media (min-width: 640px) {
+      .footer-bottom {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
+    }
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0,0,0,0);
+      border: 0;
+    }
+  </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5773NVGJ"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+  <header class="site-header">
+    <div class="bar">
+      <a class="brand" href="/">
+        <span class="brand-mark" aria-hidden="true">
+          <i></i><i></i><i></i><i></i>
+        </span>
+        <span class="brand-name">ImotiTrend</span>
+      </a>
+      <nav class="site-nav" aria-label="Основна навигация">
+        <a href="/gradove/">Градове</a>
+        <a href="/sravni/">Сравни</a>
+        <a href="/ceni/">Цени</a>
+        <a href="/lihvi/">Лихви</a>
+        <a href="/banki/">Банки</a>
+        <a href="/blog/">Блог</a>
+        <a href="/novini/">Новини</a>
+        <a href="/kalkulator/">Калкулатор</a>
+        <a href="/karta/">Карта</a>
+      </nav>
+      <div class="header-actions">
+        <a class="icon-btn" href="/gradove/" aria-label="Търси градове">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true">
+            <circle cx="11" cy="11" r="7"></circle>
+            <line x1="21" y1="21" x2="16.5" y2="16.5"></line>
+          </svg>
+        </a>
+        <button type="button" class="icon-btn menu" id="menu-btn" aria-expanded="false" aria-controls="mobile-nav">
+          <span class="sr-only">Меню</span>
+          <svg id="menu-icon" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+    <nav id="mobile-nav" class="mobile-nav" aria-label="Мобилно меню">
+      <a href="/gradove/">Градове</a>
+      <a href="/sravni/">Сравни</a>
+      <a href="/ceni/">Цени</a>
+      <a href="/lihvi/">Лихви</a>
+      <a href="/banki/">Банки</a>
+      <a href="/blog/">Блог</a>
+      <a href="/novini/">Новини</a>
+      <a href="/kalkulator/">Калкулатор</a>
+      <a href="/karta/">Карта</a>
+      <a href="/za-nas/">За нас</a>
+      <a href="/kontakt/">Контакт</a>
+    </nav>
+  </header>
+
+  <main class="wrap" id="app">
+    <div class="center muted">Зареждане на сграда…</div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="inner">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand">
+            <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+            <span class="brand-name">ImotiTrend</span>
+          </div>
+          <p class="footer-blurb">
+            Пазарна аналитика за жилищата в България. Не сме брокерска платформа -
+            сериите са ориентировъчни, проверявайте оригиналните източници преди решение.
+          </p>
+        </div>
+        <div class="footer-col">
+          <span class="label">Разгледай</span>
+          <a href="/gradove/">Градове, търсене, анализ</a>
+          <a href="/karta/">Heatmap карта</a>
+          <a href="/lihvi/">Лихви и банки</a>
+          <a href="/kalkulator/">Ипотечен калкулатор</a>
+          <a href="/blog/">Блог</a>
+          <a href="/sravni/">Сравни</a>
+        </div>
+        <div class="footer-col">
+          <span class="label">Помощ</span>
+          <a href="/metodologiya/">Методология</a>
+          <a href="/za-nas/">За нас</a>
+          <a href="/kontakt/">Контакт</a>
+          <a href="/novini/">Новини</a>
+        </div>
+        <div class="footer-col">
+          <span class="label">Правни</span>
+          <a href="/poveritelnost/">Поверителност</a>
+          <a href="/usloviya/">Общи условия</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="y"></span> ImotiTrend (imotitrend.com) - пазарна аналитика</span>
+        <span>Източници: Евростат · НСИ · БНБ · ЕЦБ · OSM (ODbL)</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+(function () {
+  var yEl = document.getElementById("y");
+  if (yEl) yEl.textContent = String(new Date().getFullYear());
+
+  var menuBtn = document.getElementById("menu-btn");
+  var mobileNav = document.getElementById("mobile-nav");
+  var menuIcon = document.getElementById("menu-icon");
+  if (menuBtn && mobileNav) {
+    menuBtn.addEventListener("click", function () {
+      var open = mobileNav.classList.toggle("open");
+      menuBtn.setAttribute("aria-expanded", open ? "true" : "false");
+      if (menuIcon) {
+        menuIcon.innerHTML = open
+          ? '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>'
+          : '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>';
+      }
+    });
+  }
+
+  var app = document.getElementById("app");
+
+  function decodeParam(raw) {
+    var s = String(raw || "");
+    for (var i = 0; i < 3; i++) {
+      try {
+        var next = decodeURIComponent(s);
+        if (next === s) break;
+        s = next;
+      } catch (e) {
+        break;
+      }
+    }
+    return s;
+  }
+
+  function slugFromPath() {
+    var parts = location.pathname.split("/").filter(Boolean);
+    var i = parts.indexOf("sgrada");
+    if (i >= 0 && parts[i + 1] && parts[i + 1] !== "sgrada-fallback") {
+      // Nested paths: /sgrada/city/.../building-slug/ → use last segment
+      var seg = parts[parts.length - 1];
+      if (parts.length > i + 2 && seg) return decodeParam(seg);
+      return decodeParam(parts[i + 1]);
+    }
+    var q = new URLSearchParams(location.search).get("slug");
+    return q ? decodeParam(q) : "";
+  }
+
+  // Full lat_lng pair - never first digits alone (cross-city collisions).
+  function osmCoordKey(s) {
+    var m = String(s).match(/(\d{6,}_\d{5,})/);
+    return m ? m[1] : "";
+  }
+
+  function findBuilding(list, s) {
+    if (!list || !list.length) return null;
+    for (var i = 0; i < list.length; i++) {
+      var b = list[i];
+      if (b.slug === s || b.id === s) return b;
+    }
+    var key = osmCoordKey(s);
+    if (!key) return null;
+    for (var j = 0; j < list.length; j++) {
+      var x = list[j];
+      if (
+        (x.slug && x.slug.indexOf(key) !== -1) ||
+        (x.id && x.id.indexOf(key) !== -1)
+      ) {
+        return x;
+      }
+    }
+    return null;
+  }
+
+  function esc(s) {
+    return String(s == null ? "" : s)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+
+  function kindLabel(k) {
+    if (k === "house") return "Къща";
+    if (k === "multifamily") return "Многофамилна";
+    return "Сграда";
+  }
+
+  function renderMissing(slug, detail) {
+    app.innerHTML =
+      '<div class="center err">' +
+      '<p class="eyebrow">404</p>' +
+      "<h1>Сградата не е намерена</h1>" +
+      '<p class="muted">' +
+      (slug
+        ? "Няма запис за „" + esc(slug) + "“ в регистъра."
+        : "Липсва идентификатор на сграда.") +
+      (detail ? " " + esc(detail) : "") +
+      "</p>" +
+      '<div class="actions" style="justify-content:center">' +
+      '<a class="btn btn-primary" href="/karta/">Към картата</a>' +
+      '<a class="btn" href="/gradove/">Всички сгради</a>' +
+      "</div></div>";
+  }
+
+  function mortgageMo(price, ratePct) {
+    var principal = price * 0.8;
+    var r = ratePct / 100 / 12;
+    var n = 25 * 12;
+    if (principal <= 0) return 0;
+    if (!r) return principal / n;
+    return (principal * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+  }
+
+  function haversineM(lat1, lng1, lat2, lng2) {
+    var R = 6371000;
+    var toR = function (d) { return (d * Math.PI) / 180; };
+    var dLat = toR(lat2 - lat1);
+    var dLng = toR(lng2 - lng1);
+    var a =
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos(toR(lat1)) *
+        Math.cos(toR(lat2)) *
+        Math.sin(dLng / 2) *
+        Math.sin(dLng / 2);
+    return 2 * R * Math.asin(Math.sqrt(a));
+  }
+
+  function renderOk(b) {
+    document.title = (b.name || "Сграда") + " - ориентир цена | ImotiTrend";
+    // Never invent tiny unit shares (old GFA×0.12 bug showed ~7.5 м²).
+    var area = b.kind === "house" ? 140 : b.floors && b.floors >= 3 ? 75 : 90;
+    if (!(area >= 40)) area = 75;
+    var eurM2 = b.eur != null ? Number(b.eur) : 2000;
+    var total = Math.round(eurM2 * area);
+    var low = Math.round(total * 0.92);
+    var high = Math.round(total * 1.08);
+    var rentMo = Math.round((eurM2 / 220) * area);
+    var yieldG = total > 0 ? Math.round(((rentMo * 12) / total) * 1000) / 10 : 0;
+    var mort = Math.round(mortgageMo(total, 2.5));
+    var meta =
+      (b.lat != null && b.lng != null
+        ? Number(b.lat).toFixed(5) + ", " + Number(b.lng).toFixed(5)
+        : "") + (b.city ? " · " + b.city : "");
+    var cityHref = b.city
+      ? "/grad/" + encodeURIComponent(b.city) + "/prodazhbi/"
+      : "/gradove/";
+    var mapHref = b.city ? "/karta/?city=" + encodeURIComponent(b.city) : "/karta/";
+    app.innerHTML =
+      '<nav class="nav">' +
+      '<a href="/gradove/">Градове</a><span>/</span>' +
+      (b.city
+        ? '<a href="' + cityHref + '">' + esc(b.city) + "</a><span>/</span>"
+        : "") +
+      '<a href="' +
+      mapHref +
+      '">Карта</a><span>/</span>' +
+      "<span>Сграда</span></nav>" +
+      '<p class="eyebrow">' +
+      (b.kind === "house" ? "Постоянна къща" : "Постоянна сграда") +
+      " · регистър · ориентир</p>" +
+      "<h1>" +
+      esc(b.name || b.slug) +
+      "</h1>" +
+      '<div class="panel" style="margin-top:1.25rem;border-color:#c9d8fc;background:linear-gradient(135deg,#f7f9ff,#fff)">' +
+      '<p class="eyebrow" style="margin:0">Ориентир продажба (estimate)</p>' +
+      '<p style="margin:0.35rem 0 0;font-size:1.75rem;font-weight:700;color:var(--navy)">~' +
+      esc(total.toLocaleString("bg-BG")) +
+      " €</p>" +
+      '<p class="muted" style="margin:0.35rem 0 0">~' +
+      esc(eurM2) +
+      " €/м² · ~" +
+      esc(area) +
+      " м² (типова площ) · диапазон " +
+      esc(low.toLocaleString("bg-BG")) +
+      " – " +
+      esc(high.toLocaleString("bg-BG")) +
+      " €</p>" +
+      '<div class="grid" style="margin-top:0.85rem">' +
+      '<div class="card"><div class="l">Наем ~</div><div class="v" style="font-size:1rem">~' +
+      esc(rentMo.toLocaleString("bg-BG")) +
+      " €/мес</div></div>" +
+      '<div class="card"><div class="l">Брутна доходност</div><div class="v" style="font-size:1rem;color:#047857">~' +
+      esc(yieldG) +
+      "%</div></div>" +
+      '<div class="card"><div class="l">Ипотека ~2.5% · 80%</div><div class="v" style="font-size:1rem">~' +
+      esc(mort.toLocaleString("bg-BG")) +
+      " €/мес</div></div>" +
+      '<div class="card"><div class="l">Тип цена</div><div class="v" style="font-size:1rem">estimate</div></div>' +
+      "</div></div>" +
+      '<div id="city-strip" class="grid" style="margin-top:0.75rem"></div>' +
+      '<div class="grid" style="margin-top:1rem">' +
+      '<div class="card"><div class="l">Тип</div><div class="v">' +
+      esc(kindLabel(b.kind)) +
+      "</div></div>" +
+      '<div class="card"><div class="l">Година</div><div class="v">' +
+      (b.year != null ? esc(b.year) : "—") +
+      "</div></div>" +
+      '<div class="card"><div class="l">Етажи</div><div class="v">' +
+      (b.floors != null ? esc(b.floors) : "—") +
+      "</div></div>" +
+      '<div class="card"><div class="l">€/м²</div><div class="v">' +
+      (b.eur != null ? "~" + esc(b.eur) : "~" + esc(eurM2)) +
+      "</div></div></div>" +
+      (meta ? '<p class="mono" style="margin-top:1rem">' + esc(meta) + "</p>" : "") +
+      '<div id="comps-slot"></div>' +
+      '<div id="hood-slot"></div>' +
+      '<section class="panel"><h2 style="margin:0;color:var(--navy);font-size:1.15rem">Методология</h2>' +
+      '<p class="muted" style="margin:0.75rem 0 0">Постоянен обект (не обява). OSM (ODbL) + ориентир estimate по квартал/град - не asking и не deed. Типова площ когато няма единица. Ипотека: анюитет 80% LTV / 25 г. ' +
+      '<a href="/metodologiya/">Пълна методология ›</a></p></section>' +
+      '<section class="panel" style="margin-top:1rem"><h2 style="margin:0;color:var(--navy);font-size:1.05rem">Свързани</h2>' +
+      '<div class="actions" style="margin-top:0.75rem">' +
+      (b.city
+        ? '<a class="btn" href="' + cityHref + '">Пазар ' + esc(b.city) + "</a>"
+        : "") +
+      '<a class="btn" href="' +
+      mapHref +
+      '">Heatmap</a>' +
+      '<a class="btn" href="/gradove/#analiz">Анализ оферта</a>' +
+      "</div></section>" +
+      '<div class="actions">' +
+      '<a class="btn btn-primary" href="/kalkulator/?price=' +
+      total +
+      '">Ипотечен калкулатор</a>' +
+      '<a class="btn" href="' +
+      mapHref +
+      '">Heatmap карта</a>' +
+      '<a class="btn" href="/gradove/#analiz">Анализ оферта</a>' +
+      "</div>";
+
+    function recomputeWithEur(nextEur, hoodName) {
+      var e = nextEur || eurM2;
+      var t = Math.round(e * area);
+      var rm = Math.round((e / 220) * area);
+      var yg = t > 0 ? Math.round(((rm * 12) / t) * 1000) / 10 : 0;
+      var m = Math.round(mortgageMo(t, 2.5));
+      // update primary numbers if we upgraded from region
+      var h1p = app.querySelector(".panel p[style*='font-size:1.75rem']");
+      if (h1p) h1p.textContent = "~" + t.toLocaleString("bg-BG") + " €";
+      var links = app.querySelectorAll('a.btn-primary');
+      if (links[0]) links[0].href = "/kalkulator/?price=" + t;
+      return { total: t, rentMo: rm, yieldG: yg, mort: m, eurM2: e, hoodName: hoodName };
+    }
+
+    // Enrich: nearest hood + city strip + 5 comps
+    if (b.city) {
+      fetchJson("/entities/" + b.city + "-heatmap.json")
+        .then(function (heat) {
+          var strip = document.getElementById("city-strip");
+          var hoodSlot = document.getElementById("hood-slot");
+          if (heat && heat.cityEurM2 && strip) {
+            strip.innerHTML =
+              '<div class="card"><div class="l">Градски ориентир</div><div class="v" style="font-size:1.1rem">~' +
+              esc(heat.cityEurM2) +
+              " €/м²</div></div>";
+          }
+          if (!heat || !heat.zones || b.lat == null) return;
+          var best = null;
+          var bestD = 1e9;
+          heat.zones.forEach(function (z) {
+            if (z.lat == null) return;
+            var d =
+              Math.pow(z.lat - b.lat, 2) + Math.pow(z.lng - (b.lng || 0), 2);
+            if (d < bestD) {
+              bestD = d;
+              best = z;
+            }
+          });
+          if (!best || !hoodSlot) return;
+          if (b.eur == null && best.eurM2) recomputeWithEur(best.eurM2, best.name);
+          if (strip) {
+            strip.innerHTML +=
+              '<div class="card"><div class="l">Квартал</div><div class="v" style="font-size:1.1rem">' +
+              esc(best.name) +
+              '</div><p class="muted" style="margin:0.2rem 0 0">~' +
+              esc(best.eurM2) +
+              " €/м²</p></div>";
+          }
+          hoodSlot.innerHTML =
+            '<section class="panel" style="margin-top:1rem"><h2 style="margin:0;color:var(--navy);font-size:1.05rem">Квартал наблизо</h2>' +
+            '<p style="margin:0.5rem 0 0;font-weight:600;color:var(--navy)">' +
+            esc(best.name) +
+            " · ~" +
+            esc(best.eurM2) +
+            " €/м²</p>" +
+            '<p class="muted" style="margin:0.35rem 0 0">Ориентир за зоната (heatmap). ' +
+            (best.href
+              ? '<a href="' + esc(best.href) + '">Пазар на квартала ›</a>'
+              : "") +
+            ' · <a href="' +
+            mapHref +
+            '">Heatmap ' +
+            esc(b.city) +
+            " ›</a></p></section>";
+        })
+        .catch(function () {});
+
+      fetchJson("/entities/" + b.city + "-map.json")
+        .then(function (map) {
+          if (!map || !map.points || b.lat == null) return;
+          var near = [];
+          map.points.forEach(function (p) {
+            if (!p.lat || !p.lng || p.slug === b.slug) return;
+            var d = haversineM(b.lat, b.lng, p.lat, p.lng);
+            if (d < 5 || d > 2000) return;
+            near.push({
+              slug: p.slug,
+              name: p.name || p.slug,
+              eur: p.eur,
+              distM: Math.round(d),
+            });
+          });
+          near.sort(function (a, c) {
+            return a.distM - c.distM;
+          });
+          near = near.slice(0, 5);
+          if (!near.length) return;
+          var slot = document.getElementById("comps-slot");
+          if (!slot) return;
+          var html =
+            '<section class="panel" style="margin-top:1rem"><h2 style="margin:0;color:var(--navy);font-size:1.05rem">Близки сгради</h2>' +
+            '<p class="muted" style="margin:0.35rem 0 0">До 2 км · ориентир €/м²</p><ul style="list-style:none;padding:0;margin:0.75rem 0 0">';
+          near.forEach(function (c) {
+            html +=
+              '<li style="padding:0.4rem 0;border-bottom:1px solid var(--line)">' +
+              '<a href="/sgrada/' +
+              encodeURIComponent(c.slug) +
+              '/" style="display:flex;justify-content:space-between;gap:0.5rem;font-weight:600;color:var(--navy)">' +
+              "<span>" +
+              esc(c.name) +
+              ' <span class="muted" style="font-weight:500">· ' +
+              (c.distM < 1000
+                ? c.distM + " м"
+                : (c.distM / 1000).toFixed(1) + " км") +
+              "</span></span>" +
+              (c.eur != null
+                ? "<span style=\"color:var(--blue)\">~" + esc(c.eur) + " €/м²</span>"
+                : "") +
+              "</a></li>";
+          });
+          html += "</ul></section>";
+          slot.innerHTML = html;
+        })
+        .catch(function () {});
+    }
+  }
+
+  function fetchJson(url) {
+    return fetch(url, { credentials: "same-origin" }).then(function (r) {
+      if (!r.ok) throw new Error(String(r.status));
+      return r.json();
+    });
+  }
+
+  var slug = slugFromPath();
+  if (!slug) {
+    renderMissing("");
+    return;
+  }
+
+  var coordKey = osmCoordKey(slug);
+
+  function normalizeHit(raw) {
+    if (!raw) return null;
+    if (raw.name || raw.slug || raw.id) {
+      return {
+        id: raw.id,
+        slug: raw.slug || slug,
+        name: raw.name || raw.slug || slug,
+        kind: raw.kind,
+        city: raw.city,
+        floors: raw.floors,
+        eur: raw.eur,
+        lat: raw.lat,
+        lng: raw.lng,
+        year: raw.year,
+      };
+    }
+    return null;
+  }
+
+  // 1) Slug lookup first (avoids osm numeric key collisions across cities)
+  // 2) osm-lookup by FULL lat_lng
+  // 3) buildings-index / city maps
+  var CITIES = [
+    "sofia",
+    "plovdiv",
+    "varna",
+    "burgas",
+    "ruse",
+    "stara-zagora",
+    "pleven",
+    "sliven",
+    "dobrich",
+    "shumen",
+  ];
+
+  function lookupOsmCoord() {
+    if (!coordKey) return Promise.resolve(false);
+    return fetchJson("/entities/osm-lookup.json")
+      .then(function (map) {
+        if (map && map[coordKey]) {
+          renderOk(normalizeHit(map[coordKey]));
+          return true;
+        }
+        return false;
+      })
+      .catch(function () {
+        return false;
+      })
+      .then(function (done) {
+        if (done) return true;
+        function nextCity(i) {
+          if (i >= CITIES.length) return Promise.resolve(false);
+          return fetchJson("/entities/" + CITIES[i] + "-osm-lookup.json")
+            .then(function (map) {
+              if (map && map[coordKey]) {
+                renderOk(normalizeHit(map[coordKey]));
+                return true;
+              }
+              return nextCity(i + 1);
+            })
+            .catch(function () {
+              return nextCity(i + 1);
+            });
+        }
+        return nextCity(0);
+      });
+  }
+
+  function load() {
+    return fetchJson("/entities/slug-lookup.json")
+      .then(function (map) {
+        if (map && map[slug]) {
+          renderOk(normalizeHit(map[slug]));
+          return true;
+        }
+        return false;
+      })
+      .catch(function () {
+        return false;
+      })
+      .then(function (done) {
+        if (done) return true;
+        return lookupOsmCoord();
+      })
+      .then(function (done2) {
+        if (done2) return;
+        return fetchJson("/entities/buildings-index.json")
+          .then(function (data) {
+            var hit = findBuilding(data.buildings || [], slug);
+            if (hit) {
+              renderOk(hit);
+              return true;
+            }
+            return false;
+          })
+          .catch(function () {
+            return false;
+          });
+      })
+      .then(function (done3) {
+        if (done3) return;
+        var cities = CITIES;
+        function nextCity(i) {
+          if (i >= cities.length) {
+            renderMissing(slug);
+            return;
+          }
+          fetchJson("/entities/" + cities[i] + "-map.json")
+            .then(function (data) {
+              var pts = (data.points || []).map(function (p) {
+                return Object.assign({}, p, { name: p.name || p.slug });
+              });
+              var hit = findBuilding(pts, slug);
+              if (hit) {
+                renderOk(hit);
+                return;
+              }
+              nextCity(i + 1);
+            })
+            .catch(function () {
+              nextCity(i + 1);
+            });
+        }
+        nextCity(0);
+      });
+  }
+
+  load();
+})();
+  </script>
+</body>
+</html>

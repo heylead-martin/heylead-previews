@@ -14,3 +14,4 @@ User-agent: Bingbot
 Allow: /
 
 Sitemap: https://imotitrend.com/sitemap.xml
+Sitemap: https://imotitrend.com/sitemap-eu.xml

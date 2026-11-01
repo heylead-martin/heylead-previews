@@ -1,0 +1,62 @@
+{
+  "buildingSlug": "черковна-38-4269747_2335153",
+  "buildingId": "bg:bldg:osm:pt4269747_2335153",
+  "buildingDisplayName": "Черковна 38",
+  "settlementId": "bg:settlement:sofia",
+  "city": "sofia",
+  "centroid": {
+    "lat": 42.6974669,
+    "lng": 23.3515345
+  },
+  "addrStreet": "Черковна",
+  "addrNumber": "38",
+  "orientirEurM2": 3675,
+  "orientirRentEurM2": 18.8,
+  "note": "Pilot identity shells for вход А (Оборище orientir ~3675 €/м² sale, ~18.8 €/м² rent). No asking prices until archive/partner attach.",
+  "units": [
+    {
+      "id": "bg:unit:prov:b83d334f2795ac092f25a86a4b730209f41284dd",
+      "slug": "черковна-38-4269747_2335153-vhod-а-ap-12",
+      "entrance": "А",
+      "apartment": "12",
+      "unitKind": "apartment",
+      "displayName": "ап. 12 · вход А · Черковна 38",
+      "sources": [
+        "provisional-pilot"
+      ],
+      "orientirEurM2": 3675,
+      "orientirRentEurM2": 18.8
+    },
+    {
+      "id": "bg:unit:prov:0a16f0ded33b48d0b985d86be5bf981a4949b2cf",
+      "slug": "черковна-38-4269747_2335153-vhod-а-ap-30",
+      "entrance": "А",
+      "apartment": "30",
+      "unitKind": "apartment",
+      "displayName": "ап. 30 · вход А · Черковна 38",
+      "sources": [
+        "provisional-pilot"
+      ],
+      "floor": 4,
+      "orientirEurM2": 3675,
+      "orientirRentEurM2": 18.8
+    },
+    {
+      "id": "bg:unit:prov:f1d4e65daf0d7465e4cd0eae3c1f5b6e18be207c",
+      "slug": "черковна-38-4269747_2335153-vhod-а-ap-45",
+      "entrance": "А",
+      "apartment": "45",
+      "unitKind": "apartment",
+      "displayName": "ап. 45 · вход А · Черковна 38",
+      "sources": [
+        "provisional-pilot"
+      ],
+      "orientirEurM2": 3675,
+      "orientirRentEurM2": 18.8
+    }
+  ],
+  "observations": [],
+  "neighborhoodId": "bg:sofia:hood:oborishte",
+  "neighborhoodSlug": "oborishte",
+  "neighborhoodName": "Оборище"
+}
